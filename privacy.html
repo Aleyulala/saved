@@ -1,0 +1,281 @@
+<!doctype html>
+<html class="lzD drK" dir="ltr" lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>Gizlilik Politikası & Lisans - SAVED</title>
+  <meta name="description" content="Saved Startpage Gizlilik Politikası (Privacy Policy) ve GNU General Public License v3.0 şartları.">
+  <meta name="theme-color" content="#1e1e1e">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Google+Sans+Text:wght@400;500;600;700&family=Google+Sans+Mono:wght@400&display=swap');
+
+    :root {
+      --bg: #1e1e1e;
+      --surface: #252526;
+      --surface2: #303031;
+      --text: #fffdfc;
+      --muted: #989b9f;
+      --line: #444444;
+      --accent: #482dff;
+      --font: "Google Sans Text", system-ui, -apple-system, sans-serif;
+      --mono: "Google Sans Mono", monospace;
+      --contentW: 1000px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.65;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--surface);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .header-inner {
+      max-width: var(--contentW);
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 17px;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: .02em;
+    }
+    .brand-badge {
+      background: var(--accent);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 99px;
+      border: 1px solid var(--line);
+      background: var(--surface2);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      transition: all .2s;
+    }
+    .back-btn:hover {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .container {
+      max-width: var(--contentW);
+      margin: 36px auto;
+      padding: 0 20px 48px;
+    }
+
+    .hero-sec {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .hero-sec h1 {
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: 700;
+      margin: 0 0 12px;
+      letter-spacing: -.02em;
+    }
+    .hero-sec p {
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 28px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 20px rgba(0,0,0,.15);
+    }
+    .card h2 {
+      font-size: 20px;
+      font-weight: 700;
+      margin: 0 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+    }
+    .card h2 svg {
+      width: 22px;
+      height: 22px;
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 2;
+    }
+    .card p, .card li {
+      color: #d1d5db;
+      font-size: 14.5px;
+    }
+    .card ul {
+      margin: 12px 0 0;
+      padding-left: 24px;
+    }
+    .card li {
+      margin-bottom: 8px;
+    }
+
+    .badge-gpl {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(72, 45, 255, .15);
+      border: 1px solid var(--accent);
+      color: #a594ff;
+      padding: 4px 12px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .license-code {
+      background: #141414;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      font-family: var(--mono);
+      font-size: 12.5px;
+      color: #9ca3af;
+      overflow-x: auto;
+      margin-top: 16px;
+    }
+
+    .footer {
+      border-top: 1px solid var(--line);
+      text-align: center;
+      padding: 24px 20px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="./" class="brand">
+        <span>SAVED</span>
+        <span class="brand-badge">GPL 3.0</span>
+      </a>
+      <a href="./" class="back-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        <span>Ana Sayfaya Dön</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero-sec">
+      <div class="badge-gpl">🛡️ %100 Gizlilik Odaklı & Özgür Yazılım</div>
+      <h1>Gizlilik Politikası & Lisans</h1>
+      <p>Saved, kullanıcı gizliliğini temel ilke kabul eden, tamamen cihazınızda çalışan açık kaynaklı bir web başlangıç ve yer imi yöneticisidir.</p>
+    </section>
+
+    <!-- 1. Gizlilik & Yerel Depolama -->
+    <article class="card">
+      <h2>
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        1. Tamamen Yerel Depolama (Local & Private Storage)
+      </h2>
+      <p>Saved uygulamasında eklediğiniz tüm yer imleri, kategoriler, yapılacaklar (To-do) listeleri, hızlı notlar ve tema tercihleri <strong>yalnızca ve yalnızca cihazınızın kendi tarayıcısında</strong> (<code>localStorage</code> ve <code>IndexedDB</code>) saklanır.</p>
+      <ul>
+        <li><strong>Sunucusuz Mimari:</strong> Hiçbir veriniz uzaktaki bir sunucuya, veritabanına veya üçüncü taraflara gönderilmez.</li>
+        <li><strong>Kullanıcı Kontrolü:</strong> İstediğiniz an ayarlar çekmecesinden verilerinizi JSON formatında dışa aktarabilir (Export), içe aktarabilir (Import) veya tek tuşla tümünü sıfırlayabilirsiniz.</li>
+        <li><strong>Çerezsiz (Cookie-Free):</strong> Reklam, profil oluşturma veya hedefleme çerezleri kesinlikle kullanılmaz.</li>
+      </ul>
+    </article>
+
+    <!-- 2. Arama ve Dış Bağlantılar -->
+    <article class="card">
+      <h2>
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        2. Arama Motorları ve Dış Servisler
+      </h2>
+      <p>Saved, arama çubuğu üzerinden arama yaptığınızda arama terimlerinizi kaydetmez veya izlemez. Arama sorgunuz, seçtiğiniz arama motoruna (Google, Perplexity, DuckDuckGo, Yandex vb.) doğrudan tarayıcınız tarafından iletilir. Bağlantı verdiğiniz sitelerin kendi gizlilik politikaları geçerlidir.</p>
+    </article>
+
+    <!-- 3. GNU GPL v3.0 Lisansı -->
+    <article class="card">
+      <h2>
+        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        3. GNU General Public License v3.0 (GPL-3.0)
+      </h2>
+      <p>Bu proje <strong>GNU Genel Kamu Lisansı Sürüm 3 (GPL-3.0)</strong> kapsamında lisanslanmıştır. Kullanıcılara şu temel haklar ve garantiler sunulur:</p>
+      <ul>
+        <li><strong>Özgürce Kullanma:</strong> Programı dilediğiniz amaçla çalıştırma ve kullanma özgürlüğü.</li>
+        <li><strong>İnceleme ve Değiştirme:</strong> Kaynak kodunu inceleme, kendi ihtiyaçlarınıza göre uyarlama ve geliştirme hakkı.</li>
+        <li><strong>Paylaşma ve Dağıtma:</strong> Yazılımın orijinal veya değiştirilmiş sürümlerini GPL-3.0 koşullarını korumak şartıyla dağıtma özgürlüğü.</li>
+        <li><strong>Garantisizlik:</strong> Yazılım, açık veya zımni herhangi bir garanti verilmeksizin "olduğu gibi" (AS IS) sağlanır.</li>
+      </ul>
+      <div class="license-code">
+Copyright (C) 2026 Ali Yıldız & nsone / Saved Contributors
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+      </div>
+    </article>
+
+    <!-- 4. İletişim ve Geri Bildirim -->
+    <article class="card">
+      <h2>
+        <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+        4. İletişim ve Topluluk
+      </h2>
+      <p>Geliştirmeler, öneriler ve hata bildirimleri için <a href="https://github.com/Aleyulala/saved/discussions/" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600">GitHub Tartışmalar</a> kanalımızı ziyaret edebilirsiniz.</p>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 ALİ YILDIZ ‧ Developed by nsone ‧ GNU GPL 3.0 Lisanslı Açık Kaynak Proje</p>
+  </footer>
+
+</body>
+</html>
