@@ -1,0 +1,2600 @@
+<!doctype html>
+<html class="lzD drK" dir="ltr" lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>Gizlilik Politikası & Lisans - SAVED</title>
+  <meta name="description" content="Saved Startpage Gizlilik Politikası (Privacy Policy) ve GNU General Public License v3.0 şartları.">
+  <meta name="theme-color" content="#1e1e1e">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Google+Sans+Text:wght@400;500;600;700&family=Google+Sans+Mono:wght@400&display=swap');
+
+    :root {
+      --fontS: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif;
+      --fontH: "Google Sans Text", var(--fontS);
+      --fontB: "Google Sans Text", var(--fontS);
+      --fontC: "Google Sans Mono", monospace;
+      --font: var(--fontB);
+      --mono: var(--fontC);
+      --contentW: 1000px;
+      --headerH: 60px;
+      --accent: #482dff;
+      --trans-1: all .1s ease;
+      --trans-2: all .2s ease;
+      --shadow: 0 5px 35px rgba(0,0,0,.07);
+
+      /* Light Theme Defaults */
+      --bg: #fdfcff;
+      --surface: #fffdfc;
+      --surface2: #f1f1f0;
+      --text: #08102b;
+      --muted: #989b9f;
+      --line: #e6e6e6;
+    }
+
+    /* Dark Theme */
+    :root.lzD.drK, html.drK {
+      --bg: #1e1e1e;
+      --surface: #252526;
+      --surface2: #303031;
+      --text: #fffdfc;
+      --muted: #989b9f;
+      --line: #444444;
+      --shadow: 0 5px 35px rgba(0,0,0,.35);
+    }
+
+    /* Light Theme */
+    :root.lzD.lgT, html.lgT {
+      --bg: #fdfcff;
+      --surface: #fffdfc;
+      --surface2: #f1f1f0;
+      --text: #08102b;
+      --muted: #64748b;
+      --line: #e2e8f0;
+      --shadow: 0 5px 35px rgba(0,0,0,.06);
+    }
+
+    /* 16 Plus UI Palette Themes */
+    .th0{--accent:#763da9}.th1{--accent:#f44336}.th2{--accent:#45a557}.th3{--accent:#0062d1}.th4{--accent:#ff990a}.th5{--accent:#e91e63}.th6{--accent:#ff5722}.th7{--accent:#607d8b}.th8{--accent:#5d4037}.th9{--accent:#0c9784}.th10{--accent:#3949ab}.th11{--accent:#5c3083}.th12{--accent:#2c5d3f}.th13{--accent:#3d6fa9}.th14{--accent:#882c70}.th15{--accent:#bf5154}
+
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.65;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+      transition: background .2s ease, color .2s ease;
+    }
+
+    /* Plus UI Header */
+    .mainH {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      width: 100%;
+      padding: 8px 16px 0;
+      box-sizing: border-box;
+    }
+    .headC {
+      max-width: var(--contentW);
+      margin: 0 auto;
+      padding: 0 20px;
+      height: var(--headerH, 60px);
+      min-height: var(--headerH, 60px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--line) !important;
+      border-radius: 18px;
+      box-sizing: border-box;
+      gap: 6px;
+      box-shadow: var(--shadow);
+    }
+    .headD {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      font-family: var(--font);
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: .02em;
+    }
+    .brand svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+    }
+    .brand svg polyline {
+      stroke: var(--accent);
+      stroke-width: 2;
+    }
+    .brand-badge {
+      display: none;
+    }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0 8px;
+      height: 30px;
+      border-radius: 6px;
+      border: none !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      transition: opacity .15s ease;
+    }
+    .back-btn:hover {
+      opacity: .7;
+      background: transparent !important;
+      color: var(--accent);
+      transform: none !important;
+      border: none !important;
+    }
+    .back-btn svg {
+      stroke: currentColor;
+    }
+
+    /* Icon controls in Header */
+    .headIc {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      height: 60px;
+    }
+    .tIc::before { display: none !important; }
+    .tIc {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 0;
+      border: none !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      color: var(--text);
+      cursor: pointer;
+      transition: opacity .15s ease;
+      padding: 0;
+    }
+    .tIc:hover {
+      opacity: .7 !important;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      transform: none !important;
+      color: var(--text);
+    }
+    .tIc svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+      opacity: .8;
+    }
+
+    /* Mode button sun/moon icons */
+    :root.lzD.lgT .tDL .d1, :root.lzD.drK .tDL .d2 { display: none; }
+
+    /* Popups (Appearance & Theme & Translate) */
+    .fCls {
+      display: block;
+      margin: 0;
+      padding: 0;
+      border: none;
+      outline: none;
+      position: fixed;
+      inset: -50%;
+      z-index: 10;
+      background: transparent;
+      visibility: hidden;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--trans-1);
+    }
+    .aprW, .thmW, .wTrans {
+      position: absolute;
+      top: calc(100% + 8px);
+      inset-inline-end: 20px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      visibility: hidden;
+      opacity: 0;
+      transform: scale(.85);
+      transform-origin: top right;
+      transition: var(--trans-2);
+      transition-property: visibility, opacity, transform;
+      z-index: 20;
+    }
+    .aprW {
+      min-width: 160px;
+      padding: 4px;
+      border-radius: 10px;
+      border-start-end-radius: 4px;
+    }
+    .aprW:before {
+      content: attr(data-text);
+      display: block;
+      padding: 6px 8px 8px;
+      font-size: 11px;
+      opacity: .7;
+      font-weight: 600;
+    }
+    .aprW > * {
+      display: flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 6px;
+      width: 100%;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      color: var(--text);
+      font: inherit;
+      font-size: 13px;
+      text-align: start;
+    }
+    .aprW > *::before {
+      content: '';
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 11' fill='%23333'><path d='M14.7813 1.21873C15.0751 1.51248 15.0751 1.98748 14.7813 2.2781L6.53135 10.5312C6.2376 10.825 5.7626 10.825 5.47197 10.5312L1.21885 6.28123C0.925098 5.98748 0.925098 5.51248 1.21885 5.22185C1.5126 4.93123 1.9876 4.9281 2.27822 5.22185L5.99697 8.9406L13.7188 1.21873C14.0126 0.924976 14.4876 0.924976 14.7782 1.21873H14.7813Z'></path></svg>") transparent center / 13px no-repeat;
+      margin-inline-end: 8px;
+      opacity: 0;
+    }
+    .aprW > *::after {
+      content: attr(aria-label);
+      opacity: .9;
+    }
+    .aprW > *:hover {
+      background: color-mix(in srgb, var(--surface2) 80%, transparent);
+    }
+    .aprI:checked ~ .aprW {
+      visibility: visible;
+      opacity: 1;
+      transform: scale(1);
+    }
+    .aprI:checked ~ .aprW + .fCls {
+      visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .lgT:not(.syS) .aprW .lgtB::before, .drK:not(.syS) .aprW .drkB::before, .syS .aprW .sysB::before {
+      opacity: .8;
+    }
+    .drK .aprW > *::before { filter: invert(1); }
+
+    /* Theme Palette Popup */
+    .thmW {
+      min-width: 168px;
+      padding: 14px;
+      border-radius: 10px;
+      border-start-end-radius: 4px;
+      z-index: 22;
+    }
+    .thmW::before {
+      content: attr(data-text);
+      display: block;
+      margin-bottom: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      opacity: .8;
+    }
+    .thmI:checked ~ .thmW {
+      visibility: visible;
+      opacity: 1;
+      transform: scale(1);
+    }
+    .thmI:checked ~ .thmW + .fCls {
+      visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+      z-index: 21;
+    }
+    .thmP {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+    .thmP > * {
+      --c: var(--surface2);
+      position: relative;
+      width: 28px;
+      height: 28px;
+      outline: none;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--c);
+      border-radius: 99px;
+      box-shadow: inset 0 0 0 2px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.2);
+      cursor: pointer;
+    }
+    .thmP > *::after {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 99px;
+      border: 2px solid var(--c);
+      opacity: 0;
+      transition: var(--trans-1);
+    }
+    .thmP > *:hover::after { opacity: .6; }
+    .th0 .thB0::after,.th1 .thB1::after,.th2 .thB2::after,.th3 .thB3::after,.th4 .thB4::after,.th5 .thB5::after,.th6 .thB6::after,.th7 .thB7::after,.th8 .thB8::after,.th9 .thB9::after,.th10 .thB10::after,.th11 .thB11::after,.th12 .thB12::after,.th13 .thB13::after,.th14 .thB14::after,.th15 .thB15::after{opacity:1}
+
+    /* Translate Popup */
+    .wTrans {
+      max-height: calc(100vh - 120px);
+      width: 240px;
+      border-radius: 12px;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 30;
+    }
+    .transI:checked ~ .wTrans {
+      display: flex;
+      visibility: visible;
+      opacity: 1;
+      transform: scale(1);
+    }
+    .transI:checked ~ .wTrans + .fCls {
+      visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+      z-index: 25;
+    }
+    .transH {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      border-bottom: 1px solid var(--line);
+      background: color-mix(in srgb, var(--surface2) 40%, transparent);
+    }
+    .transH .c {
+      width: 24px;
+      height: 24px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      cursor: pointer;
+      background: var(--surface2);
+      border: 1px solid var(--line);
+    }
+    .transH .c svg {
+      width: 12px;
+      height: 12px;
+      stroke: var(--text);
+      stroke-width: 2;
+    }
+    .transC {
+      padding: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      max-height: 360px;
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .transC::-webkit-scrollbar { display: none; }
+    .transC button {
+      display: flex;
+      align-items: center;
+      padding: 7px 10px;
+      border-radius: 8px;
+      width: 100%;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      color: var(--text);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 500;
+      text-align: start;
+      transition: background .15s ease, color .15s ease, transform .1s ease;
+    }
+    .transC button:hover {
+      background: var(--surface2);
+      color: var(--accent);
+      transform: translateX(2px);
+    }
+    .transC button.s {
+      background: color-mix(in srgb, var(--accent) 15%, var(--surface2));
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .transC button .check {
+      width: 16px;
+      height: 16px;
+      margin-inline-end: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      flex-shrink: 0;
+    }
+    .transC button.s .check { opacity: 1; }
+    .transC button .check svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 2.5;
+    }
+    .transC button .flag {
+      margin-inline-end: 8px;
+      font-size: 15px;
+      line-height: 1;
+    }
+    .transC button .name {
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .transC button .rtl-tag {
+      margin-inline-start: auto;
+      font-size: 10px;
+      padding: 2px 5px;
+      border-radius: 4px;
+      background: var(--surface2);
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    /* Google Translate Banner Suppression */
+    body { top: 0 !important; position: static !important; }
+    .goog-te-banner-frame, #goog-gt-tt, .skiptranslate, .VIpgJd-ZVi9od-aZ2wEe-wOHMyf { display: none !important; visibility: hidden !important; }
+    #google_translate_element { display: none !important; }
+
+    /* RTL Support */
+    [dir="rtl"] { direction: rtl; text-align: right; }
+    [dir="rtl"] .headL { order: 2; }
+    [dir="rtl"] .headR { order: 1; }
+    [dir="rtl"] .card { text-align: right; }
+    [dir="rtl"] .card ul { padding-right: 24px; padding-left: 0; }
+    [dir="rtl"] .wTrans, [dir="rtl"] .aprW, [dir="rtl"] .thmW {
+      transform-origin: top left;
+      inset-inline-end: auto;
+      inset-inline-start: 20px;
+    }
+    [dir="rtl"] .back-btn svg { transform: scaleX(-1); }
+
+    /* Page Content */
+    .container {
+      max-width: var(--contentW);
+      margin: 36px auto;
+      padding: 0 20px 48px;
+    }
+    .hero-sec {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .hero-sec h1 {
+      font-size: clamp(28px, 5vw, 40px);
+      font-weight: 700;
+      margin: 0 0 12px;
+      letter-spacing: -.02em;
+      color: var(--text);
+    }
+    .hero-sec p {
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 28px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+      transition: background .2s ease, border-color .2s ease;
+    }
+    .card h2 {
+      font-size: 20px;
+      font-weight: 700;
+      margin: 0 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+    }
+    .card h2 svg {
+      width: 22px;
+      height: 22px;
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 2;
+      flex-shrink: 0;
+    }
+    .card p, .card li {
+      color: var(--text);
+      opacity: .9;
+      font-size: 14.5px;
+    }
+    .card ul {
+      margin: 12px 0 0;
+      padding-left: 24px;
+    }
+    .card li {
+      margin-bottom: 8px;
+    }
+
+    .badge-gpl {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: color-mix(in srgb, var(--accent) 15%, transparent);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      padding: 4px 14px;
+      border-radius: 99px;
+      font-size: 12.5px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .license-code {
+      background: var(--surface2);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      font-family: var(--mono);
+      font-size: 12.5px;
+      color: var(--muted);
+      overflow-x: auto;
+      margin-top: 16px;
+      line-height: 1.5;
+    }
+
+    .btn-action {
+      padding: 10px 24px;
+      border-radius: 99px;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13.5px;
+      transition: transform .15s ease, opacity .15s ease;
+    }
+    .btn-action:hover {
+      transform: translateY(-2px);
+      opacity: .92;
+    }
+
+    /* Summary Navigation & Anchor Pills */
+    .summary-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 20px 0 32px;
+      padding: 18px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+    }
+    .summary-nav-title {
+      width: 100%;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .summary-nav a {
+      color: var(--text);
+      background: color-mix(in srgb, var(--surface2) 75%, transparent);
+      border: 1px solid var(--line);
+      border-radius: 99px;
+      padding: 6px 13px;
+      font-size: 12.5px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all .18s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .summary-nav a:hover {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 10px color-mix(in srgb, var(--accent) 30%, transparent);
+    }
+
+    /* Meta Info Card Grid */
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin: 18px 0;
+      padding: 16px;
+      background: var(--surface2);
+      border-radius: 12px;
+      border: 1px solid var(--line);
+    }
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .meta-item .lbl {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .meta-item .val {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .meta-item .val a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .meta-item .val a:hover {
+      text-decoration: underline;
+    }
+
+    /* Modern Table */
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      margin: 18px 0;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      scrollbar-width: thin;
+    }
+    .cookie-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      text-align: left;
+    }
+    [dir="rtl"] .cookie-table {
+      text-align: right;
+    }
+    .cookie-table th {
+      background: color-mix(in srgb, var(--surface2) 90%, transparent);
+      padding: 12px 16px;
+      font-weight: 700;
+      color: var(--text);
+      border-bottom: 1px solid var(--line);
+      white-space: nowrap;
+    }
+    .cookie-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--line);
+      color: var(--text);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+    .cookie-table tr:last-child td {
+      border-bottom: none;
+    }
+    .cookie-table tr:hover td {
+      background: color-mix(in srgb, var(--surface2) 40%, transparent);
+    }
+
+    /* Alert / Callout Notice Boxes */
+    .alert-box {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 18px;
+      border-radius: 10px;
+      background: color-mix(in srgb, #f59e0b 12%, var(--surface));
+      border: 1px solid color-mix(in srgb, #f59e0b 45%, var(--line));
+      color: var(--text);
+      font-size: 13.5px;
+      margin: 18px 0;
+      line-height: 1.6;
+    }
+    .alert-box.info {
+      background: color-mix(in srgb, var(--accent) 10%, var(--surface));
+      border-color: color-mix(in srgb, var(--accent) 35%, var(--line));
+    }
+    .alert-box .icon {
+      font-size: 18px;
+      flex-shrink: 0;
+      line-height: 1.2;
+    }
+
+    /* Browser Guide Grid */
+    .guide-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 12px;
+      margin: 18px 0;
+    }
+    .guide-card {
+      background: var(--surface2);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 16px;
+    }
+    .guide-card h4 {
+      margin: 0 0 10px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text);
+    }
+    .guide-card ol {
+      margin: 0;
+      padding-left: 20px;
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    [dir="rtl"] .guide-card ol {
+      padding-left: 0;
+      padding-right: 20px;
+    }
+    .guide-card li {
+      margin-bottom: 4px;
+    }
+
+    .tools-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0 6px;
+    }
+    .tools-list a {
+      font-size: 12.5px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      background: var(--surface2);
+      border: 1px solid var(--line);
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all .15s ease;
+    }
+    .tools-list a:hover {
+      border-color: var(--accent);
+      background: color-mix(in srgb, var(--accent) 12%, var(--surface2));
+    }
+
+    /* Footer styles defined below */
+
+    .kbd-focus {
+      outline: 3px solid var(--accent) !important;
+      outline-offset: 3px !important;
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent), 0 4px 14px rgba(0,0,0,.28) !important;
+      background: color-mix(in srgb, var(--surface2) 60%, transparent) !important;
+    }
+    .headIc button.kbd-focus, .headIc label.kbd-focus, .back-btn.kbd-focus {
+      border-radius: 30px !important;
+    }
+    .summary-nav a.kbd-focus {
+      outline: 2px solid var(--accent) !important;
+      outline-offset: 2px !important;
+      background: var(--accent) !important;
+      color: #fff !important;
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 4px 12px color-mix(in srgb, var(--accent) 40%, transparent) !important;
+    }
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 25px;
+      transform: translate(-50%, 20px);
+      background: var(--text);
+      color: var(--bg);
+      border-radius: 12px;
+      padding: 10px 18px;
+      font-size: 13px;
+      font-weight: 500;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 99999;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.35);
+      transition: all .22s cubic-bezier(.16,1,.3,1);
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+  
+    /* Header Birebir Dark & Light Mode Alignment */
+    .mainH {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      width: 100% !important;
+      padding: 8px 16px 0 !important;
+      box-sizing: border-box !important;
+    }
+    .headC {
+      max-width: var(--contentW, 1440px) !important;
+      margin: 0 auto !important;
+      height: 60px !important;
+      min-height: 60px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      position: relative !important;
+      background: var(--surface) !important;
+      border: 1px solid var(--line) !important;
+      border-radius: 18px !important;
+      box-sizing: border-box !important;
+      padding: 0 20px !important;
+      box-shadow: var(--shadow) !important;
+    }
+    html.lgT .mainH {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      padding: 8px 16px 0 !important;
+      width: 100% !important;
+    }
+    html.lgT .headC {
+      background: #fffdfc !important;
+      color: #08102b !important;
+      border: 1px solid #e6e6e6 !important;
+      border-radius: 18px !important;
+      box-shadow: 0 1px 4px rgba(0,0,0,.04) !important;
+      max-width: var(--contentW, 1440px) !important;
+      margin: 0 auto !important;
+      width: 100% !important;
+    }
+    html.lgT .headC::after {
+      display: none !important;
+    }
+    .headD {
+      display: flex !important;
+      align-items: center !important;
+      height: 60px !important;
+    }
+    .headD.headR {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: flex-end !important;
+      height: 60px !important;
+      gap: 12px !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    .headIc {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: flex-end !important;
+      height: 60px !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      list-style: none !important;
+      gap: 4px !important;
+    }
+    .headIc > li {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      height: 60px !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      list-style: none !important;
+    }
+    .headIc .tIc, .headIc button, .headIc label {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 30px !important;
+      height: 30px !important;
+      min-width: 30px !important;
+      min-height: 30px !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: none !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      color: var(--text) !important;
+      cursor: pointer !important;
+      transition: opacity .15s ease !important;
+      line-height: 1 !important;
+      vertical-align: middle !important;
+    }
+    .headIc .tIc:hover {
+      opacity: .7 !important;
+      background: transparent !important;
+    }
+    .headIc svg {
+      width: 20px !important;
+      height: 20px !important;
+      display: block !important;
+      margin: auto !important;
+    }
+
+    /* Context Menus Spacing & Inset Fix */
+    .aprW, .thmW, .wTrans {
+      top: calc(100% + 8px) !important;
+      inset-inline-end: 20px !important;
+    }
+
+    /* Search Box Select (Context Menu Style) */
+    .engine {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      color: var(--text);
+      padding: 8px 12px;
+      max-width: 130px;
+      font-size: 13px;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      outline: none;
+      transition: 0.2s;
+    }
+    .engine:hover {
+      border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+    }
+
+    /* Search Overlay - Blogger mobile style */
+    .search-overlay {
+      display: none !important;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.48);
+      -webkit-backdrop-filter: saturate(180%) blur(16px);
+      backdrop-filter: saturate(180%) blur(16px);
+      z-index: 99999;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 16px 20px 0;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .search-overlay.active {
+      display: flex !important;
+      pointer-events: auto !important;
+      opacity: 1;
+    }
+    .search-overlay .search-wrap {
+      width: 100%;
+      max-width: 680px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 6px 12px;
+      box-shadow: 0 12px 36px rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transform: translateY(-20px);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .search-overlay.active .search-wrap {
+      transform: translateY(0);
+    }
+    .search-engines-quick {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      max-width: 680px;
+      margin: 12px auto 0;
+      box-sizing: border-box;
+      transform: translateY(-8px);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .search-overlay.active .search-engines-quick {
+      transform: translateY(0);
+    }
+    .quick-eng-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 500;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      color: var(--text);
+      cursor: pointer;
+      transition: all .18s cubic-bezier(.4,0,.2,1);
+      box-shadow: 0 2px 6px rgba(0,0,0,.15);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    body.light .quick-eng-btn, html.lgT .quick-eng-btn {
+      background: #ffffff !important;
+      border-color: #e2e8f0 !important;
+      box-shadow: 0 1px 4px rgba(0,0,0,.06) !important;
+    }
+    .quick-eng-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+    .quick-eng-btn.active {
+      background: var(--accent) !important;
+      color: #fff !important;
+      border-color: var(--accent) !important;
+      box-shadow: 0 3px 12px color-mix(in srgb, var(--accent) 35%, transparent) !important;
+    }
+    .close-search {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      top: auto;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      color: var(--text);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      font-size: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      line-height: 1;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.28);
+      transition: 0.2s;
+      z-index: 100000;
+    }
+    .close-search:hover {
+      transform: scale(1.08);
+      border-color: var(--accent);
+    }
+    .search {
+      flex: 1;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      padding: 12px 10px;
+      font-size: 13px;
+      min-width: 0;
+      color: var(--text);
+    }
+    .search::placeholder {
+      color: var(--muted);
+      opacity: .9;
+    }
+    .search-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid color-mix(in srgb, var(--accent) 60%, var(--line));
+      background: color-mix(in srgb, var(--surface) 55%, transparent);
+      color: var(--accent);
+      font-size: 18px;
+      line-height: 1;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: .18s;
+      padding: 0;
+    }
+    .search-btn:hover {
+      background: var(--accent);
+      color: #08100e;
+      border-color: var(--accent);
+      transform: scale(1.06);
+    }
+
+
+
+    /* Inactive modal/backdrop click protection & safe overlay transitions */
+    .fCls {
+      display: none !important;
+      pointer-events: none !important;
+      position: fixed;
+      inset: 0;
+      z-index: 12;
+      background: transparent;
+      opacity: 0;
+    }
+    .aprI:checked ~ .aprW + .fCls,
+    .thmI:checked ~ .thmW + .fCls,
+    .transI:checked ~ .wTrans + .fCls,
+    .transI:checked ~ .fCls {
+      display: block !important;
+      opacity: 1;
+      pointer-events: auto !important;
+    }
+    .aprI:checked ~ .aprW + .fCls { z-index: 13; }
+    .thmI:checked ~ .thmW + .fCls { z-index: 14; }
+    .transI:checked ~ .wTrans + .fCls,
+    .transI:checked ~ .fCls { z-index: 90; }
+
+    /* Button SVG click transparency so target is always the interactive button */
+    .headIc button svg, .headIc label svg, .tNav svg, .close-search svg {
+      pointer-events: none !important;
+    }
+    .headIc button, .headIc label, .tNav {
+      cursor: pointer !important;
+    }
+    
+
+    /* Privacy Footer Compact Island - Routine Button Size */
+    .footer {
+      width: fit-content !important;
+      max-width: min(calc(100% - 32px), 420px) !important;
+      margin: 32px auto 24px !important;
+      box-sizing: border-box !important;
+      border: 1px solid var(--line) !important;
+      border-radius: 12px !important;
+      text-align: center !important;
+      padding: 10px 18px !important;
+      color: var(--text) !important;
+      font-size: 11.5px !important;
+      background: var(--surface) !important;
+      box-shadow: var(--shadow) !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 5px !important;
+    }
+    .footer div {
+      gap: 8px !important;
+      font-size: 11.5px !important;
+      margin-bottom: 0 !important;
+    }
+    .footer p {
+      color: var(--text) !important;
+      font-size: 11px !important;
+      margin: 0 !important;
+    }
+    .footer a {
+      color: var(--accent) !important;
+      font-weight: 700 !important;
+      text-decoration: none !important;
+    }
+    .footer a:hover {
+      text-decoration: underline !important;
+    }
+    body.light .footer, html.lgT .footer {
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
+      color: #1e293b !important;
+      box-shadow: 0 1px 4px rgba(0,0,0,.04) !important;
+    }
+    body.light .footer p, html.lgT .footer p {
+      color: #1e293b !important;
+      font-weight: 500 !important;
+    }
+    body.light .footer a, html.lgT .footer a {
+      color: var(--accent) !important;
+      font-weight: 700 !important;
+    }
+    @media (max-width: 600px) {
+      .footer {
+        width: calc(100% - 20px) !important;
+        max-width: 320px !important;
+        margin: 20px auto 16px !important;
+        padding: 8px 12px !important;
+        border-radius: 10px !important;
+      }
+    /* Plus UI Back-to-Top Floating Button & Reading Bar */
+    .back-to-top {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,.15);
+      cursor: pointer;
+      z-index: 99;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(12px) scale(.9);
+      transition: all .22s cubic-bezier(.4,0,.2,1);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .back-to-top.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+    .back-to-top:hover {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 6px 20px color-mix(in srgb,var(--accent) 35%,transparent);
+    }
+    .back-to-top:active {
+      transform: scale(.95);
+    }
+
+</style>
+</head>
+<body>
+
+  <header class="mainH" id="header">
+    <div class="headC">
+      <div class="headD headL">
+        <a href="./" class="brand">
+          <svg viewBox="0 0 24 24"><polyline points="2 17 7 12 2 7"></polyline><line x1="8" x2="22" y1="5" y2="5"></line><line x1="12" x2="22" y1="12" y2="12"></line><line x1="8" x2="22" y1="19" y2="19"></line></svg>
+          <span>SAVED</span>
+          <span class="brand-badge">GPL 3.0</span>
+        </a>
+      </div>
+      <div class="headD headR">
+        <a href="./" class="back-btn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          <span>Ana Sayfaya Dön</span>
+        </a>
+        <ul class="headIc">
+          <li class="isMode">
+            <label aria-label="Görünüm ve Tema" class="tMode tIc tDL" for="forAppearance" role="button">
+              <svg viewBox="0 0 24 24">
+                <g class="d1"><path d="M183.72453,170.371a10.4306,10.4306,0,0,1-.8987,3.793,11.19849,11.19849,0,0,1-5.73738,5.72881,10.43255,10.43255,0,0,1-3.77582.89138,1.99388,1.99388,0,0,0-1.52447,3.18176,10.82936,10.82936,0,1,0,15.118-15.11819A1.99364,1.99364,0,0,0,183.72453,170.371Z" transform="translate(-169.3959 -166.45548)"></path></g>
+                <g class="d2"><path d="M12 18.5C15.5899 18.5 18.5 15.5899 18.5 12C18.5 8.41015 15.5899 5.5 12 5.5C8.41015 5.5 5.5 8.41015 5.5 12C5.5 15.5899 8.41015 18.5 12 18.5Z"></path><path d="M19.14 19.14L19.01 19.01M19.01 4.99L19.14 4.86L19.01 4.99ZM4.86 19.14L4.99 19.01L4.86 19.14ZM12 2.08V2V2.08ZM12 22V21.92V22ZM2.08 12H2H2.08ZM22 12H21.92H22ZM4.99 4.99L4.86 4.86L4.99 4.99Z" stroke-width="2"></path></g>
+              </svg>
+            </label>
+          </li>
+          <li class="isTrans">
+            <label aria-label="Translate" class="tIc" for="forTranslate" role="button">
+              <svg viewBox="0 0 24 24"><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20"></path></svg>
+            </label>
+          </li>
+        <li class="isSearch"><button class="tIc" id="openSearchBtn" aria-label="Arama" type="button"><svg class="line" viewBox="0 0 24 24"><g><circle cx="11.36167" cy="11.36167" r="9.36167" fill="none" stroke="currentColor" stroke-width="1.5"></circle><line class="c" x1="22" x2="19.9332" y1="22" y2="19.9332" stroke="currentColor" stroke-width="1.5"></line></g></svg></button></li></ul>
+
+        <!-- Appearance Popup -->
+        <input class="aprI" hidden id="forAppearance" type="checkbox" autocomplete="off">
+        <div class="aprW" data-text="Görünüm">
+          <button aria-label="Açık" class="lgtB" onclick="if(window.PU&&window.PU.ui)window.PU.ui.lM();var c=document.getElementById('forAppearance');if(c)c.checked=false;" type="button"></button>
+          <button aria-label="Koyu" class="drkB" onclick="if(window.PU&&window.PU.ui)window.PU.ui.dM();var c=document.getElementById('forAppearance');if(c)c.checked=false;" type="button"></button>
+          <button aria-label="Sistem" class="sysB" onclick="if(window.PU&&window.PU.ui)window.PU.ui.sM();var c=document.getElementById('forAppearance');if(c)c.checked=false;" type="button"></button>
+          <label aria-label="Tema" class="thmB" for="forTheme" role="button"></label>
+        </div>
+        <label class="fCls" for="forAppearance"></label>
+
+        <!-- Theme Popup -->
+        <input class="thmI" hidden id="forTheme" type="checkbox" autocomplete="off">
+        <div class="thmW" data-text="Tema">
+          <div class="thmP">
+            <button class="thB0" data-hex="#763da9" data-theme="0" type="button"></button>
+            <button class="thB1" data-hex="#f44336" data-theme="1" type="button"></button>
+            <button class="thB2" data-hex="#45a557" data-theme="2" type="button"></button>
+            <button class="thB3" data-hex="#0062d1" data-theme="3" type="button"></button>
+            <button class="thB4" data-hex="#ff990a" data-theme="4" type="button"></button>
+            <button class="thB5" data-hex="#e91e63" data-theme="5" type="button"></button>
+            <button class="thB6" data-hex="#ff5722" data-theme="6" type="button"></button>
+            <button class="thB7" data-hex="#607d8b" data-theme="7" type="button"></button>
+            <button class="thB8" data-hex="#5d4037" data-theme="8" type="button"></button>
+            <button class="thB9" data-hex="#0c9784" data-theme="9" type="button"></button>
+            <button class="thB10" data-hex="#3949ab" data-theme="10" type="button"></button>
+            <button class="thB11" data-hex="#5c3083" data-theme="11" type="button"></button>
+            <button class="thB12" data-hex="#2c5d3f" data-theme="12" type="button"></button>
+            <button class="thB13" data-hex="#3d6fa9" data-theme="13" type="button"></button>
+            <button class="thB14" data-hex="#882c70" data-theme="14" type="button"></button>
+            <button class="thB15" data-hex="#bf5154" data-theme="15" type="button"></button>
+          </div>
+        </div>
+        <label class="fCls" for="forTheme"></label>
+
+        <!-- Translate Popup -->
+        <input class="transI" hidden id="forTranslate" type="checkbox" autocomplete="off">
+        <div class="wTrans fixLs notranslate" id="translatePopup">
+          <div class="transH fixH fixT" data-text="Çeviri">
+            <label aria-label="Kapat" class="c" for="forTranslate" role="button">
+              <svg viewBox="0 0 24 24"><path d="M19.0005 4.99988L5.00049 18.9999M5.00049 4.99988L19.0005 18.9999"></path></svg>
+            </label>
+          </div>
+          <div class="transC fixC">
+            <div id="google_translate_element"></div>
+          </div>
+        </div>
+        <label class="fCls" for="forTranslate"></label>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero-sec" id="top">
+      <div class="badge-gpl">🛡️ Şeffaf & Gizlilik Odaklı Politika</div>
+      <h1>Gizlilik ve Çerez Politikası</h1>
+      <p style="font-size:14px;color:var(--muted);margin-bottom:8px"><strong>Son Güncelleme:</strong> 4 Şubat 2026</p>
+      <p>WebSyrup Network, Saved Startpage ve bağlı ağ sitelerimiz genelinde kişisel verilerinizin korunması, gizliliğiniz ve çerez kullanım süreçlerine ilişkin resmi bildirimdir.</p>
+    </section>
+
+    <!-- Hızlı Gezinme Özeti (Summary Navigation) -->
+    <nav class="summary-nav" aria-label="Politika Özeti ve Hızlı Bağlantılar">
+      <div class="summary-nav-title">
+        <svg style="width:14px;height:14px;stroke:currentColor;fill:none" viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+        Özet ve Hızlı Gezinme (Summary)
+      </div>
+      <a href="#welcome">Giriş</a>
+      <a href="#section1">1. Bilgi Toplama</a>
+      <a href="#section2">2. Verilerin Kullanımı</a>
+      <a href="#section3">3. Çerezler ve Takip</a>
+      <a href="#section4">4. Çerezleri Yönetme</a>
+      <a href="#section5">5. Üçüncü Taraf Servisler</a>
+      <a href="#section6">6. Gizlilik Haklarınız</a>
+      <a href="#section7">7. Veri Güvenliği</a>
+      <a href="#section8">8. Veri Saklama</a>
+      <a href="#section9">9. Çocukların Gizliliği</a>
+      <a href="#section10">10. Uluslararası Transfer</a>
+      <a href="#section11">11. Politika Değişiklikleri</a>
+      <a href="#section12">12. İletişim</a>
+      <a href="#section-license">Lisans (GPL v3.0)</a>
+    </nav>
+
+    <!-- Giriş ve Kapsam -->
+    <article class="card" id="welcome">
+      <h2>
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        Giriş ve Kapsam
+      </h2>
+      <p>WebSyrup Network ve Saved Ağı Gizlilik ve Çerez Politikası'na hoş geldiniz. Bu belge, <strong>WebSyrup.net</strong> alan adı altında faaliyet gösteren tüm web siteleri, <strong>Saved Startpage</strong> uygulaması ve ağımıza bağlı diğer siteler (negronshow.blogspot.com, aleyulala.blogspot.com vb.) için geçerlidir.</p>
+      <p>Gizliliğinizi korumaya ve kişisel verilerinizi nasıl topladığımız, kullandığımız ve muhafaza ettiğimiz konusunda tam bir şeffaflık sağlamaya kararlıyız. Bu politika; hangi verileri neden topladığımızı ve kişisel verilerinize ilişkin haklarınızı detaylıca açıklamaktadır.</p>
+
+      <div class="meta-grid">
+        <div class="meta-item">
+          <span class="lbl">Veri Sorumlusu (Controller)</span>
+          <span class="val">WebSyrup Network & Saved Contributors</span>
+        </div>
+        <div class="meta-item">
+          <span class="lbl">İletişim E-Postası</span>
+          <span class="val"><a href="mailto:privacy@websyrup.net">privacy@websyrup.net</a></span>
+        </div>
+        <div class="meta-item">
+          <span class="lbl">Web Sitesi</span>
+          <span class="val"><a href="https://websyrup.net" target="_blank" rel="noopener">websyrup.net</a></span>
+        </div>
+        <div class="meta-item">
+          <span class="lbl">Ağ & Blog Siteleri</span>
+          <span class="val"><a href="https://negronshow.blogspot.com/" target="_blank" rel="noopener">negronshow.blogspot.com</a></span>
+        </div>
+      </div>
+    </article>
+
+    <!-- 1. Toplanan Bilgiler -->
+    <article class="card" id="section1">
+      <h2>
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+        1. Topladığımız Bilgiler (Information We Collect)
+      </h2>
+      
+      <h3 style="font-size:15px;margin:16px 0 6px;color:var(--text)">1.1 Doğrudan Sizin Tarafınızdan Sağlanan Bilgiler</h3>
+      <p>Aşağıdaki durumlarda gönüllü olarak paylaştığınız bilgileri toplayabiliriz:</p>
+      <ul>
+        <li><strong>Saved Yerel Tercihleri:</strong> Saved startpage üzerinde eklediğiniz yer imleri, kategoriler, yapılacak işler (To-do) ve hızlı notlar <em>yalnızca tarayıcınızın yerel hafızasında (localStorage/IndexedDB) saklanır ve sunucularımıza iletilmez</em>.</li>
+        <li>Bir hesaba kaydolduğunuzda veya bültenlere abone olduğunuzda,</li>
+        <li>İletişim formları veya e-posta yoluyla bizimle yazıştığınızda,</li>
+        <li>Geri bildirim formlarına, anketlere veya forum tartışmalarına katıldığınızda,</li>
+        <li>Yorum, değerlendirme veya kullanıcı tarafından oluşturulan içerik paylaştığınızda.</li>
+      </ul>
+
+      <h3 style="font-size:15px;margin:18px 0 6px;color:var(--text)">1.2 Otomatik Olarak Toplanan Bilgiler</h3>
+      <p>Sitelerimizi ziyaret ettiğinizde, çerezler ve benzer teknolojiler aracılığıyla belirli teknik veriler otomatik olarak toplanabilir:</p>
+      <ul>
+        <li><strong>Cihaz Bilgisi:</strong> IP adresi, tarayıcı türü, sürümü, işletim sistemi, ekran çözünürlüğü ve benzersiz cihaz tanımlayıcıları.</li>
+        <li><strong>Kullanım Verileri:</strong> Ziyaret edilen sayfalar, sitede geçirilen süre, tıklama verileri, yönlendiren URL kaynakları ve sitede gezinme adımları.</li>
+        <li><strong>Konum Verisi:</strong> IP adresinizden türetilen yaklaşık (şehir/ülke düzeyinde) coğrafi konum bilgisi.</li>
+        <li><strong>Çerez ve İzleme Verileri:</strong> Çerezler, web işaretçileri (beacons) ve yerel oturum nesnelerinde saklanan teknik tercihler.</li>
+      </ul>
+
+      <h3 style="font-size:15px;margin:18px 0 6px;color:var(--text)">1.3 Üçüncü Taraf Kaynaklardan Alınan Bilgiler</h3>
+      <p>Web sitelerimize entegre edilmiş üçüncü taraf hizmetlerden hakkınızda veri alınabilir:</p>
+      <ul>
+        <li>Sosyal medya platformları (sosyal paylaşım veya giriş araçları kullanıldığında),</li>
+        <li>Analitik sağlayıcıları (Google Analytics gibi anonim trafik verileri),</li>
+        <li>Reklam ağları (Google AdSense ve iş ortakları),</li>
+        <li>Ödeme işlemcileri, ortaklık (affiliate) program ortakları ve harici iletişim araçları.</li>
+      </ul>
+    </article>
+
+    <!-- 2. Verilerin Kullanımı -->
+    <article class="card" id="section2">
+      <h2>
+        <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+        2. Bilgilerinizi Nasıl Kullanıyoruz? (How We Use Data)
+      </h2>
+      <p>Toplanan bilgileri aşağıdaki meşru ve yasal amaçlar doğrultusunda kullanmaktayız:</p>
+      <ul>
+        <li><strong>Hizmet Sağlama ve Kişiselleştirme:</strong> Web sitelerimizi, startpage arayüzünü ve servislerimizi kesintisiz çalıştırmak, geliştirmek ve kullanıcı deneyiminizi kişiselleştirmek.</li>
+        <li><strong>İletişim ve Destek:</strong> Sorularınıza, taleplerinize ve hata bildirimlerinize yanıt vermek, teknik güncellemeler ve duyurular sunmak.</li>
+        <li><strong>Analitik ve Sürekli Geliştirme:</strong> Ziyaretçi kullanım trendlerini analiz ederek site performansını optimize etmek, araştırma ve geliştirme yapmak.</li>
+        <li><strong>Güvenlik ve Yasal Uyumluluk:</strong> Sahtekarlık, spam, kötü niyetli saldırı ve suistimalleri tespit edip engellemek; yürürlükteki yasal yükümlülüklere tam uyum sağlamak.</li>
+        <li><strong>Reklam ve Pazarlama:</strong> İlgili üçüncü taraf ağlar (Google AdSense vb.) üzerinden ilgi alanlarına uygun reklamlar sunmak ve reklam etkinliğini ölçmek.</li>
+        <li><strong>Entegrasyonlar:</strong> Arama motoru yönlendirmeleri, yazı tipleri (Google Fonts) ve harici API servislerinin uyumlu çalışmasını sağlamak.</li>
+      </ul>
+    </article>
+
+    <!-- 3. Çerezler ve Takip Teknolojileri -->
+    <article class="card" id="section3">
+      <h2>
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a10 10 0 0 0-2 19.8"></path><circle cx="8.5" cy="8.5" r="1.5"></circle><circle cx="15.5" cy="8.5" r="1.5"></circle><circle cx="15.5" cy="15.5" r="1.5"></circle><circle cx="8.5" cy="15.5" r="1.5"></circle></svg>
+        3. Çerezler ve Takip Teknolojileri (Cookies & Tracking)
+      </h2>
+      
+      <h3 style="font-size:15px;margin:16px 0 6px;color:var(--text)">3.1 Çerez Nedir?</h3>
+      <p>Çerezler (Cookies), bir web sitesini ziyaret ettiğinizde tarayıcınız aracılığıyla cihazınıza kaydedilen küçük metin dosyalarıdır. Çerezler, web sitesinin tercihlerinizi (tema, dil, görünüm vb.) hatırlamasına yardımcı olur, oturum güvenliğini sağlar ve gezinme deneyiminizi kolaylaştırır.</p>
+
+      <h3 style="font-size:15px;margin:18px 0 6px;color:var(--text)">3.2 Kullandığımız Çerez Türleri</h3>
+      <div class="table-wrap">
+        <table class="cookie-table">
+          <thead>
+            <tr>
+              <th style="min-width:140px">Çerez Türü</th>
+              <th>Kullanım Amacı</th>
+              <th style="min-width:120px">Saklama Süresi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Zorunlu / Temel (Essential)</strong></td>
+              <td>Web sitesinin temel işlevlerinin çalışması, oturum güvenliği ve sayfa gezinmesi için kesinlikle gereklidir.</td>
+              <td>Oturum / 1 Yıl</td>
+            </tr>
+            <tr>
+              <td><strong>Performans (Performance)</strong></td>
+              <td>Ziyaretçilerin siteyi nasıl kullandığına dair anonim istatistiksel veriler toplar (örn. Google Analytics).</td>
+              <td>2 Yıl (26 Ay)</td>
+            </tr>
+            <tr>
+              <td><strong>İşlevsellik (Functionality)</strong></td>
+              <td>Dil tercihlerinizi, koyu/açık tema seçiminizi ve özelleştirilmiş görünüm ayarlarınızı hatırlar.</td>
+              <td>1 Yıl / Yerel</td>
+            </tr>
+            <tr>
+              <td><strong>Reklam (Advertising)</strong></td>
+              <td>İlgi alanlarınıza uygun kişiselleştirilmiş reklamlar sunar ve kampanya etkinliğini ölçer (Google AdSense).</td>
+              <td>13 Ay</td>
+            </tr>
+            <tr>
+              <td><strong>Üçüncü Taraf (Third-Party)</strong></td>
+              <td>Sosyal medya düğmeleri, video oynatıcıları, CDN altyapısı ve harici servisler tarafından yerleştirilir.</td>
+              <td>Sağlayıcıya göre değişir</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert-box info">
+        <span class="icon">ℹ️</span>
+        <div>
+          <strong>Üçüncü Taraf Servisler Hakkında Önemli Not:</strong>
+          Ağımıza bağlı sitelerde; Google Hizmetleri (AdSense, Analytics, Tag Manager, Fonts, reCAPTCHA), Sosyal Medya Paylaşım Araçları, İçerik Dağıtım Ağları (CDN) ve harici analitik sağlayıcıları kullanılabilmektedir. Bu servisler kendi bağımsız çerez politikalarına tabidir.
+        </div>
+      </div>
+    </article>
+
+    <!-- 4. Çerezleri Yönetme ve Devre Dışı Bırakma -->
+    <article class="card" id="section4">
+      <h2>
+        <svg viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path></svg>
+        4. Çerezleri Yönetme ve Devre Dışı Bırakma (Manage Cookies)
+      </h2>
+      <p>Çerezleri kabul etme veya reddetme hakkına her zaman sahipsiniz. Çoğu internet tarayıcısı çerezleri varsayılan olarak kabul eder; ancak dilediğiniz zaman tarayıcı ayarlarınızı değiştirerek çerezleri silebilir veya engelleyebilirsiniz.</p>
+
+      <div class="alert-box">
+        <span class="icon">⚠️</span>
+        <div>
+          <strong>Önemli Uyarı:</strong> Zorunlu ve işlevsellik çerezlerini devre dışı bırakmanız halinde, Saved ve bağlı sitelerimizin bazı özellikleri düzgün çalışmayabilir, tema ve dil tercihleriniz her sayfa yenilemede sıfırlanabilir.
+        </div>
+      </div>
+
+      <h3 style="font-size:15px;margin:18px 0 10px;color:var(--text)">4.1 Tarayıcılara Özel Kılavuz</h3>
+      <div class="guide-grid">
+        <div class="guide-card">
+          <h4>🌐 Google Chrome</h4>
+          <ol>
+            <li>Sağ üstteki üç nokta menüsüne (⋮) tıklayın.</li>
+            <li><strong>Ayarlar</strong> &gt; <strong>Gizlilik ve güvenlik</strong>'i seçin.</li>
+            <li><strong>Üçüncü taraf çerezleri</strong> bölümüne girin.</li>
+            <li>Tercih ettiğiniz çerez engelleme düzeyini belirleyin.</li>
+          </ol>
+        </div>
+        <div class="guide-card">
+          <h4>🦊 Mozilla Firefox</h4>
+          <ol>
+            <li>Menü düğmesine (☰) tıklayıp <strong>Ayarlar</strong>'a gidin.</li>
+            <li><strong>Gizlilik ve Güvenlik</strong> sekmesini seçin.</li>
+            <li><strong>Çerezler ve Site Verileri</strong> başlığı altından tercihlerinizi yönetin.</li>
+          </ol>
+        </div>
+        <div class="guide-card">
+          <h4>🌀 Microsoft Edge</h4>
+          <ol>
+            <li>Sağ üstteki üç nokta (⋯) &gt; <strong>Ayarlar</strong>'a tıklayın.</li>
+            <li><strong>Çerezler ve site izinleri</strong>'ni seçin.</li>
+            <li><strong>Çerezleri ve site verilerini yönet ve sil</strong> seçeneğini yapılandırın.</li>
+          </ol>
+        </div>
+        <div class="guide-card">
+          <h4>🧭 Apple Safari</h4>
+          <ol>
+            <li><strong>Tercihler</strong> (Preferences) menüsünü açın.</li>
+            <li><strong>Gizlilik</strong> (Privacy) sekmesine tıklayın.</li>
+            <li>"Tüm çerezleri engelle" veya "Web sitesi verilerini yönet" seçeneğini kullanın.</li>
+          </ol>
+        </div>
+      </div>
+
+      <h3 style="font-size:15px;margin:18px 0 8px;color:var(--text)">4.2 Ek Gizlilik ve Çerez Denetim Araçları</h3>
+      <p>Kişiselleştirilmiş reklamları ve analitik takibini doğrudan sağlayıcılar üzerinden devre dışı bırakabilirsiniz:</p>
+      <div class="tools-list">
+        <a href="https://adssettings.google.com" target="_blank" rel="noopener">Google Reklam Ayarları ↗</a>
+        <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics Kapsamı Dışında Kalma Eklentisi ↗</a>
+        <a href="https://optout.networkadvertising.org" target="_blank" rel="noopener">Network Advertising Initiative (NAI) ↗</a>
+        <a href="https://www.youronlinechoices.eu" target="_blank" rel="noopener">Your Online Choices (AB / EU) ↗</a>
+      </div>
+    </article>
+
+    <!-- 5. Üçüncü Taraf Servisler ve Veri Paylaşımı -->
+    <article class="card" id="section5">
+      <h2>
+        <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+        5. Üçüncü Taraf Servisler ve Veri Paylaşımı (Third-Party Services)
+      </h2>
+      
+      <h3 style="font-size:15px;margin:16px 0 6px;color:var(--text)">5.1 Google Servis Entegrasyonları</h3>
+      <p>Web sitelerimiz veri toplayabilen ve işleyebilen çeşitli Google hizmetleriyle entegredir:</p>
+      <ul>
+        <li><strong>Google AdSense:</strong> Ziyaretçilere ilgi alanlarına uygun kişiselleştirilmiş reklamlar gösterir.</li>
+        <li><strong>Google Analytics:</strong> Web sitesi kullanımını, sayfa görüntülemelerini ve istatistiksel raporları takip eder.</li>
+        <li><strong>Google Tag Manager:</strong> Pazarlama etiketlerini ve analitik kodlarını merkezi olarak yönetir.</li>
+        <li><strong>Google Fonts & API'ler:</strong> Modern tipografi ve arayüz kaynaklarını yüksek hızda sunar.</li>
+      </ul>
+
+      <h3 style="font-size:15px;margin:18px 0 6px;color:var(--text)">5.2 Bilgilerinizi Ne Zaman ve Kimlerle Paylaşırız?</h3>
+      <p>Kişisel verileriniz asla izinsiz satılmaz. Yalnızca aşağıdaki durumlarda paylaşım söz konusudur:</p>
+      <ul>
+        <li><strong>Hizmet Sağlayıcılar:</strong> Hosting, içerik dağıtımı (CDN), analitik ve teknik altyapı sunan güvenilir üçüncü taraf ortaklar.</li>
+        <li><strong>Reklam Ortakları:</strong> Reklam gösterimi, dolandırıcılık önleme ve ölçümleme amacıyla yetkilendirilmiş reklam ağları.</li>
+        <li><strong>Yasal Zorunluluklar:</strong> Kanunlar, mahkeme kararları, resmi kurum talepleri veya yasal haklarımızı korumak için zorunlu olduğu hallerde.</li>
+      </ul>
+    </article>
+
+    <!-- 6. Gizlilik Haklarınız -->
+    <article class="card" id="section6">
+      <h2>
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        6. Gizlilik Haklarınız (KVKK, GDPR & CCPA)
+      </h2>
+      
+      <h3 style="font-size:15px;margin:16px 0 6px;color:var(--text)">6.1 Temel Haklarınız</h3>
+      <p>Kişisel verilerinize ilişkin olarak aşağıdaki yasal haklara sahipsiniz:</p>
+      <ul>
+        <li><strong>Erişim Hakkı:</strong> Hakkınızda tuttuğumuz kişisel verilerin bir kopyasını talep etme hakkı.</li>
+        <li><strong>Düzeltme Hakkı:</strong> Eksik, hatalı veya güncel olmayan verilerinizin düzeltilmesini isteme hakkı.</li>
+        <li><strong>Silme (Unutulma) Hakkı:</strong> Yasal saklama zorunluluğu olmayan kişisel verilerinizin silinmesini talep etme hakkı.</li>
+        <li><strong>İtiraz Etme Hakkı:</strong> Verilerinizin doğrudan pazarlama veya meşru menfaat kapsamında işlenmesine itiraz etme hakkı.</li>
+        <li><strong>Veri Taşınabilirliği:</strong> Verilerinizin yapılandırılmış, yaygın olarak kullanılan bir formatta (örn. JSON) tarafınıza verilmesini isteme hakkı.</li>
+      </ul>
+
+      <h3 style="font-size:15px;margin:18px 0 6px;color:var(--text)">6.2 GDPR (Avrupa) & CCPA (Kaliforniya) Hakları</h3>
+      <p>Avrupa Ekonomik Alanı (AEA) sakinleri GDPR kapsamında genişletilmiş veri koruma haklarına; Kaliforniya sakinleri ise CCPA kapsamında verilerinin satılmaması (Opt-Out of Sale) ve toplanan veri kategorilerini öğrenme hakkına sahiptir.</p>
+
+      <h3 style="font-size:15px;margin:18px 0 6px;color:var(--text)">6.3 Haklarınızı Nasıl Kullanabilirsiniz?</h3>
+      <p>Haklarınızı kullanmak için <a href="mailto:privacy@websyrup.net" style="color:var(--accent);font-weight:600">privacy@websyrup.net</a> adresine talebinizi belirten bir e-posta gönderebilirsiniz. Talepleriniz yasal gereklilikler uyarınca en geç <strong>30 gün</strong> içerisinde ücretsiz olarak değerlendirilir ve yanıtlanır.</p>
+    </article>
+
+    <!-- 7. Veri Güvenliği -->
+    <article class="card" id="section7">
+      <h2>
+        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        7. Veri Güvenliği (Data Security)
+      </h2>
+      <p>Kişisel verilerinizi yetkisiz erişim, kayıp, kötüye kullanım ve değiştirilmeye karşı korumak için güncel teknik ve idari tedbirler uyguluyoruz:</p>
+      <ul>
+        <li>Tüm veri iletimlerinde <strong>SSL/TLS (HTTPS)</strong> şifreleme protokolleri kullanılmaktadır.</li>
+        <li>Düzenli güvenlik güncellemeleri, güvenlik duvarları ve altyapı taramaları gerçekleştirilir.</li>
+        <li>Saved startpage mimarisinde yer imleriniz ve notlarınız doğrudan kullanıcının kendi tarayıcısında (Local Storage) izole tutulur.</li>
+      </ul>
+      <div class="alert-box">
+        <span class="icon">⚠️</span>
+        <div>
+          <strong>Hatırlatma:</strong> İnternet üzerinden yapılan hiçbir iletim veya elektronik depolama yöntemi %100 kusursuz güvenli değildir. Mutlak güvenlik garantisi verilememekle birlikte, güvenlik standartlarımızı en üst düzeyde tutmak için sürekli çalışmaktayız.
+        </div>
+      </div>
+    </article>
+
+    <!-- 8. Veri Saklama Süresi -->
+    <article class="card" id="section8">
+      <h2>
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        8. Veri Saklama Süresi (Data Retention)
+      </h2>
+      <p>Kişisel veriler yalnızca toplanma amacını gerçekleştirmek veya yasal zorunlulukları yerine getirmek için gerekli olan süre boyunca saklanır:</p>
+      <ul>
+        <li><strong>Yerel Tarayıcı Verileri:</strong> Saved üzerindeki veriler siz tarayıcı geçmişinizi/verilerinizi temizleyene veya ayarlar çekmecesinden "Sıfırla" düğmesine basana kadar cihazınızda kalır.</li>
+        <li><strong>Analitik Verileri:</strong> Google Analytics üzerinde saklanan kullanıcı ve etkinlik düzeyindeki veriler azami 26 ay sonra otomatik olarak anonimleştirilir veya silinir.</li>
+        <li><strong>Çerez Verileri:</strong> Çerez tablomuzda belirtilen geçerlilik sürelerine tabidir (oturum sonu ile 13 ay arası).</li>
+        <li><strong>Yasal Kayıtlar:</strong> Yürürlükteki mevzuatın öngördüğü kanuni süre boyunca arşivlenir.</li>
+      </ul>
+    </article>
+
+    <!-- 9. Çocukların Gizliliği -->
+    <article class="card" id="section9">
+      <h2>
+        <svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 0 1 5 5v3a5 5 0 0 1-10 0V7a5 5 0 0 1 5-5z"></path><path d="M20 21v-2a7 7 0 0 0-14 0v2"></path></svg>
+        9. Çocukların Gizliliği (Children's Privacy)
+      </h2>
+      <p>Web sitelerimiz 16 yaşın altındaki çocuklara yönelik değildir. 16 yaşından küçük bireylerden bilerek ve isteyerek kişisel veri toplamamaktayız. Eğer bir çocuğun bize kişisel bilgi sağladığını fark ederseniz, lütfen <a href="mailto:privacy@websyrup.net" style="color:var(--accent);font-weight:600">privacy@websyrup.net</a> üzerinden bize ulaşınız; bu bilgiler ivedilikle sistemlerimizden silinecektir.</p>
+    </article>
+
+    <!-- 10. Uluslararası Veri Transferi -->
+    <article class="card" id="section10">
+      <h2>
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+        10. Uluslararası Veri Aktarımı (International Transfers)
+      </h2>
+      <p>Kullandığımız sunucular, bulut altyapıları veya üçüncü taraf sağlayıcılar (örneğin Google, GitHub) ikamet ettiğiniz ülkenin dışındaki ülkelerde bulunabilir. Verilerinizin sınır ötesi aktarımında şu güvencelere dayanılmaktadır:</p>
+      <ul>
+        <li>Avrupa Komisyonu onaylı <strong>Standart Sözleşme Maddeleri (SCC)</strong>,</li>
+        <li><strong>AB-ABD Veri Gizliliği Çerçevesi (Data Privacy Framework)</strong> uyumluluğu,</li>
+        <li>Yetkili veri koruma otoritelerinin yeterlilik kararları.</li>
+      </ul>
+    </article>
+
+    <!-- 11. Politika Değişiklikleri -->
+    <article class="card" id="section11">
+      <h2>
+        <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+        11. Bu Politikadaki Değişiklikler (Changes to Policy)
+      </h2>
+      <p>Bu Gizlilik ve Çerez Politikası'nı yasal değişikliklere, teknolojik yeniliklere veya hizmet modellerimize göre zaman zaman güncelleyebiliriz. Önemli değişiklikler web sitemizde belirgin bir bildirimle duyurulur ve sayfanın başındaki "Son Güncelleme" tarihi yenilenir. Değişikliklerden sonra hizmetlerimizi kullanmaya devam etmeniz, güncel şartları kabul ettiğiniz anlamına gelir.</p>
+    </article>
+
+    <!-- 12. İletişim ve Destek -->
+    <article class="card" id="section12">
+      <h2>
+        <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+        12. İletişim (Contact Us)
+      </h2>
+      <p>Bu Gizlilik ve Çerez Politikası hakkında herhangi bir sorunuz, endişeniz, veri talebiniz veya geri bildiriminiz için bizimle dilediğiniz zaman iletişime geçebilirsiniz:</p>
+      <ul>
+        <li><strong>E-Posta:</strong> <a href="mailto:privacy@websyrup.net" style="color:var(--accent);font-weight:600">privacy@websyrup.net</a></li>
+        <li><strong>Web Sitesi:</strong> <a href="https://websyrup.net" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600">websyrup.net</a></li>
+        <li><strong>Geliştirici & Blog:</strong> <a href="https://negronshow.blogspot.com/" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600">negronshow.blogspot.com</a> & <a href="https://aleyulala.blogspot.com/" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600">aleyulala.blogspot.com</a></li>
+        <li><strong>GitHub Tartışmalar:</strong> <a href="https://github.com/Aleyulala/saved/discussions/" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600">Aleyulala/saved Discussions</a></li>
+      </ul>
+    </article>
+
+    <!-- 13. GNU GPL v3.0 Açık Kaynak Lisansı -->
+    <article class="card" id="section-license">
+      <h2>
+        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        13. Açık Kaynak Lisansı (GNU GPL v3.0)
+      </h2>
+      <p>Saved Startpage projesi <strong>GNU Genel Kamu Lisansı Sürüm 3 (GPL-3.0)</strong> kapsamında lisanslanmıştır. Kullanıcılara şu temel haklar ve garantiler sunulur:</p>
+      <ul>
+        <li><strong>Özgürce Kullanma:</strong> Programı dilediğiniz amaçla çalıştırma ve kullanma özgürlüğü.</li>
+        <li><strong>İnceleme ve Değiştirme:</strong> Kaynak kodunu inceleme, kendi ihtiyaçlarınıza göre uyarlama ve geliştirme hakkı.</li>
+        <li><strong>Paylaşma ve Dağıtma:</strong> Yazılımın orijinal veya değiştirilmiş sürümlerini GPL-3.0 koşullarını korumak şartıyla dağıtma özgürlüğü.</li>
+        <li><strong>Garantisizlik:</strong> Yazılım, açık veya zımni herhangi bir garanti verilmeksizin "olduğu gibi" (AS IS) sağlanır.</li>
+      </ul>
+      <div class="license-code">
+Copyright (C) 2026 Ali Yıldız & nsone / WebSyrup Network Contributors
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+      </div>
+    </article>
+
+    <!-- Forum Bülteni ve Destek -->
+    <article class="card">
+      <h2 style="display:flex;align-items:center;gap:8px;justify-content:center;margin-bottom:8px">
+        <span style="font-size:24px;line-height:1">💌</span> Forum Bülteni & Destek
+      </h2>
+      <p style="text-align:center;margin-bottom:20px;color:var(--muted)">En son güncellemelerden ve duyurulardan haberdar olun.</p>
+      <div style="display:flex; justify-content:center; gap: 12px; flex-wrap: wrap;">
+        <a href="https://aleyulala.blogspot.com/p/odeme.html" target="_blank" rel="noopener" class="btn-action" style="background:var(--surface2); color:var(--text); border:1px solid var(--line); border-radius:99px;">❤️ Bağış & Destek</a>
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div style="display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;font-size:13px;margin-bottom:12px">
+      <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600;display:inline-flex;align-items:center;gap:4px">
+        <svg style="width:13px;height:13px;stroke:currentColor;fill:none" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        GNU GPL v3.0
+      </a>
+      <span style="opacity:.4">·</span>
+      <a href="https://github.com/Aleyulala/saved/discussions/" target="_blank" rel="noopener">GERİ BİLDİRİM</a>
+      <span style="opacity:.4">·</span>
+      <a href="https://aleyulala.blogspot.com/" target="_blank" rel="noopener">© ALİ YILDIZ</a>
+    </div>
+    <p style="margin:0;color:var(--text);font-size:13px">Developed by <a href="https://negronshow.blogspot.com/" target="_blank" rel="noopener" style="color:var(--accent);font-weight:700;text-decoration:none">nsone</a> ‧ GNU GPL 3.0 Lisanslı Açık Kaynak Proje</p>
+  </footer>
+
+  
+<div id="searchOverlay" class="search-overlay">
+  <button id="closeSearchOverlay" class="close-search" aria-label="Close Search">&times;</button>
+  <form class="search-wrap" id="searchForm">
+    <select class="engine" id="engine" aria-label="Search engine">
+      <option value="https://www.google.com/search?q=">Google</option>
+      <option value="https://github.com/search?q=">GitHub</option>
+      <option value="https://www.google.com/preferences/source?q=">Google Items</option>
+      <option value="https://www.google.com/search?udm=50&amp;q=">Google AI</option>
+      <option value="https://scholar.google.com/scholar?q=">Google Scholar</option>
+      <option value="https://www.google.com/interests/saved/search/sdfsd?authuser=0">Google Saved</option>
+      <option value="https://translate.google.com/?sl=auto&amp;tl=en&amp;text=">Google Translate</option>
+      <option value="https://www.youtube.com/results?search_query=">YouTube</option>
+      <option value="https://music.youtube.com/search?q=">YouTube Music</option>
+      <option value="https://www.ecosia.org/search?q=">Ecosia</option>
+      <option value="https://vuhuv.com/?q=">Vuhuv</option>
+      <option value="https://duckduckgo.com/?q=">DuckDuckGo</option>
+      <option value="https://search.brave.com/search?q=">Brave</option>
+      <option value="https://www.bing.com/search?q=">Bing</option>
+      <option value="https://search.yahoo.com/search?p=">Yahoo</option>
+      <option value="https://www.startpage.com/sp/search?query=">StartPage</option>
+      <option value="https://yandex.com/search/?text=">Yandex</option>
+      <option value="https://www.perplexity.ai/search?q=">Perplexity</option>
+      <option value="https://www.searchencrypt.com/search/?q=">Search Encrypt</option>
+      <option value="https://gibiru.com/results.html?q=">Gibiru</option>
+      <option value="https://www.onesearch.com/search?q=">OneSearch</option>
+      <option value="https://swisscows.com/web?query=">Swisscows</option>
+      <option value="https://www.artadosearch.com/search?i=">Artado</option>
+      <option value="https://searx.be/?q=">SearX</option>
+      <option value="https://www.oscobo.com/search?q=">Oscobo</option>
+      <option value="https://archive.org/search?query=">Archive</option>
+    </select>
+    <input class="search" id="search" data-i18n-ph="searchPh" placeholder="Search the web or enter an address…" autocomplete="off">
+    <button class="search-btn" aria-label="Search">⌕</button>
+  </form>
+  <div class="search-engines-quick">
+    <button type="button" class="quick-eng-btn" data-eng="https://www.google.com/search?q=">Google</button>
+    <button type="button" class="quick-eng-btn" data-eng="https://github.com/search?q=">GitHub</button>
+    <button type="button" class="quick-eng-btn" data-eng="https://duckduckgo.com/?q=">DuckDuckGo</button>
+    <button type="button" class="quick-eng-btn" data-eng="https://www.perplexity.ai/search?q=">Perplexity</button>
+    <button type="button" class="quick-eng-btn" data-eng="https://archive.org/search?query=">Archive</button>
+    <button type="button" class="quick-eng-btn" data-eng="https://www.youtube.com/results?search_query=">YouTube</button>
+    <button type="button" class="quick-eng-btn" data-eng="https://scholar.google.com/scholar?q=">Google Scholar</button>
+    <button type="button" class="quick-eng-btn" data-eng="https://yandex.com/search/?text=">Yandex</button>
+  </div>
+</div>
+
+  <!-- Synchronization & Theme Script -->
+  <script>
+  (function(){
+
+  // Reset all dropdown toggles on script execution
+  ['forAppearance','forTheme','forTranslate'].forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) el.checked = false;
+  });
+
+
+    var LS = 'PLUS_UI_APPEARANCE';
+    var storageKey = 'saved_startpage_v1';
+    var themeColors = ['#763da9','#f44336','#45a557','#0062d1','#ff990a','#e91e63','#ff5722','#607d8b','#5d4037','#0c9784','#3949ab','#5c3083','#2c5d3f','#3d6fa9','#882c70','#bf5154'];
+
+    function read(){ try{ return JSON.parse(localStorage.getItem(LS)||'{}'); }catch(e){ return {}; } }
+    function write(o){ try{ localStorage.setItem(LS, JSON.stringify(Object.assign(read(), o))); }catch(e){} }
+
+    function readSavedData(){ try{ return JSON.parse(localStorage.getItem(storageKey)||'{}'); }catch(e){ return {}; } }
+    function writeSavedData(d){ try{ localStorage.setItem(storageKey, JSON.stringify(d)); }catch(e){} }
+
+    function applyTheme(n){
+      if(typeof n !== 'number' || n < 0 || n > 15) return;
+      var hex = themeColors[n];
+      if(hex){
+        document.documentElement.style.setProperty('--accent', hex);
+        var d = readSavedData();
+        d.color = hex;
+        writeSavedData(d);
+        document.querySelectorAll('.thmP button').forEach(function(b){
+          var bHex = b.dataset.hex;
+          if(bHex) b.style.setProperty('--c', bHex);
+          b.style.outline = (parseInt(b.dataset.theme, 10) === n ? '2px solid var(--text)' : 'none');
+        });
+      }
+      write({ theme: n });
+      document.documentElement.classList.forEach(function(c){ if(/^th\d+$/.test(c)) document.documentElement.classList.remove(c); });
+      document.documentElement.classList.add('th' + n);
+      document.documentElement.classList.add('thS');
+    }
+
+    function setMode(m){
+      write({ mode: m });
+      document.documentElement.classList.remove('lgT', 'drK', 'syS');
+      var map = { light: 'lgT', dark: 'drK', system: 'syS' };
+      document.documentElement.classList.add(map[m] || 'syS');
+      if(m === 'system'){
+        var sys = window.matchMedia('(prefers-color-scheme: dark)');
+        document.documentElement.classList.add(sys && sys.matches ? 'drK' : 'lgT');
+      }
+      var d = readSavedData();
+      if(m === 'light') d.theme = 'light';
+      else if(m === 'dark') d.theme = 'dark';
+      else {
+        var sys2 = window.matchMedia('(prefers-color-scheme: dark)');
+        d.theme = (sys2 && sys2.matches) ? 'dark' : 'light';
+      }
+      writeSavedData(d);
+    }
+
+    function getMode(){
+      var s = read().mode;
+      if(s) return s;
+      for(var i = 0; i < ['lgT','drK','syS'].length; i++){
+        if(document.documentElement.classList.contains(['lgT','drK','syS'][i])) return ['light','dark','system'][i];
+      }
+      return 'dark';
+    }
+
+    window.PU = window.PU || {};
+    window.PU.ui = {
+      get md(){ return getMode(); },
+      set md(m){ setMode(m); },
+      lM: function(){ setMode('light'); },
+      dM: function(){ setMode('dark'); },
+      sM: function(){ setMode('system'); },
+      sT: function(n){ applyTheme(parseInt(n, 10)); },
+      get th(){ return read().theme; },
+      set th(n){ applyTheme(n); }
+    };
+
+    // Apply saved mode & theme on startup
+    try {
+      var saved = read();
+      var savedData = readSavedData();
+      var initialMode = saved.mode || (savedData.theme === 'light' ? 'light' : 'dark');
+      setMode(initialMode);
+
+      if(saved.theme !== undefined) applyTheme(saved.theme);
+      else if(savedData.color){
+        var idx = themeColors.indexOf(savedData.color.toLowerCase());
+        if(idx > -1) applyTheme(idx);
+        else document.documentElement.style.setProperty('--accent', savedData.color);
+      }
+      document.documentElement.classList.add('lzD');
+
+      var mql = window.matchMedia('(prefers-color-scheme: dark)');
+      if(mql && mql.addEventListener){
+        mql.addEventListener('change', function(){
+          if(getMode() === 'system'){
+            document.documentElement.classList.remove('drK', 'lgT');
+            document.documentElement.classList.add(mql.matches ? 'drK' : 'lgT');
+          }
+        });
+      }
+    } catch(e){ document.documentElement.classList.add('lzD'); }
+
+    // Bind Quick Settings buttons
+    function bindQuickSettings(){
+      var lgt = document.querySelector('.lgtB'), drk = document.querySelector('.drkB'), sys = document.querySelector('.sysB');
+      if(lgt) lgt.onclick = function(){ window.PU.ui.lM(); var c=document.getElementById('forAppearance'); if(c) c.checked = false; };
+      if(drk) drk.onclick = function(){ window.PU.ui.dM(); var c=document.getElementById('forAppearance'); if(c) c.checked = false; };
+      if(sys) sys.onclick = function(){ window.PU.ui.sM(); var c=document.getElementById('forAppearance'); if(c) c.checked = false; };
+
+      document.querySelectorAll('.thmP button').forEach(function(b){
+        var hex = b.dataset.hex;
+        if(hex){ b.style.setProperty('--c', hex); b.style.backgroundColor = hex; }
+        b.onclick = function(){
+          var n = parseInt(b.dataset.theme, 10);
+          window.PU.ui.sT(n);
+          var ft = document.getElementById('forTheme'); if(ft) ft.checked = false;
+          var fa = document.getElementById('forAppearance'); if(fa) fa.checked = false;
+        };
+      });
+    }
+    if(document.readyState !== 'loading') bindQuickSettings();
+    else document.addEventListener('DOMContentLoaded', bindQuickSettings);
+  })();
+  </script>
+
+  <!-- Google Translate & RTL Engine -->
+  <script>
+  (function(){
+    var APP_LANGS = [
+      { code: 'tr', name: 'Türkçe', flag: '🇹🇷', rtl: false },
+      { code: 'en', name: 'English', flag: '🇬🇧', rtl: false },
+      { code: 'de', name: 'Deutsch', flag: '🇩🇪', rtl: false },
+      { code: 'fr', name: 'Français', flag: '🇫🇷', rtl: false },
+      { code: 'es', name: 'Español', flag: '🇪🇸', rtl: false },
+      { code: 'it', name: 'Italiano', flag: '🇮🇹', rtl: false },
+      { code: 'pt', name: 'Português', flag: '🇵🇹', rtl: false },
+      { code: 'ru', name: 'Русский', flag: '🇷🇺', rtl: false },
+      { code: 'ar', name: 'العربية (Arabic)', flag: '🇸🇦', rtl: true },
+      { code: 'fa', name: 'فارسی (Persian)', flag: '🇮🇷', rtl: true },
+      { code: 'iw', name: 'עברית (Hebrew)', flag: '🇮🇱', rtl: true },
+      { code: 'ur', name: 'اردو (Urdu)', flag: '🇵🇰', rtl: true },
+      { code: 'az', name: 'Azərbaycan', flag: '🇦🇿', rtl: false },
+      { code: 'ja', name: '日本語', flag: '🇯🇵', rtl: false },
+      { code: 'ko', name: '한국어', flag: '🇰🇷', rtl: false },
+      { code: 'zh-CN', name: '简体中文', flag: '🇨🇳', rtl: false },
+      { code: 'hi', name: 'हिन्दी', flag: '🇮🇳', rtl: false }
+    ];
+
+    var RTL_LANGS = ['ar', 'fa', 'iw', 'he', 'ur', 'ug', 'ps', 'yi'];
+
+    function getStoredLang(){
+      var m = document.cookie.match(/(?:^|;\s*)googtrans=([^;]+)/);
+      if(m){
+        var val = decodeURIComponent(m[1]);
+        var p = val.split('/');
+        if(p.length >= 3 && p[2]) return p[2];
+      }
+      return localStorage.getItem('saved_lang') || 'tr';
+    }
+
+    function setTransCookie(code){
+      var host = window.location.hostname;
+      var domainParts = host.split('.');
+      var isTr = (code === 'tr' || !code);
+      var exp = isTr ? 'Thu, 01 Jan 1970 00:00:00 GMT' : 'Fri, 31 Dec 9999 23:59:59 GMT';
+      var val = isTr ? '' : ('/tr/' + code);
+
+      document.cookie = 'googtrans=' + val + '; expires=' + exp + '; path=/;';
+      if(host) document.cookie = 'googtrans=' + val + '; expires=' + exp + '; path=/; domain=' + host + ';';
+      if(domainParts.length > 2){
+        var root = domainParts.slice(-2).join('.');
+        document.cookie = 'googtrans=' + val + '; expires=' + exp + '; path=/; domain=.' + root + ';';
+      }
+    }
+
+    function applyDirection(code){
+      var isRtl = RTL_LANGS.indexOf(code) > -1;
+      if(isRtl){
+        document.documentElement.setAttribute('dir', 'rtl');
+        document.documentElement.classList.add('translated-rtl');
+        document.documentElement.classList.remove('translated-ltr');
+      } else {
+        document.documentElement.setAttribute('dir', 'ltr');
+        document.documentElement.classList.remove('translated-rtl');
+        if(code !== 'tr') document.documentElement.classList.add('translated-ltr');
+        else document.documentElement.classList.remove('translated-ltr');
+      }
+    }
+
+    function triggerGoogleCombo(code){
+      var combo = document.querySelector('select.goog-te-combo');
+      if(!combo) return false;
+      for(var i = 0; i < combo.options.length; i++){
+        if(combo.options[i].value === code){
+          combo.selectedIndex = i;
+          combo.dispatchEvent(new Event('change', { bubbles: true }));
+          return true;
+        }
+      }
+      if(code === 'tr'){
+        combo.selectedIndex = 0;
+        combo.dispatchEvent(new Event('change', { bubbles: true }));
+        return true;
+      }
+      return false;
+    }
+
+    window.selectLanguage = function(code){
+      var prev = getStoredLang();
+      localStorage.setItem('saved_lang', code);
+      applyDirection(code);
+
+      document.querySelectorAll('.transC button').forEach(function(b){
+        if(b.dataset.code === code) b.classList.add('s');
+        else b.classList.remove('s');
+      });
+
+      if(code === 'tr'){
+        setTransCookie('tr');
+        triggerGoogleCombo('tr');
+        if(prev !== 'tr'){
+          setTimeout(function(){ window.location.reload(); }, 120);
+        }
+        return;
+      }
+
+      setTransCookie(code);
+      if(!triggerGoogleCombo(code)){
+        var retries = 0;
+        var interval = setInterval(function(){
+          retries++;
+          if(triggerGoogleCombo(code) || retries > 25){
+            clearInterval(interval);
+          }
+        }, 200);
+      }
+    };
+
+    function renderLanguageMenu(){
+      var transC = document.querySelector('.transC');
+      if(!transC) return;
+
+      var gtEl = document.getElementById('google_translate_element');
+      if(!gtEl){
+        gtEl = document.createElement('div');
+        gtEl.id = 'google_translate_element';
+        gtEl.style.display = 'none';
+      }
+      transC.innerHTML = '';
+      transC.appendChild(gtEl);
+
+      var cur = getStoredLang();
+      applyDirection(cur);
+
+      APP_LANGS.forEach(function(l){
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.dataset.code = l.code;
+        if(l.code === cur) btn.classList.add('s');
+        btn.innerHTML = '<span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>' +
+          '<span class="flag">' + l.flag + '</span>' +
+          '<span class="name">' + l.name + '</span>' +
+          (l.rtl ? '<span class="rtl-tag">RTL</span>' : '');
+
+        btn.addEventListener('click', function(){
+          window.selectLanguage(l.code);
+          var chk = document.getElementById('forTranslate');
+          if(chk) chk.checked = false;
+        });
+        transC.appendChild(btn);
+      });
+    }
+
+    applyDirection(getStoredLang());
+
+    if(document.readyState !== 'loading') renderLanguageMenu();
+    else document.addEventListener('DOMContentLoaded', renderLanguageMenu);
+    
+    window.googleTranslateElementInit = function(){
+      new google.translate.TranslateElement({
+        pageLanguage: 'tr',
+        includedLanguages: APP_LANGS.map(function(x){ return x.code; }).join(','),
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+
+      var bannerCheck = setInterval(function(){
+        var b = document.querySelector('.goog-te-banner-frame');
+        if(b) b.style.display = 'none';
+        if(document.body.style.top && document.body.style.top !== '0px') document.body.style.top = '0px';
+      }, 250);
+      setTimeout(function(){ clearInterval(bannerCheck); }, 12000);
+    };
+  })();
+  </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+  <script>
+  // Toast Notification System
+  function toast(t) {
+    var el = document.getElementById('toast');
+    if (!el) {
+      el = document.createElement('div');
+      el.id = 'toast';
+      el.className = 'toast';
+      document.body.appendChild(el);
+    }
+    el.textContent = t;
+    el.classList.add('show');
+    clearTimeout(el._tt);
+    el._tt = setTimeout(function() { el.classList.remove('show'); }, 1800);
+  }
+
+  // Keyboard, Remote Control & Gamepad Navigation Engine
+  (function() {
+    function closePopups() {
+      var a = document.getElementById('forAppearance'); if (a && a.checked) a.checked = false;
+      var b = document.getElementById('forTheme'); if (b && b.checked) b.checked = false;
+      var c = document.getElementById('forTranslate'); if (c && c.checked) c.checked = false;
+      var ov = document.getElementById('searchOverlay');
+      if (ov && ov.classList.contains('active')) {
+        ov.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+      document.querySelectorAll('.kbd-focus').forEach(function(el) { el.classList.remove('kbd-focus'); });
+    }
+
+    function navScope() {
+      var ov = document.getElementById('searchOverlay');
+      if (ov && ov.classList.contains('active')) return ov;
+      var a = document.getElementById('forAppearance');
+      if (a && a.checked) return document.querySelector('.aprW');
+      var b = document.getElementById('forTheme');
+      if (b && b.checked) return document.querySelector('.thmW');
+      var c = document.getElementById('forTranslate');
+      if (c && c.checked) return document.getElementById('translatePopup');
+      return document.body;
+    }
+
+    function navFocusables(s) {
+      if (!s) return [];
+      return Array.from(s.querySelectorAll('a[href], button, input:not([type="hidden"]), label[role="button"], [tabindex]:not([tabindex="-1"])')).filter(function(el) {
+        if (el.disabled || el.getAttribute('tabindex') === '-1') return false;
+        var cs = window.getComputedStyle(el);
+        if (cs.display === 'none' || cs.visibility === 'hidden' || cs.pointerEvents === 'none') return false;
+        var r = el.getBoundingClientRect();
+        return (r.width > 0 && r.height > 0) || el.offsetWidth > 0;
+      });
+    }
+
+    function navNearest(cur, cands, dir) {
+      var cr = cur.getBoundingClientRect(),
+          ccx = cr.left + cr.width / 2,
+          ccy = cr.top + cr.height / 2;
+      var best = null, bestScore = Infinity;
+      for (var i = 0; i < cands.length; i++) {
+        var el = cands[i];
+        if (el === cur) continue;
+        var r = el.getBoundingClientRect();
+        if (!r.width || !r.height) continue;
+        var cx = r.left + r.width / 2,
+            cy = r.top + r.height / 2,
+            dx = cx - ccx,
+            dy = cy - ccy;
+        var d1, d2;
+        if (dir === 'right') {
+          if (dx <= 0) continue;
+          d1 = dx; d2 = Math.abs(dy);
+        } else if (dir === 'left') {
+          if (dx >= 0) continue;
+          d1 = -dx; d2 = Math.abs(dy);
+        } else if (dir === 'down') {
+          if (dy <= 0) continue;
+          d1 = dy; d2 = Math.abs(dx);
+        } else {
+          if (dy >= 0) continue;
+          d1 = -dy; d2 = Math.abs(dx);
+        }
+        var score = d1 + d2 * 2.2;
+        if (score < bestScore) {
+          bestScore = score;
+          best = el;
+        }
+      }
+      return best;
+    }
+
+    function navMove(dir) {
+      var scope = navScope();
+      var cands = navFocusables(scope);
+      if (!cands.length) return;
+      var cur = document.activeElement && document.activeElement !== document.body ? document.activeElement : null;
+      document.querySelectorAll('.kbd-focus').forEach(function(el) { el.classList.remove('kbd-focus'); });
+
+      if (!cur || cands.indexOf(cur) === -1) {
+        var first = cands[0];
+        first.focus();
+        first.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+        first.classList.add('kbd-focus');
+        return;
+      }
+
+      var next = navNearest(cur, cands, dir);
+      if (next) {
+        next.focus();
+        next.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+        next.classList.add('kbd-focus');
+      } else {
+        if (dir === 'down') window.scrollBy({ top: 180, behavior: 'smooth' });
+        else if (dir === 'up') window.scrollBy({ top: -180, behavior: 'smooth' });
+      }
+    }
+
+    document.addEventListener('pointerdown', function() {
+      document.querySelectorAll('.kbd-focus').forEach(function(el) { el.classList.remove('kbd-focus'); });
+    }, true);
+
+    function isInput(el) {
+      return el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.isContentEditable);
+    }
+
+    // Keyboard & Smart TV / Media Remote Listener
+    document.addEventListener('keydown', function(e) {
+      var dir = { ArrowUp: 'up', ArrowDown: 'down', ArrowLeft: 'left', ArrowRight: 'right' }[e.key];
+      if (dir) {
+        if (isInput(document.activeElement)) return;
+        e.preventDefault();
+        navMove(dir);
+        return;
+      }
+
+      // Enter / OK button on TV remotes
+      if (e.key === 'Enter' || e.key === 'Accept' || e.key === 'Select') {
+        var a = document.activeElement;
+        if (a && a !== document.body) {
+          if (!isInput(a)) {
+            e.preventDefault();
+            a.click();
+          }
+        } else {
+          var c = navFocusables(navScope())[0];
+          if (c) {
+            c.focus();
+            c.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+            c.classList.add('kbd-focus');
+          }
+        }
+        return;
+      }
+
+      // Return / Back buttons on standard and Smart TV remotes (Samsung keyCode 10009, LG webOS keyCode 461)
+      if (e.key === 'Backspace' || e.key === 'BrowserBack' || e.key === 'MediaBack' || e.key === 'Escape' || e.keyCode === 10009 || e.keyCode === 461) {
+        if (isInput(document.activeElement) && e.key === 'Backspace') return;
+        var a = document.getElementById('forAppearance');
+        var b = document.getElementById('forTheme');
+        var c = document.getElementById('forTranslate');
+        var ov = document.getElementById('searchOverlay');
+        if ((a && a.checked) || (b && b.checked) || (c && c.checked) || (ov && ov.classList.contains('active'))) {
+          e.preventDefault();
+          closePopups();
+        } else if (e.key === 'Backspace' || e.key === 'BrowserBack' || e.key === 'MediaBack' || e.keyCode === 10009 || e.keyCode === 461) {
+          e.preventDefault();
+          window.location.href = './';
+        }
+        return;
+      }
+
+      // Hotkeys when not inside an input
+      if (!isInput(document.activeElement)) {
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+          e.preventDefault();
+          var btn = document.getElementById('openSearchBtn');
+          if (btn) btn.click();
+          return;
+        }
+        if (e.key === '/' || e.key.toLowerCase() === 's') {
+          e.preventDefault();
+          var btn = document.getElementById('openSearchBtn');
+          if (btn) btn.click();
+          return;
+        }
+        if (e.key.toLowerCase() === 't' || e.key === 'Home') {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          toast('⬆️ Sayfa başına dönüldü');
+          return;
+        }
+        if (e.key === '[' || e.key === 'PageUp') {
+          e.preventDefault();
+          var pills = Array.from(document.querySelectorAll('.summary-nav a'));
+          if (pills.length) {
+            var curIdx = pills.indexOf(document.activeElement);
+            var nextIdx = curIdx > 0 ? curIdx - 1 : pills.length - 1;
+            pills[nextIdx].focus();
+            pills[nextIdx].classList.add('kbd-focus');
+            pills[nextIdx].click();
+            pills[nextIdx].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+          return;
+        }
+        if (e.key === ']' || e.key === 'PageDown') {
+          e.preventDefault();
+          var pills = Array.from(document.querySelectorAll('.summary-nav a'));
+          if (pills.length) {
+            var curIdx = pills.indexOf(document.activeElement);
+            var nextIdx = curIdx >= 0 && curIdx < pills.length - 1 ? curIdx + 1 : 0;
+            pills[nextIdx].focus();
+            pills[nextIdx].classList.add('kbd-focus');
+            pills[nextIdx].click();
+            pills[nextIdx].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+          return;
+        }
+      }
+    });
+
+    // Gamepad API Implementation
+    function initGamepadSupport() {
+      var lastActionTime = 0, lastAxesTime = 0;
+      var ACTION_DELAY = 200, AXES_DELAY = 220;
+
+      window.addEventListener('gamepadconnected', function(e) {
+        var name = (e.gamepad && e.gamepad.id) ? e.gamepad.id.split('(')[0].trim() : 'Gamepad';
+        toast('🎮 Kumanda bağlandı: ' + name);
+        var cur = document.activeElement;
+        if (!cur || cur === document.body) {
+          var firstPill = document.querySelector('.summary-nav a') || document.querySelector('.back-btn');
+          if (firstPill) {
+            firstPill.focus();
+            firstPill.classList.add('kbd-focus');
+          }
+        }
+      });
+
+      window.addEventListener('gamepaddisconnected', function() {
+        toast('🎮 Kumanda bağlantısı kesildi');
+      });
+
+      function pollGamepads() {
+        var gamepads = navigator.getGamepads ? navigator.getGamepads() : [];
+        var gp = null;
+        for (var i = 0; i < gamepads.length; i++) {
+          if (gamepads[i] && gamepads[i].connected) { gp = gamepads[i]; break; }
+        }
+        if (!gp) {
+          requestAnimationFrame(pollGamepads);
+          return;
+        }
+
+        var now = Date.now();
+        var btn = function(idx) { return gp.buttons[idx] && gp.buttons[idx].pressed; };
+        var axX = gp.axes[0] || 0, axY = gp.axes[1] || 0;
+        var axRightY = gp.axes[3] || gp.axes[2] || 0;
+
+        // D-Pad and Left Analog Stick
+        if (now - lastAxesTime > AXES_DELAY) {
+          if (btn(12) || axY < -0.5) {
+            navMove('up'); lastAxesTime = now;
+          } else if (btn(13) || axY > 0.5) {
+            navMove('down'); lastAxesTime = now;
+          } else if (btn(14) || axX < -0.5) {
+            navMove('left'); lastAxesTime = now;
+          } else if (btn(15) || axX > 0.5) {
+            navMove('right'); lastAxesTime = now;
+          }
+        }
+
+        // Action Buttons
+        if (now - lastActionTime > ACTION_DELAY) {
+          if (btn(0)) { // A / Cross -> Click
+            lastActionTime = now;
+            var cur = document.activeElement;
+            if (cur && cur !== document.body) {
+              cur.click();
+            } else {
+              var first = navFocusables(navScope())[0];
+              if (first) {
+                first.focus();
+                first.classList.add('kbd-focus');
+                first.click();
+              }
+            }
+          } else if (btn(1)) { // B / Circle -> Close / Home
+            lastActionTime = now;
+            var sOv = document.getElementById('searchOverlay');
+            var a = document.getElementById('forAppearance');
+            var b = document.getElementById('forTheme');
+            var c = document.getElementById('forTranslate');
+            if (sOv && sOv.classList.contains('active')) {
+              var closeBtn = document.getElementById('closeSearchOverlay');
+              if (closeBtn) closeBtn.click();
+              else sOv.classList.remove('active');
+            } else if ((a && a.checked) || (b && b.checked) || (c && c.checked)) {
+              closePopups();
+            } else {
+              window.location.href = './';
+            }
+          } else if (btn(2)) { // X / Square -> Back to top
+            lastActionTime = now;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            toast('⬆️ Sayfa başına dönüldü');
+          } else if (btn(3)) { // Y / Triangle -> Toggle Search Overlay
+            lastActionTime = now;
+            var sBtn = document.getElementById('openSearchBtn');
+            var sOv = document.getElementById('searchOverlay');
+            if (sOv && sOv.classList.contains('active')) {
+              var closeBtn = document.getElementById('closeSearchOverlay');
+              if (closeBtn) closeBtn.click();
+              else sOv.classList.remove('active');
+            } else if (sBtn) {
+              sBtn.click();
+            }
+          } else if (btn(4)) { // LB / L1 -> Previous section pill
+            lastActionTime = now;
+            var pills = Array.from(document.querySelectorAll('.summary-nav a'));
+            if (pills.length) {
+              var curIdx = pills.indexOf(document.activeElement);
+              var nextIdx = curIdx > 0 ? curIdx - 1 : pills.length - 1;
+              pills[nextIdx].focus();
+              pills[nextIdx].classList.add('kbd-focus');
+              pills[nextIdx].click();
+              pills[nextIdx].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+          } else if (btn(5)) { // RB / R1 -> Next section pill
+            lastActionTime = now;
+            var pills = Array.from(document.querySelectorAll('.summary-nav a'));
+            if (pills.length) {
+              var curIdx = pills.indexOf(document.activeElement);
+              var nextIdx = curIdx >= 0 && curIdx < pills.length - 1 ? curIdx + 1 : 0;
+              pills[nextIdx].focus();
+              pills[nextIdx].classList.add('kbd-focus');
+              pills[nextIdx].click();
+              pills[nextIdx].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+          } else if (btn(8)) { // Select / Share -> Return to home
+            lastActionTime = now;
+            window.location.href = './';
+          } else if (btn(9)) { // Start / Options -> Toggle appearance / theme popup
+            lastActionTime = now;
+            var appLabel = document.querySelector('label[for="forAppearance"]');
+            if (appLabel) appLabel.click();
+          }
+        }
+
+        // Right Stick Y & Triggers: Smooth Continuous Page Scrolling
+        if (Math.abs(axRightY) > 0.15) {
+          window.scrollBy({ top: axRightY * 18, behavior: 'auto' });
+        } else if (btn(6)) { // LT -> Scroll Up
+          window.scrollBy({ top: -14, behavior: 'auto' });
+        } else if (btn(7)) { // RT -> Scroll Down
+          window.scrollBy({ top: 14, behavior: 'auto' });
+        }
+
+        requestAnimationFrame(pollGamepads);
+      }
+
+      requestAnimationFrame(pollGamepads);
+    }
+
+    try { initGamepadSupport(); } catch(e) {}
+  })();
+  </script>
+
+
+
+
+<script>
+// Search Overlay Controls for Privacy Page
+(function(){
+  function initSearchOverlay(){
+    const ov = document.getElementById('searchOverlay');
+    const btn = document.getElementById('openSearchBtn');
+    const cls = document.getElementById('closeSearchOverlay');
+    const inp = document.getElementById('search');
+    const f = document.getElementById('searchForm');
+
+    if(!ov) return;
+    function openOv(){
+      ov.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      if(inp) setTimeout(function(){ inp.focus(); inp.select(); }, 60);
+    }
+    function closeOv(){
+      ov.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    if(btn) btn.onclick = openOv;
+    if(cls) cls.onclick = closeOv;
+    ov.onclick = function(e){
+      if(e.target === ov) closeOv();
+    };
+    window.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && ov.classList.contains('active')) closeOv();
+    });
+
+    if(f){
+      f.onsubmit = function(e){
+        e.preventDefault();
+        const eng = (document.getElementById('engine') || {}).value || 'https://www.google.com/search?q=';
+        const q = ((document.getElementById('search') || {}).value || '').trim();
+        if(q){
+          window.open(eng + encodeURIComponent(q), '_blank');
+        }
+      };
+    }
+
+    document.querySelectorAll('.quick-eng-btn').forEach(function(b){
+      b.onclick = function(){
+        var eng = b.dataset.eng;
+        var engSel = document.getElementById('engine');
+        if(engSel) engSel.value = eng;
+        document.querySelectorAll('.quick-eng-btn').forEach(function(x){ x.classList.toggle('active', x.dataset.eng === eng); });
+        var q = (inp ? inp.value : '').trim();
+        if(q){
+          window.open(eng + encodeURIComponent(q), '_blank');
+        } else if(inp){
+          inp.focus();
+        }
+      };
+    });
+  }
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', initSearchOverlay);
+  } else {
+    initSearchOverlay();
+  }
+})();
+// Reading Progress, Back-to-Top, and Saved Theme Synchronization
+(function(){
+  // Synchronize theme & accent color from Saved app data
+  try {
+    const raw = localStorage.getItem('saved-app-data');
+    if (raw) {
+      const d = JSON.parse(raw);
+      if (d.theme === 'light') {
+        document.documentElement.classList.remove('drK');
+        document.documentElement.classList.add('lgT');
+      } else if (d.theme === 'dark') {
+        document.documentElement.classList.remove('lgT');
+        document.documentElement.classList.add('drK');
+      }
+      if (d.color) {
+        document.documentElement.style.setProperty('--accent', d.color);
+      }
+    }
+  } catch(e){}
+
+  // Reading progress and back-to-top handler
+  const rBar = document.getElementById('readProgress');
+  const btt = document.getElementById('backToTop');
+  function onScroll(){
+    const sTop = window.pageYOffset || document.documentElement.scrollTop;
+    const sHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    if (rBar) {
+      const progress = sHeight > 0 ? (sTop / sHeight) * 100 : 0;
+      rBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+    }
+    if (btt) {
+      if (sTop > 280) btt.classList.add('show');
+      else btt.classList.remove('show');
+    }
+  }
+  window.addEventListener('scroll', onScroll, {passive: true});
+  if (btt) {
+    btt.onclick = function(){
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    };
+  }
+})();
+</script>
+
+<div id="readProgress" style="position:fixed;top:0;left:0;height:3px;background:var(--accent);z-index:9999;width:0%;transition:width .1s linear;pointer-events:none"></div>
+
+<button id="backToTop" class="back-to-top" type="button" aria-label="Yukarı Çık" title="Yukarı Çık">
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="18 15 12 9 6 15"></polyline>
+  </svg>
+</button>
+
+<div id="toast" class="toast"></div>
+
+</body>
+</html>
