@@ -84,43 +84,31 @@
 
 <br/>
 
-<!-- Community Discussions Grid -->
+<!-- Community Discussions Grid (Same 3-column width structure) -->
 <h3 align="center">💬 Community &amp; Discussions</h3>
 <table align="center" width="100%">
 <tr>
-<td width="25%" align="center">
+<td width="33%" align="center">
   <b>❓ Soru &amp; Cevap</b><br/>
   Merak ettiklerini sor<br/>
   <img src="https://img.shields.io/badge/Q%26A-blue?style=flat-square" />
 </td>
-<td width="25%" align="center">
+<td width="33%" align="center">
   <b>💡 Fikir Paylaşımı</b><br/>
   Önerilerini sun<br/>
   <img src="https://img.shields.io/badge/Ideas-yellow?style=flat-square" />
 </td>
-<td width="25%" align="center">
-  <b>💬 Sohbet</b><br/>
-  Toplulukla konuş<br/>
+<td width="33%" align="center">
+  <b>💬 Sohbet &amp; Tanışma</b><br/>
+  Toplulukla konuş &amp; kendini tanıt<br/>
   <img src="https://img.shields.io/badge/Chat-green?style=flat-square" />
-</td>
-<td width="25%" align="center">
-  <b>👋 Tanışma</b><br/>
-  Kendini tanıt<br/>
-  <img src="https://img.shields.io/badge/Welcome-purple?style=flat-square" />
 </td>
 </tr>
 <tr>
-<td colspan="4" align="center">
+<td colspan="3" align="center">
   <br/>
   <b><a href="https://github.com/Aleyulala/saved/discussions">👉 SAVED Discussions Bölümüne Katıl</a></b>
   <br/><br/>
 </td>
 </tr>
 </table>
-
-<br/>
-
-<!-- Contribution Snake -->
-<div align="center">
-  <img src="https://raw.githubusercontent.com/Aleyulala/Aleyulala/output/github-contribution-grid-snake.svg" width="100%" />
-</div>
