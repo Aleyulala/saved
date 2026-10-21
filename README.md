@@ -84,25 +84,43 @@
 
 <br/>
 
-<!-- Contribution Snake -->
-<div align="center">
-  <h3>🐍 Contribution Snake</h3>
-  <img src="https://raw.githubusercontent.com/Aleyulala/Aleyulala/output/github-contribution-grid-snake.svg" alt="Snake Game" width="100%" />
-</div>
+<!-- Community Discussions Grid -->
+<h3 align="center">💬 Community &amp; Discussions</h3>
+<table align="center" width="100%">
+<tr>
+<td width="25%" align="center">
+  <b>❓ Soru &amp; Cevap</b><br/>
+  Merak ettiklerini sor<br/>
+  <img src="https://img.shields.io/badge/Q%26A-blue?style=flat-square" />
+</td>
+<td width="25%" align="center">
+  <b>💡 Fikir Paylaşımı</b><br/>
+  Önerilerini sun<br/>
+  <img src="https://img.shields.io/badge/Ideas-yellow?style=flat-square" />
+</td>
+<td width="25%" align="center">
+  <b>💬 Sohbet</b><br/>
+  Toplulukla konuş<br/>
+  <img src="https://img.shields.io/badge/Chat-green?style=flat-square" />
+</td>
+<td width="25%" align="center">
+  <b>👋 Tanışma</b><br/>
+  Kendini tanıt<br/>
+  <img src="https://img.shields.io/badge/Welcome-purple?style=flat-square" />
+</td>
+</tr>
+<tr>
+<td colspan="4" align="center">
+  <br/>
+  <b><a href="https://github.com/Aleyulala/saved/discussions">👉 SAVED Discussions Bölümüne Katıl</a></b>
+  <br/><br/>
+</td>
+</tr>
+</table>
 
 <br/>
-<hr/>
 
-<!-- Community Discussions Section -->
-## 👋 Hoş geldiniz!
-
-<a href="https://github.com/Aleyulala/saved/discussions">Tartışmalar (Discussions)</a> bölümünü topluluk üyeleriyle iletişim kurmak ve fikir alışverişinde bulunmak için kullanıyoruz. Burada:
-
-- ❓ Merak ettiğiniz konularda soru sorabilir,
-- 💡 Fikirlerinizi ve proje önerilerinizi paylaşabilir,
-- 💬 Diğer topluluk üyeleriyle sohbet edebilir,
-- 👋 Yeni katılanlara hoş geldiniz diyebilirsiniz.
-
-Bu topluluğu hep birlikte büyütüyoruz. 💪  
-
-👉 **[SAVED Discussions Bölümüne Git ve Kendini Tanıt](https://github.com/Aleyulala/saved/discussions)**
+<!-- Contribution Snake -->
+<div align="center">
+  <img src="https://raw.githubusercontent.com/Aleyulala/Aleyulala/output/github-contribution-grid-snake.svg" width="100%" />
+</div>
