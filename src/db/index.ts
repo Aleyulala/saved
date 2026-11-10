@@ -27,7 +27,7 @@ export class SavedDatabase extends Dexie {
 
 export const db = new SavedDatabase();
 
-const CURRENT_SEED_VERSION = 'saved-main-360-sites-v11-nosignups';
+const CURRENT_SEED_VERSION = 'saved-main-360-sites-v12-ai-tools';
 
 export async function seedSavedMainData(force = false) {
   // Quick safety check: Rename any existing 'Routine' records to 'Rutin'
@@ -42,10 +42,13 @@ export async function seedSavedMainData(force = false) {
   const dummyCol = await db.collections.where('name').equals('Research and Studies').first();
   const seedSetting = await db.settings.get('seed_version');
 
-  // Trigger migration if empty, if it still contains dummy collection, if force is requested, or if seed version not current
-  if (collectionsCount === 0 || dummyCol || force || collectionsCount < 15 || !seedSetting || seedSetting.value !== CURRENT_SEED_VERSION) {
-    if (collectionsCount === 0 || dummyCol || force || collectionsCount < 15 || !seedSetting || seedSetting.value !== CURRENT_SEED_VERSION) {
-      await db.transaction('rw', db.links, db.collections, db.tags, db.settings, async () => {
+  // Full reseed only when the database is empty, dummy, forced, too small or has no seed version.
+  // A version bump alone must NOT wipe user data; it triggers an incremental sync instead.
+  const needsFullSeed = collectionsCount === 0 || !!dummyCol || force || collectionsCount < 15 || !seedSetting;
+  const needsIncrementalSync = !needsFullSeed && seedSetting!.value !== CURRENT_SEED_VERSION;
+
+  if (needsFullSeed) {
+    await db.transaction('rw', db.links, db.collections, db.tags, db.settings, async () => {
         // Clear previous dummy data
         await db.links.clear();
         await db.collections.clear();
@@ -101,8 +104,8 @@ export async function seedSavedMainData(force = false) {
 
         await db.links.bulkAdd(linksToAdd);
         await db.settings.put({ key: 'seed_version', value: CURRENT_SEED_VERSION });
-      });
-    } else {
+    });
+  } else if (needsIncrementalSync) {
       // Incremental Sync: Add missing links without touching existing records
       await db.transaction('rw', db.links, db.collections, db.settings, async () => {
         const allCols = await db.collections.toArray();
@@ -138,8 +141,7 @@ export async function seedSavedMainData(force = false) {
           }
         }
         await db.settings.put({ key: 'seed_version', value: CURRENT_SEED_VERSION });
-      });
-    }
+    });
   }
 }
 

@@ -4628,5 +4628,191 @@ export const SEED_LINKS: RawSeedLink[] = [
     "color": "#1da1f2",
     "isPinned": false,
     "description": "XDA Forums - Forum"
+  },
+  {
+    "title": "Günlük Satırlar",
+    "url": "https://saci.com.tr/",
+    "categoryName": "Genel",
+    "tags": [
+      "genel",
+      "blog",
+      "kisisel-gelisim",
+      "ilham"
+    ],
+    "color": "#9aa0a6",
+    "isPinned": false,
+    "description": "Günlük Satırlar (saci.com.tr) - Psikoloji, motivasyon, kişisel gelişim ve edebiyat üzerine kısa ve ilham verici günlük notlar.",
+    "views": 175,
+    "commentsCount": 3,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "Kaci - Hızlı İlham Durağı",
+    "url": "https://kaci.com.tr/",
+    "categoryName": "Genel",
+    "tags": [
+      "genel",
+      "blog",
+      "ilham"
+    ],
+    "color": "#9aa0a6",
+    "isPinned": false,
+    "description": "Kaci (kaci.com.tr) - Günlük hayata dair kısa bilgiler, ilham verici notlar ve anlık içerikler sunan Türkçe blog.",
+    "views": 150,
+    "commentsCount": 2,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "Bolt.new",
+    "url": "https://bolt.new/",
+    "categoryName": "AI",
+    "tags": [
+      "ai",
+      "kod",
+      "web",
+      "builder"
+    ],
+    "color": "#38bdf8",
+    "isPinned": false,
+    "description": "Bolt.new - StackBlitz tarafından geliştirilen, tarayıcıda yapay zeka ile tam yığın web uygulamaları üreten ve anında yayınlayan araç.",
+    "views": 260,
+    "commentsCount": 6,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "Unsloth AI",
+    "url": "https://unsloth.ai/",
+    "categoryName": "AI",
+    "tags": [
+      "ai",
+      "llm",
+      "fine-tuning",
+      "acik-kaynak"
+    ],
+    "color": "#a855f7",
+    "isPinned": false,
+    "description": "Unsloth - LLM'leri 2 kat daha hızlı ve belirgin şekilde daha az bellekle fine-tune etmeyi sağlayan açık kaynak kütüphane.",
+    "views": 240,
+    "commentsCount": 5,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "v0 by Vercel",
+    "url": "https://v0.dev/",
+    "categoryName": "AI",
+    "tags": [
+      "ai",
+      "kod",
+      "web",
+      "builder"
+    ],
+    "color": "#38bdf8",
+    "isPinned": false,
+    "description": "v0 by Vercel - Metinden React, Tailwind ve shadcn/ui tabanlı arayüzler üreten yapay zeka destekli geliştirme aracı.",
+    "views": 230,
+    "commentsCount": 5,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "Lovable",
+    "url": "https://lovable.dev/",
+    "categoryName": "AI",
+    "tags": [
+      "ai",
+      "kod",
+      "web",
+      "builder"
+    ],
+    "color": "#ec4899",
+    "isPinned": false,
+    "description": "Lovable - Doğal dil ile tam yığın web uygulamaları oluşturup yayınlamayı sağlayan yapay zeka geliştirici platformu.",
+    "views": 220,
+    "commentsCount": 4,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "Replit",
+    "url": "https://replit.com/",
+    "categoryName": "Programlama",
+    "tags": [
+      "programlama",
+      "kod",
+      "ide",
+      "ai"
+    ],
+    "color": "#f97316",
+    "isPinned": false,
+    "description": "Replit - Tarayıcıda kod yazma, çalıştırma ve yayınlamayı sağlayan, yapay zeka destekli bulut geliştirme ortamı.",
+    "views": 210,
+    "commentsCount": 4,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "Hugging Face",
+    "url": "https://huggingface.co/",
+    "categoryName": "AI",
+    "tags": [
+      "ai",
+      "model",
+      "llm",
+      "acik-kaynak"
+    ],
+    "color": "#fbbf24",
+    "isPinned": false,
+    "description": "Hugging Face - Açık kaynak yapay zeka modelleri, veri setleri ve Spaces uygulamaları için lider topluluk platformu.",
+    "views": 250,
+    "commentsCount": 6,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "Ollama",
+    "url": "https://ollama.com/",
+    "categoryName": "AI",
+    "tags": [
+      "ai",
+      "llm",
+      "yerel",
+      "acik-kaynak"
+    ],
+    "color": "#0ea5e9",
+    "isPinned": false,
+    "description": "Ollama - Llama, Mistral ve Gemma gibi büyük dil modellerini kendi bilgisayarınızda yerel olarak çalıştırmanızı sağlar.",
+    "views": 235,
+    "commentsCount": 5,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "LLaMA-Factory",
+    "url": "https://github.com/hiyouga/LLaMA-Factory",
+    "categoryName": "AI",
+    "tags": [
+      "ai",
+      "llm",
+      "fine-tuning",
+      "github"
+    ],
+    "color": "#22c55e",
+    "isPinned": false,
+    "description": "LLaMA-Factory - 100'den fazla LLM ve VLM modelini kolayca fine-tune etmeyi sağlayan birleşik açık kaynak araç.",
+    "views": 190,
+    "commentsCount": 3,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "Axolotl",
+    "url": "https://github.com/axolotl-ai-cloud/axolotl",
+    "categoryName": "AI",
+    "tags": [
+      "ai",
+      "llm",
+      "fine-tuning",
+      "github"
+    ],
+    "color": "#8b5cf6",
+    "isPinned": false,
+    "description": "Axolotl - Farklı model mimarileri için yapılandırma tabanlı, esnek ve açık kaynaklı LLM fine-tuning aracı.",
+    "views": 180,
+    "commentsCount": 3,
+    "authorName": "NEGRONN"
   }
 ];
