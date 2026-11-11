@@ -26,24 +26,14 @@ export const BLOGGER_SLIDES: BloggerSlide[] = [
     link: 'https://negronshow.blogspot.com/search/label/%C3%B6neri'
   },
   {
-    id: 'Image07',
-    title: 'Programlama & Kod',
-    subtitle: 'Modern Diller, Temiz Kod, Algoritmalar ve Geliştirici Kütüphaneleri',
-    note: '*Küratörlü kod ve programlama kaynakları',
-    category: 'Programlama',
-    collectionName: 'Programlama',
-    imageUrl: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1920&q=85',
-    link: 'https://negronshow.blogspot.com/search/label/programlama'
-  },
-  {
-    id: 'Image05',
-    title: 'Yapay Zeka & Teknoloji',
-    subtitle: 'Geleceğin Teknolojileri, Derin Öğrenme, LLM Modelleri ve İnovasyon',
-    note: '*Yapay zeka ve teknoloji yer imleri',
-    category: 'Teknoloji',
-    collectionName: 'AI',
-    imageUrl: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1920&q=85',
-    link: 'https://negronshow.blogspot.com/search/label/teknoloji'
+    id: 'Image02',
+    title: 'Videolar & Sinema',
+    subtitle: 'Seçkin Belgeseller, Sinematografi, Prodüksiyon ve Video Sanatı',
+    note: '*Seçkin video kanalları ve oynatma listeleri',
+    category: 'Videolar',
+    collectionName: 'Medya',
+    imageUrl: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/videolar'
   },
   {
     id: 'Image03',
@@ -66,6 +56,16 @@ export const BLOGGER_SLIDES: BloggerSlide[] = [
     link: 'https://negronshow.blogspot.com/search/label/bilgisayar'
   },
   {
+    id: 'Image05',
+    title: 'Yapay Zeka & Teknoloji',
+    subtitle: 'Geleceğin Teknolojileri, Derin Öğrenme, LLM Modelleri ve İnovasyon',
+    note: '*Yapay zeka ve teknoloji yer imleri',
+    category: 'Teknoloji',
+    collectionName: 'AI',
+    imageUrl: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/teknoloji'
+  },
+  {
     id: 'Image06',
     title: 'Mobil Ekosistem & Telefon',
     subtitle: 'Android & iOS Gelişmiş Özellikler, Mobil Güvenlik ve Rehberler',
@@ -76,24 +76,14 @@ export const BLOGGER_SLIDES: BloggerSlide[] = [
     link: 'https://negronshow.blogspot.com/search/label/telefon'
   },
   {
-    id: 'Image02',
-    title: 'Sinema & Video Dünyası',
-    subtitle: 'Seçkin Belgeseller, Sinematografi, Prodüksiyon ve Video Sanatı',
-    note: '*Seçkin video kanalları ve oynatma listeleri',
-    category: 'Videolar',
-    collectionName: 'Medya',
-    imageUrl: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=1920&q=85',
-    link: 'https://negronshow.blogspot.com/search/label/videolar'
-  },
-  {
-    id: 'Image09',
-    title: 'Görsel Sanat & Tasarım',
-    subtitle: 'Minimalist Tasarım, UI/UX Estetiği ve Yaratıcı İlham Kaynakları',
-    note: '*Dijital sanat ve estetik portfolyolar',
-    category: 'Sanat',
-    collectionName: 'Genel',
-    imageUrl: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1920&q=85',
-    link: 'https://negronshow.blogspot.com/search/label/sanat'
+    id: 'Image07',
+    title: 'Programlama & Kod',
+    subtitle: 'Modern Diller, Temiz Kod, Algoritmalar ve Geliştirici Kütüphaneleri',
+    note: '*Küratörlü kod ve programlama kaynakları',
+    category: 'Programlama',
+    collectionName: 'Programlama',
+    imageUrl: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/programlama'
   },
   {
     id: 'Image08',
@@ -104,6 +94,16 @@ export const BLOGGER_SLIDES: BloggerSlide[] = [
     collectionName: 'Medya',
     imageUrl: 'https://images.unsplash.com/photo-1461151304267-38535e780c79?auto=format&fit=crop&w=1920&q=85',
     link: 'https://negronshow.blogspot.com/search/label/televizyon'
+  },
+  {
+    id: 'Image09',
+    title: 'Görsel Sanat & Tasarım',
+    subtitle: 'Minimalist Tasarım, UI/UX Estetiği ve Yaratıcı İlham Kaynakları',
+    note: '*Dijital sanat ve estetik portfolyolar',
+    category: 'Sanat',
+    collectionName: 'Genel',
+    imageUrl: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/sanat'
   },
   {
     id: 'Image10',

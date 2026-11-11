@@ -616,6 +616,13 @@ export const App: React.FC = () => {
                       setIsAddModalOpen(true);
                     }}
                     onOpenMedia={handleOpenMedia}
+                    onOpenChat={() => setIsRightDrawerOpen(true)}
+                    onOpenContact={() => {
+                      setIsRightDrawerOpen(true);
+                      setTimeout(() => {
+                        document.getElementById('ContactForm2')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                      }, 300);
+                    }}
                   />
                 )}
 

@@ -1231,3 +1231,50 @@ body { top: 0 !important; }
   border-color: #e2e8f0 !important;
 }
 
+/* ==========================================================================
+   MODAL & PANEL GEÇİŞ ANİMASYONLARI (animate-in / fade-in / zoom-in / slide-in)
+   Tailwind v4'te tailwindcss-animate yerleşik olmadığından elle tanımlanır;
+   bileşenlerdeki animate-in sınıflarını gerçekten çalıştırır.
+   ========================================================================== */
+@keyframes fadeInDown {
+  0% { opacity: 0; transform: translateY(-10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes savedFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes savedZoomIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes savedSlideInRight {
+  from { opacity: 0; transform: translateX(24px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.animate-in {
+  animation: savedFadeIn 0.2s ease-out both;
+}
+
+.animate-in.fade-in {
+  animation-name: savedFadeIn;
+}
+
+.animate-in.zoom-in {
+  animation-name: savedZoomIn;
+}
+
+.animate-in.slide-in-from-right {
+  animation-name: savedSlideInRight;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-in {
+    animation-duration: 0.01s !important;
+  }
+}
+

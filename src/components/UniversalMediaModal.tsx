@@ -156,7 +156,7 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
   return (
     <div
       id="fsMediaModal"
-      className="fsShow select-none"
+      className="fsShow select-none animate-in fade-in duration-200"
       onClick={(e) => {
         if (e.target === e.currentTarget) {
           onClose();

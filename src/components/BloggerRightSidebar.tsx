@@ -211,6 +211,31 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
 
     const accessKey = localStorage.getItem('nsone_web3forms_key') || '';
 
+    const resetContactFormAfterSuccess = () => {
+      setTimeout(() => {
+        setSentSuccess(false);
+        setContactName('');
+        setContactEmail('');
+        setContactMessage('');
+        setCurrentStep(0);
+        setErrorMessage('');
+      }, 4000);
+    };
+
+    // Web3Forms anahtarı yoksa, süresi dolduysa (token bitince) veya gönderim
+    // başarısız olursa otomatik olarak mailto yedeğine geçilir:
+    const openMailtoFallback = () => {
+      const mailtoUrl = `mailto:mrstar14155@gmail.com?subject=${encodeURIComponent(
+        'SAVED Nsone Bot Mesajı - ' + contactName.trim()
+      )}&body=${encodeURIComponent(
+        `Ad: ${contactName.trim()}\nE-posta: ${contactEmail.trim()}\n\nMesaj:\n${contactMessage.trim()}`
+      )}`;
+      window.open(mailtoUrl, '_blank');
+      setIsSending(false);
+      setSentSuccess(true);
+      resetContactFormAfterSuccess();
+    };
+
     try {
       if (accessKey) {
         const response = await fetch('https://api.web3forms.com/submit', {
@@ -229,44 +254,34 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
           })
         });
 
-        const data = await response.json();
+        const data = await response.json().catch(() => ({ success: false as boolean, message: '' }));
         if (data.success) {
           setIsSending(false);
           setSentSuccess(true);
-          setTimeout(() => {
-            setSentSuccess(false);
-            setContactName('');
-            setContactEmail('');
-            setContactMessage('');
-            setCurrentStep(0);
-            setErrorMessage('');
-          }, 4000);
+          resetContactFormAfterSuccess();
           return;
-        } else {
-          throw new Error(data.message || 'Gönderim başarısız oldu.');
         }
+
+        // Anahtar geçersiz veya süresi dolmuşsa kayıtlı anahtarı temizle
+        const failMsg = String(data.message || '').toLowerCase();
+        if (
+          !response.ok ||
+          failMsg.includes('key') ||
+          failMsg.includes('token') ||
+          failMsg.includes('invalid') ||
+          failMsg.includes('unauthorized') ||
+          failMsg.includes('expired')
+        ) {
+          try { localStorage.removeItem('nsone_web3forms_key'); } catch { /* yoksay */ }
+        }
+        throw new Error(data.message || 'Gönderim başarısız oldu.');
       } else {
         // Web3Forms anahtarı henüz girilmemişse, doğrudan mailto fallback'i çalıştır:
-        const mailtoUrl = `mailto:mrstar14155@gmail.com?subject=${encodeURIComponent(
-          'SAVED Nsone Bot Mesajı - ' + contactName.trim()
-        )}&body=${encodeURIComponent(
-          `Ad: ${contactName.trim()}\nE-posta: ${contactEmail.trim()}\n\nMesaj:\n${contactMessage.trim()}`
-        )}`;
-        window.open(mailtoUrl, '_blank');
-        setIsSending(false);
-        setSentSuccess(true);
-        setTimeout(() => {
-          setSentSuccess(false);
-          setContactName('');
-          setContactEmail('');
-          setContactMessage('');
-          setCurrentStep(0);
-          setErrorMessage('');
-        }, 4000);
+        openMailtoFallback();
       }
-    } catch (err: any) {
-      setIsSending(false);
-      triggerShake(3, err.message || 'Gönderim sırasında bir hata oluştu.');
+    } catch {
+      // Web3Forms erişilemiyorsa (token bitti / ağ hatası) mailto yedeğine geç
+      openMailtoFallback();
     }
   };
 

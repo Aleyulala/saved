@@ -1,14 +1,45 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { X, ExternalLink, MessageCircle } from 'lucide-react';
-import { MatrixIcon } from './BloggerIcons';
+import { X, MessageCircle, Send } from 'lucide-react';
 
-export const BloggerNotificationBar: React.FC = () => {
-  const [isVisible, setIsVisible] = useState(true);
+/**
+ * nsone.xml LinkList06 'Bildiri' birebir karşılığı:
+ * - Slayt 0: ALİ & NSONE sekmeleri (LinkList05 'Sekmeli Menü')
+ * - Slayt 1: #Sohbet (href='#comments') → yorumlar/sohbet çekmecesini açar
+ * - Slayt 2: #İletişim (href='#ContactForm2') → iletişim formunu açar
+ * - Kapatınca localStorage'a yazılır, 1 gün (86400 sn) boyunca gizli kalır
+ */
+const DISMISS_KEY = 'SAVED_NOTIFICATION_DISMISS';
+const DISMISS_MAX_AGE_MS = 86400 * 1000;
+
+interface BloggerNotificationBarProps {
+  onOpenChat?: () => void;
+  onOpenContact?: () => void;
+}
+
+const isDismissed = (): boolean => {
+  try {
+    const raw = localStorage.getItem(DISMISS_KEY);
+    if (raw) {
+      const ts = Number(raw);
+      if (Number.isFinite(ts) && Date.now() - ts < DISMISS_MAX_AGE_MS) return true;
+      localStorage.removeItem(DISMISS_KEY);
+    }
+  } catch {
+    /* localStorage yoksa bildiri her zaman gösterilir */
+  }
+  return false;
+};
+
+export const BloggerNotificationBar: React.FC<BloggerNotificationBarProps> = ({
+  onOpenChat,
+  onOpenContact
+}) => {
+  const [isVisible, setIsVisible] = useState(() => !isDismissed());
   const [activeSlide, setActiveSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const touchStartX = useRef<number | null>(null);
 
-  const totalSlides = 2;
+  const totalSlides = 3;
 
   useEffect(() => {
     if (isPaused) return;
@@ -33,23 +64,32 @@ export const BloggerNotificationBar: React.FC = () => {
     touchStartX.current = null;
   };
 
+  const handleDismiss = () => {
+    try {
+      localStorage.setItem(DISMISS_KEY, String(Date.now()));
+    } catch {
+      /* yoksay */
+    }
+    setIsVisible(false);
+  };
+
   if (!isVisible) return null;
 
   return (
     <div className="w-full mb-4">
-      <div 
+      <div
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
         className="flex items-center justify-between gap-3 px-3.5 py-2 rounded-xl bg-[#252526] border border-transparent shadow-sm select-none min-h-[46px] touch-pan-y"
       >
-        
+
         {/* Sol Kapat Butonu */}
         <button
-          onClick={() => setIsVisible(false)}
+          onClick={handleDismiss}
           className="p-1 rounded-md text-[#9ca3af] hover:text-white hover:bg-[#333333] transition-colors shrink-0 cursor-pointer"
-          title="Bildirimi Gizle"
+          title="Bildirimi Gizle (1 gün)"
           aria-label="Kapat"
         >
           <X className="w-3.5 h-3.5" />
@@ -57,8 +97,8 @@ export const BloggerNotificationBar: React.FC = () => {
 
         {/* Orta Slayt İçeriği (.bar-slider) */}
         <div className="flex-1 overflow-hidden flex items-center justify-center text-center">
-          
-          {/* SLAYT 0: ALİ & NSONE (Blogger XML 1:1 & Screenshot Birebir) */}
+
+          {/* SLAYT 0: ALİ & NSONE (LinkList05 'Sekmeli Menü' 1:1) */}
           {activeSlide === 0 && (
             <div className="ali-nsone-text-wrap inline-flex items-center justify-center gap-4 sm:gap-6 select-none animate-in fade-in duration-300">
               <a
@@ -89,28 +129,45 @@ export const BloggerNotificationBar: React.FC = () => {
             </div>
           )}
 
-          {/* SLAYT 1: Element.io */}
+          {/* SLAYT 1: #Sohbet (href='#comments') → sohbet çekmecesini açar */}
           {activeSlide === 1 && (
             <div className="flex items-center justify-center gap-2 text-xs sm:text-sm animate-in fade-in duration-300">
               <a
-                href="https://matrix.to/#/#negronn-show:matrix.org"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-[var(--linkC,#9aa0a6)] hover:text-white hover:underline transition-colors font-semibold"
-                title="Element.io"
+                href={onOpenChat ? '#Sohbet' : 'https://matrix.to/#/#negronn-show:matrix.org'}
+                target={onOpenChat ? undefined : '_blank'}
+                rel={onOpenChat ? undefined : 'noopener noreferrer'}
+                onClick={onOpenChat ? (e) => { e.preventDefault(); onOpenChat(); } : undefined}
+                className="ntf-contact-text inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--linkC,#9aa0a6)] hover:text-white transition-colors cursor-pointer"
+                title="#Sohbet — Sohbet çekmecesini açar"
               >
-                <MatrixIcon className="w-3.5 h-3.5 text-[var(--linkC,#9aa0a6)]" />
-                <span className="font-bold">Element.io</span>
-                <ExternalLink className="w-3 h-3 ml-0.5 opacity-70" />
+                <MessageCircle className="w-4 h-4 shrink-0" />
+                <span className="font-bold">#</span>
+                <span className="text-white/90">Sohbet</span>
+              </a>
+            </div>
+          )}
+
+          {/* SLAYT 2: #İletişim (href='#ContactForm2') → iletişim formunu açar */}
+          {activeSlide === 2 && (
+            <div className="flex items-center justify-center gap-2 text-xs sm:text-sm animate-in fade-in duration-300">
+              <a
+                href={onOpenContact ? '#İletişim' : 'mailto:mrstar14155@gmail.com'}
+                onClick={onOpenContact ? (e) => { e.preventDefault(); onOpenContact(); } : undefined}
+                className="ntf-contact-text inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--linkC,#9aa0a6)] hover:text-white transition-colors cursor-pointer"
+                title="#İletişim — İletişim formunu açar"
+              >
+                <Send className="w-4 h-4 shrink-0" />
+                <span className="font-bold">#</span>
+                <span className="text-white/90">İletişim</span>
               </a>
             </div>
           )}
 
         </div>
 
-        {/* Sağ 2 Çizgi Buton (.panel-slider-dots) */}
+        {/* Sağ Çizgi Butonlar (.panel-slider-dots) */}
         <div className="flex items-center gap-1.5 shrink-0">
-          {[0, 1].map((idx) => (
+          {[0, 1, 2].map((idx) => (
             <button
               key={idx}
               onClick={() => setActiveSlide(idx)}

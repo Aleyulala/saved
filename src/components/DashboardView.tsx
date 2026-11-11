@@ -52,6 +52,8 @@ interface DashboardViewProps {
   onMoveToTrash: (id: number) => void;
   onEditLink: (link: LinkItem) => void;
   onOpenMedia?: (items: MediaItem[], initialIndex?: number) => void;
+  onOpenChat?: () => void;
+  onOpenContact?: () => void;
 }
 
 // Reusable Category Card Slider Section (.cat-showcase-carousel)
@@ -177,7 +179,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   onToggleArchive,
   onMoveToTrash,
   onEditLink,
-  onOpenMedia
+  onOpenMedia,
+  onOpenChat,
+  onOpenContact
 }) => {
   const activeLinks = links.filter(l => !l.isTrash && !l.isArchived);
   
@@ -334,7 +338,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
     <div className="space-y-6 pb-12">
       
       {/* 1. Blogger Üst Bildiri Çubuğu (.ntcW) */}
-      <BloggerNotificationBar />
+      <BloggerNotificationBar onOpenChat={onOpenChat} onOpenContact={onOpenContact} />
 
       {/* 2. Blogger Plus UI Hero Showcase Carousel (.sldW) */}
       <section aria-label="Hero Carousel" className="w-full">
