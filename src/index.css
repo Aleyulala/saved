@@ -1272,8 +1272,78 @@ body { top: 0 !important; }
   animation-name: savedSlideInRight;
 }
 
+/* Yukarıdan kayarak açılan kart (adv-card translateY(-12px) — nsone.xml 1:1) */
+@keyframes savedSlideDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-in.slide-in-from-top {
+  animation-name: savedSlideDown;
+}
+
+/* ==========================================================================
+   NSONE BOT SPOTLIGHT MODALI (.cf-spotlight) — nsone.xml 1:1
+   ========================================================================== */
+@keyframes cfSpotlightAnim {
+  0% { opacity: 0; transform: translate(-50%, -46%) scale(0.96); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+.cf-spotlight-anim {
+  animation: cfSpotlightAnim 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* 'Yazıyor...' üç nokta göstergesi (cfTypingIndicator) */
+.cf-typing {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.cf-typing i {
+  width: 5px;
+  height: 5px;
+  border-radius: 99px;
+  background: #989b9f;
+  animation: cfTypingBounce 0.9s ease-in-out infinite;
+}
+
+.cf-typing i:nth-child(2) { animation-delay: 0.15s; }
+.cf-typing i:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes cfTypingBounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+
+/* Cam yüzeylerin açık tema (lgT) karşılıkları — nsone.xml 1:1 */
+:root.lgT .cf-spotlight {
+  background: rgba(255, 255, 255, 0.82) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 25px 65px rgba(0, 0, 0, 0.12) !important;
+}
+
+:root.lgT .cf-backdrop {
+  background: rgba(15, 17, 23, 0.4) !important;
+}
+
+:root.lgT .adv-card {
+  background: rgba(255, 255, 255, 0.86) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 25px 65px rgba(0, 0, 0, 0.12) !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-in {
+    animation-duration: 0.01s !important;
+  }
+
+  .cf-spotlight-anim {
+    animation-duration: 0.01s !important;
+  }
+
+  .cf-typing i {
     animation-duration: 0.01s !important;
   }
 }

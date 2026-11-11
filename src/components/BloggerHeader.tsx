@@ -77,7 +77,6 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
   onOpenSearchModal,
   onOpenPinned
 }) => {
-  const searchInputRef = useRef<HTMLInputElement>(null);
   const [isTranslateOpen, setIsTranslateOpen] = useState(false);
   const [selectedLang, setSelectedLang] = useState<string>('tr');
   const [isDark, setIsDark] = useState<boolean>(true);
@@ -311,23 +310,19 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
         </a>
       </div>
 
-      {/* Orta Bölüm: Blogger Hap Tasarımlı Arama Çubuğu (Bul...) */}
-      <div className="flex-1 max-w-md mx-3 sm:mx-8">
-        <div 
+      {/* Orta Bölüm: Blogger Arama Hapı (.headM .head-search-pill) — nsone.xml 1:1: 36px, 14px radius */}
+      <div className="flex-1 max-w-[440px] mx-auto px-2.5 min-w-0">
+        <div
           onClick={onOpenSearchModal}
-          className="relative flex items-center w-full cursor-pointer group"
+          className="relative flex items-center w-full h-9 rounded-[14px] px-3.5 gap-2.5 bg-[#252526] hover:bg-[#28282b] border border-white/[0.08] hover:border-[rgba(96,205,255,0.4)] cursor-pointer group select-none transition-all duration-200"
           title="Gelişmiş Arama & Bul Paneli (Ctrl+K)"
         >
-          <input
-            ref={searchInputRef}
-            type="search"
-            value={searchQuery}
-            readOnly
-            placeholder="Bul..."
-            className="w-full bg-[#252526] hover:bg-[#28282b] focus:bg-[#2d2d30] border border-white/5 hover:border-[var(--linkC,#9aa0a6)]/30 rounded-full pl-9 pr-14 py-1.5 text-xs text-[#fffdfc] placeholder-[#989b9f] outline-none transition-all cursor-pointer"
-          />
-          <span className="absolute left-3 text-[#989b9f] group-hover:text-[var(--linkC,#9aa0a6)] transition-colors pointer-events-none">
-            <SearchNormalIcon className="w-3.5 h-3.5" />
+          <span className="text-[#989b9f] group-hover:text-[var(--linkC,#9aa0a6)] transition-colors pointer-events-none shrink-0 flex items-center justify-center">
+            <SearchNormalIcon className="w-[15px] h-[15px]" />
+          </span>
+
+          <span className="flex-1 text-xs text-[#989b9f] text-left truncate">
+            {searchQuery || 'Bul...'}
           </span>
 
           {searchQuery ? (
@@ -337,12 +332,14 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
                 e.stopPropagation();
                 onSearchChange('');
               }}
-              className="absolute right-3 text-[#989b9f] hover:text-white transition-colors"
+              className="text-[#989b9f] hover:text-white transition-colors shrink-0 cursor-pointer"
+              title="Aramayı Temizle"
+              aria-label="Aramayı Temizle"
             >
               <CloseIcon className="w-3.5 h-3.5" />
             </button>
           ) : (
-            <kbd className="hidden sm:inline-block absolute right-3 px-1.5 py-0.5 rounded text-[9px] font-mono bg-[#1e1e1e] text-[#989b9f] group-hover:text-[var(--linkC,#9aa0a6)] transition-colors">
+            <kbd className="hidden sm:inline-flex items-center px-[7px] py-[2px] rounded-[4px] text-[9px] font-mono bg-[#1e1e1e] text-[#989b9f] border border-white/[0.06] shrink-0">
               Ctrl K
             </kbd>
           )}

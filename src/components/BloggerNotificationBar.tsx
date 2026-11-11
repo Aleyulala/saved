@@ -165,21 +165,28 @@ export const BloggerNotificationBar: React.FC<BloggerNotificationBarProps> = ({
 
         </div>
 
-        {/* Sağ Çizgi Butonlar (.panel-slider-dots) */}
+        {/* Sağ Çizgi Butonlar (.panel-slider-dots .ntfSliderDots) — Blogger 1:1: 2 tırnak, sağa/sola çevirir */}
         <div className="flex items-center gap-1.5 shrink-0">
-          {[0, 1, 2].map((idx) => (
-            <button
-              key={idx}
-              onClick={() => setActiveSlide(idx)}
-              className={`h-1.5 rounded-full transition-all duration-200 cursor-pointer ${
-                activeSlide === idx
-                  ? 'w-6 bg-[var(--linkC,#9aa0a6)] shadow-[0_0_6px_var(--linkC,#9aa0a6)]'
-                  : 'w-3.5 bg-white/20 hover:bg-white/40'
-              }`}
-              title={`Slayt ${idx + 1}`}
-              aria-label={`Slayt ${idx + 1}`}
-            />
-          ))}
+          <button
+            onClick={() => setActiveSlide((prev) => (prev - 1 + totalSlides) % totalSlides)}
+            className={`h-1.5 rounded-full transition-all duration-200 cursor-pointer ${
+              activeSlide === 0
+                ? 'w-6 bg-[var(--linkC,#9aa0a6)] shadow-[0_0_6px_var(--linkC,#9aa0a6)]'
+                : 'w-3.5 bg-white/20 hover:bg-white/40'
+            }`}
+            title="Önceki (Sekmeler)"
+            aria-label="Önceki Slayt"
+          />
+          <button
+            onClick={() => setActiveSlide((prev) => (prev + 1) % totalSlides)}
+            className={`h-1.5 rounded-full transition-all duration-200 cursor-pointer ${
+              activeSlide !== 0
+                ? 'w-6 bg-[var(--linkC,#9aa0a6)] shadow-[0_0_6px_var(--linkC,#9aa0a6)]'
+                : 'w-3.5 bg-white/20 hover:bg-white/40'
+            }`}
+            title="Sonraki (İletişim)"
+            aria-label="Sonraki Slayt"
+          />
         </div>
 
       </div>

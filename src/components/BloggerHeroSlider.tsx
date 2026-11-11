@@ -134,6 +134,8 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  // Blogger .sld-car-nav (updateHeroNav) 1:1: aktif çizgi butonu gezinme YÖNÜNÜ gösterir
+  const [navDir, setNavDir] = useState<1 | -1>(1);
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
   const didDrag = useRef(false);
@@ -146,6 +148,7 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
 
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % BLOGGER_SLIDES.length);
+      setNavDir(1);
     }, 6000);
 
     return () => clearInterval(timer);
@@ -153,11 +156,13 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
 
   const handlePrev = (e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
+    setNavDir(-1);
     setCurrentIndex((prev) => (prev - 1 + BLOGGER_SLIDES.length) % BLOGGER_SLIDES.length);
   };
 
   const handleNext = (e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
+    setNavDir(1);
     setCurrentIndex((prev) => (prev + 1) % BLOGGER_SLIDES.length);
   };
 
@@ -255,7 +260,7 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
   return (
     <div className="w-full relative select-none">
       <div 
-        className="relative w-full overflow-hidden rounded-lg bg-[#18181b] shadow-md group aspect-[16/9] sm:aspect-[21/9] md:aspect-[2.4/1] cursor-pointer touch-pan-y"
+        className="relative w-full overflow-hidden rounded-[14px] bg-[#18181b] shadow-md group aspect-video cursor-pointer touch-pan-y"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => {
           setIsPaused(false);
@@ -336,26 +341,26 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
           </button>
         </div>
 
-        {/* Bottom-Center: Blogger Saved 2 Line Pills (.sld-car-nav) */}
+        {/* Bottom-Center: Blogger Saved 2 Line Pills (.sld-car-nav) — aktif çizgi YÖNÜ gösterir (Blogger 1:1) */}
         <div className="absolute bottom-3.5 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
-          {/* Sol Çizgi Buton */}
+          {/* Sol Çizgi Buton (car-prev) */}
           <button
             onClick={handlePrev}
             className={`h-2 rounded-full transition-all duration-300 shadow-md backdrop-blur-md cursor-pointer ${
-              currentIndex % 2 === 0
-                ? 'w-7 sm:w-8 bg-white/40 hover:bg-white/60'
-                : 'w-9 sm:w-10 bg-[var(--linkC,#9aa0a6)] shadow-[0_0_10px_var(--linkC,#9aa0a6)]'
+              navDir === -1
+                ? 'w-9 bg-[var(--linkC,#9aa0a6)] shadow-[0_0_10px_var(--linkC,#9aa0a6)]'
+                : 'w-7 bg-white/40 hover:bg-white/60 hover:scale-110'
             }`}
             aria-label="Önceki Çizgi Buton"
             title="Önceki Slayt"
           />
-          {/* Sağ Çizgi Buton */}
+          {/* Sağ Çizgi Buton (car-next) */}
           <button
             onClick={handleNext}
             className={`h-2 rounded-full transition-all duration-300 shadow-md backdrop-blur-md cursor-pointer ${
-              currentIndex % 2 === 1
-                ? 'w-7 sm:w-8 bg-white/40 hover:bg-white/60'
-                : 'w-9 sm:w-10 bg-[var(--linkC,#9aa0a6)] shadow-[0_0_10px_var(--linkC,#9aa0a6)]'
+              navDir === 1
+                ? 'w-9 bg-[var(--linkC,#9aa0a6)] shadow-[0_0_10px_var(--linkC,#9aa0a6)]'
+                : 'w-7 bg-white/40 hover:bg-white/60 hover:scale-110'
             }`}
             aria-label="Sonraki Çizgi Buton"
             title="Sonraki Slayt"

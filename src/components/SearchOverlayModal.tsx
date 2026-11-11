@@ -240,32 +240,33 @@ export const SearchOverlayModal: React.FC<SearchOverlayModalProps> = ({
   };
 
   return (
-    <div 
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 sm:p-6 bg-black/75 backdrop-blur-xl animate-in fade-in duration-200"
+    <div
+      className="fixed inset-0 z-50 flex flex-col items-center justify-start px-4 pt-[10vh] pb-6 bg-black/[0.52] backdrop-blur-[16px] animate-in fade-in duration-200"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      {/* Kapat Butonu */}
+      {/* Kapat Butonu (.adv-close-btn) — nsone.xml 1:1 */}
       <button
         onClick={onClose}
-        className="absolute top-4 right-4 sm:top-6 sm:right-6 w-9 h-9 rounded-lg bg-[#252526] hover:bg-[#333333] border border-transparent flex items-center justify-center text-[#989b9f] hover:text-white transition-all shadow-lg cursor-pointer"
+        className="absolute top-5 right-5 w-8 h-8 rounded-[10px] bg-[#252526] hover:bg-[#333333] border border-white/[0.08] flex items-center justify-center text-[#989b9f] hover:text-white transition-all shadow-lg cursor-pointer"
         aria-label="Aramayı Kapat (Esc)"
         title="Kapat (Esc)"
       >
         <CloseIcon className="w-4 h-4" />
       </button>
 
-      <div className="w-full max-w-2xl flex flex-col gap-3">
-        
-        {/* Arama Kutusu ve Motor Seçici (Search Wrap) */}
-        <div className="flex items-center gap-2 p-1.5 sm:p-2 rounded-lg bg-[#252526] border border-transparent shadow-2xl focus-within:border-[var(--linkC,#9aa0a6)]/50 transition-all">
-          
-          {/* Arama Motoru Dropdown */}
+      {/* Modal Kartı (.adv-card) — nsone.xml 1:1: 660px cam efektli kart */}
+      <div className="adv-card w-full max-w-[660px] flex flex-col gap-3 p-4 rounded-[20px] bg-[rgba(22,25,34,0.82)] backdrop-blur-[28px] border border-white/[0.08] shadow-[0_30px_80px_rgba(0,0,0,0.72)] animate-in slide-in-from-top duration-200">
+
+        {/* Arama Kutusu ve Motor Seçici (.adv-input-bar) */}
+        <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-[12px] bg-[#252526] border border-white/10 focus-within:border-[var(--linkC,#9aa0a6)] shadow-[0_12px_36px_rgba(0,0,0,0.45)] transition-all">
+
+          {/* Arama Motoru Dropdown (.adv-engine-select) */}
           <select
             value={selectedEngine}
             onChange={(e) => setSelectedEngine(e.target.value)}
-            className="bg-[#1e1e1e] hover:bg-[#28282b] text-[#d4d4d4] text-xs font-semibold py-2 px-2 rounded-lg border border-transparent outline-none cursor-pointer shrink-0 max-w-[90px] sm:max-w-[130px] truncate"
+            className="bg-[#1e1e1e] hover:bg-[#28282b] text-[#d4d4d4] text-xs font-semibold py-2 px-2.5 rounded-lg border border-transparent outline-none cursor-pointer shrink-0 max-w-[120px] truncate"
             title="Arama Motoru Seçin"
           >
             {SEARCH_ENGINES.map(eng => (
@@ -275,7 +276,7 @@ export const SearchOverlayModal: React.FC<SearchOverlayModalProps> = ({
             ))}
           </select>
 
-          {/* Arama Input */}
+          {/* Arama Input (.adv-search-input) */}
           <div className="relative flex-1 flex items-center min-w-0">
             <span className="absolute left-2.5 text-[#989b9f] pointer-events-none">
               <SearchNormalIcon className="w-4 h-4" />
@@ -287,7 +288,7 @@ export const SearchOverlayModal: React.FC<SearchOverlayModalProps> = ({
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Arayın, @kategori veya adres…"
-              className="w-full bg-transparent pl-8 sm:pl-9 pr-7 py-2 text-xs sm:text-sm text-white placeholder-[#71717a] outline-none"
+              className="w-full bg-transparent pl-[34px] pr-8 py-2 text-sm text-white placeholder-[#71717a] outline-none"
               autoComplete="off"
               spellCheck="false"
             />
@@ -302,7 +303,7 @@ export const SearchOverlayModal: React.FC<SearchOverlayModalProps> = ({
             )}
           </div>
 
-          {/* Ara Butonu */}
+          {/* Ara Butonu (.adv-search-btn) */}
           <button
             type="button"
             onClick={() => handleExecuteSearch()}

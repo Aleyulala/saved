@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { 
   PulseIcon, 
   CloseIcon,
@@ -35,6 +36,8 @@ interface BloggerRightSidebarProps {
   // Mobile / Drawer props
   isDrawerOpen?: boolean;
   onCloseDrawer?: () => void;
+  // #İletişim → Nsone Bot spotlight sinyali (her artış pencereyi açar)
+  contactOpenSignal?: number;
 }
 
 export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
@@ -47,7 +50,8 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
   onSelectTag,
   onOpenPostPage,
   isDrawerOpen = false,
-  onCloseDrawer
+  onCloseDrawer,
+  contactOpenSignal = 0
 }) => {
   // Tags track horizontal slider
   const tagsTrackRef = useRef<HTMLDivElement>(null);
@@ -66,6 +70,49 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
   const [sentSuccess, setSentSuccess] = useState(false);
   const [isSending, setIsSending] = useState(false);
   const [shakeStep, setShakeStep] = useState<number | null>(null);
+
+  // Nsone Bot Spotlight (Blogger #ContactForm2 .cf-spotlight 1:1)
+  const [isSpotlightOpen, setIsSpotlightOpen] = useState(false);
+  const [typingDone, setTypingDone] = useState(true);
+
+  const openSpotlight = () => {
+    setSentSuccess(false);
+    setTypingDone(false);
+    setIsSpotlightOpen(true);
+    // 'Yazıyor...' animasyonu: 700ms sonra baloncuklar sırayla belirir
+    setTimeout(() => setTypingDone(true), 700);
+    // nsone.xml 1:1: açılırken ilk giriş alanına odaklan
+    setTimeout(() => nameInputRef.current?.focus(), 150);
+  };
+
+  const closeSpotlight = () => {
+    setIsSpotlightOpen(false);
+    setSentSuccess(false);
+  };
+
+  // #İletişim bağlantıları spotlight'ı açar (nsone.xml openSpotlight 1:1)
+  useEffect(() => {
+    if (contactOpenSignal > 0) {
+      openSpotlight();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [contactOpenSignal]);
+
+  // Esc ile kapatma + gövde kaydırma kilidi (nsone.xml closeSpotlight 1:1)
+  useEffect(() => {
+    if (!isSpotlightOpen) return;
+    const onKey = (ev: KeyboardEvent) => {
+      if (ev.key === 'Escape' || ev.keyCode === 27) closeSpotlight();
+    };
+    document.addEventListener('keydown', onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSpotlightOpen]);
 
   const nameInputRef = useRef<HTMLInputElement>(null);
   const emailInputRef = useRef<HTMLInputElement>(null);
@@ -285,6 +332,202 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
     }
   };
 
+  // Nsone Bot iç paneli — spotlight modal içeriği (nsone.xml .cf-spotlight 1:1)
+  const nsoneBotPanel = (
+    <>
+      {/* Nsone Bot Başlığı */}
+      <div className="flex items-center gap-3 pb-3 border-b border-white/10 mb-3 pr-10">
+        <div className="relative w-10 h-10 rounded-full bg-[#60cdff]/20 border border-[#60cdff]/30 flex items-center justify-center text-[#60cdff] shrink-0">
+          <ChatBloggerIcon className="w-5 h-5" />
+          <span
+            className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-[#252526] shadow-[0_0_8px_rgba(16,185,129,0.6)]"
+            title="Çevrimiçi"
+          />
+        </div>
+        <div className="flex flex-col">
+          <span className="font-bold text-white text-sm leading-tight">Nsone Bot</span>
+          <span className="text-emerald-400 text-[11px] font-medium leading-tight">{typingDone ? 'Çevrimiçi' : 'yazıyor...'}</span>
+        </div>
+      </div>
+
+      {/* Nsone Bot Tane Tane Mesaj Baloncukları (yazıyor... → sırayla belirir) */}
+      <div className="flex flex-col gap-1.5 max-w-[96%] mb-3.5">
+        {!typingDone && (
+          <div className="cf-typing rounded-[18px_18px_18px_4px] bg-white/[0.06] border border-white/10 px-3.5 py-3 w-fit">
+            <i /><i /><i />
+          </div>
+        )}
+        <div
+          style={{ transitionDelay: typingDone ? '0ms' : '0ms' }}
+          className={`rounded-[18px_18px_18px_4px] bg-white/[0.06] border border-white/10 p-2.5 px-3.5 text-xs text-slate-200 leading-relaxed shadow-sm transition-all duration-300 ${
+            typingDone ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
+          }`}
+        >
+          Merhaba! 👋
+        </div>
+        <div
+          style={{ transitionDelay: typingDone ? '120ms' : '0ms' }}
+          className={`rounded-[4px_18px_18px_4px] bg-white/[0.06] border border-white/10 p-2.5 px-3.5 text-xs text-slate-200 leading-relaxed shadow-sm transition-all duration-300 ${
+            typingDone ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
+          }`}
+        >
+          Bir sorunuz, öneriniz veya mesajınız varsa lütfen aşağıdaki formu doldurarak bize iletin.
+        </div>
+        <div
+          style={{ transitionDelay: typingDone ? '240ms' : '0ms' }}
+          className={`rounded-[4px_18px_18px_4px] bg-white/[0.06] border border-white/10 p-2.5 px-3.5 text-xs text-slate-200 leading-relaxed shadow-sm transition-all duration-300 ${
+            typingDone ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
+          }`}
+        >
+          <div>Size e-posta adresinizden en kısa sürede dönüş yapacağız.</div>
+          <div className="flex items-center justify-end gap-1 text-[10px] text-white/50 mt-1">
+            <span>Şimdi</span>
+            <svg className="w-3.5 h-3.5 stroke-[#38bdf8] fill-none" strokeWidth="2" viewBox="0 0 24 24">
+              <path d="M18 6L7 17l-5-5M22 10l-7.5 7.5L13 16" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      {sentSuccess ? (
+        <div className="p-3.5 rounded-xl bg-emerald-500/15 border border-emerald-500/20 text-emerald-400 text-xs text-center font-medium animate-in fade-in">
+          Mesajınız başarıyla iletildi! En kısa sürede dönüş yapacağız.
+        </div>
+      ) : (
+        <form onSubmit={handleContactSubmit}>
+          <div className="ns-slider-container">
+            {/* 0. Ad (İsim) Slaytı */}
+            <div className={`ns-slide ${currentStep === 0 ? 'active' : currentStep > 0 ? 'passed' : ''} ${shakeStep === 0 ? 'ns-shake' : ''}`}>
+              <div className="ns-input-wrap">
+                <input
+                  ref={nameInputRef}
+                  type="text"
+                  value={contactName}
+                  onChange={(e) => {
+                    setContactName(e.target.value);
+                    if (errorMessage) setErrorMessage('');
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      e.preventDefault();
+                      handleNext0();
+                    }
+                  }}
+                  placeholder=" "
+                  autoComplete="name"
+                />
+                <label>İsim</label>
+              </div>
+              <button
+                type="button"
+                onClick={handleNext0}
+                className="ns-btn-next"
+                title="İleri"
+                aria-label="İleri"
+              >
+                <svg viewBox="0 0 24 24">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </button>
+            </div>
+
+            {/* 1. E-posta Slaytı */}
+            <div className={`ns-slide ${currentStep === 1 ? 'active' : currentStep > 1 ? 'passed' : ''} ${shakeStep === 1 ? 'ns-shake' : ''}`}>
+              <div className="ns-input-wrap">
+                <input
+                  ref={emailInputRef}
+                  type="email"
+                  value={contactEmail}
+                  onChange={(e) => {
+                    setContactEmail(e.target.value);
+                    if (errorMessage) setErrorMessage('');
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      e.preventDefault();
+                      handleNext1();
+                    }
+                  }}
+                  placeholder=" "
+                  autoComplete="email"
+                />
+                <label>E-posta</label>
+              </div>
+              <button
+                type="button"
+                onClick={handleNext1}
+                className="ns-btn-next"
+                title="İleri"
+                aria-label="İleri"
+              >
+                <svg viewBox="0 0 24 24">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </button>
+            </div>
+
+            {/* 2. Mesaj Slaytı */}
+            <div className={`ns-slide ns-slide-msg ${currentStep === 2 ? 'active' : currentStep > 2 ? 'passed' : ''} ${shakeStep === 2 ? 'ns-shake' : ''}`}>
+              <div className="ns-input-wrap ns-msg-field">
+                <textarea
+                  ref={msgInputRef}
+                  rows={1}
+                  value={contactMessage}
+                  onChange={handleMessageChange}
+                  onKeyDown={(e) => {
+                    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                      e.preventDefault();
+                      handleNext2();
+                    }
+                  }}
+                  placeholder=" "
+                />
+                <label>Mesajınız</label>
+              </div>
+              <button
+                type="button"
+                onClick={handleNext2}
+                className="ns-btn-next"
+                title="İleri"
+                aria-label="İleri"
+              >
+                <svg viewBox="0 0 24 24">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </button>
+            </div>
+
+            {/* 3. Gönder Butonu Slaytı */}
+            <div className={`ns-slide ${currentStep === 3 ? 'active' : ''} ${shakeStep === 3 ? 'ns-shake' : ''}`}>
+              <button
+                ref={submitBtnRef}
+                type="submit"
+                disabled={isSending}
+                className="ns-btn-submit"
+              >
+                <svg viewBox="0 0 24 24">
+                  <line x1="22" y1="2" x2="11" y2="13" />
+                  <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                </svg>
+                <span>{isSending ? 'Gönderiliyor...' : 'Mesajı Gönder'}</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Hata Bildirimi */}
+          {errorMessage && (
+            <div className="mt-2.5 p-2 rounded-lg bg-red-500/10 text-red-400 text-xs text-center font-medium">
+              {errorMessage}
+            </div>
+          )}
+        </form>
+      )}
+    </>
+  );
+
   const content = (
     <div className="space-y-6 text-xs text-[#a1a1aa] select-none">
       
@@ -493,179 +736,37 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
         </div>
       </section>
 
-      {/* Widget 3: Bize Ulaşın (#ContactForm2) - Nsone Bot Carousel Slider */}
-      <section aria-label="Bize Ulaşın" id="ContactForm2" className="rounded-2xl bg-[#252526] p-4 shadow-sm border border-white/5">
-        
-        {/* Nsone Bot Başlığı */}
-        <div className="flex items-center gap-3 pb-3 border-b border-white/10 mb-3">
-          <div className="relative w-10 h-10 rounded-full bg-[#60cdff]/20 border border-[#60cdff]/30 flex items-center justify-center text-[#60cdff] shrink-0">
-            <ChatBloggerIcon className="w-5 h-5" />
+      {/* Widget 3: Bize Ulaşın (#ContactForm2) — Nsone Bot Tetikleyici (.cf-sidebar-trigger-btn, nsone.xml 1:1) */}
+      <section aria-label="Bize Ulaşın" id="ContactForm2">
+        <button
+          type="button"
+          onClick={openSpotlight}
+          className="w-full flex items-center gap-3 px-4 py-3 rounded-2xl bg-[#252526] border border-white/[0.08] hover:border-[var(--linkC,#9aa0a6)]/50 hover:bg-[#28282b] hover:-translate-y-0.5 transition-all duration-200 shadow-md cursor-pointer group select-none"
+          title="Bize Ulaşın — Nsone Bot"
+        >
+          <span className="relative w-[38px] h-[38px] rounded-full bg-[var(--linkB,#9aa0a6)] flex items-center justify-center shrink-0">
+            <ChatBloggerIcon className="w-5 h-5 text-white" />
             <span
-              className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-[#252526] shadow-[0_0_8px_rgba(16,185,129,0.6)]"
+              className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-[#252526]"
               title="Çevrimiçi"
             />
-          </div>
-          <div className="flex flex-col">
-            <span className="font-bold text-white text-sm leading-tight">Nsone Bot</span>
-            <span className="text-emerald-400 text-[11px] font-medium leading-tight">Çevrimiçi</span>
-          </div>
-        </div>
-
-        {/* Nsone Bot Tane Tane Mesaj Baloncukları */}
-        <div className="flex flex-col gap-1.5 max-w-[96%] mb-3.5">
-          <div className="rounded-[18px_18px_18px_4px] bg-white/[0.06] border border-white/10 p-2.5 px-3.5 text-xs text-slate-200 leading-relaxed shadow-sm">
-            Merhaba! 👋
-          </div>
-          <div className="rounded-[4px_18px_18px_4px] bg-white/[0.06] border border-white/10 p-2.5 px-3.5 text-xs text-slate-200 leading-relaxed shadow-sm">
-            Bir sorunuz, öneriniz veya mesajınız varsa lütfen aşağıdaki formu doldurarak bize iletin.
-          </div>
-          <div className="rounded-[4px_18px_18px_4px] bg-white/[0.06] border border-white/10 p-2.5 px-3.5 text-xs text-slate-200 leading-relaxed shadow-sm">
-            <div>Size e-posta adresinizden en kısa sürede dönüş yapacağız.</div>
-            <div className="flex items-center justify-end gap-1 text-[10px] text-white/50 mt-1">
-              <span>Şimdi</span>
-              <svg className="w-3.5 h-3.5 stroke-[#38bdf8] fill-none" strokeWidth="2" viewBox="0 0 24 24">
-                <path d="M18 6L7 17l-5-5M22 10l-7.5 7.5L13 16" />
-              </svg>
-            </div>
-          </div>
-        </div>
-
-        {sentSuccess ? (
-          <div className="p-3.5 rounded-xl bg-emerald-500/15 border border-emerald-500/20 text-emerald-400 text-xs text-center font-medium animate-in fade-in">
-            Mesajınız başarıyla iletildi! En kısa sürede dönüş yapacağız.
-          </div>
-        ) : (
-          <form onSubmit={handleContactSubmit}>
-            <div className="ns-slider-container">
-              {/* 0. Ad (İsim) Slaytı */}
-              <div className={`ns-slide ${currentStep === 0 ? 'active' : currentStep > 0 ? 'passed' : ''} ${shakeStep === 0 ? 'ns-shake' : ''}`}>
-                <div className="ns-input-wrap">
-                  <input
-                    ref={nameInputRef}
-                    type="text"
-                    value={contactName}
-                    onChange={(e) => {
-                      setContactName(e.target.value);
-                      if (errorMessage) setErrorMessage('');
-                    }}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter') {
-                        e.preventDefault();
-                        handleNext0();
-                      }
-                    }}
-                    placeholder=" "
-                    autoComplete="name"
-                  />
-                  <label>İsim</label>
-                </div>
-                <button
-                  type="button"
-                  onClick={handleNext0}
-                  className="ns-btn-next"
-                  title="İleri"
-                  aria-label="İleri"
-                >
-                  <svg viewBox="0 0 24 24">
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                    <polyline points="12 5 19 12 12 19" />
-                  </svg>
-                </button>
-              </div>
-
-              {/* 1. E-posta Slaytı */}
-              <div className={`ns-slide ${currentStep === 1 ? 'active' : currentStep > 1 ? 'passed' : ''} ${shakeStep === 1 ? 'ns-shake' : ''}`}>
-                <div className="ns-input-wrap">
-                  <input
-                    ref={emailInputRef}
-                    type="email"
-                    value={contactEmail}
-                    onChange={(e) => {
-                      setContactEmail(e.target.value);
-                      if (errorMessage) setErrorMessage('');
-                    }}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter') {
-                        e.preventDefault();
-                        handleNext1();
-                      }
-                    }}
-                    placeholder=" "
-                    autoComplete="email"
-                  />
-                  <label>E-posta</label>
-                </div>
-                <button
-                  type="button"
-                  onClick={handleNext1}
-                  className="ns-btn-next"
-                  title="İleri"
-                  aria-label="İleri"
-                >
-                  <svg viewBox="0 0 24 24">
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                    <polyline points="12 5 19 12 12 19" />
-                  </svg>
-                </button>
-              </div>
-
-              {/* 2. Mesaj Slaytı */}
-              <div className={`ns-slide ns-slide-msg ${currentStep === 2 ? 'active' : currentStep > 2 ? 'passed' : ''} ${shakeStep === 2 ? 'ns-shake' : ''}`}>
-                <div className="ns-input-wrap ns-msg-field">
-                  <textarea
-                    ref={msgInputRef}
-                    rows={1}
-                    value={contactMessage}
-                    onChange={handleMessageChange}
-                    onKeyDown={(e) => {
-                      if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
-                        e.preventDefault();
-                        handleNext2();
-                      }
-                    }}
-                    placeholder=" "
-                  />
-                  <label>Mesajınız</label>
-                </div>
-                <button
-                  type="button"
-                  onClick={handleNext2}
-                  className="ns-btn-next"
-                  title="İleri"
-                  aria-label="İleri"
-                >
-                  <svg viewBox="0 0 24 24">
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                    <polyline points="12 5 19 12 12 19" />
-                  </svg>
-                </button>
-              </div>
-
-              {/* 3. Gönder Butonu Slaytı */}
-              <div className={`ns-slide ${currentStep === 3 ? 'active' : ''} ${shakeStep === 3 ? 'ns-shake' : ''}`}>
-                <button
-                  ref={submitBtnRef}
-                  type="submit"
-                  disabled={isSending}
-                  className="ns-btn-submit"
-                >
-                  <svg viewBox="0 0 24 24">
-                    <line x1="22" y1="2" x2="11" y2="13" />
-                    <polygon points="22 2 15 22 11 13 2 9 22 2" />
-                  </svg>
-                  <span>{isSending ? 'Gönderiliyor...' : 'Mesajı Gönder'}</span>
-                </button>
-              </div>
-            </div>
-
-            {/* Hata Bildirimi */}
-            {errorMessage && (
-              <div className="mt-2.5 p-2 rounded-lg bg-red-500/10 text-red-400 text-xs text-center font-medium">
-                {errorMessage}
-              </div>
-            )}
-          </form>
-        )}
+          </span>
+          <span className="flex flex-col items-start flex-1 min-w-0">
+            <span className="text-[15px] font-bold text-white leading-tight">Nsone Bot</span>
+            <span className="text-[11.5px] text-emerald-400 font-medium leading-tight">Çevrimiçi — Bize Ulaşın</span>
+          </span>
+          <svg
+            className="w-[18px] h-[18px] text-[#989b9f] group-hover:translate-x-1 group-hover:text-[var(--linkC,#9aa0a6)] transition-all shrink-0"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        </button>
       </section>
 
     </div>
@@ -681,7 +782,7 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
       {/* 2. Mobil / Tablet Sağ Çekmece */}
       {isDrawerOpen && (
         <div className="lg:hidden fixed inset-0 z-50 flex justify-end">
-          <div 
+          <div
             className="fixed inset-0 bg-black/70 backdrop-blur-sm transition-opacity"
             onClick={onCloseDrawer}
           />
@@ -690,6 +791,51 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
           </div>
         </div>
       )}
+
+      {/* 3. Nsone Bot Spotlight Modalı (.cf-spotlight) — nsone.xml 1:1: ortada, cam efektli, kapatılabilir */}
+      {isSpotlightOpen &&
+        createPortal(
+          <>
+            {/* Bulanık Arkaplan Örtüsü (.cf-backdrop) — tıklayınca kapatır */}
+            <div
+              className="cf-backdrop fixed inset-0 z-[9998] bg-[rgba(15,17,23,0.65)] backdrop-blur-[12px] animate-in fade-in duration-200"
+              onClick={closeSpotlight}
+            />
+
+            {/* Spotlight Penceresi (.cf-spotlight) */}
+            <section
+              id="ContactForm2Spotlight"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Bize Ulaşın — Nsone Bot"
+              className="cf-spotlight fixed left-1/2 top-1/2 z-[9999] w-[min(calc(100vw-32px),360px)] max-h-[min(92vh,760px)] overflow-y-auto overscroll-contain rounded-[24px] max-[600px]:rounded-[20px] bg-[rgba(22,25,34,0.78)] backdrop-blur-[28px] border border-white/[0.08] p-6 pb-5 shadow-[0_30px_80px_rgba(0,0,0,0.72)] cf-spotlight-anim"
+            >
+              {/* Kapat (X) Butonu (.cf-close-btn) */}
+              <button
+                type="button"
+                onClick={closeSpotlight}
+                className="absolute top-3 right-3 w-9 h-9 rounded-[10px] bg-white/[0.08] backdrop-blur-[14px] border border-transparent hover:bg-[#333333] hover:border-[var(--linkC,#9aa0a6)]/60 text-[#989b9f] hover:text-white flex items-center justify-center transition-all cursor-pointer z-10"
+                aria-label="Kapat"
+                title="Kapat"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  className="w-[17px] h-[17px]"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                >
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </button>
+
+              {nsoneBotPanel}
+            </section>
+          </>,
+          document.body
+        )}
     </>
   );
 };

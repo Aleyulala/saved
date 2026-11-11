@@ -101,6 +101,8 @@ export const App: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isRightDrawerOpen, setIsRightDrawerOpen] = useState(false);
+  // #İletişim → Nsone Bot spotlight sinyali (her artış açık pencereyi tetikler)
+  const [contactOpenSignal, setContactOpenSignal] = useState(0);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [editingLink, setEditingLink] = useState<LinkItem | null>(null);
   const [detailLink, setDetailLink] = useState<LinkItem | null>(null);
@@ -617,12 +619,7 @@ export const App: React.FC = () => {
                     }}
                     onOpenMedia={handleOpenMedia}
                     onOpenChat={() => setIsRightDrawerOpen(true)}
-                    onOpenContact={() => {
-                      setIsRightDrawerOpen(true);
-                      setTimeout(() => {
-                        document.getElementById('ContactForm2')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                      }, 300);
-                    }}
+                    onOpenContact={() => setContactOpenSignal((n) => n + 1)}
                   />
                 )}
 
@@ -845,6 +842,7 @@ export const App: React.FC = () => {
                   onOpenPostPage={handleOpenPostPage}
                   isDrawerOpen={isRightDrawerOpen}
                   onCloseDrawer={() => setIsRightDrawerOpen(false)}
+                  contactOpenSignal={contactOpenSignal}
                 />
               </aside>
 
