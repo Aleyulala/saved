@@ -230,15 +230,15 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       </div>
 
-      {/* Bottom Profile / Local Storage Bar */}
+{/* Bottom Profile / Local Storage Bar */}
       <div className="p-3 border-t border-[#2e2e2e] bg-[#161616]">
         <div 
           onClick={onOpenSettings}
           className="flex items-center justify-between p-2 rounded-xl hover:bg-[#262626] cursor-pointer transition-colors"
         >
           <div className="flex items-center gap-2.5 min-w-0">
-            {/* Avatar Circle with Letter J or S */}
-            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-sky-500 to-indigo-600 flex items-center justify-center font-bold text-xs text-white shadow-sm shrink-0">
+            {/* Avatar Circle with Letter - Blogger 1:1 Style */}
+            <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-sky-500 to-indigo-600 flex items-center justify-center font-bold text-xs text-white shadow-sm shrink-0 border-2 border-white/10">
               S
             </div>
             <div className="min-w-0">
@@ -251,7 +251,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <SettingsIcon className="w-4 h-4 text-[#737373] hover:text-white" />
         </div>
       </div>
-
     </aside>
   );
 };
