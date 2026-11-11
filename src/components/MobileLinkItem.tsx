@@ -14,7 +14,8 @@ export const MobileLinkItem: React.FC<MobileLinkItemProps> = ({
   collection,
   onOpenDetail
 }) => {
-  const [imgError, setImgError] = useState(false);
+  const [thumbError, setThumbError] = useState(false);
+  const [iconError, setIconError] = useState(false);
   const domain = getDomain(link.url);
   const faviconUrl = getFaviconUrl(link.url);
 
@@ -54,13 +55,21 @@ export const MobileLinkItem: React.FC<MobileLinkItemProps> = ({
         </div>
       </div>
 
-      {/* Right: Square Thumbnail Preview */}
-      <div className="w-16 h-16 rounded-lg bg-[#1e1e1e] shrink-0 overflow-hidden flex items-center justify-center shadow-inner">
-        {!imgError ? (
+      {/* Right: Blogger XML 1:1 Yer İmi Küçük Resmi (.bkmC .pThmb) — nsone.xml 567-594: 112px, 16:9, 8px radius */}
+      <div className="w-[112px] aspect-[16/9] rounded-[8px] bg-[#1e1e1e] shrink-0 overflow-hidden flex items-center justify-center shadow-inner">
+        {link.thumbnail && !thumbError ? (
+          <img
+            src={link.thumbnail}
+            alt={link.title || domain}
+            onError={() => setThumbError(true)}
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
+        ) : !iconError ? (
           <img
             src={faviconUrl}
             alt={domain}
-            onError={() => setImgError(true)}
+            onError={() => setIconError(true)}
             className="w-7 h-7 object-contain"
             loading="lazy"
           />

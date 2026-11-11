@@ -84,7 +84,7 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
 
           <button
             onClick={onClose}
-            className="w-8 h-8 rounded-lg bg-[#252526] hover:bg-[#333333] text-[#a3a3a3] hover:text-white flex items-center justify-center transition-colors cursor-pointer"
+            className="w-8 h-8 aspect-square rounded-[10px] bg-[#282828] border border-white/[0.08] text-white hover:bg-[#333333] hover:border-[var(--linkC,#9aa0a6)] hover:text-[var(--linkC,#9aa0a6)] flex items-center justify-center shadow-[0_2px_6px_rgba(0,0,0,0.2)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] outline-none cursor-pointer"
             title="Kapat"
             aria-label="Kapat"
           >
@@ -111,7 +111,7 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
               value={localSearch}
               readOnly
               placeholder="Bul... (Ctrl+K)"
-              className="w-full bg-[#252526] group-hover:bg-[#28282b] border border-transparent group-hover:border-[var(--linkC,#9aa0a6)]/30 rounded-lg pl-9 pr-3 py-2 text-xs text-white placeholder-[#737373] outline-none transition-colors cursor-pointer"
+              className="w-full bg-[#252526] border border-transparent rounded-lg pl-9 pr-3 py-2 text-xs text-white placeholder-[#737373] outline-none cursor-pointer"
             />
             <SearchNormalIcon className="w-[18px] h-[18px] text-[#737373] group-hover:text-[var(--linkC,#9aa0a6)] transition-colors absolute left-2.5 top-2.5 pointer-events-none" />
           </div>
@@ -127,7 +127,7 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
                     onClose();
                     onSelectTab('dashboard');
                   }}
-                  className="w-full flex items-center justify-between px-3 py-2.5 rounded-lg font-medium transition-colors cursor-pointer text-[#d4d4d4] hover:bg-[#252526]/70 hover:text-white"
+                  className="w-full group flex items-center justify-between px-3 py-2.5 rounded-lg font-medium transition-colors cursor-pointer outline-none text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)]"
                 >
                   <div className="flex items-center gap-2.5">
                     <HomeIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[var(--linkC,#9aa0a6)]" />
@@ -141,7 +141,7 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
             <li className="pt-1 relative">
               <div 
                 onClick={() => setHizmetlerOpen(!hizmetlerOpen)}
-                className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-bold text-[#d4d4d4] hover:bg-[#252526] hover:text-white cursor-pointer transition-colors relative"
+                className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-bold text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] cursor-pointer transition-colors outline-none relative"
               >
                 <div className="flex items-center gap-2.5">
                   <Hierarchy4Icon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[var(--linkC,#9aa0a6)]" />
@@ -162,10 +162,10 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
                         onClose();
                         onSelectTab('pinned');
                       }}
-                      className={`w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs transition-colors cursor-pointer ${
+                      className={`w-full group flex items-center justify-between px-2.5 py-2 rounded-lg text-xs transition-colors cursor-pointer outline-none ${
                         currentTab === 'pinned'
-                          ? 'bg-[#252526] text-[var(--linkC,#9aa0a6)] font-bold'
-                          : 'text-[#d4d4d4] hover:bg-[#252526] hover:text-[var(--linkC,#9aa0a6)]'
+                          ? 'text-[var(--linkC,#9aa0a6)] font-bold'
+                          : 'text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)]'
                       }`}
                     >
                       <div className="flex items-center gap-2">
@@ -182,10 +182,10 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
                       href="https://notebooklm.google.com/"
                       target="_blank"
                       rel="nofollow noreferrer noopener"
-                      className="w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-[#252526] hover:text-[var(--linkC,#9aa0a6)] transition-colors"
+                      className="w-full group flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] transition-colors outline-none"
                     >
                       <div className="flex items-center gap-2">
-                        <Edit3Icon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[#9ca3af]" />
+                        <Edit3Icon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[#9ca3af] group-hover:text-[var(--linkC,#9aa0a6)]" />
                         <span>Notlarınız</span>
                       </div>
                     </a>
@@ -197,10 +197,10 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
                       href="https://docs.google.com/forms/u/0/"
                       target="_blank"
                       rel="nofollow noreferrer noopener"
-                      className="w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-[#252526] hover:text-[var(--linkC,#9aa0a6)] transition-colors"
+                      className="w-full group flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] transition-colors outline-none"
                     >
                       <div className="flex items-center gap-2">
-                        <Profile2UserIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[#9ca3af]" />
+                        <Profile2UserIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[#9ca3af] group-hover:text-[var(--linkC,#9aa0a6)]" />
                         <span>Forumlarınız</span>
                       </div>
                     </a>
@@ -213,7 +213,7 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
             <li className="pt-1">
               <div 
                 onClick={() => setKlasorOpen(!klasorOpen)}
-                className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-bold text-[#d4d4d4] hover:bg-[#252526] hover:text-white cursor-pointer transition-colors"
+                className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-bold text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] cursor-pointer transition-colors outline-none"
               >
                 <div className="flex items-center gap-2.5">
                   <FlashIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-amber-400" />
@@ -234,14 +234,14 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
                         onClose();
                         onSelectTab('links');
                       }}
-                      className={`w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs transition-colors cursor-pointer ${
+                      className={`w-full group flex items-center justify-between px-2.5 py-2 rounded-lg text-xs transition-colors cursor-pointer outline-none ${
                         currentTab === 'links'
-                          ? 'bg-[#252526] text-[var(--linkC,#9aa0a6)] font-bold'
-                          : 'text-[#d4d4d4] hover:bg-[#252526] hover:text-[var(--linkC,#9aa0a6)]'
+                          ? 'text-[var(--linkC,#9aa0a6)] font-bold'
+                          : 'text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)]'
                       }`}
                     >
                       <div className="flex items-center gap-2">
-                        <EyeIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[#9ca3af]" />
+                        <EyeIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[#9ca3af] group-hover:text-[var(--linkC,#9aa0a6)]" />
                         <span>İlgi Alanları</span>
                       </div>
                       <span className="text-[10px] text-[#9ca3af] font-mono">{counts.all}</span>
@@ -255,14 +255,14 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
                         onClose();
                         onSelectTab('privacy');
                       }}
-                      className={`w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs transition-colors cursor-pointer ${
+                      className={`w-full group flex items-center justify-between px-2.5 py-2 rounded-lg text-xs transition-colors cursor-pointer outline-none ${
                         currentTab === 'privacy'
-                          ? 'bg-[#252526] text-[var(--linkC,#9aa0a6)] font-bold'
-                          : 'text-[#d4d4d4] hover:bg-[#252526] hover:text-[var(--linkC,#9aa0a6)]'
+                          ? 'text-[var(--linkC,#9aa0a6)] font-bold'
+                          : 'text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)]'
                       }`}
                     >
                       <div className="flex items-center gap-2">
-                        <Verify1Icon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[#9ca3af]" />
+                        <Verify1Icon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[#9ca3af] group-hover:text-[var(--linkC,#9aa0a6)]" />
                         <span>Politikalar</span>
                       </div>
                       <span className="text-[10px] text-[#9ca3af] font-mono">Yasal</span>
@@ -275,10 +275,10 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
                       href="https://github.com/Aleyulala/saved/discussions/?pli=1"
                       target="_blank"
                       rel="nofollow noreferrer noopener"
-                      className="w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-[#252526] hover:text-[var(--linkC,#9aa0a6)] transition-colors"
+                      className="w-full group flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] transition-colors outline-none"
                     >
                       <div className="flex items-center gap-2">
-                        <SmsEditIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[#9ca3af]" />
+                        <SmsEditIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[#9ca3af] group-hover:text-[var(--linkC,#9aa0a6)]" />
                         <span>Geri Bildirim</span>
                       </div>
                     </a>
@@ -296,7 +296,7 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
             <li className="pt-1">
               <div 
                 onClick={() => setGelistiriciOpen(!gelistiriciOpen)}
-                className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-bold text-[#d4d4d4] hover:bg-[#252526] hover:text-white cursor-pointer transition-colors"
+                className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-bold text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] cursor-pointer transition-colors outline-none"
               >
                 <div className="flex items-center gap-2.5">
                   <FolderCodeIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[var(--linkC,#9aa0a6)]" />
@@ -316,10 +316,10 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
                         const next = current === 'rtl' ? 'ltr' : 'rtl';
                         document.documentElement.setAttribute('dir', next);
                       }}
-                      className="w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-[#252526] hover:text-[var(--linkC,#9aa0a6)] transition-colors cursor-pointer"
+                      className="w-full group flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] transition-colors cursor-pointer outline-none"
                     >
                       <div className="flex items-center gap-2">
-                        <ArrowSwapHorizontalIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[#9ca3af]" />
+                        <ArrowSwapHorizontalIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[#9ca3af] group-hover:text-[var(--linkC,#9aa0a6)]" />
                         <span>Ters Çevir</span>
                         <span className="text-[var(--linkC,#9aa0a6)] text-[10px] font-bold">New!</span>
                       </div>
@@ -332,10 +332,10 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
                       href="https://search.google.com/test/rich-results"
                       target="_blank"
                       rel="nofollow noreferrer noopener"
-                      className="w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-[#252526] hover:text-[var(--linkC,#9aa0a6)] transition-colors"
+                      className="w-full group flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] transition-colors outline-none"
                     >
                       <div className="flex items-center gap-2">
-                        <SearchNormalIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[#9ca3af]" />
+                        <SearchNormalIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[#9ca3af] group-hover:text-[var(--linkC,#9aa0a6)]" />
                         <span>Detaylı Ara</span>
                       </div>
                     </a>
@@ -347,10 +347,10 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
                       href="https://pagespeed.web.dev/analysis"
                       target="_blank"
                       rel="nofollow noreferrer noopener"
-                      className="w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-[#252526] hover:text-[var(--linkC,#9aa0a6)] transition-colors"
+                      className="w-full group flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] transition-colors outline-none"
                     >
                       <div className="flex items-center gap-2">
-                        <SpeedometerIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[#9ca3af]" />
+                        <SpeedometerIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[#9ca3af] group-hover:text-[var(--linkC,#9aa0a6)]" />
                         <span>Hız Testi</span>
                       </div>
                     </a>

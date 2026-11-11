@@ -72,18 +72,17 @@ export const LinkCard: React.FC<LinkCardProps> = ({
             loading="lazy"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gradient-to-tr from-sky-950 via-[#1c2430] to-[#252526] p-4 relative">
+          <div className="w-full h-full flex items-center justify-center bg-gradient-to-tr from-sky-950 via-[#1c2430] to-[#252526] relative">
             <div className="absolute inset-0 bg-[radial-gradient(#ffffff0a_1px,transparent_1px)] [background-size:12px_12px]" />
-            <div className="w-12 h-12 rounded-lg bg-black/60 backdrop-blur-md flex items-center justify-center p-2.5 shadow-lg group-hover:scale-110 transition-transform">
-              <img
-                src={faviconUrl}
-                alt={domain}
-                className="w-6 h-6 object-contain"
-                onError={(e) => {
-                  (e.target as HTMLElement).style.display = 'none';
-                }}
-              />
-            </div>
+            {/* Blogger XML 1:1 görsel yok ikonu (.pThmb .imgThm::before) — nsone.xml: 28px */}
+            <img
+              src={faviconUrl}
+              alt={domain}
+              className="w-7 h-7 object-contain opacity-90 group-hover:scale-110 transition-transform"
+              onError={(e) => {
+                (e.target as HTMLElement).style.display = 'none';
+              }}
+            />
           </div>
         )}
 

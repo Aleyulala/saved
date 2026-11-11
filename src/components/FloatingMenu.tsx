@@ -87,70 +87,71 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
   return (
     <>
       <style>{`
-        /* Blogger Float Menü (.qeF) & Scroll to Top / Bottom (.tTb) */
-        .blogger-float-group {
-          position: fixed;
-          bottom: 24px;
-          inset-inline-end: 24px;
-          z-index: 40;
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          pointer-events: none;
-          transition: bottom 0.25s ease, inset-inline-end 0.25s ease;
+        /* Blogger Float Menü (.qeF) & Scroll to Top / Bottom (.tTb) — nsone.xml 473-529 & 8709-8713 1:1 */
+        .qeF {
+          position: fixed !important;
+          bottom: 70px !important;
+          inset-inline-end: 70px !important;
+          z-index: 40 !important;
         }
 
-        /* Mobilde alt navigasyon menüsünün (BloggerMobileNav) üzerine binmemesi için yukarı kaldırıldı */
+        .tTb {
+          position: fixed !important;
+          bottom: 70px !important;
+          inset-inline-end: 20px !important;
+          z-index: 40 !important;
+        }
+
+        /* Mobilde alt navigasyon menüsünün (.mobM) üzerine binmemesi için yukarı kaldırıldı — nsone.xml 482-491 1:1 */
         @media (max-width: 768px) {
-          .blogger-float-group {
-            bottom: calc(84px + env(safe-area-inset-bottom, 0px)) !important;
-            inset-inline-end: 16px !important;
+          .qeF {
+            bottom: calc(86px + env(safe-area-inset-bottom, 0px)) !important;
+            inset-inline-end: 70px !important;
+          }
+          .tTb {
+            bottom: calc(86px + env(safe-area-inset-bottom, 0px)) !important;
+            inset-inline-end: 20px !important;
           }
         }
 
-        .qeF {
-          position: relative;
-          pointer-events: auto;
-        }
-
         .qeF svg.line {
-          width: 18px;
-          height: 18px;
-          stroke: currentColor;
-          stroke-width: 1.75;
-          fill: none;
-          transition: transform .2s ease;
+          width: 18px !important;
+          height: 18px !important;
+          stroke: currentColor !important;
+          stroke-width: 1.75 !important;
+          fill: none !important;
+          transition: transform .2s ease !important;
         }
         .qeF svg.line .c {
-          stroke: #989b9f;
+          stroke: var(--linkC, #9aa0a6) !important;
         }
 
+        /* nsone.xml 503-529 1:1 — Karemsi butonlar: 36px (.qeT) / 32px (.qeL > *), radius 10px */
         .qeT, .qeL > button {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 36px;
-          height: 36px;
-          background: #252526;
-          color: #ffffff;
-          border: 1px solid #404045;
-          border-radius: 50%;
-          box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-          cursor: pointer;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          width: 36px !important;
+          height: 36px !important;
+          background: #252526 !important;
+          color: #fffdfc !important;
+          border: 1px solid transparent !important;
+          border-radius: 10px !important;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
+          cursor: pointer !important;
           transition: all 0.2s cubic-bezier(.4,0,.2,1);
         }
         .qeT:hover, .qeL > button:hover {
-          background-color: #333333;
-          border-color: #60cdff;
-          color: #60cdff;
+          border-color: var(--linkC, #9aa0a6) !important;
+          color: var(--linkC, #9aa0a6) !important;
         }
 
         .qeL > button {
           position: absolute;
           bottom: 2px;
           inset-inline-end: 2px;
-          width: 32px;
-          height: 32px;
+          width: 32px !important;
+          height: 32px !important;
           visibility: hidden;
           opacity: 0;
           pointer-events: none;
@@ -210,7 +211,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
           backdrop-filter: blur(1px);
         }
 
-        /* Scroll to Top / Bottom (.tTb) */
+        /* Scroll to Top / Bottom (.tTb) — nsone.xml 8709-8713 1:1 */
         .tTb {
           pointer-events: auto;
           display: flex;
@@ -223,7 +224,6 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
           background: transparent;
           border: none;
           padding: 0;
-          box-shadow: 0 4px 12px rgba(0,0,0,0.25);
           transition: transform 0.2s ease;
         }
         .tTb:hover {
@@ -239,7 +239,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
           stroke: #404045;
         }
         .tTb circle:last-of-type {
-          stroke: transparent;
+          stroke: var(--linkC, #9aa0a6);
         }
         .tTb path {
           stroke: #ffffff;
@@ -258,10 +258,8 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
         />
       )}
 
-      <div className="blogger-float-group">
-        
-        {/* Quick Edit / Admin Float Menu (.qeF) */}
-        <div className={`qeF ${isOpen ? 'is-open' : ''}`}>
+      {/* Quick Edit / Admin Float Menü (.qeF) — nsone.xml 473-479 1:1: fixed bottom 70px / end 70px */}
+      <div className={`qeF ${isOpen ? 'is-open' : ''}`}>
           <button
             type="button"
             className="qeT"
@@ -456,8 +454,6 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
             </g>
           </svg>
         </button>
-
-      </div>
-    </>
+      </>
   );
 };

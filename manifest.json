@@ -1,5 +1,5 @@
 {
-  "name": "Saved - Yerel Bağlantı Yöneticisi",
+  "name": "NESCİONE",
   "short_name": "Saved",
   "description": "Giriş gerektirmeyen, IndexedDB tabanlı, GitHub Pages uyumlu açık kaynaklı bağlantı yöneticisi.",
   "start_url": "./",

@@ -925,7 +925,7 @@ body.qe-open .sldD {
 <Variable name="m.published" description="Message for: Published" type="string" default="" value="Yayınlandi!"/>
 <Variable name="m.updated" description="Message for: Updated" type="string" default="" value="Güncellendi"/>
 <Variable name="m.save" description="Message for: Save" type="string" default="" value="Save"/>
-<Variable name="m.saved" description="Message for: Saved" type="string" default="" value="Saved"/>
+<Variable name="m.saved" description="Message for: Saved" type="string" default="" value="NESCİONE"/>
 <Variable name="m.appearance" description="Message for: Appearance" type="string" default="" value="Görünüm"/>
 <Variable name="m.mode" description="Message for: Mode" type="string" default="" value="Mod"/>
 <Variable name="m.theme" description="Message for: Theme" type="string" default="" value="Tema"/>

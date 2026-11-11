@@ -242,7 +242,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               S
             </div>
             <div className="min-w-0">
-              <div className="text-xs font-semibold text-white truncate">Saved (Local)</div>
+              <div className="text-xs font-semibold text-white truncate">NESCİONE (Local)</div>
               <div className="text-[10px] text-emerald-400 flex items-center gap-1">
                 <ShieldCheck className="w-3 h-3" /> IndexedDB
               </div>
