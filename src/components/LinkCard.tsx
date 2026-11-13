@@ -35,6 +35,8 @@ export const LinkCard: React.FC<LinkCardProps> = ({
   isCompact = false
 }) => {
   const [imgError, setImgError] = useState(false);
+  const [avatarError, setAvatarError] = useState(false);
+  const initial = (link.authorName || 'A').charAt(0).toUpperCase();
   const domain = getDomain(link.url);
   const faviconUrl = getFaviconUrl(link.url);
 
@@ -134,15 +136,19 @@ export const LinkCard: React.FC<LinkCardProps> = ({
         {/* Sol Alt: Yazar / Marka Rozeti (.aNm - XML 1:1) */}
         <div className="absolute bottom-2 left-2 z-10">
           <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-lg bg-black/75 backdrop-blur-md text-white text-[10px] font-bold shadow-sm tracking-wide">
-            <img
-              src={authorData.avatar}
-              alt={author}
-              className="w-3.5 h-3.5 rounded-full object-cover shrink-0 ring-1 ring-white/20"
-              loading="lazy"
-              onError={(e) => {
-                (e.target as HTMLElement).style.display = 'none';
-              }}
-            />
+            {avatarError ? (
+              <span className="w-3.5 h-3.5 rounded-full bg-gradient-to-tr from-sky-600 to-indigo-600 text-white flex items-center justify-center text-[8px] font-bold ring-1 ring-white/20 shrink-0">
+                {initial}
+              </span>
+            ) : (
+              <img
+                src={authorData.avatar}
+                alt={author}
+                className="w-3.5 h-3.5 rounded-full object-cover shrink-0 ring-1 ring-white/20"
+                loading="lazy"
+                onError={() => setAvatarError(true)}
+              />
+            )}
             <span>{author}</span>
             <Verify1Icon className="w-3 h-3 text-[#60cdff]" />
           </div>

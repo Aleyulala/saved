@@ -441,6 +441,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               <div className="absolute bottom-2.5 left-2.5 z-10">
                 {(() => {
                   const pinnedAuthor = getAuthorData(pinnedPost.authorName || 'NEGRONN');
+                  const pInitial = (pinnedPost.authorName || 'N').charAt(0).toUpperCase();
                   return (
                     <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-lg bg-black/75 backdrop-blur-md text-white text-[10px] font-bold shadow-sm">
                       <img
@@ -449,9 +450,15 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                         className="w-3.5 h-3.5 rounded-full object-cover shrink-0 ring-1 ring-white/20"
                         loading="lazy"
                         onError={(e) => {
-                          (e.target as HTMLElement).style.display = 'none';
+                          const target = e.target as HTMLElement;
+                          target.style.display = 'none';
+                          const fallback = target.nextElementSibling as HTMLElement;
+                          if (fallback) fallback.style.display = 'flex';
                         }}
                       />
+                      <span className="hidden w-3.5 h-3.5 rounded-full bg-gradient-to-tr from-sky-600 to-indigo-600 text-white items-center justify-center text-[8px] font-bold ring-1 ring-white/20 shrink-0">
+                        {pInitial}
+                      </span>
                       <span>{pinnedPost.authorName || 'NEGRONN'}</span>
                       <Verify1Icon className="w-3 h-3 text-[#60cdff]" />
                     </div>
@@ -533,24 +540,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         </div>
       </section>
 
-      {/* 6. Sayfalar İlerledikçe Değişen Kategori Vitrini (Sayfa 1: Konu Dışı, Sayfa 2+: Sırasıyla Diğerleri) */}
-      {pageCategories.map((col) => {
-        const colLinks = (col.id && linksByCollection[col.id]) || [];
-        if (colLinks.length === 0) return null;
-
-        return (
-          <CategoryShowcaseSection
-            key={col.id}
-            col={col}
-            links={colLinks}
-            onViewCollection={onViewCollection}
-            onTogglePin={onTogglePin}
-            onOpenPostPage={onOpenPostPage}
-          />
-        );
-      })}
-
-      {/* 7. Blogger Plus UI Sayfalama Numaratörü (.blogN #blog-pager 1 2 3 4 5...) */}
+      {/* 6. Blogger Plus UI Sayfalama Numaratörü (.blogN #blog-pager 1 2 3 4 5...) */}
       {totalPages > 1 && (
         <nav aria-label="Sayfalama Numaratörü" className="blogN numP" id="blog-pager">
           {/* Önceki Sayfa (<) */}

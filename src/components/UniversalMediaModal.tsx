@@ -81,7 +81,12 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
       }
       if (e.key === 'r' || e.key === 'R') {
         e.preventDefault();
-        handleRotate();
+        handleRotateRight();
+        return;
+      }
+      if (e.key === 'l' || e.key === 'L') {
+        e.preventDefault();
+        handleRotateLeft();
         return;
       }
       if (e.key === 'w' || e.key === 'W') {
@@ -130,8 +135,12 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
     });
   };
 
-  const handleRotate = () => {
+  const handleRotateRight = () => {
     setRotation(prev => (prev + 90) % 360);
+  };
+
+  const handleRotateLeft = () => {
+    setRotation(prev => (prev - 90 + 360) % 360);
   };
 
   const handleDownload = () => {
@@ -269,13 +278,26 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
               </svg>
             </button>
 
-            {/* Rotate */}
+            {/* Sola Döndür */}
             <button
               type="button"
-              onClick={handleRotate}
+              onClick={handleRotateLeft}
               className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#181a20]/80 hover:bg-[#252832] border border-white/10 text-white flex items-center justify-center transition-all cursor-pointer shadow-lg backdrop-blur-md active:scale-95"
-              title="Döndür (R)"
-              aria-label="Döndür"
+              title="Sola Döndür (L)"
+              aria-label="Sola Döndür"
+            >
+              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M2.5 2v6h6M2.66 15.57a10 10 0 0 0 .57-8.38l-5.67-5.67" style={{ transform: 'scaleX(-1)', transformOrigin: 'center' }} />
+              </svg>
+            </button>
+
+            {/* Sağa Döndür */}
+            <button
+              type="button"
+              onClick={handleRotateRight}
+              className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#181a20]/80 hover:bg-[#252832] border border-white/10 text-white flex items-center justify-center transition-all cursor-pointer shadow-lg backdrop-blur-md active:scale-95"
+              title="Sağa Döndür (R)"
+              aria-label="Sağa Döndür"
             >
               <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" />

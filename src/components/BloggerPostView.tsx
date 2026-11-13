@@ -60,6 +60,8 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
   const prevLink = currentIndex > 0 ? activeLinks[currentIndex - 1] : (activeLinks.length > 1 ? activeLinks[1] : null);
 
   const currentAuthor = getAuthorData(link.authorName || 'Ali');
+  const [authorImgError, setAuthorImgError] = useState(false);
+  const authorInitial = (currentAuthor.name || 'A').charAt(0).toUpperCase();
 
   // Greeting
   const GREETING_OPTIONS = ['Tatlı rüyalar!', 'Günaydın!', 'İyi günler!', 'İyi akşamlar!', 'İyi geceler!'];
@@ -381,14 +383,18 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
         {/* Sol: Yazar Avatarı + İsim + Tarih + Okuma Süresi */}
         <div className="flex flex-wrap items-center gap-2 sm:gap-3">
           <div className="flex items-center gap-2">
-            <img
-              src={currentAuthor.avatar}
-              alt={currentAuthor.name}
-              className="w-7 h-7 rounded-full object-cover ring-1 ring-white/10"
-              onError={(e) => {
-                (e.target as HTMLElement).style.display = 'none';
-              }}
-            />
+            {authorImgError ? (
+              <span className="w-7 h-7 rounded-full bg-gradient-to-tr from-sky-600 to-indigo-600 text-white flex items-center justify-center text-xs font-bold ring-1 ring-white/10 shrink-0">
+                {authorInitial}
+              </span>
+            ) : (
+              <img
+                src={currentAuthor.avatar}
+                alt={currentAuthor.name}
+                className="w-7 h-7 rounded-full object-cover ring-1 ring-white/10 shrink-0"
+                onError={() => setAuthorImgError(true)}
+              />
+            )}
             <span className="text-white font-bold">{currentAuthor.name}</span>
           </div>
 

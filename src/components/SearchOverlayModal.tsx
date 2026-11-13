@@ -136,6 +136,65 @@ export const SearchOverlayModal: React.FC<SearchOverlayModalProps> = ({
   const [selectedIndex, setSelectedIndex] = useState<number>(-1);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  // Fare ile sağa-sola kaydırma (Mouse Drag & Wheel Horizontal Scroll — nsone.xml 37104-37156 1:1)
+  const attachDragScroll = (el: HTMLDivElement | null) => {
+    if (!el || (el as any)._hasDrag) return;
+    (el as any)._hasDrag = true;
+
+    // 1. Wheel ile yatay kaydırma
+    el.addEventListener('wheel', (e) => {
+      const d = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+      if (d !== 0) {
+        e.preventDefault();
+        el.scrollLeft += d * 0.9;
+      }
+    }, { passive: false });
+
+    // 2. Fare ile basılı tutup sürükleme (Drag to scroll)
+    let isDown = false;
+    let startX = 0;
+    let sLeft = 0;
+    let hasDragged = false;
+
+    el.addEventListener('mousedown', (e) => {
+      if (e.button !== 0) return;
+      isDown = true;
+      hasDragged = false;
+      startX = e.pageX;
+      sLeft = el.scrollLeft;
+      el.style.cursor = 'grabbing';
+      el.style.userSelect = 'none';
+    });
+
+    const onMouseMove = (e: MouseEvent) => {
+      if (!isDown) return;
+      const dx = e.pageX - startX;
+      if (Math.abs(dx) > 4) {
+        hasDragged = true;
+        el.scrollLeft = sLeft - dx * 1.35;
+      }
+    };
+
+    const onMouseUp = () => {
+      if (!isDown) return;
+      isDown = false;
+      el.style.cursor = 'grab';
+      el.style.removeProperty('user-select');
+      if (hasDragged) {
+        const captureClick = (ev: MouseEvent) => {
+          ev.preventDefault();
+          ev.stopPropagation();
+          window.removeEventListener('click', captureClick, true);
+        };
+        window.addEventListener('click', captureClick, true);
+        setTimeout(() => window.removeEventListener('click', captureClick, true), 60);
+      }
+    };
+
+    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mouseup', onMouseUp);
+  };
+
   useEffect(() => {
     if (isOpen) {
       setQuery(initialQuery);
@@ -450,7 +509,10 @@ export const SearchOverlayModal: React.FC<SearchOverlayModalProps> = ({
         </div>
 
         {/* Hızlı Motor Hap Butonları (.adv-pills-row) — nsone.xml 35797-35812 1:1 */}
-        <div className="adv-pills-row flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none select-none touch-pan-x cursor-grab">
+        <div 
+          ref={attachDragScroll}
+          className="adv-pills-row flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none select-none touch-pan-x cursor-grab"
+        >
           {SEARCH_PILLS.map(pill => {
             const isActive = selectedEngine === pill.url;
             return (
@@ -472,7 +534,10 @@ export const SearchOverlayModal: React.FC<SearchOverlayModalProps> = ({
 
         {/* Canlı Kısayol / Hesap Makinesi / Önizleme Şeridi (.adv-banner) — nsone.xml 36166-36204 1:1 */}
         <div className="adv-banner flex items-center justify-between gap-2.5 px-3.5 py-2.5 rounded-[10px] bg-[rgba(30,30,30,0.92)] border border-white/[0.08] text-xs">
-          <div className="flex items-center gap-1.5 min-w-0 flex-1 overflow-x-auto scrollbar-none whitespace-nowrap select-none py-0.5">
+          <div 
+            ref={attachDragScroll}
+            className="flex items-center gap-1.5 min-w-0 flex-1 overflow-x-auto scrollbar-none whitespace-nowrap select-none py-0.5 cursor-grab"
+          >
             {bannerContent}
           </div>
           <kbd className="adv-banner-kbd px-[9px] py-[3px] rounded-[7px] text-[11px] font-bold bg-[color-mix(in_srgb,var(--linkC,#9aa0a6)_25%,rgba(255,255,255,0.1))] border border-[color-mix(in_srgb,var(--linkC,#9aa0a6)_60%,rgba(255,255,255,0.2))] text-white shadow-[0_2px_6px_rgba(0,0,0,0.2)] shrink-0 whitespace-nowrap">

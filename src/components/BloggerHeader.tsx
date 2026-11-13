@@ -323,12 +323,12 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
                 e.preventDefault();
                 onGoHome();
               }}
-              className="cursor-pointer flex items-center gap-1.5 group select-none ml-1 no-underline"
-              title="Ana Sayfaya Git (NSONE)"
+              className="cursor-pointer flex items-center gap-2 group select-none ml-1 no-underline"
+              title="Ana Sayfaya Git (NESCİONE)"
               aria-label="Ana Sayfa"
             >
-              <span className="font-mono font-bold text-sm sm:text-base tracking-wider text-white group-hover:text-[var(--linkC,#9aa0a6)] transition-colors">
-                &gt;_ NSONE
+              <span className="font-extrabold text-base sm:text-lg tracking-wider text-white group-hover:text-[var(--linkC,#9aa0a6)] transition-colors font-mono">
+                NESCİONE
               </span>
             </a>
           </div>
