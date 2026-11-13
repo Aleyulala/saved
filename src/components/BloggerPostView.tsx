@@ -258,6 +258,7 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
               <img
                 src={currentMedia.url}
                 alt={currentMedia.title || link.title}
+                referrerPolicy="no-referrer"
                 className="w-full h-full object-cover object-center cursor-pointer"
                 onClick={() => onOpenMedia && onOpenMedia(mediaItems, selectedMediaIndex)}
               />

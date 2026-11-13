@@ -46,6 +46,47 @@ export function getCategoryFallbackImage(category = 'genel', title = ''): string
   return list[idx];
 }
 
+export function cleanMediaUrl(u: string): string {
+  if (!u) return '';
+  let res = u.replace(/&amp;/g, '&').trim();
+
+  // 1. Google Redirects (e.g. google.com/url?q=...&source=gmail)
+  if (res.includes('google.com/url?')) {
+    try {
+      const qMatch = res.match(/[?&]q=([^&]+)/);
+      if (qMatch && qMatch[1]) {
+        res = decodeURIComponent(qMatch[1]);
+      } else {
+        const urlMatch = res.match(/[?&]url=([^&]+)/);
+        if (urlMatch && urlMatch[1]) {
+          res = decodeURIComponent(urlMatch[1]);
+        }
+      }
+    } catch {}
+  }
+
+  // 2. Wikimedia thumbnail normalizasyonu
+  if (res.includes('upload.wikimedia.org') && res.includes('/thumb/')) {
+    res = res.replace(/\/thumb(\/.*)\/[^\/]+$/i, '$1');
+  }
+
+  // 3. Google Drive direkt link
+  if (res.includes('drive.google.com')) {
+    const dMatch = res.match(/\/d\/([a-zA-Z0-9_-]+)/) || res.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+    if (dMatch && dMatch[1]) {
+      res = `https://lh3.googleusercontent.com/d/${dMatch[1]}`;
+    }
+  }
+
+  // 4. Dropbox
+  if (res.includes('dropbox.com')) {
+    res = res.replace(/[?&]dl=0/, '?raw=1');
+    if (!res.includes('raw=1') && !res.includes('?')) res += '?raw=1';
+  }
+
+  return res;
+}
+
 export interface PostMedia {
   items: MediaItem[];
   primaryImage: string;
@@ -96,25 +137,32 @@ export function extractPostMedia(link: LinkItem): PostMedia {
   }
 
   // 2. Görselleri Çıkarma
-  // 2.1 /resim [url] kısa kodu
-  const resimMatches = text.matchAll(/\/resim\s+([^\s<"']+)/gi);
+  // 2.1 /resim [url] kısa kodu (hem standart url hem de <a href="..."> desteği)
+  const resimMatches = text.matchAll(/\/resim\s+(?:<a\s+[^>]*href=["']([^"']+)["'][^>]*>[\s\S]*?<\/a>|([^\s<"']+))/gi);
   for (const m of resimMatches) {
-    if (m[1] && !items.some(it => it.url === m[1])) {
-      items.push({
-        type: 'image',
-        url: m[1],
-        title: link.title
-      });
+    const rawUrl = m[1] || m[2];
+    if (rawUrl) {
+      const cleaned = cleanMediaUrl(rawUrl);
+      if (cleaned && !items.some(it => it.url === cleaned)) {
+        items.push({
+          type: 'image',
+          url: cleaned,
+          title: link.title
+        });
+      }
     }
   }
 
   // 2.2 Gönderinin kendi thumbnail'ı
-  if (link.thumbnail && !items.some(it => it.url === link.thumbnail)) {
-    items.unshift({
-      type: 'image',
-      url: link.thumbnail,
-      title: link.title
-    });
+  if (link.thumbnail) {
+    const cleanedThumb = cleanMediaUrl(link.thumbnail);
+    if (cleanedThumb && !items.some(it => it.url === cleanedThumb)) {
+      items.unshift({
+        type: 'image',
+        url: cleanedThumb,
+        title: link.title
+      });
+    }
   }
 
   // 2.3 YouTube ID varsa YouTube videosunu ve HD kapağını ekle
