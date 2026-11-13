@@ -64,7 +64,7 @@ export const BloggerMobileNav: React.FC<BloggerMobileNavProps> = ({
   ];
 
   return (
-    <nav className="md:hidden fixed bottom-0 inset-x-0 z-40 select-none pb-safe">
+    <nav className="min-[897px]:hidden fixed bottom-0 inset-x-0 z-40 select-none pb-safe">
       {/* Blogger .mobC container */}
       <div className="relative mx-auto max-w-lg bg-[#18181b]/95 backdrop-blur-2xl border-t border-[#333333]/90 shadow-[0_-12px_35px_rgba(0,0,0,0.6)] rounded-t-2xl px-2 py-1.5 transition-all duration-200">
         <ul className="flex items-center justify-around h-12 m-0 p-0 list-none">

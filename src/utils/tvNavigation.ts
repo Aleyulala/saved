@@ -171,6 +171,15 @@ function spatialMove(dir: 'up' | 'down' | 'left' | 'right') {
   }
 }
 
+function scrollApp(offset: number, smooth: boolean = false) {
+  const container = document.getElementById('mainScrollContainer');
+  if (container && container.scrollHeight > container.clientHeight) {
+    container.scrollBy({ top: offset, behavior: smooth ? 'smooth' : 'auto' });
+  } else {
+    window.scrollBy({ top: offset, behavior: smooth ? 'smooth' : 'auto' });
+  }
+}
+
 // Gamepad Virtual Cursor updates
 function updateVirtualCursor(dx: number, dy: number) {
   const cursor = ensureVirtualCursor();
@@ -192,9 +201,9 @@ function updateVirtualCursor(dx: number, dy: number) {
   const edgeMargin = 40;
   const scrollSpeed = 14;
   if (state.dotY < edgeMargin) {
-    window.scrollBy({ top: -scrollSpeed, behavior: 'auto' });
+    scrollApp(-scrollSpeed);
   } else if (state.dotY > vh - edgeMargin) {
-    window.scrollBy({ top: scrollSpeed, behavior: 'auto' });
+    scrollApp(scrollSpeed);
   }
 
   // Hover detection
@@ -338,7 +347,7 @@ export function initTvNavigation(): () => void {
       const rx = axes[2] || 0;
       const ry = axes[3] || 0;
       if (Math.abs(ry) > 0.2) {
-        window.scrollBy({ top: ry * 20, behavior: 'auto' });
+        scrollApp(ry * 20);
       }
 
       // Helper for button press detection (rising edge)
@@ -376,8 +385,8 @@ export function initTvNavigation(): () => void {
       isPressed(15, 'dpad-right', () => spatialMove('right'));
 
       // LB / RB (Quick Scroll)
-      isPressed(4, 'pad-lb', () => window.scrollBy({ top: -window.innerHeight * 0.7, behavior: 'smooth' }));
-      isPressed(5, 'pad-rb', () => window.scrollBy({ top: window.innerHeight * 0.7, behavior: 'smooth' }));
+      isPressed(4, 'pad-lb', () => scrollApp(-window.innerHeight * 0.7, true));
+      isPressed(5, 'pad-rb', () => scrollApp(window.innerHeight * 0.7, true));
 
       // Button 2 (X / Search)
       isPressed(2, 'pad-search', () => {

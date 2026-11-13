@@ -525,8 +525,8 @@ export const App: React.FC = () => {
       {/* 2. ANA GÖVDE: SOL BAR + ORTA İÇERİK + SAĞ BAR */}
       <div className="flex flex-1 overflow-hidden min-h-0">
         
-        {/* SOL BAR: Blogger Navigation Sidebar (.mainL - Desktop: Kapalıyken 75px Mini Bar, Açıkken 230px) */}
-        <div className="hidden md:flex shrink-0">
+        {/* SOL BAR: Blogger Navigation Sidebar (.mainL - Desktop & El Konsolu: 897px+ Üzerinde 75px Mini Bar, Açıkken 230px) */}
+        <div className="hidden min-[897px]:flex shrink-0">
           <BloggerSidebar
             isCollapsed={!isSidebarOpen}
             onToggleSidebar={() => setIsSidebarOpen(prev => !prev)}
@@ -573,10 +573,10 @@ export const App: React.FC = () => {
           {/* Ana İçerik ve Sağ Bar Konteyneri */}
           <div className="w-full flex-1">
             <div className="max-w-[1280px] mx-auto px-4 sm:px-[25px] pt-4 sm:pt-[30px] pb-12">
-              <div className="flex flex-col lg:flex-row gap-[25px] items-start">
+              <div className="flex flex-col min-[897px]:flex-row gap-[25px] items-start">
                 
-                {/* ORTA BÖLÜM: Ana İçerik Alanı (.blogB) */}
-                <main className="flex-1 min-w-0 w-full lg:w-[calc(100%-325px)]">
+                {/* ORTA BÖLÜM: Ana İçerik Alanı (.blogB - 897px+ Masaüstü / El Konsolunda calc(100%-325px)) */}
+                <main className="flex-1 min-w-0 w-full min-[897px]:w-[calc(100%-325px)]">
                 {activeView === 'dashboard' && (
                   <DashboardView
                     links={allLinks}
@@ -821,8 +821,8 @@ export const App: React.FC = () => {
 
               </main>
 
-              {/* SAĞ BAR: Popüler Post, Etiketler, Bize Ulaşın (.sideB) */}
-              <aside className="w-full lg:w-[300px] shrink-0">
+              {/* SAĞ BAR: Popüler Post, Etiketler, Bize Ulaşın (.sideB - 897px+ Masaüstü / El Konsolunda 300px Sabit) */}
+              <aside className="w-full min-[897px]:w-[300px] shrink-0">
                 <BloggerRightSidebar
                   pinnedLinks={allLinks.filter(l => l.isPinned && !l.isTrash && !l.isArchived)}
                   allLinks={allLinks}

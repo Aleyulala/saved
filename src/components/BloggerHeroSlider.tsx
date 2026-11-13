@@ -260,7 +260,7 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
   return (
     <div className="w-full relative select-none">
       <div 
-        className="relative w-full overflow-hidden rounded-[14px] bg-[#18181b] shadow-md group aspect-video cursor-pointer touch-pan-y"
+        className="relative w-full overflow-hidden rounded-[14px] bg-[#000000] shadow-lg group aspect-video cursor-pointer touch-pan-y"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => {
           setIsPaused(false);
@@ -306,7 +306,7 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
           );
         })}
 
-        {/* Top-Right: Fullscreen / Zoom Lightbox Action Button */}
+        {/* Top-Right: Fullscreen / Zoom Lightbox Action Button (.zmVideoBtn 1:1 Blogger) */}
         <div className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20">
           <button
             type="button"
@@ -314,15 +314,12 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
               e.stopPropagation();
               handleOpenViewer(currentIndex);
             }}
-            className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-black/60 hover:bg-black/90 backdrop-blur-md text-white/90 hover:text-white flex items-center justify-center transition-all duration-200 active:scale-95 shadow-lg border border-white/10 hover:border-white/25 cursor-pointer"
-            title="Görseli Yakınlaştır ve Tam Ekranda Görüntüle (Zoom)"
+            className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-[rgba(28,30,38,0.78)] hover:bg-[#333333] border border-white/10 text-white flex items-center justify-center transition-all duration-200 active:scale-95 shadow-md backdrop-blur-md cursor-pointer"
+            title="Tam Ekran Vitrini"
             aria-label="Tam Ekran Vitrini"
           >
-            <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="11" cy="11" r="8" />
-              <line x1="21" y1="21" x2="16.65" y2="16.65" />
-              <line x1="11" y1="8" x2="11" y2="14" />
-              <line x1="8" y1="11" x2="14" y2="11" />
+            <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
             </svg>
           </button>
         </div>
