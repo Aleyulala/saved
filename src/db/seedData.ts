@@ -14,7 +14,55 @@ export interface RawSeedLink {
 
 export const SEED_COLLECTIONS = [
   {
+    "name": "videolar",
+    "color": "#ec4899",
+    "icon": "tv",
+    "description": "Seçkin video kanalları, oynatma listeleri ve medya incelemeleri"
+  },
+  {
+    "name": "oyun",
+    "color": "#8b5cf6",
+    "icon": "gamepad-2",
+    "description": "Oyun platformları, donanım incelemeleri ve arşivler"
+  },
+  {
+    "name": "bilgisayar",
+    "color": "#10b981",
+    "icon": "wrench",
+    "description": "İşletim sistemleri, terminal becerileri ve sistem araçları"
+  },
+  {
+    "name": "öneri",
+    "color": "#f59e0b",
+    "icon": "star",
+    "description": "Öneri, analiz, eleştiri ve bağımsız içerik üreticileri"
+  },
+  {
+    "name": "teknoloji",
+    "color": "#a855f7",
+    "icon": "bot",
+    "description": "Teknoloji, insansız sistemler, bilim ve yenilikler"
+  },
+  {
+    "name": "televizyon",
+    "color": "#06b6d4",
+    "icon": "tv",
+    "description": "Dizi, film, sinematografi ve video sanatı"
+  },
+  {
+    "name": "programlama",
+    "color": "#3b82f6",
+    "icon": "code-2",
+    "description": "Yazılım geliştirme, API'ler, GitHub ve kodlama kaynakları"
+  },
+  {
     "name": "Konu Dışı",
+    "color": "#9aa0a6",
+    "icon": "messages-square",
+    "description": "Genel sohbet, serbest paylaşımlar ve konu dışı öneriler"
+  },
+  {
+    "name": "Rutin",
     "color": "#9aa0a6",
     "icon": "messages-square",
     "description": "Genel sohbet, serbest paylaşımlar ve konu dışı öneriler"
@@ -106,9 +154,16 @@ export const SEED_COLLECTIONS = [
 ];
 
 export const SEED_TAGS = [
-  {
-    "name": "rutin"
-  },
+  { "name": "videolar" },
+  { "name": "oyun" },
+  { "name": "bilgisayar" },
+  { "name": "öneri" },
+  { "name": "teknoloji" },
+  { "name": "televizyon" },
+  { "name": "programlama" },
+  { "name": "onarı" },
+  { "name": "telefon" },
+  { "name": "rutin" },
   {
     "name": "gunluk"
   },
@@ -187,6 +242,188 @@ export const SEED_TAGS = [
 ];
 
 export const SEED_LINKS: RawSeedLink[] = [
+  {
+    "title": "Fedora Kde Big Screen Ve Lenova Legion Go S Aldım İnceleme !",
+    "url": "https://negronshow.blogspot.com/2026/10/fedora-kde-big-screen-ve-lenova-legion.html",
+    "categoryName": "oyun",
+    "tags": ["oyun"],
+    "color": "#8b5cf6",
+    "isPinned": true,
+    "description": "Eklediğin el konsolu hayal kırıklığı, donanım performansı analizi, mobil işletim sistemlerinin (Android'in doygunluğu vs. Sailfish OS yükselişi) geleceği ve gerçekçi tüketici deneyimi.",
+    "thumbnail": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhfbIoIvor82Da_-sIFfaNlG-tIB878AhCKfIRj2bSTnb2VAOz6YPwBZG4IGd-iZYOzdn2v3IiFG-G58iyQptPZjZ-ZtFk3HU89igBpSVMnerPdhko6uWB3S8V3IQapkk366Iz0u7Sc60Y_YTeviDI9SUJUKip_8Hwew01W2UVuyZ1tp81qqx0gQO_CscI/s1600/lenovo-go-s-white.jpg",
+    "views": 19,
+    "commentsCount": 5,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "Notbook Lm Projelerim Hakkında",
+    "url": "https://negronshow.blogspot.com/2026/10/notbook-lm-projelerim.html",
+    "categoryName": "videolar",
+    "tags": ["videolar"],
+    "color": "#ec4899",
+    "isPinned": true,
+    "description": "Sistemin Çarkları Arasında Bir Sesli Günlük: Neden Buradayım ve Neden Üretiyorum? Burası sıradan bir oyun, eğlence ya da vakit geçirme kanalı değil. Bu platform; dijital dünyada kendi yolunu çizmek isteyenlere bir kılavuz.",
+    "thumbnail": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiJhv3IYtlwon8oo7nnuC9EM4IlJ51X4im6kgttJGrLqim12ty5I1Y6tzvfDBmbg6qQi_qxy09MCU8nzxIdc43r0TmL_1EyE_sCdhWAic2ImYAW6IT5A0Dm3MjBvzUgRcWpqNLPcdmq9E0h_9zycwiTK5Sz0E15FDZkXCHH_UzakSP3ln854_yxLhdS61ap/s1600/Gemini_Generated_Image_jpdg1njpdg1njpdg.jpg",
+    "views": 78,
+    "commentsCount": 2,
+    "authorName": "Ali"
+  },
+  {
+    "title": "Atom",
+    "url": "https://negronshow.blogspot.com/2026/10/atom.html",
+    "categoryName": "oyun",
+    "tags": ["oyun"],
+    "color": "#8b5cf6",
+    "isPinned": false,
+    "description": "Bağımsız Oyun Geliştirme ve Mizah: at0m (Ataberk Palaçı) YouTube Kanalı İncelemesi",
+    "thumbnail": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjrQnxbv_emUc_ELDnxXHtaqRNYchnXQPUpjxc0P6McKTdbZz35CNgAyw1C8LGzR0t6ksIhD88oPRnQee6kNmQKqUFTVVsCMonV1hB5ueZJKqxJXh6KAKqa1ghgtx235iSMeBjajX2fIHXg7_4sbrCnd-BW2YAzzH7_iuIJrM1hdNmKA5AFtq9Iee8R63A/s1600/krrAIoRVKSU-HD.jpg",
+    "views": 15,
+    "commentsCount": 0,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "Evrim Ağacı TeknoBilim",
+    "url": "https://negronshow.blogspot.com/2026/10/evrim-agac-teknobilim.html",
+    "categoryName": "bilgisayar",
+    "tags": ["bilgisayar"],
+    "color": "#10b981",
+    "isPinned": false,
+    "description": "Teknolojinin Bilimi ve İnovasyon: Evrim Ağacı - Teknobilim YouTube Kanalı İncelemesi",
+    "thumbnail": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgncJATQIpQFANZ5HZA2hROMrvf8qyiV6fQTb5i6x22YUrn_Ty2IZncWY5cK9NADHK7f6s9j8YQD5N4YTYhnncmDIHavGaZNxGECtI0XkVY2hmLraFe5nvZclq7bmvJ1zjdsFPqrN7p3a45ZzBGo5wcfRn59JPmaSghERAf_q3njAn_uqn7jjHgZuWqAVU/s1600/EvTnX95FMbk-HD.jpg",
+    "views": 15,
+    "commentsCount": 0,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "Hüseyin BABAL",
+    "url": "https://negronshow.blogspot.com/2026/10/huseyin-babal.html",
+    "categoryName": "bilgisayar",
+    "tags": ["bilgisayar"],
+    "color": "#10b981",
+    "isPinned": false,
+    "description": "Canlı Kodlama ve Bulut Teknolojileri: Hüseyin Babal YouTube Kanalı İncelemesi",
+    "thumbnail": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjL-1gyt5wACsHQGBU2YhfCtCzwc37mfddIT6qLBrq8l86oRwGyBJq8MC3U7_93I-_UGh-1GscUzOe1gJNUbXiFXgL-dYftoHl0k2znX-lqQMdsYt8RMfE1CeuCnZAmN0EJB8_TWSVJD0jzNfq6WBImhrQa2ZvdD-FB8GfJUdueA8RBdS6gPaE4dedoQvk/s1600/Bxdi6Z4Tqvo-HD.jpg",
+    "views": 15,
+    "commentsCount": 0,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "Politikeron",
+    "url": "https://negronshow.blogspot.com/2026/10/politikeron.html",
+    "categoryName": "öneri",
+    "tags": ["öneri"],
+    "color": "#f59e0b",
+    "isPinned": false,
+    "description": "Eleştirel Siyaset ve Mizahi Gözlem: Politikeron YouTube Kanalı İncelemesi",
+    "thumbnail": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjJPSxqH5-DAt99ZY_yalmiO-KUwS_seShVBv40aLi_6-IAMfFBcTA-1exMuwg8UHgCuPCUq7IDqXKTy7uVetSZXETUcTnoqiJ-NW1s1Dbm7ItZKUWVckPjW1Wa67Cu8z_LFuYpABCIh9ZDBjYT3f7mo4HLQG1hIH-rYodqtRZvJM5uthXhMm_F8cWHTZU/s1600/TDxDVnm8QEQ-HD.jpg",
+    "views": 15,
+    "commentsCount": 0,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "a'nın İHA Devrimi",
+    "url": "https://negronshow.blogspot.com/2026/10/ann-iha-devrimi.html",
+    "categoryName": "teknoloji",
+    "tags": ["teknoloji"],
+    "color": "#a855f7",
+    "isPinned": false,
+    "description": "İnsansız Hava Araçları Teknolojisi, Askeri İnovasyon ve Yeni Nesil Savunma Sanayi Çözümleri.",
+    "thumbnail": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjmT0D-6ooFeX-ZlDG-1qlecJ76MG3inPPw-SDbDJ7hdPiXlD5snW0uXmgrriW_qY-eOfYplCB5fzLiuyr5461wsN6XarBKwt2d48hq10KlgmWUfie0YmhOOFuIIv5A71xk-UHhfVsVhzfqo00vUNNHTI1KgUV60laxI95YoOVhk7fse9XaoJpIjqaRgrU/s1600/RfVtGkVY9TU-SD.jpg",
+    "views": 48,
+    "commentsCount": 0,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "Linux Üzerinde Adobe Uygulamalarını Çalıştırmak: Kolay Kurulum Rehberi",
+    "url": "https://negronshow.blogspot.com/2026/01/linux-uzerinde-adobe-uygulamalarn.html",
+    "categoryName": "bilgisayar",
+    "tags": ["bilgisayar"],
+    "color": "#10b981",
+    "isPinned": false,
+    "description": "Linux dağıtımlarında Photoshop, Illustrator ve Premiere Pro gibi Adobe Creative Cloud uygulamalarını Wine, Bottles ve özel scriptler ile sorunsuz çalıştırma rehberi.",
+    "thumbnail": "https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=800&q=80",
+    "views": 92,
+    "commentsCount": 4,
+    "authorName": "Ali"
+  },
+  {
+    "title": "Selahattin Ünlü ile açık kaynak github dedektifliği",
+    "url": "https://negronshow.blogspot.com/2026/10/selahattin-unlu-ile-ack-kaynak-github.html",
+    "categoryName": "bilgisayar",
+    "tags": ["bilgisayar"],
+    "color": "#10b981",
+    "isPinned": false,
+    "description": "Yazılım Geliştirme ve Kariyer Rehberliği: Selahattin Ünlü YouTube Kanalı İncelemesi",
+    "thumbnail": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjaR1GX1M6MU_DRnkfT6tmIQz4nCHqidOU_KWGbGgaalozXth7HwukQ_zlIZutNij7v2DrPg8L3PzVCNYpt5kr-pPK0DAyQAQUYKF6Bv5spT_pJbeujzps7CuSqNkMgzZZC30rWfqOH98RtwGVPG0NYWQ9SSIUFjiI6CxFh4gGPxC1_GJ0OIMgv-e0v2e8/s1600/PM_TSXlUGEk-HD.jpg",
+    "views": 15,
+    "commentsCount": 0,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "StoryBox",
+    "url": "https://negronshow.blogspot.com/2026/10/storybox.html",
+    "categoryName": "öneri",
+    "tags": ["öneri"],
+    "color": "#f59e0b",
+    "isPinned": false,
+    "description": "Türkiye’nin İnsan Hikâyeleri: StoryBox YouTube Kanalı İncelemesi",
+    "thumbnail": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhV2iqml0qW7qNERZvwbAUB2ok3byYf0F3pIkOqZf2yGK8OWUJNbVm50CcVR2EUyBRq9jPrOjfpJ4ZrEg-XpvSxncyTepKcxEtmi5Xg8rC2nB7TNDLGROaJeCRHpo7rNKOiu6Tn854ILbHXUcYesPhmxmQ7AH_XAq7-2KUVTpNkX4-AiU6JiowaAd2X8TM/s1600/qc-9K7B0vgQ-HD.jpg",
+    "views": 15,
+    "commentsCount": 0,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "Selman Bozkır Teknoloji",
+    "url": "https://negronshow.blogspot.com/2026/10/selman-bozkr-teknoloji.html",
+    "categoryName": "öneri",
+    "tags": ["öneri"],
+    "color": "#f59e0b",
+    "isPinned": false,
+    "description": "Teknoloji, Otomobil ve Kendin Yap Deneyimleri: Selman Bozkır YouTube Kanalı İncelemesi",
+    "thumbnail": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiFoW4BP_L1YgC7FT2pnDVi4VFW7aWc0mWoGnSitse-9FUmkIC22RHRaiEDVqhpVvf0BhPd3-iwsGKxPb9H8Gg_WIL4D4hAEfH_sWv-1Y8Qs8-5kqD-VcvydFHe1XcjTTm64p28y6sYKTIOHqNFO_468UisQY71rE-oUotrCW4rOuB6fAzCdUr674_B_ks/s1600/Nnq4HP8Lk9k-HD.jpg",
+    "views": 15,
+    "commentsCount": 0,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "Code Monkey",
+    "url": "https://negronshow.blogspot.com/2026/10/code-monkey.html",
+    "categoryName": "oyun",
+    "tags": ["oyun"],
+    "color": "#8b5cf6",
+    "isPinned": false,
+    "description": "Unity ve C# ile Oyun Geliştirme Rehberi: Code Monkey YouTube Kanalı İncelemesi",
+    "thumbnail": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQMuHZEecqQ7z1JQEBgEc3tC1QfrkNQI7G7M0_qo9S7zrnCZEfdcBzGzqy5x8ywByBKe9VdjNnnf_hcsaqB04G1QD6jNlAwEFP9M03y9I431WQrlzltkmwroZl4ULl3nbhPPhg8rsFXF9gh9ry-X4sWDoGK7LUverYbo2YKNvTx4NWl3QAWbQth2PplrE/s1600/26F9uHlPEO0-HD.jpg",
+    "views": 15,
+    "commentsCount": 0,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "Flimler Ve Flimler Eleştirel Parodi",
+    "url": "https://negronshow.blogspot.com/2026/10/flimler-ve-flimler-elestirel-parodi.html",
+    "categoryName": "televizyon",
+    "tags": ["televizyon"],
+    "color": "#06b6d4",
+    "isPinned": false,
+    "description": "Sinemanın Eğlenceli ve Eleştirel Yüzü: FilmlerveFilimler YouTube Kanalı İncelemesi",
+    "thumbnail": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgug0I_E-BobZPZNGNV9MhyT5hK4MZev99V9Nr1pUaemUQls7bdy3flp-O1uxlBFVwFADFTBMmwnvN1_uIoAP1ElS8nES89gnWV6QUKQtuZ7zMdhqYzISiNlwBygMQoMkl1ReKLzjpV-mwakDUh2nLGWwM-9Vqv64i5oQC9Gz17BZd7kfjfPfp2sb8tt6k/s1600/D9P5wt_IkR8-HD.jpg",
+    "views": 15,
+    "commentsCount": 0,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "Nejdat Delioğlu İle Teknoloji",
+    "url": "https://negronshow.blogspot.com/2026/10/nejdat-delioglu-ile-teknoloji.html",
+    "categoryName": "teknoloji",
+    "tags": ["teknoloji"],
+    "color": "#a855f7",
+    "isPinned": false,
+    "description": "Donanım, Tamir ve Pratik Teknoloji Çözümleri: Nejdat Teknoloji YouTube Kanalı İncelemesi",
+    "thumbnail": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjmT0D-6ooFeX-ZlDG-1qlecJ76MG3inPPw-SDbDJ7hdPiXlD5snW0uXmgrriW_qY-eOfYplCB5fzLiuyr5461wsN6XarBKwt2d48hq10KlgmWUfie0YmhOOFuIIv5A71xk-UHhfVsVhzfqo00vUNNHTI1KgUV60laxI95YoOVhk7fse9XaoJpIjqaRgrU/s1600/RfVtGkVY9TU-SD.jpg",
+    "views": 15,
+    "commentsCount": 0,
+    "authorName": "NEGRONN"
+  },
   {
     "title": "GitHub Discussions (Saved)",
     "url": "https://github.com/Aleyulala/saved/discussions",

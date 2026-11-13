@@ -374,11 +374,6 @@ export const App: React.FC = () => {
   const handleOpenPostPage = (link: LinkItem) => {
     setSelectedPost(link);
     setActiveView('post_detail');
-    if (window.innerWidth < 768) {
-      setIsDrawerOpen(true);
-    } else {
-      setIsSidebarOpen(true);
-    }
     document.getElementById('mainScrollContainer')?.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -492,6 +487,8 @@ export const App: React.FC = () => {
       
       {/* 1. ÜST BAR: Blogger Header (.mainH - Fixed at Top) */}
       <BloggerHeader
+        isPostDetail={activeView === 'post_detail'}
+        postTitle={selectedPost?.title}
         onToggleSidebar={() => {
           if (window.innerWidth < 768) {
             setIsDrawerOpen(prev => !prev);

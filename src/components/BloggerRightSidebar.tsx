@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import { 
   PulseIcon, 
@@ -156,10 +156,33 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
     setTimeout(checkTagScroll, 300);
   };
 
-  // Prepare popular posts (first 5 links)
-  const popularPosts = [...allLinks].filter(l => !l.isTrash && !l.isArchived).slice(0, 5);
+  // Prepare popular posts (Blogger Screenshot 2 1:1)
+  const popularPosts = useMemo(() => {
+    const list = [...allLinks].filter(l => !l.isTrash && !l.isArchived);
+    const p1 = list.find(l => l.title.includes('Fedora Kde Big Screen') || l.title.includes('Legion Go'));
+    const p2 = list.find(l => l.title.includes('Notbook Lm'));
+    const p3 = list.find(l => l.title.includes('Atom'));
+    const p4 = list.find(l => l.title.includes('Evrim Ağacı'));
+    const p5 = list.find(l => l.title.includes('Hüseyin BABAL'));
+
+    const ordered: LinkItem[] = [];
+    if (p1) ordered.push(p1);
+    if (p2) ordered.push(p2);
+    if (p3) ordered.push(p3);
+    if (p4) ordered.push(p4);
+    if (p5) ordered.push(p5);
+
+    for (const item of list) {
+      if (ordered.length >= 5) break;
+      if (!ordered.some(o => o.id === item.id)) {
+        ordered.push(item);
+      }
+    }
+    return ordered;
+  }, [allLinks]);
+
   const featuredFirst = popularPosts[0];
-  const listPosts = popularPosts.slice(1, 5);
+  const listPosts = popularPosts;
 
   const validateEmail = (val: string) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
@@ -643,9 +666,9 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
           </article>
         )}
 
-        {/* 2. Liste Formatındaki Popüler Gönderiler (.itm - Kutusuz, Çizgisiz, Doğrudan Sidebar'da) */}
+        {/* 2. Liste Formatındaki Popüler Gönderiler (.itm - Screenshot 2: #1'den #5'e kadar numaralı) */}
         <div className="space-y-4 pt-1">
-          {listPosts.map((post, idx) => {
+          {listPosts.map((post: LinkItem, idx: number) => {
             const category = post.tags[0] || 'genel';
             return (
               <article
@@ -658,12 +681,20 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
               >
                 <div className="flex items-center gap-2 text-xs">
                   <span className="text-[11px] text-[#71717a]">{formatDate(post.createdAt)}</span>
+                  <span className="text-[#52525b]">—</span>
                   <span className="text-[11px] text-[#60cdff] hover:underline lowercase">{category}</span>
                 </div>
 
                 <h4 className="font-bold text-xs sm:text-[13px] text-white/90 group-hover:text-[#60cdff] leading-snug transition-colors line-clamp-2">
+                  <span className="text-[#989b9f] font-mono mr-1.5 font-normal">#{idx + 1}</span>
                   {post.title}
                 </h4>
+
+                {idx === 0 && post.description && (
+                  <p className="text-[11px] text-[#989b9f] line-clamp-2 leading-relaxed pt-0.5">
+                    {post.description}
+                  </p>
+                )}
               </article>
             );
           })}

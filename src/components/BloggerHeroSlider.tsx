@@ -17,23 +17,23 @@ export interface BloggerSlide {
 export const BLOGGER_SLIDES: BloggerSlide[] = [
   {
     id: 'Image01',
-    title: 'ALİ & NSONE',
-    subtitle: 'Teknoloji, Kodlama, Dijital Yaşam & Kişisel Keşif Platformu',
-    note: '*Ali Yıldız & Nsone Resmi Bilgi ve Dijital Arşiv Merkezi',
-    category: 'ALİ & NSONE',
-    collectionName: 'Genel',
-    imageUrl: 'https://images.unsplash.com/photo-1508739773434-c26b3d09e071?auto=format&fit=crop&w=1920&q=85',
-    link: 'https://negronshow.blogspot.com/search/label/%C3%B6neri'
-  },
-  {
-    id: 'Image02',
     title: 'Videolar & Sinema',
     subtitle: 'Seçkin Belgeseller, Sinematografi, Prodüksiyon ve Video Sanatı',
     note: '*Seçkin video kanalları ve oynatma listeleri',
-    category: 'Videolar',
+    category: 'videolar',
     collectionName: 'Medya',
     imageUrl: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=1920&q=85',
     link: 'https://negronshow.blogspot.com/search/label/videolar'
+  },
+  {
+    id: 'Image02',
+    title: 'ALİ & NSONE',
+    subtitle: 'Teknoloji, Kodlama, Dijital Yaşam & Kişisel Keşif Platformu',
+    note: '*Ali Yıldız & Nsone Resmi Bilgi ve Dijital Arşiv Merkezi',
+    category: 'öneri',
+    collectionName: 'Genel',
+    imageUrl: 'https://images.unsplash.com/photo-1508739773434-c26b3d09e071?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/%C3%B6neri'
   },
   {
     id: 'Image03',
@@ -324,18 +324,16 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
           </button>
         </div>
 
-        {/* Bottom-Left: Blogger Category Badge (.sldT - e.g. "◎ Programlama") */}
-        <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 z-20">
-          <button
-            onClick={(e) => handleCategoryClick(e, activeSlide)}
-            className="group/badge inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/70 hover:bg-black/90 backdrop-blur-md text-white text-xs sm:text-sm font-medium transition-all duration-200 active:scale-95 shadow-lg cursor-pointer"
-            title={`${activeSlide.category} kategorisine git`}
-          >
-            <TagBloggerIcon className="w-3.5 h-3.5 text-[var(--linkC,#9aa0a6)]" />
-            <span className="tracking-wide">
-              {activeSlide.category}
-            </span>
-          </button>
+        {/* Bottom-Left: Blogger Slider Title & Subtitle (Screenshot 2 1:1) */}
+        <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-5 z-20 pointer-events-none text-left">
+          <h2 className="text-sm sm:text-base lg:text-lg font-bold text-white tracking-wide drop-shadow-md">
+            {activeSlide.title}
+          </h2>
+          {activeSlide.subtitle && (
+            <p className="text-[11px] sm:text-xs text-white/80 mt-0.5 max-w-md line-clamp-1 drop-shadow">
+              {activeSlide.subtitle}
+            </p>
+          )}
         </div>
 
         {/* Bottom-Center: Blogger Saved 2 Line Pills (.sld-car-nav) — aktif çizgi YÖNÜ gösterir (Blogger 1:1) */}

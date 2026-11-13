@@ -209,8 +209,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
     return list;
   }, [collections]);
 
-  // Featured Pinned Post (e.g. Notbook Lm Projelerim Hakkında)
-  const pinnedPost = activeLinks.find(l => l.isPinned && l.thumbnail) || activeLinks.find(l => l.isPinned) || activeLinks[0];
+  // Featured Pinned Post (Screenshot 2: Notbook Lm Projelerim Hakkında - Ali)
+  const pinnedPost = activeLinks.find(l => l.title.includes('Notbook Lm')) || activeLinks.find(l => l.isPinned && l.thumbnail) || activeLinks.find(l => l.isPinned) || activeLinks[0];
 
   // Group links by collection with Konu Dışı fallback guarantee
   const linksByCollection = useMemo(() => {

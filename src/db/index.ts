@@ -27,7 +27,7 @@ export class SavedDatabase extends Dexie {
 
 export const db = new SavedDatabase();
 
-const CURRENT_SEED_VERSION = 'saved-main-360-sites-v12-ai-tools';
+const CURRENT_SEED_VERSION = 'saved-blogger-nsone-v16-parity';
 
 export async function seedSavedMainData(force = false) {
   // Quick safety check: Rename any existing 'Routine' records to 'Rutin'
@@ -42,10 +42,9 @@ export async function seedSavedMainData(force = false) {
   const dummyCol = await db.collections.where('name').equals('Research and Studies').first();
   const seedSetting = await db.settings.get('seed_version');
 
-  // Full reseed only when the database is empty, dummy, forced, too small or has no seed version.
-  // A version bump alone must NOT wipe user data; it triggers an incremental sync instead.
-  const needsFullSeed = collectionsCount === 0 || !!dummyCol || force || collectionsCount < 15 || !seedSetting;
-  const needsIncrementalSync = !needsFullSeed && seedSetting!.value !== CURRENT_SEED_VERSION;
+  // Full reseed when empty, dummy, forced, or when seed_version is upgraded to ensure 1:1 parity with Blogger
+  const needsFullSeed = collectionsCount === 0 || !!dummyCol || force || collectionsCount < 8 || !seedSetting || seedSetting.value !== CURRENT_SEED_VERSION;
+  const needsIncrementalSync = false;
 
   if (needsFullSeed) {
     await db.transaction('rw', db.links, db.collections, db.tags, db.settings, async () => {
