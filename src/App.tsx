@@ -487,8 +487,6 @@ export const App: React.FC = () => {
       
       {/* 1. ÜST BAR: Blogger Header (.mainH - Fixed at Top) */}
       <BloggerHeader
-        isPostDetail={activeView === 'post_detail'}
-        postTitle={selectedPost?.title}
         onToggleSidebar={() => {
           if (window.innerWidth < 768) {
             setIsDrawerOpen(prev => !prev);

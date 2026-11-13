@@ -74,9 +74,7 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
   onOpenSettings,
   onGoHome,
   onOpenSearchModal,
-  onOpenPinned,
-  isPostDetail = false,
-  postTitle
+  onOpenPinned
 }) => {
   const [isTranslateOpen, setIsTranslateOpen] = useState(false);
   const [selectedLang, setSelectedLang] = useState<string>('tr');
@@ -283,31 +281,8 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
   return (
     <header className="sticky top-0 z-40 w-full h-[60px] bg-[#1e1e1e] border-b border-[#252526] px-3 sm:px-6 flex items-center justify-between select-none">
       
-      {isPostDetail ? (
-        /* Blogger Post Detay Modu Üst Barı (Screenshot 1 1:1) */
-        <div className="w-full flex items-center justify-between">
-          <button
-            onClick={onGoHome}
-            className="w-8 h-8 rounded-lg bg-[#282828] hover:bg-[#333333] border border-white/10 text-white flex items-center justify-center transition-all cursor-pointer active:scale-95"
-            title="Kapat / Ana Sayfaya Dön"
-            aria-label="Kapat"
-          >
-            <CloseIcon className="w-4 h-4" />
-          </button>
-
-          <div className="font-mono font-bold text-xs sm:text-sm tracking-[0.25em] text-white/90 uppercase text-center select-none">
-            N S O N E &nbsp;&nbsp;&amp;&nbsp;&nbsp; A L İ
-          </div>
-
-          <div className="flex items-center gap-1.5 opacity-60">
-            <span className="w-8 h-2 rounded-full bg-white/20" />
-            <span className="w-4 h-2 rounded-full bg-white/20" />
-          </div>
-        </div>
-      ) : (
-        <>
-          {/* Sol Bölüm: Hamburger Menü Butonu (.tIc XML 1:1) + >_ NSONE Logosu */}
-          <div className="flex items-center gap-2.5 shrink-0">
+      {/* Sol Bölüm: Hamburger Menü Butonu (.tIc XML 1:1) + NESCİONE Logosu */}
+      <div className="flex items-center gap-2.5 shrink-0">
             <button
               onClick={onToggleSidebar}
               className="w-8 h-8 rounded-full text-[#989b9f] hover:text-[#fffdfc] hover:bg-white/10 active:scale-95 transition-all duration-200 cursor-pointer flex items-center justify-center border-none outline-none"
@@ -591,9 +566,6 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
             </button>
 
           </div>
-        </>
-      )}
-
     </header>
   );
 };
