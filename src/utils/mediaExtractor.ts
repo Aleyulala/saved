@@ -101,11 +101,13 @@ export function extractPostMedia(link: LinkItem): PostMedia {
 
   // 1. YouTube Video ID Bulma
   let youtubeId: string | null = null;
+  let hasExplicitVideo = false;
 
   // 1.1 /youtube [id] kısa kodu
   const ytShortcode = text.match(/\/youtube\s+([a-zA-Z0-9_-]{11})/i);
   if (ytShortcode) {
     youtubeId = ytShortcode[1];
+    hasExplicitVideo = true;
   }
 
   // 1.2 YouTube URL'leri (youtube.com/watch?v=, youtu.be/, shorts)
@@ -113,6 +115,7 @@ export function extractPostMedia(link: LinkItem): PostMedia {
     const ytUrlMatch = text.match(/(?:youtube\.com\/(?:watch\?v=|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/i);
     if (ytUrlMatch) {
       youtubeId = ytUrlMatch[1];
+      hasExplicitVideo = true;
     }
   }
 
@@ -129,10 +132,13 @@ export function extractPostMedia(link: LinkItem): PostMedia {
     const lowTitle = (link.title || '').toLowerCase();
     if (lowTitle.includes('notbook lm') || lowTitle.includes('notebook lm')) {
       youtubeId = 'Gbk_p_tPjfg'; // NotebookLM Tanıtım ve Audio Overview videosu
+      hasExplicitVideo = true;
     } else if (lowTitle.includes('fedora') || lowTitle.includes('legion go')) {
       youtubeId = '0kG7-7a5-Qc'; // Lenovo Legion Go S / Handheld inceleme videosu
+      hasExplicitVideo = true;
     } else if (lowTitle.includes('adobe')) {
       youtubeId = 'yCvdQ9zD-14'; // Linux Adobe kurulum videosu
+      hasExplicitVideo = true;
     }
   }
 
@@ -165,8 +171,8 @@ export function extractPostMedia(link: LinkItem): PostMedia {
     }
   }
 
-  // 2.3 YouTube ID varsa YouTube videosunu ve HD kapağını ekle
-  if (youtubeId) {
+  // 2.3 YouTube ID varsa: Açıkça video içeriği olan yazılarda video ekle, sadece görsel içeren yazılarda (örn: Atom) çift medya üretme
+  if (youtubeId && (hasExplicitVideo || items.length === 0)) {
     const ytEmbedUrl = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0`;
     const ytThumb = `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`;
 

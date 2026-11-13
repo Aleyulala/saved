@@ -227,30 +227,32 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
       {/* 6. Medya Sekmesi İçeriği (Screenshot 4: Thumbnail Seçici + Büyük Görsel + Tam Ekran Butonu) */}
       {activeTab === 'medya' && (
         <div className="space-y-4 pt-1">
-          {/* Üst Küçük Önizleme Kutucukları (Fotoğraf / Video Seçici) */}
-          <div className="flex items-center gap-3">
-            {mediaItems.map((item, idx) => (
-              <button
-                key={idx}
-                type="button"
-                onClick={() => setSelectedMediaIndex(idx)}
-                className={`w-16 h-11 rounded-lg overflow-hidden border-2 transition-all cursor-pointer relative ${
-                  selectedMediaIndex === idx ? 'border-[var(--linkC,#9aa0a6)] scale-105 shadow-md' : 'border-white/10 opacity-70 hover:opacity-100'
-                }`}
-                title={item.type === 'image' ? 'Görseli Göster' : 'Videoyu Oynat'}
-              >
-                {item.type === 'image' ? (
-                  <img src={item.url} alt={item.title || `Görsel ${idx + 1}`} className="w-full h-full object-cover" />
-                ) : (
-                  <div className="w-full h-full bg-[#252526] flex items-center justify-center relative">
-                    <svg viewBox="0 0 24 24" className="w-5 h-5 text-white/90 fill-white/80">
-                      <polygon points="5 3 19 12 5 21 5 3" />
-                    </svg>
-                  </div>
-                )}
-              </button>
-            ))}
-          </div>
+          {/* Üst Küçük Önizleme Kutucukları (Fotoğraf / Video Seçici) - Blogger Plu$ UI: Yalnızca 2 veya daha fazla farklı medya varsa gösterilir */}
+          {mediaItems.length >= 2 && (
+            <div className="flex items-center gap-3">
+              {mediaItems.map((item, idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => setSelectedMediaIndex(idx)}
+                  className={`w-16 h-11 rounded-lg overflow-hidden border-2 transition-all cursor-pointer relative ${
+                    selectedMediaIndex === idx ? 'border-[var(--linkC,#9aa0a6)] scale-105 shadow-md' : 'border-white/10 opacity-70 hover:opacity-100'
+                  }`}
+                  title={item.type === 'image' ? 'Görseli Göster' : 'Videoyu Oynat'}
+                >
+                  {item.type === 'image' ? (
+                    <img src={item.url} alt={item.title || `Görsel ${idx + 1}`} className="w-full h-full object-cover" />
+                  ) : (
+                    <div className="w-full h-full bg-[#252526] flex items-center justify-center relative">
+                      <svg viewBox="0 0 24 24" className="w-5 h-5 text-white/90 fill-white/80">
+                        <polygon points="5 3 19 12 5 21 5 3" />
+                      </svg>
+                    </div>
+                  )}
+                </button>
+              ))}
+            </div>
+          )}
 
           {/* Büyük Görsel / Medya Alanı */}
           <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] rounded-[16px] overflow-hidden bg-[#18181b] border border-white/5 shadow-2xl group">
@@ -300,7 +302,7 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
             </div>
 
             {/* Alt Çizgi / Slayt Noktaları */}
-            {mediaItems.length > 1 && (
+            {mediaItems.length >= 2 && (
               <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5 pointer-events-none">
                 {mediaItems.map((_, dotIdx) => (
                   <span

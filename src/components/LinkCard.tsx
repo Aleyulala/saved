@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { CollectionItem, LinkItem } from '../types';
 import { formatDate, getDomain, getFaviconUrl } from '../utils/favicon';
 import { getAuthorData } from '../utils/bloggerAuthors';
+import { extractPostMedia, cleanMediaUrl } from '../utils/mediaExtractor';
 import { 
   Verify1Icon, 
   EyeIcon, 
@@ -54,8 +55,15 @@ export const LinkCard: React.FC<LinkCardProps> = ({
   const author = link.authorName || 'NEGRONN';
   const authorData = getAuthorData(author);
 
-  // Thumbnail fallback: use link.thumbnail if available, else curated aesthetic background
-  const hasThumbnail = Boolean(link.thumbnail && !imgError);
+  // Automatic Cover Photo resolution: link.thumbnail OR extracted from /resim or /youtube in content
+  const displayThumb = useMemo(() => {
+    if (link.thumbnail) return cleanMediaUrl(link.thumbnail);
+    const media = extractPostMedia(link);
+    return media.primaryImage ? cleanMediaUrl(media.primaryImage) : '';
+  }, [link]);
+
+  // Thumbnail fallback: use displayThumb if available, else curated aesthetic background
+  const hasThumbnail = Boolean(displayThumb && !imgError);
 
   return (
     <article 
@@ -67,8 +75,9 @@ export const LinkCard: React.FC<LinkCardProps> = ({
       <div className="relative w-full aspect-[16/9] bg-[#1e1e1e] overflow-hidden">
         {hasThumbnail ? (
           <img
-            src={link.thumbnail}
+            src={displayThumb}
             alt={link.title}
+            referrerPolicy="no-referrer"
             onError={() => setImgError(true)}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
             loading="lazy"
