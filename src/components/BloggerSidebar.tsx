@@ -14,7 +14,6 @@ import {
   SearchNormalIcon,
   SpeedometerIcon,
   ChevronDownIcon,
-  CloseIcon,
   PlusNavIcon,
   InstagramIcon, 
   TelegramIcon, 
@@ -298,23 +297,9 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
     );
   }
 
-  // 2. ÇEKMECE AÇIKKEN: Genişletilmiş 230px Tam Menü (negronn.xml 1:1 - Kapat butonu eklendi)
+  // 2. ÇEKMECE AÇIKKEN: Genişletilmiş 230px Tam Menü (negronn.xml 1:1)
   return (
     <aside className="w-[230px] bg-[#1e1e1e] border-r border-[#252526] flex flex-col justify-between h-[calc(100vh-60px)] shrink-0 text-xs select-none shadow-xs transition-all duration-300 ease-in-out">
-      
-      {/* Çekmece Üst Başlık & Kapat Butonu (.mnH - negron.xml 1:1) */}
-      <div className="h-10 px-3 border-b border-[#252526] flex items-center justify-between bg-[#1e1e1e] shrink-0">
-        <span className="text-[11px] font-bold text-[#989b9f] uppercase tracking-wider">Menü</span>
-        <button
-          type="button"
-          onClick={onToggleSidebar}
-          className="w-7 h-7 rounded-lg bg-[#252526] hover:bg-[#333333] text-[#989b9f] hover:text-white flex items-center justify-center transition-all cursor-pointer"
-          title="Menüyü Kapat"
-          aria-label="Menüyü Kapat"
-        >
-          <CloseIcon className="w-3.5 h-3.5" />
-        </button>
-      </div>
       
       {/* Menü Öğeleri (.mnMen) */}
       <div className="p-3 space-y-4 overflow-y-auto flex-1">

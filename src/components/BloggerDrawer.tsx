@@ -13,7 +13,6 @@ import {
   ArrowSwapHorizontalIcon,
   SearchNormalIcon,
   SpeedometerIcon,
-  CloseIcon,
   ChevronDownIcon,
   InstagramIcon, 
   TelegramIcon, 
@@ -78,18 +77,9 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
       <aside 
         className="blogger-drawer relative w-[85vw] max-w-[360px] bg-[#1e1e1e] border-r border-[#252526] h-full flex flex-col justify-between shadow-2xl z-10 overflow-hidden transform transition-transform duration-300 ease-out"
       >
-        {/* Drawer Header (.mnH - XML 1:1) */}
-        <div className="h-[60px] px-4 border-b border-[#252526] flex items-center justify-between bg-[#1e1e1e]">
-          <span className="text-sm font-medium text-[#989b9f]">Gezinme Menüsü</span>
-
-          <button
-            onClick={onClose}
-            className="w-8 h-8 aspect-square rounded-[10px] bg-[#282828] border border-white/[0.08] text-white hover:bg-[#333333] hover:border-[var(--linkC,#9aa0a6)] hover:text-[var(--linkC,#9aa0a6)] flex items-center justify-center shadow-[0_2px_6px_rgba(0,0,0,0.2)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] outline-none cursor-pointer"
-            title="Kapat"
-            aria-label="Kapat"
-          >
-            <CloseIcon className="w-4 h-4 close-icon" />
-          </button>
+        {/* Drawer Header (.mnH - XML 1:1: Çarpı kaldırıldı) */}
+        <div className="h-[52px] px-4 border-b border-[#252526] flex items-center bg-[#1e1e1e]">
+          <span className="text-sm font-extrabold text-white font-mono tracking-wider">NESCİONE</span>
         </div>
 
         {/* Drawer Scrollable Content (.mnMen) */}
