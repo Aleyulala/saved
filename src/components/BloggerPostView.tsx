@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { 
   Check, 
   Copy, 
@@ -25,6 +25,7 @@ import {
 } from './BloggerIcons';
 import { MediaItem } from './UniversalMediaModal';
 import { getAuthorData } from '../utils/bloggerAuthors';
+import { extractPostMedia } from '../utils/mediaExtractor';
 
 interface BloggerPostViewProps {
   link: LinkItem;
@@ -97,12 +98,20 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
   const shareUrl = encodeURIComponent(link.url);
   const shareTitle = encodeURIComponent(link.title);
 
+  // Otomatik Medya ve Video Çıkarıcı (Extractor: Asla Central Cinema fallback kullanmaz)
+  const postMedia = useMemo(() => extractPostMedia(link), [link]);
+  const primaryImage = postMedia.primaryImage;
+  const mediaItems = postMedia.items;
+  const currentMedia = mediaItems[selectedMediaIndex] || mediaItems[0] || { type: 'image', url: primaryImage, title: link.title };
+
+  useEffect(() => {
+    setSelectedMediaIndex(0);
+  }, [link.id]);
+
   // Benzer Yazılar (Related Posts: from same category or next active posts)
   const relatedPosts = activeLinks
     .filter(l => l.id !== link.id)
     .slice(0, 3);
-
-  const primaryImage = link.thumbnail || 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=1920&q=85';
 
   return (
     <article className="space-y-5 max-w-[840px] mx-auto animate-in fade-in duration-200 select-none pb-12">
@@ -218,45 +227,53 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
         <div className="space-y-4 pt-1">
           {/* Üst Küçük Önizleme Kutucukları (Fotoğraf / Video Seçici) */}
           <div className="flex items-center gap-3">
-            <button
-              onClick={() => setSelectedMediaIndex(0)}
-              className={`w-16 h-11 rounded-lg overflow-hidden border-2 transition-all cursor-pointer ${
-                selectedMediaIndex === 0 ? 'border-[var(--linkC,#9aa0a6)] scale-105' : 'border-white/10 opacity-70 hover:opacity-100'
-              }`}
-            >
-              <img src={primaryImage} alt="Görsel" className="w-full h-full object-cover" />
-            </button>
-
-            <button
-              onClick={() => setSelectedMediaIndex(1)}
-              className={`w-16 h-11 rounded-lg overflow-hidden bg-[#252526] border-2 flex items-center justify-center transition-all cursor-pointer ${
-                selectedMediaIndex === 1 ? 'border-[var(--linkC,#9aa0a6)] scale-105' : 'border-white/10 opacity-70 hover:opacity-100'
-              }`}
-            >
-              <svg viewBox="0 0 24 24" className="w-5 h-5 text-white/90 fill-white/80">
-                <polygon points="5 3 19 12 5 21 5 3" />
-              </svg>
-            </button>
+            {mediaItems.map((item, idx) => (
+              <button
+                key={idx}
+                type="button"
+                onClick={() => setSelectedMediaIndex(idx)}
+                className={`w-16 h-11 rounded-lg overflow-hidden border-2 transition-all cursor-pointer relative ${
+                  selectedMediaIndex === idx ? 'border-[var(--linkC,#9aa0a6)] scale-105 shadow-md' : 'border-white/10 opacity-70 hover:opacity-100'
+                }`}
+                title={item.type === 'image' ? 'Görseli Göster' : 'Videoyu Oynat'}
+              >
+                {item.type === 'image' ? (
+                  <img src={item.url} alt={item.title || `Görsel ${idx + 1}`} className="w-full h-full object-cover" />
+                ) : (
+                  <div className="w-full h-full bg-[#252526] flex items-center justify-center relative">
+                    <svg viewBox="0 0 24 24" className="w-5 h-5 text-white/90 fill-white/80">
+                      <polygon points="5 3 19 12 5 21 5 3" />
+                    </svg>
+                  </div>
+                )}
+              </button>
+            ))}
           </div>
 
           {/* Büyük Görsel / Medya Alanı */}
           <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] rounded-[16px] overflow-hidden bg-[#18181b] border border-white/5 shadow-2xl group">
-            {selectedMediaIndex === 0 ? (
+            {currentMedia.type === 'image' ? (
               <img
-                src={primaryImage}
-                alt={link.title}
+                src={currentMedia.url}
+                alt={currentMedia.title || link.title}
                 className="w-full h-full object-cover object-center cursor-pointer"
-                onClick={() => onOpenMedia && onOpenMedia([{ type: 'image', url: primaryImage, title: link.title }])}
+                onClick={() => onOpenMedia && onOpenMedia(mediaItems, selectedMediaIndex)}
+              />
+            ) : (currentMedia.type === 'youtube' || currentMedia.type === 'shorts') ? (
+              <iframe
+                src={currentMedia.url}
+                title={currentMedia.title || link.title}
+                className="w-full h-full border-0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
               />
             ) : (
-              <div className="w-full h-full flex flex-col items-center justify-center bg-black/90 p-6 text-center space-y-3">
-                <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center text-white">
-                  <svg viewBox="0 0 24 24" className="w-8 h-8 fill-white">
-                    <polygon points="5 3 19 12 5 21 5 3" />
-                  </svg>
-                </div>
-                <span className="text-xs text-[#989b9f]">Video Oynatıcı</span>
-              </div>
+              <video
+                src={currentMedia.url}
+                controls
+                autoPlay
+                className="w-full h-full object-contain bg-black"
+              />
             )}
 
             {/* Sağ Üst Köşe: Tam Ekran Genişlet Butonu (Screenshot 4 & 5 1:1) */}
@@ -266,7 +283,7 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
                 onClick={(e) => {
                   e.stopPropagation();
                   if (onOpenMedia) {
-                    onOpenMedia([{ type: 'image', url: primaryImage, title: link.title }]);
+                    onOpenMedia(mediaItems, selectedMediaIndex);
                   }
                 }}
                 className="w-8 h-8 rounded-lg bg-[rgba(28,30,38,0.85)] hover:bg-[#333333] border border-white/15 text-white flex items-center justify-center transition-all cursor-pointer shadow-md backdrop-blur-md active:scale-95"
@@ -280,11 +297,18 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
             </div>
 
             {/* Alt Çizgi / Slayt Noktaları */}
-            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5 pointer-events-none">
-              <span className="w-5 h-1.5 rounded-full bg-white/70" />
-              <span className="w-1.5 h-1.5 rounded-full bg-white/30" />
-              <span className="w-1.5 h-1.5 rounded-full bg-white/30" />
-            </div>
+            {mediaItems.length > 1 && (
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5 pointer-events-none">
+                {mediaItems.map((_, dotIdx) => (
+                  <span
+                    key={dotIdx}
+                    className={`transition-all rounded-full ${
+                      dotIdx === selectedMediaIndex ? 'w-5 h-1.5 bg-white/90' : 'w-1.5 h-1.5 bg-white/40'
+                    }`}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         </div>
       )}
@@ -447,7 +471,7 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
             >
               <div className="aspect-video w-full bg-[#18181b] overflow-hidden">
                 <img
-                  src={post.thumbnail || primaryImage}
+                  src={post.thumbnail || extractPostMedia(post).primaryImage}
                   alt={post.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
