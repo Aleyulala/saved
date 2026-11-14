@@ -243,6 +243,19 @@ export const SEED_TAGS = [
 
 export const SEED_LINKS: RawSeedLink[] = [
   {
+    "title": "Shadowban Nedir? Sosyal Medya Hesaplarında Gölge Engel Nasıl Anlaşılır ve Kaldırılır?",
+    "url": "https://negronshow.blogspot.com/2026/11/shadowban-nedir-sosyal-medya.html",
+    "categoryName": "öneri",
+    "tags": ["öneri", "sosyal medya"],
+    "color": "#f59e0b",
+    "isPinned": true,
+    "description": "Dijital içerik üreticilerinin ve sosyal medya kullanıcılarının en çok karşılaştığı gizemli kavramlardan biri olan shadowban (gölge engelleme), hesapların erişimini aniden düşüren sessiz bir kısıtlama olarak bilinir. Peki sosyal medya platformları gerçekten kullanıcıları gizlice engelliyor mu, yoksa görünürlük kaybının arkasında algoritmik filtreler mi yatıyor?",
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Cat03.jpg",
+    "views": 52,
+    "commentsCount": 0,
+    "authorName": "NEGRONN"
+  },
+  {
     "title": "Fedora Kde Big Screen Ve Lenova Legion Go S Aldım İnceleme !",
     "url": "https://negronshow.blogspot.com/2026/10/fedora-kde-big-screen-ve-lenova-legion.html",
     "categoryName": "oyun",
