@@ -37,6 +37,7 @@ export const LinkCard: React.FC<LinkCardProps> = ({
 }) => {
   const [imgError, setImgError] = useState(false);
   const [avatarError, setAvatarError] = useState(false);
+  const [faviconError, setFaviconError] = useState(false);
   const initial = (link.authorName || 'A').charAt(0).toUpperCase();
   const domain = getDomain(link.url);
   const faviconUrl = getFaviconUrl(link.url);
@@ -83,17 +84,27 @@ export const LinkCard: React.FC<LinkCardProps> = ({
             loading="lazy"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gradient-to-tr from-sky-950 via-[#1c2430] to-[#252526] relative">
-            <div className="absolute inset-0 bg-[radial-gradient(#ffffff0a_1px,transparent_1px)] [background-size:12px_12px]" />
-            {/* Blogger XML 1:1 görsel yok ikonu (.pThmb .imgThm::before) — nsone.xml: 28px */}
-            <img
-              src={faviconUrl}
-              alt={domain}
-              className="w-7 h-7 object-contain opacity-90 group-hover:scale-110 transition-transform"
-              onError={(e) => {
-                (e.target as HTMLElement).style.display = 'none';
-              }}
-            />
+          <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-tr from-sky-950/40 via-[#1c2430]/60 to-[#252526] relative p-4 group">
+            <div className="absolute inset-0 bg-[radial-gradient(#ffffff0c_1px,transparent_1px)] [background-size:12px_12px]" />
+            {/* Website Logo Container (.thmb-logo-box) — GitHub Pages 1:1 */}
+            <div className="relative z-10 w-16 h-16 rounded-2xl bg-[#1e1e1e]/90 hover:bg-[#252526] border border-white/10 shadow-xl flex items-center justify-center p-3 group-hover:scale-110 transition-all duration-300">
+              {!faviconError ? (
+                <img
+                  src={faviconUrl}
+                  alt={domain}
+                  onError={() => setFaviconError(true)}
+                  className="w-9 h-9 object-contain drop-shadow"
+                  loading="lazy"
+                />
+              ) : (
+                <span className="text-xl font-bold text-[#60cdff]">
+                  {domain.charAt(0).toUpperCase()}
+                </span>
+              )}
+            </div>
+            <span className="relative z-10 mt-2.5 text-xs font-semibold text-slate-300 tracking-wide group-hover:text-[#60cdff] transition-colors max-w-[180px] truncate">
+              {domain}
+            </span>
           </div>
         )}
 
@@ -163,15 +174,45 @@ export const LinkCard: React.FC<LinkCardProps> = ({
           </div>
         </div>
 
+        {/* Sağ Alt: Web Sitesi Logosu & Alan Adı Rozeti (Kapaklı Gönderilerde) */}
+        {hasThumbnail && (
+          <div className="absolute bottom-2 right-2 z-10">
+            <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-lg bg-black/75 backdrop-blur-md text-white text-[10px] font-medium shadow-sm border border-white/10">
+              {!faviconError ? (
+                <img
+                  src={faviconUrl}
+                  alt={domain}
+                  onError={() => setFaviconError(true)}
+                  className="w-3.5 h-3.5 object-contain shrink-0"
+                />
+              ) : null}
+              <span className="max-w-[100px] truncate text-slate-200">{domain}</span>
+            </div>
+          </div>
+        )}
+
       </div>
 
       {/* 2. Blogger Post Content (.pCntn) */}
       <div className="p-3.5 flex flex-col justify-between flex-1 gap-2.5">
         
         <div className="space-y-1">
-          {/* Kategori Adı (Örn: videolar, oyun, bilgisayar) */}
-          <div className="flex items-center gap-1.5 text-[11px] text-[#60cdff] hover:underline lowercase tracking-wide font-medium">
-            <span>{collection?.name.toLowerCase() || (link.tags[0] || 'genel')}</span>
+          {/* Web Sitesi Logosu & Kategori Adı (.pLbls / Domain Pill) */}
+          <div className="flex items-center gap-2 text-[11px]">
+            <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-slate-300">
+              <img
+                src={faviconUrl}
+                alt={domain}
+                className="w-3.5 h-3.5 object-contain shrink-0"
+                onError={(e) => {
+                  (e.target as HTMLElement).style.display = 'none';
+                }}
+              />
+              <span className="truncate max-w-[120px] font-medium text-white/90">{domain}</span>
+            </div>
+            <span className="text-[#60cdff] lowercase font-medium">
+              {collection?.name.toLowerCase() || (link.tags[0] || 'genel')}
+            </span>
           </div>
 
           {/* Başlık (.pTtl) */}

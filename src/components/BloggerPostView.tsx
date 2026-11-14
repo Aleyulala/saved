@@ -8,7 +8,7 @@ import {
   FileText
 } from 'lucide-react';
 import { CollectionItem, LinkItem } from '../types';
-import { formatDate } from '../utils/favicon';
+import { formatDate, getDomain, getFaviconUrl } from '../utils/favicon';
 import { 
   Verify1Icon, 
   ArchiveAddIcon, 
@@ -178,7 +178,7 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
       </div>
 
       {/* 3. Blogger XML 1:1 Breadcrumbs (.brdCmb) */}
-      <div className="brdCmb flex items-center gap-2 text-xs text-[#a1a1aa] pt-0.5">
+      <div className="brdCmb flex items-center gap-2 text-xs text-[#a1a1aa] pt-0.5 flex-wrap">
         <button 
           onClick={onBack} 
           className="hover:text-white transition-colors cursor-pointer font-medium"
@@ -193,6 +193,24 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
         >
           {link.tags[0] || collection?.name || 'videolar'}
         </span>
+
+        {/* Website Logo & Domain pill */}
+        <span className="text-[#52525b]">/</span>
+        <a
+          href={link.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-white/5 hover:bg-white/10 text-slate-300 text-[11px] transition-colors border border-white/10 cursor-pointer"
+          title={`Adrese Git: ${link.url}`}
+        >
+          <img
+            src={getFaviconUrl(link.url)}
+            alt={getDomain(link.url)}
+            className="w-3.5 h-3.5 object-contain"
+            onError={(e) => { (e.target as HTMLElement).style.display = 'none'; }}
+          />
+          <span className="font-medium text-white/90">{getDomain(link.url)}</span>
+        </a>
       </div>
 
       {/* 4. Gönderi Ana Başlığı (.pTtl - Screenshot 1 & 4 1:1) */}

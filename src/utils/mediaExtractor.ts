@@ -265,18 +265,7 @@ export function extractPostMedia(link: LinkItem): PostMedia {
     });
   }
 
-  // 2.4 Eğer hiç görsel bulunamadıysa kategoriye ve başlığa özel benzersiz görsel ata (ASLA tekrarlamaz)
-  const categoryHint = link.tags?.[0] || (link as any).categoryName || 'genel';
-  if (items.length === 0) {
-    const fallback = getCategoryFallbackImage(categoryHint, link.title, link.id, link.url);
-    items.push({
-      type: 'image',
-      url: fallback,
-      title: link.title
-    });
-  }
-
-  const primaryImage = items.find(it => it.type === 'image')?.url || link.thumbnail || getCategoryFallbackImage(categoryHint, link.title, link.id, link.url);
+  const primaryImage = items.find(it => it.type === 'image')?.url || (link.thumbnail ? cleanMediaUrl(link.thumbnail) : '');
   const videoItem = items.find(it => it.type === 'youtube' || it.type === 'shorts' || it.type === 'video');
 
   return {

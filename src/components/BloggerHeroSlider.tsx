@@ -82,7 +82,7 @@ export const BLOGGER_SLIDES: BloggerSlide[] = [
     note: '*Küratörlü kod ve programlama kaynakları',
     category: 'Programlama',
     collectionName: 'Programlama',
-    imageUrl: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1920&q=85',
+    imageUrl: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1920&q=85',
     link: 'https://negronshow.blogspot.com/search/label/programlama'
   },
   {
@@ -114,6 +114,156 @@ export const BLOGGER_SLIDES: BloggerSlide[] = [
     collectionName: 'Alışveriş',
     imageUrl: 'https://images.unsplash.com/photo-1642543492481-44e81e3914a7?auto=format&fit=crop&w=1920&q=85',
     link: 'https://negronshow.blogspot.com/search/label/ticaret'
+  },
+  {
+    id: 'Image11',
+    title: 'Siber Güvenlik & Terminal',
+    subtitle: 'Ağ Analizi, Kriptografi, Etik Hackleme ve Veri Gizliliği',
+    note: '*Güvenlik ve gizlilik rehberleri',
+    category: 'Güvenlik',
+    collectionName: 'Araçlar',
+    imageUrl: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/bilgisayar'
+  },
+  {
+    id: 'Image12',
+    title: 'Linux & Açık Kaynak',
+    subtitle: 'Özgür Yazılım, Dağıtımlar, Bash Scripting ve Masaüstü Kişiselleştirme',
+    note: '*Açık kaynak yazılım deposu',
+    category: 'Linux',
+    collectionName: 'Programlama',
+    imageUrl: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/bilgisayar'
+  },
+  {
+    id: 'Image13',
+    title: 'Bilim & Uzay Keşfi',
+    subtitle: 'Astronomi, Derin Uzay Gözlemleri, Gezegenler ve Astrofizik',
+    note: '*Bilim ve evren kütüphanesi',
+    category: 'Bilim',
+    collectionName: 'Genel',
+    imageUrl: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/teknoloji'
+  },
+  {
+    id: 'Image14',
+    title: 'Müzik & Ses Prodüksiyonu',
+    subtitle: 'Stüdyo Kayıtları, Akustik, Synthesizer ve Dijital Ses İşleme',
+    note: '*Müzik ve ses prodüksiyon araçları',
+    category: 'Müzik',
+    collectionName: 'Medya',
+    imageUrl: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/videolar'
+  },
+  {
+    id: 'Image15',
+    title: 'Sinematografi & Lensler',
+    subtitle: 'Işıklandırma Sanatı, Kompozisyon, 4K HDR ve Görsel Yönetmenlik',
+    note: '*Sinema ve kamera rehberleri',
+    category: 'Sinema',
+    collectionName: 'Medya',
+    imageUrl: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/videolar'
+  },
+  {
+    id: 'Image16',
+    title: 'Donanım & Çip Mimarisi',
+    subtitle: 'Yarı İletkenler, Mikroişlemciler, GPU Gücü ve Nanoteknoloji',
+    note: '*Donanım mimarisi ve işlemciler',
+    category: 'Donanım',
+    collectionName: 'Araçlar',
+    imageUrl: 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/bilgisayar'
+  },
+  {
+    id: 'Image17',
+    title: 'Sanal Gerçeklik & VR',
+    subtitle: 'Metaverse Deneyimleri, Mekansal Bilişim ve İmmersif Simülasyonlar',
+    note: '*Sanal gerçeklik ve 3D teknolojileri',
+    category: 'VR',
+    collectionName: 'AI',
+    imageUrl: 'https://images.unsplash.com/photo-1593508512255-86ab42a8e620?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/teknoloji'
+  },
+  {
+    id: 'Image18',
+    title: 'E-Spor & Turnuvalar',
+    subtitle: 'Profesyonel Oyun Dünyası, Taktik Analizler ve Canlı Turnuvalar',
+    note: '*E-spor ve rekabetçi oyun kaynakları',
+    category: 'Espor',
+    collectionName: 'Oyun',
+    imageUrl: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/oyun'
+  },
+  {
+    id: 'Image19',
+    title: 'Robotik & İleri Otomasyon',
+    subtitle: 'Akıllı Makineler, Sensör Sistemleri ve Geleceğin Fabrikaları',
+    note: '*Robotik ve otonom sistemler',
+    category: 'Robotik',
+    collectionName: 'Teknoloji',
+    imageUrl: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/teknoloji'
+  },
+  {
+    id: 'Image20',
+    title: 'Doğa & Vahşi Yaşam',
+    subtitle: 'Görkemli Manzaralar, Dağ Zirveleri ve Ekolojik Keşifler',
+    note: '*Doğa ve çevre belgeselleri',
+    category: 'Doğa',
+    collectionName: 'Genel',
+    imageUrl: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/genel'
+  },
+  {
+    id: 'Image21',
+    title: 'Gece Şehir Işıkları',
+    subtitle: 'Siberpunk Tokyo, Metropoller, Neon Caddeler ve Gece Mimarisi',
+    note: '*Şehir estetiği ve mimari fotoğraflar',
+    category: 'Metropol',
+    collectionName: 'Genel',
+    imageUrl: 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/genel'
+  },
+  {
+    id: 'Image22',
+    title: 'Kahve & Çalışma Odası',
+    subtitle: 'Minimalist Masalar, Sabah Rutinleri ve Yüksek Odaklanma Alanları',
+    note: '*Üretkenlik ve çalışma alışkanlıkları',
+    category: 'Rutin',
+    collectionName: 'Rutin',
+    imageUrl: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/rutin'
+  },
+  {
+    id: 'Image23',
+    title: 'Kütüphane & Dijital Arşiv',
+    subtitle: 'Bilgi Depoları, Nadir Eserler, Ansiklopediler ve Araştırma Merkezleri',
+    note: '*Akademi ve dijital kütüphaneler',
+    category: 'Eğitim',
+    collectionName: 'Eğitim',
+    imageUrl: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/egitim'
+  },
+  {
+    id: 'Image24',
+    title: 'Modern Metropol',
+    subtitle: 'Gökdelenler, Ufuk Çizgisi, Gün Batımı ve Kentsel Dinamizm',
+    note: '*Modern dünya ve şehir portreleri',
+    category: 'Kentsel',
+    collectionName: 'Genel',
+    imageUrl: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/genel'
+  },
+  {
+    id: 'Image25',
+    title: 'Retro Nostalji & 80ler',
+    subtitle: 'Kasetçalarlar, Analog Cihazlar, Synthwave ve 80ler Ruhu',
+    note: '*Retro teknoloji ve nostalji köşesi',
+    category: 'Retro',
+    collectionName: 'Oyun',
+    imageUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/oyun'
   }
 ];
 
