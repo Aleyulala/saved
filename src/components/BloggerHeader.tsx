@@ -301,13 +301,18 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
             e.preventDefault();
             onGoHome();
           }}
-          className="cursor-pointer flex items-center group select-none ml-2.5 no-underline"
+          className="cursor-pointer flex items-center group select-none ml-2.5 no-underline gap-2"
           title="Ana Sayfaya Git (NESCİONE)"
           aria-label="Ana Sayfa"
         >
           {/* Typographic Wordmark (Yazı Logo — NESCİONE) */}
           <span className="font-sans font-extrabold text-[16px] sm:text-[17px] tracking-[0.22em] uppercase text-white group-hover:text-[var(--linkC,#9aa0a6)] transition-colors duration-300">
             NESCİONE
+          </span>
+          <span className="inline-flex items-center justify-center w-7 h-7 rounded-[9px] bg-[#60cdff]/15 border border-[#60cdff]/35 text-[#60cdff] shrink-0" aria-hidden="true">
+            <svg className="w-4 h-4 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+            </svg>
           </span>
         </a>
       </div>
