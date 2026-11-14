@@ -51,7 +51,12 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
   onOpenMedia
 }) => {
   const [copied, setCopied] = useState(false);
-  const [activeTab, setActiveTab] = useState<'medya' | 'yazi'>('medya');
+  // Otomatik Medya ve Video Çıkarıcı (Extractor: Asla Central Cinema fallback kullanmaz)
+  const postMedia = useMemo(() => extractPostMedia(link), [link]);
+  const primaryImage = postMedia.primaryImage;
+  const mediaItems = postMedia.items;
+  const hasRealMedia = mediaItems.some((it: MediaItem) => !!it.url && it.url.trim().length > 0) || (!!primaryImage && primaryImage.trim().length > 0);
+  const [activeTab, setActiveTab] = useState<'medya' | 'yazi'>(hasRealMedia ? 'medya' : 'yazi');
   const [selectedMediaIndex, setSelectedMediaIndex] = useState<number>(0);
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
@@ -100,15 +105,12 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
   const shareUrl = encodeURIComponent(link.url);
   const shareTitle = encodeURIComponent(link.title);
 
-  // Otomatik Medya ve Video Çıkarıcı (Extractor: Asla Central Cinema fallback kullanmaz)
-  const postMedia = useMemo(() => extractPostMedia(link), [link]);
-  const primaryImage = postMedia.primaryImage;
-  const mediaItems = postMedia.items;
-  const currentMedia = mediaItems[selectedMediaIndex] || mediaItems[0] || { type: 'image', url: primaryImage, title: link.title };
+  const currentMedia = mediaItems[selectedMediaIndex] || mediaItems[0] || (primaryImage ? { type: 'image' as const, url: primaryImage, title: link.title } : null);
 
   useEffect(() => {
+    setActiveTab(hasRealMedia ? 'medya' : 'yazi');
     setSelectedMediaIndex(0);
-  }, [link.id]);
+  }, [link.id, hasRealMedia]);
 
   // Benzer Yazılar (Related Posts: from same category or next active posts)
   const relatedPosts = activeLinks
@@ -274,50 +276,93 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
 
           {/* Büyük Görsel / Medya Alanı */}
           <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] rounded-[16px] overflow-hidden bg-[#18181b] border border-white/5 shadow-2xl group">
-            {currentMedia.type === 'image' ? (
-              <img
-                src={currentMedia.url}
-                alt={currentMedia.title || link.title}
-                referrerPolicy="no-referrer"
-                className="w-full h-full object-cover object-center cursor-pointer"
-                onClick={() => onOpenMedia && onOpenMedia(mediaItems, selectedMediaIndex)}
-              />
-            ) : (currentMedia.type === 'youtube' || currentMedia.type === 'shorts') ? (
-              <iframe
-                src={currentMedia.url}
-                title={currentMedia.title || link.title}
-                className="w-full h-full border-0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              />
+            {hasRealMedia && currentMedia?.url ? (
+              currentMedia.type === 'image' ? (
+                <img
+                  src={currentMedia.url}
+                  alt={currentMedia.title || link.title}
+                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-cover object-center cursor-pointer"
+                  onClick={() => onOpenMedia && onOpenMedia(mediaItems, selectedMediaIndex)}
+                />
+              ) : (currentMedia.type === 'youtube' || currentMedia.type === 'shorts') ? (
+                <iframe
+                  src={currentMedia.url}
+                  title={currentMedia.title || link.title}
+                  className="w-full h-full border-0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              ) : (
+                <video
+                  src={currentMedia.url}
+                  controls
+                  autoPlay
+                  className="w-full h-full object-contain bg-black"
+                />
+              )
             ) : (
-              <video
-                src={currentMedia.url}
-                controls
-                autoPlay
-                className="w-full h-full object-contain bg-black"
-              />
+              /* Medya Yoksa: Şık Web Sitesi Logo & Önizleme Kartı (Blogger & Saved 1:1) */
+              <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-tr from-sky-950/40 via-[#1c2430]/60 to-[#252526] relative p-6 select-none">
+                <div className="absolute inset-0 bg-[radial-gradient(#ffffff0c_1px,transparent_1px)] [background-size:14px_14px]" />
+                
+                {/* Logo Konteyneri */}
+                <div className="relative z-10 w-20 h-20 rounded-2xl bg-[#1e1e1e]/90 border border-white/10 shadow-2xl flex items-center justify-center p-4 mb-3 transition-transform hover:scale-105">
+                  <img
+                    src={getFaviconUrl(link.url)}
+                    alt={getDomain(link.url)}
+                    onError={(e) => {
+                      (e.target as HTMLElement).style.display = 'none';
+                    }}
+                    className="w-12 h-12 object-contain drop-shadow"
+                    loading="lazy"
+                  />
+                </div>
+
+                {/* Alan Adı & Başlık */}
+                <span className="relative z-10 text-base font-bold text-white tracking-wide">
+                  {getDomain(link.url)}
+                </span>
+                <span className="relative z-10 text-xs text-[#989b9f] mt-1 max-w-[360px] text-center truncate">
+                  {link.title}
+                </span>
+
+                {/* Web Sitesine Git Butonu */}
+                <a
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative z-10 mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[var(--linkC,#60cdff)]/15 hover:bg-[var(--linkC,#60cdff)]/25 text-[var(--linkC,#60cdff)] text-xs font-semibold border border-[var(--linkC,#60cdff)]/30 transition-all hover:scale-105"
+                >
+                  <span>Web Sitesine Git</span>
+                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
+                  </svg>
+                </a>
+              </div>
             )}
 
-            {/* Sağ Üst Köşe: Tam Ekran Genişlet Butonu (Screenshot 4 & 5 1:1) */}
-            <div className="absolute top-3 right-3 z-10">
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  if (onOpenMedia) {
-                    onOpenMedia(mediaItems, selectedMediaIndex);
-                  }
-                }}
-                className="w-8 h-8 rounded-lg bg-[rgba(28,30,38,0.85)] hover:bg-[#333333] border border-white/15 text-white flex items-center justify-center transition-all cursor-pointer shadow-md backdrop-blur-md active:scale-95"
-                title="Görseli Tam Ekran Yap"
-                aria-label="Tam Ekran"
-              >
-                <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
-                </svg>
-              </button>
-            </div>
+            {/* Sağ Üst Köşe: Tam Ekran Genişlet Butonu (Screenshot 4 & 5 1:1) - Sadece gerçek medya varsa gösterilir */}
+            {hasRealMedia && currentMedia?.url && (
+              <div className="absolute top-3 right-3 z-10">
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (onOpenMedia) {
+                      onOpenMedia(mediaItems, selectedMediaIndex);
+                    }
+                  }}
+                  className="w-8 h-8 rounded-lg bg-[rgba(28,30,38,0.85)] hover:bg-[#333333] border border-white/15 text-white flex items-center justify-center transition-all cursor-pointer shadow-md backdrop-blur-md active:scale-95"
+                  title="Görseli Tam Ekran Yap"
+                  aria-label="Tam Ekran"
+                >
+                  <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                  </svg>
+                </button>
+              </div>
+            )}
 
             {/* Alt Çizgi / Slayt Noktaları */}
             {mediaItems.length >= 2 && (

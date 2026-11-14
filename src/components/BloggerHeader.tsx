@@ -279,73 +279,82 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full h-[60px] bg-[#1e1e1e] border-b border-[#252526] px-3 sm:px-6 flex items-center justify-between select-none">
+    <header className="sticky top-0 z-40 w-full h-[60px] bg-[#1e1e1e] border-b border-[#252526] flex items-center select-none relative">
       
-      {/* Sol Bölüm: Hamburger Menü Butonu (.tIc XML 1:1) + NESCİONE Logosu */}
-      <div className="flex items-center gap-2.5 shrink-0">
+      {/* 1. Sol Bölüm (.headL — XML 1:1: Desktop/El Konsolunda sabit 230px genişlik, padding-left 20px) */}
+      <div className="flex items-center min-[896px]:w-[230px] shrink-0 pl-4 min-[896px]:pl-5">
+        <button
+          onClick={onToggleSidebar}
+          className="w-8 h-8 rounded-full text-[#989b9f] hover:text-[#fffdfc] hover:bg-white/10 active:scale-95 transition-all duration-200 cursor-pointer flex items-center justify-center border-none outline-none shrink-0"
+          aria-label="Menüyü Aç/Kapat"
+          title="Menüyü Aç/Kapat"
+        >
+          <MenuHamburgerIcon className="w-4 h-4" />
+        </button>
+
+        <a 
+          href="./"
+          onClick={(e) => {
+            e.preventDefault();
+            onGoHome();
+          }}
+          className="cursor-pointer flex items-center gap-2 group select-none ml-2 no-underline"
+          title="Ana Sayfaya Git (NESCİONE)"
+          aria-label="Ana Sayfa"
+        >
+          <span className="font-extrabold text-base sm:text-lg tracking-wider text-white group-hover:text-[var(--linkC,#9aa0a6)] transition-colors font-mono">
+            NESCİONE
+          </span>
+        </a>
+      </div>
+
+      {/* 2. Orta Bölüm: Blogger Arama Hapı (.headM .head-search-pill — nsone.xml 1:1: 36px, 14px radius, flex-1 max-w-[440px] mx-auto) */}
+      <div className="hidden min-[896px]:flex flex-1 max-w-[440px] mx-auto px-2.5 min-w-0 z-5 items-center">
+        <div
+          onClick={onOpenSearchModal}
+          className="relative flex items-center w-full h-9 rounded-[14px] px-3.5 gap-2.5 bg-[#252526] hover:bg-[#28282b] border border-white/[0.08] hover:border-[rgba(96,205,255,0.4)] cursor-pointer group select-none transition-all duration-200"
+          title="Gelişmiş Arama & Bul Paneli (Ctrl+K)"
+        >
+          <span className="text-[#989b9f] group-hover:text-[var(--linkC,#9aa0a6)] transition-colors pointer-events-none shrink-0 flex items-center justify-center">
+            <SearchNormalIcon className="w-[15px] h-[15px]" />
+          </span>
+
+          <span className="flex-1 text-xs text-[#989b9f] text-left truncate">
+            {searchQuery || 'Bul...'}
+          </span>
+
+          {searchQuery ? (
             <button
-              onClick={onToggleSidebar}
-              className="w-8 h-8 rounded-full text-[#989b9f] hover:text-[#fffdfc] hover:bg-white/10 active:scale-95 transition-all duration-200 cursor-pointer flex items-center justify-center border-none outline-none"
-              aria-label="Menüyü Aç/Kapat"
-              title="Menüyü Aç/Kapat"
-            >
-              <MenuHamburgerIcon className="w-4 h-4" />
-            </button>
-
-            <a 
-              href="./"
+              type="button"
               onClick={(e) => {
-                e.preventDefault();
-                onGoHome();
+                e.stopPropagation();
+                onSearchChange('');
               }}
-              className="cursor-pointer flex items-center gap-2 group select-none ml-1 no-underline"
-              title="Ana Sayfaya Git (NESCİONE)"
-              aria-label="Ana Sayfa"
+              className="text-[#989b9f] hover:text-white transition-colors shrink-0 cursor-pointer"
+              title="Aramayı Temizle"
+              aria-label="Aramayı Temizle"
             >
-              <span className="font-extrabold text-base sm:text-lg tracking-wider text-white group-hover:text-[var(--linkC,#9aa0a6)] transition-colors font-mono">
-                NESCİONE
-              </span>
-            </a>
-          </div>
+              <CloseIcon className="w-3.5 h-3.5" />
+            </button>
+          ) : (
+            <kbd className="inline-flex items-center px-[7px] py-[2px] rounded-[4px] text-[9px] font-mono bg-[#1e1e1e] text-[#989b9f] border border-white/[0.06] shrink-0">
+              Ctrl K
+            </kbd>
+          )}
+        </div>
+      </div>
 
-          {/* Orta Bölüm: Blogger Arama Hapı (.headM .head-search-pill) — nsone.xml 1:1: 36px, 14px radius */}
-          <div className="flex-1 max-w-[440px] mx-auto px-2.5 min-w-0">
-            <div
-              onClick={onOpenSearchModal}
-              className="relative flex items-center w-full h-9 rounded-[14px] px-3.5 gap-2.5 bg-[#252526] hover:bg-[#28282b] border border-white/[0.08] hover:border-[rgba(96,205,255,0.4)] cursor-pointer group select-none transition-all duration-200"
-              title="Gelişmiş Arama & Bul Paneli (Ctrl+K)"
-            >
-              <span className="text-[#989b9f] group-hover:text-[var(--linkC,#9aa0a6)] transition-colors pointer-events-none shrink-0 flex items-center justify-center">
-                <SearchNormalIcon className="w-[15px] h-[15px]" />
-              </span>
-
-              <span className="flex-1 text-xs text-[#989b9f] text-left truncate">
-                {searchQuery || 'Bul...'}
-              </span>
-
-              {searchQuery ? (
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onSearchChange('');
-                  }}
-                  className="text-[#989b9f] hover:text-white transition-colors shrink-0 cursor-pointer"
-                  title="Aramayı Temizle"
-                  aria-label="Aramayı Temizle"
-                >
-                  <CloseIcon className="w-3.5 h-3.5" />
-                </button>
-              ) : (
-                <kbd className="hidden sm:inline-flex items-center px-[7px] py-[2px] rounded-[4px] text-[9px] font-mono bg-[#1e1e1e] text-[#989b9f] border border-white/[0.06] shrink-0">
-                  Ctrl K
-                </kbd>
-              )}
-            </div>
-          </div>
-
-          {/* Sağ Bölüm: Blogger XML 1:1 .headIc Butonları (Screenshot 2: 1: Yazarlar, 2: Yer İmleri, 3: Tema, 4: Yazı Ekle) */}
-          <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
+      {/* 3. Sağ Bölüm: Blogger XML 1:1 .headIc Butonları */}
+      <div className="flex items-center justify-end shrink-0 pr-4 min-[896px]:pr-5 gap-1 min-[896px]:gap-2 ml-auto">
+        {/* Mobilde Arama Butonu (<896px .headIc .isSrh) */}
+        <button
+          onClick={onOpenSearchModal}
+          className="min-[896px]:hidden w-8 h-8 rounded-full text-[#989b9f] hover:text-[#fffdfc] hover:bg-white/10 active:scale-95 transition-all duration-200 cursor-pointer flex items-center justify-center border-none outline-none"
+          title="Ara"
+          aria-label="Ara"
+        >
+          <SearchNormalIcon className="w-4 h-4" />
+        </button>
             
             {/* 1. Buton: Yazarlar & Profil (.isPrf - Profile1Icon & .wPrf) */}
             <div className="relative" ref={profileRef}>
