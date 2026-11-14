@@ -578,10 +578,10 @@ export const App: React.FC = () => {
           {/* Ana İçerik ve Sağ Bar Konteyneri */}
           <div className="w-full flex-1">
             <div className="max-w-[1280px] mx-auto px-4 sm:px-[25px] pt-4 sm:pt-[30px] pb-12">
-              <div className="flex flex-col min-[897px]:flex-row gap-[25px] items-start">
+              <div className="flex flex-col min-[800px]:flex-row gap-[25px] items-start">
                 
                 {/* ORTA BÖLÜM: Ana İçerik Alanı (.blogB - 897px+ Masaüstü / El Konsolunda calc(100%-325px)) */}
-                <main className="flex-1 min-w-0 w-full min-[897px]:w-[calc(100%-325px)]">
+                <main className="flex-1 min-w-0 w-full min-[800px]:w-[calc(100%-325px)]">
                 {activeView === 'dashboard' && (
                   <DashboardView
                     links={allLinks}
@@ -833,7 +833,7 @@ export const App: React.FC = () => {
               </main>
 
               {/* SAĞ BAR: Popüler Post, Etiketler, Bize Ulaşın (.sideB - 897px+ Masaüstü / El Konsolunda 300px Sabit) */}
-              <aside className="w-full min-[897px]:w-[300px] shrink-0">
+              <aside className="w-full min-[800px]:w-[300px] shrink-0">
                 <BloggerRightSidebar
                   pinnedLinks={allLinks.filter(l => l.isPinned && !l.isTrash && !l.isArchived)}
                   allLinks={allLinks}

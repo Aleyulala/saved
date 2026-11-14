@@ -17,8 +17,8 @@ export interface BloggerSlide {
 export const BLOGGER_SLIDES: BloggerSlide[] = [
   {
     id: 'Image01',
-    title: 'Videolar & Sinema',
-    subtitle: 'Seçkin Belgeseller, Sinematografi, Prodüksiyon ve Video Sanatı',
+    title: 'Sinema',
+    subtitle: 'Video',
     note: '*Seçkin video kanalları ve oynatma listeleri',
     category: 'videolar',
     collectionName: 'Medya',
@@ -27,8 +27,8 @@ export const BLOGGER_SLIDES: BloggerSlide[] = [
   },
   {
     id: 'Image02',
-    title: 'ALİ & NSONE',
-    subtitle: 'Teknoloji, Kodlama, Dijital Yaşam & Kişisel Keşif Platformu',
+    title: 'NSONE',
+    subtitle: 'Keşif',
     note: '*Ali Yıldız & Nsone Resmi Bilgi ve Dijital Arşiv Merkezi',
     category: 'öneri',
     collectionName: 'Genel',
@@ -37,8 +37,8 @@ export const BLOGGER_SLIDES: BloggerSlide[] = [
   },
   {
     id: 'Image03',
-    title: 'Oyun & Dijital Eğlence',
-    subtitle: 'Next-Gen Oyunlar, Donanım İpuçları, Emülasyon ve Arşivler',
+    title: 'Oyun',
+    subtitle: 'Eğlence',
     note: '*Oyun arşivleri ve kaynak bağlantıları',
     category: 'Oyun',
     collectionName: 'Oyun',
@@ -47,8 +47,8 @@ export const BLOGGER_SLIDES: BloggerSlide[] = [
   },
   {
     id: 'Image04',
-    title: 'Bilgisayar & Sistem',
-    subtitle: 'İşletim Sistemleri, Terminal Becerileri, Bulut ve Masaüstü Verimliliği',
+    title: 'Sistem',
+    subtitle: 'Terminal',
     note: '*Masaüstü ve sistem araçları deposu',
     category: 'Bilgisayar',
     collectionName: 'Araçlar',
@@ -57,8 +57,8 @@ export const BLOGGER_SLIDES: BloggerSlide[] = [
   },
   {
     id: 'Image05',
-    title: 'Yapay Zeka & Teknoloji',
-    subtitle: 'Geleceğin Teknolojileri, Derin Öğrenme, LLM Modelleri ve İnovasyon',
+    title: 'YapayZeka',
+    subtitle: 'İnovasyon',
     note: '*Yapay zeka ve teknoloji yer imleri',
     category: 'Teknoloji',
     collectionName: 'AI',
@@ -67,8 +67,8 @@ export const BLOGGER_SLIDES: BloggerSlide[] = [
   },
   {
     id: 'Image06',
-    title: 'Mobil Ekosistem & Telefon',
-    subtitle: 'Android & iOS Gelişmiş Özellikler, Mobil Güvenlik ve Rehberler',
+    title: 'Mobil',
+    subtitle: 'Android',
     note: '*Mobil platform rehberleri',
     category: 'Telefon',
     collectionName: 'Web Uygulamaları',
@@ -77,8 +77,8 @@ export const BLOGGER_SLIDES: BloggerSlide[] = [
   },
   {
     id: 'Image07',
-    title: 'Programlama & Kod',
-    subtitle: 'Modern Diller, Temiz Kod, Algoritmalar ve Geliştirici Kütüphaneleri',
+    title: 'Kod',
+    subtitle: 'Yazılım',
     note: '*Küratörlü kod ve programlama kaynakları',
     category: 'Programlama',
     collectionName: 'Programlama',
@@ -87,8 +87,8 @@ export const BLOGGER_SLIDES: BloggerSlide[] = [
   },
   {
     id: 'Image08',
-    title: 'Televizyon & Medya',
-    subtitle: 'Smart TV Çözümleri, Medya Merkezleri ve Ev Sinema Rehberi',
+    title: 'Medya',
+    subtitle: 'Televizyon',
     note: '*Televizyon ve ev eğlence teknolojileri',
     category: 'Televizyon',
     collectionName: 'Medya',
@@ -97,8 +97,8 @@ export const BLOGGER_SLIDES: BloggerSlide[] = [
   },
   {
     id: 'Image09',
-    title: 'Görsel Sanat & Tasarım',
-    subtitle: 'Minimalist Tasarım, UI/UX Estetiği ve Yaratıcı İlham Kaynakları',
+    title: 'Tasarım',
+    subtitle: 'Sanat',
     note: '*Dijital sanat ve estetik portfolyolar',
     category: 'Sanat',
     collectionName: 'Genel',
@@ -107,8 +107,8 @@ export const BLOGGER_SLIDES: BloggerSlide[] = [
   },
   {
     id: 'Image10',
-    title: 'Dijital Finans & Ticaret',
-    subtitle: 'E-Ticaret Trendleri, Analitik Araçlar, Pazaryeri ve Dijital Ekonomi',
+    title: 'Finans',
+    subtitle: 'Ekonomi',
     note: '*Finans ve e-ticaret araçları',
     category: 'Ticaret',
     collectionName: 'Alışveriş',
@@ -117,8 +117,8 @@ export const BLOGGER_SLIDES: BloggerSlide[] = [
   },
   {
     id: 'Image11',
-    title: 'Siber Güvenlik & Terminal',
-    subtitle: 'Ağ Analizi, Kriptografi, Etik Hackleme ve Veri Gizliliği',
+    title: 'Güvenlik',
+    subtitle: 'Kripto',
     note: '*Güvenlik ve gizlilik rehberleri',
     category: 'Güvenlik',
     collectionName: 'Araçlar',
@@ -127,8 +127,8 @@ export const BLOGGER_SLIDES: BloggerSlide[] = [
   },
   {
     id: 'Image12',
-    title: 'Linux & Açık Kaynak',
-    subtitle: 'Özgür Yazılım, Dağıtımlar, Bash Scripting ve Masaüstü Kişiselleştirme',
+    title: 'Linux',
+    subtitle: 'Çekirdek',
     note: '*Açık kaynak yazılım deposu',
     category: 'Linux',
     collectionName: 'Programlama',
@@ -137,8 +137,8 @@ export const BLOGGER_SLIDES: BloggerSlide[] = [
   },
   {
     id: 'Image13',
-    title: 'Bilim & Uzay Keşfi',
-    subtitle: 'Astronomi, Derin Uzay Gözlemleri, Gezegenler ve Astrofizik',
+    title: 'Bilim',
+    subtitle: 'Uzay',
     note: '*Bilim ve evren kütüphanesi',
     category: 'Bilim',
     collectionName: 'Genel',
@@ -147,8 +147,8 @@ export const BLOGGER_SLIDES: BloggerSlide[] = [
   },
   {
     id: 'Image14',
-    title: 'Müzik & Ses Prodüksiyonu',
-    subtitle: 'Stüdyo Kayıtları, Akustik, Synthesizer ve Dijital Ses İşleme',
+    title: 'Müzik',
+    subtitle: 'Akustik',
     note: '*Müzik ve ses prodüksiyon araçları',
     category: 'Müzik',
     collectionName: 'Medya',
@@ -157,8 +157,8 @@ export const BLOGGER_SLIDES: BloggerSlide[] = [
   },
   {
     id: 'Image15',
-    title: 'Sinematografi & Lensler',
-    subtitle: 'Işıklandırma Sanatı, Kompozisyon, 4K HDR ve Görsel Yönetmenlik',
+    title: 'Sinema',
+    subtitle: 'Kamera',
     note: '*Sinema ve kamera rehberleri',
     category: 'Sinema',
     collectionName: 'Medya',
@@ -167,8 +167,8 @@ export const BLOGGER_SLIDES: BloggerSlide[] = [
   },
   {
     id: 'Image16',
-    title: 'Donanım & Çip Mimarisi',
-    subtitle: 'Yarı İletkenler, Mikroişlemciler, GPU Gücü ve Nanoteknoloji',
+    title: 'Donanım',
+    subtitle: 'İşlemci',
     note: '*Donanım mimarisi ve işlemciler',
     category: 'Donanım',
     collectionName: 'Araçlar',
@@ -177,8 +177,8 @@ export const BLOGGER_SLIDES: BloggerSlide[] = [
   },
   {
     id: 'Image17',
-    title: 'Sanal Gerçeklik & VR',
-    subtitle: 'Metaverse Deneyimleri, Mekansal Bilişim ve İmmersif Simülasyonlar',
+    title: 'VR',
+    subtitle: 'Simülasyon',
     note: '*Sanal gerçeklik ve 3D teknolojileri',
     category: 'VR',
     collectionName: 'AI',
@@ -187,8 +187,8 @@ export const BLOGGER_SLIDES: BloggerSlide[] = [
   },
   {
     id: 'Image18',
-    title: 'E-Spor & Turnuvalar',
-    subtitle: 'Profesyonel Oyun Dünyası, Taktik Analizler ve Canlı Turnuvalar',
+    title: 'Espor',
+    subtitle: 'Turnuva',
     note: '*E-spor ve rekabetçi oyun kaynakları',
     category: 'Espor',
     collectionName: 'Oyun',
@@ -197,8 +197,8 @@ export const BLOGGER_SLIDES: BloggerSlide[] = [
   },
   {
     id: 'Image19',
-    title: 'Robotik & İleri Otomasyon',
-    subtitle: 'Akıllı Makineler, Sensör Sistemleri ve Geleceğin Fabrikaları',
+    title: 'Robotik',
+    subtitle: 'Otomasyon',
     note: '*Robotik ve otonom sistemler',
     category: 'Robotik',
     collectionName: 'Teknoloji',
@@ -207,8 +207,8 @@ export const BLOGGER_SLIDES: BloggerSlide[] = [
   },
   {
     id: 'Image20',
-    title: 'Doğa & Vahşi Yaşam',
-    subtitle: 'Görkemli Manzaralar, Dağ Zirveleri ve Ekolojik Keşifler',
+    title: 'Doğa',
+    subtitle: 'Manzara',
     note: '*Doğa ve çevre belgeselleri',
     category: 'Doğa',
     collectionName: 'Genel',
@@ -217,8 +217,8 @@ export const BLOGGER_SLIDES: BloggerSlide[] = [
   },
   {
     id: 'Image21',
-    title: 'Gece Şehir Işıkları',
-    subtitle: 'Siberpunk Tokyo, Metropoller, Neon Caddeler ve Gece Mimarisi',
+    title: 'Şehir',
+    subtitle: 'Neon',
     note: '*Şehir estetiği ve mimari fotoğraflar',
     category: 'Metropol',
     collectionName: 'Genel',
@@ -227,8 +227,8 @@ export const BLOGGER_SLIDES: BloggerSlide[] = [
   },
   {
     id: 'Image22',
-    title: 'Kahve & Çalışma Odası',
-    subtitle: 'Minimalist Masalar, Sabah Rutinleri ve Yüksek Odaklanma Alanları',
+    title: 'Rutin',
+    subtitle: 'Odak',
     note: '*Üretkenlik ve çalışma alışkanlıkları',
     category: 'Rutin',
     collectionName: 'Rutin',
@@ -237,8 +237,8 @@ export const BLOGGER_SLIDES: BloggerSlide[] = [
   },
   {
     id: 'Image23',
-    title: 'Kütüphane & Dijital Arşiv',
-    subtitle: 'Bilgi Depoları, Nadir Eserler, Ansiklopediler ve Araştırma Merkezleri',
+    title: 'Arşiv',
+    subtitle: 'Kütüphane',
     note: '*Akademi ve dijital kütüphaneler',
     category: 'Eğitim',
     collectionName: 'Eğitim',
@@ -247,8 +247,8 @@ export const BLOGGER_SLIDES: BloggerSlide[] = [
   },
   {
     id: 'Image24',
-    title: 'Modern Metropol',
-    subtitle: 'Gökdelenler, Ufuk Çizgisi, Gün Batımı ve Kentsel Dinamizm',
+    title: 'Metropol',
+    subtitle: 'Mimari',
     note: '*Modern dünya ve şehir portreleri',
     category: 'Kentsel',
     collectionName: 'Genel',
@@ -257,8 +257,8 @@ export const BLOGGER_SLIDES: BloggerSlide[] = [
   },
   {
     id: 'Image25',
-    title: 'Retro Nostalji & 80ler',
-    subtitle: 'Kasetçalarlar, Analog Cihazlar, Synthwave ve 80ler Ruhu',
+    title: 'Retro',
+    subtitle: 'Nostalji',
     note: '*Retro teknoloji ve nostalji köşesi',
     category: 'Retro',
     collectionName: 'Oyun',
@@ -268,6 +268,15 @@ export const BLOGGER_SLIDES: BloggerSlide[] = [
 ];
 
 const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1920&q=85';
+
+
+// Tek kelimeye indirgeme yardımcısı
+const toSingleWord = (str?: string): string => {
+  if (!str) return '';
+  const cleaned = str.replace(/&amp;/g, '').replace(/&/g, '').trim();
+  const words = cleaned.split(/\s+/).filter(Boolean);
+  return words[0] ? words[0].replace(/[,.;:!?]/g, '') : '';
+};
 
 interface BloggerHeroSliderProps {
   collections?: CollectionItem[];
@@ -474,14 +483,14 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
           </button>
         </div>
 
-        {/* Bottom-Left: Blogger Slider Title & Subtitle (Screenshot 2 1:1) */}
+        {/* Bottom-Left: Blogger Slider Title & Subtitle (Tek Kelime - Screenshot 1:1) */}
         <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-5 z-20 pointer-events-none text-left">
           <h2 className="text-sm sm:text-base lg:text-lg font-bold text-white tracking-wide drop-shadow-md">
-            {activeSlide.title}
+            {toSingleWord(activeSlide.title)}
           </h2>
           {activeSlide.subtitle && (
             <p className="text-[11px] sm:text-xs text-white/80 mt-0.5 max-w-md line-clamp-1 drop-shadow">
-              {activeSlide.subtitle}
+              {toSingleWord(activeSlide.subtitle)}
             </p>
           )}
         </div>

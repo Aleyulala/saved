@@ -159,21 +159,21 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
               </li>
             )}
 
-            {/* 2. KLASÖR 1: Uygulamalar (svg.flash) */}
+            {/* 2. KLASÖR 1: Uygulamalar (svg.hierarchy-4) */}
             <li className="pt-1 relative">
               <div 
                 onClick={() => setHizmetlerOpen(!hizmetlerOpen)}
                 className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-bold text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] cursor-pointer transition-colors outline-none relative"
               >
                 <div className="flex items-center gap-2.5">
-                  <FlashIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-amber-400" />
+                  <Hierarchy4Icon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[var(--linkC,#9aa0a6)]" />
                   <span>Uygulamalar</span>
                   <span className="badge-new text-[var(--linkC,#9aa0a6)] text-[11px] font-bold ml-1">
                     Yeni!
                   </span>
                 </div>
-                {/* xml 1:1 li.nt bildirim noktası */}
-                <span className="absolute top-2 left-2 w-2 h-2 rounded-full bg-[var(--linkC,#9aa0a6)] shadow-[0_0_8px_var(--linkC,#9aa0a6)]" />
+                {/* xml 1:1 li.nt-tl bildirim noktası (Sol Üst) */}
+                <span className="absolute top-2 left-2 w-2 h-2 rounded-full bg-[var(--linkC,#9aa0a6)] shadow-[0_0_8px_var(--linkC,#9aa0a6)] animate-pulse" />
                 
                 <ChevronDownIcon className={`w-3.5 h-3.5 text-[#989b9f] transition-transform duration-300 ${hizmetlerOpen ? 'rotate-180' : ''}`} />
               </div>
@@ -234,19 +234,21 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
               )}
             </li>
 
-            {/* 3. KLASÖR 2: Topluluk (svg.message-notif-1) */}
-            <li className="pt-1">
+            {/* 3. KLASÖR 2: Topluluk (svg.flash) */}
+            <li className="pt-1 relative">
               <div 
                 onClick={() => setKlasorOpen(!klasorOpen)}
-                className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-bold text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] cursor-pointer transition-colors outline-none"
+                className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-bold text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] cursor-pointer transition-colors outline-none relative"
               >
                 <div className="flex items-center gap-2.5">
-                  <MessageNotif1Icon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[var(--linkC,#9aa0a6)]" />
+                  <FlashIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[var(--linkC,#9aa0a6)]" />
                   <span>Topluluk</span>
-                  <span className="badge-new text-emerald-400 text-[11px] font-bold ml-1">
+                  <span className="badge-new text-[var(--linkC,#9aa0a6)] text-[11px] font-bold ml-1">
                     Canlı
                   </span>
                 </div>
+                {/* xml 1:1 li.nt-tr bildirim noktası (Sağ Üst) */}
+                <span className="absolute top-2 right-8 w-2 h-2 rounded-full bg-[var(--linkC,#9aa0a6)] shadow-[0_0_8px_var(--linkC,#9aa0a6)] animate-pulse" />
                 <ChevronDownIcon className={`w-3.5 h-3.5 text-[#989b9f] transition-transform duration-300 ${klasorOpen ? 'rotate-180' : ''}`} />
               </div>
 
@@ -305,16 +307,23 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
               <div className="w-full h-px bg-white/10 my-1" />
             </li>
 
+            {/* XML 1:1 Bölücü Çizgi (Topluluk ile Araçlar Arası) */}
+            <li className="py-1">
+              <div className="w-full h-px bg-white/10 my-1" />
+            </li>
+
             {/* 4. KLASÖR 3: Araçlar (svg.folder-code) */}
-            <li className="pt-1">
+            <li className="pt-1 relative">
               <div 
                 onClick={() => setGelistiriciOpen(!gelistiriciOpen)}
-                className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-bold text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] cursor-pointer transition-colors outline-none"
+                className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-bold text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] cursor-pointer transition-colors outline-none relative"
               >
                 <div className="flex items-center gap-2.5">
                   <FolderCodeIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[var(--linkC,#9aa0a6)]" />
                   <span>Araçlar</span>
                 </div>
+                {/* xml 1:1 li.nt-br bildirim noktası (Sağ Alt) */}
+                <span className="absolute bottom-2 right-8 w-1.5 h-1.5 rounded-full bg-[var(--linkC,#9aa0a6)] shadow-[0_0_6px_var(--linkC,#9aa0a6)] animate-pulse" />
                 <ChevronDownIcon className={`w-3.5 h-3.5 text-[#989b9f] transition-transform duration-300 ${gelistiriciOpen ? 'rotate-180' : ''}`} />
               </div>
 
