@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { CollectionItem, LinkItem, TagItem } from '../types';
 import { formatDate, getDomain, getFaviconUrl } from '../utils/favicon';
+import { BrandLogoCard } from './BrandLogoCard';
 
 interface BloggerRightSidebarProps {
   pinnedLinks: LinkItem[];
@@ -601,42 +602,30 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
                   loading="lazy"
                 />
               ) : (
-                <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-tr from-sky-950 via-[#1c2430] to-[#252526] p-4 relative">
-                  <div className="w-10 h-10 rounded-xl bg-black/60 backdrop-blur-md flex items-center justify-center p-2 shadow-lg mb-1">
-                    <img
-                      src={getFaviconUrl(featuredFirst.url)}
-                      alt={getDomain(featuredFirst.url)}
-                      className="w-5 h-5 object-contain"
-                      onError={(e) => {
-                        (e.target as HTMLElement).style.display = 'none';
-                      }}
-                    />
-                  </div>
-                  <span className="text-[10px] text-white/70 font-mono">{getDomain(featuredFirst.url)}</span>
-                </div>
+                <BrandLogoCard url={featuredFirst.url} title={featuredFirst.title} size="card" />
               )}
               <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/60 pointer-events-none" />
 
-              {/* Badges (.tfxM .tfxC - Beyaz Bordersız) */}
+              {/* Badges (.tfxM .tfxC - Image 4 1:1 Tam Eşit Boyut) */}
               <div className="absolute top-2 left-2 z-10">
-                <div className="flex items-center gap-1 px-2 py-0.5 rounded-lg bg-black/65 backdrop-blur-md text-white text-[10px] font-medium shadow-sm">
+                <div className="h-[22px] px-2 flex items-center gap-1 rounded-lg bg-black/65 backdrop-blur-md text-white text-[10px] font-medium shadow-sm">
                   <EyeIcon className="w-3.5 h-3.5 text-[#60cdff]" />
                   <span>{featuredFirst.views || 74}</span>
                 </div>
               </div>
 
               <div className="absolute top-2 right-2 z-10 flex items-center gap-1.5">
-                <div className="flex items-center gap-1 px-2 py-0.5 rounded-lg bg-black/65 backdrop-blur-md text-white text-[10px] font-medium shadow-sm">
-                  <MessageNotif1Icon className="w-3 h-3 text-white/90" />
+                <div className="h-[22px] px-2 flex items-center gap-1 rounded-lg bg-black/65 backdrop-blur-md text-white text-[10px] font-medium shadow-sm">
+                  <ChatBloggerIcon className="w-3.5 h-3.5 text-white/90" />
                   <span>{featuredFirst.commentsCount !== undefined ? featuredFirst.commentsCount : 0}</span>
                 </div>
-                <div className="p-1 rounded-lg bg-black/65 backdrop-blur-md text-white/80 shadow-sm">
-                  <ArchiveIcon className="w-3.5 h-3.5 text-amber-300" />
+                <div className="h-[22px] px-2 flex items-center justify-center rounded-lg bg-black/65 backdrop-blur-md text-amber-400 shadow-sm">
+                  <ArchiveIcon className="w-3.5 h-3.5 text-amber-400" />
                 </div>
               </div>
 
               <div className="absolute bottom-2 left-2 z-10">
-                <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-black/75 backdrop-blur-md text-white text-[10px] font-bold shadow-sm">
+                <div className="h-[22px] inline-flex items-center gap-1 px-2 rounded-lg bg-black/75 backdrop-blur-md text-white text-[10px] font-bold shadow-sm">
                   <span className="w-3.5 h-3.5 rounded-full bg-[#1e1e1e] flex items-center justify-center text-[7px] text-[#60cdff] font-extrabold">
                     N
                   </span>

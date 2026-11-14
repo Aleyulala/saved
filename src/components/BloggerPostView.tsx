@@ -28,6 +28,7 @@ import { MediaItem } from './UniversalMediaModal';
 import { getAuthorData } from '../utils/bloggerAuthors';
 import { extractPostMedia } from '../utils/mediaExtractor';
 import { LinkCard } from './LinkCard';
+import { BrandLogoCard } from './BrandLogoCard';
 
 interface BloggerPostViewProps {
   link: LinkItem;
@@ -329,42 +330,21 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
               )
             ) : (
               /* Medya Yoksa: Şık Web Sitesi Logo & Önizleme Kartı (Blogger & Saved 1:1) */
-              <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-tr from-sky-950/40 via-[#1c2430]/60 to-[#252526] relative p-6 select-none">
-                <div className="absolute inset-0 bg-[radial-gradient(#ffffff0c_1px,transparent_1px)] [background-size:14px_14px]" />
-                
-                {/* Logo Konteyneri */}
-                <div className="relative z-10 w-20 h-20 rounded-2xl bg-[#1e1e1e]/90 border border-white/10 shadow-2xl flex items-center justify-center p-4 mb-3 transition-transform hover:scale-105">
-                  <img
-                    src={getFaviconUrl(link.url)}
-                    alt={getDomain(link.url)}
-                    onError={(e) => {
-                      (e.target as HTMLElement).style.display = 'none';
-                    }}
-                    className="w-12 h-12 object-contain drop-shadow"
-                    loading="lazy"
-                  />
+              <div className="w-full h-full relative">
+                <BrandLogoCard url={link.url} title={link.title} size="detail" />
+                <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-20">
+                  <a
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[var(--linkC,#60cdff)]/20 hover:bg-[var(--linkC,#60cdff)]/30 text-[var(--linkC,#60cdff)] text-xs font-semibold border border-[var(--linkC,#60cdff)]/30 shadow-lg backdrop-blur-md transition-all hover:scale-105 active:scale-95 no-underline"
+                  >
+                    <span>Web Sitesine Git</span>
+                    <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
+                    </svg>
+                  </a>
                 </div>
-
-                {/* Alan Adı & Başlık */}
-                <span className="relative z-10 text-base font-bold text-white tracking-wide">
-                  {getDomain(link.url)}
-                </span>
-                <span className="relative z-10 text-xs text-[#989b9f] mt-1 max-w-[360px] text-center truncate">
-                  {link.title}
-                </span>
-
-                {/* Web Sitesine Git Butonu */}
-                <a
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="relative z-10 mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[var(--linkC,#60cdff)]/15 hover:bg-[var(--linkC,#60cdff)]/25 text-[var(--linkC,#60cdff)] text-xs font-semibold border border-[var(--linkC,#60cdff)]/30 transition-all hover:scale-105"
-                >
-                  <span>Web Sitesine Git</span>
-                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
-                  </svg>
-                </a>
               </div>
             )}
 

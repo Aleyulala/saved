@@ -24,6 +24,7 @@ import {
   FolderFavoriteIcon,
   Verify1Icon,
   EyeIcon,
+  ChatBloggerIcon,
   MessageNotif1Icon,
   ArchiveIcon,
   ArchiveAddIcon,
@@ -31,6 +32,7 @@ import {
   RankingIcon,
   DocumentIcon
 } from './BloggerIcons';
+import { BrandLogoCard } from './BrandLogoCard';
 
 interface DashboardViewProps {
   links: LinkItem[];
@@ -374,22 +376,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   loading="lazy"
                 />
               ) : (
-                <div className="w-full h-full min-h-[220px] flex flex-col items-center justify-center bg-gradient-to-tr from-sky-950 via-[#1c2430] to-[#252526] p-6 relative">
-                  <div className="absolute inset-0 bg-[radial-gradient(#ffffff0a_1px,transparent_1px)] [background-size:14px_14px]" />
-                  <div className="relative z-10 w-16 h-16 rounded-lg bg-black/60 backdrop-blur-md flex items-center justify-center p-3 shadow-xl mb-2 group-hover:scale-105 transition-transform">
-                    <img
-                      src={getFaviconUrl(pinnedPost.url)}
-                      alt={getDomain(pinnedPost.url)}
-                      className="w-8 h-8 object-contain"
-                      onError={(e) => {
-                        (e.target as HTMLElement).style.display = 'none';
-                      }}
-                    />
-                  </div>
-                  <span className="relative z-10 text-xs font-mono text-white/80 font-bold tracking-wider">
-                    {getDomain(pinnedPost.url)}
-                  </span>
-                </div>
+                <BrandLogoCard url={pinnedPost.url} title={pinnedPost.title} size="card" />
               )}
 
               {/* Gradient Overlay */}
@@ -397,20 +384,20 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
               {/* Sol Üst: 👁 Görüntülenme */}
               <div className="absolute top-2.5 left-2.5 z-10">
-                <div className="flex items-center gap-1 px-2 py-0.5 rounded-lg bg-black/65 backdrop-blur-md text-white text-[10px] font-medium shadow-sm">
+                <div className="h-[22px] px-2 flex items-center gap-1 rounded-lg bg-black/65 backdrop-blur-md text-white text-[10px] font-medium shadow-sm">
                   <EyeIcon className="w-3.5 h-3.5 text-[#60cdff]" />
                   <span>{pinnedPost.views || Math.abs(pinnedPost.title.length * 3 + 12)}</span>
                 </div>
               </div>
 
-              {/* Sağ Üst: 💬 Yorumlar ve 🔖 Yer İmi / Kaydet Butonu (.bm-button 1:1 LinkCard) */}
+              {/* Sağ Üst: 💬 Yorumlar ve 🔖 Yer İmi / Kaydet Butonu (.bm-button 1:1 LinkCard) — Tam Eşit Boyut */}
               <div className="absolute top-2.5 right-2.5 z-10 flex items-center gap-1.5">
-                <div className="flex items-center gap-1 px-2 py-0.5 rounded-lg bg-black/65 backdrop-blur-md text-white text-[10px] font-medium shadow-sm">
-                  <MessageNotif1Icon className="w-3 h-3 text-white/90" />
+                <div className="h-[22px] px-2 flex items-center gap-1 rounded-lg bg-black/65 backdrop-blur-md text-white text-[10px] font-medium shadow-sm">
+                  <ChatBloggerIcon className="w-3.5 h-3.5 text-white/90" />
                   <span>{pinnedPost.commentsCount !== undefined ? pinnedPost.commentsCount : 0}</span>
                 </div>
 
-                {/* Blogger XML 1:1 Yer İmleri / Kaydet Butonu (.bm-button) */}
+                {/* Blogger XML 1:1 Yer İmleri / Kaydet Butonu (.bm-button) — Yorum kutucuğuyla tam eşit h-[22px] */}
                 <button
                   type="button"
                   onClick={(e) => {
@@ -419,10 +406,10 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                       onTogglePin(pinnedPost.id, pinnedPost.isPinned);
                     }
                   }}
-                  className={`tIc bm-button p-1.5 rounded-lg backdrop-blur-md shadow-sm transition-all duration-200 active:scale-90 cursor-pointer ${
+                  className={`tIc bm-button h-[22px] px-2 rounded-lg bg-black/65 backdrop-blur-md shadow-sm transition-all duration-200 active:scale-90 cursor-pointer flex items-center justify-center ${
                     pinnedPost.isPinned 
-                      ? 'added bg-amber-500/25 text-amber-300 shadow-[0_0_8px_rgba(251,191,36,0.3)]' 
-                      : 'bg-black/65 text-white/80 hover:text-[#60cdff] hover:bg-black/85'
+                      ? 'text-amber-400' 
+                      : 'text-white/80 hover:text-[#60cdff]'
                   }`}
                   data-save="Kaydet"
                   data-saved="Kaydedildi"
@@ -430,7 +417,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   aria-label={pinnedPost.isPinned ? 'Kaydedildi' : 'Kaydet'}
                 >
                   {pinnedPost.isPinned ? (
-                    <ArchiveTickIcon className="w-3.5 h-3.5 text-amber-300" />
+                    <ArchiveTickIcon className="w-3.5 h-3.5 text-amber-400" />
                   ) : (
                     <ArchiveAddIcon className="w-3.5 h-3.5 text-white/90" />
                   )}

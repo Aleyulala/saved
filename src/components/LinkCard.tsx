@@ -6,11 +6,12 @@ import { extractPostMedia, cleanMediaUrl } from '../utils/mediaExtractor';
 import { 
   Verify1Icon, 
   EyeIcon, 
-  MessageNotif1Icon, 
+  ChatBloggerIcon,
   ArchiveIcon,
   ArchiveAddIcon,
   ArchiveTickIcon
 } from './BloggerIcons';
+import { BrandLogoCard } from './BrandLogoCard';
 
 interface LinkCardProps {
   link: LinkItem;
@@ -84,28 +85,7 @@ export const LinkCard: React.FC<LinkCardProps> = ({
             loading="lazy"
           />
         ) : (
-          <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-tr from-sky-950/40 via-[#1c2430]/60 to-[#252526] relative p-4 group">
-            <div className="absolute inset-0 bg-[radial-gradient(#ffffff0c_1px,transparent_1px)] [background-size:12px_12px]" />
-            {/* Website Logo Container (.thmb-logo-box) — GitHub Pages 1:1 */}
-            <div className="relative z-10 w-16 h-16 rounded-2xl bg-[#1e1e1e]/90 hover:bg-[#252526] border border-white/10 shadow-xl flex items-center justify-center p-3 group-hover:scale-110 transition-all duration-300">
-              {!faviconError ? (
-                <img
-                  src={faviconUrl}
-                  alt={domain}
-                  onError={() => setFaviconError(true)}
-                  className="w-9 h-9 object-contain drop-shadow"
-                  loading="lazy"
-                />
-              ) : (
-                <span className="text-xl font-bold text-[#60cdff]">
-                  {domain.charAt(0).toUpperCase()}
-                </span>
-              )}
-            </div>
-            <span className="relative z-10 mt-2.5 text-xs font-semibold text-slate-300 tracking-wide group-hover:text-[#60cdff] transition-colors max-w-[180px] truncate">
-              {domain}
-            </span>
-          </div>
+          <BrandLogoCard url={link.url} title={link.title} size="card" />
         )}
 
         {/* Gradient shadow overlay for crystal clear badge contrast */}
@@ -113,20 +93,20 @@ export const LinkCard: React.FC<LinkCardProps> = ({
 
         {/* Sol Üst: Görüntülenme Sayısı (👁 74) */}
         <div className="absolute top-2 left-2 z-10">
-          <div className="flex items-center gap-1 px-2 py-0.5 rounded-lg bg-black/65 backdrop-blur-md text-white text-[10px] font-medium shadow-sm">
+          <div className="h-[22px] px-2 flex items-center gap-1 rounded-lg bg-black/65 backdrop-blur-md text-white text-[10px] font-medium shadow-sm">
             <EyeIcon className="w-3.5 h-3.5 text-[#60cdff]" />
             <span>{views}</span>
           </div>
         </div>
 
-        {/* Sağ Üst: Yorum Sayısı (💬 6) & Sabitleme/Yer İmi (🔖) */}
+        {/* Sağ Üst: Yorum Sayısı (💬 0) & Sabitleme/Yer İmi (🔖) — Image 4 1:1 Tam Eşit Boyut */}
         <div className="absolute top-2 right-2 z-10 flex items-center gap-1.5">
-          <div className="flex items-center gap-1 px-2 py-0.5 rounded-lg bg-black/65 backdrop-blur-md text-white text-[10px] font-medium shadow-sm">
-            <MessageNotif1Icon className="w-3 h-3 text-white/90" />
+          <div className="h-[22px] px-2 flex items-center gap-1 rounded-lg bg-black/65 backdrop-blur-md text-white text-[10px] font-medium shadow-sm">
+            <ChatBloggerIcon className="w-3.5 h-3.5 text-white/90" />
             <span>{comments}</span>
           </div>
 
-          {/* Blogger XML 1:1 Yer İmleri / Kaydet Butonu (.bm-button) */}
+          {/* Blogger XML 1:1 Yer İmleri / Kaydet Butonu (.bm-button) — Yorum kutucuğuyla tam eşit h-[22px] */}
           <button
             type="button"
             onClick={(e) => {
@@ -135,10 +115,10 @@ export const LinkCard: React.FC<LinkCardProps> = ({
                 onTogglePin(link.id, link.isPinned);
               }
             }}
-            className={`tIc bm-button p-1.5 rounded-lg backdrop-blur-md shadow-sm transition-all duration-200 active:scale-90 cursor-pointer ${
+            className={`tIc bm-button h-[22px] px-2 rounded-lg bg-black/65 backdrop-blur-md shadow-sm transition-all duration-200 active:scale-90 cursor-pointer flex items-center justify-center ${
               link.isPinned 
-                ? 'added bg-amber-500/25 text-amber-300 shadow-[0_0_8px_rgba(251,191,36,0.3)]' 
-                : 'bg-black/65 text-white/80 hover:text-[#60cdff] hover:bg-black/85'
+                ? 'text-amber-400' 
+                : 'text-white/80 hover:text-[#60cdff]'
             }`}
             data-save="Kaydet"
             data-saved="Kaydedildi"
@@ -146,7 +126,7 @@ export const LinkCard: React.FC<LinkCardProps> = ({
             aria-label={link.isPinned ? 'Kaydedildi' : 'Kaydet'}
           >
             {link.isPinned ? (
-              <ArchiveTickIcon className="w-3.5 h-3.5 text-amber-300" />
+              <ArchiveTickIcon className="w-3.5 h-3.5 text-amber-400" />
             ) : (
               <ArchiveAddIcon className="w-3.5 h-3.5 text-white/90" />
             )}
@@ -155,7 +135,7 @@ export const LinkCard: React.FC<LinkCardProps> = ({
 
         {/* Sol Alt: Yazar / Marka Rozeti (.aNm - XML 1:1) */}
         <div className="absolute bottom-2 left-2 z-10">
-          <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-lg bg-black/75 backdrop-blur-md text-white text-[10px] font-bold shadow-sm tracking-wide">
+          <div className="h-[22px] inline-flex items-center gap-1.5 px-2 rounded-lg bg-black/75 backdrop-blur-md text-white text-[10px] font-bold shadow-sm tracking-wide">
             {avatarError ? (
               <span className="w-3.5 h-3.5 rounded-full bg-gradient-to-tr from-sky-600 to-indigo-600 text-white flex items-center justify-center text-[8px] font-bold ring-1 ring-white/20 shrink-0">
                 {initial}
