@@ -14,7 +14,7 @@ import {
 import { BLOGGER_AUTHORS } from '../utils/bloggerAuthors';
 
 const THEME_COLORS = [
-  { id: 0, hex: '#9aa0a6', name: 'Gri (Varsayılan)' },
+  { id: 0, hex: '#60cdff', name: 'Gök Mavisi (Varsayılan)' },
   { id: 1, hex: '#ea4335', name: 'Kırmızı' },
   { id: 2, hex: '#1e8e3e', name: 'Yeşil' },
   { id: 3, hex: '#4285f4', name: 'Mavi' },
@@ -85,7 +85,7 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
   const [isThemePaletteOpen, setIsThemePaletteOpen] = useState(false);
   const [currentMode, setCurrentMode] = useState<'dark' | 'light' | 'system'>('dark');
   const [currentThemeIndex, setCurrentThemeIndex] = useState<number>(0);
-  const [currentThemeColor, setCurrentThemeColor] = useState<string>('#9aa0a6');
+  const [currentThemeColor, setCurrentThemeColor] = useState<string>('#60cdff');
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const translateRef = useRef<HTMLDivElement>(null);
   const appearanceRef = useRef<HTMLDivElement>(null);
@@ -162,7 +162,7 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
         if (typeof parsed.theme === 'number' && parsed.theme !== 0 && THEME_COLORS[parsed.theme]) {
           applyThemeColor(THEME_COLORS[parsed.theme].hex, parsed.theme);
         } else {
-          applyThemeColor('#9aa0a6', 0);
+          applyThemeColor('#60cdff', 0);
         }
       } else {
         const savedMode = (localStorage.getItem('saved_theme') as any) || 'dark';
@@ -171,12 +171,12 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
         if (savedId !== null && Number(savedId) > 0 && THEME_COLORS[Number(savedId)]) {
           applyThemeColor(THEME_COLORS[Number(savedId)].hex, Number(savedId));
         } else {
-          applyThemeColor('#9aa0a6', 0);
+          applyThemeColor('#60cdff', 0);
         }
       }
     } catch {
       applyThemeMode('dark');
-      applyThemeColor('#9aa0a6', 0);
+      applyThemeColor('#60cdff', 0);
     }
 
     // Check existing Google Translate cookie
@@ -287,7 +287,7 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
       <div className="flex items-center min-[896px]:w-[230px] shrink-0 pl-4 min-[896px]:pl-5">
         <button
           onClick={onToggleSidebar}
-          className="w-[34px] h-[34px] rounded-full text-[#989b9f] hover:text-[#60cdff] hover:bg-[#60cdff]/15 hover:ring-1 hover:ring-[#60cdff]/40 active:scale-95 transition-all duration-200 cursor-pointer flex items-center justify-center border-none outline-none shrink-0"
+          className="head-action-btn shrink-0"
           aria-label="Menüyü Aç/Kapat"
           title="Menüyü Aç/Kapat"
         >
@@ -352,7 +352,7 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
         {/* Mobilde Arama Butonu (<896px .headIc .isSrh) */}
         <button
           onClick={onOpenSearchModal}
-          className="min-[896px]:hidden w-[34px] h-[34px] rounded-full text-[#989b9f] hover:text-[#60cdff] hover:bg-[#60cdff]/15 hover:ring-1 hover:ring-[#60cdff]/40 active:scale-95 transition-all duration-200 cursor-pointer flex items-center justify-center border-none outline-none"
+          className="min-[896px]:hidden head-action-btn"
           title="Ara"
           aria-label="Ara"
         >
@@ -363,11 +363,7 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
             <div className="relative" ref={profileRef}>
               <button
                 onClick={() => setIsProfileOpen(prev => !prev)}
-                className={`w-[34px] h-[34px] rounded-full transition-all duration-200 cursor-pointer flex items-center justify-center border-none outline-none active:scale-95 ${
-                  isProfileOpen 
-                    ? 'text-[#60cdff] bg-[#60cdff]/15 ring-1 ring-[#60cdff]/40' 
-                    : 'text-[#989b9f] hover:text-[#60cdff] hover:bg-[#60cdff]/15 hover:ring-1 hover:ring-[#60cdff]/40'
-                }`}
+                className={`head-action-btn ${isProfileOpen ? 'is-active' : ''}`}
                 title="Yazarlar &amp; Profil"
                 aria-label="Yazarlar"
               >
@@ -441,7 +437,7 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
                 if (onOpenPinned) onOpenPinned();
                 else onGoHome();
               }}
-              className="w-[34px] h-[34px] rounded-full text-[#989b9f] hover:text-[#60cdff] hover:bg-[#60cdff]/15 hover:ring-1 hover:ring-[#60cdff]/40 active:scale-95 transition-all duration-200 cursor-pointer flex items-center justify-center border-none outline-none"
+              className="head-action-btn"
               title="Sabitlenenler &amp; Yer İmleri"
               aria-label="Yer İmleri"
             >
@@ -452,11 +448,7 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
             <div className="relative" ref={appearanceRef}>
               <button
                 onClick={() => setIsAppearanceOpen(prev => !prev)}
-                className={`w-[34px] h-[34px] rounded-full transition-all duration-200 cursor-pointer flex items-center justify-center border-none outline-none active:scale-95 ${
-                  isAppearanceOpen
-                    ? 'text-[#60cdff] bg-[#60cdff]/15 ring-1 ring-[#60cdff]/40'
-                    : 'text-[#989b9f] hover:text-[#60cdff] hover:bg-[#60cdff]/15 hover:ring-1 hover:ring-[#60cdff]/40'
-                }`}
+                className={`head-action-btn ${isAppearanceOpen ? 'is-active' : ''}`}
                 title="Görünüm ve Tema Ayarları"
                 aria-label="Görünüm ve Tema Modu"
               >
@@ -570,11 +562,7 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
             {/* 4. Buton: Yeni Gönderi / Not Ekle ya da Mevcut Gönderiyi Düzenle (Screenshot 2 1:1 .isWrite) */}
             <button
               onClick={onOpenNewLink}
-              className={`w-[34px] h-[34px] rounded-full transition-all duration-200 cursor-pointer flex items-center justify-center border-none outline-none active:scale-95 ${
-                isPostDetail 
-                  ? 'text-[#60cdff] bg-[#60cdff]/15 ring-1 ring-[#60cdff]/40 hover:bg-[#60cdff]/25 hover:ring-[#60cdff]/60' 
-                  : 'text-[#989b9f] hover:text-[#60cdff] hover:bg-[#60cdff]/15 hover:ring-1 hover:ring-[#60cdff]/40'
-              }`}
+              className="head-action-btn"
               title={isPostDetail ? `Bu Gönderiyi Düzenle${postTitle ? `: ${postTitle}` : ''}` : "Yeni Bağlantı / Not Ekle"}
               aria-label={isPostDetail ? "Gönderiyi Düzenle" : "Yeni Ekle"}
             >

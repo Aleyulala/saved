@@ -7,9 +7,9 @@
     --darkBa: #2d2d30;
     --darkT: #fffdfc;
     --darkTa: #989b9f;
-    --linkB: #9aa0a6;
-    --linkC: #9aa0a6;
-    --theme-color: #9aa0a6;
+    --linkB: #60cdff;
+    --linkC: #60cdff;
+    --theme-color: #60cdff;
     --brand-orange: #ff5722;
     --contentL: rgba(255, 255, 255, 0.08);
 
@@ -144,6 +144,46 @@ textarea {
 #tv-virtual-cursor.clicking {
   transform: scale(0.8) !important;
   background: #2ed573 !important;
+}
+
+/* Header Action Buttons (Blogger XML 1:1 .tIc / .headIc) - Normal gözükür, üzerine gelince tema rengine göre parlar */
+.head-action-btn {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  color: #989b9f;
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+}
+
+.head-action-btn:hover {
+  color: var(--linkC, #60cdff) !important;
+  background-color: rgba(96, 205, 255, 0.15);
+  border-color: rgba(96, 205, 255, 0.4);
+  box-shadow: 0 0 10px rgba(96, 205, 255, 0.25);
+  background-color: color-mix(in srgb, var(--linkC, #60cdff) 15%, transparent) !important;
+  border-color: color-mix(in srgb, var(--linkC, #60cdff) 40%, transparent) !important;
+  box-shadow: 0 0 10px color-mix(in srgb, var(--linkC, #60cdff) 25%, transparent) !important;
+}
+
+.head-action-btn:active {
+  transform: scale(0.92);
+}
+
+.head-action-btn.is-active {
+  color: var(--linkC, #60cdff) !important;
+  background-color: rgba(96, 205, 255, 0.15);
+  border-color: rgba(96, 205, 255, 0.4);
+  background-color: color-mix(in srgb, var(--linkC, #60cdff) 15%, transparent) !important;
+  border-color: color-mix(in srgb, var(--linkC, #60cdff) 40%, transparent) !important;
 }
 
 /* XML 1:1 Left Drawer (.mnMn & .mSoc) Icon Sizing */
