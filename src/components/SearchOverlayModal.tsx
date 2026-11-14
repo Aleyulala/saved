@@ -283,7 +283,19 @@ export const SearchOverlayModal: React.FC<SearchOverlayModalProps> = ({
   const selectedResult = selectedIndex >= 0 ? results[selectedIndex] : null;
   const activeEngineName = SEARCH_ENGINES.find(e => e.url === selectedEngine)?.name || 'Arama Motoru';
 
-  const shortUrl = (url: string) => url.replace(/^https?:\/\/[^/]+/, '') || 'Bağlantıyı Aç';
+  const getSubText = (item: { url: string; description?: string }) => {
+    if (item.description && item.description.trim()) {
+      return item.description.trim();
+    }
+    try {
+      const u = new URL(item.url);
+      const host = u.hostname.replace(/^www\./, '');
+      const path = u.pathname + u.search + u.hash;
+      return path && path !== '/' ? (host + path) : host;
+    } catch {
+      return item.url.replace(/^https?:\/\/(www\.)?/, '') || 'Bağlantı';
+    }
+  };
 
   const executeSearch = (customEngineUrl?: string) => {
     if (!raw) return;
@@ -594,7 +606,7 @@ export const SearchOverlayModal: React.FC<SearchOverlayModalProps> = ({
                           )}
                         </div>
                         <div className="adv-item-sub text-[11px] text-[#71717a] whitespace-nowrap overflow-hidden text-ellipsis font-mono">
-                          {shortUrl(link.url)}
+                          {getSubText(link)}
                         </div>
                       </div>
                     </div>

@@ -614,20 +614,7 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
               )}
             </div>
 
-            {/* Dikey Çizgi Ayırıcı (| - Blogger 1:1) */}
-            <div className="w-px h-5 bg-white/15 mx-0.5 shrink-0" />
 
-            {/* 5. Buton: Telegram Mavi Daire İkonu (Blogger 1:1) */}
-            <a
-              href="https://t.me/aleyyulala"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-7 h-7 rounded-full bg-[#229ed9] hover:bg-[#1e88e5] text-white flex items-center justify-center transition-transform hover:scale-110 active:scale-95 shadow-sm shrink-0"
-              title="Telegram"
-              aria-label="Telegram"
-            >
-              <TelegramIcon className="w-3.5 h-3.5 fill-white" />
-            </a>
 
 
 
