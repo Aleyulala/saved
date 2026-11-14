@@ -624,7 +624,13 @@ export const App: React.FC = () => {
                     }}
                     onOpenMedia={handleOpenMedia}
                     onOpenChat={() => setIsRightDrawerOpen(true)}
-                    onOpenContact={() => setContactOpenSignal((n) => n + 1)}
+                    onOpenContact={() => {
+                      window.open(
+                        'https://script.google.com/macros/s/AKfycbwcZprdS6F_jJ6nin0YalTKweQKP4t936UgrTnme-d5gA-qHbi986vh6HxdzvA236Of/exec',
+                        '_blank',
+                        'noopener,noreferrer'
+                      );
+                    }}
                   />
                 )}
 

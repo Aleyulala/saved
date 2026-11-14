@@ -147,14 +147,15 @@ export const BloggerNotificationBar: React.FC<BloggerNotificationBarProps> = ({
             </div>
           )}
 
-          {/* SLAYT 2: #İletişim (href='#ContactForm2') → iletişim formunu açar */}
+          {/* SLAYT 2: #İletişim → Google Apps Script İletişim & Katıl Kapısı */}
           {activeSlide === 2 && (
             <div className="flex items-center justify-center gap-2 text-xs sm:text-sm animate-in fade-in duration-300">
               <a
-                href={onOpenContact ? '#İletişim' : 'mailto:mrstar14155@gmail.com'}
-                onClick={onOpenContact ? (e) => { e.preventDefault(); onOpenContact(); } : undefined}
+                href="https://script.google.com/macros/s/AKfycbwcZprdS6F_jJ6nin0YalTKweQKP4t936UgrTnme-d5gA-qHbi986vh6HxdzvA236Of/exec"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="ntf-contact-text inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--linkC,#9aa0a6)] hover:text-white transition-colors cursor-pointer"
-                title="#İletişim — İletişim formunu açar"
+                title="#İletişim — İletişim & Katıl Kapısını Açar"
               >
                 <Send className="w-4 h-4 shrink-0" />
                 <span className="font-bold">#</span>
