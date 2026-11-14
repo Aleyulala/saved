@@ -74,7 +74,9 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
   onOpenSettings,
   onGoHome,
   onOpenSearchModal,
-  onOpenPinned
+  onOpenPinned,
+  isPostDetail = false,
+  postTitle
 }) => {
   const [isTranslateOpen, setIsTranslateOpen] = useState(false);
   const [selectedLang, setSelectedLang] = useState<string>('tr');
@@ -572,14 +574,16 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
               )}
             </div>
 
-            {/* 4. Buton: Yeni Gönderi / Not Ekle (Screenshot 2 1:1 .isWrite) */}
+            {/* 4. Buton: Yeni Gönderi / Not Ekle ya da Mevcut Gönderiyi Düzenle (Screenshot 2 1:1 .isWrite) */}
             <button
               onClick={onOpenNewLink}
-              className="w-8 h-8 rounded-full text-[#989b9f] hover:text-[#fffdfc] hover:bg-white/10 active:scale-95 transition-all duration-200 cursor-pointer flex items-center justify-center border-none outline-none"
-              title="Yeni Bağlantı / Not Ekle"
-              aria-label="Yeni Ekle"
+              className={`w-8 h-8 rounded-full text-[#989b9f] hover:text-[#fffdfc] hover:bg-white/10 active:scale-95 transition-all duration-200 cursor-pointer flex items-center justify-center border-none outline-none ${
+                isPostDetail ? 'text-[#60cdff] bg-[#60cdff]/15 hover:bg-[#60cdff]/25 ring-1 ring-[#60cdff]/30' : ''
+              }`}
+              title={isPostDetail ? `Bu Gönderiyi Düzenle${postTitle ? `: ${postTitle}` : ''}` : "Yeni Bağlantı / Not Ekle"}
+              aria-label={isPostDetail ? "Gönderiyi Düzenle" : "Yeni Ekle"}
             >
-              <Edit3Icon className="w-4 h-4" />
+              <Edit3Icon className={`w-4 h-4 ${isPostDetail ? 'text-[#60cdff]' : ''}`} />
             </button>
 
           </div>

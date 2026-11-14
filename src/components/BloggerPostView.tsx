@@ -4,18 +4,19 @@ import {
   Copy, 
   ChevronLeft, 
   ChevronRight,
-  Share2,
   FileText
 } from 'lucide-react';
 import { CollectionItem, LinkItem } from '../types';
 import { formatDate, getDomain, getFaviconUrl } from '../utils/favicon';
 import { 
   Verify1Icon, 
+  ArchiveIcon,
   ArchiveAddIcon, 
   ArchiveTickIcon, 
   EmojiHappyIcon, 
   BloggerEyeIcon,
-  MessageNotif1Icon,
+  ChatBloggerIcon,
+  Share1Icon,
   CloseIcon,
   FacebookIcon,
   WhatsappIcon,
@@ -26,6 +27,7 @@ import {
 import { MediaItem } from './UniversalMediaModal';
 import { getAuthorData } from '../utils/bloggerAuthors';
 import { extractPostMedia } from '../utils/mediaExtractor';
+import { LinkCard } from './LinkCard';
 
 interface BloggerPostViewProps {
   link: LinkItem;
@@ -112,10 +114,16 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
     setSelectedMediaIndex(0);
   }, [link.id]);
 
-  // Benzer Yazılar (Related Posts: from same category or next active posts)
-  const relatedPosts = activeLinks
-    .filter(l => l.id !== link.id)
-    .slice(0, 3);
+  // Benzer Yazılar: Önce aynı kategori/etikete sahip yazılar, yetmezse diğer aktif yazılar
+  const relatedPosts = useMemo(() => {
+    const others = activeLinks.filter(l => l.id !== link.id);
+    const primaryTag = link.tags && link.tags[0];
+    if (!primaryTag) return others.slice(0, 3);
+
+    const sameTag = others.filter(l => l.tags && l.tags.includes(primaryTag));
+    const differentTag = others.filter(l => !l.tags || !l.tags.includes(primaryTag));
+    return [...sameTag, ...differentTag].slice(0, 3);
+  }, [activeLinks, link.id, link.tags]);
 
   return (
     <article className="space-y-5 max-w-[840px] mx-auto animate-in fade-in duration-200 select-none pb-12">
@@ -261,7 +269,19 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
                   title={item.type === 'image' ? 'Görseli Göster' : 'Videoyu Oynat'}
                 >
                   {item.type === 'image' ? (
-                    <img src={item.url} alt={item.title || `Görsel ${idx + 1}`} className="w-full h-full object-cover" />
+                    <img 
+                      src={item.url} 
+                      alt={item.title || `Görsel ${idx + 1}`} 
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        const target = e.currentTarget;
+                        if (target.src.includes('maxresdefault.jpg')) {
+                          target.src = target.src.replace('maxresdefault.jpg', 'hqdefault.jpg');
+                        } else {
+                          target.style.display = 'none';
+                        }
+                      }}
+                    />
                   ) : (
                     <div className="w-full h-full bg-[#252526] flex items-center justify-center relative">
                       <svg viewBox="0 0 24 24" className="w-5 h-5 text-white/90 fill-white/80">
@@ -284,6 +304,12 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-cover object-center cursor-pointer"
                   onClick={() => onOpenMedia && onOpenMedia(mediaItems, selectedMediaIndex)}
+                  onError={(e) => {
+                    const target = e.currentTarget;
+                    if (target.src.includes('maxresdefault.jpg')) {
+                      target.src = target.src.replace('maxresdefault.jpg', 'hqdefault.jpg');
+                    }
+                  }}
                 />
               ) : (currentMedia.type === 'youtube' || currentMedia.type === 'shorts') ? (
                 <iframe
@@ -473,7 +499,7 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
           <span className="text-[#71717a]">Estimated read time: 6 min</span>
         </div>
 
-        {/* Sağ: Yer İmi, Yorum Sayısı, Paylaş İkonu */}
+        {/* Sağ: Yer İmi, Yorum Sayısı, Paylaş İkonu (Blogger XML 1:1) */}
         <div className="flex items-center gap-3">
           <button
             type="button"
@@ -484,13 +510,13 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
             {link.isPinned ? (
               <ArchiveTickIcon className="w-4 h-4 text-amber-300" />
             ) : (
-              <ArchiveAddIcon className="w-4 h-4" />
+              <ArchiveIcon className="w-4 h-4" />
             )}
           </button>
 
-          <div className="flex items-center gap-1 text-[#989b9f]">
-            <MessageNotif1Icon className="w-4 h-4" />
-            <span className="text-[11px] font-bold">2</span>
+          <div className="flex items-center gap-1.5 text-[#989b9f]" title={`${link.commentsCount ?? 0} Yorum`}>
+            <ChatBloggerIcon className="w-4 h-4" />
+            <span className="text-[11px] font-bold">{link.commentsCount ?? 0}</span>
           </div>
 
           <button
@@ -499,7 +525,7 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
             className="text-[#989b9f] hover:text-white transition-colors cursor-pointer"
             title="Paylaş"
           >
-            <Share2 className="w-4 h-4" />
+            <Share1Icon className="w-4 h-4" />
           </button>
         </div>
 
@@ -528,38 +554,31 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
         </span>
       </div>
 
-      {/* 11. Benzer Yazılar (Screenshot 1 1:1) */}
-      <section className="space-y-3 pt-3">
-        <h3 className="text-sm font-bold text-white tracking-wide">
-          Benzer Yazılar
-        </h3>
+      {/* 11. Benzer Yazılar (1:1 Blogger Plu$ UI LinkCard Grid) */}
+      {relatedPosts.length > 0 && (
+        <section className="space-y-3.5 pt-6 border-t border-white/5">
+          <div className="flex items-center justify-between">
+            <h3 className="text-sm font-bold text-white tracking-wide flex items-center gap-2">
+              <span className="w-1.5 h-3.5 rounded-full bg-[var(--linkC,#60cdff)]" />
+              Benzer Yazılar
+            </h3>
+            <span className="text-xs text-[#989b9f] lowercase">
+              {link.tags[0] ? `#${link.tags[0]}` : 'öneriler'}
+            </span>
+          </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          {relatedPosts.map((post) => (
-            <article
-              key={post.id || post.url}
-              onClick={() => onNavigatePost(post)}
-              className="group rounded-xl bg-[#252526] hover:bg-[#28282b] border border-white/5 overflow-hidden transition-all cursor-pointer shadow-sm"
-            >
-              <div className="aspect-video w-full bg-[#18181b] overflow-hidden">
-                <img
-                  src={post.thumbnail || extractPostMedia(post).primaryImage}
-                  alt={post.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-              <div className="p-3 space-y-1">
-                <span className="text-[10px] text-[var(--linkC,#9aa0a6)] font-semibold lowercase">
-                  {post.tags[0] || 'öneri'}
-                </span>
-                <h4 className="text-xs font-bold text-white group-hover:text-[var(--linkC,#9aa0a6)] transition-colors line-clamp-2 leading-snug">
-                  {post.title}
-                </h4>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+            {relatedPosts.map((post) => (
+              <LinkCard
+                key={post.id || post.url}
+                link={post}
+                onOpenPostPage={onNavigatePost}
+                onTogglePin={onTogglePin}
+              />
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* 12. Diğer Uygulamalarla Paylaş Modal (Screenshot 7 1:1) */}
       {isShareModalOpen && (

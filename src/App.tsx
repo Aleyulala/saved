@@ -343,6 +343,9 @@ export const App: React.FC = () => {
         ...data,
         updatedAt: Date.now()
       });
+      if (selectedPost && selectedPost.id === editingLink.id) {
+        setSelectedPost(prev => prev ? ({ ...prev, ...data, updatedAt: Date.now() } as LinkItem) : null);
+      }
     } else {
       await db.links.add({
         url: data.url!,
@@ -504,9 +507,16 @@ export const App: React.FC = () => {
           }
         }}
         onOpenNewLink={() => {
-          setEditingLink(null);
-          setIsAddModalOpen(true);
+          if (activeView === 'post_detail' && selectedPost) {
+            setEditingLink(selectedPost);
+            setIsAddModalOpen(true);
+          } else {
+            setEditingLink(null);
+            setIsAddModalOpen(true);
+          }
         }}
+        isPostDetail={activeView === 'post_detail' && !!selectedPost}
+        postTitle={selectedPost?.title}
         onOpenImportExport={() => setIsImportExportOpen(true)}
         onOpenSettings={() => setIsSettingsOpen(true)}
         onGoHome={handleGoHome}

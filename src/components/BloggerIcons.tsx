@@ -382,3 +382,12 @@ export const BloggerEyeIcon: React.FC<{ className?: string }> = ({ className = '
     <path d="M12 20.27C15.53 20.27 18.82 18.19 21.11 14.59C22.01 13.18 22.01 10.81 21.11 9.39997C18.82 5.79997 15.53 3.71997 12 3.71997C8.46997 3.71997 5.17997 5.79997 2.88997 9.39997C1.98997 10.81 1.98997 13.18 2.88997 14.59C5.17997 18.19 8.46997 20.27 12 20.27Z" />
   </svg>
 );
+
+// svg.share-1 (Blogger XML 1:1 - Gönderi Paylaş İkonu / Kağıt Uçak Send)
+export const Share1Icon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
+  <svg className={`line ${className}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M7.39999 6.32003L15.89 3.49003C19.7 2.22003 21.77 4.30003 20.51 8.11003L17.68 16.6C15.78 22.31 12.66 22.31 10.76 16.6L9.91999 14.08L7.39999 13.24C1.68999 11.34 1.68999 8.23003 7.39999 6.32003Z" />
+    <path className="text-[var(--linkC,#9aa0a6)]" d="M10.11 13.6501L13.69 10.0601" />
+  </svg>
+);
+

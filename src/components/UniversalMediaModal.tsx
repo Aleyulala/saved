@@ -252,7 +252,7 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
               title="Yakınlaştır (+)"
               aria-label="Yakınlaştır"
             >
-              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="11" cy="11" r="8" />
                 <line x1="21" y1="21" x2="16.65" y2="16.65" />
                 <line x1="11" y1="8" x2="11" y2="14" />
@@ -271,7 +271,7 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
               title="Uzaklaştır (-)"
               aria-label="Uzaklaştır"
             >
-              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="11" cy="11" r="8" />
                 <line x1="21" y1="21" x2="16.65" y2="16.65" />
                 <line x1="8" y1="11" x2="14" y2="11" />
@@ -314,8 +314,10 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
               title="İndir"
               aria-label="İndir"
             >
-              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
+              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
               </svg>
             </button>
 
@@ -329,7 +331,7 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
               title={copiedLink ? 'Kopyalandı!' : 'Bağlantıyı Kopyala'}
               aria-label="Bağlantıyı Kopyala"
             >
-              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
                 <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
               </svg>
@@ -345,7 +347,7 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
           title="Tam Ekran (F)"
           aria-label="Tam Ekran"
         >
-          <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="15 3 21 3 21 9" />
             <polyline points="9 21 3 21 3 15" />
             <line x1="21" y1="3" x2="14" y2="10" />
@@ -373,11 +375,13 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
         <button
           type="button"
           onClick={handlePrev}
-          className="fixed left-3 sm:left-6 top-1/2 -translate-y-1/2 z-[1000005] w-8 h-10 sm:w-9 sm:h-12 rounded-xl bg-[#181a20]/75 hover:bg-[#252832] border border-white/10 text-white/90 hover:text-white flex items-center justify-center text-xl font-bold transition-all cursor-pointer shadow-lg backdrop-blur-md active:scale-95"
+          className="fixed left-3 sm:left-6 top-1/2 -translate-y-1/2 z-[1000005] w-9 h-11 sm:w-10 sm:h-12 rounded-xl bg-[#181a20]/80 hover:bg-[#252832] border border-white/10 text-white flex items-center justify-center transition-all cursor-pointer shadow-lg backdrop-blur-md active:scale-95"
           title="Önceki (Sol Ok)"
           aria-label="Önceki"
         >
-          ‹
+          <svg viewBox="0 0 24 24" className="w-5 h-5 text-white/90" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
         </button>
       )}
 
@@ -386,11 +390,13 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
         <button
           type="button"
           onClick={handleNext}
-          className="fixed right-3 sm:right-6 top-1/2 -translate-y-1/2 z-[1000005] w-8 h-10 sm:w-9 sm:h-12 rounded-xl bg-[#181a20]/75 hover:bg-[#252832] border border-white/10 text-white/90 hover:text-white flex items-center justify-center text-xl font-bold transition-all cursor-pointer shadow-lg backdrop-blur-md active:scale-95"
+          className="fixed right-3 sm:right-6 top-1/2 -translate-y-1/2 z-[1000005] w-9 h-11 sm:w-10 sm:h-12 rounded-xl bg-[#181a20]/80 hover:bg-[#252832] border border-white/10 text-white flex items-center justify-center transition-all cursor-pointer shadow-lg backdrop-blur-md active:scale-95"
           title="Sonraki (Sağ Ok)"
           aria-label="Sonraki"
         >
-          ›
+          <svg viewBox="0 0 24 24" className="w-5 h-5 text-white/90" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
         </button>
       )}
 
