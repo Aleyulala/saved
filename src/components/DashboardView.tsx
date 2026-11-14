@@ -397,7 +397,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   <span>{pinnedPost.commentsCount !== undefined ? pinnedPost.commentsCount : 0}</span>
                 </div>
 
-                {/* Blogger XML 1:1 Yer İmleri / Kaydet Butonu (.bm-button) — Yorum kutucuğuyla tam eşit h-[22px] */}
+                {/* Blogger XML 1:1 Yer İmleri / Kaydet Butonu (.bm-button) — Yorum kutucuğuyla tam eşit h-[22px], Screenshot 8 & 9 1:1 */}
                 <button
                   type="button"
                   onClick={(e) => {
@@ -406,10 +406,10 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                       onTogglePin(pinnedPost.id, pinnedPost.isPinned);
                     }
                   }}
-                  className={`tIc bm-button h-[22px] px-2 rounded-lg bg-black/65 backdrop-blur-md shadow-sm transition-all duration-200 active:scale-90 cursor-pointer flex items-center justify-center ${
+                  className={`tIc bm-button h-[22px] px-2 rounded-lg backdrop-blur-md shadow-sm transition-all duration-200 active:scale-90 cursor-pointer flex items-center justify-center border ${
                     pinnedPost.isPinned 
-                      ? 'text-amber-400' 
-                      : 'text-white/80 hover:text-[#60cdff]'
+                      ? 'bg-amber-600/30 border-amber-500/60 text-amber-400 shadow-[0_0_8px_rgba(245,158,11,0.25)]' 
+                      : 'bg-black/65 border-transparent text-white/80 hover:bg-amber-600/30 hover:border-amber-500/50 hover:text-amber-400'
                   }`}
                   data-save="Kaydet"
                   data-saved="Kaydedildi"
@@ -419,7 +419,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   {pinnedPost.isPinned ? (
                     <ArchiveTickIcon className="w-3.5 h-3.5 text-amber-400" />
                   ) : (
-                    <ArchiveAddIcon className="w-3.5 h-3.5 text-white/90" />
+                    <ArchiveAddIcon className="w-3.5 h-3.5 text-current" />
                   )}
                 </button>
               </div>

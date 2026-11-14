@@ -19,7 +19,8 @@ import {
   MailIcon, 
   VkIcon,
   MatrixIcon,
-  WhatsappIcon
+  WhatsappIcon,
+  GoogleChatIcon
 } from './BloggerIcons';
 import { CollectionItem, TagItem } from '../types';
 
@@ -62,6 +63,14 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
   const [klasorOpen, setKlasorOpen] = useState(false);
   const [gelistiriciOpen, setGelistiriciOpen] = useState(false);
   const [localSearch] = useState('');
+  const [footerSlideIndex, setFooterSlideIndex] = useState(0);
+
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setFooterSlideIndex(prev => (prev === 0 ? 1 : 0));
+    }, 3800);
+    return () => clearInterval(timer);
+  }, []);
 
   if (!isOpen) return null;
 
@@ -356,19 +365,45 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
           </ul>
         </div>
 
-        {/* Alt Bölüm (.mnMob Footer): E-posta (.PageList02) + 6 Sosyal Buton (.LinkList04 / .mSoc) */}
+        {/* Alt Bölüm (.mnMob Footer): E-posta & Google Chat Dönen Slaytı (.PageList02) + Sosyal Butonlar (.LinkList04 / .mSoc) */}
         <div className="p-4 border-t border-[#252526] bg-[#1e1e1e] space-y-3">
-          {/* PageList02: E-posta */}
-          <div className="text-center">
-            <a
-              href="mailto:mrstar14155@gmail.com"
-              className="text-[11px] text-[#989b9f] hover:text-[var(--linkC,#9aa0a6)] transition-colors font-mono tracking-wider"
+          {/* PageList02: E-posta & Google Chat Dönen Slayt */}
+          <div className="relative h-6 overflow-hidden text-center">
+            <div
+              className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ease-in-out ${
+                footerSlideIndex === 0
+                  ? 'opacity-100 translate-y-0 pointer-events-auto'
+                  : 'opacity-0 -translate-y-full pointer-events-none'
+              }`}
             >
-              ────Epostaৎ────
-            </a>
+              <a
+                href="mailto:mrstar14155@gmail.com"
+                className="text-[11px] text-[#989b9f] hover:text-[var(--linkC,#9aa0a6)] transition-colors font-mono tracking-wider block"
+                title="E-posta: mrstar14155@gmail.com"
+              >
+                ────Epostaৎ────
+              </a>
+            </div>
+            <div
+              className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ease-in-out ${
+                footerSlideIndex === 1
+                  ? 'opacity-100 translate-y-0 pointer-events-auto'
+                  : 'opacity-0 translate-y-full pointer-events-none'
+              }`}
+            >
+              <a
+                href="https://script.google.com/macros/s/AKfycbwcZprdS6F_jJ6nin0YalTKweQKP4t936UgrTnme-d5gA-qHbi986vh6HxdzvA236Of/exec"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[11px] text-[#00ac47] hover:text-[#34a853] font-bold transition-colors font-mono tracking-wider block"
+                title="Google Chat Odasına Katıl"
+              >
+                ────Google Chat────
+              </a>
+            </div>
           </div>
 
-          <div className="mSoc flex items-center justify-between text-[#a3a3a3] px-1">
+          <div className="mSoc flex items-center justify-between text-[#a3a3a3] px-1 gap-1">
             {/* 1. Instagram */}
             <a
               href="https://www.instagram.com/aleyul.ala/"
@@ -422,7 +457,18 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
               <MailIcon className="w-[18px] h-[18px] shrink-0 opacity-80" />
             </a>
 
-            {/* 6. Whatsapp / Telefon */}
+            {/* 6. Google Chat (Resmi Apps Script Odası) */}
+            <a
+              href="https://script.google.com/macros/s/AKfycbwcZprdS6F_jJ6nin0YalTKweQKP4t936UgrTnme-d5gA-qHbi986vh6HxdzvA236Of/exec"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-8 h-8 rounded-full bg-[#252526] hover:bg-[#00ac47] hover:text-white flex items-center justify-center transition-all duration-200"
+              title="Google Chat Odasına Katıl"
+            >
+              <GoogleChatIcon className="w-[18px] h-[18px] shrink-0 opacity-80" />
+            </a>
+
+            {/* 7. Whatsapp / Telefon */}
             <a
               href="tel:05446412904"
               className="w-8 h-8 rounded-full bg-[#252526] hover:bg-[#25d366] hover:text-white flex items-center justify-center transition-all duration-200"
