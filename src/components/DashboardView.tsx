@@ -364,10 +364,10 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
           <article 
             onClick={() => onOpenPostPage(pinnedPost)}
-            className="group relative rounded-lg bg-[#252526] hover:bg-[#28282b] border border-transparent hover:border-[#60cdff]/30 transition-all duration-200 overflow-hidden cursor-pointer shadow-md hover:shadow-xl hover:shadow-black/60 flex flex-col md:flex-row select-none"
+            className="group relative rounded-xl bg-[#252526] hover:bg-[#28282b] border border-transparent hover:border-[#60cdff]/30 transition-all duration-200 overflow-hidden cursor-pointer shadow-md hover:shadow-xl hover:shadow-black/60 flex flex-col md:flex-row select-none items-stretch"
           >
-            {/* Sol Görsel / Thumbnail */}
-            <div className="relative md:w-1/2 aspect-[16/9] md:aspect-auto bg-[#1e1e1e] overflow-hidden shrink-0">
+            {/* Sol Görsel / Thumbnail (negron.xml 1:1: 340px ferah 16/9 oranı, asla incecik ezilmez) */}
+            <div className="relative w-full md:w-[320px] lg:w-[340px] aspect-[16/9] bg-[#1e1e1e] overflow-hidden shrink-0">
               {pinnedPost.thumbnail ? (
                 <img
                   src={pinnedPost.thumbnail}
@@ -430,7 +430,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   const pinnedAuthor = getAuthorData(pinnedPost.authorName || 'NEGRONN');
                   const pInitial = (pinnedPost.authorName || 'N').charAt(0).toUpperCase();
                   return (
-                    <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-lg bg-black/75 backdrop-blur-md text-white text-[10px] font-bold shadow-sm">
+                    <div className="h-[22px] inline-flex items-center gap-1.5 px-2 rounded-lg bg-black/75 backdrop-blur-md text-white text-[10px] font-bold shadow-sm">
                       <img
                         src={pinnedAuthor.avatar}
                         alt={pinnedPost.authorName || 'NEGRONN'}
@@ -454,31 +454,34 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               </div>
             </div>
 
-            {/* Sağ Metin İçeriği */}
-            <div className="p-4 sm:p-5 flex flex-col justify-between flex-1 gap-3">
+            {/* Sağ Metin İçeriği (negron.xml 1:1 .iCtnt ferah iç dolgu) */}
+            <div className="p-5 sm:p-6 flex flex-col justify-between flex-1 gap-3 min-w-0">
               <div className="space-y-2">
-                <div className="text-[11px] text-[#60cdff] hover:underline lowercase font-medium">
+                <div className="text-[11px] text-[#60cdff] hover:underline lowercase font-semibold tracking-wide">
                   {pinnedPost.tags[0] || (pinnedPost.collectionId ? collectionMap.get(pinnedPost.collectionId)?.name.toLowerCase() : 'genel')}
                 </div>
 
-                <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-[#60cdff] leading-snug transition-colors">
+                <h3 className="text-base sm:text-lg lg:text-xl font-bold text-white group-hover:text-[#60cdff] leading-snug transition-colors line-clamp-2">
                   {pinnedPost.title}
                 </h3>
 
                 {pinnedPost.description && (
-                  <p className="text-xs text-[#989b9f] leading-relaxed line-clamp-3">
+                  <p className="text-xs sm:text-[13px] text-[#989b9f] leading-relaxed line-clamp-3">
                     {pinnedPost.description}
                   </p>
                 )}
               </div>
 
-              {/* Alt Satır: Tarih + Daha */}
+              {/* Alt Satır: Yayınlandı! Rozeti + Tarih + Daha */}
               <div className="pt-3 border-t border-white/5 flex items-center justify-between text-xs text-[#9ca3af]">
                 <div className="flex items-center gap-2">
+                  <span className="text-[10px] px-2 py-0.5 rounded-md bg-[#457f57]/20 text-[#68d391] font-semibold">
+                    Yayınlandı!
+                  </span>
                   <span className="text-[11px] text-[#71717a]">{formatDate(pinnedPost.createdAt)}</span>
                 </div>
 
-                <span className="text-xs text-[#60cdff] group-hover:underline font-medium">
+                <span className="text-xs text-[#60cdff] group-hover:underline font-semibold flex items-center gap-1">
                   Daha →
                 </span>
               </div>
