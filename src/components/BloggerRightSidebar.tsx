@@ -360,8 +360,8 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
   const nsoneBotPanel = (
     <>
       {/* Nsone Bot Başlığı */}
-      <div className="flex items-center gap-3 pb-3 border-b border-white/10 mb-3 pr-10">
-        <div className="relative w-10 h-10 rounded-full bg-[var(--linkC,#9aa0a6)]/20 border border-[var(--linkC,#9aa0a6)]/30 flex items-center justify-center text-[var(--linkC,#9aa0a6)] shrink-0">
+      <div className="flex items-center gap-3 pb-3 mb-3 pr-10">
+        <div className="relative w-10 h-10 rounded-full bg-[var(--linkC,#9aa0a6)]/20 flex items-center justify-center text-[var(--linkC,#9aa0a6)] shrink-0">
           <ChatBloggerIcon className="w-5 h-5" />
           <span
             className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-[#252526] shadow-[0_0_8px_rgba(16,185,129,0.6)]"
@@ -377,13 +377,13 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
       {/* Nsone Bot Tane Tane Mesaj Baloncukları (yazıyor... → sırayla belirir) */}
       <div className="flex flex-col gap-1.5 max-w-[96%] mb-3.5">
         {!typingDone && (
-          <div className="cf-typing rounded-[18px_18px_18px_4px] bg-white/[0.06] border border-white/10 px-3.5 py-3 w-fit">
+          <div className="cf-typing rounded-[18px_18px_18px_4px] bg-white/[0.06] px-3.5 py-3 w-fit">
             <i /><i /><i />
           </div>
         )}
         <div
           style={{ transitionDelay: typingDone ? '0ms' : '0ms' }}
-          className={`rounded-[18px_18px_18px_4px] bg-white/[0.06] border border-white/10 p-2.5 px-3.5 text-xs text-slate-200 leading-relaxed shadow-sm transition-all duration-300 ${
+          className={`rounded-[18px_18px_18px_4px] bg-white/[0.06] p-2.5 px-3.5 text-xs text-slate-200 leading-relaxed shadow-sm transition-all duration-300 ${
             typingDone ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
           }`}
         >
@@ -391,7 +391,7 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
         </div>
         <div
           style={{ transitionDelay: typingDone ? '120ms' : '0ms' }}
-          className={`rounded-[4px_18px_18px_4px] bg-white/[0.06] border border-white/10 p-2.5 px-3.5 text-xs text-slate-200 leading-relaxed shadow-sm transition-all duration-300 ${
+          className={`rounded-[4px_18px_18px_4px] bg-white/[0.06] p-2.5 px-3.5 text-xs text-slate-200 leading-relaxed shadow-sm transition-all duration-300 ${
             typingDone ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
           }`}
         >
@@ -399,7 +399,7 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
         </div>
         <div
           style={{ transitionDelay: typingDone ? '240ms' : '0ms' }}
-          className={`rounded-[4px_18px_18px_4px] bg-white/[0.06] border border-white/10 p-2.5 px-3.5 text-xs text-slate-200 leading-relaxed shadow-sm transition-all duration-300 ${
+          className={`rounded-[4px_18px_18px_4px] bg-white/[0.06] p-2.5 px-3.5 text-xs text-slate-200 leading-relaxed shadow-sm transition-all duration-300 ${
             typingDone ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
           }`}
         >
@@ -414,7 +414,7 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
       </div>
 
       {sentSuccess ? (
-        <div className="p-3.5 rounded-xl bg-emerald-500/15 border border-emerald-500/20 text-emerald-400 text-xs text-center font-medium animate-in fade-in">
+        <div className="p-3.5 rounded-xl bg-emerald-500/15 text-emerald-400 text-xs text-center font-medium animate-in fade-in">
           Mesajınız başarıyla iletildi! En kısa sürede dönüş yapacağız.
         </div>
       ) : (
@@ -557,7 +557,7 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
       
       {/* Mobile Drawer Header (Only when opened as drawer on mobile) */}
       {onCloseDrawer && (
-        <div className="flex items-center justify-between pb-3 border-b border-[#333333] lg:hidden">
+        <div className="flex items-center justify-between pb-3 lg:hidden">
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-[var(--linkC,#9aa0a6)]" />
             <h2 className="font-bold text-sm text-white">Sağ Panel</h2>
@@ -746,7 +746,7 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
                   onSelectTag(t.name);
                   if (onCloseDrawer) onCloseDrawer();
                 }}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#252526] hover:bg-[#2d2d30] text-[#d4d4d4] hover:text-[var(--linkC,#9aa0a6)] border border-transparent text-xs font-medium transition-all shrink-0 active:scale-95 shadow-none cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#252526] hover:bg-[#2d2d30] text-[#d4d4d4] hover:text-[var(--linkC,#9aa0a6)] border-0 text-xs font-medium transition-all shrink-0 active:scale-95 shadow-none cursor-pointer"
               >
                 <span>{t.name}</span>
                 <span className="text-[11px] text-[#9ca3af] opacity-80 font-normal ml-0.5 shadow-none bg-transparent">({count})</span>
@@ -773,7 +773,7 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
             className="fixed inset-0 bg-black/70 backdrop-blur-sm transition-opacity"
             onClick={onCloseDrawer}
           />
-          <div className="relative w-80 max-w-[85vw] h-full bg-[#1e1e1e] border-l border-[#252526] shadow-2xl p-4 overflow-y-auto z-10 animate-in slide-in-from-right duration-300">
+          <div className="relative w-80 max-w-[85vw] h-full bg-[#1e1e1e] border-0 shadow-2xl p-4 overflow-y-auto z-10 animate-in slide-in-from-right duration-300">
             {content}
           </div>
         </div>
@@ -795,13 +795,13 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
               role="dialog"
               aria-modal="true"
               aria-label="Bize Ulaşın — Nsone Bot"
-              className="cf-spotlight fixed left-1/2 top-1/2 z-[9999] w-[min(calc(100vw-32px),360px)] max-h-[min(92vh,760px)] overflow-y-auto overscroll-contain rounded-[24px] max-[600px]:rounded-[20px] bg-[rgba(22,25,34,0.78)] backdrop-blur-[28px] border border-white/[0.08] p-6 pb-5 shadow-[0_30px_80px_rgba(0,0,0,0.72)] cf-spotlight-anim"
+              className="cf-spotlight fixed left-1/2 top-1/2 z-[9999] w-[min(calc(100vw-32px),360px)] max-h-[min(92vh,760px)] overflow-y-auto overscroll-contain rounded-[24px] max-[600px]:rounded-[20px] bg-[rgba(22,25,34,0.78)] backdrop-blur-[28px] border-0 p-6 pb-5 shadow-[0_30px_80px_rgba(0,0,0,0.72)] cf-spotlight-anim"
             >
               {/* Kapat (X) Butonu (.cf-close-btn) */}
               <button
                 type="button"
                 onClick={closeSpotlight}
-                className="absolute top-3 right-3 w-9 h-9 rounded-[10px] bg-white/[0.08] backdrop-blur-[14px] border border-transparent hover:bg-[#333333] hover:border-[var(--linkC,#9aa0a6)]/60 text-[#989b9f] hover:text-white flex items-center justify-center transition-all cursor-pointer z-10"
+                className="absolute top-3 right-3 w-9 h-9 rounded-[10px] bg-white/[0.08] backdrop-blur-[14px] border-0 hover:bg-[#333333] text-[#989b9f] hover:text-white flex items-center justify-center transition-all cursor-pointer z-10"
                 aria-label="Kapat"
                 title="Kapat"
               >
