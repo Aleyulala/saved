@@ -103,10 +103,10 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
 
       {/* Drawer Panel (.mainL / .mnBr) */}
       <aside 
-        className="blogger-drawer relative w-[85vw] max-w-[360px] bg-[#1e1e1e] border-r border-[#252526] h-full flex flex-col justify-between shadow-2xl z-10 overflow-hidden transform transition-transform duration-300 ease-out"
+        className="blogger-drawer relative w-[85vw] max-w-[360px] bg-[#1e1e1e] border-0 h-full flex flex-col justify-between shadow-2xl z-10 overflow-hidden transform transition-transform duration-300 ease-out"
       >
         {/* Drawer Header (.mnH - XML 1:1: Çarpı kaldırıldı, NSONE Yazı Logo) */}
-        <div className="h-[52px] px-4 border-b border-[#252526] flex items-center bg-[#1e1e1e]">
+        <div className="h-[52px] px-4 flex items-center bg-[#1e1e1e]">
           <div className="flex items-center">
             <span className="font-sans font-extrabold text-[16px] tracking-[0.22em] uppercase text-white">
               NESCİONE
@@ -133,7 +133,7 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
               value={localSearch}
               readOnly
               placeholder="Bul... (Ctrl+K)"
-              className="w-full bg-[#252526] border border-transparent rounded-lg pl-9 pr-3 py-2 text-xs text-white placeholder-[#737373] outline-none cursor-pointer"
+              className="w-full bg-[#252526] border-0 rounded-lg pl-9 pr-3 py-2 text-xs text-white placeholder-[#737373] outline-none cursor-pointer"
             />
             <SearchNormalIcon className="w-[18px] h-[18px] text-[#737373] group-hover:text-[var(--linkC,#9aa0a6)] transition-colors absolute left-2.5 top-2.5 pointer-events-none" />
           </div>
@@ -179,7 +179,7 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
               </div>
 
               {hizmetlerOpen && (
-                <ul className="space-y-0.5 pl-3 border-l border-white/10 ml-4 mt-1">
+                <ul className="space-y-0.5 pl-3 ml-4 mt-1">
                   {/* 1. Saved (svg.eye) */}
                   <li>
                     <button
@@ -253,7 +253,7 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
               </div>
 
               {klasorOpen && (
-                <ul className="space-y-0.5 pl-3 border-l border-white/10 ml-4 mt-1">
+                <ul className="space-y-0.5 pl-3 ml-4 mt-1">
                   {/* 1. Chat (Google Chat Odası) */}
                   <li>
                     <a
@@ -328,7 +328,7 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
               </div>
 
               {gelistiriciOpen && (
-                <ul className="space-y-0.5 pl-3 border-l border-white/10 ml-4 mt-1">
+                <ul className="space-y-0.5 pl-3 ml-4 mt-1">
                   {/* 1. SEO (svg.search-normal-1) */}
                   <li>
                     <a
@@ -385,9 +385,9 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
         </div>
 
         {/* Alt Bölüm (.mnMob Footer): E-posta, Gizlilik ve Yorumlar Slaytı (.PageList02) + Sosyal Butonlar (.LinkList04 / .mSoc) */}
-        <div className="p-3.5 border-t border-[#252526] bg-[#1e1e1e] space-y-3">
+        <div className="p-3.5 bg-[#1e1e1e] space-y-3">
           {/* PageList02: E-posta, Gizlilik ve Yorumlar Kayan Slider + [+] Butonu */}
-          <div className="relative h-9 bg-white/[0.04] border border-white/[0.08] rounded-[9px] overflow-hidden flex items-center shadow-xs">
+          <div className="relative h-9 bg-white/[0.04] rounded-[9px] overflow-hidden flex items-center shadow-xs">
             {/* Slayt 0: E-posta */}
             <div
               className={`absolute inset-0 flex items-center justify-between px-3 transition-all duration-300 ease-in-out ${
@@ -498,7 +498,7 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
           </div>
 
           {/* LinkList04: Sosyal Medya Kayan Slider + [+] Butonu (Üstteki Slayt ile Birebir Aynı Tasarım) */}
-          <div className="relative h-9 bg-white/[0.04] border border-white/[0.08] rounded-[9px] overflow-hidden flex items-center shadow-xs">
+          <div className="relative h-9 bg-white/[0.04] rounded-[9px] overflow-hidden flex items-center shadow-xs">
             {drawerSocialLinks.map((item, idx) => {
               const IconComp = item.icon;
               return (

@@ -92,7 +92,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
   // 1. ÇEKMECE KAPALIYKEN: Daraltılmış 75px Mini Bar (negron.xml 1:1 Masaüstü Rail Modu)
   if (isCollapsed) {
     return (
-      <aside className="w-[75px] bg-[#1e1e1e] border-r border-[#252526] flex flex-col justify-between h-[calc(100vh-60px)] shrink-0 select-none shadow-xs transition-all duration-300 ease-in-out relative z-30">
+      <aside className="w-[75px] bg-[#1e1e1e] border-0 flex flex-col justify-between h-[calc(100vh-60px)] shrink-0 select-none shadow-xs transition-all duration-300 ease-in-out relative z-30">
         
         {/* Üst Menü İkonları (.mnMen .mnMn Rail — negron.xml 1:1: padding 20px 0, 40px butonlar, 18px ikonlar) */}
         <div className="py-5 flex-1 overflow-visible flex flex-col items-center">
@@ -110,7 +110,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                   <HomeIcon className="w-[18px] h-[18px] opacity-80 group-hover:opacity-100 text-[var(--linkC,#9aa0a6)] transition-opacity" />
                 </button>
                 {/* Uçan Etiket (Flyout Tooltip) */}
-                <div className="absolute left-full top-1/2 -translate-y-1/2 ml-2 px-2.5 py-1.5 rounded-xl bg-[#252526] border border-white/10 text-white text-xs font-semibold whitespace-nowrap shadow-2xl opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity z-50">
+                <div className="absolute left-full top-1/2 -translate-y-1/2 ml-2 px-2.5 py-1.5 rounded-xl bg-[#252526] text-white text-xs font-semibold whitespace-nowrap shadow-2xl opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity z-50">
                   Ana Sayfa
                 </div>
               </li>
@@ -133,8 +133,8 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                 <span className="absolute top-[7px] left-[7px] w-2 h-2 rounded-full bg-[var(--linkC,#9aa0a6)] shadow-[0_0_8px_var(--linkC,#9aa0a6)]" />
               </button>
               {/* Uçan Menü (Flyout Submenu) */}
-              <div className="absolute left-full top-0 ml-2 w-52 p-2 rounded-2xl bg-[#252526] border border-white/10 shadow-2xl opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-150 z-50 space-y-1">
-                <div className="px-2.5 py-1 text-xs font-bold text-[var(--linkC,#9aa0a6)] border-b border-white/10 flex items-center gap-2">
+              <div className="absolute left-full top-0 ml-2 w-52 p-2 rounded-2xl bg-[#252526] shadow-2xl opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-150 z-50 space-y-1">
+                <div className="px-2.5 py-1 text-xs font-bold text-[var(--linkC,#9aa0a6)] flex items-center gap-2">
                   <Hierarchy4Icon className="w-4 h-4" />
                   <span>Uygulamalar</span>
                 </div>
@@ -194,8 +194,8 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                 <span className="absolute top-[7px] right-[7px] w-2 h-2 rounded-full bg-[var(--linkC,#9aa0a6)] shadow-[0_0_6px_var(--linkC,#9aa0a6)]" />
               </button>
               {/* Uçan Menü (Flyout Submenu) */}
-              <div className="absolute left-full top-0 ml-2 w-52 p-2 rounded-2xl bg-[#252526] border border-white/10 shadow-2xl opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-150 z-50 space-y-1">
-                <div className="px-2.5 py-1 text-xs font-bold text-[var(--linkC,#9aa0a6)] border-b border-white/10 flex items-center gap-2">
+              <div className="absolute left-full top-0 ml-2 w-52 p-2 rounded-2xl bg-[#252526] shadow-2xl opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-150 z-50 space-y-1">
+                <div className="px-2.5 py-1 text-xs font-bold text-[var(--linkC,#9aa0a6)] flex items-center gap-2">
                   <FlashIcon className="w-4 h-4" />
                   <span>Topluluk</span>
                   <span className="ml-auto text-[var(--linkC,#9aa0a6)] text-[11px] font-bold">New!</span>
@@ -256,8 +256,8 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                 <span className="absolute bottom-[7px] right-[7px] w-1.5 h-1.5 rounded-full bg-[var(--linkC,#9aa0a6)] shadow-[0_0_6px_var(--linkC,#9aa0a6)]" />
               </button>
               {/* Uçan Menü (Flyout Submenu) */}
-              <div className="absolute left-full top-0 ml-2 w-52 p-2 rounded-2xl bg-[#252526] border border-white/10 shadow-2xl opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-150 z-50 space-y-1">
-                <div className="px-2.5 py-1 text-xs font-bold text-[var(--linkC,#9aa0a6)] border-b border-white/10 flex items-center gap-2">
+              <div className="absolute left-full top-0 ml-2 w-52 p-2 rounded-2xl bg-[#252526] shadow-2xl opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-150 z-50 space-y-1">
+                <div className="px-2.5 py-1 text-xs font-bold text-[var(--linkC,#9aa0a6)] flex items-center gap-2">
                   <FolderCodeIcon className="w-4 h-4" />
                   <span>Araçlar</span>
                 </div>
@@ -308,7 +308,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
         </div>
 
         {/* Alt Bölüm (.mnMob / .mNav): XML 1:1 Tek + Butonu (Menüyü Genişletir / Çekmeceyi Açar) */}
-        <div className="p-3 border-t border-[#252526] bg-[#1e1e1e] flex justify-center items-center">
+        <div className="p-3 bg-[#1e1e1e] flex justify-center items-center">
           <button
             type="button"
             onClick={onToggleSidebar || onOpenNewLink}
@@ -326,7 +326,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
 
   // 2. ÇEKMECE AÇIKKEN: Genişletilmiş 230px Tam Menü (negronn.xml 1:1)
   return (
-    <aside className="w-[230px] bg-[#1e1e1e] border-r border-[#252526] flex flex-col justify-between h-[calc(100vh-60px)] shrink-0 text-xs select-none shadow-xs transition-all duration-300 ease-in-out">
+    <aside className="w-[230px] bg-[#1e1e1e] border-0 flex flex-col justify-between h-[calc(100vh-60px)] shrink-0 text-xs select-none shadow-xs transition-all duration-300 ease-in-out">
       
       {/* Menü Öğeleri (.mnMen) */}
       <div className="p-3 space-y-4 overflow-y-auto flex-1">
@@ -366,7 +366,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
             </div>
 
             {hizmetlerOpen && (
-              <ul className="space-y-0.5 pl-3 border-l border-white/10 ml-4 mt-1">
+              <ul className="space-y-0.5 pl-3 ml-4 mt-1">
                 {/* 1. Etkileşimler (svg.message-notif-1) */}
                 <li>
                   <button
@@ -435,7 +435,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
             </div>
 
             {klasorOpen && (
-              <ul className="space-y-0.5 pl-3 border-l border-white/10 ml-4 mt-1">
+              <ul className="space-y-0.5 pl-3 ml-4 mt-1">
                 {/* 1. Chat */}
                 <li>
                   <a
@@ -503,7 +503,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
             </div>
 
             {gelistiriciOpen && (
-              <ul className="space-y-0.5 pl-3 border-l border-white/10 ml-4 mt-1">
+              <ul className="space-y-0.5 pl-3 ml-4 mt-1">
                 {/* 1. Ters Çevir (svg.arrow-swap-horizontal) */}
                 <li>
                   <button
@@ -560,9 +560,9 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
       </div>
 
       {/* Alt Bölüm (.mnMob): E-posta, Gizlilik ve Yorumlar Slaytı (.PageList02) + 6 Sosyal Buton (.LinkList04 / .mSoc) */}
-      <div className="p-3 border-t border-[#252526] bg-[#1e1e1e] space-y-2.5">
+      <div className="p-3 bg-[#1e1e1e] space-y-2.5">
         {/* PageList02: E-posta, Gizlilik ve Yorumlar Kayan Slider + [+] Butonu */}
-        <div className="relative h-9 bg-white/[0.04] border border-white/[0.08] rounded-[9px] overflow-hidden flex items-center shadow-xs">
+        <div className="relative h-9 bg-white/[0.04] rounded-[9px] overflow-hidden flex items-center shadow-xs">
           {/* Slayt 0: E-posta */}
           <div
             className={`absolute inset-0 flex items-center justify-between px-2.5 transition-all duration-300 ease-in-out ${
@@ -670,7 +670,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
         </div>
 
         {/* LinkList04: Sosyal Medya Kayan Slider + [+] Butonu (Üstteki Slayt ile Birebir Aynı Tasarım) */}
-        <div className="relative h-9 bg-white/[0.04] border border-white/[0.08] rounded-[9px] overflow-hidden flex items-center shadow-xs">
+        <div className="relative h-9 bg-white/[0.04] rounded-[9px] overflow-hidden flex items-center shadow-xs">
           {sidebarSocialLinks.map((item, idx) => {
             const IconComp = item.icon;
             return (

@@ -429,7 +429,7 @@ export const SearchOverlayModal: React.FC<SearchOverlayModalProps> = ({
             setQuery(chip.prefix);
             inputRef.current?.focus();
           }}
-          className="inline-flex items-center px-[9px] py-[3px] rounded-[7px] bg-white/[0.08] border border-white/10 text-[#f1f5f9] text-[11px] font-mono cursor-pointer shrink-0 transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[color-mix(in_srgb,var(--linkC,#9aa0a6)_28%,rgba(255,255,255,0.15))] hover:border-[var(--linkC,#9aa0a6)] hover:text-white"
+          className="inline-flex items-center px-[9px] py-[3px] rounded-[7px] bg-white/[0.08] text-[#f1f5f9] text-[11px] font-mono cursor-pointer shrink-0 transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[color-mix(in_srgb,var(--linkC,#9aa0a6)_28%,rgba(255,255,255,0.15))] hover:text-white"
           title={chip.title}
         >
           {chip.label}
@@ -454,7 +454,7 @@ export const SearchOverlayModal: React.FC<SearchOverlayModalProps> = ({
       {/* Kapat Butonu (.adv-close-btn) — nsone.xml 1:1 karemsi 32px */}
       <button
         onClick={onClose}
-        className="absolute top-5 right-5 w-8 h-8 aspect-square rounded-[10px] bg-[#282828] border border-white/[0.08] text-white hover:bg-[#333333] hover:border-[var(--linkC,#9aa0a6)] hover:text-[var(--linkC,#9aa0a6)] flex items-center justify-center shadow-[0_2px_6px_rgba(0,0,0,0.2)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] outline-none cursor-pointer"
+        className="absolute top-5 right-5 w-8 h-8 aspect-square rounded-[10px] bg-[#282828] text-white hover:bg-[#333333] hover:text-[var(--linkC,#9aa0a6)] flex items-center justify-center shadow-[0_2px_6px_rgba(0,0,0,0.2)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] outline-none cursor-pointer"
         aria-label="Aramayı Kapat (Esc)"
         title="Kapat (Esc)"
       >
@@ -462,16 +462,16 @@ export const SearchOverlayModal: React.FC<SearchOverlayModalProps> = ({
       </button>
 
       {/* Modal Kartı (.adv-card) — nsone.xml 1:1: 660px cam efektli kart */}
-      <div className="adv-card w-full max-w-[660px] flex flex-col gap-3 p-4 rounded-[20px] bg-[rgba(22,25,34,0.82)] backdrop-blur-[28px] border border-white/[0.08] shadow-[0_30px_80px_rgba(0,0,0,0.72)] animate-in slide-in-from-top duration-200">
+      <div className="adv-card w-full max-w-[660px] flex flex-col gap-3 p-4 rounded-[20px] bg-[rgba(22,25,34,0.82)] backdrop-blur-[28px] shadow-[0_30px_80px_rgba(0,0,0,0.72)] animate-in slide-in-from-top duration-200">
 
         {/* Arama Kutusu ve Motor Seçici (.adv-input-bar) */}
-        <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-[12px] bg-[#252526] border border-white/10 focus-within:border-[var(--linkC,#9aa0a6)] shadow-[0_12px_36px_rgba(0,0,0,0.45)] transition-all">
+        <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-[12px] bg-[#252526] shadow-[0_12px_36px_rgba(0,0,0,0.45)] transition-all">
 
           {/* Arama Motoru Dropdown (.adv-engine-select) */}
           <select
             value={selectedEngine}
             onChange={(e) => setSelectedEngine(e.target.value)}
-            className="bg-[#1e1e1e] hover:bg-[#28282b] text-[#d4d4d4] text-xs font-semibold py-2 px-2.5 rounded-lg border border-transparent outline-none cursor-pointer shrink-0 max-w-[130px] truncate"
+            className="bg-[#1e1e1e] hover:bg-[#28282b] text-[#d4d4d4] text-xs font-semibold py-2 px-2.5 rounded-lg border-0 outline-none cursor-pointer shrink-0 max-w-[130px] truncate"
             title="Arama Motoru Seçin"
           >
             {SEARCH_ENGINES.map((eng, i) => (
@@ -532,10 +532,10 @@ export const SearchOverlayModal: React.FC<SearchOverlayModalProps> = ({
                 key={pill.name}
                 type="button"
                 onClick={() => setSelectedEngine(pill.url)}
-                className={`adv-pill px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap cursor-pointer border transition-all duration-150 ${
+                className={`adv-pill px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap cursor-pointer transition-all duration-150 ${
                   isActive
-                    ? 'is-active bg-[rgba(96,205,255,0.15)] text-[var(--linkC,#9aa0a6)] border-[rgba(96,205,255,0.4)]'
-                    : 'bg-[#1e1e1e] text-[#a3a3a3] border-transparent hover:bg-[#28282b] hover:text-white'
+                    ? 'is-active bg-[rgba(96,205,255,0.15)] text-[var(--linkC,#9aa0a6)]'
+                    : 'bg-[#1e1e1e] text-[#a3a3a3] hover:bg-[#28282b] hover:text-white'
                 }`}
               >
                 {pill.name}
@@ -545,21 +545,21 @@ export const SearchOverlayModal: React.FC<SearchOverlayModalProps> = ({
         </div>
 
         {/* Canlı Kısayol / Hesap Makinesi / Önizleme Şeridi (.adv-banner) — nsone.xml 36166-36204 1:1 */}
-        <div className="adv-banner flex items-center justify-between gap-2.5 px-3.5 py-2.5 rounded-[10px] bg-[rgba(30,30,30,0.92)] border border-white/[0.08] text-xs">
+        <div className="adv-banner flex items-center justify-between gap-2.5 px-3.5 py-2.5 rounded-[10px] bg-[rgba(30,30,30,0.92)] text-xs">
           <div 
             ref={attachDragScroll}
             className="flex items-center gap-1.5 min-w-0 flex-1 overflow-x-auto scrollbar-none whitespace-nowrap select-none py-0.5 cursor-grab"
           >
             {bannerContent}
           </div>
-          <kbd className="adv-banner-kbd px-[9px] py-[3px] rounded-[7px] text-[11px] font-bold bg-[color-mix(in_srgb,var(--linkC,#9aa0a6)_25%,rgba(255,255,255,0.1))] border border-[color-mix(in_srgb,var(--linkC,#9aa0a6)_60%,rgba(255,255,255,0.2))] text-white shadow-[0_2px_6px_rgba(0,0,0,0.2)] shrink-0 whitespace-nowrap">
+          <kbd className="adv-banner-kbd px-[9px] py-[3px] rounded-[7px] text-[11px] font-bold bg-[color-mix(in_srgb,var(--linkC,#9aa0a6)_25%,rgba(255,255,255,0.1))] text-white shadow-[0_2px_6px_rgba(0,0,0,0.2)] shrink-0 whitespace-nowrap">
             {bannerKbd}
           </kbd>
         </div>
 
         {/* Sayfada Çekmecesi: Bağlantılar Paneli (.adv-results-list) — nsone.xml 35840-35847 1:1 */}
         {selectedEngine === 'blog' && (
-          <div className="adv-results-list max-h-[290px] overflow-y-auto rounded-xl bg-[#1e1e1e] border border-white/[0.06] p-1.5 flex flex-col gap-[3px] shadow-[0_16px_40px_rgba(0,0,0,0.5)]">
+          <div className="adv-results-list max-h-[290px] overflow-y-auto rounded-xl bg-[#1e1e1e] p-1.5 flex flex-col gap-[3px] shadow-[0_16px_40px_rgba(0,0,0,0.5)]">
             <div className="adv-results-header px-2.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.05em] text-[#989b9f] flex items-center justify-between">
               <span>
                 {results.length > 0
@@ -584,7 +584,7 @@ export const SearchOverlayModal: React.FC<SearchOverlayModalProps> = ({
                     onClick={() => openResult(link)}
                     onMouseEnter={() => setSelectedIndex(idx)}
                     className={`adv-item flex items-center justify-between gap-3 px-2.5 py-2 rounded-lg cursor-pointer transition-all duration-150 ${
-                      isSel ? 'is-selected bg-[#252526] border border-white/10' : 'border border-transparent'
+                      isSel ? 'is-selected bg-[#252526] text-white' : 'hover:bg-[#252526]/60'
                     }`}
                   >
                     <div className="adv-item-main flex items-center gap-2.5 min-w-0">
