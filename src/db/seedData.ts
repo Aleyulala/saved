@@ -444,6 +444,7 @@ export const SEED_LINKS: RawSeedLink[] = [
     "tags": ["konu-disi", "forum", "topluluk"],
     "color": "#9aa0a6",
     "isPinned": false,
+    "thumbnail": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80",
     "description": "Saved projesi topluluk tartışmaları ve soru-cevap alanı"
   },
   {
@@ -453,6 +454,7 @@ export const SEED_LINKS: RawSeedLink[] = [
     "tags": ["konu-disi", "matrix", "sohbet"],
     "color": "#0dbd8b",
     "isPinned": false,
+    "thumbnail": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80",
     "description": "Negronn Show Matrix odası ve anlık sohbet kanalı"
   },
   {
@@ -462,6 +464,7 @@ export const SEED_LINKS: RawSeedLink[] = [
     "tags": ["konu-disi", "sozluk", "gundem"],
     "color": "#53a849",
     "isPinned": false,
+    "thumbnail": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=1200&q=80",
     "description": "Kutsal bilgi kaynağı ve serbest tartışma platformu"
   },
   {
@@ -471,6 +474,7 @@ export const SEED_LINKS: RawSeedLink[] = [
     "tags": ["konu-disi", "reddit", "topluluk"],
     "color": "#ff4500",
     "isPinned": false,
+    "thumbnail": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80",
     "description": "Reddit Türkiye topluluğu ve serbest paylaşımlar"
   },
   {
@@ -480,6 +484,7 @@ export const SEED_LINKS: RawSeedLink[] = [
     "tags": ["konu-disi", "forum", "dh"],
     "color": "#e02b20",
     "isPinned": false,
+    "thumbnail": "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=1200&q=80",
     "description": "Türkiye'nin en köklü konu dışı ve serbest tartışma forumu"
   },
   {
@@ -489,6 +494,7 @@ export const SEED_LINKS: RawSeedLink[] = [
     "tags": ["konu-disi", "teknoloji", "sosyal"],
     "color": "#00a4e4",
     "isPinned": false,
+    "thumbnail": "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=1200&q=80",
     "description": "Teknoloji, donanım ve konu dışı serbest paylaşımlar"
   },
   {
