@@ -56,7 +56,7 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
   const primaryImage = postMedia.primaryImage;
   const mediaItems = postMedia.items;
   const hasRealMedia = mediaItems.some((it: MediaItem) => !!it.url && it.url.trim().length > 0) || (!!primaryImage && primaryImage.trim().length > 0);
-  const [activeTab, setActiveTab] = useState<'medya' | 'yazi'>(hasRealMedia ? 'medya' : 'yazi');
+  const [activeTab, setActiveTab] = useState<'medya' | 'yazi'>('medya');
   const [selectedMediaIndex, setSelectedMediaIndex] = useState<number>(0);
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
@@ -108,9 +108,9 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
   const currentMedia = mediaItems[selectedMediaIndex] || mediaItems[0] || (primaryImage ? { type: 'image' as const, url: primaryImage, title: link.title } : null);
 
   useEffect(() => {
-    setActiveTab(hasRealMedia ? 'medya' : 'yazi');
+    setActiveTab('medya');
     setSelectedMediaIndex(0);
-  }, [link.id, hasRealMedia]);
+  }, [link.id]);
 
   // Benzer Yazılar (Related Posts: from same category or next active posts)
   const relatedPosts = activeLinks

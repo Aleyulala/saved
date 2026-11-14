@@ -298,12 +298,20 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
             e.preventDefault();
             onGoHome();
           }}
-          className="cursor-pointer flex items-center gap-2 group select-none ml-2 no-underline"
-          title="Ana Sayfaya Git (NESCİONE)"
+          className="cursor-pointer flex items-center gap-2.5 group select-none ml-2.5 no-underline"
+          title="Ana Sayfaya Git (NSONE)"
           aria-label="Ana Sayfa"
         >
-          <span className="font-extrabold text-base sm:text-lg tracking-wider text-white group-hover:text-[var(--linkC,#9aa0a6)] transition-colors font-mono">
-            NESCİONE
+          {/* Logo Mark: Minimalist Modern Glowing N Emblem */}
+          <div className="w-7 h-7 rounded-[9px] bg-gradient-to-tr from-white/10 via-white/5 to-[var(--linkC,#60cdff)]/20 border border-white/10 group-hover:border-[var(--linkC,#60cdff)]/50 flex items-center justify-center shadow-sm group-hover:shadow-[0_0_12px_var(--linkC,#60cdff)]/25 transition-all duration-300">
+            <span className="font-sans font-black text-[13px] leading-none bg-gradient-to-b from-white to-white/70 group-hover:to-[var(--linkC,#60cdff)] bg-clip-text text-transparent">
+              N
+            </span>
+          </div>
+
+          {/* Sexy Typographic Wordmark (Yazı Logo — Blogger NSONE 1:1) */}
+          <span className="font-sans font-extrabold text-[15px] sm:text-[16px] tracking-[0.24em] uppercase text-white group-hover:text-[var(--linkC,#60cdff)] transition-colors duration-300">
+            NSONE
           </span>
         </a>
       </div>

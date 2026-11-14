@@ -767,39 +767,6 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
         </div>
       </section>
 
-      {/* Widget 3: Bize Ulaşın (#ContactForm2) — Nsone Bot Tetikleyici (.cf-sidebar-trigger-btn, nsone.xml 1:1) */}
-      <section aria-label="Bize Ulaşın" id="ContactForm2">
-        <button
-          type="button"
-          onClick={openSpotlight}
-          className="w-full flex items-center gap-3 px-4 py-3 rounded-2xl bg-[#252526] border border-white/[0.08] hover:border-[var(--linkC,#9aa0a6)]/50 hover:bg-[#28282b] hover:-translate-y-0.5 transition-all duration-200 shadow-md cursor-pointer group select-none"
-          title="Bize Ulaşın — Nsone Bot"
-        >
-          <span className="relative w-[38px] h-[38px] rounded-full bg-[var(--linkB,#9aa0a6)] flex items-center justify-center shrink-0">
-            <ChatBloggerIcon className="w-5 h-5 text-white" />
-            <span
-              className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-[#252526]"
-              title="Çevrimiçi"
-            />
-          </span>
-          <span className="flex flex-col items-start flex-1 min-w-0">
-            <span className="text-[15px] font-bold text-white leading-tight">Nsone Bot</span>
-            <span className="text-[11.5px] text-emerald-400 font-medium leading-tight">Çevrimiçi — Bize Ulaşın</span>
-          </span>
-          <svg
-            className="w-[18px] h-[18px] text-[#989b9f] group-hover:translate-x-1 group-hover:text-[var(--linkC,#9aa0a6)] transition-all shrink-0"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M9 18l6-6-6-6" />
-          </svg>
-        </button>
-      </section>
-
     </div>
   );
 

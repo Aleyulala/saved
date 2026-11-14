@@ -77,9 +77,18 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
       <aside 
         className="blogger-drawer relative w-[85vw] max-w-[360px] bg-[#1e1e1e] border-r border-[#252526] h-full flex flex-col justify-between shadow-2xl z-10 overflow-hidden transform transition-transform duration-300 ease-out"
       >
-        {/* Drawer Header (.mnH - XML 1:1: Çarpı kaldırıldı) */}
+        {/* Drawer Header (.mnH - XML 1:1: Çarpı kaldırıldı, NSONE Yazı Logo) */}
         <div className="h-[52px] px-4 border-b border-[#252526] flex items-center bg-[#1e1e1e]">
-          <span className="text-sm font-extrabold text-white font-mono tracking-wider">NESCİONE</span>
+          <div className="flex items-center gap-2.5">
+            <div className="w-7 h-7 rounded-[9px] bg-gradient-to-tr from-white/10 via-white/5 to-[var(--linkC,#60cdff)]/20 border border-white/10 flex items-center justify-center shadow-sm">
+              <span className="font-sans font-black text-[13px] leading-none bg-gradient-to-b from-white to-white/70 bg-clip-text text-transparent">
+                N
+              </span>
+            </div>
+            <span className="font-sans font-extrabold text-[15px] tracking-[0.24em] uppercase text-white">
+              NSONE
+            </span>
+          </div>
         </div>
 
         {/* Drawer Scrollable Content (.mnMen) */}
