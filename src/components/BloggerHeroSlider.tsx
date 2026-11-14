@@ -201,7 +201,7 @@ export const BLOGGER_SLIDES: BloggerSlide[] = [
     subtitle: 'Otomasyon',
     note: '*Robotik ve otonom sistemler',
     category: 'Robotik',
-    collectionName: 'Teknoloji',
+    collectionName: 'AI',
     imageUrl: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1920&q=85',
     link: 'https://negronshow.blogspot.com/search/label/teknoloji'
   },

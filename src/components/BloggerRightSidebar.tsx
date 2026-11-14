@@ -157,29 +157,9 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
     setTimeout(checkTagScroll, 300);
   };
 
-  // Prepare popular posts (Blogger Screenshot 2 1:1)
+  // Prepare popular posts (top 5 Linkwarden links)
   const popularPosts = useMemo(() => {
-    const list = [...allLinks].filter(l => !l.isTrash && !l.isArchived);
-    const p1 = list.find(l => l.title.includes('Fedora Kde Big Screen') || l.title.includes('Legion Go'));
-    const p2 = list.find(l => l.title.includes('Notbook Lm'));
-    const p3 = list.find(l => l.title.includes('Atom'));
-    const p4 = list.find(l => l.title.includes('Evrim Ağacı'));
-    const p5 = list.find(l => l.title.includes('Hüseyin BABAL'));
-
-    const ordered: LinkItem[] = [];
-    if (p1) ordered.push(p1);
-    if (p2) ordered.push(p2);
-    if (p3) ordered.push(p3);
-    if (p4) ordered.push(p4);
-    if (p5) ordered.push(p5);
-
-    for (const item of list) {
-      if (ordered.length >= 5) break;
-      if (!ordered.some(o => o.id === item.id)) {
-        ordered.push(item);
-      }
-    }
-    return ordered;
+    return [...allLinks].filter(l => !l.isTrash && !l.isArchived).slice(0, 5);
   }, [allLinks]);
 
   const listPosts = popularPosts;

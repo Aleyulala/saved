@@ -27,7 +27,7 @@ export class SavedDatabase extends Dexie {
 
 export const db = new SavedDatabase();
 
-const CURRENT_SEED_VERSION = 'saved-blogger-nsone-v16-parity';
+const CURRENT_SEED_VERSION = 'saved-linkwarden-v17';
 
 export async function seedSavedMainData(force = false) {
   // Quick safety check: Rename any existing 'Routine' records to 'Rutin'
@@ -42,11 +42,25 @@ export async function seedSavedMainData(force = false) {
   const dummyCol = await db.collections.where('name').equals('Research and Studies').first();
   const seedSetting = await db.settings.get('seed_version');
 
-  // Full reseed when empty, dummy, forced, or when seed_version is upgraded to ensure 1:1 parity with Blogger
+  // Full reseed when empty, dummy, forced, or when seed_version upgrades to Linkwarden dataset
   const needsFullSeed = collectionsCount === 0 || !!dummyCol || force || collectionsCount < 8 || !seedSetting || seedSetting.value !== CURRENT_SEED_VERSION;
   const needsIncrementalSync = false;
 
   if (needsFullSeed) {
+    const seedUrlSet = new Set(SEED_LINKS.map((s) => s.url));
+    const existingLinks = seedSetting ? await db.links.toArray() : [];
+    const existingCols = seedSetting ? await db.collections.toArray() : [];
+    const existingColNameById = new Map<number, string>();
+    existingCols.forEach((c) => {
+      if (c.id) existingColNameById.set(c.id, c.name);
+    });
+    const customUserLinks = existingLinks.filter(
+      (l) =>
+        !seedUrlSet.has(l.url) &&
+        !l.url.includes('negronshow.blogspot.com/202') &&
+        l.url !== 'https://playertwo.lol/game/impact'
+    );
+
     await db.transaction('rw', db.links, db.collections, db.tags, db.settings, async () => {
         // Clear previous dummy data
         await db.links.clear();
@@ -103,6 +117,18 @@ export async function seedSavedMainData(force = false) {
         });
 
         await db.links.bulkAdd(linksToAdd);
+        if (customUserLinks.length > 0) {
+          await db.links.bulkAdd(
+            customUserLinks.map((u) => {
+              const oldColName = u.collectionId ? existingColNameById.get(u.collectionId) : undefined;
+              const { id: _ignoredId, ...rest } = u;
+              return {
+                ...rest,
+                collectionId: oldColName ? colMap.get(oldColName) || null : null
+              };
+            })
+          );
+        }
         await db.settings.put({ key: 'seed_version', value: CURRENT_SEED_VERSION });
     });
   } else if (needsIncrementalSync) {
