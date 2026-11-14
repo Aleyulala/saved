@@ -195,7 +195,7 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
                     >
                       <div className="flex items-center gap-2">
                         <EyeIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[#9ca3af] group-hover:text-[var(--linkC,#9aa0a6)]" />
-                        <span>Saved</span>
+                        <span>NESCİONE</span>
                       </div>
                       <span className="text-[10px] text-[#9ca3af] font-mono">{counts.all}</span>
                     </button>

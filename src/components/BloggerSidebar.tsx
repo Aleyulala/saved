@@ -147,7 +147,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                 >
                   <span className="flex items-center gap-2">
                     <MessageNotif1Icon className="w-[18px] h-[18px] opacity-80 text-[var(--linkC,#9aa0a6)]" />
-                    Saved
+                    NESCİONE
                   </span>
                   <span className="text-[10px] text-[#9ca3af] font-mono">{counts.pinned}</span>
                 </button>
@@ -200,20 +200,31 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                   <span>Topluluk</span>
                   <span className="ml-auto text-[var(--linkC,#9aa0a6)] text-[11px] font-bold">New!</span>
                 </div>
-                {/* 1. İlgi Alanları */}
-                <button
-                  onClick={() => onSelectTab('links')}
-                  className={`w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs transition-colors cursor-pointer ${
-                    currentTab === 'links' ? 'bg-[#1e1e1e] text-[var(--linkC,#9aa0a6)] font-bold' : 'text-[#d4d4d4] hover:bg-[#1e1e1e] hover:text-[var(--linkC,#9aa0a6)]'
-                  }`}
+                {/* 1. Chat */}
+                <a
+                  href="https://script.google.com/macros/s/AKfycbwcZprdS6F_jJ6nin0YalTKweQKP4t936UgrTnme-d5gA-qHbi986vh6HxdzvA236Of/exec"
+                  target="_blank"
+                  rel="nofollow noreferrer noopener"
+                  className="w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-[#1e1e1e] hover:text-[#00ac47] transition-colors"
                 >
                   <span className="flex items-center gap-2">
-                    <EyeIcon className="w-[18px] h-[18px] opacity-80 text-[#9ca3af]" />
+                    <GoogleChatIcon className="w-[18px] h-[18px] opacity-80 text-[#00ac47]" />
+                    Chat
+                  </span>
+                </a>
+                {/* 2. Tartışmalar */}
+                <a
+                  href="https://github.com/Aleyulala/saved/discussions/?pli=1"
+                  target="_blank"
+                  rel="nofollow noreferrer noopener"
+                  className="w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-[#1e1e1e] hover:text-[var(--linkC,#9aa0a6)] transition-colors"
+                >
+                  <span className="flex items-center gap-2">
+                    <Profile2UserIcon className="w-[18px] h-[18px] opacity-80 text-[#9ca3af]" />
                     Tartışmalar
                   </span>
-                  <span className="text-[10px] text-[#9ca3af] font-mono">{counts.all}</span>
-                </button>
-                {/* 2. Geri Bildirim */}
+                </a>
+                {/* 3. Labs */}
                 <a
                   href="https://labs.google.com/"
                   target="_blank"
@@ -221,7 +232,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                   className="w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-[#1e1e1e] hover:text-[var(--linkC,#9aa0a6)] transition-colors"
                 >
                   <span className="flex items-center gap-2">
-                    <SmsEditIcon className="w-[18px] h-[18px] opacity-80 text-[#9ca3af]" />
+                    <LabsIcon className="w-[18px] h-[18px] opacity-80 text-[#9ca3af]" />
                     Labs
                   </span>
                 </a>
@@ -367,7 +378,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                   >
                     <div className="flex items-center gap-2">
                       <MessageNotif1Icon className="w-4 h-4 opacity-80 text-[var(--linkC,#9aa0a6)]" />
-                      <span>Saved</span>
+                      <span>NESCİONE</span>
                     </div>
                     <span className="text-[10px] text-[#9ca3af] font-mono">{counts.pinned}</span>
                   </button>
@@ -424,34 +435,46 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
 
             {klasorOpen && (
               <ul className="space-y-0.5 pl-3 border-l border-white/10 ml-4 mt-1">
-                {/* 1. İlgi Alanları (svg.eye) */}
+                {/* 1. Chat */}
                 <li>
-                  <button
-                    onClick={() => onSelectTab('links')}
-                    className={`w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs transition-colors cursor-pointer ${
-                      currentTab === 'links'
-                        ? 'bg-[#252526] text-[var(--linkC,#9aa0a6)] font-bold'
-                        : 'text-[#d4d4d4] hover:bg-[#252526] hover:text-[var(--linkC,#9aa0a6)]'
-                    }`}
+                  <a
+                    href="https://script.google.com/macros/s/AKfycbwcZprdS6F_jJ6nin0YalTKweQKP4t936UgrTnme-d5gA-qHbi986vh6HxdzvA236Of/exec"
+                    target="_blank"
+                    rel="nofollow noreferrer noopener"
+                    className="w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-[#252526] hover:text-[#00ac47] transition-colors"
                   >
                     <div className="flex items-center gap-2">
-                      <EyeIcon className="w-4 h-4 opacity-80 text-[#9ca3af]" />
-                      <span>Tartışmalar</span>
+                      <GoogleChatIcon className="w-4 h-4 opacity-80 text-[#00ac47]" />
+                      <span>Chat</span>
                     </div>
-                    <span className="text-[10px] text-[#9ca3af] font-mono">{counts.all}</span>
-                  </button>
+                  </a>
                 </li>
 
-                {/* 2. Geri Bildirim (svg.sms-edit) */}
+                {/* 2. Tartışmalar */}
+                <li>
+                  <a
+                    href="https://github.com/Aleyulala/saved/discussions/?pli=1"
+                    target="_blank"
+                    rel="nofollow noreferrer noopener"
+                    className="w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-[#252526] hover:text-[var(--linkC,#9aa0a6)] transition-colors"
+                  >
+                    <div className="flex items-center gap-2">
+                      <Profile2UserIcon className="w-4 h-4 opacity-80 text-[#9ca3af]" />
+                      <span>Tartışmalar</span>
+                    </div>
+                  </a>
+                </li>
+
+                {/* 3. Labs */}
                 <li>
                   <a
                     href="https://labs.google.com/"
                     target="_blank"
                     rel="nofollow noreferrer noopener"
-                    className="w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-[#1e1e1e] hover:text-[var(--linkC,#9aa0a6)] transition-colors"
+                    className="w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-[#252526] hover:text-[var(--linkC,#9aa0a6)] transition-colors"
                   >
                     <div className="flex items-center gap-2">
-                      <SmsEditIcon className="w-4 h-4 opacity-80 text-[#9ca3af]" />
+                      <LabsIcon className="w-4 h-4 opacity-80 text-[#9ca3af]" />
                       <span>Labs</span>
                     </div>
                   </a>
