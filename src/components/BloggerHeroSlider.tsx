@@ -457,7 +457,7 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
         })}
 
         {/* Top-Right: Fullscreen / Zoom Lightbox Action Button (.zmVideoBtn 1:1 Blogger) */}
-        <div className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20">
+        <div className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
           <button
             type="button"
             onClick={(e) => {

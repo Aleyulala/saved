@@ -361,7 +361,7 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
     <>
       {/* Nsone Bot Başlığı */}
       <div className="flex items-center gap-3 pb-3 border-b border-white/10 mb-3 pr-10">
-        <div className="relative w-10 h-10 rounded-full bg-[#60cdff]/20 border border-[#60cdff]/30 flex items-center justify-center text-[#60cdff] shrink-0">
+        <div className="relative w-10 h-10 rounded-full bg-[var(--linkC,#9aa0a6)]/20 border border-[var(--linkC,#9aa0a6)]/30 flex items-center justify-center text-[var(--linkC,#9aa0a6)] shrink-0">
           <ChatBloggerIcon className="w-5 h-5" />
           <span
             className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-[#252526] shadow-[0_0_8px_rgba(16,185,129,0.6)]"
@@ -559,7 +559,7 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
       {onCloseDrawer && (
         <div className="flex items-center justify-between pb-3 border-b border-[#333333] lg:hidden">
           <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#60cdff]" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[var(--linkC,#9aa0a6)]" />
             <h2 className="font-bold text-sm text-white">Sağ Panel</h2>
           </div>
           <button
@@ -577,7 +577,7 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
         
         {/* Başlık: Pulse İkonu + Popüler Post (.title) */}
         <div className="flex items-center gap-2 mb-3">
-          <PulseIcon className="w-5 h-5 text-[#60cdff]" />
+          <PulseIcon className="w-5 h-5 text-[var(--linkC,#9aa0a6)]" />
           <h2 className="text-[1.15rem] font-bold text-white tracking-wide">
             Popüler Post
           </h2>
@@ -609,7 +609,7 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
               {/* Badges (.tfxM .tfxC - Image 4 1:1 Tam Eşit Boyut) */}
               <div className="absolute top-2 left-2 z-10">
                 <div className="h-[22px] px-2 flex items-center gap-1 rounded-lg bg-black/65 backdrop-blur-md text-white text-[10px] font-medium shadow-sm">
-                  <EyeIcon className="w-3.5 h-3.5 text-[#60cdff]" />
+                  <EyeIcon className="w-3.5 h-3.5 text-[var(--linkC,#9aa0a6)]" />
                   <span>{featuredFirst.views || 74}</span>
                 </div>
               </div>
@@ -626,11 +626,11 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
 
               <div className="absolute bottom-2 left-2 z-10">
                 <div className="h-[22px] inline-flex items-center gap-1 px-2 rounded-lg bg-black/75 backdrop-blur-md text-white text-[10px] font-bold shadow-sm">
-                  <span className="w-3.5 h-3.5 rounded-full bg-[#1e1e1e] flex items-center justify-center text-[7px] text-[#60cdff] font-extrabold">
+                  <span className="w-3.5 h-3.5 rounded-full bg-[#1e1e1e] flex items-center justify-center text-[7px] text-[var(--linkC,#9aa0a6)] font-extrabold">
                     N
                   </span>
                   <span>{featuredFirst.authorName || 'NEGRONN'}</span>
-                  <Verify1Icon className="w-3 h-3 text-[#60cdff]" />
+                  <Verify1Icon className="w-3 h-3 text-[var(--linkC,#9aa0a6)]" />
                 </div>
               </div>
             </div>
@@ -639,10 +639,10 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
             <div className="space-y-1.5 pt-1">
               <div className="flex items-center gap-2 text-xs">
                 <span className="text-[11px] text-[#71717a]">{formatDate(featuredFirst.createdAt)}</span>
-                <span className="text-[11px] text-[#60cdff] hover:underline lowercase">{featuredFirst.tags[0] || 'genel'}</span>
+                <span className="text-[11px] text-[var(--linkC,#9aa0a6)] hover:underline lowercase">{featuredFirst.tags[0] || 'genel'}</span>
               </div>
 
-              <h3 className="font-bold text-[14px] text-white group-hover:text-[#60cdff] line-clamp-2 leading-snug transition-colors">
+              <h3 className="font-bold text-[14px] text-white group-hover:text-[var(--linkC,#9aa0a6)] line-clamp-2 leading-snug transition-colors">
                 {featuredFirst.title}
               </h3>
 
@@ -671,10 +671,10 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
                 <div className="flex items-center gap-2 text-xs">
                   <span className="text-[11px] text-[#71717a]">{formatDate(post.createdAt)}</span>
                   <span className="text-[#52525b]">—</span>
-                  <span className="text-[11px] text-[#60cdff] hover:underline lowercase">{category}</span>
+                  <span className="text-[11px] text-[var(--linkC,#9aa0a6)] hover:underline lowercase">{category}</span>
                 </div>
 
-                <h4 className="font-bold text-xs sm:text-[13px] text-white/90 group-hover:text-[#60cdff] leading-snug transition-colors line-clamp-2">
+                <h4 className="font-bold text-xs sm:text-[13px] text-white/90 group-hover:text-[var(--linkC,#9aa0a6)] leading-snug transition-colors line-clamp-2">
                   <span className="text-[#989b9f] font-mono mr-1.5 font-normal">#{idx + 1}</span>
                   {post.title}
                 </h4>
@@ -696,7 +696,7 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
         {/* Başlık: Hedef İkonu + Etiketler + Çizgi Butonlar (.car-nav) */}
         <div className="flex items-center justify-between pb-1">
           <div className="flex items-center gap-2">
-            <TagBloggerIcon className="w-4 h-4 text-[#60cdff]" />
+            <TagBloggerIcon className="w-4 h-4 text-[var(--linkC,#9aa0a6)]" />
             <h2 className="text-[1.15rem] font-bold text-white tracking-wide">
               Etiketler
             </h2>
@@ -708,7 +708,7 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
               onClick={() => scrollTags('left')}
               className={`h-1.5 rounded-full transition-all duration-200 ${
                 tagCanScrollLeft 
-                  ? 'w-6 bg-[#60cdff] shadow-[0_0_6px_rgba(96,205,255,0.6)] cursor-pointer' 
+                  ? 'w-6 bg-[var(--linkC,#9aa0a6)] shadow-[0_0_6px_rgba(96,205,255,0.6)] cursor-pointer' 
                   : 'w-4 bg-white/20 opacity-40 cursor-default'
               }`}
               title="Önceki Etiketler"
@@ -718,7 +718,7 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
               onClick={() => scrollTags('right')}
               className={`h-1.5 rounded-full transition-all duration-200 ${
                 tagCanScrollRight 
-                  ? 'w-6 bg-[#60cdff] shadow-[0_0_6px_rgba(96,205,255,0.6)] cursor-pointer' 
+                  ? 'w-6 bg-[var(--linkC,#9aa0a6)] shadow-[0_0_6px_rgba(96,205,255,0.6)] cursor-pointer' 
                   : 'w-4 bg-white/20 opacity-40 cursor-default'
               }`}
               title="Sonraki Etiketler"
@@ -746,7 +746,7 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
                   onSelectTag(t.name);
                   if (onCloseDrawer) onCloseDrawer();
                 }}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#252526] hover:bg-[#2d2d30] text-[#d4d4d4] hover:text-[#60cdff] border border-transparent text-xs font-medium transition-all shrink-0 active:scale-95 shadow-none cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#252526] hover:bg-[#2d2d30] text-[#d4d4d4] hover:text-[var(--linkC,#9aa0a6)] border border-transparent text-xs font-medium transition-all shrink-0 active:scale-95 shadow-none cursor-pointer"
               >
                 <span>{t.name}</span>
                 <span className="text-[11px] text-[#9ca3af] opacity-80 font-normal ml-0.5 shadow-none bg-transparent">({count})</span>
@@ -762,7 +762,7 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
   return (
     <>
       {/* 1. Masaüstü Sağ Bar: Sayfayla Birlikte Kayar! (Ayrı kaydırma çubuğu YOK) */}
-      <div className="w-full hidden lg:block">
+      <div className="w-full block">
         {content}
       </div>
 

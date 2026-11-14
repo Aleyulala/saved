@@ -182,6 +182,35 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
     };
   };
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (zoomLevel <= 1 || e.touches.length !== 1) return;
+    setIsDragging(true);
+    didDragRef.current = false;
+    dragStartRef.current = {
+      x: e.touches[0].clientX,
+      y: e.touches[0].clientY,
+      posX: panPos.x,
+      posY: panPos.y
+    };
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging || zoomLevel <= 1 || e.touches.length !== 1) return;
+    const dx = e.touches[0].clientX - dragStartRef.current.x;
+    const dy = e.touches[0].clientY - dragStartRef.current.y;
+    if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
+      didDragRef.current = true;
+    }
+    setPanPos({
+      x: dragStartRef.current.posX + dx,
+      y: dragStartRef.current.posY + dy
+    });
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+  };
+
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!isDragging || zoomLevel <= 1) return;
     const dx = e.clientX - dragStartRef.current.x;
@@ -420,9 +449,13 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
               zoomLevel > 1 ? 'cursor-grab active:cursor-grabbing' : 'cursor-zoom-in'
             }`}
             style={{
-              transform: `scale(${zoomLevel}) rotate(${rotation}deg) translate(${panPos.x / zoomLevel}px, ${panPos.y / zoomLevel}px)`
+              transform: `scale(${zoomLevel}) rotate(${rotation}deg) translate(${panPos.x / zoomLevel}px, ${panPos.y / zoomLevel}px)`,
+              touchAction: zoomLevel > 1 ? 'none' : 'pan-y pinch-zoom'
             }}
             onMouseDown={handleMouseDown}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
             onClick={(e) => {
               e.stopPropagation();
               if (didDragRef.current) {

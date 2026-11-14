@@ -158,7 +158,7 @@ export const BloggerPrivacyView: React.FC<BloggerPrivacyViewProps> = ({
       <div className="p-3.5 rounded-xl bg-[#252526] border border-white/5 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs shadow-sm">
         <div className="space-y-0.5">
           <div className="flex items-center gap-1.5 text-white font-bold">
-            <LinkIcon className="w-3.5 h-3.5 text-[#60cdff]" />
+            <LinkIcon className="w-3.5 h-3.5 text-[var(--linkC,#9aa0a6)]" />
             <span>Blogger Sayfaları Doğrudan Bağlantı URL'i:</span>
           </div>
           <p className="text-[11px] text-[#9ca3af]">
@@ -167,7 +167,7 @@ export const BloggerPrivacyView: React.FC<BloggerPrivacyViewProps> = ({
         </div>
 
         <div className="flex items-center gap-2">
-          <code className="px-2.5 py-1.5 rounded-lg bg-[#1e1e1e] text-[#60cdff] font-mono text-[11px] select-all truncate max-w-[260px] sm:max-w-[320px]">
+          <code className="px-2.5 py-1.5 rounded-lg bg-[#1e1e1e] text-[var(--linkC,#9aa0a6)] font-mono text-[11px] select-all truncate max-w-[260px] sm:max-w-[320px]">
             {privacyDirectUrl}
           </code>
           <button
@@ -270,14 +270,14 @@ export const BloggerPrivacyView: React.FC<BloggerPrivacyViewProps> = ({
                 <span className="text-xs text-[#71717a] font-normal mr-1">Yazan:</span>
                 <span>{authorData.name}</span>
                 <Verify1Icon className="w-3.5 h-3.5 text-[#38bdf8]" />
-                <span className="text-[10px] px-2 py-0.5 rounded-lg bg-[#1e1e1e] text-[#60cdff] font-semibold ml-1">
+                <span className="text-[10px] px-2 py-0.5 rounded-lg bg-[#1e1e1e] text-[var(--linkC,#9aa0a6)] font-semibold ml-1">
                   {authorData.role}
                 </span>
               </bdi>
             </div>
 
             <p className="admA text-xs text-[#d4d4d4] leading-relaxed">
-              {authorData.bio} Soru, öneri ve tartışmalara katılmak için <a href={authorData.communityUrl} target="_blank" rel="noopener noreferrer" className="text-[#60cdff] hover:underline font-semibold">Topluluk</a> kanalımıza katılabilirsiniz.
+              {authorData.bio} Soru, öneri ve tartışmalara katılmak için <a href={authorData.communityUrl} target="_blank" rel="noopener noreferrer" className="text-[var(--linkC,#9aa0a6)] hover:underline font-semibold">Topluluk</a> kanalımıza katılabilirsiniz.
             </p>
 
             <div className="flex flex-wrap items-center gap-2 pt-1 text-xs">
@@ -296,10 +296,10 @@ export const BloggerPrivacyView: React.FC<BloggerPrivacyViewProps> = ({
                 href={authorData.communityUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#1e1e1e] hover:bg-[#333333] text-[#60cdff] hover:text-white transition-colors border border-[#60cdff]/20 hover:border-[#60cdff]/50 font-medium"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#1e1e1e] hover:bg-[#333333] text-[var(--linkC,#9aa0a6)] hover:text-white transition-colors border border-[var(--linkC,#9aa0a6)]/20 hover:border-[var(--linkC,#9aa0a6)]/50 font-medium"
                 title="Topluluk: Matrix / Element.io (#negronn-show:matrix.org)"
               >
-                <MatrixIcon className="w-3.5 h-3.5 text-[#60cdff]" />
+                <MatrixIcon className="w-3.5 h-3.5 text-[var(--linkC,#9aa0a6)]" />
                 <span>Topluluk</span>
               </a>
 

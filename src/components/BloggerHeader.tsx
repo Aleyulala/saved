@@ -301,18 +301,18 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
             onGoHome();
           }}
           className="cursor-pointer flex items-center group select-none ml-2.5 no-underline"
-          title="Ana Sayfaya Git (NSONE)"
+          title="Ana Sayfaya Git (NESCİONE)"
           aria-label="Ana Sayfa"
         >
-          {/* Typographic Wordmark (Yazı Logo — Blogger NSONE 1:1) */}
-          <span className="font-sans font-extrabold text-[16px] sm:text-[17px] tracking-[0.24em] uppercase text-white group-hover:text-[var(--linkC,#60cdff)] transition-colors duration-300">
-            NSONE
+          {/* Typographic Wordmark (Yazı Logo — NESCİONE) */}
+          <span className="font-sans font-extrabold text-[16px] sm:text-[17px] tracking-[0.22em] uppercase text-white group-hover:text-[var(--linkC,#9aa0a6)] transition-colors duration-300">
+            NESCİONE
           </span>
         </a>
       </div>
 
       {/* 2. Orta Bölüm: Blogger Arama Hapı (.headM .head-search-pill — nsone.xml 1:1: 36px, 14px radius, flex-1 max-w-[440px] mx-auto) */}
-      <div className="hidden min-[896px]:flex flex-1 max-w-[440px] mx-auto px-2.5 min-w-0 z-5 items-center">
+      <div className="hidden min-[896px]:flex flex-1 max-w-[440px] mx-auto px-2.5 min-w-0 z-5 items-center h-full">
         <div
           onClick={onOpenSearchModal}
           className="relative flex items-center w-full h-9 rounded-[14px] px-3.5 gap-2.5 bg-[#252526] hover:bg-[#28282b] border border-white/[0.08] hover:border-[rgba(96,205,255,0.4)] cursor-pointer group select-none transition-all duration-200"

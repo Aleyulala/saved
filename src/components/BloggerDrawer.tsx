@@ -108,8 +108,8 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
         {/* Drawer Header (.mnH - XML 1:1: Çarpı kaldırıldı, NSONE Yazı Logo) */}
         <div className="h-[52px] px-4 border-b border-[#252526] flex items-center bg-[#1e1e1e]">
           <div className="flex items-center">
-            <span className="font-sans font-extrabold text-[16px] tracking-[0.24em] uppercase text-white">
-              NSONE
+            <span className="font-sans font-extrabold text-[16px] tracking-[0.22em] uppercase text-white">
+              NESCİONE
             </span>
           </div>
         </div>
@@ -258,11 +258,11 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
                       href="https://script.google.com/macros/s/AKfycbwcZprdS6F_jJ6nin0YalTKweQKP4t936UgrTnme-d5gA-qHbi986vh6HxdzvA236Of/exec"
                       target="_blank"
                       rel="nofollow noreferrer noopener"
-                      className="w-full group flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-transparent hover:text-[#00ac47] transition-colors outline-none"
+                      className="w-full group flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] transition-colors outline-none"
                     >
                       <div className="flex items-center gap-2">
-                        <GoogleChatIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[#00ac47]" />
-                        <span className="font-semibold text-white/95 group-hover:text-[#00ac47]">Chat</span>
+                        <GoogleChatIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[var(--linkC,#9aa0a6)]" />
+                        <span className="font-semibold text-white/95 group-hover:text-[var(--linkC,#9aa0a6)]">Chat</span>
                       </div>
                     </a>
                   </li>

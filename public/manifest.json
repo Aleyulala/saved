@@ -1,6 +1,6 @@
 {
-  "name": "Saved - Yerel Bağlantı Yöneticisi",
-  "short_name": "Saved",
+  "name": "NESCİONE - Yerel Bağlantı Yöneticisi",
+  "short_name": "NESCİONE",
   "description": "Giriş gerektirmeyen, IndexedDB tabanlı, GitHub Pages uyumlu açık kaynaklı bağlantı yöneticisi.",
   "start_url": "./",
   "display": "standalone",

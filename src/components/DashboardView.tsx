@@ -113,7 +113,7 @@ const CategoryShowcaseSection: React.FC<{
               onClick={() => scroll('left')}
               className={`h-1.5 rounded-full transition-all duration-200 ${
                 canScrollLeft 
-                  ? 'w-6 bg-[#60cdff] shadow-[0_0_8px_rgba(96,205,255,0.6)] cursor-pointer' 
+                  ? 'w-6 bg-[var(--linkC,#9aa0a6)] shadow-[0_0_8px_rgba(96,205,255,0.6)] cursor-pointer' 
                   : 'w-3.5 bg-white/20 opacity-40 cursor-default'
               }`}
               title="Önceki Kartlar"
@@ -123,7 +123,7 @@ const CategoryShowcaseSection: React.FC<{
               onClick={() => scroll('right')}
               className={`h-1.5 rounded-full transition-all duration-200 ${
                 canScrollRight 
-                  ? 'w-6 bg-[#60cdff] shadow-[0_0_8px_rgba(96,205,255,0.6)] cursor-pointer' 
+                  ? 'w-6 bg-[var(--linkC,#9aa0a6)] shadow-[0_0_8px_rgba(96,205,255,0.6)] cursor-pointer' 
                   : 'w-3.5 bg-white/20 opacity-40 cursor-default'
               }`}
               title="Sonraki Kartlar"
@@ -356,7 +356,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       {pinnedPost && (
         <section aria-label="Sabitlenmiş Gönderi" className="space-y-3 pt-1">
           <div className="flex items-center gap-2">
-            <RankingIcon className="w-5 h-5 text-[#60cdff]" />
+            <RankingIcon className="w-5 h-5 text-[var(--linkC,#9aa0a6)]" />
             <h2 className="text-sm sm:text-base font-bold text-white tracking-wide">
               Sabitlenmiş Gönderi
             </h2>
@@ -364,7 +364,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
           <article 
             onClick={() => onOpenPostPage(pinnedPost)}
-            className="group relative rounded-xl bg-[#252526] hover:bg-[#28282b] border border-transparent hover:border-[#60cdff]/30 transition-all duration-200 overflow-hidden cursor-pointer shadow-md hover:shadow-xl hover:shadow-black/60 flex flex-col md:flex-row select-none items-stretch"
+            className="group relative rounded-xl bg-[#252526] hover:bg-[#28282b] border border-transparent hover:border-[var(--linkC,#9aa0a6)]/30 transition-all duration-200 overflow-hidden cursor-pointer shadow-md hover:shadow-xl hover:shadow-black/60 flex flex-col md:flex-row select-none items-stretch"
           >
             {/* Sol Görsel / Thumbnail (negron.xml 1:1: 340px ferah 16/9 oranı, asla incecik ezilmez) */}
             <div className="relative w-full md:w-[320px] lg:w-[340px] aspect-[16/9] bg-[#1e1e1e] overflow-hidden shrink-0">
@@ -385,7 +385,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               {/* Sol Üst: 👁 Görüntülenme */}
               <div className="absolute top-2.5 left-2.5 z-10">
                 <div className="h-[22px] px-2 flex items-center gap-1 rounded-lg bg-black/65 backdrop-blur-md text-white text-[10px] font-medium shadow-sm">
-                  <EyeIcon className="w-3.5 h-3.5 text-[#60cdff]" />
+                  <EyeIcon className="w-3.5 h-3.5 text-[var(--linkC,#9aa0a6)]" />
                   <span>{pinnedPost.views || Math.abs(pinnedPost.title.length * 3 + 12)}</span>
                 </div>
               </div>
@@ -447,7 +447,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                         {pInitial}
                       </span>
                       <span>{pinnedPost.authorName || 'NEGRONN'}</span>
-                      <Verify1Icon className="w-3 h-3 text-[#60cdff]" />
+                      <Verify1Icon className="w-3 h-3 text-[var(--linkC,#9aa0a6)]" />
                     </div>
                   );
                 })()}
@@ -457,11 +457,11 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             {/* Sağ Metin İçeriği (negron.xml 1:1 .iCtnt ferah iç dolgu) */}
             <div className="p-5 sm:p-6 flex flex-col justify-between flex-1 gap-3 min-w-0">
               <div className="space-y-2">
-                <div className="text-[11px] text-[#60cdff] hover:underline lowercase font-semibold tracking-wide">
+                <div className="text-[11px] text-[var(--linkC,#9aa0a6)] hover:underline lowercase font-semibold tracking-wide">
                   {pinnedPost.tags[0] || (pinnedPost.collectionId ? collectionMap.get(pinnedPost.collectionId)?.name.toLowerCase() : 'genel')}
                 </div>
 
-                <h3 className="text-base sm:text-lg lg:text-xl font-bold text-white group-hover:text-[#60cdff] leading-snug transition-colors line-clamp-2">
+                <h3 className="text-base sm:text-lg lg:text-xl font-bold text-white group-hover:text-[var(--linkC,#9aa0a6)] leading-snug transition-colors line-clamp-2">
                   {pinnedPost.title}
                 </h3>
 
@@ -481,7 +481,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   <span className="text-[11px] text-[#71717a]">{formatDate(pinnedPost.createdAt)}</span>
                 </div>
 
-                <span className="text-xs text-[#60cdff] group-hover:underline font-semibold flex items-center gap-1">
+                <span className="text-xs text-[var(--linkC,#9aa0a6)] group-hover:underline font-semibold flex items-center gap-1">
                   Daha →
                 </span>
               </div>
@@ -497,7 +497,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       <section aria-label="En Son Yayınlar" className="space-y-3 pt-2">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <DocumentIcon className="w-5 h-5 text-[#60cdff]" />
+            <DocumentIcon className="w-5 h-5 text-[var(--linkC,#9aa0a6)]" />
             <h2 className="text-sm sm:text-base font-bold text-white tracking-wide">
               En Son Yayınlar
               {totalPages > 1 && (

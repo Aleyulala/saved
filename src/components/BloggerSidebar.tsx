@@ -205,10 +205,10 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                   href="https://script.google.com/macros/s/AKfycbwcZprdS6F_jJ6nin0YalTKweQKP4t936UgrTnme-d5gA-qHbi986vh6HxdzvA236Of/exec"
                   target="_blank"
                   rel="nofollow noreferrer noopener"
-                  className="w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-[#1e1e1e] hover:text-[#00ac47] transition-colors"
+                  className="w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-[#1e1e1e] hover:text-[var(--linkC,#9aa0a6)] transition-colors"
                 >
                   <span className="flex items-center gap-2">
-                    <GoogleChatIcon className="w-[18px] h-[18px] opacity-80 text-[#00ac47]" />
+                    <GoogleChatIcon className="w-[18px] h-[18px] opacity-80 text-[var(--linkC,#9aa0a6)]" />
                     Chat
                   </span>
                 </a>
@@ -248,11 +248,12 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
             <li className="relative group flex justify-center w-full h-10">
               <button
                 onClick={() => setGelistiriciOpen(!gelistiriciOpen)}
-                className="w-10 h-10 flex items-center justify-center rounded-[18px] transition-all cursor-pointer text-[#9ca3af] hover:bg-[#252526] hover:text-[var(--linkC,#9aa0a6)]"
-                title="Araçlar"
-                aria-label="Araçlar"
+                className="w-10 h-10 flex items-center justify-center rounded-[18px] transition-all cursor-pointer text-[#9ca3af] hover:bg-[#252526] hover:text-[var(--linkC,#9aa0a6)] relative"
+                title="Geliştirici"
+                aria-label="Geliştirici"
               >
                 <FolderCodeIcon className="w-[18px] h-[18px] opacity-80 group-hover:opacity-100 text-[var(--linkC,#9aa0a6)] transition-opacity" />
+                <span className="absolute bottom-[7px] right-[7px] w-1.5 h-1.5 rounded-full bg-[var(--linkC,#9aa0a6)] shadow-[0_0_6px_var(--linkC,#9aa0a6)]" />
               </button>
               {/* Uçan Menü (Flyout Submenu) */}
               <div className="absolute left-full top-0 ml-2 w-52 p-2 rounded-2xl bg-[#252526] border border-white/10 shadow-2xl opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-150 z-50 space-y-1">
@@ -441,10 +442,10 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                     href="https://script.google.com/macros/s/AKfycbwcZprdS6F_jJ6nin0YalTKweQKP4t936UgrTnme-d5gA-qHbi986vh6HxdzvA236Of/exec"
                     target="_blank"
                     rel="nofollow noreferrer noopener"
-                    className="w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-[#252526] hover:text-[#00ac47] transition-colors"
+                    className="w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-[#252526] hover:text-[var(--linkC,#9aa0a6)] transition-colors"
                   >
                     <div className="flex items-center gap-2">
-                      <GoogleChatIcon className="w-4 h-4 opacity-80 text-[#00ac47]" />
+                      <GoogleChatIcon className="w-4 h-4 opacity-80 text-[var(--linkC,#9aa0a6)]" />
                       <span>Chat</span>
                     </div>
                   </a>

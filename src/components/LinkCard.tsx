@@ -70,7 +70,7 @@ export const LinkCard: React.FC<LinkCardProps> = ({
   return (
     <article 
       onClick={handleCardClick}
-      className="group relative rounded-lg bg-[#252526] hover:bg-[#28282b] border border-transparent hover:border-[#60cdff]/30 transition-all duration-200 hover:-translate-y-1 shadow-md hover:shadow-xl hover:shadow-black/60 flex flex-col justify-between overflow-hidden cursor-pointer select-none"
+      className="group relative rounded-lg bg-[#252526] hover:bg-[#28282b] border border-transparent hover:border-[var(--linkC,#9aa0a6)]/30 transition-all duration-200 hover:-translate-y-1 shadow-md hover:shadow-xl hover:shadow-black/60 flex flex-col justify-between overflow-hidden cursor-pointer select-none"
     >
       
       {/* 1. Blogger Post Thumbnail (.pThmb) */}
@@ -94,7 +94,7 @@ export const LinkCard: React.FC<LinkCardProps> = ({
         {/* Sol Üst: Görüntülenme Sayısı (👁 74) */}
         <div className="absolute top-2 left-2 z-10">
           <div className="h-[22px] px-2 flex items-center gap-1 rounded-lg bg-black/65 backdrop-blur-md text-white text-[10px] font-medium shadow-sm">
-            <EyeIcon className="w-3.5 h-3.5 text-[#60cdff]" />
+            <EyeIcon className="w-3.5 h-3.5 text-[var(--linkC,#9aa0a6)]" />
             <span>{views}</span>
           </div>
         </div>
@@ -150,7 +150,7 @@ export const LinkCard: React.FC<LinkCardProps> = ({
               />
             )}
             <span>{author}</span>
-            <Verify1Icon className="w-3 h-3 text-[#60cdff]" />
+            <Verify1Icon className="w-3 h-3 text-[var(--linkC,#9aa0a6)]" />
           </div>
         </div>
 
@@ -190,13 +190,13 @@ export const LinkCard: React.FC<LinkCardProps> = ({
               />
               <span className="truncate max-w-[120px] font-medium text-white/90">{domain}</span>
             </div>
-            <span className="text-[#60cdff] lowercase font-medium">
+            <span className="text-[var(--linkC,#9aa0a6)] lowercase font-medium">
               {collection?.name.toLowerCase() || (link.tags[0] || 'genel')}
             </span>
           </div>
 
           {/* Başlık (.pTtl) */}
-          <h3 className="text-[14px] font-bold text-white group-hover:text-[#60cdff] line-clamp-2 leading-snug transition-colors">
+          <h3 className="text-[14px] font-bold text-white group-hover:text-[var(--linkC,#9aa0a6)] line-clamp-2 leading-snug transition-colors">
             {link.title || link.url}
           </h3>
 
@@ -214,7 +214,7 @@ export const LinkCard: React.FC<LinkCardProps> = ({
             <span>{formatDate(link.createdAt)}</span>
           </div>
 
-          <span className="text-xs text-[#60cdff] opacity-0 group-hover:opacity-100 transition-opacity font-medium">
+          <span className="text-xs text-[var(--linkC,#9aa0a6)] opacity-0 group-hover:opacity-100 transition-opacity font-medium">
             Daha →
           </span>
         </div>

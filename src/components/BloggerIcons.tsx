@@ -51,9 +51,12 @@ export const FolderFavoriteIcon: React.FC<{ className?: string }> = ({ className
 
 export const FolderCodeIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
   <svg className={`line ${className}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M22 11V17C22 21 21 22 17 22H7C3 22 2 21 2 17V7C2 3 3 2 7 2H8.5C10 2 10.33 2.44 10.9 3.2L12.4 5.2C12.78 5.7 13 6 14 6H17C21 6 22 7 22 11Z" strokeMiterlimit="10" />
-    <path className="text-[var(--linkC,#9aa0a6)]" d="M9.5 12L7.5 14.5L9.5 17" />
-    <path className="text-[var(--linkC,#9aa0a6)]" d="M14.5 12L16.5 14.5L14.5 17" />
+    {/* Sleek cyber rounded dev folder / console frame */}
+    <path d="M22 11V17C22 20.5 20.5 22 17 22H7C3.5 22 2 20.5 2 17V7C2 3.5 3.5 2 7 2H9.2C10.2 2 10.7 2.4 11.2 3.1L12.3 4.7C12.7 5.2 13 5.5 14 5.5H17C20.5 5.5 22 7 22 10.5" strokeMiterlimit="10" />
+    {/* Futuristic code brackets with slash </> */}
+    <path className="text-[var(--linkC,#9aa0a6)]" strokeWidth="1.9" d="M8 12.5L5.8 14.5L8 16.5" />
+    <path className="text-[var(--linkC,#9aa0a6)]" strokeWidth="1.9" d="M13 11L11 18" />
+    <path className="text-[var(--linkC,#9aa0a6)]" strokeWidth="1.9" d="M16 12.5L18.2 14.5L16 16.5" />
   </svg>
 );
 
