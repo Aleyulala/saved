@@ -163,17 +163,15 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
             <li className="pt-1 relative">
               <div 
                 onClick={() => setHizmetlerOpen(!hizmetlerOpen)}
-                className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-bold text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] cursor-pointer transition-colors outline-none relative"
+                className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-semibold text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] cursor-pointer transition-colors outline-none relative"
               >
                 <div className="flex items-center gap-2.5">
                   <span>Uygulamalar</span>
-                  <span className="badge-new text-[var(--linkC,#9aa0a6)] text-[11px] font-bold ml-1">
+                  <span className="text-[#989b9f] text-[11px] font-medium ml-0.5">
                     Yeni!
                   </span>
                   <Hierarchy4Icon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[var(--linkC,#9aa0a6)]" />
                 </div>
-                {/* xml 1:1 li.nt-tl bildirim noktası (Sol Üst) */}
-                <span className="absolute top-2 left-2 w-2 h-2 rounded-full bg-[var(--linkC,#9aa0a6)] shadow-[0_0_8px_var(--linkC,#9aa0a6)] animate-pulse" />
                 
                 <ChevronDownIcon className={`w-3.5 h-3.5 text-[#989b9f] transition-transform duration-300 ${hizmetlerOpen ? 'rotate-180' : ''}`} />
               </div>
@@ -197,7 +195,6 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
                         <span>NESCİONE</span>
                         <EyeIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[#9ca3af] group-hover:text-[var(--linkC,#9aa0a6)]" />
                       </div>
-                      <span className="text-[10px] text-[#9ca3af] font-mono">{counts.all}</span>
                     </button>
                   </li>
 
@@ -238,17 +235,15 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
             <li className="pt-1 relative">
               <div 
                 onClick={() => setKlasorOpen(!klasorOpen)}
-                className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-bold text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] cursor-pointer transition-colors outline-none relative"
+                className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-semibold text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] cursor-pointer transition-colors outline-none relative"
               >
                 <div className="flex items-center gap-2.5">
                   <span>Topluluk</span>
-                  <span className="badge-new text-[var(--linkC,#9aa0a6)] text-[11px] font-bold ml-1">
+                  <span className="text-[#989b9f] text-[11px] font-medium ml-0.5">
                     Canlı
                   </span>
                   <FlashIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[var(--linkC,#9aa0a6)]" />
                 </div>
-                {/* xml 1:1 li.nt-tr bildirim noktası (Sağ Üst) */}
-                <span className="absolute top-2 right-8 w-2 h-2 rounded-full bg-[var(--linkC,#9aa0a6)] shadow-[0_0_8px_var(--linkC,#9aa0a6)] animate-pulse" />
                 <ChevronDownIcon className={`w-3.5 h-3.5 text-[#989b9f] transition-transform duration-300 ${klasorOpen ? 'rotate-180' : ''}`} />
               </div>
 
@@ -302,28 +297,16 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
               )}
             </li>
 
-            {/* XML 1:1 Bölücü Çizgi (.mnMn > li.br::after) */}
-            <li className="py-1">
-              <div className="w-full h-px bg-white/10 my-1" />
-            </li>
-
-            {/* XML 1:1 Bölücü Çizgi (Topluluk ile Araçlar Arası) */}
-            <li className="py-1">
-              <div className="w-full h-px bg-white/10 my-1" />
-            </li>
-
             {/* 4. KLASÖR 3: Araçlar (svg.folder-code) */}
             <li className="pt-1 relative">
               <div 
                 onClick={() => setGelistiriciOpen(!gelistiriciOpen)}
-                className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-bold text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] cursor-pointer transition-colors outline-none relative"
+                className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-semibold text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] cursor-pointer transition-colors outline-none relative"
               >
                 <div className="flex items-center gap-2.5">
                   <span>Araçlar</span>
                   <FolderCodeIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[var(--linkC,#9aa0a6)]" />
                 </div>
-                {/* xml 1:1 li.nt-br bildirim noktası (Sağ Alt) */}
-                <span className="absolute bottom-2 right-8 w-1.5 h-1.5 rounded-full bg-[var(--linkC,#9aa0a6)] shadow-[0_0_6px_var(--linkC,#9aa0a6)] animate-pulse" />
                 <ChevronDownIcon className={`w-3.5 h-3.5 text-[#989b9f] transition-transform duration-300 ${gelistiriciOpen ? 'rotate-180' : ''}`} />
               </div>
 
@@ -385,9 +368,9 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
         </div>
 
         {/* Alt Bölüm (.mnMob Footer): E-posta, Gizlilik ve Yorumlar Slaytı (.PageList02) + Sosyal Butonlar (.LinkList04 / .mSoc) */}
-        <div className="p-3.5 bg-[#1e1e1e] space-y-3">
+        <div className="sidebar-foot-panel p-3.5 bg-[#1e1e1e] space-y-1.5">
           {/* PageList02: E-posta, Gizlilik ve Yorumlar Kayan Slider + [+] Butonu */}
-          <div className="relative h-9 bg-white/[0.04] rounded-[9px] overflow-hidden flex items-center shadow-xs">
+          <div className="sidebar-foot-slider relative h-9 bg-transparent rounded-[9px] overflow-hidden flex items-center">
             {/* Slayt 0: E-posta */}
             <div
               className={`absolute inset-0 flex items-center justify-between px-3 transition-all duration-300 ease-in-out ${
@@ -398,13 +381,12 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
             >
               <a
                 href="mailto:mrstar14155@gmail.com"
-                className="flex items-center gap-2.5 text-xs text-[#e5e5e5] hover:text-[var(--linkC,#9aa0a6)] font-semibold transition-colors"
+                className="flex items-center gap-2.5 text-xs text-white hover:text-[var(--linkC,#9aa0a6)] font-semibold transition-colors"
                 title="E-posta: mrstar14155@gmail.com"
               >
                 <div className="relative flex items-center justify-center">
-                  <MailIcon className="w-4 h-4 text-[#e5e5e5] shrink-0" />
-                  {/* Parlayan Canlı Bildirim Noktası (.nt glow) */}
-                  <span className="absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#ffffff] animate-pulse" />
+                  <MailIcon className="w-4 h-4 text-white shrink-0" />
+                  <span className="sidebar-dot absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-[var(--linkC,#9aa0a6)]" />
                 </div>
                 <span className="tracking-wide">E-posta</span>
               </a>
@@ -438,12 +420,12 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
                   onClose();
                   onSelectTab('privacy');
                 }}
-                className="flex items-center gap-2.5 text-xs text-[#e5e5e5] hover:text-[var(--linkC,#9aa0a6)] font-semibold transition-colors cursor-pointer"
+                className="flex items-center gap-2.5 text-xs text-white hover:text-[var(--linkC,#9aa0a6)] font-semibold transition-colors cursor-pointer"
                 title="Gizlilik Politikası & Şartlar"
               >
                 <div className="relative flex items-center justify-center">
-                  <Verify1Icon className="w-4 h-4 text-[#e5e5e5] shrink-0" />
-                  <span className="absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#ffffff] animate-pulse" />
+                  <Verify1Icon className="w-4 h-4 text-white shrink-0" />
+                  <span className="sidebar-dot absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-[var(--linkC,#9aa0a6)]" />
                 </div>
                 <span className="tracking-wide">Gizlilik</span>
               </button>
@@ -473,12 +455,12 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
                 href="https://negronshow.blogspot.com/p/muhabbet.html"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2.5 text-xs text-[#e5e5e5] hover:text-[var(--linkC,#9aa0a6)] font-semibold transition-colors"
+                className="flex items-center gap-2.5 text-xs text-white hover:text-[var(--linkC,#9aa0a6)] font-semibold transition-colors"
                 title="Muhabbet Odası & Yorumlar"
               >
                 <div className="relative flex items-center justify-center">
                   <MessageNotif1Icon className="w-4 h-4 text-[var(--linkC,#9aa0a6)] shrink-0" />
-                  <span className="absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#ffffff] animate-pulse" />
+                  <span className="sidebar-dot absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-[var(--linkC,#9aa0a6)]" />
                 </div>
                 <span className="tracking-wide">Yorumlar</span>
               </a>
@@ -497,8 +479,8 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
             </div>
           </div>
 
-          {/* LinkList04: Sosyal Medya Kayan Slider + [+] Butonu (Üstteki Slayt ile Birebir Aynı Tasarım) */}
-          <div className="relative h-9 bg-white/[0.04] rounded-[9px] overflow-hidden flex items-center shadow-xs">
+          {/* LinkList04: Sosyal Medya Kayan Slider + [+] Butonu */}
+          <div className="sidebar-foot-slider relative h-9 bg-transparent rounded-[9px] overflow-hidden flex items-center">
             {drawerSocialLinks.map((item, idx) => {
               const IconComp = item.icon;
               return (
@@ -514,13 +496,12 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2.5 text-xs text-[#e5e5e5] hover:text-[var(--linkC,#9aa0a6)] font-semibold transition-colors"
+                    className="flex items-center gap-2.5 text-xs text-white hover:text-[var(--linkC,#9aa0a6)] font-semibold transition-colors"
                     title={`${item.name} Profilini Aç`}
                   >
-                    <div className="relative flex items-center justify-center text-[#e5e5e5]">
+                    <div className="relative flex items-center justify-center text-white">
                       <IconComp className="w-4 h-4 shrink-0" />
-                      {/* Parlayan Canlı Bildirim Noktası (.nt glow) */}
-                      <span className="absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#ffffff] animate-pulse" />
+                      <span className="sidebar-dot absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-[var(--linkC,#9aa0a6)]" />
                     </div>
                     <span className="tracking-wide">{item.name}</span>
                   </a>
@@ -539,11 +520,6 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
                 </div>
               );
             })}
-          </div>
-
-          <div className="flex items-center justify-between text-[10px] text-[#989b9f] font-mono px-2">
-            <span>GNU GPL v3.0</span>
-            <span>v1.0 • Plus UI</span>
           </div>
         </div>
 

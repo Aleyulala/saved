@@ -376,7 +376,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
           /* Kapalıyken Blogger .qeT Tarzı İkon Butonu */
           <button
             type="button"
-            className="w-10 h-10 rounded-[12px] bg-[#252526] hover:bg-[#333333] border border-white/10 text-white hover:text-[var(--linkC,#9aa0a6)] flex items-center justify-center transition-all cursor-pointer shadow-lg active:scale-95 group relative"
+            className="floating-btn w-10 h-10 rounded-[12px] bg-[#252526] hover:bg-[#333333] border border-white/10 text-white hover:text-[var(--linkC,#9aa0a6)] flex items-center justify-center transition-all cursor-pointer shadow-lg active:scale-95 group relative"
             onClick={() => setIsOpen(true)}
             title="Hızlı İşlemler Paneli"
             aria-label="Hızlı İşlemler"
@@ -392,7 +392,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
         <button
           type="button"
           onClick={handleScrollToggle}
-          className="w-10 h-10 rounded-full bg-[#252526] hover:bg-[#333333] border border-white/15 text-white flex items-center justify-center transition-all cursor-pointer shadow-lg active:scale-95 shrink-0"
+          className="floating-btn w-10 h-10 rounded-full bg-[#252526] hover:bg-[#333333] border border-white/15 text-white flex items-center justify-center transition-all cursor-pointer shadow-lg active:scale-95 shrink-0"
           title={isScrolled ? 'Yukarı Çık' : 'Aşağı İn'}
           aria-label={isScrolled ? 'Yukarı Çık' : 'Aşağı İn'}
         >

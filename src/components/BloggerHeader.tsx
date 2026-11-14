@@ -281,8 +281,10 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
     }
   };
 
+  const hasContextOpen = isProfileOpen || isAppearanceOpen || isTranslateOpen;
+
   return (
-    <header className="sticky top-0 z-40 w-full h-[60px] bg-[#1e1e1e] border-b border-[#252526] flex items-center select-none relative">
+    <header className={`sticky top-0 ${hasContextOpen ? 'z-[60]' : 'z-40'} w-full h-[60px] bg-[#1e1e1e] border-0 flex items-center select-none`}>
       
       {/* 1. Sol Bölüm (.headL — XML 1:1: Desktop/El Konsolunda sabit 230px genişlik, padding-left 20px) */}
       <div className="flex items-center min-[896px]:w-[230px] shrink-0 pl-4 min-[896px]:pl-5">
@@ -306,10 +308,10 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
           aria-label="Ana Sayfa"
         >
           {/* Typographic Wordmark (Yazı Logo — NESCİONE) */}
-          <span className="font-sans font-extrabold text-[15px] sm:text-[16px] tracking-[0.22em] uppercase text-white group-hover:text-[var(--linkC,#9aa0a6)] transition-colors duration-300 leading-none">
+          <span className="font-sans font-medium text-[15px] sm:text-[16px] tracking-[0.04em] uppercase text-white group-hover:text-[var(--linkC,#9aa0a6)] transition-colors duration-300 leading-none">
             NESCİONE
           </span>
-          <span className="inline-flex items-center justify-center ml-2.5 text-white group-hover:text-[var(--linkC,#9aa0a6)] transition-colors duration-300 shrink-0 leading-none" aria-hidden="true">
+          <span className="inline-flex items-center justify-center ml-2 text-white group-hover:text-[var(--linkC,#9aa0a6)] transition-colors duration-300 shrink-0 leading-none" aria-hidden="true">
             <svg className="w-[14px] h-[14px] text-current stroke-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ shapeRendering: 'geometricPrecision' }}>
               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
             </svg>
@@ -321,7 +323,7 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
       <div className="hidden min-[800px]:flex absolute left-1/2 -translate-x-1/2 w-full max-w-[440px] px-2.5 min-w-0 z-10 items-center justify-center h-full pointer-events-none">
         <div
           onClick={onOpenSearchModal}
-          className="relative flex items-center w-full h-9 rounded-[14px] px-3.5 gap-2.5 bg-[#252526] pointer-events-auto hover:bg-[#28282b] border border-white/[0.08] hover:border-[rgba(96,205,255,0.4)] cursor-pointer group select-none transition-all duration-200"
+          className="head-search-pill relative flex items-center w-full h-9 rounded-[14px] px-3.5 gap-2.5 bg-[#252526] pointer-events-auto hover:bg-[#28282b] border border-white/[0.08] hover:border-[rgba(96,205,255,0.4)] cursor-pointer group select-none transition-all duration-200"
           title="Gelişmiş Arama & Bul Paneli (Ctrl+K)"
         >
           <span className="text-[#989b9f] group-hover:text-[var(--linkC,#9aa0a6)] transition-colors pointer-events-none shrink-0 flex items-center justify-center">
@@ -353,8 +355,21 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
         </div>
       </div>
 
+      {/* Backdrop Blur Overlay (.fCls — negron.xml 1:1 context menu açılınca arka planı bulanıklaştırır) */}
+      {(isProfileOpen || isAppearanceOpen || isTranslateOpen) && (
+        <div
+          onClick={() => {
+            setIsProfileOpen(false);
+            setIsAppearanceOpen(false);
+            setIsTranslateOpen(false);
+          }}
+          className="head-context-backdrop fixed inset-0 z-40 transition-opacity duration-200"
+          aria-hidden="true"
+        />
+      )}
+
       {/* 3. Sağ Bölüm: Blogger XML 1:1 .headIc Butonları */}
-      <div className="flex items-center justify-end shrink-0 pr-3 sm:pr-4 gap-1 sm:gap-1.5 ml-auto z-20">
+      <div className={`flex items-center justify-end shrink-0 pr-3 sm:pr-4 gap-1 sm:gap-1.5 ml-auto ${(isProfileOpen || isAppearanceOpen || isTranslateOpen) ? '' : 'z-20'}`}>
         {/* Mobilde Arama Butonu (<800px .headIc .isSrh) */}
         <button
           onClick={onOpenSearchModal}
@@ -366,9 +381,13 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
         </button>
             
             {/* 1. Buton: Yazarlar & Profil (.isPrf - Profile1Icon & .wPrf) */}
-            <div className="relative" ref={profileRef}>
+            <div className={`relative ${isProfileOpen ? 'z-50' : ''}`} ref={profileRef}>
               <button
-                onClick={() => setIsProfileOpen(prev => !prev)}
+                onClick={() => {
+                  setIsAppearanceOpen(false);
+                  setIsTranslateOpen(false);
+                  setIsProfileOpen(prev => !prev);
+                }}
                 className={`head-action-btn ${isProfileOpen ? 'is-active' : ''}`}
                 title="Yazarlar &amp; Profil"
                 aria-label="Yazarlar"
@@ -379,57 +398,54 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
               {/* Blogger XML 1:1 Profil / Yazarlar Açılır Kartı */}
               {isProfileOpen && (
                 <div
-                  className="wPrf fixLs animate-in fade-in duration-200 flex flex-col origin-top-right"
+                  className="wPrf fixLs context-menu-card bg-[#252526] border-0 animate-in fade-in duration-200 flex flex-col origin-top-right z-50"
                   style={{
                     position: 'absolute',
                     top: 'calc(100% + (var(--headerHc, 60px) - 100%) / 2)',
                     insetInlineEnd: 0,
-                    width: '240px',
-                    maxHeight: '240px',
-                    background: '#252526',
-                    border: '1px solid #333333',
-                    borderRadius: '10px',
-                    borderStartEndRadius: '5px',
+                    width: '285px',
+                    maxHeight: '380px',
+                    borderRadius: '14px',
                     overflow: 'hidden',
-                    zIndex: 4
+                    zIndex: 50
                   }}
                 >
-                  <div className="prfH fixH fixT flex items-center justify-between gap-2 px-5 shrink-0 border-b border-[#333333]">
-                    <span className="flex-1 py-3 text-[13px] font-bold text-[#fffdfc] opacity-80">Yazarlar</span>
+                  <div className="prfH fixH fixT flex items-center justify-between gap-2 px-4 pt-3.5 pb-1 shrink-0 border-0">
+                    <span className="flex-1 text-[13px] font-medium text-[#989b9f]">Yazarlar</span>
                     <button
                       onClick={() => setIsProfileOpen(false)}
-                      className="w-8 h-8 aspect-square rounded-[10px] bg-[#282828] border border-white/[0.08] text-white hover:bg-[#333333] hover:border-[var(--linkC,#9aa0a6)] hover:text-[var(--linkC,#9aa0a6)] flex items-center justify-center shadow-[0_2px_6px_rgba(0,0,0,0.2)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] outline-none cursor-pointer shrink-0"
+                      className="w-8 h-8 aspect-square rounded-[10px] bg-[#252526] hover:bg-[#333333] text-white hover:text-[var(--linkC,#9aa0a6)] flex items-center justify-center transition-all duration-200 outline-none cursor-pointer shrink-0"
                       title="Kapat"
                       aria-label="Kapat"
                     >
-                      <CloseIcon className="w-4 h-4" />
+                      <CloseIcon className="w-3.5 h-3.5" />
                     </button>
                   </div>
 
-                  <div className="prfC fixC teamPrfWrap overflow-y-auto p-3 flex flex-col gap-2.5">
+                  <div className="prfC fixC teamPrfWrap overflow-y-auto px-3 pb-3 pt-1 flex flex-col gap-1.5">
                     {Object.values(BLOGGER_AUTHORS).map((author) => (
                       <a
                         key={author.name}
                         href={author.url}
                         target="_blank"
                         rel="noreferrer"
-                        className="prfAuthorBlock block px-3 py-2.5 rounded-[10px] bg-white/[0.03] border border-white/[0.08] no-underline text-inherit hover:bg-white/[0.06] hover:border-[var(--linkC,#9aa0a6)] hover:-translate-y-[1px] transition-all duration-200"
+                        className="prfAuthorBlock block px-3 py-2.5 rounded-[10px] bg-transparent border-0 no-underline text-inherit hover:bg-white/5 transition-all duration-200"
                       >
-                        <div className="prfTopRow flex items-center gap-2.5">
+                        <div className="prfTopRow flex items-center gap-3">
                           <img
                             src={author.avatar}
                             alt={author.name}
-                            className="im w-[39px] h-[39px] rounded-full object-cover shrink-0 border-[1.5px] border-[var(--linkC,#9aa0a6)]"
+                            className="im w-[39px] h-[39px] rounded-full object-cover shrink-0 border border-white/15"
                           />
                           <div className="prfHeadMeta flex flex-col min-w-0">
-                            <span className="prfName flex items-center gap-1 text-[13px] font-bold text-[#fffdfc]">
+                            <span className="prfName flex items-center gap-1 text-[13px] font-bold text-white">
                               {author.name}
                               <Verify1Icon className="w-3.5 h-3.5 text-[var(--linkC,#9aa0a6)] shrink-0" />
                             </span>
-                            <span className="prfRole text-[11px] font-semibold text-[var(--linkC,#9aa0a6)]">{author.role}</span>
+                            <span className="prfRole text-[11px] font-medium text-[#989b9f]">{author.role}</span>
                           </div>
                         </div>
-                        <p className="prfBio mt-1.5 mb-0 text-[11.5px] leading-[1.4] text-[#a1a1aa]">{author.bio}</p>
+                        <p className="prfBio mt-1.5 mb-0 text-[11.5px] leading-[1.4] text-[#989b9f]">{author.bio}</p>
                       </a>
                     ))}
                   </div>
@@ -451,9 +467,13 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
             </button>
 
             {/* 3. Buton: Ay / Görünüm & Tema (.isMode - svg.moon-sun-icon & .aprW & .thmW) */}
-            <div className="relative" ref={appearanceRef}>
+            <div className={`relative ${isAppearanceOpen ? 'z-50' : ''}`} ref={appearanceRef}>
               <button
-                onClick={() => setIsAppearanceOpen(prev => !prev)}
+                onClick={() => {
+                  setIsProfileOpen(false);
+                  setIsTranslateOpen(false);
+                  setIsAppearanceOpen(prev => !prev);
+                }}
                 className={`head-action-btn ${isAppearanceOpen ? 'is-active' : ''}`}
                 title="Görünüm ve Tema Ayarları"
                 aria-label="Görünüm ve Tema Modu"
@@ -463,9 +483,9 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
 
               {/* Blogger XML 1:1 Görünüm Context Menüsü */}
               {isAppearanceOpen && (
-                <div className="aprW absolute right-0 top-[calc(100%+8px)] w-60 bg-[#252526] border border-[#333333] rounded-xl shadow-2xl p-2 z-50 animate-in fade-in zoom-in-95 duration-150 select-none">
+                <div className="aprW context-menu-card absolute right-0 top-[calc(100%+8px)] w-60 bg-[#252526] border-0 rounded-[14px] shadow-2xl p-2 z-50 animate-in fade-in zoom-in-95 duration-150 select-none">
                   
-                  <div className="px-2.5 py-1.5 text-[11px] font-bold text-[#989b9f] uppercase tracking-wider border-b border-white/5 flex items-center justify-between">
+                  <div className="px-2.5 py-1.5 text-[11px] font-bold text-[#989b9f] uppercase tracking-wider flex items-center justify-between">
                     <span>Görünüm</span>
                     <button 
                       onClick={() => setIsAppearanceOpen(false)} 
@@ -522,7 +542,7 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
                   </div>
 
                   {/* Vurgu Rengi */}
-                  <div className="pt-1.5 border-t border-white/5">
+                  <div className="pt-1.5">
                     <button
                       type="button"
                       onClick={() => setIsThemePaletteOpen(prev => !prev)}
@@ -533,13 +553,13 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
                         <span>Tema Rengi</span>
                       </div>
                       <div className="flex items-center gap-1.5">
-                        <span className="w-3.5 h-3.5 rounded-full border border-white/30" style={{ backgroundColor: currentThemeColor }} />
+                        <span className="w-3.5 h-3.5 rounded-full border border-white/20" style={{ backgroundColor: currentThemeColor }} />
                         <ChevronDown className={`w-3.5 h-3.5 text-[#71717a] transition-transform duration-200 ${isThemePaletteOpen ? 'rotate-180' : ''}`} />
                       </div>
                     </button>
 
                     {isThemePaletteOpen && (
-                      <div className="thmP grid grid-cols-4 gap-2.5 p-2 mt-1.5 bg-[#1e1e1e] rounded-lg border border-white/5 animate-in fade-in duration-150">
+                      <div className="thmP grid grid-cols-4 gap-2.5 p-2 mt-1.5 bg-[#252526] rounded-lg border-0 animate-in fade-in duration-150">
                         {THEME_COLORS.map(c => {
                           const isSelected = currentThemeIndex === c.id;
                           return (
@@ -566,9 +586,13 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
             </div>
 
             {/* 4. Buton: Çeviri (.isTrans - TranslateIcon & .wTrans) */}
-            <div className="relative" ref={translateRef}>
+            <div className={`relative ${isTranslateOpen ? 'z-50' : ''}`} ref={translateRef}>
               <button
-                onClick={() => setIsTranslateOpen(prev => !prev)}
+                onClick={() => {
+                  setIsProfileOpen(false);
+                  setIsAppearanceOpen(false);
+                  setIsTranslateOpen(prev => !prev);
+                }}
                 className={`head-action-btn ${isTranslateOpen ? 'is-active' : ''}`}
                 title="Dili Çevir"
                 aria-label="Dili Çevir"
@@ -578,21 +602,19 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
 
               {isTranslateOpen && (
                 <div
-                  className="wTrans fixLs animate-in fade-in duration-200 flex flex-col origin-top-right select-none"
+                  className="wTrans fixLs context-menu-card bg-[#252526] border-0 animate-in fade-in duration-200 flex flex-col origin-top-right select-none"
                   style={{
                     position: 'absolute',
                     top: 'calc(100% + 8px)',
                     insetInlineEnd: 0,
                     width: '200px',
                     maxHeight: '260px',
-                    background: '#252526',
-                    border: '1px solid #333333',
-                    borderRadius: '10px',
+                    borderRadius: '14px',
                     overflow: 'hidden',
                     zIndex: 50
                   }}
                 >
-                  <div className="fixH px-3 py-2 border-b border-[#333333] flex items-center justify-between text-xs font-bold text-white">
+                  <div className="fixH px-3 py-2.5 border-0 flex items-center justify-between text-xs font-bold text-white">
                     <span>Dili Seçin</span>
                     <button
                       onClick={() => setIsTranslateOpen(false)}

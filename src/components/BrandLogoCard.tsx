@@ -268,7 +268,7 @@ export const BrandLogoCard: React.FC<BrandLogoCardProps> = ({
   const isLarge = size === 'detail';
 
   return (
-    <div className={`w-full h-full flex flex-col items-center justify-center bg-gradient-to-tr ${brand ? brand.gradient : generic.gradient} relative p-4 select-none overflow-hidden group`}>
+    <div className={`brand-card-dark w-full h-full flex flex-col items-center justify-center bg-gradient-to-tr ${brand ? brand.gradient : generic.gradient} relative p-4 select-none overflow-hidden group`}>
       {/* Dynamic Background Spot Glow */}
       <div className={`absolute w-36 h-36 rounded-full blur-3xl pointer-events-none opacity-40 ${generic.spot}`} />
       

@@ -63,12 +63,6 @@ export const SEED_COLLECTIONS = [
   },
   {
     "name": "Rutin",
-    "color": "#9aa0a6",
-    "icon": "messages-square",
-    "description": "Genel sohbet, serbest paylaşımlar ve konu dışı öneriler"
-  },
-  {
-    "name": "Rutin",
     "color": "#38bdf8",
     "icon": "calendar-check",
     "description": "Günlük rutinler, ajanda, mail ve notlar"
@@ -213,13 +207,7 @@ export const SEED_TAGS = [
     "name": "harita"
   },
   {
-    "name": "oyun"
-  },
-  {
     "name": "games"
-  },
-  {
-    "name": "programlama"
   },
   {
     "name": "kod"

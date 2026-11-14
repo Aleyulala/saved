@@ -82,13 +82,13 @@ export const BloggerNotificationBar: React.FC<BloggerNotificationBarProps> = ({
         onTouchEnd={handleTouchEnd}
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
-        className="flex items-center justify-between gap-3 px-3.5 py-2 rounded-xl bg-[#252526] border border-transparent shadow-sm select-none min-h-[46px] touch-pan-y"
+        className="ntfC flex items-center justify-between gap-3 px-4 py-2 rounded-[14px] bg-[#252526] border border-transparent shadow-sm select-none min-h-[46px] touch-pan-y"
       >
 
         {/* Sol Kapat Butonu */}
         <button
           onClick={handleDismiss}
-          className="p-1 rounded-md text-[#9ca3af] hover:text-white hover:bg-[#333333] transition-colors shrink-0 cursor-pointer"
+          className="p-1 rounded-full text-[#9ca3af] opacity-75 hover:opacity-100 hover:text-white hover:bg-[#333333] transition-colors shrink-0 cursor-pointer"
           title="Bildirimi Gizle (1 gün)"
           aria-label="Kapat"
         >
@@ -100,19 +100,19 @@ export const BloggerNotificationBar: React.FC<BloggerNotificationBarProps> = ({
 
           {/* SLAYT 0: ALİ & NSONE (LinkList05 'Sekmeli Menü' 1:1) */}
           {activeSlide === 0 && (
-            <div className="ali-nsone-text-wrap inline-flex items-center justify-center gap-4 sm:gap-6 select-none animate-in fade-in duration-300">
+            <div className="ali-nsone-text-wrap inline-flex items-center justify-center gap-3 sm:gap-4 select-none animate-in fade-in duration-300">
               <a
                 href="https://aleyulala.blogspot.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ali-nsone-slide-btn font-extrabold text-[15px] sm:text-[16px] tracking-[6px] uppercase text-white hover:text-[var(--linkC,#9aa0a6)] transition-colors cursor-pointer"
+                className="ali-nsone-slide-btn font-bold text-sm sm:text-[15px] tracking-[0.12em] uppercase text-white hover:text-[var(--linkC,#9aa0a6)] transition-colors cursor-pointer"
                 title="ALİ"
               >
                 ALİ
               </a>
               <a
                 href="https://aleyulala.github.io/saved/"
-                className="ali-nsone-amp font-bold text-[15px] sm:text-[16px] text-[var(--linkC,#9aa0a6)] px-2 py-0.5 rounded-md hover:bg-white/10 transition-all cursor-pointer"
+                className="ali-nsone-amp font-bold text-sm sm:text-[15px] text-[var(--linkC,#9aa0a6)] px-1.5 py-0.5 rounded-md hover:bg-white/10 transition-all cursor-pointer"
                 title="ALİ &amp; NSONE"
               >
                 &amp;
@@ -121,7 +121,7 @@ export const BloggerNotificationBar: React.FC<BloggerNotificationBarProps> = ({
                 href="https://negronshow.blogspot.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ali-nsone-slide-btn font-extrabold text-[15px] sm:text-[16px] tracking-[6px] uppercase text-white hover:text-[var(--linkC,#9aa0a6)] transition-colors cursor-pointer"
+                className="ali-nsone-slide-btn font-bold text-sm sm:text-[15px] tracking-[0.12em] uppercase text-white hover:text-[var(--linkC,#9aa0a6)] transition-colors cursor-pointer"
                 title="NSONE"
               >
                 NSONE
@@ -142,7 +142,7 @@ export const BloggerNotificationBar: React.FC<BloggerNotificationBarProps> = ({
               >
                 <MessageCircle className="w-4 h-4 shrink-0" />
                 <span className="font-bold">#</span>
-                <span className="text-white/90">Sohbet</span>
+                <span className="text-white">Sohbet</span>
               </a>
             </div>
           )}
@@ -159,7 +159,7 @@ export const BloggerNotificationBar: React.FC<BloggerNotificationBarProps> = ({
               >
                 <Send className="w-4 h-4 shrink-0" />
                 <span className="font-bold">#</span>
-                <span className="text-white/90">İletişim</span>
+                <span className="text-white">İletişim</span>
               </a>
             </div>
           )}
@@ -172,7 +172,7 @@ export const BloggerNotificationBar: React.FC<BloggerNotificationBarProps> = ({
             onClick={() => setActiveSlide((prev) => (prev - 1 + totalSlides) % totalSlides)}
             className={`h-1.5 rounded-full transition-all duration-200 cursor-pointer ${
               activeSlide === 0
-                ? 'w-6 bg-[var(--linkC,#9aa0a6)] shadow-[0_0_6px_var(--linkC,#9aa0a6)]'
+                ? 'w-6 bg-[var(--linkC,#9aa0a6)]'
                 : 'w-3.5 bg-white/20 hover:bg-white/40'
             }`}
             title="Önceki (Sekmeler)"
@@ -182,7 +182,7 @@ export const BloggerNotificationBar: React.FC<BloggerNotificationBarProps> = ({
             onClick={() => setActiveSlide((prev) => (prev + 1) % totalSlides)}
             className={`h-1.5 rounded-full transition-all duration-200 cursor-pointer ${
               activeSlide !== 0
-                ? 'w-6 bg-[var(--linkC,#9aa0a6)] shadow-[0_0_6px_var(--linkC,#9aa0a6)]'
+                ? 'w-6 bg-[var(--linkC,#9aa0a6)]'
                 : 'w-3.5 bg-white/20 hover:bg-white/40'
             }`}
             title="Sonraki (İletişim)"

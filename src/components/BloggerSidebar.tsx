@@ -92,7 +92,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
   // 1. ÇEKMECE KAPALIYKEN: Daraltılmış 75px Mini Bar (negron.xml 1:1 Masaüstü Rail Modu)
   if (isCollapsed) {
     return (
-      <aside className="w-[75px] bg-[#1e1e1e] border-0 flex flex-col justify-between h-[calc(100vh-60px)] shrink-0 select-none shadow-xs transition-all duration-300 ease-in-out relative z-30">
+      <aside className="w-[75px] bg-[#1e1e1e] border-0 flex flex-col justify-between h-[calc(100vh-60px)] shrink-0 select-none transition-all duration-300 ease-in-out relative z-30">
         
         {/* Üst Menü İkonları (.mnMen .mnMn Rail — negron.xml 1:1: padding 20px 0, 40px butonlar, 18px ikonlar) */}
         <div className="py-5 flex-1 overflow-visible flex flex-col items-center">
@@ -117,206 +117,170 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
             )}
 
             {/* 2. Hizmetler (svg.hierarchy-4) */}
-            <li className="relative group flex justify-center w-full h-10 nt">
+            <li className="relative group flex justify-center w-full h-10">
               <button
                 onClick={() => onSelectTab('pinned')}
-                className={`w-10 h-10 flex items-center justify-center rounded-[18px] transition-all cursor-pointer relative ${
+                className={`w-10 h-10 flex items-center justify-center rounded-[18px] transition-colors cursor-pointer relative ${
                   currentTab === 'pinned'
-                    ? 'bg-[#252526] text-[var(--linkC,#9aa0a6)] shadow-sm'
-                    : 'text-[#9ca3af] hover:bg-[#252526] hover:text-[var(--linkC,#9aa0a6)]'
+                    ? 'text-[var(--linkC,#9aa0a6)]'
+                    : 'text-[#9ca3af] hover:bg-white/[0.06] hover:text-[var(--linkC,#9aa0a6)]'
                 }`}
-                title="Hizmetler"
-                aria-label="Hizmetler"
+                title="Uygulamalar"
+                aria-label="Uygulamalar"
               >
                 <Hierarchy4Icon className="w-[18px] h-[18px] opacity-80 group-hover:opacity-100 text-[var(--linkC,#9aa0a6)] transition-opacity" />
-                {/* xml 1:1 li.nt bildirim noktası (top: 7px, left: 7px) */}
-                <span className="absolute top-[7px] left-[7px] w-2 h-2 rounded-full bg-[var(--linkC,#9aa0a6)] shadow-[0_0_8px_var(--linkC,#9aa0a6)]" />
               </button>
-              {/* Uçan Menü (Flyout Submenu) */}
-              <div className="absolute left-full top-0 ml-2 w-52 p-2 rounded-2xl bg-[#252526] shadow-2xl opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-150 z-50 space-y-1">
-                <div className="px-2.5 py-1 text-xs font-bold text-[var(--linkC,#9aa0a6)] flex items-center gap-2">
-                  <Hierarchy4Icon className="w-4 h-4" />
-                  <span>Uygulamalar</span>
-                </div>
-                {/* 1. Etkileşimler */}
-                <button
-                  onClick={() => onSelectTab('pinned')}
-                  className={`w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs transition-colors cursor-pointer ${
-                    currentTab === 'pinned' ? 'bg-[#1e1e1e] text-[var(--linkC,#9aa0a6)] font-bold' : 'text-[#d4d4d4] hover:bg-[#1e1e1e] hover:text-[var(--linkC,#9aa0a6)]'
-                  }`}
-                >
-                  <span className="flex items-center gap-2">
+              {/* Uçan Menü (.mnMn li ul — negron.xml 1:1 kompakt, başlık/sayaç/rozet yok) */}
+              <div className="absolute left-full top-0 pl-1.5 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-150 z-50">
+                <div className="sidebar-flyout w-[164px] p-1.5 rounded-[16px] rounded-tl-[5px] bg-[#252526] shadow-xl space-y-0.5">
+                  {/* 1. Etkileşimler */}
+                  <button
+                    onClick={() => onSelectTab('pinned')}
+                    className={`w-full flex items-center gap-2 px-2.5 py-2 rounded-lg text-xs transition-colors cursor-pointer ${
+                      currentTab === 'pinned' ? 'text-[var(--linkC,#9aa0a6)] font-semibold' : 'text-[#d4d4d4] hover:bg-white/[0.06] hover:text-[var(--linkC,#9aa0a6)]'
+                    }`}
+                  >
                     <MessageNotif1Icon className="w-[18px] h-[18px] opacity-80 text-[var(--linkC,#9aa0a6)]" />
-                    NESCİONE
-                  </span>
-                  <span className="text-[10px] text-[#9ca3af] font-mono">{counts.pinned}</span>
-                </button>
-                {/* 2. Notlarınız */}
-                <a
-                  href="https://notebooklm.google.com/"
-                  target="_blank"
-                  rel="nofollow noreferrer noopener"
-                  className="w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-[#1e1e1e] hover:text-[var(--linkC,#9aa0a6)] transition-colors"
-                >
-                  <span className="flex items-center gap-2">
+                    <span>NESCİONE</span>
+                  </button>
+                  {/* 2. Notlarınız */}
+                  <a
+                    href="https://notebooklm.google.com/"
+                    target="_blank"
+                    rel="nofollow noreferrer noopener"
+                    className="w-full flex items-center gap-2 px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-white/[0.06] hover:text-[var(--linkC,#9aa0a6)] transition-colors"
+                  >
                     <Edit3Icon className="w-[18px] h-[18px] opacity-80 text-[#9ca3af]" />
-                    NotebookLM
-                  </span>
-                </a>
-                {/* 3. Forumlarınız */}
-                <a
-                  href="https://docs.google.com/forms/u/0/"
-                  target="_blank"
-                  rel="nofollow noreferrer noopener"
-                  className="w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-[#1e1e1e] hover:text-[var(--linkC,#9aa0a6)] transition-colors"
-                >
-                  <span className="flex items-center gap-2">
+                    <span>NotebookLM</span>
+                  </a>
+                  {/* 3. Forumlarınız */}
+                  <a
+                    href="https://docs.google.com/forms/u/0/"
+                    target="_blank"
+                    rel="nofollow noreferrer noopener"
+                    className="w-full flex items-center gap-2 px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-white/[0.06] hover:text-[var(--linkC,#9aa0a6)] transition-colors"
+                  >
                     <Profile2UserIcon className="w-[18px] h-[18px] opacity-80 text-[#9ca3af]" />
-                    Formlar
-                  </span>
-                </a>
+                    <span>Formlar</span>
+                  </a>
+                </div>
               </div>
             </li>
 
-            {/* 3. Klasör (svg.flash) - New! */}
+            {/* 3. Klasör (svg.flash) */}
             <li className="relative group flex justify-center w-full h-10">
               <button
                 onClick={() => onSelectTab('links')}
-                className={`w-10 h-10 flex items-center justify-center rounded-[18px] transition-all cursor-pointer relative ${
+                className={`w-10 h-10 flex items-center justify-center rounded-[18px] transition-colors cursor-pointer relative ${
                   currentTab === 'links' || currentTab === 'privacy'
-                    ? 'bg-[#252526] text-[var(--linkC,#9aa0a6)] shadow-sm'
-                    : 'text-[#9ca3af] hover:bg-[#252526] hover:text-[var(--linkC,#9aa0a6)]'
+                    ? 'text-[var(--linkC,#9aa0a6)]'
+                    : 'text-[#9ca3af] hover:bg-white/[0.06] hover:text-[var(--linkC,#9aa0a6)]'
                 }`}
                 title="Topluluk"
                 aria-label="Topluluk"
               >
                 <FlashIcon className="w-[18px] h-[18px] opacity-80 group-hover:opacity-100 text-[var(--linkC,#9aa0a6)] transition-opacity" />
-                <span className="absolute top-[7px] right-[7px] w-2 h-2 rounded-full bg-[var(--linkC,#9aa0a6)] shadow-[0_0_6px_var(--linkC,#9aa0a6)]" />
               </button>
-              {/* Uçan Menü (Flyout Submenu) */}
-              <div className="absolute left-full top-0 ml-2 w-52 p-2 rounded-2xl bg-[#252526] shadow-2xl opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-150 z-50 space-y-1">
-                <div className="px-2.5 py-1 text-xs font-bold text-[var(--linkC,#9aa0a6)] flex items-center gap-2">
-                  <FlashIcon className="w-4 h-4" />
-                  <span>Topluluk</span>
-                  <span className="ml-auto text-[var(--linkC,#9aa0a6)] text-[11px] font-bold">New!</span>
-                </div>
-                {/* 1. Chat */}
-                <a
-                  href="https://script.google.com/macros/s/AKfycbwcZprdS6F_jJ6nin0YalTKweQKP4t936UgrTnme-d5gA-qHbi986vh6HxdzvA236Of/exec"
-                  target="_blank"
-                  rel="nofollow noreferrer noopener"
-                  className="w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-[#1e1e1e] hover:text-[var(--linkC,#9aa0a6)] transition-colors"
-                >
-                  <span className="flex items-center gap-2">
+              {/* Uçan Menü */}
+              <div className="absolute left-full top-0 pl-1.5 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-150 z-50">
+                <div className="sidebar-flyout w-[164px] p-1.5 rounded-[16px] rounded-tl-[5px] bg-[#252526] shadow-xl space-y-0.5">
+                  {/* 1. Chat */}
+                  <a
+                    href="https://script.google.com/macros/s/AKfycbwcZprdS6F_jJ6nin0YalTKweQKP4t936UgrTnme-d5gA-qHbi986vh6HxdzvA236Of/exec"
+                    target="_blank"
+                    rel="nofollow noreferrer noopener"
+                    className="w-full flex items-center gap-2 px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-white/[0.06] hover:text-[var(--linkC,#9aa0a6)] transition-colors"
+                  >
                     <GoogleChatIcon className="w-[18px] h-[18px] opacity-80 text-[var(--linkC,#9aa0a6)]" />
-                    Chat
-                  </span>
-                </a>
-                {/* 2. Tartışmalar */}
-                <a
-                  href="https://github.com/Aleyulala/saved/discussions/?pli=1"
-                  target="_blank"
-                  rel="nofollow noreferrer noopener"
-                  className="w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-[#1e1e1e] hover:text-[var(--linkC,#9aa0a6)] transition-colors"
-                >
-                  <span className="flex items-center gap-2">
+                    <span>Chat</span>
+                  </a>
+                  {/* 2. Tartışmalar */}
+                  <a
+                    href="https://github.com/Aleyulala/saved/discussions/?pli=1"
+                    target="_blank"
+                    rel="nofollow noreferrer noopener"
+                    className="w-full flex items-center gap-2 px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-white/[0.06] hover:text-[var(--linkC,#9aa0a6)] transition-colors"
+                  >
                     <Profile2UserIcon className="w-[18px] h-[18px] opacity-80 text-[#9ca3af]" />
-                    Tartışmalar
-                  </span>
-                </a>
-                {/* 3. Labs */}
-                <a
-                  href="https://labs.google.com/"
-                  target="_blank"
-                  rel="nofollow noreferrer noopener"
-                  className="w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-[#1e1e1e] hover:text-[var(--linkC,#9aa0a6)] transition-colors"
-                >
-                  <span className="flex items-center gap-2">
+                    <span>Tartışmalar</span>
+                  </a>
+                  {/* 3. Labs */}
+                  <a
+                    href="https://labs.google.com/"
+                    target="_blank"
+                    rel="nofollow noreferrer noopener"
+                    className="w-full flex items-center gap-2 px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-white/[0.06] hover:text-[var(--linkC,#9aa0a6)] transition-colors"
+                  >
                     <LabsIcon className="w-[18px] h-[18px] opacity-80 text-[#9ca3af]" />
-                    Labs
-                  </span>
-                </a>
+                    <span>Labs</span>
+                  </a>
+                </div>
               </div>
             </li>
 
-            {/* XML 1:1 Bölücü Çizgi (.mnMn > li.br::after) */}
-            <li className="flex justify-center w-full py-2.5">
-              <div className="w-5 h-px bg-white/10" />
-            </li>
-
-            {/* 4. Geliştiriciler (svg.folder-code) */}
+            {/* 4. Araçlar (svg.folder-code) */}
             <li className="relative group flex justify-center w-full h-10">
               <button
                 onClick={() => setGelistiriciOpen(!gelistiriciOpen)}
-                className="w-10 h-10 flex items-center justify-center rounded-[18px] transition-all cursor-pointer text-[#9ca3af] hover:bg-[#252526] hover:text-[var(--linkC,#9aa0a6)] relative"
-                title="Geliştirici"
-                aria-label="Geliştirici"
+                className="w-10 h-10 flex items-center justify-center rounded-[18px] transition-colors cursor-pointer text-[#9ca3af] hover:bg-white/[0.06] hover:text-[var(--linkC,#9aa0a6)] relative"
+                title="Araçlar"
+                aria-label="Araçlar"
               >
                 <FolderCodeIcon className="w-[18px] h-[18px] opacity-80 group-hover:opacity-100 text-[var(--linkC,#9aa0a6)] transition-opacity" />
-                <span className="absolute bottom-[7px] right-[7px] w-1.5 h-1.5 rounded-full bg-[var(--linkC,#9aa0a6)] shadow-[0_0_6px_var(--linkC,#9aa0a6)]" />
               </button>
-              {/* Uçan Menü (Flyout Submenu) */}
-              <div className="absolute left-full top-0 ml-2 w-52 p-2 rounded-2xl bg-[#252526] shadow-2xl opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-150 z-50 space-y-1">
-                <div className="px-2.5 py-1 text-xs font-bold text-[var(--linkC,#9aa0a6)] flex items-center gap-2">
-                  <FolderCodeIcon className="w-4 h-4" />
-                  <span>Araçlar</span>
-                </div>
-                {/* 1. Ters Çevir */}
-                <button
-                  type="button"
-                  onClick={() => {
-                    const current = document.documentElement.getAttribute('dir') || 'ltr';
-                    const next = current === 'rtl' ? 'ltr' : 'rtl';
-                    document.documentElement.setAttribute('dir', next);
-                  }}
-                  className="w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-[#1e1e1e] hover:text-[var(--linkC,#9aa0a6)] transition-colors cursor-pointer"
-                >
-                  <span className="flex items-center gap-2">
+              {/* Uçan Menü */}
+              <div className="absolute left-full top-0 pl-1.5 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-150 z-50">
+                <div className="sidebar-flyout w-[164px] p-1.5 rounded-[16px] rounded-tl-[5px] bg-[#252526] shadow-xl space-y-0.5">
+                  {/* 1. Ters Çevir */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const current = document.documentElement.getAttribute('dir') || 'ltr';
+                      const next = current === 'rtl' ? 'ltr' : 'rtl';
+                      document.documentElement.setAttribute('dir', next);
+                    }}
+                    className="w-full flex items-center gap-2 px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-white/[0.06] hover:text-[var(--linkC,#9aa0a6)] transition-colors cursor-pointer"
+                  >
                     <ArrowSwapHorizontalIcon className="w-[18px] h-[18px] opacity-80 text-[#9ca3af]" />
-                    Ayna
-                  </span>
-                  <span className="text-[var(--linkC,#9aa0a6)] text-[10px] font-bold">New!</span>
-                </button>
-                {/* 2. Detaylı Ara */}
-                <a
-                  href="https://search.google.com/test/rich-results"
-                  target="_blank"
-                  rel="nofollow noreferrer noopener"
-                  className="w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-[#1e1e1e] hover:text-[var(--linkC,#9aa0a6)] transition-colors"
-                >
-                  <span className="flex items-center gap-2">
+                    <span>Ayna</span>
+                  </button>
+                  {/* 2. Detaylı Ara */}
+                  <a
+                    href="https://search.google.com/test/rich-results"
+                    target="_blank"
+                    rel="nofollow noreferrer noopener"
+                    className="w-full flex items-center gap-2 px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-white/[0.06] hover:text-[var(--linkC,#9aa0a6)] transition-colors"
+                  >
                     <SearchNormalIcon className="w-[18px] h-[18px] opacity-80 text-[#9ca3af]" />
-                    SEO
-                  </span>
-                </a>
-                {/* 3. Hız Testi */}
-                <a
-                  href="https://pagespeed.web.dev/analysis"
-                  target="_blank"
-                  rel="nofollow noreferrer noopener"
-                  className="w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-[#1e1e1e] hover:text-[var(--linkC,#9aa0a6)] transition-colors"
-                >
-                  <span className="flex items-center gap-2">
+                    <span>SEO</span>
+                  </a>
+                  {/* 3. Hız Testi */}
+                  <a
+                    href="https://pagespeed.web.dev/analysis"
+                    target="_blank"
+                    rel="nofollow noreferrer noopener"
+                    className="w-full flex items-center gap-2 px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-white/[0.06] hover:text-[var(--linkC,#9aa0a6)] transition-colors"
+                  >
                     <SpeedometerIcon className="w-[18px] h-[18px] opacity-80 text-[#9ca3af]" />
-                    Hız
-                  </span>
-                </a>
+                    <span>Hız</span>
+                  </a>
+                </div>
               </div>
             </li>
 
           </ul>
         </div>
 
-        {/* Alt Bölüm (.mnMob / .mNav): XML 1:1 Tek + Butonu (Menüyü Genişletir / Çekmeceyi Açar) */}
-        <div className="p-3 bg-[#1e1e1e] flex justify-center items-center">
+        {/* Alt Bölüm (.mnMob / .mNav): XML 1:1 Tek + Butonu (Kutusuz düz Blogger stili) */}
+        <div className="sidebar-foot-panel p-3 bg-[#1e1e1e] flex justify-center items-center">
           <button
             type="button"
             onClick={onToggleSidebar || onOpenNewLink}
-            className="w-9 h-9 flex items-center justify-center rounded-[18px] text-[#9ca3af] hover:text-white hover:bg-[#252526] transition-colors cursor-pointer"
+            className="w-9 h-9 flex items-center justify-center rounded-[12px] text-[#9ca3af] hover:text-white hover:bg-white/[0.06] transition-colors cursor-pointer"
             title="Gezinme Menüsü (Genişlet)"
             aria-label="Navigation menu"
           >
-            <PlusNavIcon className="w-[18px] h-[18px] opacity-80 hover:opacity-100 text-[#9ca3af] hover:text-white transition-opacity" />
+            <PlusNavIcon className="w-[18px] h-[18px]" />
           </button>
         </div>
 
@@ -326,7 +290,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
 
   // 2. ÇEKMECE AÇIKKEN: Genişletilmiş 230px Tam Menü (negronn.xml 1:1)
   return (
-    <aside className="w-[230px] bg-[#1e1e1e] border-0 flex flex-col justify-between h-[calc(100vh-60px)] shrink-0 text-xs select-none shadow-xs transition-all duration-300 ease-in-out">
+    <aside className="w-[230px] bg-[#1e1e1e] border-0 flex flex-col justify-between h-[calc(100vh-60px)] shrink-0 text-xs select-none transition-all duration-300 ease-in-out">
       
       {/* Menü Öğeleri (.mnMen) */}
       <div className="p-3 space-y-4 overflow-y-auto flex-1">
@@ -353,14 +317,13 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
           <li className="pt-1 relative">
             <div 
               onClick={() => setHizmetlerOpen(!hizmetlerOpen)}
-              className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-bold text-[#d4d4d4] hover:bg-[#252526] hover:text-white cursor-pointer transition-colors relative"
+              className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-semibold text-[#d4d4d4] hover:bg-[#252526] hover:text-white cursor-pointer transition-colors relative"
             >
-              <div className="flex items-center gap-2.5">
+              <div className="flex items-center gap-2">
                 <Hierarchy4Icon className="w-[18px] h-[18px] opacity-80 text-[var(--linkC,#9aa0a6)]" />
                 <span>Uygulamalar</span>
+                <span className="text-[11px] font-medium text-[#989b9f] ml-0.5">Yeni!</span>
               </div>
-              {/* xml 1:1 li.nt bildirim noktası */}
-              <span className="absolute top-2 left-2 w-2 h-2 rounded-full bg-[var(--linkC,#9aa0a6)] shadow-[0_0_8px_var(--linkC,#9aa0a6)]" />
               
               <ChevronDownIcon className={`w-3.5 h-3.5 text-[#989b9f] transition-transform duration-300 ${hizmetlerOpen ? 'rotate-180' : ''}`} />
             </div>
@@ -381,7 +344,6 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                       <MessageNotif1Icon className="w-4 h-4 opacity-80 text-[var(--linkC,#9aa0a6)]" />
                       <span>NESCİONE</span>
                     </div>
-                    <span className="text-[10px] text-[#9ca3af] font-mono">{counts.pinned}</span>
                   </button>
                 </li>
 
@@ -422,13 +384,13 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
           <li className="pt-1">
             <div 
               onClick={() => setKlasorOpen(!klasorOpen)}
-              className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-bold text-[#d4d4d4] hover:bg-[#252526] hover:text-white cursor-pointer transition-colors"
+              className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-semibold text-[#d4d4d4] hover:bg-[#252526] hover:text-white cursor-pointer transition-colors"
             >
-              <div className="flex items-center gap-2.5">
+              <div className="flex items-center gap-2">
                 <FlashIcon className="w-[18px] h-[18px] opacity-80 text-[var(--linkC,#9aa0a6)]" />
                 <span>Topluluk</span>
-                <span className="badge-new text-[var(--linkC,#9aa0a6)] text-[11px] font-bold ml-1">
-                  New!
+                <span className="text-[11px] font-medium text-[#989b9f] ml-0.5">
+                  Canlı
                 </span>
               </div>
               <ChevronDownIcon className={`w-3.5 h-3.5 text-[#989b9f] transition-transform duration-300 ${klasorOpen ? 'rotate-180' : ''}`} />
@@ -484,16 +446,11 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
             )}
           </li>
 
-          {/* XML 1:1 Bölücü Çizgi (.mnMn > li.br::after) */}
-          <li className="py-1">
-            <div className="w-full h-px bg-white/10 my-1" />
-          </li>
-
-          {/* 4. Geliştiriciler (svg.folder-code) */}
+          {/* 4. Araçlar (svg.folder-code) */}
           <li className="pt-1">
             <div 
               onClick={() => setGelistiriciOpen(!gelistiriciOpen)}
-              className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-bold text-[#d4d4d4] hover:bg-[#252526] hover:text-white cursor-pointer transition-colors"
+              className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-semibold text-[#d4d4d4] hover:bg-[#252526] hover:text-white cursor-pointer transition-colors"
             >
               <div className="flex items-center gap-2.5">
                 <FolderCodeIcon className="w-[18px] h-[18px] opacity-80 text-[var(--linkC,#9aa0a6)]" />
@@ -518,7 +475,6 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                     <div className="flex items-center gap-2">
                       <ArrowSwapHorizontalIcon className="w-3.5 h-3.5 text-[#9ca3af]" />
                       <span>Ayna</span>
-                      <span className="text-[var(--linkC,#9aa0a6)] text-[10px] font-bold">New!</span>
                     </div>
                   </button>
                 </li>
@@ -560,9 +516,9 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
       </div>
 
       {/* Alt Bölüm (.mnMob): E-posta, Gizlilik ve Yorumlar Slaytı (.PageList02) + 6 Sosyal Buton (.LinkList04 / .mSoc) */}
-      <div className="p-3 bg-[#1e1e1e] space-y-2.5">
+      <div className="sidebar-foot-panel p-3 bg-[#1e1e1e] space-y-1.5">
         {/* PageList02: E-posta, Gizlilik ve Yorumlar Kayan Slider + [+] Butonu */}
-        <div className="relative h-9 bg-white/[0.04] rounded-[9px] overflow-hidden flex items-center shadow-xs">
+        <div className="sidebar-foot-slider relative h-9 bg-transparent rounded-[9px] overflow-hidden flex items-center">
           {/* Slayt 0: E-posta */}
           <div
             className={`absolute inset-0 flex items-center justify-between px-2.5 transition-all duration-300 ease-in-out ${
@@ -573,13 +529,12 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
           >
             <a
               href="mailto:mrstar14155@gmail.com"
-              className="flex items-center gap-2 text-xs text-[#e5e5e5] hover:text-[var(--linkC,#9aa0a6)] font-semibold transition-colors"
+              className="flex items-center gap-2 text-xs text-white hover:text-[var(--linkC,#9aa0a6)] font-semibold transition-colors"
               title="E-posta: mrstar14155@gmail.com"
             >
               <div className="relative flex items-center justify-center">
-                <MailIcon className="w-3.5 h-3.5 text-[#e5e5e5] shrink-0" />
-                {/* Parlayan Canlı Bildirim Noktası (.nt glow) */}
-                <span className="absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#ffffff] animate-pulse" />
+                <MailIcon className="w-3.5 h-3.5 text-white shrink-0" />
+                <span className="sidebar-dot absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-[var(--linkC,#9aa0a6)]" />
               </div>
               <span className="tracking-wide">E-posta</span>
             </a>
@@ -610,12 +565,12 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
             <button
               type="button"
               onClick={() => onSelectTab('privacy')}
-              className="flex items-center gap-2 text-xs text-[#e5e5e5] hover:text-[var(--linkC,#9aa0a6)] font-semibold transition-colors cursor-pointer"
+              className="flex items-center gap-2 text-xs text-white hover:text-[var(--linkC,#9aa0a6)] font-semibold transition-colors cursor-pointer"
               title="Gizlilik Politikası & Şartlar"
             >
               <div className="relative flex items-center justify-center">
-                <Verify1Icon className="w-3.5 h-3.5 text-[#e5e5e5] shrink-0" />
-                <span className="absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#ffffff] animate-pulse" />
+                <Verify1Icon className="w-3.5 h-3.5 text-white shrink-0" />
+                <span className="sidebar-dot absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-[var(--linkC,#9aa0a6)]" />
               </div>
               <span className="tracking-wide">Gizlilik</span>
             </button>
@@ -645,12 +600,12 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
               href="https://negronshow.blogspot.com/p/muhabbet.html"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-xs text-[#e5e5e5] hover:text-[var(--linkC,#9aa0a6)] font-semibold transition-colors"
+              className="flex items-center gap-2 text-xs text-white hover:text-[var(--linkC,#9aa0a6)] font-semibold transition-colors"
               title="Muhabbet Odası & Yorumlar"
             >
               <div className="relative flex items-center justify-center">
                 <MessageNotif1Icon className="w-3.5 h-3.5 text-[var(--linkC,#9aa0a6)] shrink-0" />
-                <span className="absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#ffffff] animate-pulse" />
+                <span className="sidebar-dot absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-[var(--linkC,#9aa0a6)]" />
               </div>
               <span className="tracking-wide">Yorumlar</span>
             </a>
@@ -670,13 +625,13 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
         </div>
 
         {/* LinkList04: Sosyal Medya Kayan Slider + [+] Butonu (Üstteki Slayt ile Birebir Aynı Tasarım) */}
-        <div className="relative h-9 bg-white/[0.04] rounded-[9px] overflow-hidden flex items-center shadow-xs">
+        <div className="sidebar-foot-slider relative h-9 bg-transparent rounded-[9px] overflow-hidden flex items-center">
           {sidebarSocialLinks.map((item, idx) => {
             const IconComp = item.icon;
             return (
               <div
                 key={item.name}
-                className={`absolute inset-0 flex items-center justify-between px-3 transition-all duration-300 ease-in-out ${
+                className={`absolute inset-0 flex items-center justify-between px-2.5 transition-all duration-300 ease-in-out ${
                   socSlideIndex === idx
                     ? 'opacity-100 translate-x-0 pointer-events-auto'
                     : 'opacity-0 -translate-x-full pointer-events-none'
@@ -686,13 +641,12 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-xs text-[#e5e5e5] hover:text-[var(--linkC,#9aa0a6)] font-semibold transition-colors"
+                  className="flex items-center gap-2 text-xs text-white hover:text-[var(--linkC,#9aa0a6)] font-semibold transition-colors"
                   title={`${item.name} Profilini Aç`}
                 >
-                  <div className="relative flex items-center justify-center text-[#e5e5e5]">
+                  <div className="relative flex items-center justify-center text-white">
                     <IconComp className="w-3.5 h-3.5 shrink-0" />
-                    {/* Parlayan Canlı Bildirim Noktası (.nt glow) */}
-                    <span className="absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#ffffff] animate-pulse" />
+                    <span className="sidebar-dot absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-[var(--linkC,#9aa0a6)]" />
                   </div>
                   <span className="tracking-wide">{item.name}</span>
                 </a>
@@ -711,11 +665,6 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
               </div>
             );
           })}
-        </div>
-
-        <div className="flex items-center justify-between text-[10px] text-[#989b9f] font-mono px-1">
-          <span>GNU GPL v3.0</span>
-          <span>v1.0 • Plus UI</span>
         </div>
       </div>
 
