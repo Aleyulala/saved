@@ -14,7 +14,7 @@ import {
 import { BLOGGER_AUTHORS } from '../utils/bloggerAuthors';
 
 const THEME_COLORS = [
-  { id: 0, hex: '#60cdff', name: 'Gök Mavisi (Varsayılan)' },
+  { id: 0, hex: '#9aa0a6', name: 'Gri (Varsayılan)' },
   { id: 1, hex: '#ea4335', name: 'Kırmızı' },
   { id: 2, hex: '#1e8e3e', name: 'Yeşil' },
   { id: 3, hex: '#4285f4', name: 'Mavi' },
@@ -85,7 +85,7 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
   const [isThemePaletteOpen, setIsThemePaletteOpen] = useState(false);
   const [currentMode, setCurrentMode] = useState<'dark' | 'light' | 'system'>('dark');
   const [currentThemeIndex, setCurrentThemeIndex] = useState<number>(0);
-  const [currentThemeColor, setCurrentThemeColor] = useState<string>('#60cdff');
+  const [currentThemeColor, setCurrentThemeColor] = useState<string>('#9aa0a6');
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const translateRef = useRef<HTMLDivElement>(null);
   const appearanceRef = useRef<HTMLDivElement>(null);
@@ -162,7 +162,7 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
         if (typeof parsed.theme === 'number' && parsed.theme !== 0 && THEME_COLORS[parsed.theme]) {
           applyThemeColor(THEME_COLORS[parsed.theme].hex, parsed.theme);
         } else {
-          applyThemeColor('#60cdff', 0);
+          applyThemeColor('#9aa0a6', 0);
         }
       } else {
         const savedMode = (localStorage.getItem('saved_theme') as any) || 'dark';
@@ -171,12 +171,12 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
         if (savedId !== null && Number(savedId) > 0 && THEME_COLORS[Number(savedId)]) {
           applyThemeColor(THEME_COLORS[Number(savedId)].hex, Number(savedId));
         } else {
-          applyThemeColor('#60cdff', 0);
+          applyThemeColor('#9aa0a6', 0);
         }
       }
     } catch {
       applyThemeMode('dark');
-      applyThemeColor('#60cdff', 0);
+      applyThemeColor('#9aa0a6', 0);
     }
 
     // Check existing Google Translate cookie
