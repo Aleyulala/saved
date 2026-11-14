@@ -329,23 +329,16 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
                 />
               )
             ) : (
-              /* Medya Yoksa: Şık Web Sitesi Logo & Önizleme Kartı (Blogger & Saved 1:1) */
-              <div className="w-full h-full relative">
+              /* Medya Yoksa: Karta basınca doğrudan web sitesine gider (Web Sitesine Git butonu kaldırıldı) */
+              <a
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full h-full relative block cursor-pointer group no-underline transition-all duration-200 active:scale-[0.99]"
+                title={`${link.title || link.url} Sitesine Git`}
+              >
                 <BrandLogoCard url={link.url} title={link.title} size="detail" />
-                <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-20">
-                  <a
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[var(--linkC,#60cdff)]/20 hover:bg-[var(--linkC,#60cdff)]/30 text-[var(--linkC,#60cdff)] text-xs font-semibold border border-[var(--linkC,#60cdff)]/30 shadow-lg backdrop-blur-md transition-all hover:scale-105 active:scale-95 no-underline"
-                  >
-                    <span>Web Sitesine Git</span>
-                    <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
-                    </svg>
-                  </a>
-                </div>
-              </div>
+              </a>
             )}
 
             {/* Sağ Üst Köşe: Tam Ekran Genişlet Butonu (Screenshot 4 & 5 1:1) - Sadece gerçek medya varsa gösterilir */}
