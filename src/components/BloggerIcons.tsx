@@ -406,4 +406,13 @@ export const TiktokIcon: React.FC<{ className?: string }> = ({ className = 'w-4 
   </svg>
 );
 
+// svg.labs (Google Labs / Bilim Deney Tüpü İkonu)
+export const LabsIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
+  <svg className={`line ${className}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M9 3h6M10 3v5.5L4.5 19a2 2 0 0 0 1.8 2.9h11.4a2 2 0 0 0 1.8-2.9L14 8.5V3" />
+    <path d="M7.5 15h9" />
+  </svg>
+);
+
+
 

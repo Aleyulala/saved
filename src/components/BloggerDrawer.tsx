@@ -21,7 +21,8 @@ import {
   MatrixIcon,
   WhatsappIcon,
   GoogleChatIcon,
-  TiktokIcon
+  TiktokIcon,
+  LabsIcon
 } from './BloggerIcons';
 import { CollectionItem, TagItem } from '../types';
 
@@ -158,7 +159,7 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
               </li>
             )}
 
-            {/* 2. KLASÖR 1: Uygulamalar & Portallar (svg.flash) */}
+            {/* 2. KLASÖR 1: Uygulamalar (svg.flash) */}
             <li className="pt-1 relative">
               <div 
                 onClick={() => setHizmetlerOpen(!hizmetlerOpen)}
@@ -166,7 +167,7 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
               >
                 <div className="flex items-center gap-2.5">
                   <FlashIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-amber-400" />
-                  <span>Uygulamalar &amp; Portallar</span>
+                  <span>Uygulamalar</span>
                   <span className="badge-new text-[var(--linkC,#9aa0a6)] text-[11px] font-bold ml-1">
                     Yeni!
                   </span>
@@ -179,7 +180,7 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
 
               {hizmetlerOpen && (
                 <ul className="space-y-0.5 pl-3 border-l border-white/10 ml-4 mt-1">
-                  {/* 1. Saved (Koleksiyon & Arşiv) (svg.eye) */}
+                  {/* 1. Saved (svg.eye) */}
                   <li>
                     <button
                       onClick={() => {
@@ -194,13 +195,13 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
                     >
                       <div className="flex items-center gap-2">
                         <EyeIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[#9ca3af] group-hover:text-[var(--linkC,#9aa0a6)]" />
-                        <span>Saved (Koleksiyon &amp; Arşiv)</span>
+                        <span>Saved</span>
                       </div>
                       <span className="text-[10px] text-[#9ca3af] font-mono">{counts.all}</span>
                     </button>
                   </li>
 
-                  {/* 2. Akıllı Not Defteri (NotebookLM) (svg.edit-3) */}
+                  {/* 2. NotebookLM (svg.edit-3) */}
                   <li>
                     <a
                       href="https://notebooklm.google.com/"
@@ -210,12 +211,12 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
                     >
                       <div className="flex items-center gap-2">
                         <Edit3Icon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[#9ca3af] group-hover:text-[var(--linkC,#9aa0a6)]" />
-                        <span>Akıllı Not Defteri (NotebookLM)</span>
+                        <span>NotebookLM</span>
                       </div>
                     </a>
                   </li>
 
-                  {/* 3. Topluluk Formları (Google Forms) (svg.profile-2user) */}
+                  {/* 3. Formlar (svg.profile-2user) */}
                   <li>
                     <a
                       href="https://docs.google.com/forms/u/0/"
@@ -225,7 +226,7 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
                     >
                       <div className="flex items-center gap-2">
                         <Profile2UserIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[#9ca3af] group-hover:text-[var(--linkC,#9aa0a6)]" />
-                        <span>Topluluk Formları (Google Forms)</span>
+                        <span>Formlar</span>
                       </div>
                     </a>
                   </li>
@@ -233,7 +234,7 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
               )}
             </li>
 
-            {/* 3. KLASÖR 2: Topluluk & İletişim (svg.message-notif-1) */}
+            {/* 3. KLASÖR 2: Topluluk (svg.message-notif-1) */}
             <li className="pt-1">
               <div 
                 onClick={() => setKlasorOpen(!klasorOpen)}
@@ -241,7 +242,7 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
               >
                 <div className="flex items-center gap-2.5">
                   <MessageNotif1Icon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[var(--linkC,#9aa0a6)]" />
-                  <span>Topluluk &amp; İletişim</span>
+                  <span>Topluluk</span>
                   <span className="badge-new text-emerald-400 text-[11px] font-bold ml-1">
                     Canlı
                   </span>
@@ -251,7 +252,7 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
 
               {klasorOpen && (
                 <ul className="space-y-0.5 pl-3 border-l border-white/10 ml-4 mt-1">
-                  {/* 1. Google Chat Odası */}
+                  {/* 1. Chat (Google Chat Odası) */}
                   <li>
                     <a
                       href="https://script.google.com/macros/s/AKfycbwcZprdS6F_jJ6nin0YalTKweQKP4t936UgrTnme-d5gA-qHbi986vh6HxdzvA236Of/exec"
@@ -261,12 +262,12 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
                     >
                       <div className="flex items-center gap-2">
                         <GoogleChatIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[#00ac47]" />
-                        <span className="font-semibold text-white/95 group-hover:text-[#00ac47]">Google Chat Odası</span>
+                        <span className="font-semibold text-white/95 group-hover:text-[#00ac47]">Chat</span>
                       </div>
                     </a>
                   </li>
 
-                  {/* 2. Topluluk Tartışmaları (GitHub) */}
+                  {/* 2. Tartışmalar (GitHub Discussions) */}
                   <li>
                     <a
                       href="https://github.com/Aleyulala/saved/discussions/?pli=1"
@@ -276,7 +277,22 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
                     >
                       <div className="flex items-center gap-2">
                         <Profile2UserIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[#9ca3af] group-hover:text-[var(--linkC,#9aa0a6)]" />
-                        <span>Topluluk Tartışmaları (GitHub)</span>
+                        <span>Tartışmalar</span>
+                      </div>
+                    </a>
+                  </li>
+
+                  {/* 3. Labs (Google Labs) */}
+                  <li>
+                    <a
+                      href="https://labs.google.com/"
+                      target="_blank"
+                      rel="nofollow noreferrer noopener"
+                      className="w-full group flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] transition-colors outline-none"
+                    >
+                      <div className="flex items-center gap-2">
+                        <LabsIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[#9ca3af] group-hover:text-[var(--linkC,#9aa0a6)]" />
+                        <span>Labs</span>
                       </div>
                     </a>
                   </li>
@@ -289,7 +305,7 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
               <div className="w-full h-px bg-white/10 my-1" />
             </li>
 
-            {/* 4. KLASÖR 3: Geliştirici & Araçlar (svg.folder-code) */}
+            {/* 4. KLASÖR 3: Araçlar (svg.folder-code) */}
             <li className="pt-1">
               <div 
                 onClick={() => setGelistiriciOpen(!gelistiriciOpen)}
@@ -297,14 +313,14 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
               >
                 <div className="flex items-center gap-2.5">
                   <FolderCodeIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[var(--linkC,#9aa0a6)]" />
-                  <span>Geliştirici &amp; Araçlar</span>
+                  <span>Araçlar</span>
                 </div>
                 <ChevronDownIcon className={`w-3.5 h-3.5 text-[#989b9f] transition-transform duration-300 ${gelistiriciOpen ? 'rotate-180' : ''}`} />
               </div>
 
               {gelistiriciOpen && (
                 <ul className="space-y-0.5 pl-3 border-l border-white/10 ml-4 mt-1">
-                  {/* 1. Arama & SEO Testi (svg.search-normal-1) */}
+                  {/* 1. SEO (svg.search-normal-1) */}
                   <li>
                     <a
                       href="https://search.google.com/test/rich-results"
@@ -314,12 +330,12 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
                     >
                       <div className="flex items-center gap-2">
                         <SearchNormalIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[#9ca3af] group-hover:text-[var(--linkC,#9aa0a6)]" />
-                        <span>Arama &amp; SEO Testi</span>
+                        <span>SEO</span>
                       </div>
                     </a>
                   </li>
 
-                  {/* 2. Sayfa Hız Analizi (svg.speedometer) */}
+                  {/* 2. Hız (svg.speedometer) */}
                   <li>
                     <a
                       href="https://pagespeed.web.dev/analysis"
@@ -329,12 +345,12 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
                     >
                       <div className="flex items-center gap-2">
                         <SpeedometerIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[#9ca3af] group-hover:text-[var(--linkC,#9aa0a6)]" />
-                        <span>Sayfa Hız Analizi</span>
+                        <span>Hız</span>
                       </div>
                     </a>
                   </li>
 
-                  {/* 3. Ayna Modu (RTL Görünüm) (svg.arrow-swap-horizontal) */}
+                  {/* 3. Ayna (svg.arrow-swap-horizontal) */}
                   <li>
                     <button
                       type="button"
@@ -347,7 +363,7 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
                     >
                       <div className="flex items-center gap-2">
                         <ArrowSwapHorizontalIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[#9ca3af] group-hover:text-[var(--linkC,#9aa0a6)]" />
-                        <span>Ayna Modu (RTL)</span>
+                        <span>Ayna</span>
                         <span className="text-[var(--linkC,#9aa0a6)] text-[10px] font-bold">RTL</span>
                       </div>
                     </button>

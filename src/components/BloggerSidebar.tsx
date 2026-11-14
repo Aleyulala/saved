@@ -21,7 +21,9 @@ import {
   MailIcon, 
   VkIcon,
   MatrixIcon,
-  WhatsappIcon
+  WhatsappIcon,
+  GoogleChatIcon,
+  LabsIcon
 } from './BloggerIcons';
 import { CollectionItem, TagItem } from '../types';
 
@@ -134,7 +136,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
               <div className="absolute left-full top-0 ml-2 w-52 p-2 rounded-2xl bg-[#252526] border border-white/10 shadow-2xl opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-150 z-50 space-y-1">
                 <div className="px-2.5 py-1 text-xs font-bold text-[var(--linkC,#9aa0a6)] border-b border-white/10 flex items-center gap-2">
                   <Hierarchy4Icon className="w-4 h-4" />
-                  <span>Hizmetler</span>
+                  <span>Uygulamalar</span>
                 </div>
                 {/* 1. Etkileşimler */}
                 <button
@@ -145,7 +147,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                 >
                   <span className="flex items-center gap-2">
                     <MessageNotif1Icon className="w-[18px] h-[18px] opacity-80 text-[var(--linkC,#9aa0a6)]" />
-                    Etkileşimler
+                    Saved
                   </span>
                   <span className="text-[10px] text-[#9ca3af] font-mono">{counts.pinned}</span>
                 </button>
@@ -158,7 +160,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                 >
                   <span className="flex items-center gap-2">
                     <Edit3Icon className="w-[18px] h-[18px] opacity-80 text-[#9ca3af]" />
-                    Notlarınız
+                    NotebookLM
                   </span>
                 </a>
                 {/* 3. Forumlarınız */}
@@ -170,7 +172,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                 >
                   <span className="flex items-center gap-2">
                     <Profile2UserIcon className="w-[18px] h-[18px] opacity-80 text-[#9ca3af]" />
-                    Forumlarınız
+                    Formlar
                   </span>
                 </a>
               </div>
@@ -185,8 +187,8 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                     ? 'bg-[#252526] text-[var(--linkC,#9aa0a6)] shadow-sm'
                     : 'text-[#9ca3af] hover:bg-[#252526] hover:text-[var(--linkC,#9aa0a6)]'
                 }`}
-                title="Klasör"
-                aria-label="Klasör"
+                title="Topluluk"
+                aria-label="Topluluk"
               >
                 <FlashIcon className="w-[18px] h-[18px] opacity-80 group-hover:opacity-100 text-[var(--linkC,#9aa0a6)] transition-opacity" />
                 <span className="absolute top-[7px] right-[7px] w-2 h-2 rounded-full bg-[var(--linkC,#9aa0a6)] shadow-[0_0_6px_var(--linkC,#9aa0a6)]" />
@@ -195,7 +197,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
               <div className="absolute left-full top-0 ml-2 w-52 p-2 rounded-2xl bg-[#252526] border border-white/10 shadow-2xl opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-150 z-50 space-y-1">
                 <div className="px-2.5 py-1 text-xs font-bold text-[var(--linkC,#9aa0a6)] border-b border-white/10 flex items-center gap-2">
                   <FlashIcon className="w-4 h-4" />
-                  <span>Klasör</span>
+                  <span>Topluluk</span>
                   <span className="ml-auto text-[var(--linkC,#9aa0a6)] text-[11px] font-bold">New!</span>
                 </div>
                 {/* 1. İlgi Alanları */}
@@ -207,20 +209,20 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                 >
                   <span className="flex items-center gap-2">
                     <EyeIcon className="w-[18px] h-[18px] opacity-80 text-[#9ca3af]" />
-                    İlgi Alanları
+                    Tartışmalar
                   </span>
                   <span className="text-[10px] text-[#9ca3af] font-mono">{counts.all}</span>
                 </button>
                 {/* 2. Geri Bildirim */}
                 <a
-                  href="https://github.com/Aleyulala/saved/discussions/?pli=1"
+                  href="https://labs.google.com/"
                   target="_blank"
                   rel="nofollow noreferrer noopener"
                   className="w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-[#1e1e1e] hover:text-[var(--linkC,#9aa0a6)] transition-colors"
                 >
                   <span className="flex items-center gap-2">
                     <SmsEditIcon className="w-[18px] h-[18px] opacity-80 text-[#9ca3af]" />
-                    Geri Bildirim
+                    Labs
                   </span>
                 </a>
               </div>
@@ -236,8 +238,8 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
               <button
                 onClick={() => setGelistiriciOpen(!gelistiriciOpen)}
                 className="w-10 h-10 flex items-center justify-center rounded-[18px] transition-all cursor-pointer text-[#9ca3af] hover:bg-[#252526] hover:text-[var(--linkC,#9aa0a6)]"
-                title="Geliştiriciler"
-                aria-label="Geliştiriciler"
+                title="Araçlar"
+                aria-label="Araçlar"
               >
                 <FolderCodeIcon className="w-[18px] h-[18px] opacity-80 group-hover:opacity-100 text-[var(--linkC,#9aa0a6)] transition-opacity" />
               </button>
@@ -245,7 +247,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
               <div className="absolute left-full top-0 ml-2 w-52 p-2 rounded-2xl bg-[#252526] border border-white/10 shadow-2xl opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-150 z-50 space-y-1">
                 <div className="px-2.5 py-1 text-xs font-bold text-[var(--linkC,#9aa0a6)] border-b border-white/10 flex items-center gap-2">
                   <FolderCodeIcon className="w-4 h-4" />
-                  <span>Geliştiriciler</span>
+                  <span>Araçlar</span>
                 </div>
                 {/* 1. Ters Çevir */}
                 <button
@@ -259,7 +261,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                 >
                   <span className="flex items-center gap-2">
                     <ArrowSwapHorizontalIcon className="w-[18px] h-[18px] opacity-80 text-[#9ca3af]" />
-                    Ters Çevir
+                    Ayna
                   </span>
                   <span className="text-[var(--linkC,#9aa0a6)] text-[10px] font-bold">New!</span>
                 </button>
@@ -272,7 +274,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                 >
                   <span className="flex items-center gap-2">
                     <SearchNormalIcon className="w-[18px] h-[18px] opacity-80 text-[#9ca3af]" />
-                    Detaylı Ara
+                    SEO
                   </span>
                 </a>
                 {/* 3. Hız Testi */}
@@ -284,7 +286,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                 >
                   <span className="flex items-center gap-2">
                     <SpeedometerIcon className="w-[18px] h-[18px] opacity-80 text-[#9ca3af]" />
-                    Hız Testi
+                    Hız
                   </span>
                 </a>
               </div>
@@ -343,7 +345,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
             >
               <div className="flex items-center gap-2.5">
                 <Hierarchy4Icon className="w-[18px] h-[18px] opacity-80 text-[var(--linkC,#9aa0a6)]" />
-                <span>Hizmetler</span>
+                <span>Uygulamalar</span>
               </div>
               {/* xml 1:1 li.nt bildirim noktası */}
               <span className="absolute top-2 left-2 w-2 h-2 rounded-full bg-[var(--linkC,#9aa0a6)] shadow-[0_0_8px_var(--linkC,#9aa0a6)]" />
@@ -365,7 +367,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                   >
                     <div className="flex items-center gap-2">
                       <MessageNotif1Icon className="w-4 h-4 opacity-80 text-[var(--linkC,#9aa0a6)]" />
-                      <span>Etkileşimler</span>
+                      <span>Saved</span>
                     </div>
                     <span className="text-[10px] text-[#9ca3af] font-mono">{counts.pinned}</span>
                   </button>
@@ -381,7 +383,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                   >
                     <div className="flex items-center gap-2">
                       <Edit3Icon className="w-4 h-4 opacity-80 text-[#9ca3af]" />
-                      <span>Notlarınız</span>
+                      <span>NotebookLM</span>
                     </div>
                   </a>
                 </li>
@@ -396,7 +398,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                   >
                     <div className="flex items-center gap-2">
                       <Profile2UserIcon className="w-4 h-4 opacity-80 text-[#9ca3af]" />
-                      <span>Forumlarınız</span>
+                      <span>Formlar</span>
                     </div>
                   </a>
                 </li>
@@ -412,7 +414,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
             >
               <div className="flex items-center gap-2.5">
                 <FlashIcon className="w-[18px] h-[18px] opacity-80 text-[var(--linkC,#9aa0a6)]" />
-                <span>Klasör</span>
+                <span>Topluluk</span>
                 <span className="badge-new text-[var(--linkC,#9aa0a6)] text-[11px] font-bold ml-1">
                   New!
                 </span>
@@ -434,7 +436,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                   >
                     <div className="flex items-center gap-2">
                       <EyeIcon className="w-4 h-4 opacity-80 text-[#9ca3af]" />
-                      <span>İlgi Alanları</span>
+                      <span>Tartışmalar</span>
                     </div>
                     <span className="text-[10px] text-[#9ca3af] font-mono">{counts.all}</span>
                   </button>
@@ -443,14 +445,14 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                 {/* 2. Geri Bildirim (svg.sms-edit) */}
                 <li>
                   <a
-                    href="https://github.com/Aleyulala/saved/discussions/?pli=1"
+                    href="https://labs.google.com/"
                     target="_blank"
                     rel="nofollow noreferrer noopener"
                     className="w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-[#1e1e1e] hover:text-[var(--linkC,#9aa0a6)] transition-colors"
                   >
                     <div className="flex items-center gap-2">
                       <SmsEditIcon className="w-4 h-4 opacity-80 text-[#9ca3af]" />
-                      <span>Geri Bildirim</span>
+                      <span>Labs</span>
                     </div>
                   </a>
                 </li>
@@ -471,7 +473,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
             >
               <div className="flex items-center gap-2.5">
                 <FolderCodeIcon className="w-[18px] h-[18px] opacity-80 text-[var(--linkC,#9aa0a6)]" />
-                <span>Geliştiriciler</span>
+                <span>Araçlar</span>
               </div>
               <ChevronDownIcon className={`w-3.5 h-3.5 text-[#989b9f] transition-transform duration-300 ${gelistiriciOpen ? 'rotate-180' : ''}`} />
             </div>
@@ -491,7 +493,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                   >
                     <div className="flex items-center gap-2">
                       <ArrowSwapHorizontalIcon className="w-3.5 h-3.5 text-[#9ca3af]" />
-                      <span>Ters Çevir</span>
+                      <span>Ayna</span>
                       <span className="text-[var(--linkC,#9aa0a6)] text-[10px] font-bold">New!</span>
                     </div>
                   </button>
@@ -507,7 +509,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                   >
                     <div className="flex items-center gap-2">
                       <SearchNormalIcon className="w-3.5 h-3.5 text-[#9ca3af]" />
-                      <span>Detaylı Ara</span>
+                      <span>SEO</span>
                     </div>
                   </a>
                 </li>
@@ -522,7 +524,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                   >
                     <div className="flex items-center gap-2">
                       <SpeedometerIcon className="w-3.5 h-3.5 text-[#9ca3af]" />
-                      <span>Hız Testi</span>
+                      <span>Hız</span>
                     </div>
                   </a>
                 </li>
