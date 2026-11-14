@@ -67,12 +67,12 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
   const [socSlideIndex, setSocSlideIndex] = useState(0);
 
   const sidebarSocialLinks = [
-    { name: 'Instagram', href: 'https://www.instagram.com/aleyul.ala/', icon: InstagramIcon, color: '#e1306c' },
-    { name: 'Telegram', href: 'https://t.me/aleyyulala', icon: TelegramIcon, color: '#229ed9' },
-    { name: 'TikTok', href: 'https://www.tiktok.com/@Aleyyu.Ala', icon: TiktokIcon, color: '#25f4ee' },
-    { name: 'Matrix', href: 'https://matrix.to/#/#negronn-show:matrix.org', icon: MatrixIcon, color: 'var(--linkC,#9aa0a6)' },
-    { name: 'VKontakte', href: 'https://vk.com/negronn', icon: VkIcon, color: '#4680c2' },
-    { name: 'WhatsApp', href: 'tel:05446412904', icon: WhatsappIcon, color: '#25d366' }
+    { name: 'Instagram', href: 'https://www.instagram.com/aleyul.ala/', icon: InstagramIcon },
+    { name: 'Telegram', href: 'https://t.me/aleyyulala', icon: TelegramIcon },
+    { name: 'TikTok', href: 'https://www.tiktok.com/@Aleyyu.Ala', icon: TiktokIcon },
+    { name: 'Matrix', href: 'https://matrix.to/#/#negronn-show:matrix.org', icon: MatrixIcon },
+    { name: 'VKontakte', href: 'https://vk.com/negronn', icon: VkIcon },
+    { name: 'WhatsApp', href: 'tel:05446412904', icon: WhatsappIcon }
   ];
 
   React.useEffect(() => {
@@ -562,7 +562,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
       {/* Alt Bölüm (.mnMob): E-posta, Gizlilik ve Yorumlar Slaytı (.PageList02) + 6 Sosyal Buton (.LinkList04 / .mSoc) */}
       <div className="p-3 border-t border-[#252526] bg-[#1e1e1e] space-y-2.5">
         {/* PageList02: E-posta, Gizlilik ve Yorumlar Kayan Slider + [+] Butonu */}
-        <div className="relative h-8 bg-[#252526]/80 border border-white/10 rounded-lg overflow-hidden flex items-center">
+        <div className="relative h-9 bg-white/[0.04] border border-white/[0.08] rounded-[9px] overflow-hidden flex items-center shadow-xs">
           {/* Slayt 0: E-posta */}
           <div
             className={`absolute inset-0 flex items-center justify-between px-2.5 transition-all duration-300 ease-in-out ${
@@ -577,7 +577,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
               title="E-posta: mrstar14155@gmail.com"
             >
               <div className="relative flex items-center justify-center">
-                <MailIcon className="w-3.5 h-3.5 text-[#ea4335] shrink-0" />
+                <MailIcon className="w-3.5 h-3.5 text-[#e5e5e5] shrink-0" />
                 {/* Parlayan Canlı Bildirim Noktası (.nt glow) */}
                 <span className="absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#ffffff] animate-pulse" />
               </div>
@@ -614,7 +614,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
               title="Gizlilik Politikası & Şartlar"
             >
               <div className="relative flex items-center justify-center">
-                <Verify1Icon className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                <Verify1Icon className="w-3.5 h-3.5 text-[#e5e5e5] shrink-0" />
                 <span className="absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#ffffff] animate-pulse" />
               </div>
               <span className="tracking-wide">Gizlilik</span>
@@ -670,7 +670,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
         </div>
 
         {/* LinkList04: Sosyal Medya Kayan Slider + [+] Butonu (Üstteki Slayt ile Birebir Aynı Tasarım) */}
-        <div className="relative h-9 bg-[#252526]/80 border border-white/10 rounded-lg overflow-hidden flex items-center shadow-sm">
+        <div className="relative h-9 bg-white/[0.04] border border-white/[0.08] rounded-[9px] overflow-hidden flex items-center shadow-xs">
           {sidebarSocialLinks.map((item, idx) => {
             const IconComp = item.icon;
             return (
@@ -689,7 +689,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                   className="flex items-center gap-2 text-xs text-[#e5e5e5] hover:text-[var(--linkC,#9aa0a6)] font-semibold transition-colors"
                   title={`${item.name} Profilini Aç`}
                 >
-                  <div className="relative flex items-center justify-center" style={{ color: item.color }}>
+                  <div className="relative flex items-center justify-center text-[#e5e5e5]">
                     <IconComp className="w-3.5 h-3.5 shrink-0" />
                     {/* Parlayan Canlı Bildirim Noktası (.nt glow) */}
                     <span className="absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#ffffff] animate-pulse" />
