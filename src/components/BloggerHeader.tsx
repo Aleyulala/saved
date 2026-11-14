@@ -6,6 +6,7 @@ import {
   CloseIcon, 
   SunMoonIcon,
   TranslateIcon,
+  TelegramIcon,
   ArchiveIcon,
   Profile1Icon,
   Verify1Icon,
@@ -311,11 +312,11 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
         </a>
       </div>
 
-      {/* 2. Orta Bölüm: Blogger Arama Hapı (.headM .head-search-pill — nsone.xml 1:1: 36px, 14px radius, flex-1 max-w-[440px] mx-auto) */}
-      <div className="hidden min-[896px]:flex flex-1 max-w-[440px] mx-auto px-2.5 min-w-0 z-5 items-center h-full">
+      {/* 2. Orta Bölüm: Blogger Arama Hapı (Ekranın TAM GEOMETRİK ORTASINDA: absolute left-1/2 -translate-x-1/2 — Blogger 1:1) */}
+      <div className="hidden min-[800px]:flex absolute left-1/2 -translate-x-1/2 w-full max-w-[440px] px-2.5 min-w-0 z-10 items-center justify-center h-full pointer-events-none">
         <div
           onClick={onOpenSearchModal}
-          className="relative flex items-center w-full h-9 rounded-[14px] px-3.5 gap-2.5 bg-[#252526] hover:bg-[#28282b] border border-white/[0.08] hover:border-[rgba(96,205,255,0.4)] cursor-pointer group select-none transition-all duration-200"
+          className="relative flex items-center w-full h-9 rounded-[14px] px-3.5 gap-2.5 bg-[#252526] pointer-events-auto hover:bg-[#28282b] border border-white/[0.08] hover:border-[rgba(96,205,255,0.4)] cursor-pointer group select-none transition-all duration-200"
           title="Gelişmiş Arama & Bul Paneli (Ctrl+K)"
         >
           <span className="text-[#989b9f] group-hover:text-[var(--linkC,#9aa0a6)] transition-colors pointer-events-none shrink-0 flex items-center justify-center">
@@ -348,11 +349,11 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
       </div>
 
       {/* 3. Sağ Bölüm: Blogger XML 1:1 .headIc Butonları */}
-      <div className="flex items-center justify-end shrink-0 pr-4 min-[896px]:pr-5 gap-1 min-[896px]:gap-1.5 ml-auto">
-        {/* Mobilde Arama Butonu (<896px .headIc .isSrh) */}
+      <div className="flex items-center justify-end shrink-0 pr-3 sm:pr-4 gap-1 sm:gap-1.5 ml-auto z-20">
+        {/* Mobilde Arama Butonu (<800px .headIc .isSrh) */}
         <button
           onClick={onOpenSearchModal}
-          className="min-[896px]:hidden head-action-btn"
+          className="min-[800px]:hidden head-action-btn"
           title="Ara"
           aria-label="Ara"
         >
@@ -559,15 +560,76 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
               )}
             </div>
 
-            {/* 4. Buton: Yeni Gönderi / Not Ekle ya da Mevcut Gönderiyi Düzenle (Screenshot 2 1:1 .isWrite) */}
-            <button
-              onClick={onOpenNewLink}
-              className="head-action-btn"
-              title={isPostDetail ? `Bu Gönderiyi Düzenle${postTitle ? `: ${postTitle}` : ''}` : "Yeni Bağlantı / Not Ekle"}
-              aria-label={isPostDetail ? "Gönderiyi Düzenle" : "Yeni Ekle"}
+            {/* 4. Buton: Çeviri (.isTrans - TranslateIcon & .wTrans) */}
+            <div className="relative" ref={translateRef}>
+              <button
+                onClick={() => setIsTranslateOpen(prev => !prev)}
+                className={`head-action-btn ${isTranslateOpen ? 'is-active' : ''}`}
+                title="Dili Çevir"
+                aria-label="Dili Çevir"
+              >
+                <TranslateIcon className="w-4 h-4" />
+              </button>
+
+              {isTranslateOpen && (
+                <div
+                  className="wTrans fixLs animate-in fade-in duration-200 flex flex-col origin-top-right select-none"
+                  style={{
+                    position: 'absolute',
+                    top: 'calc(100% + 8px)',
+                    insetInlineEnd: 0,
+                    width: '200px',
+                    maxHeight: '260px',
+                    background: '#252526',
+                    border: '1px solid #333333',
+                    borderRadius: '10px',
+                    overflow: 'hidden',
+                    zIndex: 50
+                  }}
+                >
+                  <div className="fixH px-3 py-2 border-b border-[#333333] flex items-center justify-between text-xs font-bold text-white">
+                    <span>Dili Seçin</span>
+                    <button
+                      onClick={() => setIsTranslateOpen(false)}
+                      className="text-[#989b9f] hover:text-white p-0.5 cursor-pointer"
+                    >
+                      <CloseIcon className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                  <div className="overflow-y-auto p-1.5 space-y-0.5">
+                    {LANGUAGES.map(lang => (
+                      <button
+                        key={lang.code}
+                        onClick={() => handleSelectLanguage(lang.code)}
+                        className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs transition-colors cursor-pointer ${
+                          selectedLang === lang.code ? 'bg-[#333333] text-white font-bold' : 'text-[#d4d4d4] hover:bg-white/5'
+                        }`}
+                      >
+                        <span>{lang.native}</span>
+                        {selectedLang === lang.code && <Check className="w-3.5 h-3.5 text-[var(--linkC,#9aa0a6)]" />}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Dikey Çizgi Ayırıcı (| - Blogger 1:1) */}
+            <div className="w-px h-5 bg-white/15 mx-0.5 shrink-0" />
+
+            {/* 5. Buton: Telegram Mavi Daire İkonu (Blogger 1:1) */}
+            <a
+              href="https://t.me/aleyyulala"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-7 h-7 rounded-full bg-[#229ed9] hover:bg-[#1e88e5] text-white flex items-center justify-center transition-transform hover:scale-110 active:scale-95 shadow-sm shrink-0"
+              title="Telegram"
+              aria-label="Telegram"
             >
-              <Edit3Icon className="w-4 h-4" />
-            </button>
+              <TelegramIcon className="w-3.5 h-3.5 fill-white" />
+            </a>
+
+
 
           </div>
     </header>
