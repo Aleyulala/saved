@@ -894,6 +894,14 @@ export const App: React.FC = () => {
         onOpenAllLinks={() => {
           setActiveView('links');
         }}
+        onOpenPinned={() => {
+          setActiveView('pinned');
+          setSearchQuery('');
+        }}
+        onToggleViewMode={() => {
+          setViewMode(prev => prev === 'grid' ? 'list' : 'grid');
+        }}
+        viewMode={viewMode}
       />
 
       {/* Blogger Side Drawer (.mainL / .mnBr) */}
