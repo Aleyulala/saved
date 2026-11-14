@@ -69,10 +69,11 @@ export async function seedSavedMainData(force = false) {
           colMap.set(colDef.name, id as number);
         }
 
-        // 2. Insert Tags
-        await db.tags.bulkAdd(
-          SEED_TAGS.map(t => ({
-            name: t.name,
+        // 2. Insert Tags (deduplicated so &name unique constraint never aborts seeding)
+        const uniqueTagNames = Array.from(new Set(SEED_TAGS.map(t => t.name)));
+        await db.tags.bulkPut(
+          uniqueTagNames.map(name => ({
+            name,
             color: '#38bdf8'
           }))
         );

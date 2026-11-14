@@ -364,10 +364,10 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
           <article 
             onClick={() => onOpenPostPage(pinnedPost)}
-            className="group relative rounded-xl bg-[#252526] hover:bg-[#28282b] border border-transparent hover:border-[var(--linkC,#9aa0a6)]/30 transition-all duration-200 overflow-hidden cursor-pointer shadow-md hover:shadow-xl hover:shadow-black/60 flex flex-col md:flex-row select-none items-stretch"
+            className="group relative bg-transparent border-0 transition-all duration-200 cursor-pointer flex flex-col md:flex-row gap-4 md:gap-5 select-none items-stretch"
           >
-            {/* Sol Görsel / Thumbnail (negron.xml 1:1: 340px ferah 16/9 oranı, asla incecik ezilmez) */}
-            <div className="relative w-full md:w-[320px] lg:w-[340px] aspect-[16/9] bg-[#1e1e1e] overflow-hidden shrink-0">
+            {/* Sol Görsel / Thumbnail (Blogger FeaturedPost01 1:1 — Temiz görsel, köşe rozet yığını yok) */}
+            <div className="relative w-full md:w-[320px] lg:w-[340px] aspect-[16/9] rounded-[12px] bg-[#1e1e1e] overflow-hidden shrink-0">
               {pinnedPost.thumbnail ? (
                 <img
                   src={pinnedPost.thumbnail}
@@ -379,25 +379,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 <BrandLogoCard url={pinnedPost.url} title={pinnedPost.title} size="card" />
               )}
 
-              {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/60 pointer-events-none" />
-
-              {/* Sol Üst: 👁 Görüntülenme */}
-              <div className="absolute top-2.5 left-2.5 z-10">
-                <div className="h-[22px] px-2 flex items-center gap-1 rounded-lg bg-black/65 backdrop-blur-md text-white text-[10px] font-medium shadow-sm">
-                  <EyeIcon className="w-3.5 h-3.5 text-[var(--linkC,#9aa0a6)]" />
-                  <span>{pinnedPost.views || Math.abs(pinnedPost.title.length * 3 + 12)}</span>
-                </div>
-              </div>
-
-              {/* Sağ Üst: 💬 Yorumlar ve 🔖 Yer İmi / Kaydet Butonu (.bm-button 1:1 LinkCard) — Tam Eşit Boyut */}
-              <div className="absolute top-2.5 right-2.5 z-10 flex items-center gap-1.5">
-                <div className="h-[22px] px-2 flex items-center gap-1 rounded-lg bg-black/65 backdrop-blur-md text-white text-[10px] font-medium shadow-sm">
-                  <ChatBloggerIcon className="w-3.5 h-3.5 text-white/90" />
-                  <span>{pinnedPost.commentsCount !== undefined ? pinnedPost.commentsCount : 0}</span>
-                </div>
-
-                {/* Blogger XML 1:1 Yer İmleri / Kaydet Butonu (.bm-button) — Yorum kutucuğuyla tam eşit h-[22px], Screenshot 8 & 9 1:1 */}
+              {/* Blogger XML 1:1 Yer İmleri / Kaydet Butonu (.bm-button — yalnızca üzerine gelince veya kaydedilmişse) */}
+              <div className={`absolute top-2.5 right-2.5 z-10 transition-opacity duration-200 ${pinnedPost.isPinned ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
                 <button
                   type="button"
                   onClick={(e) => {
@@ -406,10 +389,10 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                       onTogglePin(pinnedPost.id, pinnedPost.isPinned);
                     }
                   }}
-                  className={`tIc bm-button h-[22px] px-2 rounded-lg backdrop-blur-md shadow-sm transition-all duration-200 active:scale-90 cursor-pointer flex items-center justify-center border ${
+                  className={`tIc bm-button w-7 h-7 rounded-full backdrop-blur-md shadow-sm transition-all duration-200 active:scale-90 cursor-pointer flex items-center justify-center ${
                     pinnedPost.isPinned 
-                      ? 'bg-amber-600/30 border-amber-500/60 text-amber-400 shadow-[0_0_8px_rgba(245,158,11,0.25)]' 
-                      : 'bg-black/65 border-transparent text-white/80 hover:bg-amber-600/30 hover:border-amber-500/50 hover:text-amber-400'
+                      ? 'bg-black/75 text-amber-400' 
+                      : 'bg-black/65 text-white hover:bg-black/80'
                   }`}
                   data-save="Kaydet"
                   data-saved="Kaydedildi"
@@ -419,70 +402,41 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   {pinnedPost.isPinned ? (
                     <ArchiveTickIcon className="w-3.5 h-3.5 text-amber-400" />
                   ) : (
-                    <ArchiveAddIcon className="w-3.5 h-3.5 text-current" />
+                    <ArchiveAddIcon className="w-3.5 h-3.5 text-white" />
                   )}
                 </button>
               </div>
-
-              {/* Sol Alt: Yazar Rozeti (.aNm - XML 1:1) */}
-              <div className="absolute bottom-2.5 left-2.5 z-10">
-                {(() => {
-                  const pinnedAuthor = getAuthorData(pinnedPost.authorName || 'NEGRONN');
-                  const pInitial = (pinnedPost.authorName || 'N').charAt(0).toUpperCase();
-                  return (
-                    <div className="h-[22px] inline-flex items-center gap-1.5 px-2 rounded-lg bg-black/75 backdrop-blur-md text-white text-[10px] font-bold shadow-sm">
-                      <img
-                        src={pinnedAuthor.avatar}
-                        alt={pinnedPost.authorName || 'NEGRONN'}
-                        className="w-3.5 h-3.5 rounded-full object-cover shrink-0 ring-1 ring-white/20"
-                        loading="lazy"
-                        onError={(e) => {
-                          const target = e.target as HTMLElement;
-                          target.style.display = 'none';
-                          const fallback = target.nextElementSibling as HTMLElement;
-                          if (fallback) fallback.style.display = 'flex';
-                        }}
-                      />
-                      <span className="hidden w-3.5 h-3.5 rounded-full bg-gradient-to-tr from-sky-600 to-indigo-600 text-white items-center justify-center text-[8px] font-bold ring-1 ring-white/20 shrink-0">
-                        {pInitial}
-                      </span>
-                      <span>{pinnedPost.authorName || 'NEGRONN'}</span>
-                      <Verify1Icon className="w-3 h-3 text-[var(--linkC,#9aa0a6)]" />
-                    </div>
-                  );
-                })()}
-              </div>
             </div>
 
-            {/* Sağ Metin İçeriği (negron.xml 1:1 .iCtnt ferah iç dolgu) */}
-            <div className="p-5 sm:p-6 flex flex-col justify-between flex-1 gap-3 min-w-0">
-              <div className="space-y-2">
-                <div className="text-[11px] text-[var(--linkC,#9aa0a6)] hover:underline lowercase font-semibold tracking-wide">
+            {/* Sağ Metin İçeriği (negron.xml 1:1 kutusuz doğrudan akış) */}
+            <div className="py-0.5 flex flex-col justify-between flex-1 gap-2.5 min-w-0">
+              <div className="space-y-1.5">
+                <div className="text-[12px] text-[var(--linkC,#9aa0a6)] hover:underline lowercase font-medium">
                   {pinnedPost.tags[0] || (pinnedPost.collectionId ? collectionMap.get(pinnedPost.collectionId)?.name.toLowerCase() : 'genel')}
                 </div>
 
-                <h3 className="text-base sm:text-lg lg:text-xl font-bold text-white group-hover:text-[var(--linkC,#9aa0a6)] leading-snug transition-colors line-clamp-2">
+                <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-[var(--linkC,#9aa0a6)] leading-snug transition-colors line-clamp-2">
                   {pinnedPost.title}
                 </h3>
 
                 {pinnedPost.description && (
-                  <p className="text-xs sm:text-[13px] text-[#989b9f] leading-relaxed line-clamp-3">
+                  <p className="text-xs sm:text-[13px] text-[#989b9f] leading-relaxed line-clamp-2">
                     {pinnedPost.description}
                   </p>
                 )}
               </div>
 
-              {/* Alt Satır: Yayınlandı! Rozeti + Tarih + Daha */}
-              <div className="pt-3 border-t border-white/5 flex items-center justify-between text-xs text-[#9ca3af]">
+              {/* Alt Satır: Güncellendi Rozeti + Tarih + Daha */}
+              <div className="pt-2 flex items-center justify-between text-xs text-[#9ca3af]">
                 <div className="flex items-center gap-2">
-                  <span className="text-[10px] px-2 py-0.5 rounded-md bg-[#457f57]/20 text-[#68d391] font-semibold">
-                    Yayınlandı!
+                  <span className="text-[10px] px-2 py-0.5 rounded bg-[#5f6368] text-white font-semibold">
+                    Güncellendi
                   </span>
                   <span className="text-[11px] text-[#71717a]">{formatDate(pinnedPost.createdAt)}</span>
                 </div>
 
-                <span className="text-xs text-[var(--linkC,#9aa0a6)] group-hover:underline font-semibold flex items-center gap-1">
-                  Daha →
+                <span className="text-xs text-[#989b9f] group-hover:text-[var(--linkC,#9aa0a6)] group-hover:underline font-medium">
+                  Daha
                 </span>
               </div>
             </div>
@@ -500,21 +454,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             <DocumentIcon className="w-5 h-5 text-[var(--linkC,#9aa0a6)]" />
             <h2 className="text-sm sm:text-base font-bold text-white tracking-wide">
               En Son Yayınlar
-              {totalPages > 1 && (
-                <span className="text-xs font-normal text-[#9aa0a6] ml-2 font-mono">
-                  (Sayfa {currentPage}/{totalPages})
-                </span>
-              )}
             </h2>
           </div>
-
-          <button
-            onClick={onViewAllRecent}
-            className="flex items-center gap-1 text-xs text-[#a3a3a3] hover:text-[#38bdf8] font-medium transition-colors cursor-pointer"
-          >
-            <span>Tümünü Gör</span>
-            <ChevronRight className="w-3.5 h-3.5" />
-          </button>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-[18px] gap-y-[36px]">

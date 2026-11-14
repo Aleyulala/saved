@@ -182,7 +182,6 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
     return ordered;
   }, [allLinks]);
 
-  const featuredFirst = popularPosts[0];
   const listPosts = popularPosts;
 
   const validateEmail = (val: string) => {
@@ -583,80 +582,8 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
           </h2>
         </div>
 
-        {/* 1. Öne Çıkan Büyük Popüler Post (.mostP - Kart Kutusu Yok, Doğrudan Sidebar'da) */}
-        {featuredFirst && (
-          <article
-            onClick={() => {
-              onOpenPostPage(featuredFirst);
-              if (onCloseDrawer) onCloseDrawer();
-            }}
-            className="group cursor-pointer select-none space-y-2 mb-5"
-          >
-            {/* Büyük 16:9 Thumbnail (.iThmb .thmb) */}
-            <div className="relative w-full aspect-[16/9] rounded-[14px] overflow-hidden bg-[#1e1e1e]">
-              {featuredFirst.thumbnail ? (
-                <img
-                  src={featuredFirst.thumbnail}
-                  alt={featuredFirst.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-                  loading="lazy"
-                />
-              ) : (
-                <BrandLogoCard url={featuredFirst.url} title={featuredFirst.title} size="card" />
-              )}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/60 pointer-events-none" />
-
-              {/* Badges (.tfxM .tfxC - Image 4 1:1 Tam Eşit Boyut) */}
-              <div className="absolute top-2 left-2 z-10">
-                <div className="h-[22px] px-2 flex items-center gap-1 rounded-lg bg-black/65 backdrop-blur-md text-white text-[10px] font-medium shadow-sm">
-                  <EyeIcon className="w-3.5 h-3.5 text-[var(--linkC,#9aa0a6)]" />
-                  <span>{featuredFirst.views || 74}</span>
-                </div>
-              </div>
-
-              <div className="absolute top-2 right-2 z-10 flex items-center gap-1.5">
-                <div className="h-[22px] px-2 flex items-center gap-1 rounded-lg bg-black/65 backdrop-blur-md text-white text-[10px] font-medium shadow-sm">
-                  <ChatBloggerIcon className="w-3.5 h-3.5 text-white/90" />
-                  <span>{featuredFirst.commentsCount !== undefined ? featuredFirst.commentsCount : 0}</span>
-                </div>
-                <div className="h-[22px] px-2 flex items-center justify-center rounded-lg bg-black/65 backdrop-blur-md text-amber-400 shadow-sm">
-                  <ArchiveIcon className="w-3.5 h-3.5 text-amber-400" />
-                </div>
-              </div>
-
-              <div className="absolute bottom-2 left-2 z-10">
-                <div className="h-[22px] inline-flex items-center gap-1 px-2 rounded-lg bg-black/75 backdrop-blur-md text-white text-[10px] font-bold shadow-sm">
-                  <span className="w-3.5 h-3.5 rounded-full bg-[#1e1e1e] flex items-center justify-center text-[7px] text-[var(--linkC,#9aa0a6)] font-extrabold">
-                    N
-                  </span>
-                  <span>{featuredFirst.authorName || 'NEGRONN'}</span>
-                  <Verify1Icon className="w-3 h-3 text-[var(--linkC,#9aa0a6)]" />
-                </div>
-              </div>
-            </div>
-
-            {/* Metin İçeriği (.iCtnt) */}
-            <div className="space-y-1.5 pt-1">
-              <div className="flex items-center gap-2 text-xs">
-                <span className="text-[11px] text-[#71717a]">{formatDate(featuredFirst.createdAt)}</span>
-                <span className="text-[11px] text-[var(--linkC,#9aa0a6)] hover:underline lowercase">{featuredFirst.tags[0] || 'genel'}</span>
-              </div>
-
-              <h3 className="font-bold text-[14px] text-white group-hover:text-[var(--linkC,#9aa0a6)] line-clamp-2 leading-snug transition-colors">
-                {featuredFirst.title}
-              </h3>
-
-              {featuredFirst.description && (
-                <p className="text-xs text-[#989b9f] line-clamp-2 leading-relaxed pt-0.5">
-                  {featuredFirst.description}
-                </p>
-              )}
-            </div>
-          </article>
-        )}
-
-        {/* 2. Liste Formatındaki Popüler Gönderiler (.itm - Screenshot 2: #1'den #5'e kadar numaralı) */}
-        <div className="space-y-4 pt-1">
+        {/* Blogger PopularPosts01 Tek Döngü (#1 Büyük Thumbnail + Başlık, #2-#5 Kompakt Liste — Tekrarsız) */}
+        <div className="space-y-4">
           {listPosts.map((post: LinkItem, idx: number) => {
             const category = post.tags[0] || 'genel';
             return (
@@ -666,15 +593,30 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
                   onOpenPostPage(post);
                   if (onCloseDrawer) onCloseDrawer();
                 }}
-                className="group cursor-pointer select-none space-y-1 transition-colors"
+                className="group cursor-pointer select-none space-y-1.5 transition-colors"
               >
+                {idx === 0 && (
+                  <div className="relative w-full aspect-[16/9] rounded-[12px] overflow-hidden bg-[#1e1e1e] mb-2.5">
+                    {post.thumbnail ? (
+                      <img
+                        src={post.thumbnail}
+                        alt={post.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <BrandLogoCard url={post.url} title={post.title} size="card" />
+                    )}
+                  </div>
+                )}
+
                 <div className="flex items-center gap-2 text-xs">
                   <span className="text-[11px] text-[#71717a]">{formatDate(post.createdAt)}</span>
                   <span className="text-[#52525b]">—</span>
                   <span className="text-[11px] text-[var(--linkC,#9aa0a6)] hover:underline lowercase">{category}</span>
                 </div>
 
-                <h4 className="font-bold text-xs sm:text-[13px] text-white/90 group-hover:text-[var(--linkC,#9aa0a6)] leading-snug transition-colors line-clamp-2">
+                <h4 className="font-bold text-xs sm:text-[13px] text-white group-hover:text-[var(--linkC,#9aa0a6)] leading-snug transition-colors line-clamp-2">
                   <span className="text-[#989b9f] font-mono mr-1.5 font-normal">#{idx + 1}</span>
                   {post.title}
                 </h4>
@@ -708,7 +650,7 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
               onClick={() => scrollTags('left')}
               className={`h-1.5 rounded-full transition-all duration-200 ${
                 tagCanScrollLeft 
-                  ? 'w-6 bg-[var(--linkC,#9aa0a6)] shadow-[0_0_6px_rgba(96,205,255,0.6)] cursor-pointer' 
+                  ? 'w-6 bg-[var(--linkC,#9aa0a6)] cursor-pointer' 
                   : 'w-4 bg-white/20 opacity-40 cursor-default'
               }`}
               title="Önceki Etiketler"
@@ -718,7 +660,7 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
               onClick={() => scrollTags('right')}
               className={`h-1.5 rounded-full transition-all duration-200 ${
                 tagCanScrollRight 
-                  ? 'w-6 bg-[var(--linkC,#9aa0a6)] shadow-[0_0_6px_rgba(96,205,255,0.6)] cursor-pointer' 
+                  ? 'w-6 bg-[var(--linkC,#9aa0a6)] cursor-pointer' 
                   : 'w-4 bg-white/20 opacity-40 cursor-default'
               }`}
               title="Sonraki Etiketler"
@@ -735,7 +677,7 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
           onMouseMove={handleTagsMouseMove}
           onMouseUp={handleTagsMouseUpOrLeave}
           onMouseLeave={handleTagsMouseUpOrLeave}
-          className="flex gap-2 overflow-x-auto pb-1 hide-scrollbar scroll-smooth cursor-grab active:cursor-grabbing select-none"
+          className="lbL flex gap-2 overflow-x-auto pb-1 hide-scrollbar scroll-smooth cursor-grab active:cursor-grabbing select-none"
         >
           {tags.map((t) => {
             const count = counts.tags[t.name] || 0;

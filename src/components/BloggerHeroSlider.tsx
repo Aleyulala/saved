@@ -419,7 +419,7 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
   return (
     <div className="w-full relative select-none">
       <div 
-        className="relative w-full overflow-hidden rounded-[14px] bg-[#000000] shadow-lg group aspect-video cursor-pointer touch-pan-y"
+        className="hero-dark-overlay relative w-full overflow-hidden rounded-[14px] bg-[#000000] shadow-lg group aspect-video cursor-pointer touch-pan-y"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => {
           setIsPaused(false);
@@ -473,7 +473,7 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
               e.stopPropagation();
               handleOpenViewer(currentIndex);
             }}
-            className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-[rgba(28,30,38,0.78)] hover:bg-[#333333] border border-white/10 text-white flex items-center justify-center transition-all duration-200 active:scale-95 shadow-md backdrop-blur-md cursor-pointer"
+            className="hero-zoom-btn w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-[rgba(28,30,38,0.78)] hover:bg-[#333333] border border-white/10 text-white flex items-center justify-center transition-all duration-200 active:scale-95 shadow-md backdrop-blur-md cursor-pointer"
             title="Tam Ekran Vitrini"
             aria-label="Tam Ekran Vitrini"
           >
@@ -483,16 +483,29 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
           </button>
         </div>
 
-        {/* Bottom-Left: Blogger Slider Title & Subtitle (Tek Kelime - Screenshot 1:1) */}
-        <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-5 z-20 pointer-events-none text-left">
-          <h2 className="text-sm sm:text-base lg:text-lg font-bold text-white tracking-wide drop-shadow-md">
-            {toSingleWord(activeSlide.title)}
-          </h2>
-          {activeSlide.subtitle && (
-            <p className="text-[11px] sm:text-xs text-white/80 mt-0.5 max-w-md line-clamp-1 drop-shadow">
-              {toSingleWord(activeSlide.subtitle)}
-            </p>
-          )}
+        {/* Bottom-Left: Blogger Slider .sldL Rozeti + Başlık & Alt Başlık */}
+        <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-5 z-20 flex items-center gap-2.5 text-left">
+          <button
+            type="button"
+            onClick={(e) => handleCategoryClick(e, activeSlide)}
+            className="hero-cat-pill w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white text-[#1f1f1f] flex items-center justify-center shadow-md hover:scale-105 transition-transform shrink-0 cursor-pointer"
+            title={activeSlide.collectionName || activeSlide.category}
+            aria-label={activeSlide.collectionName || activeSlide.category}
+          >
+            <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M7 17L17 7M17 7H8M17 7V16" />
+            </svg>
+          </button>
+          <div className="pointer-events-none">
+            <h2 className="text-sm sm:text-base lg:text-lg font-bold text-white tracking-wide drop-shadow-md leading-tight">
+              {toSingleWord(activeSlide.title)}
+            </h2>
+            {activeSlide.subtitle && (
+              <p className="text-[11px] sm:text-xs text-white/80 mt-0.5 max-w-md line-clamp-1 drop-shadow">
+                {toSingleWord(activeSlide.subtitle)}
+              </p>
+            )}
+          </div>
         </div>
 
         {/* Bottom-Center: Blogger Saved 2 Line Pills (.sld-car-nav) — aktif çizgi YÖNÜ gösterir (Blogger 1:1) */}
@@ -500,9 +513,9 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
           {/* Sol Çizgi Buton (car-prev) */}
           <button
             onClick={handlePrev}
-            className={`h-2 rounded-full transition-all duration-300 shadow-md backdrop-blur-md cursor-pointer ${
+            className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
               navDir === -1
-                ? 'w-9 bg-[var(--linkC,#9aa0a6)] shadow-[0_0_10px_var(--linkC,#9aa0a6)]'
+                ? 'w-9 bg-[var(--linkC,#9aa0a6)]'
                 : 'w-7 bg-white/40 hover:bg-white/60 hover:scale-110'
             }`}
             aria-label="Önceki Çizgi Buton"
@@ -511,9 +524,9 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
           {/* Sağ Çizgi Buton (car-next) */}
           <button
             onClick={handleNext}
-            className={`h-2 rounded-full transition-all duration-300 shadow-md backdrop-blur-md cursor-pointer ${
+            className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
               navDir === 1
-                ? 'w-9 bg-[var(--linkC,#9aa0a6)] shadow-[0_0_10px_var(--linkC,#9aa0a6)]'
+                ? 'w-9 bg-[var(--linkC,#9aa0a6)]'
                 : 'w-7 bg-white/40 hover:bg-white/60 hover:scale-110'
             }`}
             aria-label="Sonraki Çizgi Buton"

@@ -32,11 +32,11 @@
   /* Light mode (lgT) */
   :root.lgT {
     --bg-base-100: #ffffff;
-    --bg-base-200: #f4f4f5;
+    --bg-base-200: #f0f4f9;
     --bg-base-300: #e4e4e7;
-    --border-color: #e4e4e7;
-    --text-base: #18181b;
-    --text-muted: #71717a;
+    --border-color: transparent;
+    --text-base: #1f1f1f;
+    --text-muted: #5f6368;
     --contentL: rgba(0, 0, 0, 0.08);
   }
 
@@ -56,8 +56,8 @@
   }
 
   :root.lgT body {
-    background-color: #f8fafc;
-    color: #0f172a;
+    background-color: #ffffff;
+    color: #1f1f1f;
   }
 }
 
@@ -146,44 +146,63 @@ textarea {
   background: #2ed573 !important;
 }
 
-/* Header Action Buttons (Blogger XML 1:1 .tIc / .headIc) - Normal gözükür, üzerine gelince tema rengine göre parlar */
-.head-action-btn {
-  position: relative;
-  width: 34px;
-  height: 34px;
-  border-radius: 9999px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid transparent;
-  color: #989b9f;
-  background-color: transparent;
-  outline: none;
-  cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  flex-shrink: 0;
-}
+/* Header Action Buttons (Blogger XML 1:1 .tIc / .headIc) — @layer components içinde kalmalı ki Tailwind .min-[800px]:hidden vb. utility sınıfları masaüstünde ezilmesin */
+@layer components {
+  .head-action-btn {
+    position: relative;
+    width: 34px;
+    height: 34px;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+    color: #989b9f;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    flex-shrink: 0;
+  }
 
-.head-action-btn:hover {
-  color: var(--linkC, #60cdff) !important;
-  background-color: rgba(96, 205, 255, 0.15);
-  border-color: rgba(96, 205, 255, 0.4);
-  box-shadow: 0 0 10px rgba(96, 205, 255, 0.25);
-  background-color: color-mix(in srgb, var(--linkC, #60cdff) 15%, transparent) !important;
-  border-color: color-mix(in srgb, var(--linkC, #60cdff) 40%, transparent) !important;
-  box-shadow: 0 0 10px color-mix(in srgb, var(--linkC, #60cdff) 25%, transparent) !important;
-}
+  :root.lgT .head-action-btn {
+    color: #3c4043;
+  }
 
-.head-action-btn:active {
-  transform: scale(0.92);
-}
+  .head-action-btn:hover {
+    color: var(--linkC, #60cdff) !important;
+    background-color: rgba(96, 205, 255, 0.15);
+    border-color: rgba(96, 205, 255, 0.4);
+    box-shadow: 0 0 10px rgba(96, 205, 255, 0.25);
+    background-color: color-mix(in srgb, var(--linkC, #60cdff) 15%, transparent) !important;
+    border-color: color-mix(in srgb, var(--linkC, #60cdff) 40%, transparent) !important;
+    box-shadow: 0 0 10px color-mix(in srgb, var(--linkC, #60cdff) 25%, transparent) !important;
+  }
 
-.head-action-btn.is-active {
-  color: var(--linkC, #60cdff) !important;
-  background-color: rgba(96, 205, 255, 0.15);
-  border-color: rgba(96, 205, 255, 0.4);
-  background-color: color-mix(in srgb, var(--linkC, #60cdff) 15%, transparent) !important;
-  border-color: color-mix(in srgb, var(--linkC, #60cdff) 40%, transparent) !important;
+  :root.lgT .head-action-btn:hover {
+    color: var(--linkC, #1f1f1f) !important;
+    background-color: rgba(0, 0, 0, 0.05) !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .head-action-btn:active {
+    transform: scale(0.92);
+  }
+
+  .head-action-btn.is-active {
+    color: var(--linkC, #60cdff) !important;
+    background-color: rgba(96, 205, 255, 0.15);
+    border-color: rgba(96, 205, 255, 0.4);
+    background-color: color-mix(in srgb, var(--linkC, #60cdff) 15%, transparent) !important;
+    border-color: color-mix(in srgb, var(--linkC, #60cdff) 40%, transparent) !important;
+  }
+
+  :root.lgT .head-action-btn.is-active {
+    color: var(--linkC, #1f1f1f) !important;
+    background-color: rgba(0, 0, 0, 0.06) !important;
+    border-color: transparent !important;
+  }
 }
 
 /* XML 1:1 Left Drawer (.mnMn & .mSoc) Icon Sizing */
@@ -387,12 +406,12 @@ body { top: 0 !important; }
   position: absolute;
   top: calc(100% + 8px);
   right: 0;
-  background: #252526;
-  border-radius: 12px;
-  width: 288px;
+  background: #1f1f1f;
+  border-radius: 14px;
+  width: 285px;
   max-width: calc(100vw - 24px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 12px 35px rgba(0,0,0,0.45);
+  border: none;
   overflow: hidden;
   z-index: 50;
   animation: fadeInDown .2s ease-out;
@@ -411,16 +430,15 @@ body { top: 0 !important; }
   }
 }
 .wPrf .prfH {
-  padding: 10px 14px;
-  background: #1e1e1e;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding: 14px 16px 4px;
+  background: transparent;
+  border-bottom: none;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 13px;
+  font-weight: 500;
   color: #989b9f;
-  text-transform: uppercase;
 }
 .wPrf .prfC {
   padding: 16px;
@@ -816,152 +834,364 @@ body { top: 0 !important; }
   color-scheme: light;
 }
 
+html.lgT:not(.thS) {
+  --linkC: #5f6368 !important;
+  --linkB: #5f6368 !important;
+  --text-primary: #5f6368 !important;
+  --theme-color: #5f6368 !important;
+  --c: #5f6368 !important;
+}
+
 :root.lgT body {
-  background-color: #f8fafc !important;
-  color: #0f172a !important;
+  background-color: #ffffff !important;
+  color: #1f1f1f !important;
 }
 
-/* Temel sayfa ve yüzeyler */
-:root.lgT [class*="bg-[#1e1e1e]"],
-:root.lgT [class*="bg-[#161616]"],
-:root.lgT [class*="bg-[#111111]"] {
-  background-color: #f8fafc !important;
-}
-
-:root.lgT [class*="bg-[#212121]"] {
+/* Temel sayfa, çekmeceler ve pürüzsüz beyaz yüzeyler (Blogger Plus UI --lBodyB: #ffffff) */
+:root.lgT .bg-\[\#1e1e1e\],
+:root.lgT .bg-\[\#161616\],
+:root.lgT .bg-\[\#111111\],
+:root.lgT .bg-\[\#212121\] {
   background-color: #ffffff !important;
 }
 
-:root.lgT [class*="bg-[#171717]"],
-:root.lgT [class*="bg-[#1a1a1a]"],
-:root.lgT [class*="bg-[#1b1b1b]"],
-:root.lgT [class*="bg-[#1f1f1f]"],
-:root.lgT [class*="bg-[#18181b]"] {
-  background-color: #f1f5f9 !important;
+:root.lgT .bg-\[\#252526\] {
+  background-color: #f0f4f9 !important;
 }
 
-:root.lgT [class*="bg-[#252526]"] {
-  background-color: #ffffff !important;
+:root.lgT .hover\:bg-\[\#1e1e1e\]:hover,
+:root.lgT .hover\:bg-\[\#252526\]:hover,
+:root.lgT .hover\:bg-\[\#252526\]\/70:hover,
+:root.lgT .hover\:bg-\[\#28282b\]:hover,
+:root.lgT .hover\:bg-\[\#2d2d30\]:hover {
+  background-color: #f0f4f9 !important;
 }
 
-:root.lgT [class*="bg-[#262626]"],
-:root.lgT [class*="bg-[#27272a]"],
-:root.lgT [class*="bg-[#282828]"],
-:root.lgT [class*="bg-[#28282b]"],
-:root.lgT [class*="bg-[#2a2d2e]"],
-:root.lgT [class*="bg-[#2b2b2e]"],
-:root.lgT [class*="bg-[#2d2d30]"],
-:root.lgT [class*="bg-[#1e293b]"] {
-  background-color: #f1f5f9 !important;
+:root.lgT .bg-\[\#171717\],
+:root.lgT .bg-\[\#1a1a1a\],
+:root.lgT .bg-\[\#1b1b1b\],
+:root.lgT .bg-\[\#1f1f1f\],
+:root.lgT .bg-\[\#18181b\],
+:root.lgT .bg-\[\#262626\],
+:root.lgT .bg-\[\#27272a\],
+:root.lgT .bg-\[\#282828\],
+:root.lgT .bg-\[\#28282b\],
+:root.lgT .bg-\[\#2a2d2e\],
+:root.lgT .bg-\[\#2b2b2e\],
+:root.lgT .bg-\[\#2d2d30\],
+:root.lgT .bg-\[\#1e293b\] {
+  background-color: #f0f4f9 !important;
 }
 
-:root.lgT [class*="bg-[#333333]"] {
-  background-color: #e2e8f0 !important;
+:root.lgT .bg-\[\#333333\],
+:root.lgT .hover\:bg-\[\#333333\]:hover {
+  background-color: #e4eaf3 !important;
 }
 
-:root.lgT [class*="bg-[#383838]"],
-:root.lgT [class*="bg-[#404040]"],
-:root.lgT [class*="bg-[#444444]"],
-:root.lgT [class*="bg-[#4d4d4d]"] {
+:root.lgT .bg-\[\#383838\],
+:root.lgT .bg-\[\#404040\],
+:root.lgT .bg-\[\#444444\],
+:root.lgT .bg-\[\#4d4d4d\] {
   background-color: #cbd5e1 !important;
 }
 
+/* Blogger Özel Bileşen Yüzeyleri (Arama Hapı, Bildirim Barı, Bağlam Menüleri, Sol Çekmece Flyout, Etiket Çipleri, Yüzen Butonlar) */
+:root.lgT .head-search-pill {
+  background-color: #f0f4f9 !important;
+  border-color: transparent !important;
+  color: #5f6368 !important;
+}
+
+:root.lgT .head-search-pill:hover {
+  background-color: #e6ecf5 !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+:root.lgT .ntfC {
+  background-color: #ffffff !important;
+  border-color: transparent !important;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.06) !important;
+}
+
+:root.lgT .context-menu-card,
+:root.lgT .wPrf,
+:root.lgT .wTrans,
+:root.lgT .aprW {
+  background-color: #ffffff !important;
+  border: none !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.10) !important;
+}
+
+.wPrf .prfH,
+.wTrans .fixH,
+:root.lgT .wPrf .prfH,
+:root.lgT .wTrans .fixH {
+  background-color: transparent !important;
+  border-bottom: none !important;
+}
+
+:root.lgT .wPrf .prfH {
+  color: #5f6368 !important;
+}
+
+:root.lgT .sidebar-flyout {
+  background-color: #ffffff !important;
+  border: none !important;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08) !important;
+}
+
+:root.lgT .adv-card {
+  background-color: rgba(255, 255, 255, 0.96) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.14) !important;
+}
+
+:root.lgT .mob-nav-bar {
+  background-color: rgba(255, 255, 255, 0.96) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.06) !important;
+}
+
+:root.lgT .sidebar-foot-panel,
+.sidebar-foot-panel {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+:root.lgT .sidebar-foot-panel {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.sidebar-foot-slider,
+:root.lgT .sidebar-foot-slider {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.sidebar-dot,
+:root.lgT .sidebar-dot {
+  display: none !important;
+}
+
+.head-context-backdrop {
+  background-color: rgba(0, 0, 0, 0.42);
+  -webkit-backdrop-filter: saturate(180%) blur(10px);
+  backdrop-filter: saturate(180%) blur(10px);
+}
+
+:root.lgT .head-context-backdrop {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+:root.drK .context-menu-card,
+:root.drK .wPrf,
+:root.drK .wTrans,
+:root.drK .aprW,
+:root.drK .sidebar-flyout {
+  background-color: #1f1f1f !important;
+  border: none !important;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45) !important;
+}
+
+:root.lgT .aprW .ring-white {
+  --tw-ring-color: #1f1f1f !important;
+}
+
+:root.lgT .aprW .ring-offset-\[\#1e1e1e\] {
+  --tw-ring-offset-color: #ffffff !important;
+}
+
+:root.lgT .lbL > button {
+  background-color: #f0f4f9 !important;
+  color: #3c4043 !important;
+  border-color: transparent !important;
+}
+
+:root.lgT .lbL > button:hover {
+  background-color: #e2e8f0 !important;
+  color: #1f1f1f !important;
+}
+
+:root.lgT .floating-btn {
+  background-color: #ffffff !important;
+  border: none !important;
+  color: #1f1f1f !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08) !important;
+}
+
+:root.lgT .floating-btn:hover {
+  background-color: #f0f4f9 !important;
+}
+
 /* Yarı saydam beyaz yüzeyler */
-:root.lgT [class*="bg-white/5"],
-:root.lgT [class*="bg-white/[0.06]"] {
-  background-color: rgba(15, 23, 42, 0.04) !important;
+:root.lgT .bg-white\/5,
+:root.lgT .bg-white\/\[0\.03\],
+:root.lgT .bg-white\/\[0\.04\],
+:root.lgT .bg-white\/\[0\.06\] {
+  background-color: rgba(0, 0, 0, 0.04) !important;
 }
 
-:root.lgT [class*="bg-white/10"] {
-  background-color: rgba(15, 23, 42, 0.06) !important;
+:root.lgT .hover\:bg-white\/5:hover,
+:root.lgT .hover\:bg-white\/\[0\.06\]:hover,
+:root.lgT .hover\:bg-white\/10:hover {
+  background-color: rgba(0, 0, 0, 0.06) !important;
 }
 
-:root.lgT [class*="bg-white/20"] {
-  background-color: rgba(15, 23, 42, 0.10) !important;
+:root.lgT .bg-white\/10 {
+  background-color: rgba(0, 0, 0, 0.06) !important;
 }
 
-/* Kenarlıklar */
-:root.lgT [class*="border-[#252526]"],
-:root.lgT [class*="border-[#2d2d30]"],
-:root.lgT [class*="border-[#2e2e2e]"],
-:root.lgT [class*="border-[#333]"],
-:root.lgT [class*="border-[#333333]"],
-:root.lgT [class*="border-[#383838]"],
-:root.lgT [class*="border-[#3e3e3e]"],
-:root.lgT [class*="border-[#404040]"],
-:root.lgT [class*="border-[#404045]"],
-:root.lgT [class*="border-[#4d4d4d]"] {
-  border-color: #e2e8f0 !important;
+:root.lgT .bg-white\/20 {
+  background-color: rgba(0, 0, 0, 0.14) !important;
 }
 
-:root.lgT [class*="border-white/5"] {
-  border-color: rgba(15, 23, 42, 0.06) !important;
+:root.lgT .hover\:bg-white\/40:hover {
+  background-color: rgba(0, 0, 0, 0.25) !important;
 }
 
-:root.lgT [class*="border-white/10"] {
-  border-color: rgba(15, 23, 42, 0.10) !important;
+/* Kenarlıklar (ince Blogger saç teli ayırıcılar) */
+:root.lgT .border-\[\#252526\],
+:root.lgT .border-\[\#2d2d30\],
+:root.lgT .border-\[\#2e2e2e\],
+:root.lgT .border-\[\#333\],
+:root.lgT .border-\[\#333333\],
+:root.lgT .border-\[\#383838\],
+:root.lgT .border-\[\#3e3e3e\],
+:root.lgT .border-\[\#404040\],
+:root.lgT .border-\[\#404045\],
+:root.lgT .border-\[\#4d4d4d\] {
+  border-color: rgba(0, 0, 0, 0.08) !important;
 }
 
-:root.lgT [class*="border-white/20"] {
-  border-color: rgba(15, 23, 42, 0.12) !important;
+:root.lgT .border-white\/5,
+:root.lgT .border-white\/\[0\.08\] {
+  border-color: rgba(0, 0, 0, 0.06) !important;
 }
 
-/* Ana metin renkleri */
-:root.lgT [class*="text-white"],
-:root.lgT [class*="text-[#fffdfc]"],
-:root.lgT [class*="text-[#f3f4f6]"],
-:root.lgT [class*="text-slate-100"] {
-  color: #0f172a !important;
+:root.lgT .border-white\/10,
+:root.lgT .border-white\/15 {
+  border-color: rgba(0, 0, 0, 0.10) !important;
 }
 
-/* Koyu görsel/rozet zeminleri üzerindeki beyaz metinler korunur */
-:root.lgT [class*="bg-black"][class*="text-white"],
-:root.lgT [class*="bg-black"] [class*="text-white"],
-:root.lgT [class*="from-sky-950"] [class*="text-white"] {
-  color: #ffffff !important;
+:root.lgT .border-white\/20 {
+  border-color: rgba(0, 0, 0, 0.12) !important;
 }
 
-/* İkincil metin renkleri */
-:root.lgT [class*="text-[#d4d4d4]"],
-:root.lgT [class*="text-[#a3a3a3]"],
-:root.lgT [class*="text-[#9ca3af]"],
-:root.lgT [class*="text-[#989b9f]"],
-:root.lgT [class*="text-[#9aa0a6]"],
-:root.lgT [class*="text-[#8e8e8e]"],
-:root.lgT [class*="text-[#737373]"],
-:root.lgT [class*="text-[#71717a]"],
-:root.lgT [class*="text-[#a1a1aa]"],
-:root.lgT [class*="text-[#52525b]"],
-:root.lgT [class*="text-[#525252]"],
-:root.lgT [class*="text-neutral-200"],
-:root.lgT [class*="text-neutral-300"],
-:root.lgT [class*="text-slate-200"],
-:root.lgT [class*="text-slate-300"] {
-  color: #334155 !important;
+/* Ana metin renkleri (--lBodyC: #1f1f1f / #202124) */
+:root.lgT .text-white,
+:root.lgT .text-white\/90,
+:root.lgT .text-white\/95,
+:root.lgT .text-\[\#fffdfc\],
+:root.lgT .text-\[\#f3f4f6\],
+:root.lgT .text-slate-100,
+:root.lgT .text-\[\#e5e5e5\],
+:root.lgT .hover\:text-white:hover {
+  color: #1f1f1f !important;
 }
 
-:root.lgT [class*="text-neutral-400"],
-:root.lgT [class*="text-neutral-500"],
-:root.lgT [class*="text-slate-400"],
-:root.lgT [class*="text-slate-500"],
-:root.lgT [class*="text-slate-600"],
-:root.lgT [class*="text-slate-700"] {
-  color: #64748b !important;
+:root.lgT .text-\[\#d4d4d4\],
+:root.lgT .text-neutral-200,
+:root.lgT .text-neutral-300,
+:root.lgT .text-slate-200,
+:root.lgT .text-slate-300 {
+  color: #202124 !important;
 }
 
-/* Aydınlık zeminde vurgu metinleri daha koyu okunur */
-:root.lgT [class*="text-[#60cdff]"],
-:root.lgT [class*="text-[#38bdf8]"],
-:root.lgT [class*="text-[#7dd3fc]"] {
+/* İkincil / açıklama metin renkleri (--lBodyCa: #5f6368) */
+:root.lgT .text-\[\#a3a3a3\],
+:root.lgT .text-\[\#9ca3af\],
+:root.lgT .text-\[\#989b9f\],
+:root.lgT .text-\[\#9aa0a6\],
+:root.lgT .text-\[\#8e8e8e\],
+:root.lgT .text-\[\#737373\],
+:root.lgT .text-\[\#71717a\],
+:root.lgT .text-\[\#a1a1aa\],
+:root.lgT .text-\[\#52525b\],
+:root.lgT .text-\[\#525252\],
+:root.lgT .text-neutral-400,
+:root.lgT .text-neutral-500,
+:root.lgT .text-slate-400,
+:root.lgT .text-slate-500,
+:root.lgT .text-slate-600,
+:root.lgT .text-slate-700 {
+  color: #5f6368 !important;
+}
+
+/* Aydınlık zeminde vurgu metinleri */
+:root.lgT .text-\[\#60cdff\],
+:root.lgT .text-\[\#38bdf8\],
+:root.lgT .text-\[\#7dd3fc\] {
   color: #0369a1 !important;
 }
 
-:root.lgT [class*="bg-black"][class*="text-[#60cdff]"],
-:root.lgT [class*="bg-black"] [class*="text-[#60cdff]"] {
+/* Koyu vitrin/görsel/rozet zeminleri üzerindeki beyaz metin ve kontroller korunur */
+:root.lgT .hero-dark-overlay,
+:root.lgT .brand-card-dark,
+:root.lgT .bg-black,
+:root.lgT .bg-black\/65,
+:root.lgT .bg-black\/75,
+:root.lgT .bg-black\/60,
+:root.lgT .bg-black\/80,
+:root.lgT .bg-\[\#000000\],
+:root.lgT .bg-\[\#5f6368\] {
+  color: #ffffff !important;
+}
+
+:root.lgT .hero-dark-overlay .text-white,
+:root.lgT .brand-card-dark .text-white,
+:root.lgT .bg-black .text-white,
+:root.lgT .bg-black\/65 .text-white,
+:root.lgT .bg-black\/75 .text-white,
+:root.lgT .bg-black\/60 .text-white,
+:root.lgT .bg-black\/80 .text-white,
+:root.lgT .bg-\[\#5f6368\].text-white {
+  color: #ffffff !important;
+}
+
+:root.lgT .hero-dark-overlay .text-white\/80,
+:root.lgT .hero-dark-overlay .text-white\/90 {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+:root.lgT .hero-dark-overlay .bg-white\/40 {
+  background-color: rgba(255, 255, 255, 0.45) !important;
+}
+
+:root.lgT .hero-dark-overlay .hover\:bg-white\/60:hover {
+  background-color: rgba(255, 255, 255, 0.70) !important;
+}
+
+:root.lgT .hero-dark-overlay .hero-zoom-btn {
+  background-color: rgba(28, 30, 38, 0.78) !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+:root.lgT .hero-dark-overlay .hero-zoom-btn:hover {
+  background-color: #333333 !important;
+  color: #ffffff !important;
+}
+
+:root.lgT .hero-dark-overlay .hero-cat-pill {
+  background-color: #ffffff !important;
+  color: #1f1f1f !important;
+}
+
+:root.lgT .brand-card-dark .text-slate-200,
+:root.lgT .brand-card-dark .text-\[\#989b9f\] {
+  color: #e2e8f0 !important;
+}
+
+:root.lgT .brand-card-dark .hover\:text-white:hover,
+:root.lgT .bg-black .hover\:text-white:hover {
+  color: #ffffff !important;
+}
+
+:root.lgT .bg-black .text-\[\#60cdff\],
+:root.lgT .hero-dark-overlay .text-\[\#60cdff\],
+:root.lgT .brand-card-dark .text-\[\#60cdff\] {
   color: #60cdff !important;
 }
 
-/* Blogger yazar kartı ve profil açılır penceresi */
+/* Blogger yazar kartı ve profil açılır metinleri */
 :root.lgT .admAbt {
   background: #ffffff;
   border-color: rgba(15, 23, 42, 0.08);
@@ -981,17 +1211,6 @@ body { top: 0 !important; }
 
 :root.lgT .admAbt .admA {
   color: #475569;
-}
-
-:root.lgT .wPrf {
-  background: #ffffff;
-  border-color: rgba(15, 23, 42, 0.08);
-}
-
-:root.lgT .wPrf .prfH {
-  background: #f1f5f9;
-  color: #64748b;
-  border-bottom-color: rgba(15, 23, 42, 0.08);
 }
 
 :root.lgT .wPrf .sInf .sDt .l {

@@ -10,7 +10,7 @@ export const BloggerFooter: React.FC<BloggerFooterProps> = ({
   onOpenPrivacy
 }) => {
   return (
-    <footer className="mainF w-full bg-[#1e1e1e] border-t border-[#333333] select-none text-xs text-[#989b9f]">
+    <footer className="mainF w-full bg-[#1e1e1e] border-0 select-none text-xs text-[#989b9f]">
       <div className="fotC w-full py-10 sm:py-12">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-[25px]">
           
