@@ -287,7 +287,7 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
       <div className="flex items-center min-[896px]:w-[230px] shrink-0 pl-4 min-[896px]:pl-5">
         <button
           onClick={onToggleSidebar}
-          className="w-8 h-8 rounded-full text-[#989b9f] hover:text-[#fffdfc] hover:bg-white/10 active:scale-95 transition-all duration-200 cursor-pointer flex items-center justify-center border-none outline-none shrink-0"
+          className="w-[34px] h-[34px] rounded-full text-[#989b9f] hover:text-[#60cdff] hover:bg-[#60cdff]/15 hover:ring-1 hover:ring-[#60cdff]/40 active:scale-95 transition-all duration-200 cursor-pointer flex items-center justify-center border-none outline-none shrink-0"
           aria-label="Menüyü Aç/Kapat"
           title="Menüyü Aç/Kapat"
         >
@@ -348,11 +348,11 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
       </div>
 
       {/* 3. Sağ Bölüm: Blogger XML 1:1 .headIc Butonları */}
-      <div className="flex items-center justify-end shrink-0 pr-4 min-[896px]:pr-5 gap-1 min-[896px]:gap-2 ml-auto">
+      <div className="flex items-center justify-end shrink-0 pr-4 min-[896px]:pr-5 gap-1 min-[896px]:gap-1.5 ml-auto">
         {/* Mobilde Arama Butonu (<896px .headIc .isSrh) */}
         <button
           onClick={onOpenSearchModal}
-          className="min-[896px]:hidden w-8 h-8 rounded-full text-[#989b9f] hover:text-[#fffdfc] hover:bg-white/10 active:scale-95 transition-all duration-200 cursor-pointer flex items-center justify-center border-none outline-none"
+          className="min-[896px]:hidden w-[34px] h-[34px] rounded-full text-[#989b9f] hover:text-[#60cdff] hover:bg-[#60cdff]/15 hover:ring-1 hover:ring-[#60cdff]/40 active:scale-95 transition-all duration-200 cursor-pointer flex items-center justify-center border-none outline-none"
           title="Ara"
           aria-label="Ara"
         >
@@ -363,10 +363,10 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
             <div className="relative" ref={profileRef}>
               <button
                 onClick={() => setIsProfileOpen(prev => !prev)}
-                className={`w-8 h-8 rounded-full transition-all duration-200 cursor-pointer flex items-center justify-center border-none outline-none ${
+                className={`w-[34px] h-[34px] rounded-full transition-all duration-200 cursor-pointer flex items-center justify-center border-none outline-none active:scale-95 ${
                   isProfileOpen 
-                    ? 'bg-white/10 text-[var(--linkC,#9aa0a6)]' 
-                    : 'text-[#989b9f] hover:text-[#fffdfc] hover:bg-white/10 active:scale-95'
+                    ? 'text-[#60cdff] bg-[#60cdff]/15 ring-1 ring-[#60cdff]/40' 
+                    : 'text-[#989b9f] hover:text-[#60cdff] hover:bg-[#60cdff]/15 hover:ring-1 hover:ring-[#60cdff]/40'
                 }`}
                 title="Yazarlar &amp; Profil"
                 aria-label="Yazarlar"
@@ -441,7 +441,7 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
                 if (onOpenPinned) onOpenPinned();
                 else onGoHome();
               }}
-              className="w-8 h-8 rounded-full text-[#989b9f] hover:text-[#fffdfc] hover:bg-white/10 active:scale-95 transition-all duration-200 cursor-pointer flex items-center justify-center border-none outline-none"
+              className="w-[34px] h-[34px] rounded-full text-[#989b9f] hover:text-[#60cdff] hover:bg-[#60cdff]/15 hover:ring-1 hover:ring-[#60cdff]/40 active:scale-95 transition-all duration-200 cursor-pointer flex items-center justify-center border-none outline-none"
               title="Sabitlenenler &amp; Yer İmleri"
               aria-label="Yer İmleri"
             >
@@ -452,10 +452,10 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
             <div className="relative" ref={appearanceRef}>
               <button
                 onClick={() => setIsAppearanceOpen(prev => !prev)}
-                className={`w-8 h-8 rounded-full transition-all duration-200 cursor-pointer flex items-center justify-center border-none outline-none ${
+                className={`w-[34px] h-[34px] rounded-full transition-all duration-200 cursor-pointer flex items-center justify-center border-none outline-none active:scale-95 ${
                   isAppearanceOpen
-                    ? 'bg-white/10 text-[var(--linkC,#9aa0a6)]'
-                    : 'text-[#989b9f] hover:text-[#fffdfc] hover:bg-white/10 active:scale-95'
+                    ? 'text-[#60cdff] bg-[#60cdff]/15 ring-1 ring-[#60cdff]/40'
+                    : 'text-[#989b9f] hover:text-[#60cdff] hover:bg-[#60cdff]/15 hover:ring-1 hover:ring-[#60cdff]/40'
                 }`}
                 title="Görünüm ve Tema Ayarları"
                 aria-label="Görünüm ve Tema Modu"
@@ -570,13 +570,15 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
             {/* 4. Buton: Yeni Gönderi / Not Ekle ya da Mevcut Gönderiyi Düzenle (Screenshot 2 1:1 .isWrite) */}
             <button
               onClick={onOpenNewLink}
-              className={`w-8 h-8 rounded-full text-[#989b9f] hover:text-[#fffdfc] hover:bg-white/10 active:scale-95 transition-all duration-200 cursor-pointer flex items-center justify-center border-none outline-none ${
-                isPostDetail ? 'text-[#60cdff] bg-[#60cdff]/15 hover:bg-[#60cdff]/25 ring-1 ring-[#60cdff]/30' : ''
+              className={`w-[34px] h-[34px] rounded-full transition-all duration-200 cursor-pointer flex items-center justify-center border-none outline-none active:scale-95 ${
+                isPostDetail 
+                  ? 'text-[#60cdff] bg-[#60cdff]/15 ring-1 ring-[#60cdff]/40 hover:bg-[#60cdff]/25 hover:ring-[#60cdff]/60' 
+                  : 'text-[#989b9f] hover:text-[#60cdff] hover:bg-[#60cdff]/15 hover:ring-1 hover:ring-[#60cdff]/40'
               }`}
               title={isPostDetail ? `Bu Gönderiyi Düzenle${postTitle ? `: ${postTitle}` : ''}` : "Yeni Bağlantı / Not Ekle"}
               aria-label={isPostDetail ? "Gönderiyi Düzenle" : "Yeni Ekle"}
             >
-              <Edit3Icon className={`w-4 h-4 ${isPostDetail ? 'text-[#60cdff]' : ''}`} />
+              <Edit3Icon className="w-4 h-4" />
             </button>
 
           </div>
