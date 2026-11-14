@@ -17,6 +17,7 @@ import {
   PlusNavIcon,
   InstagramIcon, 
   TelegramIcon, 
+  TiktokIcon,
   MailIcon, 
   VkIcon,
   MatrixIcon,
@@ -61,11 +62,28 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
   const [klasorOpen, setKlasorOpen] = useState(false);
   const [gelistiriciOpen, setGelistiriciOpen] = useState(false);
   const [footerSlideIndex, setFooterSlideIndex] = useState(0);
+  const [socSlideIndex, setSocSlideIndex] = useState(0);
+
+  const sidebarSocialLinks = [
+    { name: 'Instagram', href: 'https://www.instagram.com/aleyul.ala/', icon: InstagramIcon, color: '#e1306c' },
+    { name: 'Telegram', href: 'https://t.me/aleyyulala', icon: TelegramIcon, color: '#229ed9' },
+    { name: 'TikTok', href: 'https://www.tiktok.com/@Aleyyu.Ala', icon: TiktokIcon, color: '#25f4ee' },
+    { name: 'Matrix', href: 'https://matrix.to/#/#negronn-show:matrix.org', icon: MatrixIcon, color: 'var(--linkC,#9aa0a6)' },
+    { name: 'VKontakte', href: 'https://vk.com/negronn', icon: VkIcon, color: '#4680c2' },
+    { name: 'WhatsApp', href: 'tel:05446412904', icon: WhatsappIcon, color: '#25d366' }
+  ];
 
   React.useEffect(() => {
     const timer = setInterval(() => {
       setFooterSlideIndex(prev => (prev + 1) % 3);
     }, 4500);
+    return () => clearInterval(timer);
+  }, []);
+
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setSocSlideIndex(prev => (prev + 1) % 6);
+    }, 5000);
     return () => clearInterval(timer);
   }, []);
 
@@ -625,69 +643,48 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
           </div>
         </div>
 
-        {/* LinkList04: .mSoc 6 Sosyal Buton (Slider ile Aynı Şık Kart Tasarımı) */}
-        <div className="mSoc bg-[#252526]/80 border border-white/10 rounded-lg p-1.5 flex items-center justify-between text-[#a3a3a3] shadow-sm">
-          {/* 1. Instagram */}
-          <a
-            href="https://www.instagram.com/aleyul.ala/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-6 h-6 rounded-md bg-white/5 hover:bg-[#e1306c] hover:text-white flex items-center justify-center transition-all duration-200"
-            title="Instagram"
-          >
-            <InstagramIcon className="w-3.5 h-3.5" />
-          </a>
-
-          {/* 2. Telegram */}
-          <a
-            href="https://t.me/aleyyulala"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-6 h-6 rounded-md bg-white/5 hover:bg-[#229ed9] hover:text-white flex items-center justify-center transition-all duration-200"
-            title="Telegram"
-          >
-            <TelegramIcon className="w-3.5 h-3.5" />
-          </a>
-
-          {/* 3. Element.io / Matrix */}
-          <a
-            href="https://matrix.to/#/#negronn-show:matrix.org"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-6 h-6 rounded-md bg-white/5 hover:bg-[var(--linkC,#9aa0a6)] hover:text-black flex items-center justify-center transition-all duration-200"
-            title="Element.io / Matrix: @negronn:matrix.org"
-          >
-            <MatrixIcon className="w-3.5 h-3.5" />
-          </a>
-
-          {/* 4. VKontakte */}
-          <a
-            href="https://vk.com/negronn"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-6 h-6 rounded-md bg-white/5 hover:bg-[#4680c2] hover:text-white flex items-center justify-center transition-all duration-200"
-            title="VK (VKontakte)"
-          >
-            <VkIcon className="w-3.5 h-3.5" />
-          </a>
-
-          {/* 5. E-posta */}
-          <a
-            href="mailto:mrstar14155@gmail.com"
-            className="w-6 h-6 rounded-md bg-white/5 hover:bg-[#ea4335] hover:text-white flex items-center justify-center transition-all duration-200"
-            title="E-posta: mrstar14155@gmail.com"
-          >
-            <MailIcon className="w-3.5 h-3.5" />
-          </a>
-
-          {/* 6. Whatsapp / Telefon */}
-          <a
-            href="tel:05446412904"
-            className="w-6 h-6 rounded-md bg-white/5 hover:bg-[#25d366] hover:text-white flex items-center justify-center transition-all duration-200"
-            title="Telefon / Whatsapp: 0544 641 29 04"
-          >
-            <WhatsappIcon className="w-3.5 h-3.5" />
-          </a>
+        {/* LinkList04: Sosyal Medya Kayan Slider + [+] Butonu (Üstteki Slayt ile Birebir Aynı Tasarım) */}
+        <div className="relative h-9 bg-[#252526]/80 border border-white/10 rounded-lg overflow-hidden flex items-center shadow-sm">
+          {sidebarSocialLinks.map((item, idx) => {
+            const IconComp = item.icon;
+            return (
+              <div
+                key={item.name}
+                className={`absolute inset-0 flex items-center justify-between px-3 transition-all duration-300 ease-in-out ${
+                  socSlideIndex === idx
+                    ? 'opacity-100 translate-x-0 pointer-events-auto'
+                    : 'opacity-0 -translate-x-full pointer-events-none'
+                }`}
+              >
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-xs text-[#e5e5e5] hover:text-[var(--linkC,#9aa0a6)] font-semibold transition-colors"
+                  title={`${item.name} Profilini Aç`}
+                >
+                  <div className="relative flex items-center justify-center" style={{ color: item.color }}>
+                    <IconComp className="w-3.5 h-3.5 shrink-0" />
+                    {/* Parlayan Canlı Bildirim Noktası (.nt glow) */}
+                    <span className="absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#ffffff] animate-pulse" />
+                  </div>
+                  <span className="tracking-wide">{item.name}</span>
+                </a>
+                <button
+                  type="button"
+                  onClick={() => setSocSlideIndex((prev) => (prev + 1) % sidebarSocialLinks.length)}
+                  className="w-5 h-5 rounded flex items-center justify-center text-[#9ca3af] hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                  title="Sonraki Sosyal Medya"
+                  aria-label="Sonraki Sosyal Medyaya Geç"
+                >
+                  <svg viewBox="0 0 24 24" className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                    <line x1="12" y1="5" x2="12" y2="19" />
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                  </svg>
+                </button>
+              </div>
+            );
+          })}
         </div>
 
         <div className="flex items-center justify-between text-[10px] text-[#989b9f] font-mono px-1">
