@@ -320,7 +320,7 @@ export const LinksView: React.FC<LinksViewProps> = ({
                     onClick={() => handlePageChange(pageNum)}
                     className={`min-w-9 h-9 px-3 rounded-lg flex items-center justify-center text-xs font-bold transition-all cursor-pointer active:scale-95 ${
                       isActive
-                        ? 'bg-[var(--linkC,#9aa0a6)] text-[#0f172a] shadow-md shadow-sky-500/25 scale-105'
+                        ? 'pager-active bg-[var(--linkC,#9aa0a6)] text-[#0f172a] shadow-md shadow-sky-500/25 scale-105'
                         : 'bg-[#252526] hover:bg-[#333333] text-[#d4d4d4] hover:text-white'
                     }`}
                     aria-current={isActive ? 'page' : undefined}

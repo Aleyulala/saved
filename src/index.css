@@ -855,13 +855,20 @@ html.lgT:not(.thS) {
   background-color: #ffffff !important;
 }
 
-:root.lgT .bg-\[\#252526\] {
+:root.lgT .bg-\[\#252526\],
+:root.lgT .bg-\[\#252526\]\/40 {
   background-color: #f0f4f9 !important;
 }
 
 :root.lgT .hover\:bg-\[\#1e1e1e\]:hover,
 :root.lgT .hover\:bg-\[\#252526\]:hover,
+:root.lgT .hover\:bg-\[\#252526\]\/60:hover,
 :root.lgT .hover\:bg-\[\#252526\]\/70:hover,
+:root.lgT .hover\:bg-\[\#262626\]:hover,
+:root.lgT .hover\:bg-\[\#262626\]\/50:hover,
+:root.lgT .hover\:bg-\[\#262626\]\/60:hover,
+:root.lgT .hover\:bg-\[\#27272a\]:hover,
+:root.lgT .hover\:bg-\[\#282828\]:hover,
 :root.lgT .hover\:bg-\[\#28282b\]:hover,
 :root.lgT .hover\:bg-\[\#2d2d30\]:hover {
   background-color: #f0f4f9 !important;
@@ -890,6 +897,7 @@ html.lgT:not(.thS) {
 
 :root.lgT .bg-\[\#383838\],
 :root.lgT .bg-\[\#404040\],
+:root.lgT .hover\:bg-\[\#404040\]:hover,
 :root.lgT .bg-\[\#444444\],
 :root.lgT .bg-\[\#4d4d4d\] {
   background-color: #cbd5e1 !important;
@@ -938,11 +946,6 @@ html.lgT:not(.thS) {
   background-color: #ffffff !important;
   border: none !important;
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08) !important;
-}
-
-:root.lgT .adv-card {
-  background-color: rgba(255, 255, 255, 0.96) !important;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.14) !important;
 }
 
 :root.lgT .mob-nav-bar {
@@ -1077,6 +1080,7 @@ html.lgT:not(.thS) {
 
 /* Ana metin renkleri (--lBodyC: #1f1f1f / #202124) */
 :root.lgT .text-white,
+:root.lgT .text-white\/80,
 :root.lgT .text-white\/90,
 :root.lgT .text-white\/95,
 :root.lgT .text-\[\#fffdfc\],
@@ -1115,14 +1119,26 @@ html.lgT:not(.thS) {
   color: #5f6368 !important;
 }
 
-/* Aydınlık zeminde vurgu metinleri */
+/* Aydınlık zeminde vurgu ve yıldız metinleri */
 :root.lgT .text-\[\#60cdff\],
 :root.lgT .text-\[\#38bdf8\],
 :root.lgT .text-\[\#7dd3fc\] {
   color: #0369a1 !important;
 }
 
-/* Koyu vitrin/görsel/rozet zeminleri üzerindeki beyaz metin ve kontroller korunur */
+:root.lgT .text-amber-400 {
+  color: #d97706 !important;
+}
+
+:root.lgT .bg-white\/40 {
+  background-color: rgba(0, 0, 0, 0.22) !important;
+}
+
+:root.lgT:not(.thS) .pager-active {
+  color: #ffffff !important;
+}
+
+/* Koyu vitrin/görsel/marka buton zeminleri üzerindeki beyaz metin ve kontroller korunur */
 :root.lgT .hero-dark-overlay,
 :root.lgT .brand-card-dark,
 :root.lgT .bg-black,
@@ -1131,7 +1147,16 @@ html.lgT:not(.thS) {
 :root.lgT .bg-black\/60,
 :root.lgT .bg-black\/80,
 :root.lgT .bg-\[\#000000\],
-:root.lgT .bg-\[\#5f6368\] {
+:root.lgT .bg-\[\#5f6368\],
+:root.lgT .bg-\[\#1877f2\],
+:root.lgT .bg-\[\#00a884\],
+:root.lgT .bg-\[\#229ed9\],
+:root.lgT .hover\:bg-\[\#229ed9\]:hover,
+:root.lgT .hover\:bg-\[\#4680c2\]:hover,
+:root.lgT .hover\:bg-\[\#ea4335\]:hover,
+:root.lgT .bg-\[rgba\(28\,30\,38\,0\.85\)\],
+:root.lgT .bg-\[rgba\(28\,30\,38\,0\.78\)\],
+:root.lgT #fsMediaModal {
   color: #ffffff !important;
 }
 
@@ -1142,13 +1167,34 @@ html.lgT:not(.thS) {
 :root.lgT .bg-black\/75 .text-white,
 :root.lgT .bg-black\/60 .text-white,
 :root.lgT .bg-black\/80 .text-white,
-:root.lgT .bg-\[\#5f6368\].text-white {
+:root.lgT .bg-\[\#5f6368\].text-white,
+:root.lgT .bg-\[\#1877f2\],
+:root.lgT .bg-\[\#00a884\],
+:root.lgT .bg-\[\#229ed9\],
+:root.lgT .hover\:bg-\[\#229ed9\]:hover,
+:root.lgT .hover\:bg-\[\#4680c2\]:hover,
+:root.lgT .hover\:bg-\[\#ea4335\]:hover,
+:root.lgT .bg-\[rgba\(28\,30\,38\,0\.85\)\].text-white,
+:root.lgT #fsMediaModal .text-white {
   color: #ffffff !important;
 }
 
+:root.lgT .bg-black\/75 .text-amber-400 {
+  color: #fbbf24 !important;
+}
+
 :root.lgT .hero-dark-overlay .text-white\/80,
-:root.lgT .hero-dark-overlay .text-white\/90 {
-  color: rgba(255, 255, 255, 0.85) !important;
+:root.lgT .hero-dark-overlay .text-white\/90,
+:root.lgT #fsMediaModal .text-white\/90 {
+  color: rgba(255, 255, 255, 0.90) !important;
+}
+
+:root.lgT #fsMediaModal .text-white\/75 {
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
+:root.lgT #fsMediaModal .hover\:bg-\[\#252832\]:hover {
+  background-color: #252832 !important;
 }
 
 :root.lgT .hero-dark-overlay .bg-white\/40 {
@@ -1181,7 +1227,8 @@ html.lgT:not(.thS) {
 }
 
 :root.lgT .brand-card-dark .hover\:text-white:hover,
-:root.lgT .bg-black .hover\:text-white:hover {
+:root.lgT .bg-black .hover\:text-white:hover,
+:root.lgT #fsMediaModal .hover\:text-white:hover {
   color: #ffffff !important;
 }
 
@@ -1394,21 +1441,176 @@ html.lgT:not(.thS) {
   30% { transform: translateY(-4px); opacity: 1; }
 }
 
-/* Cam yüzeylerin açık tema (lgT) karşılıkları — nsone.xml 1:1 */
+/* Cam yüzeylerin ve Arama Modalının açık/koyu tema karşılıkları — nsone.xml 1:1 */
 :root.lgT .cf-spotlight {
-  background: rgba(255, 255, 255, 0.82) !important;
-  border-color: rgba(0, 0, 0, 0.08) !important;
-  box-shadow: 0 25px 65px rgba(0, 0, 0, 0.12) !important;
-}
-
-:root.lgT .cf-backdrop {
-  background: rgba(15, 17, 23, 0.4) !important;
-}
-
-:root.lgT .adv-card {
   background: rgba(255, 255, 255, 0.86) !important;
   border-color: rgba(0, 0, 0, 0.08) !important;
   box-shadow: 0 25px 65px rgba(0, 0, 0, 0.12) !important;
+}
+
+:root.lgT .cf-backdrop,
+:root.lgT .adv-backdrop {
+  background: rgba(15, 17, 23, 0.36) !important;
+}
+
+:root.lgT .adv-close-btn {
+  background-color: #ffffff !important;
+  color: #5f6368 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12) !important;
+}
+
+:root.lgT .adv-close-btn:hover {
+  background-color: #f0f4f9 !important;
+  color: #1f1f1f !important;
+}
+
+:root.drK .adv-close-btn {
+  background-color: #252526 !important;
+  color: #989b9f !important;
+}
+
+:root.drK .adv-close-btn:hover {
+  background-color: #333333 !important;
+  color: #ffffff !important;
+}
+
+:root.lgT .adv-card {
+  background: rgba(255, 255, 255, 0.94) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 25px 65px rgba(0, 0, 0, 0.14) !important;
+}
+
+:root.lgT .adv-input-bar {
+  background-color: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.10) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+}
+
+:root.lgT .adv-engine-select {
+  background-color: #f0f4f9 !important;
+  color: #1f1f1f !important;
+}
+
+:root.lgT .adv-engine-select:hover {
+  background-color: #e2e8f0 !important;
+}
+
+:root.drK .adv-search-btn {
+  background-color: var(--linkB, #9aa0a6) !important;
+  color: #0f172a !important;
+}
+
+html.drK.thS:not(.th4):not(.th7):not(.th8) .adv-search-btn {
+  color: #ffffff !important;
+}
+
+:root.lgT .adv-search-btn {
+  background-color: var(--linkB, #5f6368) !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12) !important;
+}
+
+html.lgT.th4 .adv-search-btn,
+html.lgT.th7 .adv-search-btn,
+html.lgT.th8 .adv-search-btn {
+  color: #0f172a !important;
+}
+
+:root.lgT .adv-pill {
+  background-color: #f0f4f9 !important;
+  color: #4b5563 !important;
+}
+
+:root.lgT .adv-pill:hover {
+  background-color: #e2e8f0 !important;
+  color: #1f1f1f !important;
+}
+
+:root.lgT:not(.thS) .adv-pill.is-active {
+  background-color: #5f6368 !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+
+html.lgT.thS .adv-pill.is-active {
+  background-color: color-mix(in srgb, var(--linkC, #1a73e8) 14%, #ffffff) !important;
+  color: var(--linkC, #1a73e8) !important;
+  font-weight: 600 !important;
+}
+
+:root.drK .adv-pill.is-active {
+  background-color: color-mix(in srgb, var(--linkC, #9aa0a6) 22%, #252526) !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+
+:root.drK .adv-banner {
+  background-color: rgba(30, 30, 30, 0.92) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #e5e5e5 !important;
+}
+
+:root.lgT .adv-banner {
+  background-color: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  color: #1f1f1f !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05) !important;
+}
+
+:root.drK .adv-banner-chip {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  color: #f1f5f9 !important;
+}
+
+:root.drK .adv-banner-chip:hover {
+  background-color: color-mix(in srgb, var(--linkC, #9aa0a6) 28%, rgba(255, 255, 255, 0.15)) !important;
+  color: #ffffff !important;
+}
+
+:root.lgT .adv-banner-chip {
+  background-color: #f0f4f9 !important;
+  color: #3c4043 !important;
+}
+
+:root.lgT .adv-banner-chip:hover {
+  background-color: #e2e8f0 !important;
+  color: #1f1f1f !important;
+}
+
+:root.drK .adv-banner-kbd {
+  background-color: color-mix(in srgb, var(--linkC, #9aa0a6) 25%, rgba(255, 255, 255, 0.1)) !important;
+  color: #ffffff !important;
+}
+
+:root.lgT .adv-banner-kbd {
+  background-color: #e2e8f0 !important;
+  color: #1f1f1f !important;
+  box-shadow: none !important;
+}
+
+:root.lgT .adv-results-list {
+  background-color: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08) !important;
+}
+
+:root.lgT .adv-item:hover,
+:root.lgT .adv-item.is-selected {
+  background-color: #f0f4f9 !important;
+  color: #1f1f1f !important;
+}
+
+:root.lgT .adv-item-title {
+  color: #1f1f1f !important;
+}
+
+:root.lgT .adv-item-sub {
+  color: #5f6368 !important;
+}
+
+:root.lgT .adv-item-tag {
+  background-color: #e4eaf3 !important;
+  color: #3c4043 !important;
 }
 
 @media (prefers-reduced-motion: reduce) {

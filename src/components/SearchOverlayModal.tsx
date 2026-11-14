@@ -429,7 +429,7 @@ export const SearchOverlayModal: React.FC<SearchOverlayModalProps> = ({
             setQuery(chip.prefix);
             inputRef.current?.focus();
           }}
-          className="inline-flex items-center px-[9px] py-[3px] rounded-[7px] bg-white/[0.08] text-[#f1f5f9] text-[11px] font-mono cursor-pointer shrink-0 transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[color-mix(in_srgb,var(--linkC,#9aa0a6)_28%,rgba(255,255,255,0.15))] hover:text-white"
+          className="adv-banner-chip inline-flex items-center px-[9px] py-[3px] rounded-[7px] bg-white/[0.08] text-[#f1f5f9] text-[11px] font-mono cursor-pointer shrink-0 transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[color-mix(in_srgb,var(--linkC,#9aa0a6)_28%,rgba(255,255,255,0.15))] hover:text-white"
           title={chip.title}
         >
           {chip.label}
@@ -446,7 +446,7 @@ export const SearchOverlayModal: React.FC<SearchOverlayModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex flex-col items-center justify-start px-4 pt-[10vh] pb-6 bg-black/[0.52] backdrop-blur-[16px] animate-in fade-in duration-200"
+      className="adv-backdrop fixed inset-0 z-50 flex flex-col items-center justify-start px-4 pt-[10vh] pb-6 bg-black/[0.52] backdrop-blur-[16px] animate-in fade-in duration-200"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
@@ -454,7 +454,7 @@ export const SearchOverlayModal: React.FC<SearchOverlayModalProps> = ({
       {/* Kapat Butonu (.adv-close-btn) — nsone.xml 1:1 karemsi 32px */}
       <button
         onClick={onClose}
-        className="absolute top-5 right-5 w-8 h-8 aspect-square rounded-[10px] bg-[#282828] text-white hover:bg-[#333333] hover:text-[var(--linkC,#9aa0a6)] flex items-center justify-center shadow-[0_2px_6px_rgba(0,0,0,0.2)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] outline-none cursor-pointer"
+        className="adv-close-btn absolute top-5 right-5 w-8 h-8 aspect-square rounded-[10px] bg-[#282828] text-white hover:bg-[#333333] hover:text-[var(--linkC,#9aa0a6)] flex items-center justify-center shadow-[0_2px_6px_rgba(0,0,0,0.2)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] outline-none cursor-pointer"
         aria-label="Aramayı Kapat (Esc)"
         title="Kapat (Esc)"
       >
@@ -465,13 +465,13 @@ export const SearchOverlayModal: React.FC<SearchOverlayModalProps> = ({
       <div className="adv-card w-full max-w-[660px] flex flex-col gap-3 p-4 rounded-[20px] bg-[rgba(22,25,34,0.82)] backdrop-blur-[28px] shadow-[0_30px_80px_rgba(0,0,0,0.72)] animate-in slide-in-from-top duration-200">
 
         {/* Arama Kutusu ve Motor Seçici (.adv-input-bar) */}
-        <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-[12px] bg-[#252526] shadow-[0_12px_36px_rgba(0,0,0,0.45)] transition-all">
+        <div className="adv-input-bar flex items-center gap-2 px-2.5 py-1.5 rounded-[12px] bg-[#252526] shadow-[0_12px_36px_rgba(0,0,0,0.45)] transition-all">
 
           {/* Arama Motoru Dropdown (.adv-engine-select) */}
           <select
             value={selectedEngine}
             onChange={(e) => setSelectedEngine(e.target.value)}
-            className="bg-[#1e1e1e] hover:bg-[#28282b] text-[#d4d4d4] text-xs font-semibold py-2 px-2.5 rounded-lg border-0 outline-none cursor-pointer shrink-0 max-w-[130px] truncate"
+            className="adv-engine-select bg-[#1e1e1e] hover:bg-[#28282b] text-[#d4d4d4] text-xs font-semibold py-2 px-2.5 rounded-lg border-0 outline-none cursor-pointer shrink-0 max-w-[130px] truncate"
             title="Arama Motoru Seçin"
           >
             {SEARCH_ENGINES.map((eng, i) => (
@@ -513,7 +513,7 @@ export const SearchOverlayModal: React.FC<SearchOverlayModalProps> = ({
           <button
             type="button"
             onClick={() => executeSearch()}
-            className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-[var(--linkB,#9aa0a6)] hover:opacity-90 text-[#0f172a] flex items-center justify-center font-bold text-base shadow-md active:scale-95 transition-all cursor-pointer shrink-0"
+            className="adv-search-btn w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-[var(--linkB,#9aa0a6)] hover:opacity-90 text-[#0f172a] flex items-center justify-center font-bold text-base shadow-md active:scale-95 transition-all cursor-pointer shrink-0"
             title="Ara veya Git (Enter)"
           >
             <SearchNormalIcon className="w-4 h-4 stroke-[2.5]" />
@@ -534,7 +534,7 @@ export const SearchOverlayModal: React.FC<SearchOverlayModalProps> = ({
                 onClick={() => setSelectedEngine(pill.url)}
                 className={`adv-pill px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap cursor-pointer transition-all duration-150 ${
                   isActive
-                    ? 'is-active bg-[rgba(96,205,255,0.15)] text-[var(--linkC,#9aa0a6)]'
+                    ? 'is-active'
                     : 'bg-[#1e1e1e] text-[#a3a3a3] hover:bg-[#28282b] hover:text-white'
                 }`}
               >
@@ -560,8 +560,8 @@ export const SearchOverlayModal: React.FC<SearchOverlayModalProps> = ({
         {/* Sayfada Çekmecesi: Bağlantılar Paneli (.adv-results-list) — nsone.xml 35840-35847 1:1 */}
         {selectedEngine === 'blog' && (
           <div className="adv-results-list max-h-[290px] overflow-y-auto rounded-xl bg-[#1e1e1e] p-1.5 flex flex-col gap-[3px] shadow-[0_16px_40px_rgba(0,0,0,0.5)]">
-            <div className="adv-results-header px-2.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.05em] text-[#989b9f] flex items-center justify-between">
-              <span>
+            <div className="adv-results-header px-2.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.05em] text-[#989b9f] flex items-center justify-between gap-2">
+              <span className="min-w-0 truncate">
                 {results.length > 0
                   ? isLatest
                     ? `📖 Son Eklenen Bağlantılar (${results.length})`
@@ -570,7 +570,7 @@ export const SearchOverlayModal: React.FC<SearchOverlayModalProps> = ({
                     ? 'Eşleşen Sonuç Bulunamadı'
                     : '📖 Son Eklenen Bağlantılar'}
               </span>
-              <span className="text-[10px] font-normal opacity-70">Gezinmek için ↑ ↓</span>
+              <span className="text-[10px] font-normal opacity-75 shrink-0 whitespace-nowrap">Gezinmek için ↑ ↓</span>
             </div>
 
             {results.length > 0 ? (
@@ -584,7 +584,7 @@ export const SearchOverlayModal: React.FC<SearchOverlayModalProps> = ({
                     onClick={() => openResult(link)}
                     onMouseEnter={() => setSelectedIndex(idx)}
                     className={`adv-item flex items-center justify-between gap-3 px-2.5 py-2 rounded-lg cursor-pointer transition-all duration-150 ${
-                      isSel ? 'is-selected bg-[#252526] text-white' : 'hover:bg-[#252526]/60'
+                      isSel ? 'is-selected bg-[#252526] text-white' : 'hover:bg-[#252526]'
                     }`}
                   >
                     <div className="adv-item-main flex items-center gap-2.5 min-w-0">
