@@ -625,14 +625,14 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
           </div>
         </div>
 
-        {/* LinkList04: .mSoc 6 Sosyal Buton */}
-        <div className="flex items-center justify-between text-[#a3a3a3] px-1">
+        {/* LinkList04: .mSoc 6 Sosyal Buton (Slider ile Aynı Şık Kart Tasarımı) */}
+        <div className="mSoc bg-[#252526]/80 border border-white/10 rounded-lg p-1.5 flex items-center justify-between text-[#a3a3a3] shadow-sm">
           {/* 1. Instagram */}
           <a
             href="https://www.instagram.com/aleyul.ala/"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-7 h-7 rounded-full bg-[#252526] hover:bg-[#e1306c] hover:text-white flex items-center justify-center transition-all duration-200"
+            className="w-6 h-6 rounded-md bg-white/5 hover:bg-[#e1306c] hover:text-white flex items-center justify-center transition-all duration-200"
             title="Instagram"
           >
             <InstagramIcon className="w-3.5 h-3.5" />
@@ -643,7 +643,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
             href="https://t.me/aleyyulala"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-7 h-7 rounded-full bg-[#252526] hover:bg-[#229ed9] hover:text-white flex items-center justify-center transition-all duration-200"
+            className="w-6 h-6 rounded-md bg-white/5 hover:bg-[#229ed9] hover:text-white flex items-center justify-center transition-all duration-200"
             title="Telegram"
           >
             <TelegramIcon className="w-3.5 h-3.5" />
@@ -654,7 +654,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
             href="https://matrix.to/#/#negronn-show:matrix.org"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-7 h-7 rounded-full bg-[#252526] hover:bg-[var(--linkC,#9aa0a6)] hover:text-black flex items-center justify-center transition-all duration-200"
+            className="w-6 h-6 rounded-md bg-white/5 hover:bg-[var(--linkC,#9aa0a6)] hover:text-black flex items-center justify-center transition-all duration-200"
             title="Element.io / Matrix: @negronn:matrix.org"
           >
             <MatrixIcon className="w-3.5 h-3.5" />
@@ -665,7 +665,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
             href="https://vk.com/negronn"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-7 h-7 rounded-full bg-[#252526] hover:bg-[#4680c2] hover:text-white flex items-center justify-center transition-all duration-200"
+            className="w-6 h-6 rounded-md bg-white/5 hover:bg-[#4680c2] hover:text-white flex items-center justify-center transition-all duration-200"
             title="VK (VKontakte)"
           >
             <VkIcon className="w-3.5 h-3.5" />
@@ -674,7 +674,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
           {/* 5. E-posta */}
           <a
             href="mailto:mrstar14155@gmail.com"
-            className="w-7 h-7 rounded-full bg-[#252526] hover:bg-[#ea4335] hover:text-white flex items-center justify-center transition-all duration-200"
+            className="w-6 h-6 rounded-md bg-white/5 hover:bg-[#ea4335] hover:text-white flex items-center justify-center transition-all duration-200"
             title="E-posta: mrstar14155@gmail.com"
           >
             <MailIcon className="w-3.5 h-3.5" />
@@ -683,7 +683,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
           {/* 6. Whatsapp / Telefon */}
           <a
             href="tel:05446412904"
-            className="w-7 h-7 rounded-full bg-[#252526] hover:bg-[#25d366] hover:text-white flex items-center justify-center transition-all duration-200"
+            className="w-6 h-6 rounded-md bg-white/5 hover:bg-[#25d366] hover:text-white flex items-center justify-center transition-all duration-200"
             title="Telefon / Whatsapp: 0544 641 29 04"
           >
             <WhatsappIcon className="w-3.5 h-3.5" />

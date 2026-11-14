@@ -455,16 +455,16 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
             </div>
           </div>
 
-          <div className="mSoc flex items-center justify-between text-[#a3a3a3] px-1 gap-1">
+          <div className="mSoc bg-[#252526]/80 border border-white/10 rounded-lg p-1.5 flex items-center justify-between text-[#a3a3a3] gap-1 shadow-sm">
             {/* 1. Instagram */}
             <a
               href="https://www.instagram.com/aleyul.ala/"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-8 h-8 rounded-full bg-[#252526] hover:bg-[#e1306c] hover:text-white flex items-center justify-center transition-all duration-200"
+              className="w-7 h-7 rounded-md bg-white/5 hover:bg-[#e1306c] hover:text-white flex items-center justify-center transition-all duration-200"
               title="Instagram: @aleyul.ala"
             >
-              <InstagramIcon className="w-[18px] h-[18px] shrink-0 opacity-80" />
+              <InstagramIcon className="w-4 h-4 shrink-0 opacity-80" />
             </a>
 
             {/* 2. Telegram */}
@@ -472,10 +472,10 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
               href="https://t.me/aleyyulala"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-8 h-8 rounded-full bg-[#252526] hover:bg-[#229ed9] hover:text-white flex items-center justify-center transition-all duration-200"
+              className="w-7 h-7 rounded-md bg-white/5 hover:bg-[#229ed9] hover:text-white flex items-center justify-center transition-all duration-200"
               title="Telegram: @aleyyulala"
             >
-              <TelegramIcon className="w-[18px] h-[18px] shrink-0 opacity-80" />
+              <TelegramIcon className="w-4 h-4 shrink-0 opacity-80" />
             </a>
 
             {/* 3. TikTok (Facebook yerine 3. sıraya alındı) */}
@@ -483,10 +483,10 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
               href="https://www.tiktok.com/@Aleyyu.Ala"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-8 h-8 rounded-full bg-[#252526] hover:bg-black hover:text-[#25f4ee] flex items-center justify-center transition-all duration-200"
+              className="w-7 h-7 rounded-md bg-white/5 hover:bg-black hover:text-[#25f4ee] flex items-center justify-center transition-all duration-200"
               title="TikTok: @Aleyyu.Ala"
             >
-              <TiktokIcon className="w-[18px] h-[18px] shrink-0 opacity-80" />
+              <TiktokIcon className="w-4 h-4 shrink-0 opacity-80" />
             </a>
 
             {/* 4. Element.io / Matrix */}
@@ -494,10 +494,10 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
               href="https://matrix.to/#/#negronn-show:matrix.org"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-8 h-8 rounded-full bg-[#252526] hover:bg-[var(--linkC,#9aa0a6)] hover:text-black flex items-center justify-center transition-all duration-200"
+              className="w-7 h-7 rounded-md bg-white/5 hover:bg-[var(--linkC,#9aa0a6)] hover:text-black flex items-center justify-center transition-all duration-200"
               title="Element.io / Matrix: @negronn:matrix.org"
             >
-              <MatrixIcon className="w-[18px] h-[18px] shrink-0 opacity-80" />
+              <MatrixIcon className="w-4 h-4 shrink-0 opacity-80" />
             </a>
 
             {/* 5. VKontakte */}
@@ -505,19 +505,19 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
               href="https://vk.com/negronn"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-8 h-8 rounded-full bg-[#252526] hover:bg-[#4680c2] hover:text-white flex items-center justify-center transition-all duration-200"
+              className="w-7 h-7 rounded-md bg-white/5 hover:bg-[#4680c2] hover:text-white flex items-center justify-center transition-all duration-200"
               title="VK (VKontakte)"
             >
-              <VkIcon className="w-[18px] h-[18px] shrink-0 opacity-80" />
+              <VkIcon className="w-4 h-4 shrink-0 opacity-80" />
             </a>
 
             {/* 6. E-posta */}
             <a
               href="mailto:mrstar14155@gmail.com"
-              className="w-8 h-8 rounded-full bg-[#252526] hover:bg-[#ea4335] hover:text-white flex items-center justify-center transition-all duration-200"
+              className="w-7 h-7 rounded-md bg-white/5 hover:bg-[#ea4335] hover:text-white flex items-center justify-center transition-all duration-200"
               title="E-posta: mrstar14155@gmail.com"
             >
-              <MailIcon className="w-[18px] h-[18px] shrink-0 opacity-80" />
+              <MailIcon className="w-4 h-4 shrink-0 opacity-80" />
             </a>
 
             {/* 7. Google Chat (Resmi Apps Script Odası) */}
@@ -525,19 +525,19 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
               href="https://script.google.com/macros/s/AKfycbwcZprdS6F_jJ6nin0YalTKweQKP4t936UgrTnme-d5gA-qHbi986vh6HxdzvA236Of/exec"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-8 h-8 rounded-full bg-[#252526] hover:bg-[#00ac47] hover:text-white flex items-center justify-center transition-all duration-200"
+              className="w-7 h-7 rounded-md bg-white/5 hover:bg-[#00ac47] hover:text-white flex items-center justify-center transition-all duration-200"
               title="Google Chat Odasına Katıl"
             >
-              <GoogleChatIcon className="w-[18px] h-[18px] shrink-0 opacity-80" />
+              <GoogleChatIcon className="w-4 h-4 shrink-0 opacity-80" />
             </a>
 
             {/* 8. Whatsapp / Telefon */}
             <a
               href="tel:05446412904"
-              className="w-8 h-8 rounded-full bg-[#252526] hover:bg-[#25d366] hover:text-white flex items-center justify-center transition-all duration-200"
+              className="w-7 h-7 rounded-md bg-white/5 hover:bg-[#25d366] hover:text-white flex items-center justify-center transition-all duration-200"
               title="Telefon / Whatsapp: 0544 641 29 04"
             >
-              <WhatsappIcon className="w-[18px] h-[18px] shrink-0 opacity-80" />
+              <WhatsappIcon className="w-4 h-4 shrink-0 opacity-80" />
             </a>
           </div>
 
