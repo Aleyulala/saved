@@ -306,10 +306,10 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
           aria-label="Ana Sayfa"
         >
           {/* Typographic Wordmark (Yazı Logo — NESCİONE) */}
-          <span className="font-sans font-extrabold text-[15px] sm:text-[16px] tracking-[0.22em] uppercase text-[#202124] dark:text-[#fffdfc] group-hover:text-[var(--linkC,#9aa0a6)] transition-colors duration-300 leading-none">
+          <span className="font-sans font-extrabold text-[15px] sm:text-[16px] tracking-[0.22em] uppercase text-white group-hover:text-[var(--linkC,#9aa0a6)] transition-colors duration-300 leading-none">
             NESCİONE
           </span>
-          <span className="inline-flex items-center justify-center ml-2.5 text-[#202124] dark:text-[#fffdfc] group-hover:text-[var(--linkC,#9aa0a6)] transition-colors duration-300 shrink-0 leading-none" aria-hidden="true">
+          <span className="inline-flex items-center justify-center ml-2.5 text-white group-hover:text-[var(--linkC,#9aa0a6)] transition-colors duration-300 shrink-0 leading-none" aria-hidden="true">
             <svg className="w-[14px] h-[14px] text-current stroke-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ shapeRendering: 'geometricPrecision' }}>
               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
             </svg>
