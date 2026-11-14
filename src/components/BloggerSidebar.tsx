@@ -60,6 +60,14 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
   const [hizmetlerOpen, setHizmetlerOpen] = useState(false);
   const [klasorOpen, setKlasorOpen] = useState(false);
   const [gelistiriciOpen, setGelistiriciOpen] = useState(false);
+  const [footerSlideIndex, setFooterSlideIndex] = useState(0);
+
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setFooterSlideIndex(prev => (prev + 1) % 3);
+    }, 4500);
+    return () => clearInterval(timer);
+  }, []);
 
   // 1. ÇEKMECE KAPALIYKEN: Daraltılmış 75px Mini Bar (negron.xml 1:1 Masaüstü Rail Modu)
   if (isCollapsed) {
@@ -185,20 +193,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                   </span>
                   <span className="text-[10px] text-[#9ca3af] font-mono">{counts.all}</span>
                 </button>
-                {/* 2. Politikalar */}
-                <button
-                  onClick={() => onSelectTab('privacy')}
-                  className={`w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs transition-colors cursor-pointer ${
-                    currentTab === 'privacy' ? 'bg-[#1e1e1e] text-[var(--linkC,#9aa0a6)] font-bold' : 'text-[#d4d4d4] hover:bg-[#1e1e1e] hover:text-[var(--linkC,#9aa0a6)]'
-                  }`}
-                >
-                  <span className="flex items-center gap-2">
-                    <Verify1Icon className="w-[18px] h-[18px] opacity-80 text-[#9ca3af]" />
-                    Politikalar
-                  </span>
-                  <span className="text-[10px] text-[#9ca3af] font-mono">Yasal</span>
-                </button>
-                {/* 3. Geri Bildirim */}
+                {/* 2. Geri Bildirim */}
                 <a
                   href="https://github.com/Aleyulala/saved/discussions/?pli=1"
                   target="_blank"
@@ -427,25 +422,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                   </button>
                 </li>
 
-                {/* 2. Politikalar (svg.verify-1) */}
-                <li>
-                  <button
-                    onClick={() => onSelectTab('privacy')}
-                    className={`w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs transition-colors cursor-pointer ${
-                      currentTab === 'privacy'
-                        ? 'bg-[#252526] text-[var(--linkC,#9aa0a6)] font-bold'
-                        : 'text-[#d4d4d4] hover:bg-[#252526] hover:text-[var(--linkC,#9aa0a6)]'
-                    }`}
-                  >
-                    <div className="flex items-center gap-2">
-                      <Verify1Icon className="w-4 h-4 opacity-80 text-[#9ca3af]" />
-                      <span>Politikalar</span>
-                    </div>
-                    <span className="text-[10px] text-[#9ca3af] font-mono">Yasal</span>
-                  </button>
-                </li>
-
-                {/* 3. Geri Bildirim (svg.sms-edit) */}
+                {/* 2. Geri Bildirim (svg.sms-edit) */}
                 <li>
                   <a
                     href="https://github.com/Aleyulala/saved/discussions/?pli=1"
@@ -538,16 +515,114 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
         </ul>
       </div>
 
-      {/* Alt Bölüm (.mnMob): E-posta (.PageList02) + 6 Sosyal Ağ Butonu (.LinkList04 / .mSoc) */}
+      {/* Alt Bölüm (.mnMob): E-posta, Gizlilik ve Yorumlar Slaytı (.PageList02) + 6 Sosyal Buton (.LinkList04 / .mSoc) */}
       <div className="p-3 border-t border-[#252526] bg-[#1e1e1e] space-y-2.5">
-        {/* PageList02: E-posta */}
-        <div className="text-center">
-          <a
-            href="mailto:mrstar14155@gmail.com"
-            className="text-[11px] text-[#989b9f] hover:text-[var(--linkC,#9aa0a6)] transition-colors font-mono tracking-wider"
+        {/* PageList02: E-posta, Gizlilik ve Yorumlar Kayan Slider + [+] Butonu */}
+        <div className="relative h-8 bg-[#252526]/80 border border-white/10 rounded-lg overflow-hidden flex items-center">
+          {/* Slayt 0: E-posta */}
+          <div
+            className={`absolute inset-0 flex items-center justify-between px-2.5 transition-all duration-300 ease-in-out ${
+              footerSlideIndex === 0
+                ? 'opacity-100 translate-x-0 pointer-events-auto'
+                : 'opacity-0 -translate-x-full pointer-events-none'
+            }`}
           >
-            ────Epostaৎ────
-          </a>
+            <a
+              href="mailto:mrstar14155@gmail.com"
+              className="flex items-center gap-2 text-xs text-[#e5e5e5] hover:text-[var(--linkC,#9aa0a6)] font-semibold transition-colors"
+              title="E-posta: mrstar14155@gmail.com"
+            >
+              <div className="relative flex items-center justify-center">
+                <MailIcon className="w-3.5 h-3.5 text-[#ea4335] shrink-0" />
+                {/* Parlayan Canlı Bildirim Noktası (.nt glow) */}
+                <span className="absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#ffffff] animate-pulse" />
+              </div>
+              <span className="tracking-wide">E-posta</span>
+            </a>
+            <button
+              type="button"
+              onClick={() => setFooterSlideIndex(1)}
+              className="w-5 h-5 rounded flex items-center justify-center text-[#9ca3af] hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+              title="Sonraki: Gizlilik Politikası"
+              aria-label="Gizlilik Politikasına Geç"
+            >
+              <svg viewBox="0 0 24 24" className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Slayt 1: Gizlilik Politikası */}
+          <div
+            className={`absolute inset-0 flex items-center justify-between px-2.5 transition-all duration-300 ease-in-out ${
+              footerSlideIndex === 1
+                ? 'opacity-100 translate-x-0 pointer-events-auto'
+                : footerSlideIndex === 0
+                ? 'opacity-0 translate-x-full pointer-events-none'
+                : 'opacity-0 -translate-x-full pointer-events-none'
+            }`}
+          >
+            <button
+              type="button"
+              onClick={() => onSelectTab('privacy')}
+              className="flex items-center gap-2 text-xs text-[#e5e5e5] hover:text-[var(--linkC,#9aa0a6)] font-semibold transition-colors cursor-pointer"
+              title="Gizlilik Politikası & Şartlar"
+            >
+              <div className="relative flex items-center justify-center">
+                <Verify1Icon className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                <span className="absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#ffffff] animate-pulse" />
+              </div>
+              <span className="tracking-wide">Gizlilik</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setFooterSlideIndex(2)}
+              className="w-5 h-5 rounded flex items-center justify-center text-[#9ca3af] hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+              title="Sonraki: Yorumlar"
+              aria-label="Yorumlara Geç"
+            >
+              <svg viewBox="0 0 24 24" className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Slayt 2: Yorumlar / Muhabbet Odası */}
+          <div
+            className={`absolute inset-0 flex items-center justify-between px-2.5 transition-all duration-300 ease-in-out ${
+              footerSlideIndex === 2
+                ? 'opacity-100 translate-x-0 pointer-events-auto'
+                : 'opacity-0 translate-x-full pointer-events-none'
+            }`}
+          >
+            <a
+              href="https://negronshow.blogspot.com/p/muhabbet.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-xs text-[#e5e5e5] hover:text-[var(--linkC,#9aa0a6)] font-semibold transition-colors"
+              title="Muhabbet Odası & Yorumlar"
+            >
+              <div className="relative flex items-center justify-center">
+                <MessageNotif1Icon className="w-3.5 h-3.5 text-[var(--linkC,#9aa0a6)] shrink-0" />
+                <span className="absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#ffffff] animate-pulse" />
+              </div>
+              <span className="tracking-wide">Yorumlar</span>
+            </a>
+            <button
+              type="button"
+              onClick={() => setFooterSlideIndex(0)}
+              className="w-5 h-5 rounded flex items-center justify-center text-[#9ca3af] hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+              title="Başa Dön: E-posta"
+              aria-label="E-postaya Geç"
+            >
+              <svg viewBox="0 0 24 24" className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
+            </button>
+          </div>
         </div>
 
         {/* LinkList04: .mSoc 6 Sosyal Buton */}
