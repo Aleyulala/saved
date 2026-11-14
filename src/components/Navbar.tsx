@@ -29,6 +29,8 @@ interface NavbarProps {
   isDarkMode: boolean;
   onToggleDarkMode: () => void;
   totalLinksCount: number;
+  showLogo?: boolean;
+  logoToggle?: boolean;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -44,14 +46,16 @@ export const Navbar: React.FC<NavbarProps> = ({
   onToggleSidebar,
   isDarkMode,
   onToggleDarkMode,
-  totalLinksCount
+  totalLinksCount,
+  showLogo = true,
+  logoToggle = false
 }) => {
   return (
     <header className="sticky top-0 z-30 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 gap-4">
-          
-          {/* Sol: Logo ve Mobil Menü Butonu */}
+{/* Sol: Logo ve Mobil Menü Butonu */}
+          {showLogo && (
           <div className="flex items-center gap-3">
             <button
               onClick={onToggleSidebar}
@@ -61,25 +65,32 @@ export const Navbar: React.FC<NavbarProps> = ({
               <Menu className="w-5 h-5" />
             </button>
 
-            <div className="flex items-center gap-2.5 cursor-pointer">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20">
-                <Bookmark className="w-5 h-5 fill-current" />
-              </div>
-              <div className="flex flex-col">
-                <div className="flex items-center gap-2">
-                  <span className="text-xl font-bold tracking-tight bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-900 dark:from-white dark:via-blue-200 dark:to-indigo-200 bg-clip-text text-transparent">
-                    saved
-                  </span>
-                  <span className="text-[10px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded-full bg-blue-100 dark:bg-blue-950/80 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
-                    GPL 3.0
+            {logoToggle ? (
+              <span className="text-xl font-bold tracking-tight bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-900 dark:from-white dark:via-blue-200 dark:to-indigo-200 bg-clip-text text-transparent">
+                NESCİONE
+              </span>
+            ) : (
+              <div className="flex items-center gap-2.5 cursor-pointer">
+                <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20">
+                  <Bookmark className="w-5 h-5 fill-current" />
+                </div>
+                <div className="flex flex-col">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xl font-bold tracking-tight bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-900 dark:from-white dark:via-blue-200 dark:to-indigo-200 bg-clip-text text-transparent">
+                      NESCİONE
+                    </span>
+                    <span className="text-[10px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded-full bg-blue-100 dark:bg-blue-950/80 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
+                      GPL 3.0
+                    </span>
+                  </div>
+                  <span className="text-[10px] text-slate-500 dark:text-slate-400 hidden sm:inline -mt-1">
+                    Yerel & Açık Kaynak
                   </span>
                 </div>
-                <span className="text-[10px] text-slate-500 dark:text-slate-400 hidden sm:inline -mt-1">
-                  Yerel & Açık Kaynak
-                </span>
               </div>
-            </div>
+            )}
           </div>
+          )}
 
           {/* Orta: Arama Çubuğu */}
           <div className="flex-1 max-w-xl mx-2">

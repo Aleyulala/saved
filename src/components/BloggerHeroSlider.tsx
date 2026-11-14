@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { CollectionItem } from '../types';
 import { TagBloggerIcon } from './BloggerIcons';
+import { MediaItem } from './UniversalMediaModal';
 
 export interface BloggerSlide {
   id: string;
@@ -15,104 +16,273 @@ export interface BloggerSlide {
 
 export const BLOGGER_SLIDES: BloggerSlide[] = [
   {
-    id: 'Image07',
-    title: 'Programlama',
-    subtitle: 'Programming, Kodlama, Geliştirici Araçları ve Algoritmalar',
-    note: '*Küratörlü kod ve programlama kaynakları',
-    category: 'Programlama',
-    collectionName: 'Programlama',
-    imageUrl: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1920&q=85'
+    id: 'Image01',
+    title: 'Sinema',
+    subtitle: 'Video',
+    note: '*Seçkin video kanalları ve oynatma listeleri',
+    category: 'videolar',
+    collectionName: 'Medya',
+    imageUrl: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/videolar'
+  },
+  {
+    id: 'Image02',
+    title: 'NSONE',
+    subtitle: 'Keşif',
+    note: '*Ali Yıldız & Nsone Resmi Bilgi ve Dijital Arşiv Merkezi',
+    category: 'öneri',
+    collectionName: 'Genel',
+    imageUrl: 'https://images.unsplash.com/photo-1508739773434-c26b3d09e071?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/%C3%B6neri'
   },
   {
     id: 'Image03',
     title: 'Oyun',
-    subtitle: 'Gaming, Oyun Rehberleri, İpuçları ve Emülasyon',
+    subtitle: 'Eğlence',
     note: '*Oyun arşivleri ve kaynak bağlantıları',
     category: 'Oyun',
     collectionName: 'Oyun',
-    imageUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1920&q=85'
+    imageUrl: 'https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/oyun'
   },
   {
     id: 'Image04',
-    title: 'Bilgisayar',
-    subtitle: 'Sistem Yardımcıları, Donanım, Bulut ve Masaüstü Yazılımları',
+    title: 'Sistem',
+    subtitle: 'Terminal',
     note: '*Masaüstü ve sistem araçları deposu',
     category: 'Bilgisayar',
     collectionName: 'Araçlar',
-    imageUrl: 'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=1920&q=85'
+    imageUrl: 'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/bilgisayar'
   },
   {
     id: 'Image05',
-    title: 'Teknoloji',
-    subtitle: 'Yapay Zeka, Gelecek Trendleri, LLM Modelleri ve API’ler',
+    title: 'YapayZeka',
+    subtitle: 'İnovasyon',
     note: '*Yapay zeka ve teknoloji yer imleri',
     category: 'Teknoloji',
     collectionName: 'AI',
-    imageUrl: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1920&q=85'
+    imageUrl: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/teknoloji'
   },
   {
     id: 'Image06',
-    title: 'Telefon',
-    subtitle: 'Mobil Ekosistem, Android & iOS Uygulamaları ve Tweaks',
+    title: 'Mobil',
+    subtitle: 'Android',
     note: '*Mobil platform rehberleri',
     category: 'Telefon',
     collectionName: 'Web Uygulamaları',
-    imageUrl: 'https://images.unsplash.com/photo-1556656793-08538906a9f8?auto=format&fit=crop&w=1920&q=85'
+    imageUrl: 'https://images.unsplash.com/photo-1556656793-08538906a9f8?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/telefon'
   },
   {
-    id: 'Image02',
-    title: 'Videolar',
-    subtitle: 'Medya, YouTube Kanalları, Sinema ve Görsel Sanatlar',
-    note: '*Seçkin video kanalları ve oynatma listeleri',
-    category: 'Videolar',
-    collectionName: 'Medya',
-    imageUrl: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1920&q=85'
-  },
-  {
-    id: 'Image01',
-    title: 'Konu Dışı',
-    subtitle: 'Günlük Yaşam, Verimlilik, Okumalar ve Düşünceler',
-    note: '*Günlük rutin ve yaşam bağlantıları',
-    category: 'Konu Dışı',
-    collectionName: 'Routine',
-    imageUrl: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=85'
+    id: 'Image07',
+    title: 'Kod',
+    subtitle: 'Yazılım',
+    note: '*Küratörlü kod ve programlama kaynakları',
+    category: 'Programlama',
+    collectionName: 'Programlama',
+    imageUrl: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/programlama'
   },
   {
     id: 'Image08',
-    title: 'Televizyon',
-    subtitle: 'Smart TV, Yayın Servisleri, Ekran ve Ev Sinema Sistemleri',
+    title: 'Medya',
+    subtitle: 'Televizyon',
     note: '*Televizyon ve ev eğlence teknolojileri',
     category: 'Televizyon',
     collectionName: 'Medya',
-    imageUrl: 'https://images.unsplash.com/photo-1461151304267-38535e780c79?auto=format&fit=crop&w=1920&q=85'
+    imageUrl: 'https://images.unsplash.com/photo-1461151304267-38535e780c79?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/televizyon'
   },
   {
     id: 'Image09',
-    title: 'Sanat',
-    subtitle: 'Tasarım, UI/UX, Yaratıcı Varlıklar ve Dijital Görsel Estetik',
+    title: 'Tasarım',
+    subtitle: 'Sanat',
     note: '*Dijital sanat ve estetik portfolyolar',
     category: 'Sanat',
     collectionName: 'Genel',
-    imageUrl: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=1920&q=85'
+    imageUrl: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/sanat'
   },
   {
     id: 'Image10',
-    title: 'Ticaret',
-    subtitle: 'E-Ticaret, Finansal Veriler, Pazaryeri ve Analizler',
+    title: 'Finans',
+    subtitle: 'Ekonomi',
     note: '*Finans ve e-ticaret araçları',
     category: 'Ticaret',
     collectionName: 'Alışveriş',
-    imageUrl: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1920&q=85'
+    imageUrl: 'https://images.unsplash.com/photo-1642543492481-44e81e3914a7?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/ticaret'
+  },
+  {
+    id: 'Image11',
+    title: 'Güvenlik',
+    subtitle: 'Kripto',
+    note: '*Güvenlik ve gizlilik rehberleri',
+    category: 'Güvenlik',
+    collectionName: 'Araçlar',
+    imageUrl: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/bilgisayar'
+  },
+  {
+    id: 'Image12',
+    title: 'Linux',
+    subtitle: 'Çekirdek',
+    note: '*Açık kaynak yazılım deposu',
+    category: 'Linux',
+    collectionName: 'Programlama',
+    imageUrl: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/bilgisayar'
+  },
+  {
+    id: 'Image13',
+    title: 'Bilim',
+    subtitle: 'Uzay',
+    note: '*Bilim ve evren kütüphanesi',
+    category: 'Bilim',
+    collectionName: 'Genel',
+    imageUrl: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/teknoloji'
+  },
+  {
+    id: 'Image14',
+    title: 'Müzik',
+    subtitle: 'Akustik',
+    note: '*Müzik ve ses prodüksiyon araçları',
+    category: 'Müzik',
+    collectionName: 'Medya',
+    imageUrl: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/videolar'
+  },
+  {
+    id: 'Image15',
+    title: 'Sinema',
+    subtitle: 'Kamera',
+    note: '*Sinema ve kamera rehberleri',
+    category: 'Sinema',
+    collectionName: 'Medya',
+    imageUrl: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/videolar'
+  },
+  {
+    id: 'Image16',
+    title: 'Donanım',
+    subtitle: 'İşlemci',
+    note: '*Donanım mimarisi ve işlemciler',
+    category: 'Donanım',
+    collectionName: 'Araçlar',
+    imageUrl: 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/bilgisayar'
+  },
+  {
+    id: 'Image17',
+    title: 'VR',
+    subtitle: 'Simülasyon',
+    note: '*Sanal gerçeklik ve 3D teknolojileri',
+    category: 'VR',
+    collectionName: 'AI',
+    imageUrl: 'https://images.unsplash.com/photo-1593508512255-86ab42a8e620?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/teknoloji'
+  },
+  {
+    id: 'Image18',
+    title: 'Espor',
+    subtitle: 'Turnuva',
+    note: '*E-spor ve rekabetçi oyun kaynakları',
+    category: 'Espor',
+    collectionName: 'Oyun',
+    imageUrl: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/oyun'
+  },
+  {
+    id: 'Image19',
+    title: 'Robotik',
+    subtitle: 'Otomasyon',
+    note: '*Robotik ve otonom sistemler',
+    category: 'Robotik',
+    collectionName: 'Teknoloji',
+    imageUrl: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/teknoloji'
+  },
+  {
+    id: 'Image20',
+    title: 'Doğa',
+    subtitle: 'Manzara',
+    note: '*Doğa ve çevre belgeselleri',
+    category: 'Doğa',
+    collectionName: 'Genel',
+    imageUrl: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/genel'
+  },
+  {
+    id: 'Image21',
+    title: 'Şehir',
+    subtitle: 'Neon',
+    note: '*Şehir estetiği ve mimari fotoğraflar',
+    category: 'Metropol',
+    collectionName: 'Genel',
+    imageUrl: 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/genel'
+  },
+  {
+    id: 'Image22',
+    title: 'Rutin',
+    subtitle: 'Odak',
+    note: '*Üretkenlik ve çalışma alışkanlıkları',
+    category: 'Rutin',
+    collectionName: 'Rutin',
+    imageUrl: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/rutin'
+  },
+  {
+    id: 'Image23',
+    title: 'Arşiv',
+    subtitle: 'Kütüphane',
+    note: '*Akademi ve dijital kütüphaneler',
+    category: 'Eğitim',
+    collectionName: 'Eğitim',
+    imageUrl: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/egitim'
+  },
+  {
+    id: 'Image24',
+    title: 'Metropol',
+    subtitle: 'Mimari',
+    note: '*Modern dünya ve şehir portreleri',
+    category: 'Kentsel',
+    collectionName: 'Genel',
+    imageUrl: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/genel'
+  },
+  {
+    id: 'Image25',
+    title: 'Retro',
+    subtitle: 'Nostalji',
+    note: '*Retro teknoloji ve nostalji köşesi',
+    category: 'Retro',
+    collectionName: 'Oyun',
+    imageUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1920&q=85',
+    link: 'https://negronshow.blogspot.com/search/label/oyun'
   }
 ];
 
 const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1920&q=85';
 
+
+// Tek kelimeye indirgeme yardımcısı
+const toSingleWord = (str?: string): string => {
+  if (!str) return '';
+  const cleaned = str.replace(/&amp;/g, '').replace(/&/g, '').trim();
+  const words = cleaned.split(/\s+/).filter(Boolean);
+  return words[0] ? words[0].replace(/[,.;:!?]/g, '') : '';
+};
+
 interface BloggerHeroSliderProps {
   collections?: CollectionItem[];
   onSelectCollection?: (id: number) => void;
   onFilterTag?: (tag: string) => void;
-  onOpenMedia?: (slide: BloggerSlide) => void;
+  onOpenMedia?: (items: MediaItem[], initialIndex?: number) => void;
 }
 
 export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
@@ -123,8 +293,11 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  // Blogger .sld-car-nav (updateHeroNav) 1:1: aktif çizgi butonu gezinme YÖNÜNÜ gösterir
+  const [navDir, setNavDir] = useState<1 | -1>(1);
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
+  const didDrag = useRef(false);
 
   const activeSlide = BLOGGER_SLIDES[currentIndex];
 
@@ -134,6 +307,7 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
 
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % BLOGGER_SLIDES.length);
+      setNavDir(1);
     }, 6000);
 
     return () => clearInterval(timer);
@@ -141,11 +315,13 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
 
   const handlePrev = (e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
+    setNavDir(-1);
     setCurrentIndex((prev) => (prev - 1 + BLOGGER_SLIDES.length) % BLOGGER_SLIDES.length);
   };
 
   const handleNext = (e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
+    setNavDir(1);
     setCurrentIndex((prev) => (prev + 1) % BLOGGER_SLIDES.length);
   };
 
@@ -153,10 +329,14 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
     touchEndX.current = null;
+    didDrag.current = false;
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
     touchEndX.current = e.touches[0].clientX;
+    if (touchStartX.current !== null && Math.abs(touchStartX.current - touchEndX.current) > 10) {
+      didDrag.current = true;
+    }
   };
 
   const handleTouchEnd = () => {
@@ -181,11 +361,15 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
   const handleMouseDown = (e: React.MouseEvent) => {
     isMouseDown.current = true;
     mouseStartX.current = e.clientX;
+    didDrag.current = false;
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!isMouseDown.current || mouseStartX.current === null) return;
     const diff = mouseStartX.current - e.clientX;
+    if (Math.abs(diff) > 10) {
+      didDrag.current = true;
+    }
     if (Math.abs(diff) > 45) {
       if (diff > 0) handleNext();
       else handlePrev();
@@ -197,6 +381,22 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
   const handleMouseUp = () => {
     isMouseDown.current = false;
     mouseStartX.current = null;
+  };
+
+  const handleOpenViewer = (index: number) => {
+    if (onOpenMedia) {
+      const items: MediaItem[] = BLOGGER_SLIDES.map((s) => ({
+        type: 'image',
+        url: s.imageUrl,
+        title: s.title
+      }));
+      onOpenMedia(items, index);
+    }
+  };
+
+  const handleSlideClick = (index: number) => {
+    if (didDrag.current) return;
+    handleOpenViewer(index);
   };
 
   // Navigate to category/collection on click
@@ -219,7 +419,7 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
   return (
     <div className="w-full relative select-none">
       <div 
-        className="relative w-full overflow-hidden rounded-lg bg-[#18181b] shadow-md group aspect-[16/9] sm:aspect-[21/9] md:aspect-[2.4/1] cursor-grab active:cursor-grabbing touch-pan-y"
+        className="relative w-full overflow-hidden rounded-[14px] bg-[#000000] shadow-lg group aspect-video cursor-pointer touch-pan-y"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => {
           setIsPaused(false);
@@ -231,6 +431,7 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
+        onClick={() => handleSlideClick(currentIndex)}
       >
         {/* Slides list */}
         {BLOGGER_SLIDES.map((slide, idx) => {
@@ -246,7 +447,7 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
               <img
                 src={slide.imageUrl}
                 alt={slide.title}
-                className="w-full h-full object-cover object-center transform scale-100 transition-transform duration-1000 ease-out"
+                className="w-full h-full object-cover object-center transform scale-100 group-hover:scale-102 transition-transform duration-700 ease-out"
                 loading={idx === 0 ? 'eager' : 'lazy'}
                 draggable={false}
                 onError={(e) => {
@@ -264,40 +465,56 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
           );
         })}
 
-        {/* Bottom-Left: Blogger Category Badge (.sldT - e.g. "◎ Programlama") */}
-        <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 z-20">
+        {/* Top-Right: Fullscreen / Zoom Lightbox Action Button (.zmVideoBtn 1:1 Blogger) */}
+        <div className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
           <button
-            onClick={(e) => handleCategoryClick(e, activeSlide)}
-            className="group/badge inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/70 hover:bg-black/90 backdrop-blur-md text-white text-xs sm:text-sm font-medium transition-all duration-200 active:scale-95 shadow-lg cursor-pointer"
-            title={`${activeSlide.category} kategorisine git`}
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleOpenViewer(currentIndex);
+            }}
+            className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-[rgba(28,30,38,0.78)] hover:bg-[#333333] border border-white/10 text-white flex items-center justify-center transition-all duration-200 active:scale-95 shadow-md backdrop-blur-md cursor-pointer"
+            title="Tam Ekran Vitrini"
+            aria-label="Tam Ekran Vitrini"
           >
-            <TagBloggerIcon className="w-3.5 h-3.5 text-[#60cdff]" />
-            <span className="tracking-wide">
-              {activeSlide.category}
-            </span>
+            <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+            </svg>
           </button>
         </div>
 
-        {/* Bottom-Center: Blogger Saved 2 Line Pills (.sld-car-nav) */}
+        {/* Bottom-Left: Blogger Slider Title & Subtitle (Tek Kelime - Screenshot 1:1) */}
+        <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-5 z-20 pointer-events-none text-left">
+          <h2 className="text-sm sm:text-base lg:text-lg font-bold text-white tracking-wide drop-shadow-md">
+            {toSingleWord(activeSlide.title)}
+          </h2>
+          {activeSlide.subtitle && (
+            <p className="text-[11px] sm:text-xs text-white/80 mt-0.5 max-w-md line-clamp-1 drop-shadow">
+              {toSingleWord(activeSlide.subtitle)}
+            </p>
+          )}
+        </div>
+
+        {/* Bottom-Center: Blogger Saved 2 Line Pills (.sld-car-nav) — aktif çizgi YÖNÜ gösterir (Blogger 1:1) */}
         <div className="absolute bottom-3.5 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
-          {/* Sol Çizgi Buton */}
+          {/* Sol Çizgi Buton (car-prev) */}
           <button
             onClick={handlePrev}
             className={`h-2 rounded-full transition-all duration-300 shadow-md backdrop-blur-md cursor-pointer ${
-              currentIndex % 2 === 0
-                ? 'w-7 sm:w-8 bg-white/40 hover:bg-white/60'
-                : 'w-9 sm:w-10 bg-[#60cdff] shadow-[0_0_10px_rgba(96,205,255,0.6)]'
+              navDir === -1
+                ? 'w-9 bg-[var(--linkC,#9aa0a6)] shadow-[0_0_10px_var(--linkC,#9aa0a6)]'
+                : 'w-7 bg-white/40 hover:bg-white/60 hover:scale-110'
             }`}
             aria-label="Önceki Çizgi Buton"
             title="Önceki Slayt"
           />
-          {/* Sağ Çizgi Buton */}
+          {/* Sağ Çizgi Buton (car-next) */}
           <button
             onClick={handleNext}
             className={`h-2 rounded-full transition-all duration-300 shadow-md backdrop-blur-md cursor-pointer ${
-              currentIndex % 2 === 1
-                ? 'w-7 sm:w-8 bg-white/40 hover:bg-white/60'
-                : 'w-9 sm:w-10 bg-[#60cdff] shadow-[0_0_10px_rgba(96,205,255,0.6)]'
+              navDir === 1
+                ? 'w-9 bg-[var(--linkC,#9aa0a6)] shadow-[0_0_10px_var(--linkC,#9aa0a6)]'
+                : 'w-7 bg-white/40 hover:bg-white/60 hover:scale-110'
             }`}
             aria-label="Sonraki Çizgi Buton"
             title="Sonraki Slayt"

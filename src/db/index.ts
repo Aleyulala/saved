@@ -27,17 +27,27 @@ export class SavedDatabase extends Dexie {
 
 export const db = new SavedDatabase();
 
-const CURRENT_SEED_VERSION = 'saved-main-360-sites-v7';
+const CURRENT_SEED_VERSION = 'saved-blogger-nsone-v16-parity';
 
 export async function seedSavedMainData(force = false) {
+  // Quick safety check: Rename any existing 'Routine' records to 'Rutin'
+  try {
+    await db.collections.where('name').equals('Routine').modify({ name: 'Rutin' });
+    await db.tags.where('name').equals('routine').modify({ name: 'rutin' });
+  } catch {
+    // Ignore error if table not ready yet
+  }
+
   const collectionsCount = await db.collections.count();
   const dummyCol = await db.collections.where('name').equals('Research and Studies').first();
   const seedSetting = await db.settings.get('seed_version');
 
-  // Trigger migration if empty, if it still contains dummy collection, if force is requested, or if seed version not current
-  if (collectionsCount === 0 || dummyCol || force || !seedSetting || seedSetting.value !== CURRENT_SEED_VERSION) {
-    if (collectionsCount === 0 || dummyCol || force || collectionsCount < 14) {
-      await db.transaction('rw', db.links, db.collections, db.tags, db.settings, async () => {
+  // Full reseed when empty, dummy, forced, or when seed_version is upgraded to ensure 1:1 parity with Blogger
+  const needsFullSeed = collectionsCount === 0 || !!dummyCol || force || collectionsCount < 8 || !seedSetting || seedSetting.value !== CURRENT_SEED_VERSION;
+  const needsIncrementalSync = false;
+
+  if (needsFullSeed) {
+    await db.transaction('rw', db.links, db.collections, db.tags, db.settings, async () => {
         // Clear previous dummy data
         await db.links.clear();
         await db.collections.clear();
@@ -93,8 +103,8 @@ export async function seedSavedMainData(force = false) {
 
         await db.links.bulkAdd(linksToAdd);
         await db.settings.put({ key: 'seed_version', value: CURRENT_SEED_VERSION });
-      });
-    } else {
+    });
+  } else if (needsIncrementalSync) {
       // Incremental Sync: Add missing links without touching existing records
       await db.transaction('rw', db.links, db.collections, db.settings, async () => {
         const allCols = await db.collections.toArray();
@@ -130,8 +140,7 @@ export async function seedSavedMainData(force = false) {
           }
         }
         await db.settings.put({ key: 'seed_version', value: CURRENT_SEED_VERSION });
-      });
-    }
+    });
   }
 }
 
@@ -153,6 +162,33 @@ export async function initializeDatabase() {
         commentsCount: 4,
         authorName: 'NEGRONN',
         notes: 'Özgün Renk: #0ea5e9',
+        isPinned: false,
+        isArchived: false,
+        isRead: false,
+        isTrash: false,
+        createdAt: Date.now(),
+        updatedAt: Date.now()
+      });
+    }
+  } catch {
+    // ignore
+  }
+
+  // NoSignups.net kontrolü ve eklenmesi (Mevcut kullanıcı verilerini koruyarak garanti ekleme)
+  try {
+    const existingNosignups = await db.links.where('url').equals('https://nosignups.net/').or('url').equals('https://nosignups.net').first();
+    if (!existingNosignups) {
+      const araclarCol = await db.collections.where('name').equals('Araçlar').first();
+      await db.links.add({
+        url: 'https://nosignups.net/',
+        title: 'NoSignups',
+        description: 'NoSignups - Kayıt ve üyelik gerektirmeyen, doğrudan tarayıcıda çalışan açık kaynaklı web araçları ve servisler dizini.',
+        collectionId: araclarCol ? araclarCol.id! : null,
+        tags: ['araclar', 'tools', 'web'],
+        views: 220,
+        commentsCount: 4,
+        authorName: 'NEGRONN',
+        notes: 'Özgün Renk: #10b981',
         isPinned: false,
         isArchived: false,
         isRead: false,

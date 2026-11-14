@@ -1,39 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { 
-  ArrowLeft, 
-  ExternalLink, 
-  Star, 
-  Calendar, 
-  Globe, 
-  Folder, 
-  CheckCircle2, 
-  Edit2, 
-  Trash2, 
-  Copy, 
   Check, 
-  Share2, 
-  Clock, 
+  Copy, 
   ChevronLeft, 
   ChevronRight,
-  ShieldCheck,
-  FileText,
-  Rss
+  FileText
 } from 'lucide-react';
 import { CollectionItem, LinkItem } from '../types';
 import { formatDate, getDomain, getFaviconUrl } from '../utils/favicon';
 import { 
-  PulseIcon, 
   Verify1Icon, 
-  BloggerBIcon, 
-  TelegramIcon, 
-  InstagramIcon, 
-  MailIcon,
-  ArchiveAddIcon,
-  ArchiveTickIcon,
-  VkIcon,
-  MatrixIcon
+  ArchiveIcon,
+  ArchiveAddIcon, 
+  ArchiveTickIcon, 
+  EmojiHappyIcon, 
+  BloggerEyeIcon,
+  ChatBloggerIcon,
+  Share1Icon,
+  CloseIcon,
+  FacebookIcon,
+  WhatsappIcon,
+  TwitterIcon,
+  TelegramIcon,
+  MailIcon
 } from './BloggerIcons';
 import { MediaItem } from './UniversalMediaModal';
+import { getAuthorData } from '../utils/bloggerAuthors';
+import { extractPostMedia } from '../utils/mediaExtractor';
+import { LinkCard } from './LinkCard';
+import { BrandLogoCard } from './BrandLogoCard';
 
 interface BloggerPostViewProps {
   link: LinkItem;
@@ -46,7 +41,7 @@ interface BloggerPostViewProps {
   onToggleArchive: (id: number, current: boolean) => void;
   onMoveToTrash: (id: number) => void;
   onEdit: (link: LinkItem) => void;
-  onOpenMedia?: (items: MediaItem[]) => void;
+  onOpenMedia?: (items: MediaItem[], initialIndex?: number) => void;
 }
 
 export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
@@ -56,44 +51,53 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
   onBack,
   onNavigatePost,
   onTogglePin,
-  onToggleRead,
-  onToggleArchive,
-  onMoveToTrash,
-  onEdit,
   onOpenMedia
 }) => {
   const [copied, setCopied] = useState(false);
-  const domain = getDomain(link.url);
-  const faviconUrl = getFaviconUrl(link.url);
+  // Otomatik Medya ve Video Çıkarıcı (Extractor: Asla Central Cinema fallback kullanmaz)
+  const postMedia = useMemo(() => extractPostMedia(link), [link]);
+  const primaryImage = postMedia.primaryImage;
+  const mediaItems = postMedia.items;
+  const hasRealMedia = mediaItems.some((it: MediaItem) => !!it.url && it.url.trim().length > 0) || (!!primaryImage && primaryImage.trim().length > 0);
+  const [activeTab, setActiveTab] = useState<'medya' | 'yazi'>('medya');
+  const [selectedMediaIndex, setSelectedMediaIndex] = useState<number>(0);
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
-  const isYoutube = link.url.includes('youtube.com/watch') || link.url.includes('youtu.be') || link.url.includes('youtube.com/shorts');
-  const isShorts = link.url.includes('youtube.com/shorts');
-  const isDirectVideo = /\.(mp4|webm|ogg)$/i.test(link.url);
-  const hasThumbnail = Boolean(link.thumbnail);
-
-  const getYoutubeEmbed = (u: string) => {
-    try {
-      if (u.includes('youtube.com/shorts/')) {
-        const id = u.split('/shorts/')[1]?.split(/[?#&]/)[0];
-        return `https://www.youtube.com/embed/${id}`;
-      }
-      if (u.includes('watch?v=')) {
-        const id = new URL(u).searchParams.get('v');
-        return `https://www.youtube.com/embed/${id}`;
-      }
-      if (u.includes('youtu.be/')) {
-        const id = u.split('youtu.be/')[1]?.split(/[?#&]/)[0];
-        return `https://www.youtube.com/embed/${id}`;
-      }
-    } catch {}
-    return u;
-  };
-
-  // Find previous and next links for pagination (.aChp)
   const activeLinks = allLinks.filter(l => !l.isTrash && !l.isArchived);
   const currentIndex = activeLinks.findIndex(l => l.id === link.id);
-  const prevLink = currentIndex > 0 ? activeLinks[currentIndex - 1] : null;
-  const nextLink = currentIndex >= 0 && currentIndex < activeLinks.length - 1 ? activeLinks[currentIndex + 1] : null;
+  const prevLink = currentIndex > 0 ? activeLinks[currentIndex - 1] : (activeLinks.length > 1 ? activeLinks[1] : null);
+
+  const currentAuthor = getAuthorData(link.authorName || 'Ali');
+  const [authorImgError, setAuthorImgError] = useState(false);
+  const authorInitial = (currentAuthor.name || 'A').charAt(0).toUpperCase();
+
+  // Greeting
+  const GREETING_OPTIONS = ['Tatlı rüyalar!', 'Günaydın!', 'İyi günler!', 'İyi akşamlar!', 'İyi geceler!'];
+  const [greeting, setGreeting] = useState('Tatlı rüyalar!');
+  const handleToggleGreeting = () => {
+    setGreeting(prev => {
+      const idx = GREETING_OPTIONS.indexOf(prev);
+      return GREETING_OPTIONS[(idx + 1) % GREETING_OPTIONS.length];
+    });
+  };
+
+  // Ticker bar states
+  const otherPosts = allLinks.filter(l => l.id !== link.id && !l.isTrash);
+  const [tickerIndex, setTickerIndex] = useState(0);
+  const [isTickerVisible, setIsTickerVisible] = useState(true);
+  const currentTickerPost = otherPosts.length > 0 ? otherPosts[tickerIndex % otherPosts.length] : null;
+
+  const handleNextTicker = () => {
+    if (otherPosts.length > 0) {
+      setTickerIndex(prev => (prev + 1) % otherPosts.length);
+    }
+  };
+
+  const handlePrevTicker = () => {
+    if (otherPosts.length > 0) {
+      setTickerIndex(prev => (prev - 1 + otherPosts.length) % otherPosts.length);
+    }
+  };
 
   const handleCopy = () => {
     navigator.clipboard.writeText(link.url);
@@ -101,462 +105,567 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const shareUrl = encodeURIComponent(link.url);
+  const shareTitle = encodeURIComponent(link.title);
+
+  const currentMedia = mediaItems[selectedMediaIndex] || mediaItems[0] || (primaryImage ? { type: 'image' as const, url: primaryImage, title: link.title } : null);
+
+  useEffect(() => {
+    setActiveTab('medya');
+    setSelectedMediaIndex(0);
+  }, [link.id]);
+
+  // Benzer Yazılar: Önce aynı kategori/etikete sahip yazılar, yetmezse diğer aktif yazılar
+  const relatedPosts = useMemo(() => {
+    const others = activeLinks.filter(l => l.id !== link.id);
+    const primaryTag = link.tags && link.tags[0];
+    if (!primaryTag) return others.slice(0, 3);
+
+    const sameTag = others.filter(l => l.tags && l.tags.includes(primaryTag));
+    const differentTag = others.filter(l => !l.tags || !l.tags.includes(primaryTag));
+    return [...sameTag, ...differentTag].slice(0, 3);
+  }, [activeLinks, link.id, link.tags]);
+
   return (
-    <article className="space-y-6 max-w-[780px] mx-auto animate-in fade-in duration-200">
+    <article className="space-y-5 max-w-[840px] mx-auto animate-in fade-in duration-200 select-none pb-12">
       
-      {/* 1. Üst Kontrol & Ekmek Kırıntısı Barı (.brdCmb) */}
-      <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-white/5">
-        <div className="flex items-center gap-2 text-xs text-[#a1a1aa]">
-          <button
-            onClick={onBack}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#252526] hover:bg-[#333333] text-white border border-transparent transition-colors font-medium active:scale-95"
-          >
-            <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Geri Dön</span>
-          </button>
+      {/* 1. Ticker Paneli (#ticker-wrapper - Screenshot 4 & 8: 1:1 Fedora / Linux Adobe Stili) */}
+      {isTickerVisible && currentTickerPost && (
+        <div className="h-11 sm:h-12 rounded-[14px] bg-[#282828] border border-white/5 px-3.5 flex items-center justify-between gap-3 text-xs select-none shadow-sm transition-all">
+          <div className="flex items-center gap-3 overflow-hidden flex-1 min-w-0">
+            <button
+              type="button"
+              onClick={() => setIsTickerVisible(false)}
+              className="w-6 h-6 rounded-full bg-[#383838] hover:bg-[#444444] text-[#a3a3a3] hover:text-white flex items-center justify-center shrink-0 transition-colors cursor-pointer"
+              title="Kapat"
+              aria-label="Kapat"
+            >
+              <span className="text-[11px] leading-none">✕</span>
+            </button>
 
-          <span className="text-[#52525b]">/</span>
-          <button onClick={onBack} className="hover:text-white transition-colors">
-            Ana Sayfa
-          </button>
-          
-          {collection && (
-            <>
-              <span className="text-[#52525b]">/</span>
-              <span 
-                className="font-medium truncate max-w-[140px]"
-                style={{ color: collection.color || '#38bdf8' }}
-              >
-                {collection.name}
-              </span>
-            </>
-          )}
+            <span 
+              onClick={() => onNavigatePost(currentTickerPost)}
+              className="truncate font-semibold text-white/90 hover:text-[var(--linkC,#9aa0a6)] transition-colors cursor-pointer text-xs sm:text-[13px]"
+              title={currentTickerPost.title}
+            >
+              {currentTickerPost.title}
+            </span>
+          </div>
 
-          <span className="text-[#52525b] hidden sm:inline">/</span>
-          <span className="text-[#71717a] truncate max-w-[180px] hidden sm:inline">
-            {link.title || domain}
-          </span>
+          {/* Sağ Taraf Slayt Çizgi Butonları */}
+          <div className="flex items-center gap-1.5 shrink-0">
+            <button 
+              type="button"
+              onClick={handlePrevTicker}
+              className="w-5 h-1.5 rounded-full bg-white/40 hover:bg-white transition-all cursor-pointer"
+              aria-label="Önceki"
+            />
+            <button 
+              type="button"
+              onClick={handleNextTicker}
+              className="w-5 h-1.5 rounded-full bg-white/20 hover:bg-white transition-all cursor-pointer"
+              aria-label="Sonraki"
+            />
+          </div>
+        </div>
+      )}
+
+      {/* 2. Page Views & Greetings Rozetleri (.pGV - Screenshot 1 & 4 1:1) */}
+      <div className="pGV flex items-center gap-2 pt-0.5">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#252526] text-xs text-[#d4d4d4] font-medium shadow-none">
+          <BloggerEyeIcon className="w-3.5 h-3.5 text-[#38bdf8]" />
+          <span>{link.views || 78} views</span>
         </div>
 
-        {/* Aksiyon Butonları */}
-        <div className="flex items-center gap-1.5">
-          {/* Blogger XML 1:1 Yer İmleri / Kaydet Butonu (.bm-button) */}
+        <button 
+          type="button"
+          onClick={handleToggleGreeting}
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#252526] hover:bg-[#333333] text-xs text-[#d4d4d4] font-medium transition-colors cursor-pointer active:scale-95 shadow-none"
+          title="Selamlama Değiştir"
+        >
+          <EmojiHappyIcon className="w-3.5 h-3.5 text-amber-400" />
+          <span>{greeting}</span>
+        </button>
+      </div>
+
+      {/* 3. Blogger XML 1:1 Breadcrumbs (.brdCmb) */}
+      <div className="brdCmb flex items-center gap-2 text-xs text-[#a1a1aa] pt-0.5 flex-wrap">
+        <button 
+          onClick={onBack} 
+          className="hover:text-white transition-colors cursor-pointer font-medium"
+        >
+          Ana Sayfa
+        </button>
+        
+        <span className="text-[#52525b]">/</span>
+        
+        <span 
+          className="hover:underline cursor-pointer lowercase font-medium text-[var(--linkC,#9aa0a6)]"
+        >
+          {link.tags[0] || collection?.name || 'videolar'}
+        </span>
+
+        {/* Website Logo & Domain pill */}
+        <span className="text-[#52525b]">/</span>
+        <a
+          href={link.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-white/5 hover:bg-white/10 text-slate-300 text-[11px] transition-colors border border-white/10 cursor-pointer"
+          title={`Adrese Git: ${link.url}`}
+        >
+          <img
+            src={getFaviconUrl(link.url)}
+            alt={getDomain(link.url)}
+            className="w-3.5 h-3.5 object-contain"
+            onError={(e) => { (e.target as HTMLElement).style.display = 'none'; }}
+          />
+          <span className="font-medium text-white/90">{getDomain(link.url)}</span>
+        </a>
+      </div>
+
+      {/* 4. Gönderi Ana Başlığı (.pTtl - Screenshot 1 & 4 1:1) */}
+      <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-snug pt-1">
+        {link.title}
+      </h1>
+
+      {/* 5. Sekmeler: Medya / Yazı (Screenshot 1 & 4 1:1) */}
+      <div className="flex items-center gap-6 border-b border-white/10 pt-2 pb-1 text-sm font-semibold">
+        <button
+          onClick={() => setActiveTab('medya')}
+          className={`pb-2.5 transition-all cursor-pointer relative ${
+            activeTab === 'medya'
+              ? 'text-white border-b-2 border-[var(--linkC,#9aa0a6)] font-bold'
+              : 'text-[#989b9f] hover:text-white'
+          }`}
+        >
+          Medya
+        </button>
+        <button
+          onClick={() => setActiveTab('yazi')}
+          className={`pb-2.5 transition-all cursor-pointer relative ${
+            activeTab === 'yazi'
+              ? 'text-white border-b-2 border-[var(--linkC,#9aa0a6)] font-bold'
+              : 'text-[#989b9f] hover:text-white'
+          }`}
+        >
+          Yazı
+        </button>
+      </div>
+
+      {/* 6. Medya Sekmesi İçeriği (Screenshot 4: Thumbnail Seçici + Büyük Görsel + Tam Ekran Butonu) */}
+      {activeTab === 'medya' && (
+        <div className="space-y-4 pt-1">
+          {/* Üst Küçük Önizleme Kutucukları (Fotoğraf / Video Seçici) - Blogger Plu$ UI: Yalnızca 2 veya daha fazla farklı medya varsa gösterilir */}
+          {mediaItems.length >= 2 && (
+            <div className="flex items-center gap-3">
+              {mediaItems.map((item, idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => setSelectedMediaIndex(idx)}
+                  className={`w-16 h-11 rounded-lg overflow-hidden border-2 transition-all cursor-pointer relative ${
+                    selectedMediaIndex === idx ? 'border-[var(--linkC,#9aa0a6)] scale-105 shadow-md' : 'border-white/10 opacity-70 hover:opacity-100'
+                  }`}
+                  title={item.type === 'image' ? 'Görseli Göster' : 'Videoyu Oynat'}
+                >
+                  {item.type === 'image' ? (
+                    <img 
+                      src={item.url} 
+                      alt={item.title || `Görsel ${idx + 1}`} 
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        const target = e.currentTarget;
+                        if (target.src.includes('maxresdefault.jpg')) {
+                          target.src = target.src.replace('maxresdefault.jpg', 'hqdefault.jpg');
+                        } else {
+                          target.style.display = 'none';
+                        }
+                      }}
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-[#252526] flex items-center justify-center relative">
+                      <svg viewBox="0 0 24 24" className="w-5 h-5 text-white/90 fill-white/80">
+                        <polygon points="5 3 19 12 5 21 5 3" />
+                      </svg>
+                    </div>
+                  )}
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* Büyük Görsel / Medya Alanı */}
+          <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] rounded-[16px] overflow-hidden bg-[#18181b] border border-white/5 shadow-2xl group">
+            {hasRealMedia && currentMedia?.url ? (
+              currentMedia.type === 'image' ? (
+                <img
+                  src={currentMedia.url}
+                  alt={currentMedia.title || link.title}
+                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-cover object-center cursor-pointer"
+                  onClick={() => onOpenMedia && onOpenMedia(mediaItems, selectedMediaIndex)}
+                  onError={(e) => {
+                    const target = e.currentTarget;
+                    if (target.src.includes('maxresdefault.jpg')) {
+                      target.src = target.src.replace('maxresdefault.jpg', 'hqdefault.jpg');
+                    }
+                  }}
+                />
+              ) : (currentMedia.type === 'youtube' || currentMedia.type === 'shorts') ? (
+                <iframe
+                  src={currentMedia.url}
+                  title={currentMedia.title || link.title}
+                  className="w-full h-full border-0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              ) : (
+                <video
+                  src={currentMedia.url}
+                  controls
+                  autoPlay
+                  className="w-full h-full object-contain bg-black"
+                />
+              )
+            ) : (
+              /* Medya Yoksa: Karta basınca doğrudan web sitesine gider (Web Sitesine Git butonu kaldırıldı) */
+              <a
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full h-full relative block cursor-pointer group no-underline transition-all duration-200 active:scale-[0.99]"
+                title={`${link.title || link.url} Sitesine Git`}
+              >
+                <BrandLogoCard url={link.url} title={link.title} size="detail" />
+              </a>
+            )}
+
+            {/* Sağ Üst Köşe: Tam Ekran Genişlet Butonu (Screenshot 4 & 5 1:1) - Sadece gerçek medya varsa gösterilir */}
+            {hasRealMedia && currentMedia?.url && (
+              <div className="absolute top-3 right-3 z-10">
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (onOpenMedia) {
+                      onOpenMedia(mediaItems, selectedMediaIndex);
+                    }
+                  }}
+                  className="w-8 h-8 rounded-lg bg-[rgba(28,30,38,0.85)] hover:bg-[#333333] border border-white/15 text-white flex items-center justify-center transition-all cursor-pointer shadow-md backdrop-blur-md active:scale-95"
+                  title="Görseli Tam Ekran Yap"
+                  aria-label="Tam Ekran"
+                >
+                  <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                  </svg>
+                </button>
+              </div>
+            )}
+
+            {/* Alt Çizgi / Slayt Noktaları */}
+            {mediaItems.length >= 2 && (
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5 pointer-events-none">
+                {mediaItems.map((_, dotIdx) => (
+                  <span
+                    key={dotIdx}
+                    className={`transition-all rounded-full ${
+                      dotIdx === selectedMediaIndex ? 'w-5 h-1.5 bg-white/90' : 'w-1.5 h-1.5 bg-white/40'
+                    }`}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* 6.1. Yazı Sekmesi İçeriği (Makale Metni) */}
+      {activeTab === 'yazi' && (
+        <div className="rounded-[16px] bg-[#252526] border border-white/5 p-6 sm:p-8 space-y-4 shadow-md text-sm text-[#d4d4d4] leading-relaxed whitespace-pre-wrap">
+          <p>{link.description}</p>
+          {link.notes && (
+            <div className="mt-4 p-4 rounded-xl bg-[#1e1e1e] border border-white/5 text-xs text-[#a1a1aa]">
+              <span className="font-bold text-[var(--linkC,#9aa0a6)] block mb-1">Not:</span>
+              {link.notes}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* 7. Paylaş Barı (Screenshot 1 & 4 1:1: Facebook, Whatsapp, X / Twitter, +) */}
+      <div className="pt-2 flex flex-wrap items-center gap-2 text-xs">
+        <span className="text-[#989b9f] font-medium mr-1 text-xs">Paylaş:</span>
+
+        {/* Facebook Butonu (Mavi) */}
+        <a
+          href={`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#1877f2] hover:bg-[#166fe5] text-white font-semibold transition-all shadow-sm active:scale-95 no-underline"
+        >
+          <FacebookIcon className="w-3.5 h-3.5 fill-white" />
+          <span>Facebook</span>
+        </a>
+
+        {/* Whatsapp Butonu (Yeşil) */}
+        <a
+          href={`https://api.whatsapp.com/send?text=${shareTitle}%20${shareUrl}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#00a884] hover:bg-[#008f6f] text-white font-semibold transition-all shadow-sm active:scale-95 no-underline"
+        >
+          <WhatsappIcon className="w-3.5 h-3.5 fill-white" />
+          <span>Whatsapp</span>
+        </a>
+
+        {/* X / Twitter Butonu (Siyah) */}
+        <a
+          href={`https://twitter.com/intent/tweet?text=${shareTitle}&url=${shareUrl}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#000000] hover:bg-[#111111] border border-white/10 text-white font-semibold transition-all shadow-sm active:scale-95 no-underline"
+        >
+          <TwitterIcon className="w-3.5 h-3.5 fill-white" />
+          <span>X / Twitter</span>
+        </a>
+
+        {/* + Diğer Uygulamalarla Paylaş Butonu (Screenshot 7 Modalını Açar) */}
+        <button
+          type="button"
+          onClick={() => setIsShareModalOpen(true)}
+          className="w-9 h-8 rounded-xl bg-[#282828] hover:bg-[#333333] border border-white/10 text-white font-bold flex items-center justify-center transition-all cursor-pointer active:scale-95 shadow-sm"
+          title="Diğer uygulamalarla paylaş"
+          aria-label="Daha fazla paylaşım seçeneği"
+        >
+          <span className="text-base leading-none">+</span>
+        </button>
+      </div>
+
+      {/* 8. Yazar & Meta Bilgileri Satırı (Screenshot 1 & 4 1:1) */}
+      <div className="pt-3 border-t border-white/5 flex flex-wrap items-center justify-between gap-3 text-xs text-[#989b9f]">
+        
+        {/* Sol: Yazar Avatarı + İsim + Tarih + Okuma Süresi */}
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-2">
+            {authorImgError ? (
+              <span className="w-7 h-7 rounded-full bg-gradient-to-tr from-sky-600 to-indigo-600 text-white flex items-center justify-center text-xs font-bold ring-1 ring-white/10 shrink-0">
+                {authorInitial}
+              </span>
+            ) : (
+              <img
+                src={currentAuthor.avatar}
+                alt={currentAuthor.name}
+                className="w-7 h-7 rounded-full object-cover ring-1 ring-white/10 shrink-0"
+                onError={() => setAuthorImgError(true)}
+              />
+            )}
+            <span className="text-white font-bold">{currentAuthor.name}</span>
+          </div>
+
+          <span className="text-[#52525b]">•</span>
+
+          <span className="text-[#71717a]">Eki 29, 2026</span>
+          <span className="text-[#52525b]">•</span>
+          <span className="text-[#71717a]">Kas 8, 2026</span>
+          <span className="text-[#52525b]">•</span>
+          <span className="text-[#71717a]">Estimated read time: 6 min</span>
+        </div>
+
+        {/* Sağ: Yer İmi, Yorum Sayısı, Paylaş İkonu (Blogger XML 1:1) */}
+        <div className="flex items-center gap-3">
           <button
             type="button"
             onClick={() => link.id && onTogglePin(link.id, link.isPinned)}
-            className={`tIc bm-button flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all active:scale-95 cursor-pointer ${
-              link.isPinned
-                ? 'added bg-amber-500/25 text-amber-300 shadow-[0_0_8px_rgba(251,191,36,0.3)]'
-                : 'bg-[#252526] hover:bg-[#333333] text-[#d4d4d4] hover:text-[#60cdff]'
-            }`}
-            data-save="Kaydet"
-            data-saved="Kaydedildi"
+            className="text-[#989b9f] hover:text-white transition-colors cursor-pointer"
             title={link.isPinned ? 'Kaydedildi' : 'Kaydet'}
-            aria-label={link.isPinned ? 'Kaydedildi' : 'Kaydet'}
           >
             {link.isPinned ? (
               <ArchiveTickIcon className="w-4 h-4 text-amber-300" />
             ) : (
-              <ArchiveAddIcon className="w-4 h-4" />
+              <ArchiveIcon className="w-4 h-4" />
             )}
-            <span className="hidden sm:inline">{link.isPinned ? 'Kaydedildi' : 'Kaydet'}</span>
           </button>
 
-          <button
-            onClick={() => link.id && onToggleRead(link.id, link.isRead)}
-            className={`p-2 rounded-lg transition-all ${
-              link.isRead
-                ? 'bg-emerald-500/20 text-emerald-300'
-                : 'bg-[#252526] text-[#a1a1aa] hover:text-white'
-            }`}
-            title={link.isRead ? 'Okundu' : 'Okundu olarak işaretle'}
-          >
-            <CheckCircle2 className="w-4 h-4" />
-          </button>
-
-          <button
-            onClick={() => onEdit(link)}
-            className="p-2 rounded-lg bg-[#252526] hover:bg-[#333333] text-[#a1a1aa] hover:text-[#38bdf8] transition-colors"
-            title="Düzenle"
-          >
-            <Edit2 className="w-4 h-4" />
-          </button>
-
-          <button
-            onClick={() => link.id && onMoveToTrash(link.id)}
-            className="p-2 rounded-lg bg-[#252526] hover:bg-[#333333] text-[#a1a1aa] hover:text-rose-400 transition-colors"
-            title="Çöpe At"
-          >
-            <Trash2 className="w-4 h-4" />
-          </button>
-        </div>
-      </div>
-
-      {/* 2. Gönderi Başlık ve Meta Bilgileri (.postHeaders) */}
-      <div className="space-y-3">
-        {/* Kategori Rozeti & Sabit Etiketi */}
-        <div className="flex items-center gap-2">
-          {collection ? (
-            <span 
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-semibold border shadow-sm"
-              style={{ 
-                backgroundColor: `${collection.color || '#38bdf8'}20`,
-                borderColor: `${collection.color || '#38bdf8'}40`,
-                color: collection.color || '#38bdf8'
-              }}
-            >
-              <span 
-                className="w-2 h-2 rounded-full" 
-                style={{ backgroundColor: collection.color || '#38bdf8' }} 
-              />
-              <span>{collection.name}</span>
-            </span>
-          ) : (
-            <span className="px-3 py-1 rounded-lg bg-[#252526] text-xs text-[#a1a1aa] border border-transparent">
-              Genel
-            </span>
-          )}
-
-          {link.isPinned && (
-            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-amber-500/20 text-amber-300 border border-transparent text-xs font-bold">
-              <PulseIcon className="w-3 h-3" />
-              <span>SABİTLENDİ</span>
-            </span>
-          )}
-        </div>
-
-        {/* Ana Başlık */}
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight leading-snug">
-          {link.title || link.url}
-        </h1>
-
-        {/* Yazar & Tarih Meta Bilgisi (.pInf) */}
-        <div className="flex flex-wrap items-center gap-4 text-xs text-[#a1a1aa] pt-1">
-          <div className="flex items-center gap-1.5">
-            <span className="w-5 h-5 rounded-full bg-gradient-to-tr from-[#38bdf8] to-indigo-600 flex items-center justify-center text-[10px] text-white font-bold">
-              N
-            </span>
-            <span className="text-white font-semibold">{link.authorName || 'NEGRONN'}</span>
-            <Verify1Icon className="w-3.5 h-3.5 text-[#38bdf8]" />
+          <div className="flex items-center gap-1.5 text-[#989b9f]" title={`${link.commentsCount ?? 0} Yorum`}>
+            <ChatBloggerIcon className="w-4 h-4" />
+            <span className="text-[11px] font-bold">{link.commentsCount ?? 0}</span>
           </div>
 
-          <div className="flex items-center gap-1.5 text-[#71717a]">
-            <Calendar className="w-3.5 h-3.5 text-[#38bdf8]" />
-            <span>{formatDate(link.createdAt)}</span>
-          </div>
-
-          <div className="flex items-center gap-1.5 text-[#71717a]">
-            <Globe className="w-3.5 h-3.5 text-emerald-400" />
-            <span>{domain}</span>
-          </div>
-
-          {link.rss && (
-            <a
-              href={link.rss}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-lg bg-amber-500/15 hover:bg-amber-500/25 text-amber-400 text-xs font-semibold transition-colors"
-              title={`RSS Akışı: ${link.rss}`}
-            >
-              <Rss className="w-3.5 h-3.5" />
-              <span>RSS Akışı</span>
-            </a>
-          )}
-        </div>
-      </div>
-
-      {/* 3. Büyük Görsel / Önizleme Bannerı (.pThmb) */}
-      <div className="relative w-full rounded-2xl overflow-hidden border border-transparent bg-gradient-to-tr from-sky-950 via-[#1c2430] to-[#18181b] p-8 sm:p-12 shadow-2xl flex flex-col items-center justify-center text-center space-y-5">
-        <div className="absolute inset-0 bg-[radial-gradient(#ffffff0f_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
-
-        {/* Logo Avatar */}
-        <div className="relative z-10 w-20 h-20 rounded-3xl bg-[#1e1e1e]/90 backdrop-blur-md flex items-center justify-center shadow-2xl p-4">
-          <img
-            src={faviconUrl}
-            alt={domain}
-            className="w-10 h-10 object-contain"
-            onError={(e) => {
-              (e.target as HTMLElement).style.display = 'none';
-            }}
-          />
-        </div>
-
-        {/* Domain & URL Açıklama */}
-        <div className="relative z-10 space-y-2 max-w-lg">
-          <h2 className="text-lg sm:text-xl font-bold text-white tracking-wide">
-            {domain}
-          </h2>
-          <p className="text-xs sm:text-sm text-[#9ca3af] break-all font-mono bg-black/40 px-4 py-2 rounded-xl">
-            {link.url}
-          </p>
-        </div>
-
-        {/* Büyük Dış Bağlantıya Git Butonu */}
-        <div className="relative z-10 flex flex-wrap items-center justify-center gap-3 pt-2">
-          <a
-            href={link.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#38bdf8] to-[#0ea5e9] hover:from-[#7dd3fc] hover:to-[#38bdf8] text-[#0f172a] font-bold text-sm shadow-xl shadow-sky-500/25 active:scale-95 transition-all duration-200"
-          >
-            <span>Siteyi Ziyaret Et</span>
-            <ExternalLink className="w-4 h-4 stroke-[2.5]" />
-          </a>
-
           <button
-            onClick={handleCopy}
-            className="inline-flex items-center gap-2 px-4 py-3 rounded-full bg-[#252526] hover:bg-[#333333] text-white text-xs font-semibold active:scale-95 transition-all"
+            type="button"
+            onClick={() => setIsShareModalOpen(true)}
+            className="text-[#989b9f] hover:text-white transition-colors cursor-pointer"
+            title="Paylaş"
           >
-            {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
-            <span>{copied ? 'Kopyalandı' : 'URL Kopyala'}</span>
+            <Share1Icon className="w-4 h-4" />
           </button>
         </div>
+
       </div>
 
-      {/* 3.1. Blogger Medya Player Vitrini (YouTube, Shorts, Video veya Görsel) */}
-      {(isYoutube || isDirectVideo || hasThumbnail) && (
-        <div className="relative w-full rounded-2xl overflow-hidden bg-[#18181b] border border-transparent shadow-xl">
-          {isYoutube && (
-            <div className={`relative w-full ${isShorts ? 'max-w-xs mx-auto aspect-[9/16]' : 'aspect-video'} bg-black overflow-hidden`}>
-              <iframe
-                src={getYoutubeEmbed(link.url)}
-                title={link.title}
-                className="w-full h-full border-0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            </div>
-          )}
+      {/* 9. Önceki Gönderi Bloğu (Screenshot 1 1:1) */}
+      {prevLink && (
+        <div 
+          onClick={() => onNavigatePost(prevLink)}
+          className="p-4 rounded-xl bg-[#252526] hover:bg-[#28282b] border border-white/5 transition-all cursor-pointer group space-y-1"
+        >
+          <div className="flex items-center gap-1.5 text-xs text-[#989b9f] group-hover:text-white font-bold">
+            <ChevronLeft className="w-4 h-4" />
+            <span>Önceki</span>
+          </div>
+          <div className="text-xs sm:text-[13px] font-semibold text-white/90 group-hover:text-[var(--linkC,#9aa0a6)] transition-colors truncate">
+            {prevLink.title}
+          </div>
+        </div>
+      )}
 
-          {isDirectVideo && (
-            <div className="relative w-full aspect-video bg-black overflow-hidden">
-              <video
-                src={link.url}
-                controls
-                className="w-full h-full object-contain"
-              />
-            </div>
-          )}
+      {/* 10. Etiket Rozeti (Screenshot 1 1:1) */}
+      <div className="pt-1">
+        <span className="inline-block px-3 py-1.5 rounded-xl bg-[#252526] text-xs font-semibold text-white/80">
+          {link.tags[0] || 'videolar'}
+        </span>
+      </div>
 
-          {!isYoutube && !isDirectVideo && hasThumbnail && (
-            <div 
-              className="relative w-full aspect-video bg-black overflow-hidden cursor-pointer group/thumb"
-              onClick={() => onOpenMedia && onOpenMedia([{ type: 'image', url: link.thumbnail!, title: link.title }])}
-            >
-              <img
-                src={link.thumbnail}
-                alt={link.title}
-                className="w-full h-full object-contain group-hover/thumb:scale-105 transition-transform duration-300"
-              />
-            </div>
-          )}
+      {/* 11. Benzer Yazılar (1:1 Blogger Plu$ UI LinkCard Grid) */}
+      {relatedPosts.length > 0 && (
+        <section className="space-y-3.5 pt-6 border-t border-white/5">
+          <div className="flex items-center justify-between">
+            <h3 className="text-sm font-bold text-white tracking-wide flex items-center gap-2">
+              <span className="w-1.5 h-3.5 rounded-full bg-[var(--linkC,#60cdff)]" />
+              Benzer Yazılar
+            </h3>
+            <span className="text-xs text-[#989b9f] lowercase">
+              {link.tags[0] ? `#${link.tags[0]}` : 'öneriler'}
+            </span>
+          </div>
 
-          {onOpenMedia && (
-            <div className="p-3 bg-[#252526] flex items-center justify-between text-xs">
-              <span className="text-[#989b9f] font-medium flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-[#60cdff] animate-pulse" />
-                <span>Blogger Medya Player</span>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+            {relatedPosts.map((post) => (
+              <LinkCard
+                key={post.id || post.url}
+                link={post}
+                onOpenPostPage={onNavigatePost}
+                onTogglePin={onTogglePin}
+              />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* 12. Diğer Uygulamalarla Paylaş Modal (Screenshot 7 1:1) */}
+      {isShareModalOpen && (
+        <div 
+          className="fixed inset-0 z-50 bg-black/70 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-200"
+          onClick={() => setIsShareModalOpen(false)}
+        >
+          <div 
+            onClick={(e) => e.stopPropagation()}
+            className="w-full max-w-[420px] rounded-[18px] bg-[#252526] border border-white/10 shadow-2xl p-5 space-y-4 animate-in zoom-in-95 duration-150 text-white"
+          >
+            {/* Modal Header */}
+            <div className="flex items-center justify-between pb-1 border-b border-white/5">
+              <span className="text-xs font-bold text-[#989b9f]">
+                Diğer uygulamalarla paylaşın
               </span>
               <button
                 type="button"
-                onClick={() => {
-                  if (isYoutube) {
-                    onOpenMedia([{ type: isShorts ? 'shorts' : 'youtube', url: link.url, title: link.title }]);
-                  } else if (isDirectVideo) {
-                    onOpenMedia([{ type: 'video', url: link.url, title: link.title }]);
-                  } else if (hasThumbnail) {
-                    onOpenMedia([{ type: 'image', url: link.thumbnail!, title: link.title }]);
-                  }
-                }}
-                className="px-3 py-1.5 rounded-lg bg-[#1e1e1e] hover:bg-[#333333] text-[#60cdff] hover:text-white font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+                onClick={() => setIsShareModalOpen(false)}
+                className="w-7 h-7 rounded-full bg-[#1e1e1e] hover:bg-[#333333] text-white flex items-center justify-center cursor-pointer"
+                title="Kapat"
               >
-                <span>Tam Ekranda Aç</span>
-                <ExternalLink className="w-3.5 h-3.5" />
+                <CloseIcon className="w-3.5 h-3.5" />
               </button>
             </div>
-          )}
-        </div>
-      )}
 
-      {/* 4. Gönderi Açıklaması ve Notlar (.post-body) */}
-      <div className="rounded-2xl bg-[#252526] border border-transparent p-6 space-y-4 shadow-md">
-        <h3 className="text-sm font-bold uppercase tracking-wider text-white border-b border-[#333333] pb-2 flex items-center gap-2">
-          <FileText className="w-4 h-4 text-[#38bdf8]" />
-          <span>Bağlantı Detayı & Açıklama</span>
-        </h3>
-
-        {link.description ? (
-          <p className="text-sm text-[#d4d4d4] leading-relaxed whitespace-pre-wrap">
-            {link.description}
-          </p>
-        ) : (
-          <p className="text-xs text-[#71717a] italic">
-            Bu bağlantı için ek bir açıklama girilmemiş.
-          </p>
-        )}
-
-        {link.notes && (
-          <div className="mt-4 p-4 rounded-lg bg-[#1e1e1e] border border-transparent space-y-1.5">
-            <h4 className="text-xs font-bold text-[#38bdf8] uppercase tracking-wider">
-              Kullanıcı Notu
-            </h4>
-            <p className="text-xs text-[#a1a1aa] leading-relaxed whitespace-pre-wrap">
-              {link.notes}
-            </p>
-          </div>
-        )}
-      </div>
-
-      {/* 5. Etiketler (.lbHt - Blogger Stili) */}
-      {link.tags && link.tags.length > 0 && (
-        <div className="rounded-lg bg-[#252526] border border-transparent p-5 space-y-2.5 shadow-md">
-          <h4 className="text-xs font-bold uppercase tracking-wider text-[#989b9f]">
-            İlgili Etiketler
-          </h4>
-          <div className="flex flex-wrap gap-2">
-            {link.tags.map((tag) => (
-              <span
-                key={tag}
-                className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#1e1e1e] hover:bg-[#38bdf8] text-[#d4d4d4] hover:text-[#0f172a] border border-transparent hover:border-[#38bdf8] text-xs font-medium transition-all"
-              >
-                <span>#{tag}</span>
-              </span>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* 6. Blogger Yazar Tanıtım Kartı (.admAbt - XML 1:1) */}
-      <div className="admAbt bX" id="author">
-        <h2 className="title dt" data-text="Yazar Hakkında">
-          <span>Yazar Hakkında</span>
-        </h2>
-
-        <div className="admPs">
-          <div className="admIm">
-            <div className="im relative w-11 h-11 rounded-full bg-gradient-to-tr from-[#38bdf8] via-indigo-500 to-rose-500 p-0.5 shadow-md shrink-0">
-              <div className="w-full h-full rounded-full bg-[#1e1e1e] flex items-center justify-center font-bold text-base text-white">
-                N
-              </div>
-              <div className="absolute -bottom-0.5 -right-0.5 bg-[#1e1e1e] rounded-full p-0.5">
-                <Verify1Icon className="w-3.5 h-3.5 text-[#38bdf8]" />
+            {/* Post Preview Box */}
+            <div className="flex items-center gap-3 p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
+              <img
+                src={primaryImage}
+                alt={link.title}
+                className="w-12 h-12 rounded-lg object-cover shrink-0"
+              />
+              <div className="min-w-0 flex-1">
+                <h4 className="text-xs font-bold text-white truncate">{link.title}</h4>
+                <span className="text-[11px] text-[#989b9f] lowercase">{link.tags[0] || 'videolar'}</span>
               </div>
             </div>
-          </div>
 
-          <div className="admI">
-            <div className="flex items-center justify-between flex-wrap gap-2">
-              <bdi className="admN font-bold text-sm text-white" data-write="Yazan:" data-text="NEGRONN">
-                <span className="text-xs text-[#71717a] font-normal mr-1">Yazan:</span>
-                <span>NEGRONN</span>
-                <Verify1Icon className="w-3.5 h-3.5 text-[#38bdf8]" />
-                <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-[#ff5722]/20 text-[#ff5722] font-semibold ml-1">BLOGGER</span>
-              </bdi>
-              <span className="text-[11px] text-[#71717a]">Yazar &amp; Yazılım Mimarı</span>
-            </div>
-
-            <div className="admA text-xs text-[#d4d4d4] leading-relaxed">
-              Saved Startpage ve Blogger ağının mimarı. Local-first açık kaynaklı sistemler, gizlilik odaklı web teknolojileri ve dijital içerik üretimi. Soru, öneri ve sohbet için <a href="https://matrix.to/#/#negronn-show:matrix.org" target="_blank" rel="noopener noreferrer" className="text-[#60cdff] hover:underline font-semibold">Topluluk</a> kanalımıza katılabilirsiniz.
-            </div>
-
-            <div className="flex flex-wrap items-center gap-2 pt-1 text-xs">
+            {/* Share Grid (8 Apps: Facebook, WhatsApp, Twitter, Telegram, Pinterest, LinkedIn, Line, Email) */}
+            <div className="grid grid-cols-4 gap-3 py-2 text-center text-[11px] text-[#d4d4d4]">
               <a
-                href="https://aleyulala.blogspot.com/"
+                href={`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`}
                 target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#1e1e1e] hover:bg-[#333333] text-[#d4d4d4] hover:text-white transition-colors"
-                title="Blogger Profil"
+                rel="noreferrer"
+                className="flex flex-col items-center gap-1.5 p-2 rounded-xl hover:bg-white/5 cursor-pointer no-underline text-inherit"
               >
-                <BloggerBIcon className="w-3.5 h-3.5 text-amber-500" />
-                <span>Blogger</span>
+                <div className="w-10 h-10 rounded-full bg-[#1877f2] flex items-center justify-center shadow-md">
+                  <FacebookIcon className="w-4 h-4 fill-white" />
+                </div>
+                <span>Facebook</span>
               </a>
 
               <a
-                href="https://matrix.to/#/#negronn-show:matrix.org"
+                href={`https://api.whatsapp.com/send?text=${shareTitle}%20${shareUrl}`}
                 target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#1e1e1e] hover:bg-[#333333] text-[#60cdff] hover:text-white transition-colors border border-[#60cdff]/20 hover:border-[#60cdff]/50 font-medium"
-                title="Topluluk: Matrix / Element.io (#negronn-show:matrix.org)"
+                rel="noreferrer"
+                className="flex flex-col items-center gap-1.5 p-2 rounded-xl hover:bg-white/5 cursor-pointer no-underline text-inherit"
               >
-                <MatrixIcon className="w-3.5 h-3.5 text-[#60cdff]" />
-                <span>Topluluk</span>
+                <div className="w-10 h-10 rounded-full bg-[#00a884] flex items-center justify-center shadow-md">
+                  <WhatsappIcon className="w-4 h-4 fill-white" />
+                </div>
+                <span>WhatsApp</span>
               </a>
 
               <a
-                href="https://t.me/aleyyulala"
+                href={`https://twitter.com/intent/tweet?text=${shareTitle}&url=${shareUrl}`}
                 target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#1e1e1e] hover:bg-[#229ed9] text-[#d4d4d4] hover:text-white transition-colors"
-                title="Telegram"
+                rel="noreferrer"
+                className="flex flex-col items-center gap-1.5 p-2 rounded-xl hover:bg-white/5 cursor-pointer no-underline text-inherit"
               >
-                <TelegramIcon className="w-3.5 h-3.5 text-sky-400" />
+                <div className="w-10 h-10 rounded-full bg-[#000000] border border-white/10 flex items-center justify-center shadow-md">
+                  <TwitterIcon className="w-4 h-4 fill-white" />
+                </div>
+                <span>X / Twitter</span>
+              </a>
+
+              <a
+                href={`https://t.me/share/url?url=${shareUrl}&text=${shareTitle}`}
+                target="_blank"
+                rel="noreferrer"
+                className="flex flex-col items-center gap-1.5 p-2 rounded-xl hover:bg-white/5 cursor-pointer no-underline text-inherit"
+              >
+                <div className="w-10 h-10 rounded-full bg-[#229ed9] flex items-center justify-center shadow-md">
+                  <TelegramIcon className="w-4 h-4 fill-white" />
+                </div>
                 <span>Telegram</span>
               </a>
-
-              <a
-                href="https://vk.com/negronn"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#1e1e1e] hover:bg-[#4680c2] text-[#d4d4d4] hover:text-white transition-colors"
-                title="VKontakte (VK)"
-              >
-                <VkIcon className="w-3.5 h-3.5 text-[#4680c2]" />
-                <span>VK</span>
-              </a>
-
-              <a
-                href="mailto:mrstar14155@gmail.com"
-                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#1e1e1e] hover:bg-[#ea4335] text-[#d4d4d4] hover:text-white transition-colors"
-                title="E-posta"
-              >
-                <MailIcon className="w-3.5 h-3.5 text-rose-400" />
-                <span>E-posta</span>
-              </a>
             </div>
+
+            {/* Copy Link Row */}
+            <div className="pt-2 space-y-1.5">
+              <span className="text-[11px] text-[#71717a]">or copy link</span>
+              <div className="flex items-center gap-2 p-2 rounded-xl bg-[#1e1e1e] border border-white/10">
+                <input
+                  type="text"
+                  readOnly
+                  value={link.url}
+                  className="bg-transparent text-xs text-white/90 flex-1 outline-none px-1 font-mono truncate"
+                />
+                <button
+                  type="button"
+                  onClick={handleCopy}
+                  className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white cursor-pointer transition-colors"
+                  title="Kopyala"
+                >
+                  {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+                </button>
+              </div>
+            </div>
+
           </div>
         </div>
-      </div>
-
-      {/* 7. Önceki / Sonraki Gönderi Navigasyonu (.aChp) */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-        {prevLink ? (
-          <button
-            onClick={() => onNavigatePost(prevLink)}
-            className="group flex flex-col items-start p-4 rounded-lg bg-[#252526] hover:bg-[#2b2b2e] border border-transparent hover:border-[#38bdf8]/50 text-left transition-all active:scale-[0.99] shadow-sm"
-          >
-            <div className="flex items-center gap-1.5 text-xs text-[#71717a] group-hover:text-[#38bdf8] font-semibold uppercase tracking-wider">
-              <ChevronLeft className="w-4 h-4" />
-              <span>Önceki Bağlantı</span>
-            </div>
-            <div className="text-sm font-semibold text-white group-hover:text-[#38bdf8] truncate w-full mt-1">
-              {prevLink.title || prevLink.url}
-            </div>
-          </button>
-        ) : (
-          <div className="p-4 rounded-lg bg-[#1e1e1e]/40 border border-transparent text-xs text-[#52525b]">
-            İlk bağlantıdasınız
-          </div>
-        )}
-
-        {nextLink ? (
-          <button
-            onClick={() => onNavigatePost(nextLink)}
-            className="group flex flex-col items-end p-4 rounded-lg bg-[#252526] hover:bg-[#2b2b2e] border border-transparent hover:border-[#38bdf8]/50 text-right transition-all active:scale-[0.99] shadow-sm"
-          >
-            <div className="flex items-center gap-1.5 text-xs text-[#71717a] group-hover:text-[#38bdf8] font-semibold uppercase tracking-wider">
-              <span>Sonraki Bağlantı</span>
-              <ChevronRight className="w-4 h-4" />
-            </div>
-            <div className="text-sm font-semibold text-white group-hover:text-[#38bdf8] truncate w-full mt-1">
-              {nextLink.title || nextLink.url}
-            </div>
-          </button>
-        ) : (
-          <div className="p-4 rounded-lg bg-[#1e1e1e]/40 border border-transparent text-xs text-[#52525b] text-right">
-            Son bağlantıdasınız
-          </div>
-        )}
-      </div>
+      )}
 
     </article>
   );

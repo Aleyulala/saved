@@ -14,7 +14,61 @@ export interface RawSeedLink {
 
 export const SEED_COLLECTIONS = [
   {
-    "name": "Routine",
+    "name": "videolar",
+    "color": "#ec4899",
+    "icon": "tv",
+    "description": "Seçkin video kanalları, oynatma listeleri ve medya incelemeleri"
+  },
+  {
+    "name": "oyun",
+    "color": "#8b5cf6",
+    "icon": "gamepad-2",
+    "description": "Oyun platformları, donanım incelemeleri ve arşivler"
+  },
+  {
+    "name": "bilgisayar",
+    "color": "#10b981",
+    "icon": "wrench",
+    "description": "İşletim sistemleri, terminal becerileri ve sistem araçları"
+  },
+  {
+    "name": "öneri",
+    "color": "#f59e0b",
+    "icon": "star",
+    "description": "Öneri, analiz, eleştiri ve bağımsız içerik üreticileri"
+  },
+  {
+    "name": "teknoloji",
+    "color": "#a855f7",
+    "icon": "bot",
+    "description": "Teknoloji, insansız sistemler, bilim ve yenilikler"
+  },
+  {
+    "name": "televizyon",
+    "color": "#06b6d4",
+    "icon": "tv",
+    "description": "Dizi, film, sinematografi ve video sanatı"
+  },
+  {
+    "name": "programlama",
+    "color": "#3b82f6",
+    "icon": "code-2",
+    "description": "Yazılım geliştirme, API'ler, GitHub ve kodlama kaynakları"
+  },
+  {
+    "name": "Konu Dışı",
+    "color": "#9aa0a6",
+    "icon": "messages-square",
+    "description": "Genel sohbet, serbest paylaşımlar ve konu dışı öneriler"
+  },
+  {
+    "name": "Rutin",
+    "color": "#9aa0a6",
+    "icon": "messages-square",
+    "description": "Genel sohbet, serbest paylaşımlar ve konu dışı öneriler"
+  },
+  {
+    "name": "Rutin",
     "color": "#38bdf8",
     "icon": "calendar-check",
     "description": "Günlük rutinler, ajanda, mail ve notlar"
@@ -100,9 +154,16 @@ export const SEED_COLLECTIONS = [
 ];
 
 export const SEED_TAGS = [
-  {
-    "name": "routine"
-  },
+  { "name": "videolar" },
+  { "name": "oyun" },
+  { "name": "bilgisayar" },
+  { "name": "öneri" },
+  { "name": "teknoloji" },
+  { "name": "televizyon" },
+  { "name": "programlama" },
+  { "name": "onarı" },
+  { "name": "telefon" },
+  { "name": "rutin" },
   {
     "name": "gunluk"
   },
@@ -182,64 +243,313 @@ export const SEED_TAGS = [
 
 export const SEED_LINKS: RawSeedLink[] = [
   {
+    "title": "Shadowban Nedir? Sosyal Medya Hesaplarında Gölge Engel Nasıl Anlaşılır ve Kaldırılır?",
+    "url": "https://negronshow.blogspot.com/2026/11/shadowban-nedir-sosyal-medya.html",
+    "categoryName": "öneri",
+    "tags": ["öneri", "sosyal medya"],
+    "color": "#f59e0b",
+    "isPinned": true,
+    "description": "Dijital içerik üreticilerinin ve sosyal medya kullanıcılarının en çok karşılaştığı gizemli kavramlardan biri olan shadowban (gölge engelleme), hesapların erişimini aniden düşüren sessiz bir kısıtlama olarak bilinir. Peki sosyal medya platformları gerçekten kullanıcıları gizlice engelliyor mu, yoksa görünürlük kaybının arkasında algoritmik filtreler mi yatıyor?",
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Cat03.jpg",
+    "views": 52,
+    "commentsCount": 0,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "Fedora Kde Big Screen Ve Lenova Legion Go S Aldım İnceleme !",
+    "url": "https://negronshow.blogspot.com/2026/10/fedora-kde-big-screen-ve-lenova-legion.html",
+    "categoryName": "oyun",
+    "tags": ["oyun"],
+    "color": "#8b5cf6",
+    "isPinned": true,
+    "description": "Eklediğin el konsolu hayal kırıklığı, donanım performansı analizi, mobil işletim sistemlerinin (Android'in doygunluğu vs. Sailfish OS yükselişi) geleceği ve gerçekçi tüketici deneyimi.",
+    "thumbnail": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhfbIoIvor82Da_-sIFfaNlG-tIB878AhCKfIRj2bSTnb2VAOz6YPwBZG4IGd-iZYOzdn2v3IiFG-G58iyQptPZjZ-ZtFk3HU89igBpSVMnerPdhko6uWB3S8V3IQapkk366Iz0u7Sc60Y_YTeviDI9SUJUKip_8Hwew01W2UVuyZ1tp81qqx0gQO_CscI/s1600/lenovo-go-s-white.jpg",
+    "views": 19,
+    "commentsCount": 5,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "Notbook Lm Projelerim Hakkında",
+    "url": "https://negronshow.blogspot.com/2026/10/notbook-lm-projelerim.html",
+    "categoryName": "videolar",
+    "tags": ["videolar"],
+    "color": "#ec4899",
+    "isPinned": true,
+    "description": "Sistemin Çarkları Arasında Bir Sesli Günlük: Neden Buradayım ve Neden Üretiyorum? Burası sıradan bir oyun, eğlence ya da vakit geçirme kanalı değil. Bu platform; dijital dünyada kendi yolunu çizmek isteyenlere bir kılavuz.",
+    "thumbnail": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiJhv3IYtlwon8oo7nnuC9EM4IlJ51X4im6kgttJGrLqim12ty5I1Y6tzvfDBmbg6qQi_qxy09MCU8nzxIdc43r0TmL_1EyE_sCdhWAic2ImYAW6IT5A0Dm3MjBvzUgRcWpqNLPcdmq9E0h_9zycwiTK5Sz0E15FDZkXCHH_UzakSP3ln854_yxLhdS61ap/s1600/Gemini_Generated_Image_jpdg1njpdg1njpdg.jpg",
+    "views": 78,
+    "commentsCount": 2,
+    "authorName": "Ali"
+  },
+  {
+    "title": "Atom",
+    "url": "https://negronshow.blogspot.com/2026/10/atom.html",
+    "categoryName": "oyun",
+    "tags": ["oyun"],
+    "color": "#8b5cf6",
+    "isPinned": false,
+    "description": "Bağımsız Oyun Geliştirme ve Mizah: at0m (Ataberk Palaçı) YouTube Kanalı İncelemesi",
+    "thumbnail": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjrQnxbv_emUc_ELDnxXHtaqRNYchnXQPUpjxc0P6McKTdbZz35CNgAyw1C8LGzR0t6ksIhD88oPRnQee6kNmQKqUFTVVsCMonV1hB5ueZJKqxJXh6KAKqa1ghgtx235iSMeBjajX2fIHXg7_4sbrCnd-BW2YAzzH7_iuIJrM1hdNmKA5AFtq9Iee8R63A/s1600/krrAIoRVKSU-HD.jpg",
+    "views": 15,
+    "commentsCount": 0,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "Evrim Ağacı TeknoBilim",
+    "url": "https://negronshow.blogspot.com/2026/10/evrim-agac-teknobilim.html",
+    "categoryName": "bilgisayar",
+    "tags": ["bilgisayar"],
+    "color": "#10b981",
+    "isPinned": false,
+    "description": "Teknolojinin Bilimi ve İnovasyon: Evrim Ağacı - Teknobilim YouTube Kanalı İncelemesi",
+    "thumbnail": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgncJATQIpQFANZ5HZA2hROMrvf8qyiV6fQTb5i6x22YUrn_Ty2IZncWY5cK9NADHK7f6s9j8YQD5N4YTYhnncmDIHavGaZNxGECtI0XkVY2hmLraFe5nvZclq7bmvJ1zjdsFPqrN7p3a45ZzBGo5wcfRn59JPmaSghERAf_q3njAn_uqn7jjHgZuWqAVU/s1600/EvTnX95FMbk-HD.jpg",
+    "views": 15,
+    "commentsCount": 0,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "Hüseyin BABAL",
+    "url": "https://negronshow.blogspot.com/2026/10/huseyin-babal.html",
+    "categoryName": "bilgisayar",
+    "tags": ["bilgisayar"],
+    "color": "#10b981",
+    "isPinned": false,
+    "description": "Canlı Kodlama ve Bulut Teknolojileri: Hüseyin Babal YouTube Kanalı İncelemesi",
+    "thumbnail": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjL-1gyt5wACsHQGBU2YhfCtCzwc37mfddIT6qLBrq8l86oRwGyBJq8MC3U7_93I-_UGh-1GscUzOe1gJNUbXiFXgL-dYftoHl0k2znX-lqQMdsYt8RMfE1CeuCnZAmN0EJB8_TWSVJD0jzNfq6WBImhrQa2ZvdD-FB8GfJUdueA8RBdS6gPaE4dedoQvk/s1600/Bxdi6Z4Tqvo-HD.jpg",
+    "views": 15,
+    "commentsCount": 0,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "Politikeron",
+    "url": "https://negronshow.blogspot.com/2026/10/politikeron.html",
+    "categoryName": "öneri",
+    "tags": ["öneri"],
+    "color": "#f59e0b",
+    "isPinned": false,
+    "description": "Eleştirel Siyaset ve Mizahi Gözlem: Politikeron YouTube Kanalı İncelemesi",
+    "thumbnail": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjJPSxqH5-DAt99ZY_yalmiO-KUwS_seShVBv40aLi_6-IAMfFBcTA-1exMuwg8UHgCuPCUq7IDqXKTy7uVetSZXETUcTnoqiJ-NW1s1Dbm7ItZKUWVckPjW1Wa67Cu8z_LFuYpABCIh9ZDBjYT3f7mo4HLQG1hIH-rYodqtRZvJM5uthXhMm_F8cWHTZU/s1600/TDxDVnm8QEQ-HD.jpg",
+    "views": 15,
+    "commentsCount": 0,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "a'nın İHA Devrimi",
+    "url": "https://negronshow.blogspot.com/2026/10/ann-iha-devrimi.html",
+    "categoryName": "teknoloji",
+    "tags": ["teknoloji"],
+    "color": "#a855f7",
+    "isPinned": false,
+    "description": "İnsansız Hava Araçları Teknolojisi, Askeri İnovasyon ve Yeni Nesil Savunma Sanayi Çözümleri.",
+    "thumbnail": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjmT0D-6ooFeX-ZlDG-1qlecJ76MG3inPPw-SDbDJ7hdPiXlD5snW0uXmgrriW_qY-eOfYplCB5fzLiuyr5461wsN6XarBKwt2d48hq10KlgmWUfie0YmhOOFuIIv5A71xk-UHhfVsVhzfqo00vUNNHTI1KgUV60laxI95YoOVhk7fse9XaoJpIjqaRgrU/s1600/RfVtGkVY9TU-SD.jpg",
+    "views": 48,
+    "commentsCount": 0,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "Linux Üzerinde Adobe Uygulamalarını Çalıştırmak: Kolay Kurulum Rehberi",
+    "url": "https://negronshow.blogspot.com/2026/01/linux-uzerinde-adobe-uygulamalarn.html",
+    "categoryName": "bilgisayar",
+    "tags": ["bilgisayar"],
+    "color": "#10b981",
+    "isPinned": false,
+    "description": "Linux dağıtımlarında Photoshop, Illustrator ve Premiere Pro gibi Adobe Creative Cloud uygulamalarını Wine, Bottles ve özel scriptler ile sorunsuz çalıştırma rehberi.",
+    "thumbnail": "https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=800&q=80",
+    "views": 92,
+    "commentsCount": 4,
+    "authorName": "Ali"
+  },
+  {
+    "title": "Selahattin Ünlü ile açık kaynak github dedektifliği",
+    "url": "https://negronshow.blogspot.com/2026/10/selahattin-unlu-ile-ack-kaynak-github.html",
+    "categoryName": "bilgisayar",
+    "tags": ["bilgisayar"],
+    "color": "#10b981",
+    "isPinned": false,
+    "description": "Yazılım Geliştirme ve Kariyer Rehberliği: Selahattin Ünlü YouTube Kanalı İncelemesi",
+    "thumbnail": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjaR1GX1M6MU_DRnkfT6tmIQz4nCHqidOU_KWGbGgaalozXth7HwukQ_zlIZutNij7v2DrPg8L3PzVCNYpt5kr-pPK0DAyQAQUYKF6Bv5spT_pJbeujzps7CuSqNkMgzZZC30rWfqOH98RtwGVPG0NYWQ9SSIUFjiI6CxFh4gGPxC1_GJ0OIMgv-e0v2e8/s1600/PM_TSXlUGEk-HD.jpg",
+    "views": 15,
+    "commentsCount": 0,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "StoryBox",
+    "url": "https://negronshow.blogspot.com/2026/10/storybox.html",
+    "categoryName": "öneri",
+    "tags": ["öneri"],
+    "color": "#f59e0b",
+    "isPinned": false,
+    "description": "Türkiye’nin İnsan Hikâyeleri: StoryBox YouTube Kanalı İncelemesi",
+    "thumbnail": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhV2iqml0qW7qNERZvwbAUB2ok3byYf0F3pIkOqZf2yGK8OWUJNbVm50CcVR2EUyBRq9jPrOjfpJ4ZrEg-XpvSxncyTepKcxEtmi5Xg8rC2nB7TNDLGROaJeCRHpo7rNKOiu6Tn854ILbHXUcYesPhmxmQ7AH_XAq7-2KUVTpNkX4-AiU6JiowaAd2X8TM/s1600/qc-9K7B0vgQ-HD.jpg",
+    "views": 15,
+    "commentsCount": 0,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "Selman Bozkır Teknoloji",
+    "url": "https://negronshow.blogspot.com/2026/10/selman-bozkr-teknoloji.html",
+    "categoryName": "öneri",
+    "tags": ["öneri"],
+    "color": "#f59e0b",
+    "isPinned": false,
+    "description": "Teknoloji, Otomobil ve Kendin Yap Deneyimleri: Selman Bozkır YouTube Kanalı İncelemesi",
+    "thumbnail": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiFoW4BP_L1YgC7FT2pnDVi4VFW7aWc0mWoGnSitse-9FUmkIC22RHRaiEDVqhpVvf0BhPd3-iwsGKxPb9H8Gg_WIL4D4hAEfH_sWv-1Y8Qs8-5kqD-VcvydFHe1XcjTTm64p28y6sYKTIOHqNFO_468UisQY71rE-oUotrCW4rOuB6fAzCdUr674_B_ks/s1600/Nnq4HP8Lk9k-HD.jpg",
+    "views": 15,
+    "commentsCount": 0,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "Code Monkey",
+    "url": "https://negronshow.blogspot.com/2026/10/code-monkey.html",
+    "categoryName": "oyun",
+    "tags": ["oyun"],
+    "color": "#8b5cf6",
+    "isPinned": false,
+    "description": "Unity ve C# ile Oyun Geliştirme Rehberi: Code Monkey YouTube Kanalı İncelemesi",
+    "thumbnail": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQMuHZEecqQ7z1JQEBgEc3tC1QfrkNQI7G7M0_qo9S7zrnCZEfdcBzGzqy5x8ywByBKe9VdjNnnf_hcsaqB04G1QD6jNlAwEFP9M03y9I431WQrlzltkmwroZl4ULl3nbhPPhg8rsFXF9gh9ry-X4sWDoGK7LUverYbo2YKNvTx4NWl3QAWbQth2PplrE/s1600/26F9uHlPEO0-HD.jpg",
+    "views": 15,
+    "commentsCount": 0,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "Flimler Ve Flimler Eleştirel Parodi",
+    "url": "https://negronshow.blogspot.com/2026/10/flimler-ve-flimler-elestirel-parodi.html",
+    "categoryName": "televizyon",
+    "tags": ["televizyon"],
+    "color": "#06b6d4",
+    "isPinned": false,
+    "description": "Sinemanın Eğlenceli ve Eleştirel Yüzü: FilmlerveFilimler YouTube Kanalı İncelemesi",
+    "thumbnail": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgug0I_E-BobZPZNGNV9MhyT5hK4MZev99V9Nr1pUaemUQls7bdy3flp-O1uxlBFVwFADFTBMmwnvN1_uIoAP1ElS8nES89gnWV6QUKQtuZ7zMdhqYzISiNlwBygMQoMkl1ReKLzjpV-mwakDUh2nLGWwM-9Vqv64i5oQC9Gz17BZd7kfjfPfp2sb8tt6k/s1600/D9P5wt_IkR8-HD.jpg",
+    "views": 15,
+    "commentsCount": 0,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "Nejdat Delioğlu İle Teknoloji",
+    "url": "https://negronshow.blogspot.com/2026/10/nejdat-delioglu-ile-teknoloji.html",
+    "categoryName": "teknoloji",
+    "tags": ["teknoloji"],
+    "color": "#a855f7",
+    "isPinned": false,
+    "description": "Donanım, Tamir ve Pratik Teknoloji Çözümleri: Nejdat Teknoloji YouTube Kanalı İncelemesi",
+    "thumbnail": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjmT0D-6ooFeX-ZlDG-1qlecJ76MG3inPPw-SDbDJ7hdPiXlD5snW0uXmgrriW_qY-eOfYplCB5fzLiuyr5461wsN6XarBKwt2d48hq10KlgmWUfie0YmhOOFuIIv5A71xk-UHhfVsVhzfqo00vUNNHTI1KgUV60laxI95YoOVhk7fse9XaoJpIjqaRgrU/s1600/RfVtGkVY9TU-SD.jpg",
+    "views": 15,
+    "commentsCount": 0,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "GitHub Discussions (Saved)",
+    "url": "https://github.com/Aleyulala/saved/discussions",
+    "categoryName": "Konu Dışı",
+    "tags": ["konu-disi", "forum", "topluluk"],
+    "color": "#9aa0a6",
+    "isPinned": false,
+    "description": "Saved projesi topluluk tartışmaları ve soru-cevap alanı"
+  },
+  {
+    "title": "Matrix Topluluk Sohbeti",
+    "url": "https://matrix.to/#/#negronn-show:matrix.org",
+    "categoryName": "Konu Dışı",
+    "tags": ["konu-disi", "matrix", "sohbet"],
+    "color": "#0dbd8b",
+    "isPinned": false,
+    "description": "Negronn Show Matrix odası ve anlık sohbet kanalı"
+  },
+  {
+    "title": "Ekşi Sözlük",
+    "url": "https://eksisozluk.com/",
+    "categoryName": "Konu Dışı",
+    "tags": ["konu-disi", "sozluk", "gundem"],
+    "color": "#53a849",
+    "isPinned": false,
+    "description": "Kutsal bilgi kaynağı ve serbest tartışma platformu"
+  },
+  {
+    "title": "Reddit Türkiye",
+    "url": "https://www.reddit.com/r/Turkey/",
+    "categoryName": "Konu Dışı",
+    "tags": ["konu-disi", "reddit", "topluluk"],
+    "color": "#ff4500",
+    "isPinned": false,
+    "description": "Reddit Türkiye topluluğu ve serbest paylaşımlar"
+  },
+  {
+    "title": "DonanımHaber Forum - Konu Dışı",
+    "url": "https://forum.donanimhaber.com/konu-disi--f286",
+    "categoryName": "Konu Dışı",
+    "tags": ["konu-disi", "forum", "dh"],
+    "color": "#e02b20",
+    "isPinned": false,
+    "description": "Türkiye'nin en köklü konu dışı ve serbest tartışma forumu"
+  },
+  {
+    "title": "Technopat Sosyal",
+    "url": "https://www.technopat.net/sosyal/",
+    "categoryName": "Konu Dışı",
+    "tags": ["konu-disi", "teknoloji", "sosyal"],
+    "color": "#00a4e4",
+    "isPinned": false,
+    "description": "Teknoloji, donanım ve konu dışı serbest paylaşımlar"
+  },
+  {
     "title": "Google Calendar",
     "url": "https://calendar.google.com/",
-    "categoryName": "Routine",
+    "categoryName": "Rutin",
     "tags": [
-      "routine",
+      "rutin",
       "gunluk"
     ],
     "color": "#1a73e8",
     "isPinned": false,
-    "description": "Google Calendar - Routine"
+    "description": "Google Calendar - Rutin"
   },
   {
     "title": "Gmail",
     "url": "https://mail.google.com/",
-    "categoryName": "Routine",
+    "categoryName": "Rutin",
     "tags": [
-      "routine",
+      "rutin",
       "gunluk"
     ],
     "color": "#ea4335",
     "isPinned": true,
-    "description": "Gmail - Routine"
+    "description": "Gmail - Rutin"
   },
   {
     "title": "ALİ YILDIZ Blog",
     "url": "https://aleyulala.blogspot.com/",
-    "categoryName": "Routine",
+    "categoryName": "Rutin",
     "tags": [
-      "routine",
+      "rutin",
       "gunluk"
     ],
     "color": "#ff5722",
     "isPinned": false,
-    "description": "ALİ YILDIZ Blog - Routine"
+    "description": "ALİ YILDIZ Blog - Rutin"
   },
   {
     "title": "Google Tasks",
     "url": "https://tasks.google.com/",
-    "categoryName": "Routine",
+    "categoryName": "Rutin",
     "tags": [
-      "routine",
+      "rutin",
       "gunluk"
     ],
     "color": "#1a73e8",
     "isPinned": false,
-    "description": "Google Tasks - Routine"
+    "description": "Google Tasks - Rutin"
   },
   {
     "title": "Google Keep",
     "url": "https://keep.google.com/",
-    "categoryName": "Routine",
+    "categoryName": "Rutin",
     "tags": [
-      "routine",
+      "rutin",
       "gunluk"
     ],
     "color": "#fbbc04",
     "isPinned": false,
-    "description": "Google Keep - Routine"
+    "description": "Google Keep - Rutin"
   },
   {
     "title": "e-Devlet",
@@ -1627,6 +1937,20 @@ export const SEED_LINKS: RawSeedLink[] = [
     "description": "NFSMWO - Oyun"
   },
   {
+    "title": "NFS Carbon Online",
+    "url": "https://nfscrb.xyz/",
+    "categoryName": "Oyun",
+    "tags": [
+      "oyun",
+      "games",
+      "nfs",
+      "racing"
+    ],
+    "color": "#f59e0b",
+    "isPinned": true,
+    "description": "NFS Carbon Online – Need for Speed: Carbon multiplayer in your browser - Oyun"
+  },
+  {
     "title": "Shell Shockers",
     "url": "https://shellshockers.io/",
     "categoryName": "Oyun",
@@ -1997,6 +2321,22 @@ export const SEED_LINKS: RawSeedLink[] = [
     "color": "#14b8a6",
     "isPinned": false,
     "description": "OmniTools - Araçlar"
+  },
+  {
+    "title": "NoSignups",
+    "url": "https://nosignups.net/",
+    "categoryName": "Araçlar",
+    "tags": [
+      "araclar",
+      "tools",
+      "web"
+    ],
+    "color": "#10b981",
+    "isPinned": false,
+    "description": "NoSignups - Kayıt ve üyelik gerektirmeyen, doğrudan tarayıcıda çalışan açık kaynaklı web araçları ve servisler dizini.",
+    "views": 220,
+    "commentsCount": 4,
+    "authorName": "NEGRONN"
   },
   {
     "title": "Toolixy",
@@ -4538,5 +4878,191 @@ export const SEED_LINKS: RawSeedLink[] = [
     "color": "#1da1f2",
     "isPinned": false,
     "description": "XDA Forums - Forum"
+  },
+  {
+    "title": "Günlük Satırlar",
+    "url": "https://saci.com.tr/",
+    "categoryName": "Genel",
+    "tags": [
+      "genel",
+      "blog",
+      "kisisel-gelisim",
+      "ilham"
+    ],
+    "color": "#9aa0a6",
+    "isPinned": false,
+    "description": "Günlük Satırlar (saci.com.tr) - Psikoloji, motivasyon, kişisel gelişim ve edebiyat üzerine kısa ve ilham verici günlük notlar.",
+    "views": 175,
+    "commentsCount": 3,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "Kaci - Hızlı İlham Durağı",
+    "url": "https://kaci.com.tr/",
+    "categoryName": "Genel",
+    "tags": [
+      "genel",
+      "blog",
+      "ilham"
+    ],
+    "color": "#9aa0a6",
+    "isPinned": false,
+    "description": "Kaci (kaci.com.tr) - Günlük hayata dair kısa bilgiler, ilham verici notlar ve anlık içerikler sunan Türkçe blog.",
+    "views": 150,
+    "commentsCount": 2,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "Bolt.new",
+    "url": "https://bolt.new/",
+    "categoryName": "AI",
+    "tags": [
+      "ai",
+      "kod",
+      "web",
+      "builder"
+    ],
+    "color": "#38bdf8",
+    "isPinned": false,
+    "description": "Bolt.new - StackBlitz tarafından geliştirilen, tarayıcıda yapay zeka ile tam yığın web uygulamaları üreten ve anında yayınlayan araç.",
+    "views": 260,
+    "commentsCount": 6,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "Unsloth AI",
+    "url": "https://unsloth.ai/",
+    "categoryName": "AI",
+    "tags": [
+      "ai",
+      "llm",
+      "fine-tuning",
+      "acik-kaynak"
+    ],
+    "color": "#a855f7",
+    "isPinned": false,
+    "description": "Unsloth - LLM'leri 2 kat daha hızlı ve belirgin şekilde daha az bellekle fine-tune etmeyi sağlayan açık kaynak kütüphane.",
+    "views": 240,
+    "commentsCount": 5,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "v0 by Vercel",
+    "url": "https://v0.dev/",
+    "categoryName": "AI",
+    "tags": [
+      "ai",
+      "kod",
+      "web",
+      "builder"
+    ],
+    "color": "#38bdf8",
+    "isPinned": false,
+    "description": "v0 by Vercel - Metinden React, Tailwind ve shadcn/ui tabanlı arayüzler üreten yapay zeka destekli geliştirme aracı.",
+    "views": 230,
+    "commentsCount": 5,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "Lovable",
+    "url": "https://lovable.dev/",
+    "categoryName": "AI",
+    "tags": [
+      "ai",
+      "kod",
+      "web",
+      "builder"
+    ],
+    "color": "#ec4899",
+    "isPinned": false,
+    "description": "Lovable - Doğal dil ile tam yığın web uygulamaları oluşturup yayınlamayı sağlayan yapay zeka geliştirici platformu.",
+    "views": 220,
+    "commentsCount": 4,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "Replit",
+    "url": "https://replit.com/",
+    "categoryName": "Programlama",
+    "tags": [
+      "programlama",
+      "kod",
+      "ide",
+      "ai"
+    ],
+    "color": "#f97316",
+    "isPinned": false,
+    "description": "Replit - Tarayıcıda kod yazma, çalıştırma ve yayınlamayı sağlayan, yapay zeka destekli bulut geliştirme ortamı.",
+    "views": 210,
+    "commentsCount": 4,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "Hugging Face",
+    "url": "https://huggingface.co/",
+    "categoryName": "AI",
+    "tags": [
+      "ai",
+      "model",
+      "llm",
+      "acik-kaynak"
+    ],
+    "color": "#fbbf24",
+    "isPinned": false,
+    "description": "Hugging Face - Açık kaynak yapay zeka modelleri, veri setleri ve Spaces uygulamaları için lider topluluk platformu.",
+    "views": 250,
+    "commentsCount": 6,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "Ollama",
+    "url": "https://ollama.com/",
+    "categoryName": "AI",
+    "tags": [
+      "ai",
+      "llm",
+      "yerel",
+      "acik-kaynak"
+    ],
+    "color": "#0ea5e9",
+    "isPinned": false,
+    "description": "Ollama - Llama, Mistral ve Gemma gibi büyük dil modellerini kendi bilgisayarınızda yerel olarak çalıştırmanızı sağlar.",
+    "views": 235,
+    "commentsCount": 5,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "LLaMA-Factory",
+    "url": "https://github.com/hiyouga/LLaMA-Factory",
+    "categoryName": "AI",
+    "tags": [
+      "ai",
+      "llm",
+      "fine-tuning",
+      "github"
+    ],
+    "color": "#22c55e",
+    "isPinned": false,
+    "description": "LLaMA-Factory - 100'den fazla LLM ve VLM modelini kolayca fine-tune etmeyi sağlayan birleşik açık kaynak araç.",
+    "views": 190,
+    "commentsCount": 3,
+    "authorName": "NEGRONN"
+  },
+  {
+    "title": "Axolotl",
+    "url": "https://github.com/axolotl-ai-cloud/axolotl",
+    "categoryName": "AI",
+    "tags": [
+      "ai",
+      "llm",
+      "fine-tuning",
+      "github"
+    ],
+    "color": "#8b5cf6",
+    "isPinned": false,
+    "description": "Axolotl - Farklı model mimarileri için yapılandırma tabanlı, esnek ve açık kaynaklı LLM fine-tuning aracı.",
+    "views": 180,
+    "commentsCount": 3,
+    "authorName": "NEGRONN"
   }
 ];

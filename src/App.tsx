@@ -64,6 +64,7 @@ export const App: React.FC = () => {
   const [selectedPost, setSelectedPost] = useState<LinkItem | null>(null);
   const [selectedCollectionId, setSelectedCollectionId] = useState<number | null>(null);
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  const [resetPageTrigger, setResetPageTrigger] = useState<number>(0);
 
   // Universal Media Modal State (#fsMediaModal)
   const [mediaModal, setMediaModal] = useState<{
@@ -100,6 +101,8 @@ export const App: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isRightDrawerOpen, setIsRightDrawerOpen] = useState(false);
+  // #İletişim → Nsone Bot spotlight sinyali (her artış açık pencereyi tetikler)
+  const [contactOpenSignal, setContactOpenSignal] = useState(0);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [editingLink, setEditingLink] = useState<LinkItem | null>(null);
   const [detailLink, setDetailLink] = useState<LinkItem | null>(null);
@@ -340,6 +343,9 @@ export const App: React.FC = () => {
         ...data,
         updatedAt: Date.now()
       });
+      if (selectedPost && selectedPost.id === editingLink.id) {
+        setSelectedPost(prev => prev ? ({ ...prev, ...data, updatedAt: Date.now() } as LinkItem) : null);
+      }
     } else {
       await db.links.add({
         url: data.url!,
@@ -371,12 +377,27 @@ export const App: React.FC = () => {
   const handleOpenPostPage = (link: LinkItem) => {
     setSelectedPost(link);
     setActiveView('post_detail');
-    if (window.innerWidth < 768) {
-      setIsDrawerOpen(true);
-    } else {
-      setIsSidebarOpen(true);
-    }
     document.getElementById('mainScrollContainer')?.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleGoHome = () => {
+    setActiveView('dashboard');
+    setSelectedPost(null);
+    setSelectedCollectionId(null);
+    setSelectedTag(null);
+    setSearchQuery('');
+    setResetPageTrigger((prev) => prev + 1);
+    try {
+      const url = new URL(window.location.href);
+      url.search = '';
+      url.hash = '';
+      window.history.pushState({}, '', url.pathname);
+    } catch {}
+    const mainContainer = document.getElementById('mainScrollContainer');
+    if (mainContainer) {
+      mainContainer.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleTogglePin = async (id: number, current: boolean) => {
@@ -486,15 +507,19 @@ export const App: React.FC = () => {
           }
         }}
         onOpenNewLink={() => {
-          setEditingLink(null);
-          setIsAddModalOpen(true);
+          if (activeView === 'post_detail' && selectedPost) {
+            setEditingLink(selectedPost);
+            setIsAddModalOpen(true);
+          } else {
+            setEditingLink(null);
+            setIsAddModalOpen(true);
+          }
         }}
+        isPostDetail={activeView === 'post_detail' && !!selectedPost}
+        postTitle={selectedPost?.title}
         onOpenImportExport={() => setIsImportExportOpen(true)}
         onOpenSettings={() => setIsSettingsOpen(true)}
-        onGoHome={() => {
-          setActiveView('dashboard');
-          setSearchQuery('');
-        }}
+        onGoHome={handleGoHome}
         onOpenPinned={() => {
           setActiveView('pinned');
           setSearchQuery('');
@@ -505,52 +530,58 @@ export const App: React.FC = () => {
       {/* 2. ANA GÖVDE: SOL BAR + ORTA İÇERİK + SAĞ BAR */}
       <div className="flex flex-1 overflow-hidden min-h-0">
         
-        {/* SOL BAR: Blogger Navigation Sidebar (.mainL - Desktop) */}
-        {isSidebarOpen && (
-          <div className="hidden md:flex shrink-0">
-            <BloggerSidebar
-              currentTab={activeView === 'post_detail' ? 'dashboard' : activeView}
-              activeCollectionId={selectedCollectionId}
-              activeTag={selectedTag}
-              onSelectTab={(tab) => {
+        {/* SOL BAR: Blogger Navigation Sidebar (.mainL - Desktop & El Konsolu: 897px+ Üzerinde 75px Mini Bar, Açıkken 230px) */}
+        <div className="hidden min-[897px]:flex shrink-0">
+          <BloggerSidebar
+            isCollapsed={!isSidebarOpen}
+            onToggleSidebar={() => setIsSidebarOpen(prev => !prev)}
+            currentTab={activeView}
+            activeCollectionId={selectedCollectionId}
+            activeTag={selectedTag}
+            onSelectTab={(tab) => {
+              if (tab === 'dashboard') {
+                handleGoHome();
+              } else {
                 setActiveView(tab);
                 setSearchQuery('');
-              }}
-              onSelectCollection={(id) => {
-                setSelectedCollectionId(id);
-                setActiveView('collection');
-                setSearchQuery('');
-              }}
-              onSelectTag={(tag) => {
-                setSelectedTag(tag);
-                setActiveView('tag');
-                setSearchQuery('');
-              }}
-              collections={collections}
-              tags={tags}
-              counts={counts}
-              onOpenNewLink={() => {
-                setEditingLink(null);
-                setIsAddModalOpen(true);
-              }}
-              onOpenManageCollections={() => setIsCollectionsModalOpen(true)}
-              onOpenManageTags={() => setIsTagsModalOpen(true)}
-              onOpenSettings={() => setIsSettingsOpen(true)}
-              onOpenImportExport={() => setIsImportExportOpen(true)}
-            />
-          </div>
-        )}
+              }
+            }}
+            onSelectCollection={(id) => {
+              setSelectedCollectionId(id);
+              setActiveView('collection');
+              setSearchQuery('');
+            }}
+            onSelectTag={(tag) => {
+              setSelectedTag(tag);
+              setActiveView('tag');
+              setSearchQuery('');
+            }}
+            collections={collections}
+            tags={tags}
+            counts={counts}
+            onOpenNewLink={() => {
+              setEditingLink(null);
+              setIsAddModalOpen(true);
+            }}
+            onOpenManageCollections={() => setIsCollectionsModalOpen(true)}
+            onOpenManageTags={() => setIsTagsModalOpen(true)}
+            onOpenSettings={() => setIsSettingsOpen(true)}
+            onOpenImportExport={() => setIsImportExportOpen(true)}
+          />
+        </div>
 
         {/* BİRLEŞİK KAYDIRMA ALANI: Orta İçerik ve Sağ Bar BİRLİKTE Kayar (.mainW) */}
         <div 
           id="mainScrollContainer"
-          className="flex-1 h-[calc(100vh-60px)] overflow-y-auto overflow-x-hidden min-w-0 bg-[#1e1e1e]"
+          className="flex-1 h-[calc(100vh-60px)] overflow-y-auto overflow-x-hidden min-w-0 bg-[#1e1e1e] flex flex-col justify-between"
         >
-          <div className="max-w-[1280px] mx-auto px-4 sm:px-[25px] pt-4 sm:pt-[30px] pb-20">
-            <div className="flex flex-col lg:flex-row gap-[25px] items-start">
-              
-              {/* ORTA BÖLÜM: Ana İçerik Alanı (.blogB) */}
-              <main className="flex-1 min-w-0 w-full lg:w-[calc(100%-325px)]">
+          {/* Ana İçerik ve Sağ Bar Konteyneri */}
+          <div className="w-full flex-1">
+            <div className="max-w-[1280px] mx-auto px-4 sm:px-[25px] pt-4 sm:pt-[30px] pb-12">
+              <div className="flex flex-col min-[800px]:flex-row gap-[25px] items-start">
+                
+                {/* ORTA BÖLÜM: Ana İçerik Alanı (.blogB - 897px+ Masaüstü / El Konsolunda calc(100%-325px)) */}
+                <main className="flex-1 min-w-0 w-full min-[800px]:w-[calc(100%-325px)]">
                 {activeView === 'dashboard' && (
                   <DashboardView
                     links={allLinks}
@@ -558,6 +589,7 @@ export const App: React.FC = () => {
                     tagsCount={tags.length}
                     pinnedCount={counts.pinned}
                     collectionMap={collectionMap}
+                    resetPageTrigger={resetPageTrigger}
                     onNavigateTab={(tab) => {
                       setActiveView(tab);
                       setSearchQuery('');
@@ -590,6 +622,15 @@ export const App: React.FC = () => {
                       setEditingLink(link);
                       setIsAddModalOpen(true);
                     }}
+                    onOpenMedia={handleOpenMedia}
+                    onOpenChat={() => setIsRightDrawerOpen(true)}
+                    onOpenContact={() => {
+                      window.open(
+                        'https://script.google.com/macros/s/AKfycbwcZprdS6F_jJ6nin0YalTKweQKP4t936UgrTnme-d5gA-qHbi986vh6HxdzvA236Of/exec',
+                        '_blank',
+                        'noopener,noreferrer'
+                      );
+                    }}
                   />
                 )}
 
@@ -598,10 +639,7 @@ export const App: React.FC = () => {
                     link={selectedPost}
                     allLinks={allLinks}
                     collection={selectedPost.collectionId ? collectionMap.get(selectedPost.collectionId) : undefined}
-                    onBack={() => {
-                      setActiveView('dashboard');
-                      document.getElementById('mainScrollContainer')?.scrollTo({ top: 0, behavior: 'smooth' });
-                    }}
+                    onBack={handleGoHome}
                     onNavigatePost={(nextPost) => {
                       setSelectedPost(nextPost);
                       document.getElementById('mainScrollContainer')?.scrollTo({ top: 0, behavior: 'smooth' });
@@ -620,14 +658,8 @@ export const App: React.FC = () => {
 
                 {activeView === 'privacy' && (
                   <BloggerPrivacyView
-                    onBack={() => {
-                      setActiveView('dashboard');
-                      document.getElementById('mainScrollContainer')?.scrollTo({ top: 0, behavior: 'smooth' });
-                    }}
-                    onGoHome={() => {
-                      setActiveView('dashboard');
-                      document.getElementById('mainScrollContainer')?.scrollTo({ top: 0, behavior: 'smooth' });
-                    }}
+                    onBack={handleGoHome}
+                    onGoHome={handleGoHome}
                   />
                 )}
 
@@ -800,8 +832,8 @@ export const App: React.FC = () => {
 
               </main>
 
-              {/* SAĞ BAR: Popüler Post, Etiketler, Bize Ulaşın (.sideB) */}
-              <aside className="w-full lg:w-[300px] shrink-0">
+              {/* SAĞ BAR: Popüler Post, Etiketler, Bize Ulaşın (.sideB - 897px+ Masaüstü / El Konsolunda 300px Sabit) */}
+              <aside className="w-full min-[800px]:w-[300px] shrink-0">
                 <BloggerRightSidebar
                   pinnedLinks={allLinks.filter(l => l.isPinned && !l.isTrash && !l.isArchived)}
                   allLinks={allLinks}
@@ -821,14 +853,16 @@ export const App: React.FC = () => {
                   onOpenPostPage={handleOpenPostPage}
                   isDrawerOpen={isRightDrawerOpen}
                   onCloseDrawer={() => setIsRightDrawerOpen(false)}
+                  contactOpenSignal={contactOpenSignal}
                 />
               </aside>
 
+              </div>
             </div>
-
-            {/* Blogger Alt Footer Bölümü (.mainF) */}
-            <BloggerFooter onOpenPrivacy={() => setActiveView('privacy')} />
           </div>
+
+          {/* Blogger Alt Footer Bölümü (.mainF) - Tam Genişlik (Full Width) */}
+          <BloggerFooter onOpenPrivacy={() => setActiveView('privacy')} />
         </div>
 
       </div>
@@ -876,6 +910,14 @@ export const App: React.FC = () => {
         onOpenAllLinks={() => {
           setActiveView('links');
         }}
+        onOpenPinned={() => {
+          setActiveView('pinned');
+          setSearchQuery('');
+        }}
+        onToggleViewMode={() => {
+          setViewMode(prev => prev === 'grid' ? 'list' : 'grid');
+        }}
+        viewMode={viewMode}
       />
 
       {/* Blogger Side Drawer (.mainL / .mnBr) */}
@@ -884,8 +926,12 @@ export const App: React.FC = () => {
         onClose={() => setIsDrawerOpen(false)}
         currentTab={activeView}
         onSelectTab={(tab) => {
-          setActiveView(tab);
-          setSearchQuery('');
+          if (tab === 'dashboard') {
+            handleGoHome();
+          } else {
+            setActiveView(tab);
+            setSearchQuery('');
+          }
         }}
         collections={collections}
         tags={tags}

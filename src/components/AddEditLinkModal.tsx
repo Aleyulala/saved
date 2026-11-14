@@ -26,6 +26,7 @@ export const AddEditLinkModal: React.FC<AddEditLinkModalProps> = ({
   const [url, setUrl] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [thumbnail, setThumbnail] = useState('');
   const [rss, setRss] = useState('');
   const [rssFound, setRssFound] = useState(false);
   const [showCandidates, setShowCandidates] = useState(false);
@@ -41,6 +42,7 @@ export const AddEditLinkModal: React.FC<AddEditLinkModalProps> = ({
       setUrl(editingLink.url);
       setTitle(editingLink.title);
       setDescription(editingLink.description || '');
+      setThumbnail(editingLink.thumbnail || '');
       setRss(editingLink.rss || '');
       setRssFound(!!editingLink.rss);
       setShowCandidates(false);
@@ -52,6 +54,7 @@ export const AddEditLinkModal: React.FC<AddEditLinkModalProps> = ({
       setUrl('');
       setTitle('');
       setDescription('');
+      setThumbnail('');
       setRss('');
       setRssFound(false);
       setShowCandidates(false);
@@ -114,6 +117,7 @@ export const AddEditLinkModal: React.FC<AddEditLinkModalProps> = ({
         url: formattedUrl,
         title: title.trim() || formattedUrl,
         description: description.trim(),
+        thumbnail: thumbnail.trim() || undefined,
         rss: rss.trim() || undefined,
         collectionId: collectionId ? Number(collectionId) : null,
         tags,
@@ -129,9 +133,9 @@ export const AddEditLinkModal: React.FC<AddEditLinkModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-xs overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-xs overflow-y-auto animate-in fade-in duration-200">
       <div 
-        className="w-full max-w-lg bg-[#212121] rounded-2xl shadow-2xl border border-[#3e3e3e] overflow-hidden my-8 text-neutral-200"
+        className="w-full max-w-lg bg-[#212121] rounded-2xl shadow-2xl border border-[#3e3e3e] overflow-hidden my-8 text-neutral-200 animate-in zoom-in duration-200"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -265,6 +269,43 @@ export const AddEditLinkModal: React.FC<AddEditLinkModalProps> = ({
               placeholder="Brief summary..."
               className="w-full px-3.5 py-2 rounded-xl bg-[#171717] border border-[#383838] text-sm text-white focus:outline-none focus:border-[#38bdf8] transition-colors resize-none"
             />
+          </div>
+
+          {/* Özel Görsel / Fotoğraf URL */}
+          <div>
+            <div className="flex items-center justify-between mb-1.5">
+              <label className="text-xs font-semibold text-neutral-300 uppercase tracking-wider">
+                Özel Görsel / Fotoğraf URL
+              </label>
+              {thumbnail && (
+                <button
+                  type="button"
+                  onClick={() => setThumbnail('')}
+                  className="text-[11px] text-[#989b9f] hover:text-red-400 transition-colors cursor-pointer"
+                >
+                  Görseli Kaldır
+                </button>
+              )}
+            </div>
+            <input
+              type="url"
+              value={thumbnail}
+              onChange={(e) => setThumbnail(e.target.value)}
+              placeholder="https://... doğrudan görsel veya kapak fotoğrafı bağlantısı (opsiyonel)"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-[#171717] border border-[#383838] text-sm text-white focus:outline-none focus:border-[#38bdf8] transition-colors"
+            />
+            {thumbnail.trim() && (
+              <div className="mt-2 relative w-full h-24 rounded-xl overflow-hidden bg-[#171717] border border-[#383838]">
+                <img
+                  src={thumbnail}
+                  alt="Önizleme"
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    (e.target as HTMLElement).style.display = 'none';
+                  }}
+                />
+              </div>
+            )}
           </div>
 
           <div>

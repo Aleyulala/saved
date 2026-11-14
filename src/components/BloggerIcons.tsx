@@ -27,6 +27,14 @@ export const HomeIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-
   </svg>
 );
 
+export const HomeAltIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
+  <svg className={`line ${className}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <g transform="translate(2.400000, 2.000000)">
+      <path d="M1.24344979e-14,11.713 C1.24344979e-14,6.082 0.614,6.475 3.919,3.41 C5.365,2.246 7.615,0 9.558,0 C11.5,0 13.795,2.235 15.254,3.41 C18.559,6.475 19.172,6.082 19.172,11.713 C19.172,20 17.213,20 9.586,20 C1.959,20 1.24344979e-14,20 1.24344979e-14,11.713 Z" />
+    </g>
+  </svg>
+);
+
 export const Folder2Icon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
   <svg className={`line ${className}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
     <path d="M8 2H17C19 2 20 3 20 5V6.38" strokeMiterlimit="10" />
@@ -43,9 +51,12 @@ export const FolderFavoriteIcon: React.FC<{ className?: string }> = ({ className
 
 export const FolderCodeIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
   <svg className={`line ${className}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M22 11V17C22 21 21 22 17 22H7C3 22 2 21 2 17V7C2 3 3 2 7 2H8.5C10 2 10.33 2.44 10.9 3.2L12.4 5.2C12.78 5.7 13 6 14 6H17C21 6 22 7 22 11Z" strokeMiterlimit="10" />
-    <path className="text-[#60cdff]" d="M9.5 12L7.5 14.5L9.5 17" />
-    <path className="text-[#60cdff]" d="M14.5 12L16.5 14.5L14.5 17" />
+    {/* Sleek cyber rounded dev folder / console frame */}
+    <path d="M22 11V17C22 20.5 20.5 22 17 22H7C3.5 22 2 20.5 2 17V7C2 3.5 3.5 2 7 2H9.2C10.2 2 10.7 2.4 11.2 3.1L12.3 4.7C12.7 5.2 13 5.5 14 5.5H17C20.5 5.5 22 7 22 10.5" strokeMiterlimit="10" />
+    {/* Futuristic code brackets with slash </> */}
+    <path className="text-[var(--linkC,#9aa0a6)]" strokeWidth="1.9" d="M8 12.5L5.8 14.5L8 16.5" />
+    <path className="text-[var(--linkC,#9aa0a6)]" strokeWidth="1.9" d="M13 11L11 18" />
+    <path className="text-[var(--linkC,#9aa0a6)]" strokeWidth="1.9" d="M16 12.5L18.2 14.5L16 16.5" />
   </svg>
 );
 
@@ -87,11 +98,11 @@ export const TranslateIcon: React.FC<{ className?: string }> = ({ className = 'w
     <path d="M.5,2V18A1.5,1.5,0,0,0,2,19.5H17L10.5.5H2A1.5,1.5,0,0,0,.5,2Z" />
     <path d="M12,4.5H22A1.5,1.5,0,0,1,23.5,6V22A1.5,1.5,0,0,1,22,23.5H13.5l-1.5-4" />
     <line x1="17" x2="13.5" y1="19.5" y2="23.5" />
-    <line className="text-[#60cdff]" x1="14.5" x2="21.5" y1="10.5" y2="10.5" />
-    <line className="text-[#60cdff]" x1="17.5" x2="17.5" y1="9.5" y2="10.5" />
-    <path className="text-[#60cdff]" d="M20,10.5c0,1.1-1.77,4.42-4,6" />
-    <path className="text-[#60cdff]" d="M16,13c.54,1.33,4,4.5,4,4.5" />
-    <path className="text-[#60cdff]" d="M10.1,7.46a4,4,0,1,0,1.4,3h-4" />
+    <line className="text-[var(--linkC,#9aa0a6)]" x1="14.5" x2="21.5" y1="10.5" y2="10.5" />
+    <line className="text-[var(--linkC,#9aa0a6)]" x1="17.5" x2="17.5" y1="9.5" y2="10.5" />
+    <path className="text-[var(--linkC,#9aa0a6)]" d="M20,10.5c0,1.1-1.77,4.42-4,6" />
+    <path className="text-[var(--linkC,#9aa0a6)]" d="M16,13c.54,1.33,4,4.5,4,4.5" />
+    <path className="text-[var(--linkC,#9aa0a6)]" d="M10.1,7.46a4,4,0,1,0,1.4,3h-4" />
   </svg>
 );
 
@@ -195,16 +206,16 @@ export const ArrowSwapHorizontalIcon: React.FC<{ className?: string }> = ({ clas
   <svg className={`line ${className}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
     <path d="M20.5 14.99L15.49 20.01" strokeMiterlimit="10" />
     <path d="M3.5 14.99H20.5" strokeMiterlimit="10" />
-    <path className="text-[#60cdff]" d="M3.5 9.00999L8.51 3.98999" strokeMiterlimit="10" />
-    <path className="text-[#60cdff]" d="M20.5 9.01001H3.5" strokeMiterlimit="10" />
+    <path className="text-[var(--linkC,#9aa0a6)]" d="M3.5 9.00999L8.51 3.98999" strokeMiterlimit="10" />
+    <path className="text-[var(--linkC,#9aa0a6)]" d="M20.5 9.01001H3.5" strokeMiterlimit="10" />
   </svg>
 );
 
 export const SpeedometerIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
   <svg className={`line ${className}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
     <path d="M19.14 19.5C20.91 17.7 22 15.22 22 12.5C22 6.98 17.52 2.5 12 2.5C6.48 2.5 2 6.98 2 12.5C2 15.22 3.08 17.68 4.84 19.49" strokeMiterlimit="10" />
-    <path className="text-[#60cdff]" d="M12 21.5C13.8667 21.5 15.38 19.9867 15.38 18.12C15.38 16.2533 13.8667 14.74 12 14.74C10.1333 14.74 8.62 16.2533 8.62 18.12C8.62 19.9867 10.1333 21.5 12 21.5Z" strokeMiterlimit="10" />
-    <path className="text-[#60cdff]" d="M15.25 12H16C16.82 12 17.5 11.33 17.5 10.5C17.5 9.68 16.82 9 16 9C15.18 9 14.5 9.67 14.5 10.5V11.25C14.5 11.66 14.84 12 15.25 12Z" strokeMiterlimit="10" />
+    <path className="text-[var(--linkC,#9aa0a6)]" d="M12 21.5C13.8667 21.5 15.38 19.9867 15.38 18.12C15.38 16.2533 13.8667 14.74 12 14.74C10.1333 14.74 8.62 16.2533 8.62 18.12C8.62 19.9867 10.1333 21.5 12 21.5Z" strokeMiterlimit="10" />
+    <path className="text-[var(--linkC,#9aa0a6)]" d="M15.25 12H16C16.82 12 17.5 11.33 17.5 10.5C17.5 9.68 16.82 9 16 9C15.18 9 14.5 9.67 14.5 10.5V11.25C14.5 11.66 14.84 12 15.25 12Z" strokeMiterlimit="10" />
   </svg>
 );
 
@@ -265,3 +276,146 @@ export const ChatBloggerIcon: React.FC<{ className?: string }> = ({ className = 
     </g>
   </svg>
 );
+
+// svg.hierarchy-4 (Blogger XML 1:1 - Hizmetler)
+export const Hierarchy4Icon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
+  <svg className={`line ${className}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M6 12H18" />
+    <path d="M18 4H14C12 4 11 5 11 7V17C11 19 12 20 14 20H18" />
+    <path className="c" d="M20 14C21.1046 14 22 13.1046 22 12C22 10.8954 21.1046 10 20 10C18.8954 10 18 10.8954 18 12C18 13.1046 18.8954 14 20 14Z" />
+    <path className="c" d="M20 6C21.1046 6 22 5.10457 22 4C22 2.89543 21.1046 2 20 2C18.8954 2 18 2.89543 18 4C18 5.10457 18.8954 6 20 6Z" />
+    <path className="c" d="M20 22C21.1046 22 22 21.1046 22 20C22 18.8954 21.1046 18 20 18C18.8954 18 18 18.8954 18 20C18 21.1046 18.8954 22 20 22Z" />
+    <path className="c" d="M4 14C5.10457 14 6 13.1046 6 12C6 10.8954 5.10457 10 4 10C2.89543 10 2 10.8954 2 12C2 13.1046 2.89543 14 4 14Z" />
+  </svg>
+);
+
+// svg.flash (Blogger XML 1:1 - Klasör / Menü)
+export const FlashIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
+  <svg className={`line ${className}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M6.08998 13.28H9.17998V20.48C9.17998 22.16 10.09 22.5 11.2 21.24L18.77 12.64C19.7 11.59 19.31 10.72 17.9 10.72H14.81V3.52002C14.81 1.84002 13.9 1.50002 12.79 2.76002L5.21998 11.36C4.29998 12.42 4.68998 13.28 6.08998 13.28Z" strokeMiterlimit="10" />
+  </svg>
+);
+
+// svg.edit-3 (Blogger XML 1:1 - Notlarınız)
+export const Edit3Icon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
+  <svg className={`line ${className}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <g transform="translate(3.500000, 3.500000)">
+      <line className="c" x1="9.8352" x2="16.2122" y1="16.0078" y2="16.0078" />
+      <path d="M12.5578,1.3589 L12.5578,1.3589 C11.2138,0.3509 9.3078,0.6229 8.2998,1.9659 C8.2998,1.9659 3.2868,8.6439 1.5478,10.9609 C-0.1912,13.2789 1.4538,16.1509 1.4538,16.1509 C1.4538,16.1509 4.6978,16.8969 6.4118,14.6119 C8.1268,12.3279 13.1638,5.6169 13.1638,5.6169 C14.1718,4.2739 13.9008,2.3669 12.5578,1.3589 Z" />
+      <line x1="7.0041" x2="11.8681" y1="3.7114" y2="7.3624" />
+    </g>
+  </svg>
+);
+
+// svg.profile-2user (Blogger XML 1:1 - Forumlarınız)
+export const Profile2UserIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
+  <svg className={`line ${className}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <g transform="translate(2.749500, 2.549500)">
+      <path d="M6.809,18.9067 C3.137,18.9067 9.41469125e-14,18.3517 9.41469125e-14,16.1277 C9.41469125e-14,13.9037 3.117,11.8997 6.809,11.8997 C10.481,11.8997 13.617,13.8847 13.617,16.1077 C13.617,18.3307 10.501,18.9067 6.809,18.9067 Z" />
+      <path d="M6.809,8.728 C9.219,8.728 11.173,6.774 11.173,4.364 C11.173,1.954 9.219,-2.48689958e-14 6.809,-2.48689958e-14 C4.399,-2.48689958e-14 2.44496883,1.954 2.44496883,4.364 C2.436,6.766 4.377,8.72 6.778,8.728 L6.809,8.728 Z" />
+      <path className="c" d="M14.0517,7.5293 C15.4547,7.1543 16.4887007,5.8753 16.4887007,4.3533 C16.4897,2.7653 15.3627,1.4393 13.8647,1.1323" />
+      <path className="c" d="M14.7113,11.104 C16.6993,11.104 18.3973,12.452 18.3973,13.655 C18.3973,14.364 17.8123,15.092 16.9223,15.301" />
+    </g>
+  </svg>
+);
+
+// svg.sms-edit (Blogger XML 1:1 - Geri Bildirim)
+export const SmsEditIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
+  <svg className={`line ${className}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 20.5H7C4 20.5 2 19 2 15.5V8.5C2 5 4 3.5 7 3.5H17C20 3.5 22 5 22 8.5V11.5" strokeMiterlimit="10" />
+    <path d="M17 9L13.87 11.5C12.84 12.32 11.15 12.32 10.12 11.5L7 9" strokeMiterlimit="10" />
+    <path className="c" d="M19.21 14.77L15.6701 18.31C15.5301 18.45 15.4 18.71 15.37 18.9L15.18 20.25C15.11 20.74 15.45 21.0801 15.94 21.0101L17.29 20.82C17.48 20.79 17.75 20.66 17.88 20.52L21.4201 16.9801C22.0301 16.3701 22.3201 15.6601 21.4201 14.7601C20.5301 13.8701 19.82 14.16 19.21 14.77Z" strokeMiterlimit="10" />
+    <path className="c" d="M18.7001 15.28C19.0001 16.36 19.8401 17.2 20.9201 17.5" strokeMiterlimit="10" />
+  </svg>
+);
+
+// ChevronDown (Blogger XML 1:1 - Menü Açılır Ok)
+export const ChevronDownIcon: React.FC<{ className?: string }> = ({ className = 'w-3.5 h-3.5' }) => (
+  <svg className={`line ${className}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10">
+    <g transform="translate(12.000000, 12.000000) rotate(0.000000) translate(-12.000000, -12.000000) translate(5.000000, 8.500000)">
+      <polyline points="14 0 7 7 0 0" />
+    </g>
+  </svg>
+);
+
+// svg.plus (Blogger XML 1:1 .mNav - Menü Açma Butonu)
+export const PlusNavIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
+  <svg className={`line ${className}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M6 12H18" />
+    <path d="M12 18V6" />
+  </svg>
+);
+
+// svg.whatsapp (Blogger XML 1:1 - Whatsapp / Telefon)
+export const WhatsappIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
+  <svg className={`fill-current ${className}`} viewBox="0 0 32 32">
+    <path d="M16,2A13,13,0,0,0,8,25.23V29a1,1,0,0,0,.51.87A1,1,0,0,0,9,30a1,1,0,0,0,.51-.14l3.65-2.19A12.64,12.64,0,0,0,16,28,13,13,0,0,0,16,2Zm0,24a11.13,11.13,0,0,1-2.76-.36,1,1,0,0,0-.76.11L10,27.23v-2.5a1,1,0,0,0-.42-.81A11,11,0,1,1,16,26Z" />
+    <path d="M19.86,15.18a1.9,1.9,0,0,0-2.64,0l-.09.09-1.4-1.4.09-.09a1.86,1.86,0,0,0,0-2.64L14.23,9.55a1.9,1.9,0,0,0-2.64,0l-.8.79a3.56,3.56,0,0,0-.5,3.76,10.64,10.64,0,0,0,2.62,4A8.7,8.7,0,0,0,18.56,21a2.92,2.92,0,0,0,2.1-.79l.79-.8a1.86,1.86,0,0,0,0-2.64Zm-.62,3.61c-.57.58-2.78,0-4.92-2.11a8.88,8.88,0,0,1-2.13-3.21c-.26-.79-.25-1.44,0-1.71l.7-.7,1.4,1.4-.7.7a1,1,0,0,0,0,1.41l2.82,2.82a1,1,0,0,0,1.41,0l.7-.7,1.4,1.4Z" />
+  </svg>
+);
+
+// svg.emoji-happy (Blogger XML 1:1 - .pGrt Selamlama İkonu)
+export const EmojiHappyIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
+  <svg className={`line ${className}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z" />
+    <path className="c" d="M15.5 9.75C16.3284 9.75 17 9.07843 17 8.25C17 7.42157 16.3284 6.75 15.5 6.75C14.6716 6.75 14 7.42157 14 8.25C14 9.07843 14.6716 9.75 15.5 9.75Z" strokeMiterlimit="10" />
+    <path className="c" d="M8.5 9.75C9.32843 9.75 10 9.07843 10 8.25C10 7.42157 9.32843 6.75 8.5 6.75C7.67157 6.75 7 7.42157 7 8.25C7 9.07843 7.67157 9.75 8.5 9.75Z" strokeMiterlimit="10" />
+    <path d="M8.4 13.3H15.6C16.1 13.3 16.5 13.7 16.5 14.2C16.5 16.69 14.49 18.7 12 18.7C9.51 18.7 7.5 16.69 7.5 14.2C7.5 13.7 7.9 13.3 8.4 13.3Z" strokeMiterlimit="10" />
+  </svg>
+);
+
+// svg.facebook (Blogger XML 1:1 - Facebook Paylaş İkonu)
+export const FacebookIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
+  <svg className={`fill-current ${className}`} viewBox="0 0 24 24">
+    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+  </svg>
+);
+
+// svg.twitter / X (Blogger XML 1:1 - X Paylaş İkonu)
+export const TwitterIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
+  <svg className={`fill-current ${className}`} viewBox="0 0 24 24">
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+  </svg>
+);
+
+// svg.eye (Blogger XML 1:1 - .pVws Sayfa Görüntüleme İkonu)
+export const BloggerEyeIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
+  <svg className={`line ${className}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path className="c" d="M15.58 12C15.58 13.98 13.98 15.58 12 15.58C10.02 15.58 8.42004 13.98 8.42004 12C8.42004 10.02 10.02 8.42004 12 8.42004C13.98 8.42004 15.58 10.02 15.58 12Z" />
+    <path d="M12 20.27C15.53 20.27 18.82 18.19 21.11 14.59C22.01 13.18 22.01 10.81 21.11 9.39997C18.82 5.79997 15.53 3.71997 12 3.71997C8.46997 3.71997 5.17997 5.79997 2.88997 9.39997C1.98997 10.81 1.98997 13.18 2.88997 14.59C5.17997 18.19 8.46997 20.27 12 20.27Z" />
+  </svg>
+);
+
+// svg.share-1 (Blogger XML 1:1 - Gönderi Paylaş İkonu / Kağıt Uçak Send)
+export const Share1Icon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
+  <svg className={`line ${className}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M7.39999 6.32003L15.89 3.49003C19.7 2.22003 21.77 4.30003 20.51 8.11003L17.68 16.6C15.78 22.31 12.66 22.31 10.76 16.6L9.91999 14.08L7.39999 13.24C1.68999 11.34 1.68999 8.23003 7.39999 6.32003Z" />
+    <path className="text-[var(--linkC,#9aa0a6)]" d="M10.11 13.6501L13.69 10.0601" />
+  </svg>
+);
+
+// svg.google-chat (Google Chat Resmi Vektör İkonu)
+export const GoogleChatIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
+  <svg className={`fill-current ${className}`} viewBox="0 0 24 24">
+    <path d="M1.637 0C.733 0 0 .733 0 1.637v16.5c0 .904.733 1.636 1.637 1.636h3.955v3.323c0 .804.97 1.207 1.539.638l3.963-3.96h11.27c.903 0 1.636-.733 1.636-1.637V5.592L18.408 0Zm3.955 5.592h12.816v8.59H8.455l-2.863 2.863Z" />
+  </svg>
+);
+
+// svg.tiktok (Blogger XML 1:1 - TikTok İkonu)
+export const TiktokIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
+  <svg className={`fill-current ${className}`} viewBox="0 0 32 32">
+    <path d="M24,3H8A5,5,0,0,0,3,8V24a5,5,0,0,0,5,5H24a5,5,0,0,0,5-5V8A5,5,0,0,0,24,3Zm3,21a3,3,0,0,1-3,3H8a3,3,0,0,1-3-3V8A3,3,0,0,1,8,5H24a3,3,0,0,1,3,3Z" />
+    <path className="text-[var(--linkC,#9aa0a6)]" d="M22,12a3,3,0,0,1-3-3,1,1,0,0,0-2,0V19a3,3,0,1,1-3-3,1,1,0,0,0,0-2,5,5,0,1,0,5,5V13a4.92,4.92,0,0,0,3,1,1,1,0,0,0,0-2Z" />
+  </svg>
+);
+
+// svg.labs (Google Labs / Bilim Deney Tüpü İkonu)
+export const LabsIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
+  <svg className={`line ${className}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M9 3h6M10 3v5.5L4.5 19a2 2 0 0 0 1.8 2.9h11.4a2 2 0 0 0 1.8-2.9L14 8.5V3" />
+    <path d="M7.5 15h9" />
+  </svg>
+);
+
+
+

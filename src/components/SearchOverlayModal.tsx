@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { SearchNormalIcon, CloseIcon, RankingIcon, Link21Icon } from './BloggerIcons';
-import { LinkItem, CollectionItem } from '../types';
+import { SearchNormalIcon, CloseIcon, RankingIcon } from './BloggerIcons';
+import { LinkItem } from '../types';
 import { db } from '../db';
 import { getFaviconUrl } from '../utils/favicon';
 
@@ -12,11 +12,20 @@ interface SearchOverlayModalProps {
   initialQuery?: string;
 }
 
+/* nsone.xml 35760-35781 1:1 — Arama Motorları & Siteler */
 const SEARCH_ENGINES = [
   { name: 'Sayfada', url: 'blog' },
   { name: 'Google AI', url: 'https://www.google.com/search?udm=50&q=' },
   { name: 'Google', url: 'https://www.google.com/search?q=' },
+  { name: 'Google Çeviri', url: 'https://translate.google.com/?sl=auto&tl=tr&text=' },
+  { name: 'DeepL', url: 'https://www.deepl.com/translator#auto/tr/' },
+  { name: 'Yandex Çeviri', url: 'https://translate.yandex.com/?source_lang=auto&target_lang=tr&text=' },
+  { name: 'YouTube Music', url: 'https://music.youtube.com/search?q=' },
+  { name: 'Google Kaynak', url: 'https://www.google.com/preferences/source?q=' },
+  { name: 'YouTube', url: 'https://www.youtube.com/results?search_query=' },
   { name: 'GitHub', url: 'https://github.com/search?q=' },
+  { name: 'Hacker News', url: 'https://news.ycombinator.com/' },
+  { name: 'Y Combinator', url: 'https://www.ycombinator.com/companies?query=' },
   { name: 'YouTube', url: 'https://www.youtube.com/results?search_query=' },
   { name: 'DuckDuckGo', url: 'https://duckduckgo.com/?q=' },
   { name: 'Perplexity', url: 'https://www.perplexity.ai/search?q=' },
@@ -27,15 +36,67 @@ const SEARCH_ENGINES = [
   { name: 'Hakaret Mi?', url: 'https://hakaretmi.com/?s=' },
 ];
 
+/* nsone.xml 35797-35812 1:1 — Hızlı Motor Hap Butonları (14) */
+const SEARCH_PILLS = [
+  { name: 'Sayfada', url: 'blog' },
+  { name: 'Google AI', url: 'https://www.google.com/search?udm=50&q=' },
+  { name: 'Google', url: 'https://www.google.com/search?q=' },
+  { name: 'Google Çeviri', url: 'https://translate.google.com/?sl=auto&tl=tr&text=' },
+  { name: 'DeepL', url: 'https://www.deepl.com/translator#auto/tr/' },
+  { name: 'Yandex Çeviri', url: 'https://translate.yandex.com/?source_lang=auto&target_lang=tr&text=' },
+  { name: 'YT Music', url: 'https://music.youtube.com/search?q=' },
+  { name: 'Google Kaynak', url: 'https://www.google.com/preferences/source?q=' },
+  { name: 'GitHub', url: 'https://github.com/search?q=' },
+  { name: 'Hacker News', url: 'https://news.ycombinator.com/' },
+  { name: 'YouTube', url: 'https://www.youtube.com/results?search_query=' },
+  { name: 'DuckDuckGo', url: 'https://duckduckgo.com/?q=' },
+  { name: 'Perplexity', url: 'https://www.perplexity.ai/search?q=' },
+  { name: 'Yandex', url: 'https://yandex.com/search/?text=' },
+];
+
+/* nsone.xml 36076-36086 1:1 — Varsayılan Kısayol Çipleri (.adv-banner-chip) */
+const BANNER_CHIPS: { prefix: string; label: string; title: string }[] = [
+  { prefix: 'tr ', label: 'tr', title: 'Google Çeviri' },
+  { prefix: 'deepl ', label: 'deepl', title: 'DeepL Çeviri' },
+  { prefix: 'ytr ', label: 'ytr', title: 'Yandex Çeviri' },
+  { prefix: 'ytm ', label: 'ytm', title: 'YouTube Music üzerinde ara' },
+  { prefix: 'kaynak ', label: 'kaynak', title: 'Google Kaynak Tercihleri' },
+  { prefix: 'yt ', label: 'yt', title: 'YouTube üzerinde ara' },
+  { prefix: 'gh ', label: 'gh', title: 'GitHub üzerinde ara' },
+  { prefix: 'wiki ', label: 'wiki', title: 'Wikipedia üzerinde ara' },
+  { prefix: 'ps ', label: 'ps', title: 'PageSpeed hız testi' },
+  { prefix: '@', label: '@kategori', title: 'Kategoriye göre ara' },
+];
+
+/* nsone.xml 35930-35967 1:1 — Kısayol Haritası (SHORTCUTS) */
 const SHORTCUTS: Record<string, { label: string; url: string }> = {
   blog: { label: 'Sayfada', url: 'blog' },
   saved: { label: 'Sayfada', url: 'blog' },
   b: { label: 'Sayfada', url: 'blog' },
+  ytm: { label: 'YouTube Music', url: 'https://music.youtube.com/search?q=' },
+  music: { label: 'YouTube Music', url: 'https://music.youtube.com/search?q=' },
+  ytmusic: { label: 'YouTube Music', url: 'https://music.youtube.com/search?q=' },
+  kaynak: { label: 'Google Kaynak', url: 'https://www.google.com/preferences/source?q=' },
+  source: { label: 'Google Kaynak', url: 'https://www.google.com/preferences/source?q=' },
+  gsrc: { label: 'Google Kaynak', url: 'https://www.google.com/preferences/source?q=' },
+  tr: { label: 'Google Çeviri', url: 'https://translate.google.com/?sl=auto&tl=tr&text=' },
+  ceviri: { label: 'Google Çeviri', url: 'https://translate.google.com/?sl=auto&tl=tr&text=' },
+  translate: { label: 'Google Çeviri', url: 'https://translate.google.com/?sl=auto&tl=tr&text=' },
+  gt: { label: 'Google Çeviri', url: 'https://translate.google.com/?sl=auto&tl=tr&text=' },
+  deepl: { label: 'DeepL', url: 'https://www.deepl.com/translator#auto/tr/' },
+  dl: { label: 'DeepL', url: 'https://www.deepl.com/translator#auto/tr/' },
+  ytr: { label: 'Yandex Çeviri', url: 'https://translate.yandex.com/?source_lang=auto&target_lang=tr&text=' },
+  yandexceviri: { label: 'Yandex Çeviri', url: 'https://translate.yandex.com/?source_lang=auto&target_lang=tr&text=' },
   yt: { label: 'YouTube', url: 'https://www.youtube.com/results?search_query=' },
   youtube: { label: 'YouTube', url: 'https://www.youtube.com/results?search_query=' },
   gh: { label: 'GitHub', url: 'https://github.com/search?q=' },
   github: { label: 'GitHub', url: 'https://github.com/search?q=' },
-  wiki: { label: 'Wikipedia', url: 'https://en.wikipedia.org/wiki/Special:Search?search=' },
+  hn: { label: 'Hacker News', url: 'https://hn.algolia.com/?q=' },
+  hackernews: { label: 'Hacker News', url: 'https://hn.algolia.com/?q=' },
+  guilded: { label: 'Guilded', url: 'https://www.guilded.gg/explore?query=' },
+  yc: { label: 'Y Combinator', url: 'https://www.ycombinator.com/companies?query=' },
+  ycombinator: { label: 'Y Combinator', url: 'https://www.ycombinator.com/companies?query=' },
+  wiki: { label: 'Wikipedia', url: 'https://tr.wikipedia.org/wiki/Özel:Ara?search=' },
   maps: { label: 'Google Haritalar', url: 'https://www.google.com/maps/search/' },
   ps: { label: 'Google Hız Testi', url: 'https://pagespeed.web.dev/analysis?url=' },
   pagespeed: { label: 'Google Hız Testi', url: 'https://pagespeed.web.dev/analysis?url=' },
@@ -47,11 +108,14 @@ const SHORTCUTS: Record<string, { label: string; url: string }> = {
   ddg: { label: 'DuckDuckGo', url: 'https://duckduckgo.com/?q=' },
 };
 
-function calculate(q: string): number | null {
+/* nsone.xml 35969-35979 1:1 — Hesap Makinesi */
+function calcMath(q: string): number | null {
   if (!/^[\d\s+\-*/().%]+$/.test(q)) return null;
+  if (!/[+\-*/%]/.test(q)) return null;
   try {
-    const result = Function(`"use strict"; return (${q})`)();
-    return Number.isFinite(result) ? result : null;
+    const fn = new Function('"use strict"; return (' + q + ')');
+    const res = fn();
+    return typeof res === 'number' && isFinite(res) ? res : null;
   } catch {
     return null;
   }
@@ -66,10 +130,70 @@ export const SearchOverlayModal: React.FC<SearchOverlayModalProps> = ({
 }) => {
   const [query, setQuery] = useState(initialQuery);
   const [selectedEngine, setSelectedEngine] = useState('blog');
-  const [matchingLinks, setMatchingLinks] = useState<LinkItem[]>([]);
+  const [results, setResults] = useState<LinkItem[]>([]);
+  const [isLatest, setIsLatest] = useState(false);
   const [collectionMap, setCollectionMap] = useState<Map<number, string>>(new Map());
   const [selectedIndex, setSelectedIndex] = useState<number>(-1);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  // Fare ile sağa-sola kaydırma (Mouse Drag & Wheel Horizontal Scroll — nsone.xml 37104-37156 1:1)
+  const attachDragScroll = (el: HTMLDivElement | null) => {
+    if (!el || (el as any)._hasDrag) return;
+    (el as any)._hasDrag = true;
+
+    // 1. Wheel ile yatay kaydırma
+    el.addEventListener('wheel', (e) => {
+      const d = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+      if (d !== 0) {
+        e.preventDefault();
+        el.scrollLeft += d * 0.9;
+      }
+    }, { passive: false });
+
+    // 2. Fare ile basılı tutup sürükleme (Drag to scroll)
+    let isDown = false;
+    let startX = 0;
+    let sLeft = 0;
+    let hasDragged = false;
+
+    el.addEventListener('mousedown', (e) => {
+      if (e.button !== 0) return;
+      isDown = true;
+      hasDragged = false;
+      startX = e.pageX;
+      sLeft = el.scrollLeft;
+      el.style.cursor = 'grabbing';
+      el.style.userSelect = 'none';
+    });
+
+    const onMouseMove = (e: MouseEvent) => {
+      if (!isDown) return;
+      const dx = e.pageX - startX;
+      if (Math.abs(dx) > 4) {
+        hasDragged = true;
+        el.scrollLeft = sLeft - dx * 1.35;
+      }
+    };
+
+    const onMouseUp = () => {
+      if (!isDown) return;
+      isDown = false;
+      el.style.cursor = 'grab';
+      el.style.removeProperty('user-select');
+      if (hasDragged) {
+        const captureClick = (ev: MouseEvent) => {
+          ev.preventDefault();
+          ev.stopPropagation();
+          window.removeEventListener('click', captureClick, true);
+        };
+        window.addEventListener('click', captureClick, true);
+        setTimeout(() => window.removeEventListener('click', captureClick, true), 60);
+      }
+    };
+
+    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mouseup', onMouseUp);
+  };
 
   useEffect(() => {
     if (isOpen) {
@@ -80,7 +204,6 @@ export const SearchOverlayModal: React.FC<SearchOverlayModalProps> = ({
         inputRef.current?.select();
       }, 50);
 
-      // Load collections
       db.collections.toArray().then(cols => {
         const map = new Map<number, string>();
         cols.forEach(c => {
@@ -91,84 +214,102 @@ export const SearchOverlayModal: React.FC<SearchOverlayModalProps> = ({
     }
   }, [isOpen, initialQuery]);
 
-  // Live matching saved links search
+  /* nsone.xml 36206-36273 1:1 — Sayfada Çekmecesi (Son Eklenen / Eşleşen Bağlantılar) */
   useEffect(() => {
     let isMounted = true;
     const searchDb = async () => {
-      const q = query.trim().toLowerCase();
-      if (!q) {
-        setMatchingLinks([]);
+      if (selectedEngine !== 'blog') {
+        if (isMounted) {
+          setResults([]);
+          setIsLatest(false);
+        }
         return;
       }
 
-      const all = await db.links.toArray();
+      const raw = query.trim();
+      const all = (await db.links.toArray()).filter(l => !l.isTrash);
       const cols = await db.collections.toArray();
 
-      // If category / collection search @name
-      if (q.startsWith('@')) {
-        const cat = q.slice(1).trim();
+      let matches: LinkItem[] = [];
+      let latest = false;
+
+      if (!raw) {
+        matches = all
+          .slice()
+          .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0))
+          .slice(0, 8);
+        latest = true;
+      } else if (raw.charAt(0) === '@') {
+        const cat = raw.slice(1).trim().toLowerCase();
         const matchedColIds = cols
           .filter(c => c.name.toLowerCase().includes(cat))
           .map(c => c.id);
-
-        const filtered = all.filter(l => 
-          !l.isTrash && (
-            (l.collectionId && matchedColIds.includes(l.collectionId)) ||
-            (l.tags && l.tags.some(t => t.toLowerCase().includes(cat)))
-          )
+        matches = all.filter(l =>
+          (l.collectionId && matchedColIds.includes(l.collectionId)) ||
+          (l.tags && l.tags.some(t => t.toLowerCase().includes(cat)))
         ).slice(0, 8);
-        if (isMounted) setMatchingLinks(filtered);
-        return;
+      } else {
+        const q = raw.toLowerCase();
+        matches = all.filter(l => {
+          const tMatch = l.title.toLowerCase().includes(q);
+          const uMatch = l.url.toLowerCase().includes(q);
+          const cMatch = (l.tags || []).some(t => t.toLowerCase().includes(q));
+          const colName = l.collectionId ? cols.find(c => c.id === l.collectionId)?.name || '' : '';
+          return tMatch || uMatch || cMatch || colName.toLowerCase().includes(q);
+        }).slice(0, 8);
       }
 
-      const filtered = all.filter(l => {
-        if (l.isTrash) return false;
-        const nameMatch = l.title.toLowerCase().includes(q);
-        const urlMatch = l.url.toLowerCase().includes(q);
-        const descMatch = (l.description || '').toLowerCase().includes(q);
-        const tagMatch = (l.tags || []).some(t => t.toLowerCase().includes(q));
-        const colName = l.collectionId ? (collectionMap.get(l.collectionId) || '') : '';
-        const colMatch = colName.toLowerCase().includes(q);
-        return nameMatch || urlMatch || descMatch || tagMatch || colMatch;
-      }).slice(0, 8);
-
-      if (isMounted) setMatchingLinks(filtered);
+      if (isMounted) {
+        setResults(matches);
+        setIsLatest(latest);
+        if (selectedIndex >= matches.length) setSelectedIndex(-1);
+      }
     };
-
     searchDb();
     return () => { isMounted = false; };
-  }, [query, collectionMap]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query, selectedEngine, isOpen]);
 
   if (!isOpen) return null;
 
-  const trimmedQuery = query.trim();
-  const mathResult = calculate(trimmedQuery);
-
-  // Shortcut check
-  const parts = trimmedQuery.split(/\s+/);
+  const raw = query.trim();
+  const math = calcMath(raw);
+  const parts = raw.split(/\s+/);
   const prefix = (parts[0] || '').toLowerCase().replace(/:$/, '');
-  const hasShortcut = SHORTCUTS[prefix] && trimmedQuery.length > prefix.length;
+  const hasShortcut = !!SHORTCUTS[prefix] && raw.length > parts[0].length;
   const shortcutTarget = hasShortcut ? SHORTCUTS[prefix] : null;
-  const shortcutPayload = hasShortcut ? trimmedQuery.slice(parts[0].length).trim() : '';
+  const shortcutPayload = hasShortcut ? raw.slice(parts[0].length).trim() : '';
+  const isDirectUrl = /^(https?:\/\/|[\w-]+\.[a-z]{2,})(\/|$)/i.test(raw);
+  const selectedResult = selectedIndex >= 0 ? results[selectedIndex] : null;
+  const activeEngineName = SEARCH_ENGINES.find(e => e.url === selectedEngine)?.name || 'Arama Motoru';
 
-  // Direct URL check
-  const isDirectUrl = /^(https?:\/\/|[\w-]+\.[a-z]{2,})(\/|$)/i.test(trimmedQuery);
+  const getSubText = (item: { url: string; description?: string }) => {
+    if (item.description && item.description.trim()) {
+      return item.description.trim();
+    }
+    try {
+      const u = new URL(item.url);
+      const host = u.hostname.replace(/^www\./, '');
+      const path = u.pathname + u.search + u.hash;
+      return path && path !== '/' ? (host + path) : host;
+    } catch {
+      return item.url.replace(/^https?:\/\/(www\.)?/, '') || 'Bağlantı';
+    }
+  };
 
-  const handleExecuteSearch = (customEngineUrl?: string) => {
-    if (!trimmedQuery) return;
+  const executeSearch = (customEngineUrl?: string) => {
+    if (!raw) return;
 
-    // 1. Math calculation
-    if (mathResult !== null) {
-      setQuery(`${trimmedQuery} = ${mathResult}`);
+    // 1. Hesap Makinesi
+    if (math !== null) {
+      setQuery(`${raw} = ${math}`);
       return;
     }
 
-    // 2. Shortcut bang
+    // 2. Kısayol
     if (hasShortcut && shortcutTarget && shortcutPayload) {
       if (shortcutTarget.url === 'blog') {
-        if (onApplySearchQuery) {
-          onApplySearchQuery(shortcutPayload);
-        }
+        if (onApplySearchQuery) onApplySearchQuery(shortcutPayload);
         onClose();
         return;
       }
@@ -177,29 +318,28 @@ export const SearchOverlayModal: React.FC<SearchOverlayModalProps> = ({
       return;
     }
 
-    // 3. Direct URL
+    // 3. Doğrudan Adres
     if (isDirectUrl) {
-      const safeUrl = trimmedQuery.startsWith('http') ? trimmedQuery : `https://${trimmedQuery}`;
+      const safeUrl = raw.startsWith('http') ? raw : `https://${raw}`;
       window.open(safeUrl, '_blank', 'noopener,noreferrer');
       onClose();
       return;
     }
 
-    // 4. Custom or Selected Engine
+    // 4. Seçili Motor
     const targetEngine = customEngineUrl || selectedEngine;
     if (targetEngine === 'blog') {
-      if (onApplySearchQuery) {
-        onApplySearchQuery(trimmedQuery);
-      }
+      if (onApplySearchQuery) onApplySearchQuery(raw);
       onClose();
       return;
     }
-    window.open(targetEngine + encodeURIComponent(trimmedQuery), '_blank', 'noopener,noreferrer');
-    
-    // Also update in-app filter
-    if (onApplySearchQuery) {
-      onApplySearchQuery(trimmedQuery);
-    }
+    window.open(targetEngine + encodeURIComponent(raw), '_blank', 'noopener,noreferrer');
+    onClose();
+  };
+
+  const openResult = (link: LinkItem) => {
+    if (onSelectLink) onSelectLink(link);
+    else window.open(link.url, '_blank', 'noopener,noreferrer');
     onClose();
   };
 
@@ -210,72 +350,138 @@ export const SearchOverlayModal: React.FC<SearchOverlayModalProps> = ({
       return;
     }
 
+    /* nsone.xml 36093-36108 1:1 — advNextResult / advPrevResult */
     if (e.key === 'ArrowDown') {
       e.preventDefault();
-      setSelectedIndex(prev => Math.min(prev + 1, matchingLinks.length - 1));
+      setSelectedIndex(prev => Math.min(prev + 1, results.length - 1));
       return;
     }
 
     if (e.key === 'ArrowUp') {
       e.preventDefault();
-      setSelectedIndex(prev => Math.max(prev - 1, -1));
+      setSelectedIndex(prev => Math.max(prev - 1, 0));
       return;
     }
 
     if (e.key === 'Enter') {
       e.preventDefault();
-      if (selectedIndex >= 0 && matchingLinks[selectedIndex]) {
-        const item = matchingLinks[selectedIndex];
-        if (onSelectLink) {
-          onSelectLink(item);
-        } else {
-          window.open(item.url, '_blank', 'noopener,noreferrer');
-        }
-        onClose();
+      if (selectedResult) {
+        openResult(selectedResult);
         return;
       }
-
-      handleExecuteSearch();
+      executeSearch();
     }
   };
 
+  /* nsone.xml 36166-36204 1:1 — Canlı Bilgi Şeridi (renderState) */
+  let bannerKbd = 'Enter ↵';
+  const bannerContent = (() => {
+    if (math !== null) {
+      return (
+        <>
+          <span className="text-[15px]">🧮</span>
+          <span>Hesap Sonucu: <strong>{raw} = {math}</strong></span>
+        </>
+      );
+    }
+    if (hasShortcut && shortcutTarget) {
+      return (
+        <>
+          <span className="text-[var(--linkC,#9aa0a6)] font-semibold">{shortcutTarget.label}:</span>
+          <span>&ldquo;<strong>{shortcutPayload}</strong>&rdquo; üzerinde ara</span>
+        </>
+      );
+    }
+    if (isDirectUrl) {
+      bannerKbd = 'Git (Enter ↵)';
+      return (
+        <>
+          <span className="text-[14px]">🔗</span>
+          <span>Doğrudan Web Sitesine Git: <strong>{raw}</strong></span>
+        </>
+      );
+    }
+    if (selectedResult) {
+      bannerKbd = 'Aç (Enter ↵)';
+      return (
+        <>
+          <span className="text-[13px]">🚀</span>
+          <span>Bağlantıyı Aç: <strong>{selectedResult.title}</strong></span>
+        </>
+      );
+    }
+    if (selectedEngine !== 'blog') {
+      bannerKbd = 'Ara (Enter ↵)';
+      return (
+        <>
+          <span className="text-[var(--linkC,#9aa0a6)] font-semibold">{activeEngineName}:</span>
+          <span>&ldquo;<strong>{raw || '...'}</strong>&rdquo; ara</span>
+        </>
+      );
+    }
+    if (!raw) {
+      /* nsone.xml 36076-36086 1:1 — Varsayılan Kısayol Çipleri */
+      return BANNER_CHIPS.map(chip => (
+        <button
+          key={chip.label}
+          type="button"
+          onClick={() => {
+            setQuery(chip.prefix);
+            inputRef.current?.focus();
+          }}
+          className="inline-flex items-center px-[9px] py-[3px] rounded-[7px] bg-white/[0.08] border border-white/10 text-[#f1f5f9] text-[11px] font-mono cursor-pointer shrink-0 transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[color-mix(in_srgb,var(--linkC,#9aa0a6)_28%,rgba(255,255,255,0.15))] hover:border-[var(--linkC,#9aa0a6)] hover:text-white"
+          title={chip.title}
+        >
+          {chip.label}
+        </button>
+      ));
+    }
+    return (
+      <>
+        <span className="text-[12.5px]">🔍</span>
+        <span>&ldquo;<strong>{raw}</strong>&rdquo; için ara veya aşağıdan bağlantı seçin</span>
+      </>
+    );
+  })();
+
   return (
-    <div 
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 sm:p-6 bg-black/75 backdrop-blur-xl animate-in fade-in duration-200"
+    <div
+      className="fixed inset-0 z-50 flex flex-col items-center justify-start px-4 pt-[10vh] pb-6 bg-black/[0.52] backdrop-blur-[16px] animate-in fade-in duration-200"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      {/* Kapat Butonu */}
+      {/* Kapat Butonu (.adv-close-btn) — nsone.xml 1:1 karemsi 32px */}
       <button
         onClick={onClose}
-        className="absolute top-4 right-4 sm:top-6 sm:right-6 w-9 h-9 rounded-lg bg-[#252526] hover:bg-[#333333] border border-transparent flex items-center justify-center text-[#989b9f] hover:text-white transition-all shadow-lg cursor-pointer"
+        className="absolute top-5 right-5 w-8 h-8 aspect-square rounded-[10px] bg-[#282828] border border-white/[0.08] text-white hover:bg-[#333333] hover:border-[var(--linkC,#9aa0a6)] hover:text-[var(--linkC,#9aa0a6)] flex items-center justify-center shadow-[0_2px_6px_rgba(0,0,0,0.2)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] outline-none cursor-pointer"
         aria-label="Aramayı Kapat (Esc)"
         title="Kapat (Esc)"
       >
         <CloseIcon className="w-4 h-4" />
       </button>
 
-      <div className="w-full max-w-2xl flex flex-col gap-3">
-        
-        {/* Arama Kutusu ve Motor Seçici (Search Wrap) */}
-        <div className="flex items-center gap-2 p-1.5 sm:p-2 rounded-lg bg-[#252526] border border-transparent shadow-2xl focus-within:border-[#60cdff]/50 transition-all">
-          
-          {/* Arama Motoru Dropdown */}
+      {/* Modal Kartı (.adv-card) — nsone.xml 1:1: 660px cam efektli kart */}
+      <div className="adv-card w-full max-w-[660px] flex flex-col gap-3 p-4 rounded-[20px] bg-[rgba(22,25,34,0.82)] backdrop-blur-[28px] border border-white/[0.08] shadow-[0_30px_80px_rgba(0,0,0,0.72)] animate-in slide-in-from-top duration-200">
+
+        {/* Arama Kutusu ve Motor Seçici (.adv-input-bar) */}
+        <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-[12px] bg-[#252526] border border-white/10 focus-within:border-[var(--linkC,#9aa0a6)] shadow-[0_12px_36px_rgba(0,0,0,0.45)] transition-all">
+
+          {/* Arama Motoru Dropdown (.adv-engine-select) */}
           <select
             value={selectedEngine}
             onChange={(e) => setSelectedEngine(e.target.value)}
-            className="bg-[#1e1e1e] hover:bg-[#28282b] text-[#d4d4d4] text-xs font-semibold py-2 px-2 rounded-lg border border-transparent outline-none cursor-pointer shrink-0 max-w-[90px] sm:max-w-[130px] truncate"
+            className="bg-[#1e1e1e] hover:bg-[#28282b] text-[#d4d4d4] text-xs font-semibold py-2 px-2.5 rounded-lg border border-transparent outline-none cursor-pointer shrink-0 max-w-[130px] truncate"
             title="Arama Motoru Seçin"
           >
-            {SEARCH_ENGINES.map(eng => (
-              <option key={eng.url} value={eng.url}>
+            {SEARCH_ENGINES.map((eng, i) => (
+              <option key={`${eng.url}-${i}`} value={eng.url}>
                 {eng.name}
               </option>
             ))}
           </select>
 
-          {/* Arama Input */}
+          {/* Arama Input (.adv-search-input) */}
           <div className="relative flex-1 flex items-center min-w-0">
             <span className="absolute left-2.5 text-[#989b9f] pointer-events-none">
               <SearchNormalIcon className="w-4 h-4" />
@@ -287,7 +493,7 @@ export const SearchOverlayModal: React.FC<SearchOverlayModalProps> = ({
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Arayın, @kategori veya adres…"
-              className="w-full bg-transparent pl-8 sm:pl-9 pr-7 py-2 text-xs sm:text-sm text-white placeholder-[#71717a] outline-none"
+              className="w-full bg-transparent pl-[34px] pr-8 py-2 text-sm text-white placeholder-[#71717a] outline-none"
               autoComplete="off"
               spellCheck="false"
             />
@@ -296,144 +502,133 @@ export const SearchOverlayModal: React.FC<SearchOverlayModalProps> = ({
                 type="button"
                 onClick={() => setQuery('')}
                 className="absolute right-2 text-[#989b9f] hover:text-white transition-colors"
+                title="Temizle"
               >
                 <CloseIcon className="w-3.5 h-3.5" />
               </button>
             )}
           </div>
 
-          {/* Ara Butonu */}
+          {/* Ara Butonu (.adv-search-btn) */}
           <button
             type="button"
-            onClick={() => handleExecuteSearch()}
-            className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-gradient-to-r from-[#38bdf8] to-[#0ea5e9] hover:from-[#7dd3fc] hover:to-[#38bdf8] text-[#0f172a] flex items-center justify-center font-bold text-base shadow-md active:scale-95 transition-all cursor-pointer shrink-0"
+            onClick={() => executeSearch()}
+            className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-[var(--linkB,#9aa0a6)] hover:opacity-90 text-[#0f172a] flex items-center justify-center font-bold text-base shadow-md active:scale-95 transition-all cursor-pointer shrink-0"
             title="Ara veya Git (Enter)"
           >
             <SearchNormalIcon className="w-4 h-4 stroke-[2.5]" />
           </button>
         </div>
 
-        {/* Hızlı Arama Motoru Hap Butonları */}
-        <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-1 scrollbar-none select-none touch-pan-x">
-          {SEARCH_ENGINES.slice(0, 8).map(eng => {
-            const isActive = selectedEngine === eng.url;
+        {/* Hızlı Motor Hap Butonları (.adv-pills-row) — nsone.xml 35797-35812 1:1 */}
+        <div 
+          ref={attachDragScroll}
+          className="adv-pills-row flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none select-none touch-pan-x cursor-grab"
+        >
+          {SEARCH_PILLS.map(pill => {
+            const isActive = selectedEngine === pill.url;
             return (
               <button
-                key={eng.name}
+                key={pill.name}
                 type="button"
-                onClick={() => {
-                  setSelectedEngine(eng.url);
-                  if (trimmedQuery) {
-                    handleExecuteSearch(eng.url);
-                  }
-                }}
-                className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all cursor-pointer border ${
+                onClick={() => setSelectedEngine(pill.url)}
+                className={`adv-pill px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap cursor-pointer border transition-all duration-150 ${
                   isActive
-                    ? 'bg-[#60cdff]/15 text-[#60cdff] border-[#60cdff]/40 shadow-sm'
-                    : 'bg-[#1e1e1e] hover:bg-[#28282b] text-[#a3a3a3] hover:text-white border-transparent'
+                    ? 'is-active bg-[rgba(96,205,255,0.15)] text-[var(--linkC,#9aa0a6)] border-[rgba(96,205,255,0.4)]'
+                    : 'bg-[#1e1e1e] text-[#a3a3a3] border-transparent hover:bg-[#28282b] hover:text-white'
                 }`}
               >
-                <span>{eng.name}</span>
+                {pill.name}
               </button>
             );
           })}
         </div>
 
-        {/* Canlı Kısayol / Hesap Makinesi / Doğrudan URL Önizlemesi */}
-        {(mathResult !== null || hasShortcut || isDirectUrl) && (
-          <div className="p-3 rounded-xl bg-[#1e1e1e]/90 border border-white/5 flex items-center justify-between text-xs animate-in fade-in duration-150">
-            {mathResult !== null && (
-              <div className="flex items-center gap-2 text-emerald-400 font-mono">
-                <span className="text-base font-bold">🧮</span>
-                <span>Hesap Sonucu: <strong>{trimmedQuery} = {mathResult}</strong></span>
-              </div>
-            )}
-            {hasShortcut && shortcutTarget && (
-              <div className="flex items-center gap-2 text-[#60cdff]">
-                <RankingIcon className="w-4 h-4 text-[#60cdff]" />
-                <span><strong>{shortcutTarget.label}</strong> üzerinde ara: <em>"{shortcutPayload}"</em></span>
-              </div>
-            )}
-            {!hasShortcut && isDirectUrl && (
-              <div className="flex items-center gap-2 text-sky-300">
-                <Link21Icon className="w-4 h-4 text-sky-300" />
-                <span>Doğrudan Web Adresine Git: <strong>{trimmedQuery}</strong></span>
-              </div>
-            )}
-            <kbd className="px-2 py-0.5 rounded text-[10px] font-mono bg-[#252526] text-[#989b9f]">
-              Enter ↵
-            </kbd>
+        {/* Canlı Kısayol / Hesap Makinesi / Önizleme Şeridi (.adv-banner) — nsone.xml 36166-36204 1:1 */}
+        <div className="adv-banner flex items-center justify-between gap-2.5 px-3.5 py-2.5 rounded-[10px] bg-[rgba(30,30,30,0.92)] border border-white/[0.08] text-xs">
+          <div 
+            ref={attachDragScroll}
+            className="flex items-center gap-1.5 min-w-0 flex-1 overflow-x-auto scrollbar-none whitespace-nowrap select-none py-0.5 cursor-grab"
+          >
+            {bannerContent}
           </div>
-        )}
+          <kbd className="adv-banner-kbd px-[9px] py-[3px] rounded-[7px] text-[11px] font-bold bg-[color-mix(in_srgb,var(--linkC,#9aa0a6)_25%,rgba(255,255,255,0.1))] border border-[color-mix(in_srgb,var(--linkC,#9aa0a6)_60%,rgba(255,255,255,0.2))] text-white shadow-[0_2px_6px_rgba(0,0,0,0.2)] shrink-0 whitespace-nowrap">
+            {bannerKbd}
+          </kbd>
+        </div>
 
-        {/* Eşleşen Kayıtlı Linkler Paneli */}
-        {matchingLinks.length > 0 && (
-          <div className="max-h-72 overflow-y-auto rounded-lg bg-[#1e1e1e] border border-transparent p-1.5 space-y-1 shadow-2xl">
-            <div className="px-2.5 py-1 text-[11px] font-semibold text-[#989b9f] uppercase tracking-wider flex items-center justify-between">
-              <span>Kayıtlı Bağlantılarınız ({matchingLinks.length})</span>
-              <span className="text-[10px] font-normal text-[#71717a]">Gezinmek için ↑ ↓</span>
+        {/* Sayfada Çekmecesi: Bağlantılar Paneli (.adv-results-list) — nsone.xml 35840-35847 1:1 */}
+        {selectedEngine === 'blog' && (
+          <div className="adv-results-list max-h-[290px] overflow-y-auto rounded-xl bg-[#1e1e1e] border border-white/[0.06] p-1.5 flex flex-col gap-[3px] shadow-[0_16px_40px_rgba(0,0,0,0.5)]">
+            <div className="adv-results-header px-2.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.05em] text-[#989b9f] flex items-center justify-between">
+              <span>
+                {results.length > 0
+                  ? isLatest
+                    ? `📖 Son Eklenen Bağlantılar (${results.length})`
+                    : `🔍 Eşleşen Bağlantılar (${results.length})`
+                  : raw
+                    ? 'Eşleşen Sonuç Bulunamadı'
+                    : '📖 Son Eklenen Bağlantılar'}
+              </span>
+              <span className="text-[10px] font-normal opacity-70">Gezinmek için ↑ ↓</span>
             </div>
 
-            {matchingLinks.map((link, idx) => {
-              const isItemActive = idx === selectedIndex;
-              const colName = link.collectionId ? collectionMap.get(link.collectionId) : null;
-              return (
-                <div
-                  key={link.id || link.url}
-                  onClick={() => {
-                    if (onSelectLink) onSelectLink(link);
-                    else window.open(link.url, '_blank', 'noopener,noreferrer');
-                    onClose();
-                  }}
-                  onMouseEnter={() => setSelectedIndex(idx)}
-                  className={`flex items-center justify-between p-2 rounded-lg cursor-pointer transition-colors ${
-                    isItemActive
-                      ? 'bg-[#252526] text-white border border-[#404045]'
-                      : 'hover:bg-[#252526]/70 text-[#d4d4d4]'
-                  }`}
-                >
-                  <div className="flex items-center gap-2.5 min-w-0 pr-2">
-                    <img
-                      src={link.favicon || getFaviconUrl(link.url)}
-                      alt=""
-                      className="w-4 h-4 rounded object-contain shrink-0"
-                      onError={(e) => {
-                        (e.target as HTMLElement).style.display = 'none';
-                      }}
-                    />
-                    <div className="min-w-0">
-                      <div className="text-xs font-semibold truncate text-[#f3f4f6]">
-                        {link.title}
-                      </div>
-                      <div className="text-[11px] text-[#71717a] truncate font-mono">
-                        {link.url}
+            {results.length > 0 ? (
+              results.map((link, idx) => {
+                const isSel = idx === selectedIndex;
+                const colName = link.collectionId ? collectionMap.get(link.collectionId) : null;
+                const tag = colName || (link.tags && link.tags.length > 0 ? link.tags[0] : null) || 'Bağlantı';
+                return (
+                  <div
+                    key={link.id || link.url}
+                    onClick={() => openResult(link)}
+                    onMouseEnter={() => setSelectedIndex(idx)}
+                    className={`adv-item flex items-center justify-between gap-3 px-2.5 py-2 rounded-lg cursor-pointer transition-all duration-150 ${
+                      isSel ? 'is-selected bg-[#252526] border border-white/10' : 'border border-transparent'
+                    }`}
+                  >
+                    <div className="adv-item-main flex items-center gap-2.5 min-w-0">
+                      <span className="adv-item-icon w-5 h-5 flex items-center justify-center text-[var(--linkC,#9aa0a6)] shrink-0">
+                        <img
+                          src={link.favicon || getFaviconUrl(link.url)}
+                          alt=""
+                          className="w-4 h-4 rounded object-contain"
+                          onError={(e) => {
+                            (e.target as HTMLElement).style.display = 'none';
+                          }}
+                        />
+                      </span>
+                      <div className="adv-item-text min-w-0">
+                        <div className="adv-item-title text-[13px] font-semibold text-[#f3f4f6] whitespace-nowrap overflow-hidden text-ellipsis flex items-center gap-1">
+                          <span className="truncate">{link.title}</span>
+                          {link.isPinned && (
+                            <RankingIcon className="w-3 h-3 text-amber-400 shrink-0" />
+                          )}
+                        </div>
+                        <div className="adv-item-sub text-[11px] text-[#71717a] whitespace-nowrap overflow-hidden text-ellipsis font-mono">
+                          {getSubText(link)}
+                        </div>
                       </div>
                     </div>
+                    <span className="adv-item-tag px-2 py-[3px] rounded-full text-[10px] font-medium bg-[#28282b] text-[#a3a3a3] shrink-0">
+                      {tag}
+                    </span>
                   </div>
-
-                  <div className="flex items-center gap-1.5 shrink-0">
-                    {colName && (
-                      <span className="px-2 py-0.5 rounded-full text-[10px] font-medium bg-[#28282b] text-[#a3a3a3]">
-                        {colName}
-                      </span>
-                    )}
-                    {link.isPinned && (
-                      <span title="Sabitlenmiş">
-                        <RankingIcon className="w-3.5 h-3.5 text-amber-400" />
-                      </span>
-                    )}
-                  </div>
+                );
+              })
+            ) : (
+              raw ? (
+                <div className="px-3.5 py-3.5 text-xs text-[#989b9f] text-center">
+                  Sayfada eşleşen bağlantı bulunamadı. Enter tuşuna basarak genel arama yapabilirsiniz.
                 </div>
-              );
-            })}
+              ) : (
+                <div className="px-3.5 py-3.5 text-xs text-[#989b9f] text-center">
+                  Kayıtlı bağlantılar hazırlanıyor…
+                </div>
+              )
+            )}
           </div>
         )}
-
-        {/* Bilgilendirme Altlığı */}
-        <div className="flex items-center justify-between px-2 text-[11px] text-[#71717a] font-mono">
-          <span>Kısayollar: <strong>yt</strong>, <strong>gh</strong>, <strong>wiki</strong>, <strong>ps</strong>, <strong>@kategori</strong></span>
-          <span>Kapatmak için <strong>Esc</strong></span>
-        </div>
 
       </div>
     </div>

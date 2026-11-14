@@ -1,31 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  ExternalLink,
-  Layers,
-  Zap,
-  MessageSquare,
-  FileText,
-  ClipboardList,
-  Eye,
-  ShieldCheck,
-  Send,
-  Code2,
-  Sparkles,
-  Phone
-} from 'lucide-react';
+import React, { useState } from 'react';
 import { 
   HomeIcon,
-  FolderFavoriteIcon,
-  SearchNormalIcon,
+  Hierarchy4Icon,
+  FlashIcon,
+  FolderCodeIcon,
+  MessageNotif1Icon,
+  Edit3Icon,
+  Profile2UserIcon,
+  EyeIcon,
+  Verify1Icon,
+  SmsEditIcon,
   ArrowSwapHorizontalIcon,
+  SearchNormalIcon,
   SpeedometerIcon,
-  CloseIcon,
+  ChevronDownIcon,
   InstagramIcon, 
   TelegramIcon, 
   MailIcon, 
-  GithubIcon,
   VkIcon,
-  MatrixIcon
+  MatrixIcon,
+  WhatsappIcon,
+  GoogleChatIcon,
+  TiktokIcon,
+  LabsIcon
 } from './BloggerIcons';
 import { CollectionItem, TagItem } from '../types';
 
@@ -62,14 +59,37 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
   currentTab,
   onSelectTab,
   counts,
-  onSearchSubmit,
   onOpenSearchModal
 }) => {
-  const [hizmetlerOpen, setHizmetlerOpen] = useState(true);
-  const [klasorOpen, setKlasorOpen] = useState(true);
-  const [gelistiriciOpen, setGelistiriciOpen] = useState(true);
-  const [socialExpanded, setSocialExpanded] = useState(false);
-  const [localSearch, setLocalSearch] = useState('');
+  const [hizmetlerOpen, setHizmetlerOpen] = useState(false);
+  const [klasorOpen, setKlasorOpen] = useState(false);
+  const [gelistiriciOpen, setGelistiriciOpen] = useState(false);
+  const [localSearch] = useState('');
+  const [footerSlideIndex, setFooterSlideIndex] = useState(0);
+  const [socSlideIndex, setSocSlideIndex] = useState(0);
+
+  const drawerSocialLinks = [
+    { name: 'Instagram', href: 'https://www.instagram.com/aleyul.ala/', icon: InstagramIcon },
+    { name: 'Telegram', href: 'https://t.me/aleyyulala', icon: TelegramIcon },
+    { name: 'TikTok', href: 'https://www.tiktok.com/@Aleyyu.Ala', icon: TiktokIcon },
+    { name: 'Matrix', href: 'https://matrix.to/#/#negronn-show:matrix.org', icon: MatrixIcon },
+    { name: 'VKontakte', href: 'https://vk.com/negronn', icon: VkIcon },
+    { name: 'WhatsApp', href: 'tel:05446412904', icon: WhatsappIcon }
+  ];
+
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setFooterSlideIndex(prev => (prev + 1) % 3);
+    }, 4500);
+    return () => clearInterval(timer);
+  }, []);
+
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setSocSlideIndex(prev => (prev + 1) % 6);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
 
   if (!isOpen) return null;
 
@@ -83,20 +103,15 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
 
       {/* Drawer Panel (.mainL / .mnBr) */}
       <aside 
-        className="relative w-[85vw] max-w-[480px] bg-[#1e1e1e] border-r border-[#252526] h-full flex flex-col justify-between shadow-2xl z-10 overflow-hidden transform transition-transform duration-300 ease-out"
+        className="blogger-drawer relative w-[85vw] max-w-[360px] bg-[#1e1e1e] border-r border-[#252526] h-full flex flex-col justify-between shadow-2xl z-10 overflow-hidden transform transition-transform duration-300 ease-out"
       >
-        {/* Drawer Header (.mnH - XML 1:1) */}
-        <div className="h-[60px] px-4 border-b border-[#252526] flex items-center justify-between bg-[#1e1e1e]">
-          <span className="text-sm font-medium text-[#989b9f]">Menü</span>
-
-          <button
-            onClick={onClose}
-            className="w-8 h-8 rounded-lg bg-[#252526] hover:bg-[#333333] text-[#a3a3a3] hover:text-white flex items-center justify-center transition-colors cursor-pointer"
-            title="Kapat"
-            aria-label="Kapat"
-          >
-            <CloseIcon className="w-4 h-4" />
-          </button>
+        {/* Drawer Header (.mnH - XML 1:1: Çarpı kaldırıldı, NSONE Yazı Logo) */}
+        <div className="h-[52px] px-4 border-b border-[#252526] flex items-center bg-[#1e1e1e]">
+          <div className="flex items-center">
+            <span className="font-sans font-extrabold text-[16px] tracking-[0.22em] uppercase text-white">
+              NESCİONE
+            </span>
+          </div>
         </div>
 
         {/* Drawer Scrollable Content (.mnMen) */}
@@ -118,230 +133,233 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
               value={localSearch}
               readOnly
               placeholder="Bul... (Ctrl+K)"
-              className="w-full bg-[#252526] group-hover:bg-[#28282b] border border-transparent group-hover:border-[#60cdff]/30 rounded-lg pl-9 pr-3 py-2 text-xs text-white placeholder-[#737373] outline-none transition-colors cursor-pointer"
+              className="w-full bg-[#252526] border border-transparent rounded-lg pl-9 pr-3 py-2 text-xs text-white placeholder-[#737373] outline-none cursor-pointer"
             />
-            <SearchNormalIcon className="w-4 h-4 text-[#737373] group-hover:text-[#60cdff] transition-colors absolute left-2.5 top-2.5 pointer-events-none" />
+            <SearchNormalIcon className="w-[18px] h-[18px] text-[#737373] group-hover:text-[var(--linkC,#9aa0a6)] transition-colors absolute left-2.5 top-2.5 pointer-events-none" />
           </div>
 
           {/* Blogger Gezinme Menüsü (.mnMn) */}
-          <ul className="space-y-1">
+          <ul className="space-y-1 mnMn">
             
-            {/* 1. KÖK BUTON: Ana Sayfa */}
-            <li>
-              <button
-                onClick={() => {
-                  onClose();
-                  onSelectTab('dashboard');
-                }}
-                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg font-medium transition-colors cursor-pointer ${
-                  currentTab === 'dashboard'
-                    ? 'bg-[#252526] text-[#38bdf8]'
-                    : 'text-[#d4d4d4] hover:bg-[#252526]/70 hover:text-white'
-                }`}
-              >
-                <div className="flex items-center gap-2.5">
-                  <HomeIcon className="w-4 h-4 text-[#38bdf8]" />
-                  <span className="font-semibold text-xs">Ana Sayfa</span>
-                </div>
-              </button>
-            </li>
+            {/* 1. KÖK BUTON: Ana Sayfa (svg.home) - XML 1:1: Sadece ana sayfa DIŞINDAKİ sayfalarda gözükür (!data:view.isHomepage) */}
+            {currentTab !== 'dashboard' && (
+              <li>
+                <button
+                  onClick={() => {
+                    onClose();
+                    onSelectTab('dashboard');
+                  }}
+                  className="w-full group flex items-center justify-between px-3 py-2.5 rounded-lg font-medium transition-colors cursor-pointer outline-none text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)]"
+                >
+                  <div className="flex items-center gap-2.5">
+                    <span className="font-semibold text-xs">Ana Sayfa</span>
+                    <HomeIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[var(--linkC,#9aa0a6)]" />
+                  </div>
+                </button>
+              </li>
+            )}
 
-            {/* 3. KLASÖR 1: Hizmetler (+ / − Genişletilebilir) */}
-            <li className="pt-1">
+            {/* 2. KLASÖR 1: Uygulamalar (svg.hierarchy-4) */}
+            <li className="pt-1 relative">
               <div 
                 onClick={() => setHizmetlerOpen(!hizmetlerOpen)}
-                className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-bold text-[#d4d4d4] hover:bg-[#252526] hover:text-white cursor-pointer transition-colors"
+                className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-bold text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] cursor-pointer transition-colors outline-none relative"
               >
                 <div className="flex items-center gap-2.5">
-                  <Layers className="w-4 h-4 text-[#60cdff]" />
-                  <span>Hizmetler</span>
+                  <span>Uygulamalar</span>
+                  <span className="badge-new text-[var(--linkC,#9aa0a6)] text-[11px] font-bold ml-1">
+                    Yeni!
+                  </span>
+                  <Hierarchy4Icon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[var(--linkC,#9aa0a6)]" />
                 </div>
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setHizmetlerOpen(!hizmetlerOpen);
-                  }}
-                  className="w-5 h-5 rounded-full bg-[#1e1e1e] hover:bg-[#333333] border border-white/10 flex items-center justify-center text-xs font-bold text-[#60cdff] transition-all cursor-pointer"
-                  aria-label={hizmetlerOpen ? "Daralt" : "Genişlet"}
-                >
-                  {hizmetlerOpen ? '−' : '+'}
-                </button>
+                {/* xml 1:1 li.nt-tl bildirim noktası (Sol Üst) */}
+                <span className="absolute top-2 left-2 w-2 h-2 rounded-full bg-[var(--linkC,#9aa0a6)] shadow-[0_0_8px_var(--linkC,#9aa0a6)] animate-pulse" />
+                
+                <ChevronDownIcon className={`w-3.5 h-3.5 text-[#989b9f] transition-transform duration-300 ${hizmetlerOpen ? 'rotate-180' : ''}`} />
               </div>
 
               {hizmetlerOpen && (
                 <ul className="space-y-0.5 pl-3 border-l border-white/10 ml-4 mt-1">
-                  {/* 1. Etkileşimler (Saved Sabitlenenler) */}
-                  <li>
-                    <button
-                      onClick={() => {
-                        onClose();
-                        onSelectTab('pinned');
-                      }}
-                      className={`w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs transition-colors cursor-pointer ${
-                        currentTab === 'pinned'
-                          ? 'bg-[#252526] text-[#38bdf8] font-bold'
-                          : 'text-[#d4d4d4] hover:bg-[#252526] hover:text-[#60cdff]'
-                      }`}
-                    >
-                      <div className="flex items-center gap-2">
-                        <FolderFavoriteIcon className="w-3.5 h-3.5 text-amber-400" />
-                        <span>Etkileşimler</span>
-                      </div>
-                      <span className="text-[10px] text-[#9ca3af] font-mono">{counts.pinned}</span>
-                    </button>
-                  </li>
-
-                  {/* 2. Notlarınız (NotebookLM) */}
-                  <li>
-                    <a
-                      href="https://notebooklm.google.com/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-[#252526] hover:text-[#60cdff] transition-colors group"
-                    >
-                      <div className="flex items-center gap-2">
-                        <FileText className="w-3.5 h-3.5 text-[#9ca3af] group-hover:text-[#60cdff]" />
-                        <span>Notlarınız</span>
-                      </div>
-                      <ExternalLink className="w-3 h-3 text-[#71717a] group-hover:text-[#60cdff]" />
-                    </a>
-                  </li>
-
-                  {/* 3. Forumlarınız (Google Forms) */}
-                  <li>
-                    <a
-                      href="https://docs.google.com/forms/u/0/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-[#252526] hover:text-[#60cdff] transition-colors group"
-                    >
-                      <div className="flex items-center gap-2">
-                        <ClipboardList className="w-3.5 h-3.5 text-[#9ca3af] group-hover:text-[#60cdff]" />
-                        <span>Forumlarınız</span>
-                      </div>
-                      <ExternalLink className="w-3 h-3 text-[#71717a] group-hover:text-[#60cdff]" />
-                    </a>
-                  </li>
-                </ul>
-              )}
-            </li>
-
-            {/* 4. KLASÖR 2: Klasör (+ / − Genişletilebilir) */}
-            <li className="pt-1">
-              <div 
-                onClick={() => setKlasorOpen(!klasorOpen)}
-                className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-bold text-[#d4d4d4] hover:bg-[#252526] hover:text-white cursor-pointer transition-colors"
-              >
-                <div className="flex items-center gap-2.5">
-                  <Zap className="w-4 h-4 text-amber-400" />
-                  <span>Klasör</span>
-                  <span className="px-1.5 py-0.5 rounded-full bg-emerald-950/80 text-emerald-400 text-[9px] font-bold">
-                    New!
-                  </span>
-                </div>
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setKlasorOpen(!klasorOpen);
-                  }}
-                  className="w-5 h-5 rounded-full bg-[#1e1e1e] hover:bg-[#333333] border border-white/10 flex items-center justify-center text-xs font-bold text-[#60cdff] transition-all cursor-pointer"
-                  aria-label={klasorOpen ? "Daralt" : "Genişlet"}
-                >
-                  {klasorOpen ? '−' : '+'}
-                </button>
-              </div>
-
-              {klasorOpen && (
-                <ul className="space-y-0.5 pl-3 border-l border-white/10 ml-4 mt-1">
-                  {/* 1. İlgi Alanları (Saved: Tüm Bağlantılar) */}
+                  {/* 1. Saved (svg.eye) */}
                   <li>
                     <button
                       onClick={() => {
                         onClose();
                         onSelectTab('links');
                       }}
-                      className={`w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs transition-colors cursor-pointer ${
+                      className={`w-full group flex items-center justify-between px-2.5 py-2 rounded-lg text-xs transition-colors cursor-pointer outline-none ${
                         currentTab === 'links'
-                          ? 'bg-[#252526] text-[#38bdf8] font-bold'
-                          : 'text-[#d4d4d4] hover:bg-[#252526] hover:text-[#60cdff]'
+                          ? 'text-[var(--linkC,#9aa0a6)] font-bold'
+                          : 'text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)]'
                       }`}
                     >
                       <div className="flex items-center gap-2">
-                        <Eye className="w-3.5 h-3.5 text-[#9ca3af]" />
-                        <span>İlgi Alanları</span>
+                        <span>NESCİONE</span>
+                        <EyeIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[#9ca3af] group-hover:text-[var(--linkC,#9aa0a6)]" />
                       </div>
                       <span className="text-[10px] text-[#9ca3af] font-mono">{counts.all}</span>
                     </button>
                   </li>
 
-                  {/* 2. Politikalar (Saved Gizlilik Politikası & Lisans) */}
-                  <li>
-                    <button
-                      onClick={() => {
-                        onClose();
-                        onSelectTab('privacy');
-                      }}
-                      className={`w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs transition-colors cursor-pointer ${
-                        currentTab === 'privacy'
-                          ? 'bg-[#252526] text-[#38bdf8] font-bold'
-                          : 'text-[#d4d4d4] hover:bg-[#252526] hover:text-[#60cdff]'
-                      }`}
-                    >
-                      <div className="flex items-center gap-2">
-                        <ShieldCheck className="w-3.5 h-3.5 text-[#9ca3af]" />
-                        <span>Politikalar</span>
-                      </div>
-                      <span className="text-[10px] text-[#9ca3af] font-mono">Yasal</span>
-                    </button>
-                  </li>
-
-                  {/* 3. Geri Bildirim (Saved GitHub Discussions) */}
+                  {/* 2. NotebookLM (svg.edit-3) */}
                   <li>
                     <a
-                      href="https://github.com/Aleyulala/saved/discussions"
+                      href="https://notebooklm.google.com/"
                       target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-[#252526] hover:text-[#60cdff] transition-colors group"
+                      rel="nofollow noreferrer noopener"
+                      className="w-full group flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] transition-colors outline-none"
                     >
                       <div className="flex items-center gap-2">
-                        <Send className="w-3.5 h-3.5 text-[#9ca3af] group-hover:text-[#60cdff]" />
-                        <span>Geri Bildirim</span>
+                        <span>NotebookLM</span>
+                        <Edit3Icon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[#9ca3af] group-hover:text-[var(--linkC,#9aa0a6)]" />
                       </div>
-                      <ExternalLink className="w-3 h-3 text-[#71717a] group-hover:text-[#60cdff]" />
+                    </a>
+                  </li>
+
+                  {/* 3. Formlar (svg.profile-2user) */}
+                  <li>
+                    <a
+                      href="https://docs.google.com/forms/u/0/"
+                      target="_blank"
+                      rel="nofollow noreferrer noopener"
+                      className="w-full group flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] transition-colors outline-none"
+                    >
+                      <div className="flex items-center gap-2">
+                        <span>Formlar</span>
+                        <Profile2UserIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[#9ca3af] group-hover:text-[var(--linkC,#9aa0a6)]" />
+                      </div>
                     </a>
                   </li>
                 </ul>
               )}
             </li>
 
-            {/* 5. KLASÖR 3: Geliştirici (+ / − Genişletilebilir) */}
-            <li className="pt-1">
+            {/* 3. KLASÖR 2: Topluluk (svg.flash) */}
+            <li className="pt-1 relative">
               <div 
-                onClick={() => setGelistiriciOpen(!gelistiriciOpen)}
-                className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-bold text-[#d4d4d4] hover:bg-[#252526] hover:text-white cursor-pointer transition-colors"
+                onClick={() => setKlasorOpen(!klasorOpen)}
+                className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-bold text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] cursor-pointer transition-colors outline-none relative"
               >
                 <div className="flex items-center gap-2.5">
-                  <Code2 className="w-4 h-4 text-[#60cdff]" />
-                  <span>Geliştirici</span>
+                  <span>Topluluk</span>
+                  <span className="badge-new text-[var(--linkC,#9aa0a6)] text-[11px] font-bold ml-1">
+                    Canlı
+                  </span>
+                  <FlashIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[var(--linkC,#9aa0a6)]" />
                 </div>
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setGelistiriciOpen(!gelistiriciOpen);
-                  }}
-                  className="w-5 h-5 rounded-full bg-[#1e1e1e] hover:bg-[#333333] border border-white/10 flex items-center justify-center text-xs font-bold text-[#60cdff] transition-all cursor-pointer"
-                  aria-label={gelistiriciOpen ? "Daralt" : "Genişlet"}
-                >
-                  {gelistiriciOpen ? '−' : '+'}
-                </button>
+                {/* xml 1:1 li.nt-tr bildirim noktası (Sağ Üst) */}
+                <span className="absolute top-2 right-8 w-2 h-2 rounded-full bg-[var(--linkC,#9aa0a6)] shadow-[0_0_8px_var(--linkC,#9aa0a6)] animate-pulse" />
+                <ChevronDownIcon className={`w-3.5 h-3.5 text-[#989b9f] transition-transform duration-300 ${klasorOpen ? 'rotate-180' : ''}`} />
+              </div>
+
+              {klasorOpen && (
+                <ul className="space-y-0.5 pl-3 border-l border-white/10 ml-4 mt-1">
+                  {/* 1. Chat (Google Chat Odası) */}
+                  <li>
+                    <a
+                      href="https://script.google.com/macros/s/AKfycbwcZprdS6F_jJ6nin0YalTKweQKP4t936UgrTnme-d5gA-qHbi986vh6HxdzvA236Of/exec"
+                      target="_blank"
+                      rel="nofollow noreferrer noopener"
+                      className="w-full group flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] transition-colors outline-none"
+                    >
+                      <div className="flex items-center gap-2">
+                        <span className="font-semibold text-white/95 group-hover:text-[var(--linkC,#9aa0a6)]">Chat</span>
+                        <GoogleChatIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[var(--linkC,#9aa0a6)]" />
+                      </div>
+                    </a>
+                  </li>
+
+                  {/* 2. Tartışmalar (GitHub Discussions) */}
+                  <li>
+                    <a
+                      href="https://github.com/Aleyulala/saved/discussions/?pli=1"
+                      target="_blank"
+                      rel="nofollow noreferrer noopener"
+                      className="w-full group flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] transition-colors outline-none"
+                    >
+                      <div className="flex items-center gap-2">
+                        <span>Tartışmalar</span>
+                        <Profile2UserIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[#9ca3af] group-hover:text-[var(--linkC,#9aa0a6)]" />
+                      </div>
+                    </a>
+                  </li>
+
+                  {/* 3. Labs (Google Labs) */}
+                  <li>
+                    <a
+                      href="https://labs.google.com/"
+                      target="_blank"
+                      rel="nofollow noreferrer noopener"
+                      className="w-full group flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] transition-colors outline-none"
+                    >
+                      <div className="flex items-center gap-2">
+                        <span>Labs</span>
+                        <LabsIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[#9ca3af] group-hover:text-[var(--linkC,#9aa0a6)]" />
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              )}
+            </li>
+
+            {/* XML 1:1 Bölücü Çizgi (.mnMn > li.br::after) */}
+            <li className="py-1">
+              <div className="w-full h-px bg-white/10 my-1" />
+            </li>
+
+            {/* XML 1:1 Bölücü Çizgi (Topluluk ile Araçlar Arası) */}
+            <li className="py-1">
+              <div className="w-full h-px bg-white/10 my-1" />
+            </li>
+
+            {/* 4. KLASÖR 3: Araçlar (svg.folder-code) */}
+            <li className="pt-1 relative">
+              <div 
+                onClick={() => setGelistiriciOpen(!gelistiriciOpen)}
+                className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-bold text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] cursor-pointer transition-colors outline-none relative"
+              >
+                <div className="flex items-center gap-2.5">
+                  <span>Araçlar</span>
+                  <FolderCodeIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[var(--linkC,#9aa0a6)]" />
+                </div>
+                {/* xml 1:1 li.nt-br bildirim noktası (Sağ Alt) */}
+                <span className="absolute bottom-2 right-8 w-1.5 h-1.5 rounded-full bg-[var(--linkC,#9aa0a6)] shadow-[0_0_6px_var(--linkC,#9aa0a6)] animate-pulse" />
+                <ChevronDownIcon className={`w-3.5 h-3.5 text-[#989b9f] transition-transform duration-300 ${gelistiriciOpen ? 'rotate-180' : ''}`} />
               </div>
 
               {gelistiriciOpen && (
                 <ul className="space-y-0.5 pl-3 border-l border-white/10 ml-4 mt-1">
-                  {/* 1. Ters Çevir (RTL / Yön Değiştirme) */}
+                  {/* 1. SEO (svg.search-normal-1) */}
+                  <li>
+                    <a
+                      href="https://search.google.com/test/rich-results"
+                      target="_blank"
+                      rel="nofollow noreferrer noopener"
+                      className="w-full group flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] transition-colors outline-none"
+                    >
+                      <div className="flex items-center gap-2">
+                        <span>SEO</span>
+                        <SearchNormalIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[#9ca3af] group-hover:text-[var(--linkC,#9aa0a6)]" />
+                      </div>
+                    </a>
+                  </li>
+
+                  {/* 2. Hız (svg.speedometer) */}
+                  <li>
+                    <a
+                      href="https://pagespeed.web.dev/analysis"
+                      target="_blank"
+                      rel="nofollow noreferrer noopener"
+                      className="w-full group flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] transition-colors outline-none"
+                    >
+                      <div className="flex items-center gap-2">
+                        <span>Hız</span>
+                        <SpeedometerIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[#9ca3af] group-hover:text-[var(--linkC,#9aa0a6)]" />
+                      </div>
+                    </a>
+                  </li>
+
+                  {/* 3. Ayna (svg.arrow-swap-horizontal) */}
                   <li>
                     <button
                       type="button"
@@ -350,151 +368,180 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
                         const next = current === 'rtl' ? 'ltr' : 'rtl';
                         document.documentElement.setAttribute('dir', next);
                       }}
-                      className="w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-[#252526] hover:text-[#60cdff] transition-colors group cursor-pointer"
+                      className="w-full group flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] transition-colors cursor-pointer outline-none"
                     >
                       <div className="flex items-center gap-2">
-                        <ArrowSwapHorizontalIcon className="w-3.5 h-3.5 text-[#9ca3af] group-hover:text-[#60cdff]" />
-                        <span>Ters Çevir</span>
-                        <span className="px-1.5 py-0.5 rounded-full bg-cyan-950/80 text-[#60cdff] text-[9px] font-bold">
-                          New!
-                        </span>
+                        <span>Ayna</span>
+                        <span className="text-[var(--linkC,#9aa0a6)] text-[10px] font-bold">RTL</span>
+                        <ArrowSwapHorizontalIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[#9ca3af] group-hover:text-[var(--linkC,#9aa0a6)]" />
                       </div>
                     </button>
-                  </li>
-
-                  {/* 2. Detaylı Ara (Google Zengin Sonuçlar Testi) */}
-                  <li>
-                    <a
-                      href="https://search.google.com/test/rich-results"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-[#252526] hover:text-[#60cdff] transition-colors group"
-                    >
-                      <div className="flex items-center gap-2">
-                        <SearchNormalIcon className="w-3.5 h-3.5 text-[#9ca3af] group-hover:text-[#60cdff]" />
-                        <span>Detaylı Ara</span>
-                      </div>
-                      <ExternalLink className="w-3 h-3 text-[#71717a] group-hover:text-[#60cdff]" />
-                    </a>
-                  </li>
-
-                  {/* 3. Hız Testi (Google PageSpeed Insights) */}
-                  <li>
-                    <a
-                      href="https://pagespeed.web.dev/analysis"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-[#252526] hover:text-[#60cdff] transition-colors group"
-                    >
-                      <div className="flex items-center gap-2">
-                        <SpeedometerIcon className="w-3.5 h-3.5 text-[#9ca3af] group-hover:text-[#60cdff]" />
-                        <span>Hız Testi</span>
-                      </div>
-                      <ExternalLink className="w-3 h-3 text-[#71717a] group-hover:text-[#60cdff]" />
-                    </a>
                   </li>
                 </ul>
               )}
             </li>
 
-            {/* 6. KLASÖR 4 kaldırıldı */}
-
           </ul>
-
         </div>
 
-        {/* Drawer Footer: Sosyal Medya & Topluluk İkonları (.mnMob / .mSoc + Genişletme) */}
-        <div className="p-3 border-t border-[rgba(255,255,255,0.08)] bg-[#252526] space-y-2">
-          <div className="flex items-center justify-around text-[#a3a3a3]">
-            {/* Instagram */}
-            <a
-              href="https://www.instagram.com/aleyul.ala/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-7 h-7 rounded-full bg-[#1e1e1e] hover:bg-[#e1306c] hover:text-white flex items-center justify-center transition-all duration-200"
-              title="Instagram"
+        {/* Alt Bölüm (.mnMob Footer): E-posta, Gizlilik ve Yorumlar Slaytı (.PageList02) + Sosyal Butonlar (.LinkList04 / .mSoc) */}
+        <div className="p-3.5 border-t border-[#252526] bg-[#1e1e1e] space-y-3">
+          {/* PageList02: E-posta, Gizlilik ve Yorumlar Kayan Slider + [+] Butonu */}
+          <div className="relative h-9 bg-white/[0.04] border border-white/[0.08] rounded-[9px] overflow-hidden flex items-center shadow-xs">
+            {/* Slayt 0: E-posta */}
+            <div
+              className={`absolute inset-0 flex items-center justify-between px-3 transition-all duration-300 ease-in-out ${
+                footerSlideIndex === 0
+                  ? 'opacity-100 translate-x-0 pointer-events-auto'
+                  : 'opacity-0 -translate-x-full pointer-events-none'
+              }`}
             >
-              <InstagramIcon className="w-3.5 h-3.5" />
-            </a>
-
-            {/* Telegram */}
-            <a
-              href="https://t.me/aleyyulala"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-7 h-7 rounded-full bg-[#1e1e1e] hover:bg-[#229ed9] hover:text-white flex items-center justify-center transition-all duration-200"
-              title="Telegram"
-            >
-              <TelegramIcon className="w-3.5 h-3.5" />
-            </a>
-
-            {/* Element.io / Matrix */}
-            <a
-              href="https://matrix.to/#/#negronn-show:matrix.org"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-7 h-7 rounded-full bg-[#1e1e1e] hover:bg-[#38bdf8] hover:text-black flex items-center justify-center transition-all duration-200"
-              title="Element.io / Matrix: @negronn:matrix.org"
-            >
-              <MatrixIcon className="w-3.5 h-3.5" />
-            </a>
-
-            {/* VKontakte (VK) */}
-            <a
-              href="https://vk.com/negronn"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-7 h-7 rounded-full bg-[#1e1e1e] hover:bg-[#4680c2] hover:text-white flex items-center justify-center transition-all duration-200"
-              title="VK (VKontakte)"
-            >
-              <VkIcon className="w-3.5 h-3.5" />
-            </a>
-
-            {/* E-posta */}
-            <a
-              href="mailto:mrstar14155@gmail.com"
-              className="w-7 h-7 rounded-full bg-[#1e1e1e] hover:bg-[#ea4335] hover:text-white flex items-center justify-center transition-all duration-200"
-              title="E-posta: mrstar14155@gmail.com"
-            >
-              <MailIcon className="w-3.5 h-3.5" />
-            </a>
-
-            {/* Genişlet Butonu (.mSocT) */}
-            <button
-              type="button"
-              onClick={() => setSocialExpanded(!socialExpanded)}
-              className="w-6 h-6 rounded-full border border-white/20 hover:border-[#60cdff] text-white hover:text-[#60cdff] flex items-center justify-center font-bold text-xs transition-all cursor-pointer"
-              title={socialExpanded ? "Sosyal Medyayı Daralt" : "Daha Fazla Sosyal Bağlantı"}
-            >
-              {socialExpanded ? '−' : '+'}
-            </button>
-          </div>
-
-          {/* Genişletilmiş İletişim / Sosyal Menü */}
-          {socialExpanded && (
-            <div className="pt-2 border-t border-white/5 flex items-center justify-center gap-4 text-xs animate-in fade-in duration-200">
               <a
-                href="tel:05446412904"
-                className="inline-flex items-center gap-1.5 text-[#9ca3af] hover:text-[#60cdff] transition-colors"
-                title="Telefon ile İletişim"
+                href="mailto:mrstar14155@gmail.com"
+                className="flex items-center gap-2.5 text-xs text-[#e5e5e5] hover:text-[var(--linkC,#9aa0a6)] font-semibold transition-colors"
+                title="E-posta: mrstar14155@gmail.com"
               >
-                <Phone className="w-3 h-3" />
-                <span>0544 641 29 04</span>
+                <div className="relative flex items-center justify-center">
+                  <MailIcon className="w-4 h-4 text-[#e5e5e5] shrink-0" />
+                  {/* Parlayan Canlı Bildirim Noktası (.nt glow) */}
+                  <span className="absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#ffffff] animate-pulse" />
+                </div>
+                <span className="tracking-wide">E-posta</span>
               </a>
-              <span className="text-[#52525b]">•</span>
+              <button
+                type="button"
+                onClick={() => setFooterSlideIndex(1)}
+                className="w-6 h-6 rounded flex items-center justify-center text-[#9ca3af] hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                title="Sonraki: Gizlilik Politikası"
+                aria-label="Gizlilik Politikasına Geç"
+              >
+                <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                  <line x1="12" y1="5" x2="12" y2="19" />
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Slayt 1: Gizlilik Politikası */}
+            <div
+              className={`absolute inset-0 flex items-center justify-between px-3 transition-all duration-300 ease-in-out ${
+                footerSlideIndex === 1
+                  ? 'opacity-100 translate-x-0 pointer-events-auto'
+                  : footerSlideIndex === 0
+                  ? 'opacity-0 translate-x-full pointer-events-none'
+                  : 'opacity-0 -translate-x-full pointer-events-none'
+              }`}
+            >
+              <button
+                type="button"
+                onClick={() => {
+                  onClose();
+                  onSelectTab('privacy');
+                }}
+                className="flex items-center gap-2.5 text-xs text-[#e5e5e5] hover:text-[var(--linkC,#9aa0a6)] font-semibold transition-colors cursor-pointer"
+                title="Gizlilik Politikası & Şartlar"
+              >
+                <div className="relative flex items-center justify-center">
+                  <Verify1Icon className="w-4 h-4 text-[#e5e5e5] shrink-0" />
+                  <span className="absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#ffffff] animate-pulse" />
+                </div>
+                <span className="tracking-wide">Gizlilik</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setFooterSlideIndex(2)}
+                className="w-6 h-6 rounded flex items-center justify-center text-[#9ca3af] hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                title="Sonraki: Yorumlar"
+                aria-label="Yorumlara Geç"
+              >
+                <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                  <line x1="12" y1="5" x2="12" y2="19" />
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Slayt 2: Yorumlar / Muhabbet Odası */}
+            <div
+              className={`absolute inset-0 flex items-center justify-between px-3 transition-all duration-300 ease-in-out ${
+                footerSlideIndex === 2
+                  ? 'opacity-100 translate-x-0 pointer-events-auto'
+                  : 'opacity-0 translate-x-full pointer-events-none'
+              }`}
+            >
               <a
-                href="https://github.com/Aleyulala/saved"
+                href="https://negronshow.blogspot.com/p/muhabbet.html"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-[#9ca3af] hover:text-white transition-colors"
+                className="flex items-center gap-2.5 text-xs text-[#e5e5e5] hover:text-[var(--linkC,#9aa0a6)] font-semibold transition-colors"
+                title="Muhabbet Odası & Yorumlar"
               >
-                <GithubIcon className="w-3 h-3" />
-                <span>GitHub Depo</span>
+                <div className="relative flex items-center justify-center">
+                  <MessageNotif1Icon className="w-4 h-4 text-[var(--linkC,#9aa0a6)] shrink-0" />
+                  <span className="absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#ffffff] animate-pulse" />
+                </div>
+                <span className="tracking-wide">Yorumlar</span>
               </a>
+              <button
+                type="button"
+                onClick={() => setFooterSlideIndex(0)}
+                className="w-6 h-6 rounded flex items-center justify-center text-[#9ca3af] hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                title="Başa Dön: E-posta"
+                aria-label="E-postaya Geç"
+              >
+                <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                  <line x1="12" y1="5" x2="12" y2="19" />
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+              </button>
             </div>
-          )}
+          </div>
 
-          <div className="flex items-center justify-between text-[10px] text-[#989b9f] font-mono px-1">
+          {/* LinkList04: Sosyal Medya Kayan Slider + [+] Butonu (Üstteki Slayt ile Birebir Aynı Tasarım) */}
+          <div className="relative h-9 bg-white/[0.04] border border-white/[0.08] rounded-[9px] overflow-hidden flex items-center shadow-xs">
+            {drawerSocialLinks.map((item, idx) => {
+              const IconComp = item.icon;
+              return (
+                <div
+                  key={item.name}
+                  className={`absolute inset-0 flex items-center justify-between px-3 transition-all duration-300 ease-in-out ${
+                    socSlideIndex === idx
+                      ? 'opacity-100 translate-x-0 pointer-events-auto'
+                      : 'opacity-0 -translate-x-full pointer-events-none'
+                  }`}
+                >
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2.5 text-xs text-[#e5e5e5] hover:text-[var(--linkC,#9aa0a6)] font-semibold transition-colors"
+                    title={`${item.name} Profilini Aç`}
+                  >
+                    <div className="relative flex items-center justify-center text-[#e5e5e5]">
+                      <IconComp className="w-4 h-4 shrink-0" />
+                      {/* Parlayan Canlı Bildirim Noktası (.nt glow) */}
+                      <span className="absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#ffffff] animate-pulse" />
+                    </div>
+                    <span className="tracking-wide">{item.name}</span>
+                  </a>
+                  <button
+                    type="button"
+                    onClick={() => setSocSlideIndex((prev) => (prev + 1) % drawerSocialLinks.length)}
+                    className="w-6 h-6 rounded flex items-center justify-center text-[#9ca3af] hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                    title="Sonraki Sosyal Medya"
+                    aria-label="Sonraki Sosyal Medyaya Geç"
+                  >
+                    <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                      <line x1="12" y1="5" x2="12" y2="19" />
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                    </svg>
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="flex items-center justify-between text-[10px] text-[#989b9f] font-mono px-2">
             <span>GNU GPL v3.0</span>
             <span>v1.0 • Plus UI</span>
           </div>

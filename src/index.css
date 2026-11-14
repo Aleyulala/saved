@@ -7,7 +7,9 @@
     --darkBa: #2d2d30;
     --darkT: #fffdfc;
     --darkTa: #989b9f;
-    --linkB: #38bdf8;
+    --linkB: #9aa0a6;
+    --linkC: #9aa0a6;
+    --theme-color: #9aa0a6;
     --brand-orange: #ff5722;
     --contentL: rgba(255, 255, 255, 0.08);
 
@@ -15,7 +17,7 @@
     --bg-base-200: #252526;
     --bg-base-300: #2d2d30;
     --border-color: #252526;
-    --text-primary: #38bdf8;
+    --text-primary: #9aa0a6;
     --text-base: #fffdfc;
     --text-muted: #989b9f;
 
@@ -24,7 +26,7 @@
     --menuW: 230px;
     --pageW: 780px;
     --headerH: 60px;
-    --tv-nav-ring: #60cdff;
+    --tv-nav-ring: #9aa0a6;
   }
 
   /* Light mode (lgT) */
@@ -65,9 +67,22 @@ textarea {
   min-height: 80px;
 }
 
-/* Blogger XML Etiketler (.lbL, .pLbls) Corner & Radius Tutarlılığı (8px) */
-.pLbls a, .lbL > *, .c-tag {
+/* Blogger XML Etiketler (.lbL, .pLbls) ve .pGV (Views, Selamlama) Corner & Radius Tutarlılığı (8px) */
+.pLbls a, .lbL > *, .c-tag, .pGV > * {
   border-radius: 8px !important;
+}
+
+/* Etiketlerde ve etiket rakamlarında/sayaçlarında shadow tamamen sıfırlandı */
+.lbL > *,
+#Label01 .lbL > *,
+.c-tag,
+.tag-badge,
+.tag-count,
+.pLbls a,
+.pGV > * {
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
 }
 
 /* Tarayıcı varsayılan ekstra outline'ını sıfırla - Tek odak göstergesi: #tv-focus-dot */
@@ -82,9 +97,9 @@ textarea {
   width: 14px !important;
   height: 14px !important;
   border-radius: 50% !important;
-  background: var(--tv-nav-ring, #60cdff) !important;
+  background: var(--tv-nav-ring, #9aa0a6) !important;
   border: 2px solid #ffffff !important;
-  box-shadow: 0 0 0 2px var(--tv-nav-ring, #60cdff), 0 2px 8px rgba(0,0,0,0.45) !important;
+  box-shadow: 0 0 0 2px var(--tv-nav-ring, #9aa0a6), 0 2px 8px rgba(0,0,0,0.45) !important;
   z-index: 2147483647 !important;
   pointer-events: none !important;
   opacity: 0;
@@ -107,7 +122,7 @@ textarea {
   margin-top: -11px !important;
   margin-left: -11px !important;
   border-radius: 50% !important;
-  background: var(--tv-nav-ring, #60cdff) !important;
+  background: var(--tv-nav-ring, #9aa0a6) !important;
   border: 3px solid #ffffff !important;
   box-shadow: 0 0 0 1.5px rgba(0,0,0,0.35), 0 4px 16px rgba(0,0,0,0.45) !important;
   z-index: 2147483647 !important;
@@ -129,6 +144,60 @@ textarea {
 #tv-virtual-cursor.clicking {
   transform: scale(0.8) !important;
   background: #2ed573 !important;
+}
+
+/* Header Action Buttons (Blogger XML 1:1 .tIc / .headIc) - Normal gözükür, üzerine gelince tema rengine göre parlar */
+.head-action-btn {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  color: #989b9f;
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+}
+
+.head-action-btn:hover {
+  color: var(--linkC, #60cdff) !important;
+  background-color: rgba(96, 205, 255, 0.15);
+  border-color: rgba(96, 205, 255, 0.4);
+  box-shadow: 0 0 10px rgba(96, 205, 255, 0.25);
+  background-color: color-mix(in srgb, var(--linkC, #60cdff) 15%, transparent) !important;
+  border-color: color-mix(in srgb, var(--linkC, #60cdff) 40%, transparent) !important;
+  box-shadow: 0 0 10px color-mix(in srgb, var(--linkC, #60cdff) 25%, transparent) !important;
+}
+
+.head-action-btn:active {
+  transform: scale(0.92);
+}
+
+.head-action-btn.is-active {
+  color: var(--linkC, #60cdff) !important;
+  background-color: rgba(96, 205, 255, 0.15);
+  border-color: rgba(96, 205, 255, 0.4);
+  background-color: color-mix(in srgb, var(--linkC, #60cdff) 15%, transparent) !important;
+  border-color: color-mix(in srgb, var(--linkC, #60cdff) 40%, transparent) !important;
+}
+
+/* XML 1:1 Left Drawer (.mnMn & .mSoc) Icon Sizing */
+.mSoc svg, .mnMn svg, .blogger-drawer .mnMn svg, .blogger-drawer .mSoc svg {
+  width: 18px !important;
+  height: 18px !important;
+  flex-shrink: 0 !important;
+  opacity: 0.8;
+}
+.mnMn a:hover svg,
+.mnMn button:hover svg,
+.mnMn div:hover > div > svg,
+.mSoc a:hover svg {
+  opacity: 1 !important;
 }
 
 /* Hide Google Translate top banner & elements */
@@ -210,208 +279,26 @@ body { top: 0 !important; }
 }
 
 /* ==========================================================================
-   Blogger XML 1:1 Universal Media Lightbox (#fsMediaModal)
+   Blogger XML 1:1 Universal Media Lightbox (#fsMediaModal - Screenshot 1:1)
    ========================================================================== */
 #fsMediaModal {
   position: fixed !important;
-  top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important;
-  width: 100vw !important; height: 100vh !important;
-  background: rgba(0, 0, 0, 0.92) !important;
-  -webkit-backdrop-filter: blur(14px) !important;
-  backdrop-filter: blur(14px) !important;
-  z-index: 1000000 !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.28s ease !important;
-}
-#fsMediaModal.fsShow {
-  opacity: 1 !important;
-  pointer-events: auto !important;
-}
-#fsMediaModal .fsClose {
-  position: fixed !important;
-  top: 20px !important; right: 24px !important;
-  background: rgba(255, 255, 255, 0.2) !important;
-  color: #fff !important;
-  border: none !important;
-  width: 44px !important; height: 44px !important;
-  border-radius: 50% !important;
-  font-size: 26px !important;
-  line-height: 1 !important;
-  cursor: pointer !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  z-index: 1000005 !important;
-  transition: background 0.2s, transform 0.2s !important;
-}
-#fsMediaModal .fsClose:hover {
-  background: rgba(255, 255, 255, 0.38) !important;
-  transform: scale(1.1) !important;
-}
-#fsMediaModal .fsNavBtn {
-  position: fixed !important;
-  top: 50% !important;
-  transform: translateY(-50%) !important;
-  width: 50px !important;
-  height: 50px !important;
-  border-radius: 50% !important;
-  background: rgba(255, 255, 255, 0.22) !important;
-  color: #ffffff !important;
-  border: none !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  cursor: pointer !important;
-  z-index: 1000005 !important;
-  font-size: 26px !important;
-  line-height: 1 !important;
-  transition: background 0.2s, transform 0.2s !important;
-  user-select: none !important;
-}
-#fsMediaModal .fsNavBtn:hover {
-  background: rgba(255, 255, 255, 0.45) !important;
-  transform: translateY(-50%) scale(1.12) !important;
-}
-#fsMediaModal .fsNavBtn.fsPrev { left: 24px !important; }
-#fsMediaModal .fsNavBtn.fsNext { right: 24px !important; }
-#fsMediaModal .fsCounter {
-  position: fixed !important;
-  bottom: 24px !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  background: rgba(0, 0, 0, 0.72) !important;
-  color: #ffffff !important;
-  padding: 6px 18px !important;
-  border-radius: 20px !important;
-  font-size: 13px !important;
-  font-weight: 500 !important;
-  letter-spacing: .5px !important;
-  z-index: 1000005 !important;
-  border: none !important;
-  pointer-events: none !important;
-}
-#fsMediaModal .fsModalContent {
-  width: 90vw !important;
-  max-width: 980px !important;
-  max-height: 88vh !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  position: relative !important;
-}
-#fsMediaModal .fsVideoWrapper {
-  position: relative !important;
-  width: 100% !important;
-  border-radius: 8px !important;
-  overflow: hidden !important;
-  background: #000 !important;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.5) !important;
-}
-#fsMediaModal .fsVideoWrapper.is-standard {
-  padding-top: 56.25% !important;
-  max-width: 960px !important;
-  border-radius: 8px !important;
-}
-#fsMediaModal .fsVideoWrapper.is-shorts {
-  padding-top: 0 !important;
-  width: min(85vh * 9 / 16, 405px) !important;
-  height: min(85vh, 720px) !important;
-  max-height: 85vh !important;
-  aspect-ratio: 9/16 !important;
-  margin: 0 auto !important;
-  border-radius: 8px !important;
-  overflow: hidden !important;
-}
-#fsMediaModal .fsVideoWrapper.is-widescreen {
-  width: min(94vw, 1200px) !important;
-  max-width: 94vw !important;
-  height: min(82vh, 675px) !important;
-  max-height: 82vh !important;
-  aspect-ratio: 16/9 !important;
-  padding-top: 0 !important;
-  margin: 0 auto !important;
-  border-radius: 8px !important;
-  overflow: hidden !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
   background: #000000 !important;
-}
-#fsMediaModal .fsVideoWrapper iframe,
-#fsMediaModal .fsVideoWrapper video {
-  position: absolute !important;
-  top: 0 !important; left: 0 !important;
-  width: 100% !important; height: 100% !important;
-  border: 0 !important;
-}
-#fsMediaModal .fsWideBtn,
-#fsMediaModal .fsZoomBtn {
-  position: fixed !important;
-  top: 20px !important;
-  right: 76px !important;
-  width: 44px !important;
-  height: 44px !important;
-  border-radius: 50% !important;
-  background: rgba(255, 255, 255, 0.15) !important;
-  border: none !important;
-  color: #ffffff !important;
+  z-index: 1000000 !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  cursor: pointer !important;
-  z-index: 1000000 !important;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  outline: none !important;
 }
-#fsMediaModal .fsWideBtn:hover,
-#fsMediaModal .fsZoomBtn:hover {
-  background: rgba(255, 255, 255, 0.3) !important;
-  transform: scale(1.1) !important;
-  color: #60cdff !important;
-}
-#fsMediaModal .fsWideBtn.active,
-#fsMediaModal .fsZoomBtn.active {
-  background: #60cdff !important;
-  color: #000000 !important;
-}
-#fsMediaModal .fsWideBtn svg,
-#fsMediaModal .fsZoomBtn svg {
-  width: 20px !important;
-  height: 20px !important;
-  stroke: currentColor !important;
-  stroke-width: 2 !important;
-  stroke-linecap: round !important;
-  stroke-linejoin: round !important;
-  fill: none !important;
-}
-@media screen and (max-width: 640px) {
-  #fsMediaModal .fsWideBtn,
-  #fsMediaModal .fsZoomBtn {
-    top: 14px !important;
-    right: 64px !important;
-    width: 38px !important;
-    height: 38px !important;
-  }
-}
-#fsMediaModal .fsImg {
-  max-width: 90vw !important;
-  max-height: 85vh !important;
-  border-radius: 8px !important;
+
+#fsMediaModal img {
+  max-width: 86vw !important;
+  max-height: 82vh !important;
+  border-radius: 20px !important;
   object-fit: contain !important;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.5) !important;
-  cursor: zoom-in !important;
-  transition: transform 0.32s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.32s ease !important;
-  will-change: transform !important;
-  user-select: none !important;
-}
-#fsMediaModal .fsImg.is-zoomed {
-  transform: scale(1.85) !important;
-  cursor: zoom-out !important;
-  box-shadow: 0 25px 80px rgba(0,0,0,0.85) !important;
-  z-index: 10 !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9) !important;
 }
 
 /* ========================================================
@@ -502,12 +389,26 @@ body { top: 0 !important; }
   right: 0;
   background: #252526;
   border-radius: 12px;
-  width: 270px;
+  width: 288px;
+  max-width: calc(100vw - 24px);
   box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   border: 1px solid rgba(255,255,255,0.08);
   overflow: hidden;
   z-index: 50;
   animation: fadeInDown .2s ease-out;
+}
+@media (max-width: 640px) {
+  .bX .admAbt, .admAbt {
+    padding: 16px;
+    margin: 20px 0;
+  }
+  .admAbt .admPs {
+    gap: 12px !important;
+  }
+  .wPrf {
+    right: -8px;
+    width: calc(100vw - 24px);
+  }
 }
 .wPrf .prfH {
   padding: 10px 14px;
@@ -556,3 +457,752 @@ body { top: 0 !important; }
   font-size: 11px;
   color: #71717a;
 }
+
+/* ========================================================
+   NSONE BOT YATAY KAYAN CAROUSEL SLIDER (.ns-slider-container)
+   ======================================================== */
+.ns-slider-container {
+  position: relative !important;
+  width: 100% !important;
+  overflow: hidden !important;
+  min-height: 52px !important;
+  padding: 8px 2px 4px 2px !important;
+  box-sizing: border-box !important;
+}
+
+.ns-slide {
+  position: absolute !important;
+  top: 8px !important;
+  left: 2px !important;
+  right: 2px !important;
+  width: calc(100% - 4px) !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  box-sizing: border-box !important;
+  transition: transform 0.32s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.28s ease, visibility 0.32s !important;
+  transform: translateX(110%) !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.ns-slide.active {
+  position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  transform: translateX(0%) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+.ns-slide.passed {
+  position: absolute !important;
+  transform: translateX(-110%) !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.ns-slide-msg {
+  align-items: flex-end !important;
+}
+
+@keyframes nsShake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+.ns-shake {
+  animation: nsShake 0.32s ease !important;
+}
+
+/* Plu$ UI Floating Label .ns-input-wrap Alanları */
+.ns-input-wrap {
+  position: relative !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+}
+
+.ns-input-wrap input,
+.ns-input-wrap textarea {
+  display: block !important;
+  width: 100% !important;
+  height: 48px !important;
+  margin: 0 !important;
+  outline: none !important;
+  font-family: inherit !important;
+  font-size: 0.9rem !important;
+  padding: 13px 14px !important;
+  border-radius: 14px !important;
+  background: rgba(0, 0, 0, 0.28) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  color: #fffdfc !important;
+  box-sizing: border-box !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+:root.lgT .ns-input-wrap input,
+:root.lgT .ns-input-wrap textarea {
+  background: rgba(0, 0, 0, 0.04) !important;
+  border-color: rgba(0, 0, 0, 0.16) !important;
+  color: #18181b !important;
+}
+
+.ns-input-wrap input:focus,
+.ns-input-wrap textarea:focus {
+  border-color: var(--linkC, #9aa0a6) !important;
+  box-shadow: 0 0 0 3px rgba(154, 160, 166, 0.22) !important;
+}
+
+.ns-input-wrap label {
+  position: absolute !important;
+  top: 14px !important;
+  left: 14px !important;
+  font-size: 0.88rem !important;
+  color: #888888 !important;
+  pointer-events: none !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  background: transparent !important;
+  padding: 0 4px !important;
+  border-radius: 4px !important;
+  line-height: 1 !important;
+}
+
+.ns-input-wrap input:focus ~ label,
+.ns-input-wrap textarea:focus ~ label,
+.ns-input-wrap input:not(:placeholder-shown) ~ label,
+.ns-input-wrap textarea:not(:placeholder-shown) ~ label {
+  top: -8px !important;
+  left: 10px !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  color: var(--linkC, #9aa0a6) !important;
+  background: #252526 !important;
+  opacity: 1 !important;
+}
+
+:root.lgT .ns-input-wrap input:focus ~ label,
+:root.lgT .ns-input-wrap textarea:focus ~ label,
+:root.lgT .ns-input-wrap input:not(:placeholder-shown) ~ label,
+:root.lgT .ns-input-wrap textarea:not(:placeholder-shown) ~ label {
+  background: #f4f4f5 !important;
+}
+
+.ns-msg-field textarea {
+  height: 48px !important;
+  min-height: 48px !important;
+  max-height: 220px !important;
+  resize: none !important;
+  overflow-y: hidden !important;
+  line-height: 20px !important;
+}
+
+/* Sadece İleri Butonu (Kare 48x48) */
+.ns-btn-next {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 48px !important;
+  height: 48px !important;
+  min-width: 48px !important;
+  min-height: 48px !important;
+  padding: 0 !important;
+  border-radius: 14px !important;
+  background: var(--linkB, #9aa0a6) !important;
+  color: #0f172a !important;
+  border: none !important;
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
+  box-sizing: border-box !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  box-shadow: 0 3px 12px rgba(154, 160, 166, 0.25) !important;
+}
+
+.ns-btn-next:hover {
+  opacity: 0.92 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 5px 16px rgba(154, 160, 166, 0.35) !important;
+}
+
+.ns-btn-next:active {
+  transform: translateY(0) scale(0.98) !important;
+}
+
+.ns-btn-next svg {
+  width: 20px !important;
+  height: 20px !important;
+  stroke: currentColor !important;
+  stroke-width: 2.2 !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+  fill: none !important;
+  transition: transform 0.2s ease !important;
+}
+
+.ns-btn-next:hover svg {
+  transform: translateX(3px) !important;
+}
+
+/* Gönder Butonu (Tam Genişlik) */
+.ns-btn-submit {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  width: 100% !important;
+  height: 48px !important;
+  border-radius: 14px !important;
+  padding: 0 24px !important;
+  margin: 0 !important;
+  font-family: inherit !important;
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  border: none !important;
+  background: var(--linkB, #9aa0a6) !important;
+  color: #0f172a !important;
+  box-shadow: 0 3px 14px rgba(154, 160, 166, 0.28) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.ns-btn-submit:hover {
+  opacity: 0.92 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 18px rgba(56, 189, 248, 0.38) !important;
+}
+
+.ns-btn-submit svg {
+  width: 18px !important;
+  height: 18px !important;
+  stroke: currentColor !important;
+  stroke-width: 2.2 !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+  fill: none !important;
+  transition: transform 0.25s ease !important;
+}
+
+.ns-btn-submit:hover svg {
+  transform: translate(2px, -2px) scale(1.1) !important;
+}
+
+/*--[ Blogger Plus UI Numbered Pagination (.blogN / #blog-pager) ]--*/
+.blogN {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  line-height: 20px !important;
+  margin: 40px 0 24px !important;
+  max-width: 100% !important;
+  user-select: none !important;
+}
+
+.blogN > * {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  min-width: 40px !important;
+  min-height: 40px !important;
+  padding: 6px 14px !important;
+  border-radius: 8px !important;
+  color: #fffdfc !important;
+  background: #252526 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  font-family: inherit !important;
+  text-decoration: none !important;
+}
+
+.blogN button {
+  cursor: pointer !important;
+  outline: none !important;
+}
+
+.blogN button:hover {
+  background: #323235 !important;
+  color: var(--linkC, #9aa0a6) !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35) !important;
+}
+
+.blogN button:active {
+  transform: translateY(0) scale(0.96) !important;
+}
+
+.blogN .active,
+.blogN button.active,
+.blogN .nPst.active {
+  background: var(--linkC, #9aa0a6) !important;
+  color: #121212 !important;
+  border-color: var(--linkC, #9aa0a6) !important;
+  font-weight: 700 !important;
+  box-shadow: 0 0 16px rgba(154, 160, 166, 0.4) !important;
+}
+
+.blogN .disabled,
+.blogN div.disabled {
+  opacity: 0.3 !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+  background: rgba(255, 255, 255, 0.03) !important;
+  border-color: transparent !important;
+}
+
+.blogN .ellipsis,
+.blogN div.ellipsis {
+  background: transparent !important;
+  border: none !important;
+  color: #71717a !important;
+  min-width: 28px !important;
+  box-shadow: none !important;
+}
+
+.blogN svg.line {
+  width: 16px !important;
+  height: 16px !important;
+  stroke: currentColor !important;
+  stroke-width: 2.2 !important;
+  fill: none !important;
+}
+
+.blogN .hmLnk {
+  padding: 8px 12px !important;
+}
+
+.blogN .hmLnk svg,
+.blogN .hmLnk svg.line {
+  width: 18px !important;
+  height: 18px !important;
+  stroke: currentColor !important;
+  stroke-width: 1.8 !important;
+  fill: none !important;
+}
+
+:root.lgT .blogN > * {
+  background: #f4f4f5 !important;
+  color: #18181b !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+:root.lgT .blogN button:hover {
+  background: #e4e4e7 !important;
+  color: var(--linkC, #5f6368) !important;
+  border-color: rgba(0, 0, 0, 0.16) !important;
+}
+
+:root.lgT .blogN .active,
+:root.lgT .blogN button.active {
+  background: var(--linkC, #5f6368) !important;
+  color: #ffffff !important;
+  border-color: var(--linkC, #5f6368) !important;
+}
+
+/* ==========================================================================
+   AYDINLIK MOD (lgT) - Sabit koyu renklerin aydınlık karşılıkları
+   Bileşenlerdeki Tailwind renk sınıflarını kapsam altına alır.
+   ========================================================================== */
+:root.lgT {
+  color-scheme: light;
+}
+
+:root.lgT body {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+/* Temel sayfa ve yüzeyler */
+:root.lgT [class*="bg-[#1e1e1e]"],
+:root.lgT [class*="bg-[#161616]"],
+:root.lgT [class*="bg-[#111111]"] {
+  background-color: #f8fafc !important;
+}
+
+:root.lgT [class*="bg-[#212121]"] {
+  background-color: #ffffff !important;
+}
+
+:root.lgT [class*="bg-[#171717]"],
+:root.lgT [class*="bg-[#1a1a1a]"],
+:root.lgT [class*="bg-[#1b1b1b]"],
+:root.lgT [class*="bg-[#1f1f1f]"],
+:root.lgT [class*="bg-[#18181b]"] {
+  background-color: #f1f5f9 !important;
+}
+
+:root.lgT [class*="bg-[#252526]"] {
+  background-color: #ffffff !important;
+}
+
+:root.lgT [class*="bg-[#262626]"],
+:root.lgT [class*="bg-[#27272a]"],
+:root.lgT [class*="bg-[#282828]"],
+:root.lgT [class*="bg-[#28282b]"],
+:root.lgT [class*="bg-[#2a2d2e]"],
+:root.lgT [class*="bg-[#2b2b2e]"],
+:root.lgT [class*="bg-[#2d2d30]"],
+:root.lgT [class*="bg-[#1e293b]"] {
+  background-color: #f1f5f9 !important;
+}
+
+:root.lgT [class*="bg-[#333333]"] {
+  background-color: #e2e8f0 !important;
+}
+
+:root.lgT [class*="bg-[#383838]"],
+:root.lgT [class*="bg-[#404040]"],
+:root.lgT [class*="bg-[#444444]"],
+:root.lgT [class*="bg-[#4d4d4d]"] {
+  background-color: #cbd5e1 !important;
+}
+
+/* Yarı saydam beyaz yüzeyler */
+:root.lgT [class*="bg-white/5"],
+:root.lgT [class*="bg-white/[0.06]"] {
+  background-color: rgba(15, 23, 42, 0.04) !important;
+}
+
+:root.lgT [class*="bg-white/10"] {
+  background-color: rgba(15, 23, 42, 0.06) !important;
+}
+
+:root.lgT [class*="bg-white/20"] {
+  background-color: rgba(15, 23, 42, 0.10) !important;
+}
+
+/* Kenarlıklar */
+:root.lgT [class*="border-[#252526]"],
+:root.lgT [class*="border-[#2d2d30]"],
+:root.lgT [class*="border-[#2e2e2e]"],
+:root.lgT [class*="border-[#333]"],
+:root.lgT [class*="border-[#333333]"],
+:root.lgT [class*="border-[#383838]"],
+:root.lgT [class*="border-[#3e3e3e]"],
+:root.lgT [class*="border-[#404040]"],
+:root.lgT [class*="border-[#404045]"],
+:root.lgT [class*="border-[#4d4d4d]"] {
+  border-color: #e2e8f0 !important;
+}
+
+:root.lgT [class*="border-white/5"] {
+  border-color: rgba(15, 23, 42, 0.06) !important;
+}
+
+:root.lgT [class*="border-white/10"] {
+  border-color: rgba(15, 23, 42, 0.10) !important;
+}
+
+:root.lgT [class*="border-white/20"] {
+  border-color: rgba(15, 23, 42, 0.12) !important;
+}
+
+/* Ana metin renkleri */
+:root.lgT [class*="text-white"],
+:root.lgT [class*="text-[#fffdfc]"],
+:root.lgT [class*="text-[#f3f4f6]"],
+:root.lgT [class*="text-slate-100"] {
+  color: #0f172a !important;
+}
+
+/* Koyu görsel/rozet zeminleri üzerindeki beyaz metinler korunur */
+:root.lgT [class*="bg-black"][class*="text-white"],
+:root.lgT [class*="bg-black"] [class*="text-white"],
+:root.lgT [class*="from-sky-950"] [class*="text-white"] {
+  color: #ffffff !important;
+}
+
+/* İkincil metin renkleri */
+:root.lgT [class*="text-[#d4d4d4]"],
+:root.lgT [class*="text-[#a3a3a3]"],
+:root.lgT [class*="text-[#9ca3af]"],
+:root.lgT [class*="text-[#989b9f]"],
+:root.lgT [class*="text-[#9aa0a6]"],
+:root.lgT [class*="text-[#8e8e8e]"],
+:root.lgT [class*="text-[#737373]"],
+:root.lgT [class*="text-[#71717a]"],
+:root.lgT [class*="text-[#a1a1aa]"],
+:root.lgT [class*="text-[#52525b]"],
+:root.lgT [class*="text-[#525252]"],
+:root.lgT [class*="text-neutral-200"],
+:root.lgT [class*="text-neutral-300"],
+:root.lgT [class*="text-slate-200"],
+:root.lgT [class*="text-slate-300"] {
+  color: #334155 !important;
+}
+
+:root.lgT [class*="text-neutral-400"],
+:root.lgT [class*="text-neutral-500"],
+:root.lgT [class*="text-slate-400"],
+:root.lgT [class*="text-slate-500"],
+:root.lgT [class*="text-slate-600"],
+:root.lgT [class*="text-slate-700"] {
+  color: #64748b !important;
+}
+
+/* Aydınlık zeminde vurgu metinleri daha koyu okunur */
+:root.lgT [class*="text-[#60cdff]"],
+:root.lgT [class*="text-[#38bdf8]"],
+:root.lgT [class*="text-[#7dd3fc]"] {
+  color: #0369a1 !important;
+}
+
+:root.lgT [class*="bg-black"][class*="text-[#60cdff]"],
+:root.lgT [class*="bg-black"] [class*="text-[#60cdff]"] {
+  color: #60cdff !important;
+}
+
+/* Blogger yazar kartı ve profil açılır penceresi */
+:root.lgT .admAbt {
+  background: #ffffff;
+  border-color: rgba(15, 23, 42, 0.08);
+}
+
+:root.lgT .admAbt .title {
+  color: #64748b;
+}
+
+:root.lgT .admAbt .title::after {
+  border-bottom-color: rgba(15, 23, 42, 0.2);
+}
+
+:root.lgT .admAbt .admN {
+  color: #0f172a;
+}
+
+:root.lgT .admAbt .admA {
+  color: #475569;
+}
+
+:root.lgT .wPrf {
+  background: #ffffff;
+  border-color: rgba(15, 23, 42, 0.08);
+}
+
+:root.lgT .wPrf .prfH {
+  background: #f1f5f9;
+  color: #64748b;
+  border-bottom-color: rgba(15, 23, 42, 0.08);
+}
+
+:root.lgT .wPrf .sInf .sDt .l {
+  color: #0f172a;
+}
+
+:root.lgT .wPrf .sInf .sTxt {
+  color: #475569;
+}
+
+:root.lgT .wPrf .sInf .lc {
+  color: #64748b;
+}
+
+/* Popüler Post başlığı */
+:root.lgT #PopularPosts01 .title,
+:root.lgT .PopularPosts .title {
+  color: #0f172a !important;
+}
+
+/* FloatingMenu (.qeF / .tTb) satır içi stilleri */
+:root.lgT .qeT,
+:root.lgT .qeL > button {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #e2e8f0 !important;
+}
+
+:root.lgT .qeT:hover,
+:root.lgT .qeL > button:hover {
+  background-color: #f1f5f9 !important;
+  border-color: var(--linkC, #9aa0a6) !important;
+  color: var(--linkC, #9aa0a6) !important;
+}
+
+:root.lgT .qeL > button::before {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #e2e8f0 !important;
+}
+
+:root.lgT .qeF svg.line .c {
+  stroke: #64748b !important;
+}
+
+:root.lgT .tTb circle:first-of-type {
+  fill: #ffffff !important;
+  stroke: #e2e8f0 !important;
+}
+
+:root.lgT .tTb path {
+  stroke: #0f172a !important;
+}
+
+/* Özel kaydırma çubuğu */
+:root.lgT ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+}
+
+:root.lgT ::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Gizlilik politikası içeriği ([&_...] varyantları) */
+:root.lgT [class*="[&_strong]:text-white"] strong {
+  color: #0f172a !important;
+}
+
+:root.lgT [class*="[&_.faq-trigger]:text-white"] .faq-trigger {
+  color: #0f172a !important;
+}
+
+:root.lgT [class*="[&_.cookie-table_th]:text-white"] .cookie-table th {
+  color: #0f172a !important;
+}
+
+:root.lgT [class*="[&_.alert-box]:bg-[#1e1e1e]"] .alert-box,
+:root.lgT [class*="[&_.faq-item]:bg-[#1e1e1e]"] .faq-item {
+  background-color: #f1f5f9 !important;
+}
+
+:root.lgT [class*="[&_.cookie-table_th]:bg-[#1e1e1e]"] .cookie-table th {
+  background-color: #f1f5f9 !important;
+}
+
+:root.lgT [class*="[&_li]:text-[#d4d4d4]"] li {
+  color: #334155 !important;
+}
+
+:root.lgT [class*="[&_.faq-content]:text-[#a1a1aa]"] .faq-content {
+  color: #64748b !important;
+}
+
+:root.lgT [class*="[&_.cookie-table_td]:border-[#333]"] .cookie-table td {
+  border-color: #e2e8f0 !important;
+}
+
+/* ==========================================================================
+   MODAL & PANEL GEÇİŞ ANİMASYONLARI (animate-in / fade-in / zoom-in / slide-in)
+   Tailwind v4'te tailwindcss-animate yerleşik olmadığından elle tanımlanır;
+   bileşenlerdeki animate-in sınıflarını gerçekten çalıştırır.
+   ========================================================================== */
+@keyframes fadeInDown {
+  0% { opacity: 0; transform: translateY(-10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes savedFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes savedZoomIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes savedSlideInRight {
+  from { opacity: 0; transform: translateX(24px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.animate-in {
+  animation: savedFadeIn 0.2s ease-out both;
+}
+
+.animate-in.fade-in {
+  animation-name: savedFadeIn;
+}
+
+.animate-in.zoom-in {
+  animation-name: savedZoomIn;
+}
+
+.animate-in.slide-in-from-right {
+  animation-name: savedSlideInRight;
+}
+
+/* Yukarıdan kayarak açılan kart (adv-card translateY(-12px) — nsone.xml 1:1) */
+@keyframes savedSlideDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-in.slide-in-from-top {
+  animation-name: savedSlideDown;
+}
+
+/* ==========================================================================
+   NSONE BOT SPOTLIGHT MODALI (.cf-spotlight) — nsone.xml 1:1
+   ========================================================================== */
+@keyframes cfSpotlightAnim {
+  0% { opacity: 0; transform: translate(-50%, -46%) scale(0.96); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+.cf-spotlight-anim {
+  animation: cfSpotlightAnim 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* 'Yazıyor...' üç nokta göstergesi (cfTypingIndicator) */
+.cf-typing {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.cf-typing i {
+  width: 5px;
+  height: 5px;
+  border-radius: 99px;
+  background: #989b9f;
+  animation: cfTypingBounce 0.9s ease-in-out infinite;
+}
+
+.cf-typing i:nth-child(2) { animation-delay: 0.15s; }
+.cf-typing i:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes cfTypingBounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+
+/* Cam yüzeylerin açık tema (lgT) karşılıkları — nsone.xml 1:1 */
+:root.lgT .cf-spotlight {
+  background: rgba(255, 255, 255, 0.82) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 25px 65px rgba(0, 0, 0, 0.12) !important;
+}
+
+:root.lgT .cf-backdrop {
+  background: rgba(15, 17, 23, 0.4) !important;
+}
+
+:root.lgT .adv-card {
+  background: rgba(255, 255, 255, 0.86) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 25px 65px rgba(0, 0, 0, 0.12) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-in {
+    animation-duration: 0.01s !important;
+  }
+
+  .cf-spotlight-anim {
+    animation-duration: 0.01s !important;
+  }
+
+  .cf-typing i {
+    animation-duration: 0.01s !important;
+  }
+}
+

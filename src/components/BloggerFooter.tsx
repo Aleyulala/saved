@@ -1,5 +1,5 @@
 import React from 'react';
-import { Rss, Plus } from 'lucide-react';
+import { Rss } from 'lucide-react';
 import { BloggerBIcon } from './BloggerIcons';
 
 interface BloggerFooterProps {
@@ -10,26 +10,21 @@ export const BloggerFooter: React.FC<BloggerFooterProps> = ({
   onOpenPrivacy
 }) => {
   return (
-    <footer className="w-full bg-[#18181b] border-t border-[#252526] mt-16 pt-12 pb-16 select-none text-xs text-[#989b9f]">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Blogger Plus UI 1:1 Footer (.abtU & LinkList21..24) */}
-        <div className="flex flex-col lg:flex-row items-start justify-between gap-10 lg:gap-12">
+    <footer className="mainF w-full bg-[#1e1e1e] border-t border-[#333333] select-none text-xs text-[#989b9f]">
+      <div className="fotC w-full py-10 sm:py-12">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-[25px]">
           
-          {/* Sol Kısım: + İkonu ve Yazar / Marka Kartı (.abtU) */}
-          <div className="flex items-start gap-4 sm:gap-6 shrink-0">
-            {/* En Sol + İkonu */}
-            <div className="pt-2 text-[#71717a] hover:text-white transition-colors cursor-pointer select-none">
-              <Plus className="w-4 h-4" />
-            </div>
-
-            <div className="space-y-4">
+          {/* Blogger Plus UI 1:1 Footer (.fotN: %35 + %21.66 + %21.66 + %21.66) */}
+          <div className="fotN flex flex-wrap -mx-4 items-start">
+            
+            {/* 1. Kolon: Logo & Marka Kartı (.abtU - negronn.xml 1:1 %35 Genişlik) */}
+            <div className="w-full lg:w-[35%] px-4 mb-8 lg:mb-0 space-y-4">
               {/* Profil & Başlık */}
               <div className="flex items-center gap-3.5">
                 <img
                   src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjuF5-IgFBevlNcBbXMSdl7Egn34HcWcPccvcujWL1XU0r_22ZPQIFUySo7l_YmmIwpzmkppKZUPJVAl0ipZ-HHB4LyzCQgq39Ii7PPcvvcTbBWkPa2Z2_fYvD57BQrq9yNckevGtzc79XFgbfi9QZQ9wKVIJfVA1R3cmj98A4Ce9jxeDU4R4lvggThYP4/s150/minimize%20nsw.png"
                   alt="NSW Logo"
-                  className="w-12 h-12 rounded-xl object-cover shadow-md"
+                  className="w-14 h-14 rounded-2xl object-cover shadow-md shrink-0"
                 />
                 <div className="space-y-1">
                   <h3 className="text-white font-bold text-base tracking-wider uppercase leading-none">
@@ -48,7 +43,7 @@ export const BloggerFooter: React.FC<BloggerFooterProps> = ({
                 </div>
               </div>
 
-              {/* Sosyal Alt Bağlantılar: Youtube / Whatsapp / Haritalar */}
+              {/* Sosyal Alt Bağlantılar: Youtube / Whatsapp / Haritalar (.sL) */}
               <div className="flex items-center gap-2 text-xs text-[#989b9f]">
                 <a
                   href="https://www.youtube.com/@ngronn/post"
@@ -78,27 +73,23 @@ export const BloggerFooter: React.FC<BloggerFooterProps> = ({
                 </a>
               </div>
 
-              {/* RSS Feed Bağlantısı */}
+              {/* RSS Feed Bağlantısı (GitHub Native Atom / RSS Akışı) */}
               <div className="pt-1">
                 <a
-                  href="https://negronshow.blogspot.com/feeds/posts/default?alt=rss"
+                  href="https://github.com/Aleyulala/saved/commits/main.atom"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs text-[#989b9f] hover:text-[#60cdff] transition-colors"
-                  title="Feed"
+                  className="inline-flex items-center gap-1.5 text-xs text-[#989b9f] hover:text-[var(--linkC,#9aa0a6)] transition-colors"
+                  title="GitHub SAVED RSS/Atom Akışı"
                 >
                   <Rss className="w-3.5 h-3.5" />
                   <span>Feed</span>
                 </a>
               </div>
             </div>
-          </div>
 
-          {/* Sağ Kısım: 3 Kolonlu Blogger Menüsü (Forum, Servis, Ödeme) */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 sm:gap-14 lg:gap-16 text-xs">
-            
-            {/* Kolon 1: Forum */}
-            <div className="space-y-3">
+            {/* 2. Kolon: Forum (.LinkList22 - negronn.xml 1:1 %21.66 Genişlik) */}
+            <div className="w-full sm:w-1/3 lg:w-[21.666%] px-4 mb-6 lg:mb-0 space-y-3">
               <h4 className="text-white font-bold text-sm tracking-wide">
                 Forum
               </h4>
@@ -150,8 +141,8 @@ export const BloggerFooter: React.FC<BloggerFooterProps> = ({
               </ul>
             </div>
 
-            {/* Kolon 2: Servis */}
-            <div className="space-y-3">
+            {/* 3. Kolon: Servis (.LinkList23 - negronn.xml 1:1 %21.66 Genişlik) */}
+            <div className="w-full sm:w-1/3 lg:w-[21.666%] px-4 mb-6 lg:mb-0 space-y-3">
               <h4 className="text-white font-bold text-sm tracking-wide">
                 Servis
               </h4>
@@ -192,8 +183,8 @@ export const BloggerFooter: React.FC<BloggerFooterProps> = ({
               </ul>
             </div>
 
-            {/* Kolon 3: Ödeme */}
-            <div className="space-y-3">
+            {/* 4. Kolon: Ödeme (.LinkList24 - negronn.xml 1:1 %21.66 Genişlik) */}
+            <div className="w-full sm:w-1/3 lg:w-[21.666%] px-4 mb-6 lg:mb-0 space-y-3">
               <h4 className="text-white font-bold text-sm tracking-wide">
                 Ödeme
               </h4>
@@ -237,7 +228,6 @@ export const BloggerFooter: React.FC<BloggerFooterProps> = ({
           </div>
 
         </div>
-
       </div>
     </footer>
   );
