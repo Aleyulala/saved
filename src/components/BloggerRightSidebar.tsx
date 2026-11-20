@@ -711,19 +711,19 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
               onClick={closeSpotlight}
             />
 
-            {/* Spotlight Penceresi (.cf-spotlight) */}
+            {/* Spotlight Penceresi (.cf-spotlight) - Topicroom Canlı İletişim Formu */}
             <section
               id="ContactForm2Spotlight"
               role="dialog"
               aria-modal="true"
-              aria-label="Bize Ulaşın — Nsone Bot"
-              className="cf-spotlight fixed left-1/2 top-1/2 z-[9999] w-[min(calc(100vw-32px),360px)] max-h-[min(92vh,760px)] overflow-y-auto overscroll-contain rounded-[24px] max-[600px]:rounded-[20px] bg-[rgba(22,25,34,0.78)] backdrop-blur-[28px] border-0 p-6 pb-5 shadow-[0_30px_80px_rgba(0,0,0,0.72)] cf-spotlight-anim"
+              aria-label="Bize Ulaşın — Topicroom İletişim"
+              className="cf-spotlight fixed left-1/2 top-1/2 z-[9999] w-[min(calc(100vw-32px),450px)] max-h-[min(94vh,760px)] overflow-hidden rounded-[24px] max-[600px]:rounded-[20px] bg-[rgba(22,25,34,0.92)] backdrop-blur-[28px] border border-white/10 p-4 shadow-[0_30px_80px_rgba(0,0,0,0.72)] cf-spotlight-anim"
             >
               {/* Kapat (X) Butonu (.cf-close-btn) */}
               <button
                 type="button"
                 onClick={closeSpotlight}
-                className="absolute top-3 right-3 w-9 h-9 rounded-[10px] bg-white/[0.08] backdrop-blur-[14px] border-0 hover:bg-[#333333] text-[#989b9f] hover:text-white flex items-center justify-center transition-all cursor-pointer z-10"
+                className="absolute top-3 right-3 w-9 h-9 rounded-[10px] bg-white/[0.08] backdrop-blur-[14px] border-0 hover:bg-[#333333] text-[#989b9f] hover:text-white flex items-center justify-center transition-all cursor-pointer z-20"
                 aria-label="Kapat"
                 title="Kapat"
               >
@@ -740,7 +740,13 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
                 </svg>
               </button>
 
-              {nsoneBotPanel}
+              <iframe
+                id="bttContactWidgetIframeGithub"
+                src="https://script.google.com/macros/s/AKfycbx8B_7DX64ss6H1CxIyZ_KOUyzyfcEvX82pqmsPixLn4YVDaVtoPB5qp_qhj7ExckZR/exec?action=contact&source=github"
+                className="w-full h-[470px] border-0 rounded-[16px] bg-transparent block"
+                title="Topicroom İletişim Formu"
+                allow="clipboard-write"
+              />
             </section>
           </>,
           document.body
