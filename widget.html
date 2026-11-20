@@ -25,11 +25,12 @@
       flex-direction: column;
       height: 100%;
       width: 100%;
-      background: #18181b;
+      background: linear-gradient(180deg, #181922 0%, #111216 100%);
       border-radius: 18px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.09);
       overflow: hidden;
-      box-shadow: 0 20px 45px rgba(0,0,0,0.6);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(16, 185, 129, 0.25);
+      position: relative;
     }
     .chat-header {
       display: flex;
@@ -38,52 +39,64 @@
       padding: 12px 16px;
       background: rgba(255, 255, 255, 0.03);
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
     .header-left {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 11px;
     }
     .chat-avatar {
-      width: 34px;
-      height: 34px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       background: linear-gradient(135deg, #10b981 0%, #059669 100%);
       color: #fff;
       font-weight: 700;
-      font-size: 14px;
+      font-size: 15px;
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
     }
     .avatar-dot {
       position: absolute;
       bottom: 0;
       right: 0;
-      width: 8.5px;
-      height: 8.5px;
+      width: 9px;
+      height: 9px;
       background: #10b981;
-      border: 2px solid #18181b;
+      border: 2px solid #181922;
       border-radius: 50%;
-      box-shadow: 0 0 6px #10b981;
+      animation: radarPulse 2s infinite ease-in-out;
+    }
+    @keyframes radarPulse {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 7px rgba(16, 185, 129, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
     }
     .header-meta h3 {
       font-size: 13.5px;
-      font-weight: 600;
+      font-weight: 700;
       color: #ffffff;
+      letter-spacing: -0.2px;
     }
     .header-meta p {
       font-size: 11px;
       color: #34d399;
       font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 4px;
     }
     .badge-source {
       font-size: 10.5px;
-      background: rgba(16, 185, 129, 0.14);
-      border: 1px solid rgba(16, 185, 129, 0.3);
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.28);
       color: #34d399;
-      padding: 3px 8px;
+      padding: 3px 9px;
       border-radius: 12px;
       font-weight: 600;
     }
@@ -100,14 +113,15 @@
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 8px;
       color: #ffffff;
-      padding: 6px 10px;
+      padding: 6px 11px;
       font-size: 11.5px;
       outline: none;
-      transition: border-color .15s;
+      transition: all .16s ease;
     }
     .profile-input:focus {
       border-color: #10b981;
       background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
     }
     .profile-input::placeholder {
       color: #71717a;
@@ -118,14 +132,14 @@
       padding: 14px 12px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 11px;
       scroll-behavior: smooth;
     }
     .chat-stream::-webkit-scrollbar {
       width: 5px;
     }
     .chat-stream::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.16);
       border-radius: 4px;
     }
     .msg-row {
@@ -139,39 +153,72 @@
       justify-content: flex-end;
     }
     .bubble {
-      max-width: 84%;
-      padding: 9px 13px;
-      border-radius: 14px;
+      max-width: 85%;
+      padding: 10px 14px;
+      border-radius: 15px;
       font-size: 13px;
       line-height: 1.5;
       word-break: break-word;
-      animation: bubbleIn .2s ease;
+      animation: bubbleIn .22s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
     }
     @keyframes bubbleIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; transform: translateY(8px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
     .bubble.bot {
-      background: #27272a;
+      background: rgba(255, 255, 255, 0.06);
       color: #f4f4f5;
-      border: 1px solid rgba(255, 255, 255, 0.07);
-      border-bottom-left-radius: 3px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom-left-radius: 4px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
     }
     .bubble.user {
       background: linear-gradient(135deg, #10b981 0%, #059669 100%);
       color: #ffffff;
-      border-bottom-right-radius: 3px;
-      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.28);
+      border-bottom-right-radius: 4px;
+      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.32);
     }
     .bubble-meta {
       font-size: 9.5px;
-      opacity: 0.75;
-      margin-top: 3px;
+      opacity: 0.8;
+      margin-top: 4px;
       display: flex;
       align-items: center;
       justify-content: flex-end;
       gap: 4px;
+    }
+    .bubble.user .bubble-meta {
+      color: rgba(255, 255, 255, 0.9);
+    }
+    .quick-chips {
+      display: flex;
+      gap: 6px;
+      padding: 4px 12px 6px 12px;
+      overflow-x: auto;
+      background: rgba(255, 255, 255, 0.015);
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+    }
+    .quick-chips::-webkit-scrollbar { display: none; }
+    .quick-chip {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 12px;
+      color: #d4d4d8;
+      font-size: 11px;
+      padding: 4px 9px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all .15s ease;
+      user-select: none;
+    }
+    .quick-chip:hover {
+      background: rgba(16, 185, 129, 0.16);
+      border-color: rgba(16, 185, 129, 0.35);
+      color: #34d399;
+      transform: translateY(-1px);
     }
     .chat-footer {
       padding: 8px 12px 10px 12px;
@@ -190,11 +237,12 @@
       padding: 9px 16px;
       font-size: 13px;
       outline: none;
-      transition: border-color .15s;
+      transition: all .16s ease;
     }
     .chat-input:focus {
       border-color: #10b981;
       background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
     }
     .chat-input::placeholder {
       color: #71717a;
@@ -212,10 +260,11 @@
       cursor: pointer;
       transition: all .16s ease;
       flex-shrink: 0;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
     }
     .send-btn:hover:not(:disabled) {
-      transform: scale(1.05);
-      box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+      transform: scale(1.06);
+      box-shadow: 0 0 16px rgba(16, 185, 129, 0.5);
     }
     .send-btn:active:not(:disabled) {
       transform: scale(0.95);
@@ -233,7 +282,7 @@
         <div class="chat-avatar" id="avatarBox">T<span class="avatar-dot"></span></div>
         <div class="header-meta">
           <h3 id="chatTitle">Topicroom Sohbet</h3>
-          <p>● Çevrimiçi Destek</p>
+          <p id="chatOnlineStatus">● Çevrimiçi Destek</p>
         </div>
       </div>
       <span class="badge-source" id="sourceBadge">Canlı Sohbet</span>
@@ -248,9 +297,15 @@
       <div class="msg-row bot">
         <div class="bubble bot">
           <span id="welcomeMsg">Merhaba! Bizimle doğrudan iletişime geçmek için mesajınızı aşağıdan yazabilirsiniz. Size en kısa sürede dönüş sağlanacaktır 👋</span>
-          <div class="bubble-meta">Şimdi</div>
+          <div class="bubble-meta" id="welcomeTime">Şimdi</div>
         </div>
       </div>
+    </div>
+
+    <div class="quick-chips" id="quickChips">
+      <span class="quick-chip" onclick="applyQuickChip('👋 Merhaba')">👋 Merhaba</span>
+      <span class="quick-chip" onclick="applyQuickChip('💬 Bir sorum var')">💬 Soru</span>
+      <span class="quick-chip" onclick="applyQuickChip('💡 Öneri / Geri bildirim')">💡 Öneri</span>
     </div>
 
     <form class="chat-footer" id="chatForm" onsubmit="handleChatSend(event)">
@@ -266,6 +321,88 @@
 
   <script>
     var urlParams = new URLSearchParams(window.location.search);
+    var langParam = (urlParams.get('lang') || document.documentElement.lang || navigator.language || 'tr').substring(0, 2).toLowerCase();
+
+    var I18N = {
+      tr: {
+        online: "● Çevrimiçi Destek",
+        liveChat: "Canlı Sohbet",
+        namePlaceholder: "Adınız Soyadınız",
+        emailPlaceholder: "E-posta Adresiniz",
+        welcomePrefix: "Merhaba! ",
+        welcomeSuffix: " ile doğrudan iletişime geçmek için mesajınızı aşağıdan yazabilirsiniz. Size en kısa sürede dönüş sağlanacaktır 👋",
+        inputPlaceholder: "Mesajınızı buraya yazın... (Enter ile gönder)",
+        sendSuccess: "Mesajınız başarıyla iletildi! En kısa sürede dönüş sağlanacaktır.",
+        emailError: "Lütfen size yanıt verebilmemiz için geçerli bir e-posta adresi girin.",
+        now: "Şimdi",
+        chipHello: "👋 Merhaba",
+        chipQuestion: "💬 Soru",
+        chipFeedback: "💡 Öneri"
+      },
+      en: {
+        online: "● Online Support",
+        liveChat: "Live Chat",
+        namePlaceholder: "Your Name",
+        emailPlaceholder: "Your Email Address",
+        welcomePrefix: "Hello! ",
+        welcomeSuffix: " - you can message us directly below. We will get back to you shortly 👋",
+        inputPlaceholder: "Type your message here... (Press Enter to send)",
+        sendSuccess: "Your message has been sent successfully! We will get back to you soon.",
+        emailError: "Please enter a valid email address so we can reply.",
+        now: "Just now",
+        chipHello: "👋 Hello",
+        chipQuestion: "💬 Question",
+        chipFeedback: "💡 Feedback"
+      },
+      de: {
+        online: "● Online-Support",
+        liveChat: "Live-Chat",
+        namePlaceholder: "Ihr Name",
+        emailPlaceholder: "Ihre E-Mail-Adresse",
+        welcomePrefix: "Hallo! ",
+        welcomeSuffix: " - schreiben Sie uns direkt unten. Wir werden uns in Kürze bei Ihnen melden 👋",
+        inputPlaceholder: "Nachricht eingeben... (Enter zum Senden)",
+        sendSuccess: "Ihre Nachricht wurde erfolgreich gesendet!",
+        emailError: "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+        now: "Jetzt",
+        chipHello: "👋 Hallo",
+        chipQuestion: "💬 Frage",
+        chipFeedback: "💡 Vorschlag"
+      },
+      fr: {
+        online: "● Support en ligne",
+        liveChat: "Chat en direct",
+        namePlaceholder: "Votre Nom",
+        emailPlaceholder: "Votre Adresse E-mail",
+        welcomePrefix: "Bonjour ! ",
+        welcomeSuffix: " - écrivez-nous ci-dessous. Nous vous répondrons rapidement 👋",
+        inputPlaceholder: "Tapez votre message... (Entrée pour envoyer)",
+        sendSuccess: "Votre message a été envoyé avec succès !",
+        emailError: "Veuillez entrer une adresse e-mail valide.",
+        now: "Maintenant",
+        chipHello: "👋 Bonjour",
+        chipQuestion: "💬 Question",
+        chipFeedback: "💡 Suggestion"
+      },
+      az: {
+        online: "● Onlayn Dəstək",
+        liveChat: "Canlı Söhbət",
+        namePlaceholder: "Adınız Soyadınız",
+        emailPlaceholder: "E-poçt Ünvanınız",
+        welcomePrefix: "Salam! ",
+        welcomeSuffix: " ilə birbaşa əlaqə saxlamaq üçün mesajınızı aşağıda yaza bilərsiniz 👋",
+        inputPlaceholder: "Mesajınızı bura yazın... (Enter ilə göndər)",
+        sendSuccess: "Mesajınız uğurla göndərildi!",
+        emailError: "Zəhmət olmasa düzgün e-poçt ünvanı daxil edin.",
+        now: "İndi",
+        chipHello: "👋 Salam",
+        chipQuestion: "💬 Sual",
+        chipFeedback: "💡 Təklif"
+      }
+    };
+
+    var t = I18N[langParam] || I18N.tr;
+
     var currentSource = (urlParams.get('source') || 'general').toLowerCase();
     var sourceMap = {
       'negron': 'Negron Show Blogu',
@@ -278,7 +415,13 @@
     var title = sourceMap[currentSource] || 'Topicroom';
     document.getElementById('chatTitle').textContent = title;
     document.getElementById('avatarBox').innerHTML = title.charAt(0).toUpperCase() + '<span class="avatar-dot"></span>';
-    document.getElementById('welcomeMsg').textContent = 'Merhaba! ' + title + ' ile doğrudan iletişime geçmek için mesajınızı aşağıdan yazabilirsiniz. Size en kısa sürede dönüş sağlanacaktır 👋';
+    document.getElementById('chatOnlineStatus').textContent = t.online;
+    document.getElementById('sourceBadge').textContent = t.liveChat;
+    document.getElementById('chatSenderName').placeholder = t.namePlaceholder;
+    document.getElementById('chatSenderEmail').placeholder = t.emailPlaceholder;
+    document.getElementById('chatMsgInput').placeholder = t.inputPlaceholder;
+    document.getElementById('welcomeMsg').textContent = t.welcomePrefix + title + t.welcomeSuffix;
+    document.getElementById('welcomeTime').textContent = t.now;
 
     var APPS_SCRIPT_URL = urlParams.get('script_url') || 'https://script.google.com/macros/s/AKfycbwcZprdS6F_jJ6nin0YalTKweQKP4t936UgrTnme-d5gA-qHbi986vh6HxdzvA236Of/exec';
 
@@ -289,6 +432,14 @@
       if (se) document.getElementById('chatSenderEmail').value = se;
     } catch (_) {}
 
+    function applyQuickChip(txt) {
+      var inp = document.getElementById('chatMsgInput');
+      if (inp) {
+        inp.value = txt + ' ';
+        inp.focus();
+      }
+    }
+
     function scrollChatBottom() {
       var s = document.getElementById('chatStream');
       if (s) s.scrollTop = s.scrollHeight;
@@ -298,8 +449,8 @@
       var stream = document.getElementById('chatStream');
       var row = document.createElement('div');
       row.className = 'msg-row ' + (isUser ? 'user' : 'bot');
-      var now = new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' });
-      var checkmark = isUser ? ' ✓✓' : '';
+      var now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      var checkmark = isUser ? ' <span style="color:#a7f3d0;font-weight:700;">✓✓</span>' : '';
       row.innerHTML = '<div class="bubble ' + (isUser ? 'user' : 'bot') + '">' +
         text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') +
         '<div class="bubble-meta">' + now + checkmark + '</div></div>';
@@ -320,7 +471,7 @@
 
       if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         if (emailEl) { emailEl.focus(); emailEl.style.borderColor = '#ef4444'; }
-        appendMessage('Lütfen size yanıt verebilmemiz için geçerli bir e-posta adresi girin.', false);
+        appendMessage(t.emailError, false);
         return;
       }
       if (emailEl) emailEl.style.borderColor = '';
@@ -332,6 +483,9 @@
 
       appendMessage(msg, true);
       input.value = '';
+
+      var chips = document.getElementById('quickChips');
+      if (chips) chips.style.display = 'none';
 
       var btn = document.getElementById('chatSendBtn');
       if (btn) btn.disabled = true;
@@ -352,11 +506,11 @@
       })
       .then(function() {
         if (btn) btn.disabled = false;
-        appendMessage('Mesajınız başarıyla iletildi! En kısa sürede dönüş sağlanacaktır.', false);
+        appendMessage(t.sendSuccess, false);
       })
       .catch(function() {
         if (btn) btn.disabled = false;
-        appendMessage('Mesajınız başarıyla iletildi!', false);
+        appendMessage(t.sendSuccess, false);
       });
     }
   </script>
