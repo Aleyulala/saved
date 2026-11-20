@@ -25,14 +25,14 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* CARD CONTAINER: Görseldeki Tam Boyut ve Mat Koyu Tema */
+    /* CARD CONTAINER: Görsel 1 & 2 Uzun Mobil Uygulama (640px) */
     .cf-card-wrap {
       width: 385px;
       max-width: calc(100vw - 20px);
       height: 640px;
       max-height: min(92vh, 660px);
       background: #111113;
-      border: none !important;
+      border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 24px;
       box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85);
       display: flex;
@@ -67,8 +67,8 @@
     .cf-loading-spinner {
       width: 36px;
       height: 36px;
-      border: 3px solid rgba(255, 255, 255, 0.1);
-      border-top-color: #949ba4;
+      border: 3px solid rgba(88, 101, 242, 0.15);
+      border-top-color: #5865F2;
       border-radius: 50%;
       animation: cfSpin 0.75s linear infinite;
     }
@@ -86,10 +86,10 @@
       color: #72767d;
     }
 
-    /* HEADER: Görseldeki Avatar + #İletişim + Çevrimiçi Durum + Kapat Butonu */
+    /* HEADER: Avatar + #İletişim + Çevrimiçi Durum + Kapat Butonu */
     .cf-header {
       padding: 16px 20px 14px 20px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -203,31 +203,46 @@
       border-radius: 4px;
     }
 
-    /* BORDER YOK! MAT KOYU GRİ BALONLAR / EMBEDLER (Görseldeki Gibi) */
+    /* =====================================================================
+       2. FOTOĞRAFTAKİ GİBİ DİSCORD EMBEDLERİ (SAYDAM VE SOL ŞERİTLİ)
+       ===================================================================== */
     .cf-discord-embed,
     .cf-user-embed {
-      background: #1c1c1f;
-      border: none !important;
-      border-left: none !important;
-      outline: none !important;
-      box-shadow: none !important;
-      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.035);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-left: 4px solid #5865F2; /* Fotoğraf 2'deki Discord Blurple Çizgisi */
+      border-radius: 4px 12px 12px 4px;
       padding: 12px 16px;
       max-width: 92%;
       align-self: flex-start;
       display: flex;
       flex-direction: column;
       gap: 6px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
       animation: cfFadeIn 0.22s ease-out;
     }
+
+    /* GÖNDERİLEN MESAJ (KULLANICI): DİSCORD EMBED + SAYDAM ARKAPLAN */
     .cf-user-embed {
-      background: #23252a;
       align-self: flex-end;
+      border-left-color: #38bdf8; /* Kullanıcı Açık Mavi Şerit */
+      background: rgba(56, 189, 248, 0.04);
+      border-color: rgba(56, 189, 248, 0.12);
     }
+    .cf-discord-embed.green-accent {
+      border-left-color: #10b981;
+    }
+    .cf-discord-embed.purple-accent {
+      border-left-color: #5865F2;
+    }
+
     @keyframes cfFadeIn {
       from { opacity: 0; transform: translateY(6px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
     .cf-embed-author {
       display: flex;
       align-items: center;
@@ -236,9 +251,9 @@
       font-weight: 600;
       color: #f1f5f9;
     }
-    .cf-bot-tag, .cf-user-tag {
-      background: #2a2b30;
-      color: #a6abb2;
+    .cf-bot-tag {
+      background: #5865F2;
+      color: #ffffff;
       font-size: 9px;
       font-weight: 700;
       padding: 1px 5px;
@@ -247,8 +262,25 @@
       letter-spacing: 0.4px;
       line-height: 1.2;
     }
+    .cf-user-tag {
+      background: #38bdf8;
+      color: #090b10;
+      font-size: 9px;
+      font-weight: 700;
+      padding: 1px 5px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      line-height: 1.2;
+    }
+    .cf-embed-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.2px;
+    }
     .cf-embed-desc {
-      font-size: 13.5px;
+      font-size: 13px;
       color: #dcddde;
       line-height: 1.5;
       word-break: break-word;
@@ -263,7 +295,7 @@
       font-weight: 500;
       margin-top: 2px;
     }
-    .cf-embed-footer svg {
+    .cf-double-check {
       width: 14px;
       height: 14px;
       stroke: #72767d;
@@ -276,15 +308,17 @@
       display: inline-flex;
       align-items: center;
       gap: 7px;
-      background: #1c1c1f;
-      border: none !important;
-      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.04);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-left: 3px solid #5865F2;
+      border-radius: 4px 12px 12px 4px;
       padding: 7px 14px;
       font-size: 11.5px;
       color: #949ba4;
       align-self: flex-start;
       margin-bottom: 4px;
-      box-shadow: none !important;
     }
     .cf-dots {
       display: flex;
@@ -294,7 +328,7 @@
       width: 4px;
       height: 4px;
       border-radius: 50%;
-      background: #949ba4;
+      background: #5865F2;
       animation: cfDotPulse 1.2s infinite ease-in-out;
     }
     .cf-dot:nth-child(2) { animation-delay: 0.2s; }
@@ -304,17 +338,16 @@
       40% { opacity: 1; transform: scale(1.15); }
     }
 
-    /* INPUT CARD: Görseldeki Kart (ADINIZ * + Gri Buton + Gri Input) */
+    /* INPUT CARD: Mat Koyu Kart (ADINIZ * + Gri Input + Gri Buton) */
     .cf-input-card {
       background: #141416;
-      border: none !important;
+      border: 1px solid rgba(255, 255, 255, 0.05);
       border-radius: 16px;
       padding: 12px 14px;
       margin: 0 16px 8px 16px;
       display: flex;
       flex-direction: column;
       gap: 8px;
-      box-shadow: none !important;
       flex-shrink: 0;
     }
     .cf-input-header {
@@ -343,22 +376,21 @@
     .cf-input-field {
       flex: 1;
       background: #1c1c1f;
-      border: none !important;
+      border: 1px solid rgba(255, 255, 255, 0.04);
       outline: none !important;
       border-radius: 8px;
       padding: 11px 14px;
       color: #f2f3f5;
       font-size: 13.5px;
-      box-shadow: none !important;
-      transition: background 0.15s ease;
+      transition: background 0.15s ease, border-color 0.15s ease;
     }
     .cf-input-field:focus {
       background: #222327;
+      border-color: rgba(255, 255, 255, 0.12);
     }
     .cf-input-field::placeholder {
       color: #72767d;
     }
-    /* GRİ GÖNDER BUTONU (MAVİ DEĞİL!) */
     .cf-send-btn {
       width: 42px;
       height: 42px;
@@ -373,7 +405,6 @@
       cursor: pointer;
       transition: background 0.16s ease, color 0.16s ease;
       flex-shrink: 0;
-      box-shadow: none !important;
     }
     .cf-send-btn:hover {
       background: #36393f;
@@ -391,7 +422,7 @@
       fill: none;
     }
 
-    /* FOOTER BAR: Görseldeki Nsone Bot v2.0 • Güvenli İletişim ve Domain */
+    /* FOOTER BAR */
     .cf-footer-bar {
       display: flex;
       align-items: center;
@@ -418,8 +449,8 @@
       display: inline-flex;
       align-items: center;
       gap: 5px;
-      background: #202125;
-      border: none !important;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 6px;
       padding: 6px 10px;
       font-size: 11px;
@@ -428,7 +459,7 @@
       transition: background 0.16s ease;
     }
     .cf-soc-pill:hover {
-      background: #2b2d31;
+      background: rgba(255, 255, 255, 0.1);
       color: #ffffff;
     }
   </style>
@@ -444,7 +475,7 @@
       </div>
     </div>
 
-    <!-- HEADER: Görseldeki Avatar + #İletişim + Çevrimiçi • Nsone Bot + Kapat Butonu -->
+    <!-- HEADER: Avatar + #İletişim + Çevrimiçi • Nsone Bot + Kapat Butonu -->
     <div class="cf-header">
       <div class="cf-header-left">
         <div class="cf-header-avatar">
@@ -463,32 +494,21 @@
 
     <!-- SOHBET ALANI -->
     <div class="cf-chat-messages" id="cfChatMessages">
-      <!-- Başlangıç Mesajı 1: Merhaba! 👋 dostum -->
-      <div class="cf-discord-embed">
+      <!-- 2. Fotoğraftaki Gibi Karşılama Discord Embed (Saydam Arkaplan + Sol Renkli Şerit) -->
+      <div class="cf-discord-embed purple-accent" id="cfWelcomeEmbed">
         <div class="cf-embed-author">
           <span>Nsone Bot</span>
           <span class="cf-bot-tag">BOT</span>
         </div>
+        <div class="cf-embed-title">Topicroom İletişim'e Hoş Geldiniz! 👋</div>
         <div class="cf-embed-desc">
-          Merhaba! 👋 dostum
-        </div>
-      </div>
-
-      <!-- Başlangıç Mesajı 2 -->
-      <div class="cf-discord-embed">
-        <div class="cf-embed-desc">
-          Bir sorunuz, öneriniz veya mesajınız varsa lütfen aşağıdaki formu doldurarak bize iletin.
-        </div>
-      </div>
-
-      <!-- Başlangıç Mesajı 3 -->
-      <div class="cf-discord-embed">
-        <div class="cf-embed-desc">
-          Size e-posta adresinizden en kısa sürede dönüş yapacağız.
+          Merhaba! 👋 dostum<br><br>
+          Bir sorunuz, öneriniz veya iletmek istediğiniz bir konu varsa aşağıdaki formu kullanarak bize doğrudan ulaşabilirsiniz.<br><br>
+          Size en kısa sürede dönüş yapacağız.
         </div>
         <div class="cf-embed-footer">
           <span>Şimdi</span>
-          <svg viewBox="0 0 24 24"><path d="M18 6L7 17l-5-5M22 10l-7.5 7.5L13 16"></path></svg>
+          <svg class="cf-double-check" viewBox="0 0 24 24"><path d="M18 6L7 17l-5-5M22 10l-7.5 7.5L13 16"></path></svg>
         </div>
       </div>
 
@@ -505,7 +525,7 @@
       </div>
     </div>
 
-    <!-- GİRİŞ KARTI (Görseldeki ADINIZ * + Input + Gri Buton) -->
+    <!-- GİRİŞ KARTI (ADINIZ * + Gri Input + Gri Buton) -->
     <div class="cf-input-card">
       <div class="cf-input-header">
         <span class="cf-input-label" id="cfInputLabel">ADINIZ *</span>
@@ -519,7 +539,7 @@
       </div>
     </div>
 
-    <!-- ALT BİLGİ ÇUBUĞU (Görseldeki) -->
+    <!-- ALT BİLGİ ÇUBUĞU -->
     <div class="cf-footer-bar">
       <div class="cf-footer-left">Nsone Bot v2.0 • Güvenli İletişim</div>
       <div class="cf-footer-right" id="cfFooterOrigin">aleyulala.blogspot.com</div>
@@ -573,7 +593,7 @@
       }
     }
 
-    // KULLANICI MESAJI (BORDER YOK - MAT GRİ)
+    // GÖNDERİLEN MESAJ: DİSCORD EMBED (SAYDAM VE MAVİ/CYAN SOL ŞERİTLİ)
     function appendUserEmbed(text) {
       var authorName = chatData.name ? chatData.name : 'Siz';
       var embed = document.createElement('div');
@@ -584,22 +604,23 @@
         '</div>' +
         '<div class="cf-embed-desc">' + escapeHtml(text) + '</div>' +
         '<div class="cf-embed-footer"><span>Şimdi</span>' +
-        '<svg viewBox="0 0 24 24"><path d="M18 6L7 17l-5-5M22 10l-7.5 7.5L13 16"></path></svg></div>';
+        '<svg class="cf-double-check" viewBox="0 0 24 24"><path d="M18 6L7 17l-5-5M22 10l-7.5 7.5L13 16"></path></svg></div>';
       dynamicArea.appendChild(embed);
       scrollToBottom();
     }
 
-    // BOT MESAJI (BORDER YOK - MAT GRİ)
-    function appendBotEmbed(descHtml) {
+    // BOT MESAJI: DİSCORD EMBED (SAYDAM VE BLURPLE/YEŞİL ŞERİTLİ)
+    function appendBotEmbed(descHtml, accentClass) {
+      accentClass = accentClass || 'purple-accent';
       var embed = document.createElement('div');
-      embed.className = 'cf-discord-embed';
+      embed.className = 'cf-discord-embed ' + accentClass;
       embed.innerHTML = '<div class="cf-embed-author">' +
         '<span>Nsone Bot</span>' +
         '<span class="cf-bot-tag">BOT</span>' +
         '</div>' +
         '<div class="cf-embed-desc">' + descHtml + '</div>' +
         '<div class="cf-embed-footer"><span>Şimdi</span>' +
-        '<svg viewBox="0 0 24 24"><path d="M18 6L7 17l-5-5M22 10l-7.5 7.5L13 16"></path></svg></div>';
+        '<svg class="cf-double-check" viewBox="0 0 24 24"><path d="M18 6L7 17l-5-5M22 10l-7.5 7.5L13 16"></path></svg></div>';
       dynamicArea.appendChild(embed);
       scrollToBottom();
     }
@@ -627,7 +648,7 @@
 
         setTimeout(function() {
           showTyping(false);
-          appendBotEmbed('Memnun oldum <b>' + escapeHtml(val) + '</b>! Sana hızlıca dönüş yapabilmemiz için <b>e-posta adresini</b> yazabilir misin? 📧');
+          appendBotEmbed('Memnun oldum <b>' + escapeHtml(val) + '</b>! Sana hızlıca dönüş yapabilmemiz için <b>e-posta adresini</b> yazabilir misin? 📧', 'purple-accent');
           inputField.disabled = false;
           inputField.type = 'email';
           inputLabel.textContent = 'E-POSTA ADRESİNİZ *';
@@ -652,7 +673,7 @@
 
         setTimeout(function() {
           showTyping(false);
-          appendBotEmbed('Harika! Şimdi bize iletmek istediğin <b>mesajını</b> yazabilirsin. 👇');
+          appendBotEmbed('Harika! Şimdi bize iletmek istediğin <b>mesajını</b> yazabilirsin. 👇', 'purple-accent');
           inputField.disabled = false;
           inputField.type = 'text';
           inputLabel.textContent = 'MESAJINIZ * (1/3)';
@@ -676,18 +697,18 @@
           inputField.disabled = false;
 
           if (currentMsgIndex === 1) {
-            appendBotEmbed('Mesajını ilettik! İletmek istediğin başka bir konu varsa aşağıdan yazmaya devam edebilirsin. 👇 (1/3)');
+            appendBotEmbed('Mesajını ilettik! İletmek istediğin başka bir konu varsa aşağıdan yazmaya devam edebilirsin. 👇 (1/3)', 'green-accent');
             inputLabel.textContent = 'EK MESAJ (2/3)';
             inputField.placeholder = 'Ek mesajınızı yazın... (2/3)';
             inputField.focus();
             showSocialLinks();
           } else if (currentMsgIndex === 2) {
-            appendBotEmbed('Ek mesajını da ilettik. ✓✓ (2/3)');
+            appendBotEmbed('Ek mesajını da ilettik. ✓✓ (2/3)', 'green-accent');
             inputLabel.textContent = 'SON MESAJ (3/3)';
             inputField.placeholder = 'Son mesajınızı yazın... (3/3)';
             inputField.focus();
           } else if (currentMsgIndex >= 3) {
-            appendBotEmbed('Tüm mesajlarını başarıyla aldık! En kısa sürede <b>' + escapeHtml(chatData.email) + '</b> adresinden sana dönüş yapacağız. Teşekkürler! 🎉 (3/3)');
+            appendBotEmbed('Tüm mesajlarını başarıyla aldık! En kısa sürede <b>' + escapeHtml(chatData.email) + '</b> adresinden sana dönüş yapacağız. Teşekkürler! 🎉 (3/3)', 'green-accent');
             inputField.disabled = true;
             inputLabel.textContent = 'KOTA DOLDU (3/3)';
             inputField.placeholder = 'Mesaj kotanız doldu (3/3)';
