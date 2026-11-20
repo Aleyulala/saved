@@ -616,10 +616,6 @@
       var val = (inputField.value || '').trim();
       if (!val) {
         inputField.focus();
-    setTimeout(function() {
-      var ldr = document.getElementById('cfLoadingScreen');
-      if (ldr) ldr.classList.add('hidden');
-    }, 380);
         return;
       }
 
@@ -775,7 +771,21 @@
       }
     }
 
+    
+    // LOADING SCREEN SMOOTH DISMISS
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        var ldr = document.getElementById('cfLoadingScreen');
+        if (ldr) ldr.classList.add('hidden');
+      }, 400);
+    });
+    setTimeout(function() {
+      var ldr = document.getElementById('cfLoadingScreen');
+      if (ldr && !ldr.classList.contains('hidden')) ldr.classList.add('hidden');
+    }, 1200);
+
     inputField.addEventListener('keydown', function(e) {
+
       if (e.key === 'Enter') {
         e.preventDefault();
         handleStepAction();
