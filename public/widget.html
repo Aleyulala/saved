@@ -192,7 +192,7 @@
       padding: 16px 16px 12px 16px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 14px;
       scroll-behavior: smooth;
     }
     .cf-chat-messages::-webkit-scrollbar {
@@ -204,30 +204,81 @@
     }
 
     /* =====================================================================
-       2. FOTOĞRAFTAKİ GİBİ DİSCORD EMBEDLERİ (SAYDAM VE SOL ŞERİTLİ)
+       FOTOĞRAFTAKİ SQUIRCLE AVATAR + DİSCORD EMBED YORUM DÜZENİ
        ===================================================================== */
+    .cf-message-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      width: 100%;
+      animation: cfFadeIn 0.22s ease-out;
+    }
+    .cf-message-row.bot-row {
+      justify-content: flex-start;
+    }
+    .cf-message-row.user-row {
+      justify-content: flex-end;
+    }
+
+    /* SQUIRCLE AVATAR KUTUSU (Görsel 2'deki Sol Kutu + 👋 Çıkartması) */
+    .cf-avatar-squircle {
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      max-width: 44px;
+      border-radius: 14px;
+      background: #1c1d22;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    }
+    .cf-avatar-squircle.bot-avatar {
+      background: #1b1d24;
+    }
+    .cf-avatar-squircle.user-avatar {
+      background: #1e2229;
+    }
+    .cf-avatar-badge-sticker {
+      position: absolute;
+      bottom: -4px;
+      right: -4px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #18191c;
+      border: 2px solid #111113;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10.5px;
+      line-height: 1;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    }
+
+    /* DİSCORD EMBED KARTI (SAYDAM CAM + SOL VURGU ŞERİDİ) */
     .cf-discord-embed,
     .cf-user-embed {
       background: rgba(255, 255, 255, 0.035);
       -webkit-backdrop-filter: blur(12px);
       backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      border-left: 4px solid #5865F2; /* Fotoğraf 2'deki Discord Blurple Çizgisi */
-      border-radius: 4px 12px 12px 4px;
+      border-left: 4px solid #5865F2; /* Discord Blurple */
+      border-radius: 4px 14px 14px 4px;
       padding: 12px 16px;
-      max-width: 92%;
-      align-self: flex-start;
+      flex: 1;
+      max-width: calc(100% - 56px);
       display: flex;
       flex-direction: column;
       gap: 6px;
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
-      animation: cfFadeIn 0.22s ease-out;
     }
 
-    /* GÖNDERİLEN MESAJ (KULLANICI): DİSCORD EMBED + SAYDAM ARKAPLAN */
     .cf-user-embed {
-      align-self: flex-end;
-      border-left-color: #38bdf8; /* Kullanıcı Açık Mavi Şerit */
+      border-left-color: #38bdf8;
       background: rgba(56, 189, 248, 0.04);
       border-color: rgba(56, 189, 248, 0.12);
     }
@@ -274,7 +325,7 @@
       line-height: 1.2;
     }
     .cf-embed-title {
-      font-size: 14px;
+      font-size: 14.5px;
       font-weight: 700;
       color: #ffffff;
       letter-spacing: -0.2px;
@@ -285,6 +336,32 @@
       line-height: 1.5;
       word-break: break-word;
     }
+
+    /* GÖRSELDEKİ EMBED HAPLARI / BUTONLARI */
+    .cf-embed-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+    .cf-action-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #dcddde;
+    }
+    .cf-action-pill.primary {
+      background: #5865F2;
+      border-color: #5865F2;
+      color: #ffffff;
+    }
+
     .cf-embed-footer {
       display: flex;
       align-items: center;
@@ -318,6 +395,7 @@
       font-size: 11.5px;
       color: #949ba4;
       align-self: flex-start;
+      margin-left: 56px;
       margin-bottom: 4px;
     }
     .cf-dots {
@@ -494,25 +572,35 @@
 
     <!-- SOHBET ALANI -->
     <div class="cf-chat-messages" id="cfChatMessages">
-      <!-- 2. Fotoğraftaki Gibi Karşılama Discord Embed (Saydam Arkaplan + Sol Renkli Şerit) -->
-      <div class="cf-discord-embed purple-accent" id="cfWelcomeEmbed">
-        <div class="cf-embed-author">
-          <span>Nsone Bot</span>
-          <span class="cf-bot-tag">BOT</span>
+      <!-- 2. Fotoğraftaki Gibi: Squircle Avatar (👋) + Discord Embed Yorum Kartı -->
+      <div class="cf-message-row bot-row">
+        <div class="cf-avatar-squircle bot-avatar">
+          <svg class="cf-avatar-svg" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          <span class="cf-avatar-badge-sticker">👋</span>
         </div>
-        <div class="cf-embed-title">Topicroom İletişim'e Hoş Geldiniz! 👋</div>
-        <div class="cf-embed-desc">
-          Merhaba! 👋 dostum<br><br>
-          Bir sorunuz, öneriniz veya iletmek istediğiniz bir konu varsa aşağıdaki formu kullanarak bize doğrudan ulaşabilirsiniz.<br><br>
-          Size en kısa sürede dönüş yapacağız.
-        </div>
-        <div class="cf-embed-footer">
-          <span>Şimdi</span>
-          <svg class="cf-double-check" viewBox="0 0 24 24"><path d="M18 6L7 17l-5-5M22 10l-7.5 7.5L13 16"></path></svg>
+        <div class="cf-discord-embed purple-accent" id="cfWelcomeEmbed">
+          <div class="cf-embed-author">
+            <span>Nsone Bot</span>
+            <span class="cf-bot-tag">BOT</span>
+          </div>
+          <div class="cf-embed-title">Welcome to the server!</div>
+          <div class="cf-embed-desc">
+            Merhaba! 👋 dostum<br><br>
+            Bir sorunuz, öneriniz veya iletmek istediğiniz bir konu varsa formu kullanarak bize iletebilirsiniz.
+          </div>
+          <div class="cf-embed-pills">
+            <span class="cf-action-pill primary">İletişim</span>
+            <span class="cf-action-pill">E-posta</span>
+            <span class="cf-action-pill">7/24 Aktif</span>
+          </div>
+          <div class="cf-embed-footer">
+            <span>Şimdi</span>
+            <svg class="cf-double-check" viewBox="0 0 24 24"><path d="M18 6L7 17l-5-5M22 10l-7.5 7.5L13 16"></path></svg>
+          </div>
         </div>
       </div>
 
-      <div id="cfDynamicArea"></div>
+      <div id="cfDynamicArea" style="display:flex; flex-direction:column; gap:14px; width:100%;"></div>
 
       <!-- NSONE BOT YAZIYOR... -->
       <div id="cfTypingIndicator" class="cf-typing-pill" style="display:none;">
@@ -593,35 +681,47 @@
       }
     }
 
-    // GÖNDERİLEN MESAJ: DİSCORD EMBED (SAYDAM VE MAVİ/CYAN SOL ŞERİTLİ)
+    // GÖNDERİLEN MESAJ: DİSCORD EMBED + SQUIRCLE AVATAR (Görsel 2 Düzeni)
     function appendUserEmbed(text) {
       var authorName = chatData.name ? chatData.name : 'Siz';
-      var embed = document.createElement('div');
-      embed.className = 'cf-user-embed';
-      embed.innerHTML = '<div class="cf-embed-author">' +
-        '<span>' + escapeHtml(authorName) + '</span>' +
-        '<span class="cf-user-tag">ÜYE</span>' +
+      var row = document.createElement('div');
+      row.className = 'cf-message-row user-row';
+      row.innerHTML = '<div class="cf-user-embed">' +
+        '<div class="cf-embed-author">' +
+          '<span>' + escapeHtml(authorName) + '</span>' +
+          '<span class="cf-user-tag">ÜYE</span>' +
         '</div>' +
         '<div class="cf-embed-desc">' + escapeHtml(text) + '</div>' +
         '<div class="cf-embed-footer"><span>Şimdi</span>' +
-        '<svg class="cf-double-check" viewBox="0 0 24 24"><path d="M18 6L7 17l-5-5M22 10l-7.5 7.5L13 16"></path></svg></div>';
-      dynamicArea.appendChild(embed);
+        '<svg class="cf-double-check" viewBox="0 0 24 24"><path d="M18 6L7 17l-5-5M22 10l-7.5 7.5L13 16"></path></svg></div>' +
+        '</div>' +
+        '<div class="cf-avatar-squircle user-avatar">' +
+          '<svg class="cf-avatar-svg" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>' +
+          '<span class="cf-avatar-badge-sticker">💬</span>' +
+        '</div>';
+      dynamicArea.appendChild(row);
       scrollToBottom();
     }
 
-    // BOT MESAJI: DİSCORD EMBED (SAYDAM VE BLURPLE/YEŞİL ŞERİTLİ)
+    // BOT MESAJI: DİSCORD EMBED + SQUIRCLE AVATAR (Görsel 2 Düzeni)
     function appendBotEmbed(descHtml, accentClass) {
       accentClass = accentClass || 'purple-accent';
-      var embed = document.createElement('div');
-      embed.className = 'cf-discord-embed ' + accentClass;
-      embed.innerHTML = '<div class="cf-embed-author">' +
-        '<span>Nsone Bot</span>' +
-        '<span class="cf-bot-tag">BOT</span>' +
+      var row = document.createElement('div');
+      row.className = 'cf-message-row bot-row';
+      row.innerHTML = '<div class="cf-avatar-squircle bot-avatar">' +
+        '<svg class="cf-avatar-svg" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>' +
+        '<span class="cf-avatar-badge-sticker">✨</span>' +
+        '</div>' +
+        '<div class="cf-discord-embed ' + accentClass + '">' +
+        '<div class="cf-embed-author">' +
+          '<span>Nsone Bot</span>' +
+          '<span class="cf-bot-tag">BOT</span>' +
         '</div>' +
         '<div class="cf-embed-desc">' + descHtml + '</div>' +
         '<div class="cf-embed-footer"><span>Şimdi</span>' +
-        '<svg class="cf-double-check" viewBox="0 0 24 24"><path d="M18 6L7 17l-5-5M22 10l-7.5 7.5L13 16"></path></svg></div>';
-      dynamicArea.appendChild(embed);
+        '<svg class="cf-double-check" viewBox="0 0 24 24"><path d="M18 6L7 17l-5-5M22 10l-7.5 7.5L13 16"></path></svg></div>' +
+        '</div>';
+      dynamicArea.appendChild(row);
       scrollToBottom();
     }
 
@@ -720,7 +820,7 @@
 
     function showSocialLinks() {
       var d = document.createElement('div');
-      d.innerHTML = '<div class="cf-social-pills-row">' +
+      d.innerHTML = '<div class="cf-social-pills-row" style="margin-left: 56px;">' +
         '<a href="https://t.me/" target="_blank" rel="noopener" class="cf-soc-pill">' +
           '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"></path></svg>' +
           '<span>Telegram</span>' +
