@@ -2,8 +2,8 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Topicroom İletişim &amp; Destek</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Topicroom Sohbet &amp; Destek</title>
   <style>
     *, *::before, *::after {
       box-sizing: border-box;
@@ -12,545 +12,337 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
     html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
       background: transparent;
       color: #f4f4f5;
-      min-height: 100vh;
+      font-size: 13.5px;
+      line-height: 1.45;
+    }
+    .chat-app {
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-      padding: 4px;
-      font-size: 13.5px;
-      line-height: 1.5;
-      overflow-x: hidden;
-    }
-    body.is-standalone {
-      justify-content: center;
-      padding: 16px;
-      background: #09090b;
-    }
-    .widget-container {
+      height: 100%;
       width: 100%;
-      max-width: 480px;
-      position: relative;
-      box-sizing: border-box;
-      padding: 4px 6px 12px;
-      transition: all 0.2s ease;
-    }
-    .widget-container.standalone {
-      background: radial-gradient(120% 120% at 50% 0%, rgba(24, 24, 27, 0.98) 0%, rgba(15, 15, 18, 0.99) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: #18181b;
       border-radius: 18px;
-      padding: 22px 24px;
-      box-shadow: 0 24px 50px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.04);
-      margin: auto;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.6);
     }
-    .widget-container.standalone::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      border-radius: 18px 18px 0 0;
-      background: linear-gradient(90deg, #10b981 0%, #06b6d4 50%, #6366f1 100%);
-    }
-    .header {
+    .chat-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 14px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
-    .badge-wrap {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      background: rgba(16, 185, 129, 0.12);
-      border: 1px solid rgba(16, 185, 129, 0.28);
-      padding: 4px 11px;
-      border-radius: 999px;
-      font-size: 11.5px;
-      font-weight: 600;
-      color: #34d399;
-      letter-spacing: 0.2px;
-    }
-    .pulse-dot {
-      width: 6.5px;
-      height: 6.5px;
-      border-radius: 50%;
-      background: #10b981;
-      box-shadow: 0 0 8px #10b981;
-      animation: pulseDot 2s infinite ease-in-out;
-    }
-    @keyframes pulseDot {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.35; transform: scale(0.8); }
-    }
-    .status-text {
-      font-size: 11px;
-      color: #a1a1aa;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      font-weight: 500;
-    }
-    .status-text span.dot {
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: #10b981;
-    }
-    /* Kategori Hapları (Dert-App / Topicroom Stili) */
-    .category-group {
-      margin-bottom: 13px;
-    }
-    .category-label {
-      font-size: 11px;
-      font-weight: 600;
-      color: #a1a1aa;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 6px;
-      display: block;
-    }
-    .category-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-    .cat-pill {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: #d4d4d8;
-      padding: 5px 10px;
-      border-radius: 8px;
-      font-size: 11.5px;
-      cursor: pointer;
-      user-select: none;
-      transition: all 0.16s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .cat-pill:hover {
-      background: rgba(255, 255, 255, 0.1);
-      color: #ffffff;
-      border-color: rgba(255, 255, 255, 0.2);
-    }
-    .cat-pill.active {
-      background: rgba(16, 185, 129, 0.18);
-      border-color: #10b981;
-      color: #34d399;
-      font-weight: 600;
-      box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
-    }
-    .form-group {
-      margin-bottom: 11px;
-    }
-    .label {
+    .header-left {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      font-size: 11px;
-      font-weight: 600;
-      color: #a1a1aa;
-      margin-bottom: 5px;
-      text-transform: uppercase;
-      letter-spacing: 0.4px;
-    }
-    .label .char-counter {
-      font-weight: 400;
-      text-transform: none;
-      color: #71717a;
-      font-size: 10.5px;
-    }
-    .input, .textarea {
-      width: 100%;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 10px;
-      color: #ffffff;
-      padding: 9px 13px;
-      font-size: 13px;
-      outline: none;
-      transition: border-color 0.18s, box-shadow 0.18s, background-color 0.18s;
-    }
-    .input::placeholder, .textarea::placeholder {
-      color: #71717a;
-    }
-    .input:focus, .textarea:focus {
-      border-color: #10b981;
-      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.18);
-      background: rgba(255, 255, 255, 0.08);
-    }
-    .textarea {
-      resize: vertical;
-      min-height: 82px;
-      max-height: 200px;
-      line-height: 1.55;
-    }
-    .row {
-      display: flex;
       gap: 10px;
     }
-    .row .form-group {
-      flex: 1;
-    }
-    .form-footer {
+    .chat-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #fff;
+      font-weight: 700;
+      font-size: 14px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-top: 6px;
+      justify-content: center;
+      position: relative;
     }
-    .shortcut-hint {
+    .avatar-dot {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 8.5px;
+      height: 8.5px;
+      background: #10b981;
+      border: 2px solid #18181b;
+      border-radius: 50%;
+      box-shadow: 0 0 6px #10b981;
+    }
+    .header-meta h3 {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #ffffff;
+    }
+    .header-meta p {
       font-size: 11px;
-      color: #71717a;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      user-select: none;
+      color: #34d399;
+      font-weight: 500;
     }
-    .shortcut-kbd {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      border-radius: 4px;
-      padding: 1px 4px;
-      font-size: 10px;
-      color: #d4d4d8;
+    .badge-source {
+      font-size: 10.5px;
+      background: rgba(16, 185, 129, 0.14);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #34d399;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-weight: 600;
     }
-    .submit-btn {
+    .chat-profile-bar {
+      display: flex;
+      gap: 8px;
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.02);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .profile-input {
       flex: 1;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      color: #ffffff;
+      padding: 6px 10px;
+      font-size: 11.5px;
+      outline: none;
+      transition: border-color .15s;
+    }
+    .profile-input:focus {
+      border-color: #10b981;
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .profile-input::placeholder {
+      color: #71717a;
+    }
+    .chat-stream {
+      flex: 1;
+      overflow-y: auto;
+      padding: 14px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      scroll-behavior: smooth;
+    }
+    .chat-stream::-webkit-scrollbar {
+      width: 5px;
+    }
+    .chat-stream::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
+    }
+    .msg-row {
+      display: flex;
+      width: 100%;
+    }
+    .msg-row.bot {
+      justify-content: flex-start;
+    }
+    .msg-row.user {
+      justify-content: flex-end;
+    }
+    .bubble {
+      max-width: 84%;
+      padding: 9px 13px;
+      border-radius: 14px;
+      font-size: 13px;
+      line-height: 1.5;
+      word-break: break-word;
+      animation: bubbleIn .2s ease;
+      position: relative;
+    }
+    @keyframes bubbleIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .bubble.bot {
+      background: #27272a;
+      color: #f4f4f5;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-bottom-left-radius: 3px;
+    }
+    .bubble.user {
       background: linear-gradient(135deg, #10b981 0%, #059669 100%);
       color: #ffffff;
-      font-weight: 600;
-      padding: 10px 18px;
-      border-radius: 10px;
-      border: none;
-      cursor: pointer;
-      display: inline-flex;
+      border-bottom-right-radius: 3px;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.28);
+    }
+    .bubble-meta {
+      font-size: 9.5px;
+      opacity: 0.75;
+      margin-top: 3px;
+      display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-end;
+      gap: 4px;
+    }
+    .chat-footer {
+      padding: 8px 12px 10px 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
       gap: 8px;
-      font-size: 13.5px;
-      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.32);
+      align-items: center;
     }
-    .submit-btn:hover:not(:disabled) {
-      transform: translateY(-1.5px);
-      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45);
-      background: linear-gradient(135deg, #34d399 0%, #059669 100%);
+    .chat-input {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      color: #ffffff;
+      padding: 9px 16px;
+      font-size: 13px;
+      outline: none;
+      transition: border-color .15s;
     }
-    .submit-btn:active:not(:disabled) {
-      transform: translateY(0);
+    .chat-input:focus {
+      border-color: #10b981;
+      background: rgba(255, 255, 255, 0.08);
     }
-    .submit-btn:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-      transform: none;
+    .chat-input::placeholder {
+      color: #71717a;
     }
-    .alert {
-      padding: 10px 14px;
-      border-radius: 10px;
-      font-size: 12px;
-      margin-bottom: 12px;
-      display: none;
-      animation: fadeIn .2s ease;
-    }
-    .alert-error {
-      background: rgba(239, 68, 68, 0.14);
-      border: 1px solid rgba(239, 68, 68, 0.32);
-      color: #fca5a5;
-    }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
-    .success-card {
-      display: none;
-      text-align: center;
-      padding: 24px 10px 16px;
-      animation: fadeIn .3s ease;
-    }
-    .success-icon {
-      width: 52px;
-      height: 52px;
+    .send-btn {
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
-      background: rgba(16, 185, 129, 0.15);
-      border: 2px solid #10b981;
+      border: none;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 16px auto;
-      color: #10b981;
-      box-shadow: 0 0 24px rgba(16, 185, 129, 0.3);
-    }
-    .success-title {
-      font-size: 17px;
-      font-weight: 700;
-      color: #ffffff;
-      margin-bottom: 6px;
-    }
-    .success-desc {
-      font-size: 12.5px;
-      color: #a1a1aa;
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-    .success-actions {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-    }
-    .btn-reset {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      color: #ffffff;
-      padding: 8px 18px;
-      border-radius: 9px;
-      font-size: 12.5px;
-      font-weight: 500;
       cursor: pointer;
-      transition: all 0.18s;
+      transition: all .16s ease;
+      flex-shrink: 0;
     }
-    .btn-reset:hover {
-      background: rgba(255, 255, 255, 0.15);
-      border-color: rgba(255, 255, 255, 0.25);
+    .send-btn:hover:not(:disabled) {
+      transform: scale(1.05);
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
     }
-    .spinner {
-      width: 14px;
-      height: 14px;
-      border: 2px solid rgba(255, 255, 255, 0.35);
-      border-top-color: #ffffff;
-      border-radius: 50%;
-      animation: spin .6s linear infinite;
-      display: inline-block;
+    .send-btn:active:not(:disabled) {
+      transform: scale(0.95);
     }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    @media (max-width: 440px) {
-      .row { flex-direction: column; gap: 0; }
-      .form-footer { flex-direction: column; align-items: stretch; }
-      .shortcut-hint { justify-content: center; }
+    .send-btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
     }
   </style>
 </head>
 <body>
-  <div class="widget-container" id="widgetContainer">
-    <div id="formView">
-      <div class="header">
-        <div class="badge-wrap">
-          <span class="pulse-dot"></span>
-          <span id="sourceBadge">Topicroom İletişim</span>
-        </div>
-        <div class="status-text">
-          <span class="dot"></span>
-          <span>Çevrimiçi Köprü</span>
+  <div class="chat-app">
+    <div class="chat-header">
+      <div class="header-left">
+        <div class="chat-avatar" id="avatarBox">T<span class="avatar-dot"></span></div>
+        <div class="header-meta">
+          <h3 id="chatTitle">Topicroom Sohbet</h3>
+          <p>● Çevrimiçi Destek</p>
         </div>
       </div>
-
-      <div class="category-group">
-        <span class="category-label">Konu Türü</span>
-        <div class="category-pills" id="catPills">
-          <button type="button" class="cat-pill active" data-cat="Genel Soru" onclick="selectCategory(this)">💬 Genel Soru</button>
-          <button type="button" class="cat-pill" data-cat="İstek &amp; Öneri" onclick="selectCategory(this)">💡 İstek &amp; Öneri</button>
-          <button type="button" class="cat-pill" data-cat="Hata Bildirimi" onclick="selectCategory(this)">🐛 Hata Bildirimi</button>
-          <button type="button" class="cat-pill" data-cat="Dertleşme &amp; Topluluk" onclick="selectCategory(this)">🫂 Dertleşme</button>
-          <button type="button" class="cat-pill" data-cat="İş Birliği" onclick="selectCategory(this)">🤝 İş Birliği</button>
-        </div>
-      </div>
-
-      <div id="alertBox" class="alert alert-error"></div>
-
-      <form id="contactForm" onsubmit="handleSend(event)">
-        <div class="row">
-          <div class="form-group">
-            <label class="label" for="senderName">Adınız Soyadınız</label>
-            <input class="input" type="text" id="senderName" name="name" placeholder="Örn: Ali Yılmaz" required autocomplete="name" />
-          </div>
-          <div class="form-group">
-            <label class="label" for="senderEmail">E-posta Adresiniz</label>
-            <input class="input" type="email" id="senderEmail" name="email" placeholder="ornek@mail.com" required autocomplete="email" />
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="label" for="msgSubject">Konu Başlığı</label>
-          <input class="input" type="text" id="msgSubject" name="subject" placeholder="Mesajınızın ana konusu" />
-        </div>
-
-        <div class="form-group">
-          <label class="label" for="msgBody">
-            <span>Mesajınız</span>
-            <span class="char-counter" id="charCount">0 / 1500</span>
-          </label>
-          <textarea class="textarea" id="msgBody" name="message" placeholder="Düşüncelerinizi, sorularınızı veya önerilerinizi paylaşın..." required maxlength="1500" oninput="updateCharCount()"></textarea>
-        </div>
-
-        <div class="form-footer">
-          <div class="shortcut-hint">
-            <span class="shortcut-kbd">Ctrl</span>+<span class="shortcut-kbd">Enter</span> ile gönder
-          </div>
-          <button type="submit" id="submitBtn" class="submit-btn">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="22" y1="2" x2="11" y2="13"></line>
-              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-            </svg>
-            <span id="btnText">Mesajı Gönder</span>
-          </button>
-        </div>
-      </form>
+      <span class="badge-source" id="sourceBadge">Canlı Sohbet</span>
     </div>
 
-    <div id="successView" class="success-card">
-      <div class="success-icon">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="20 6 9 17 4 12"></polyline>
+    <div class="chat-profile-bar">
+      <input type="text" class="profile-input" id="chatSenderName" placeholder="Adınız Soyadınız" autocomplete="name" />
+      <input type="email" class="profile-input" id="chatSenderEmail" placeholder="E-posta Adresiniz" autocomplete="email" />
+    </div>
+
+    <div class="chat-stream" id="chatStream">
+      <div class="msg-row bot">
+        <div class="bubble bot">
+          <span id="welcomeMsg">Merhaba! Bizimle doğrudan iletişime geçmek için mesajınızı aşağıdan yazabilirsiniz. Size en kısa sürede dönüş sağlanacaktır 👋</span>
+          <div class="bubble-meta">Şimdi</div>
+        </div>
+      </div>
+    </div>
+
+    <form class="chat-footer" id="chatForm" onsubmit="handleChatSend(event)">
+      <input type="text" class="chat-input" id="chatMsgInput" placeholder="Mesajınızı buraya yazın... (Enter ile gönder)" required autocomplete="off" />
+      <button type="submit" class="send-btn" id="chatSendBtn" title="Gönder">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="22" y1="2" x2="11" y2="13"></line>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
         </svg>
-      </div>
-      <div class="success-title">Mesajınız Başarıyla İletildi!</div>
-      <div class="success-desc">
-        Bildiriminiz Topicroom köprüsü üzerinden ilgili blog yöneticisine ulaştırıldı. Belirttiğiniz e-posta adresinden en kısa sürede geri dönüş sağlanacaktır.
-      </div>
-      <div class="success-actions">
-        <button type="button" class="btn-reset" onclick="resetForm()">Yeni Mesaj Gönder</button>
-      </div>
-    </div>
+      </button>
+    </form>
   </div>
 
   <script>
-    if (window.self === window.top) {
-      document.body.classList.add('is-standalone');
-      var c = document.getElementById('widgetContainer');
-      if (c) c.classList.add('standalone');
-    }
-
     var urlParams = new URLSearchParams(window.location.search);
     var currentSource = (urlParams.get('source') || 'general').toLowerCase();
     var sourceMap = {
       'negron': 'Negron Show Blogu',
       'ali': 'Aleyulala Blogu',
+      'aleyyul': 'Aleyulala Blogu',
       'github': 'GitHub - Saved Uygulaması',
-      'general': 'Topicroom Köprüsü'
+      'general': 'Topicroom'
     };
-    var selectedCategory = 'Genel Soru';
 
-    var badgeEl = document.getElementById('sourceBadge');
-    if (badgeEl && sourceMap[currentSource]) {
-      badgeEl.textContent = sourceMap[currentSource];
-    }
+    var title = sourceMap[currentSource] || 'Topicroom';
+    document.getElementById('chatTitle').textContent = title;
+    document.getElementById('avatarBox').innerHTML = title.charAt(0).toUpperCase() + '<span class="avatar-dot"></span>';
+    document.getElementById('welcomeMsg').textContent = 'Merhaba! ' + title + ' ile doğrudan iletişime geçmek için mesajınızı aşağıdan yazabilirsiniz. Size en kısa sürede dönüş sağlanacaktır 👋';
 
-    var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx8B_7DX64ss6H1CxIyZ_KOUyzyfcEvX82pqmsPixLn4YVDaVtoPB5qp_qhj7ExckZR/exec';
+    var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwcZprdS6F_jJ6nin0YalTKweQKP4t936UgrTnme-d5gA-qHbi986vh6HxdzvA236Of/exec';
 
-    function sendHeight() {
-      try {
-        var h = document.body.scrollHeight || document.documentElement.scrollHeight;
-        if (h && window.parent && window.parent !== window) {
-          window.parent.postMessage({ type: 'topicroom_widget_resize', height: h }, '*');
-        }
-      } catch (_) {}
-    }
-    window.addEventListener('load', sendHeight);
-    window.addEventListener('resize', sendHeight);
-    setTimeout(sendHeight, 250);
-
-    // Auto-restore saved fields & drafts
     try {
-      var savedName = localStorage.getItem('topicroom_sender_name');
-      var savedEmail = localStorage.getItem('topicroom_sender_email');
-      var savedDraft = localStorage.getItem('topicroom_draft_' + currentSource);
-      if (savedName) document.getElementById('senderName').value = savedName;
-      if (savedEmail) document.getElementById('senderEmail').value = savedEmail;
-      if (savedDraft) {
-        document.getElementById('msgBody').value = savedDraft;
-        updateCharCount();
-      }
+      var sn = localStorage.getItem('topicroom_sender_name');
+      var se = localStorage.getItem('topicroom_sender_email');
+      if (sn) document.getElementById('chatSenderName').value = sn;
+      if (se) document.getElementById('chatSenderEmail').value = se;
     } catch (_) {}
 
-    function selectCategory(btn) {
-      document.querySelectorAll('.cat-pill').forEach(function(p) { p.classList.remove('active'); });
-      btn.classList.add('active');
-      selectedCategory = btn.getAttribute('data-cat') || 'Genel';
-      var subj = document.getElementById('msgSubject');
-      if (subj && !subj.value.trim()) {
-        subj.value = '[' + selectedCategory + '] ';
-      }
-      sendHeight();
+    function scrollChatBottom() {
+      var s = document.getElementById('chatStream');
+      if (s) s.scrollTop = s.scrollHeight;
     }
 
-    function updateCharCount() {
-      var body = document.getElementById('msgBody');
-      var count = body ? body.value.length : 0;
-      var el = document.getElementById('charCount');
-      if (el) el.textContent = count + ' / 1500';
-      try {
-        if (body) localStorage.setItem('topicroom_draft_' + currentSource, body.value);
-      } catch (_) {}
+    function appendMessage(text, isUser) {
+      var stream = document.getElementById('chatStream');
+      var row = document.createElement('div');
+      row.className = 'msg-row ' + (isUser ? 'user' : 'bot');
+      var now = new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' });
+      var checkmark = isUser ? ' ✓✓' : '';
+      row.innerHTML = '<div class="bubble ' + (isUser ? 'user' : 'bot') + '">' +
+        text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') +
+        '<div class="bubble-meta">' + now + checkmark + '</div></div>';
+      stream.appendChild(row);
+      scrollChatBottom();
     }
 
-    // Keyboard shortcut (Ctrl+Enter / Cmd+Enter)
-    document.addEventListener('keydown', function(e) {
-      if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
-        var form = document.getElementById('contactForm');
-        var formView = document.getElementById('formView');
-        if (formView && formView.style.display !== 'none') {
-          handleSend(e);
-        }
-      }
-    });
+    function handleChatSend(ev) {
+      if (ev) ev.preventDefault();
+      var input = document.getElementById('chatMsgInput');
+      var msg = (input ? input.value : '').trim();
+      if (!msg) return;
 
-    function showAlert(msg) {
-      var box = document.getElementById('alertBox');
-      if (!box) return;
-      box.textContent = msg;
-      box.style.display = 'block';
-      sendHeight();
-    }
-    function hideAlert() {
-      var box = document.getElementById('alertBox');
-      if (box) box.style.display = 'none';
-      sendHeight();
-    }
+      var nameEl = document.getElementById('chatSenderName');
+      var emailEl = document.getElementById('chatSenderEmail');
+      var name = (nameEl ? nameEl.value : '').trim() || 'Ziyaretçi';
+      var email = (emailEl ? emailEl.value : '').trim();
 
-    function setSubmitting(isSubmitting) {
-      var btn = document.getElementById('submitBtn');
-      var btnText = document.getElementById('btnText');
-      if (!btn) return;
-      btn.disabled = isSubmitting;
-      if (isSubmitting) {
-        btnText.innerHTML = '<span class="spinner"></span> Gönderiliyor...';
-      } else {
-        btnText.textContent = 'Mesajı Gönder';
-      }
-    }
-
-    function handleSend(ev) {
-      if (ev && typeof ev.preventDefault === 'function') ev.preventDefault();
-      hideAlert();
-
-      var name = (document.getElementById('senderName').value || '').trim();
-      var email = (document.getElementById('senderEmail').value || '').trim();
-      var subject = (document.getElementById('msgSubject').value || '').trim();
-      var message = (document.getElementById('msgBody').value || '').trim();
-
-      if (!name) { showAlert('Lütfen adınızı girin.'); return; }
       if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        showAlert('Lütfen geçerli bir e-posta adresi girin.');
+        if (emailEl) { emailEl.focus(); emailEl.style.borderColor = '#ef4444'; }
+        appendMessage('Lütfen size yanıt verebilmemiz için geçerli bir e-posta adresi girin.', false);
         return;
       }
-      if (!message) { showAlert('Lütfen iletmek istediğiniz mesajınızı yazın.'); return; }
+      if (emailEl) emailEl.style.borderColor = '';
 
-      // Save user profile for next visits
       try {
         localStorage.setItem('topicroom_sender_name', name);
         localStorage.setItem('topicroom_sender_email', email);
       } catch (_) {}
 
-      setSubmitting(true);
+      appendMessage(msg, true);
+      input.value = '';
+
+      var btn = document.getElementById('chatSendBtn');
+      if (btn) btn.disabled = true;
+
       var payload = {
         action: 'submit_contact',
         source: currentSource,
-        category: selectedCategory,
         name: name,
         email: email,
-        subject: subject || ('[' + selectedCategory + '] Yeni Mesaj'),
-        message: message
+        subject: 'Yeni Sohbet Mesajı',
+        message: msg
       };
 
       fetch(APPS_SCRIPT_URL, {
@@ -558,48 +350,14 @@
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify(payload)
       })
-      .then(function(r) { return r.json(); })
-      .then(function(res) {
-        setSubmitting(false);
-        if (res && res.ok) {
-          showSuccess();
-        } else {
-          showAlert((res && res.error) || 'Mesaj gönderilirken hata oluştu.');
-        }
+      .then(function() {
+        if (btn) btn.disabled = false;
+        appendMessage('Mesajınız başarıyla iletildi! En kısa sürede dönüş sağlanacaktır.', false);
       })
-      .catch(function(err) {
-        setSubmitting(false);
-        showSuccess();
+      .catch(function() {
+        if (btn) btn.disabled = false;
+        appendMessage('Mesajınız başarıyla iletildi!', false);
       });
-    }
-
-    function showSuccess() {
-      try {
-        localStorage.removeItem('topicroom_draft_' + currentSource);
-      } catch (_) {}
-      document.getElementById('formView').style.display = 'none';
-      document.getElementById('successView').style.display = 'block';
-      sendHeight();
-
-      // Notify parent window (Blogger or Saved app)
-      try {
-        window.parent.postMessage({
-          type: 'topicroom_contact_sent',
-          source: currentSource
-        }, '*');
-      } catch (_) {}
-    }
-
-    function resetForm() {
-      var body = document.getElementById('msgBody');
-      if (body) body.value = '';
-      var subj = document.getElementById('msgSubject');
-      if (subj) subj.value = '';
-      updateCharCount();
-      document.getElementById('successView').style.display = 'none';
-      document.getElementById('formView').style.display = 'block';
-      hideAlert();
-      sendHeight();
     }
   </script>
 </body>
