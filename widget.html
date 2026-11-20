@@ -14,8 +14,10 @@
     html, body {
       width: 100%;
       height: 100%;
+      margin: 0;
+      padding: 0;
       overflow: hidden;
-      background: #090b10;
+      background: #111113;
       color: #f1f5f9;
       font-size: 13px;
       line-height: 1.45;
@@ -25,20 +27,33 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* CARD CONTAINER: Görsel 1 & 2 Uzun Mobil Uygulama (640px) */
+    /* CARD CONTAINER: Çerçeveye Cuk Diye Oturan Koyu Tema */
     .cf-card-wrap {
-      width: 385px;
-      max-width: calc(100vw - 20px);
-      height: 640px;
-      max-height: min(92vh, 660px);
+      width: 100%;
+      height: 100%;
+      max-width: 100%;
+      max-height: 100%;
       background: #111113;
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      border: none !important;
       border-radius: 24px;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85);
+      box-shadow: none !important;
       display: flex;
       flex-direction: column;
       overflow: hidden;
       position: relative;
+    }
+
+    /* Standalone masaüstü görünümü (iframe dışındayken) */
+    @media screen and (min-width: 480px) and (min-height: 700px) {
+      body:not(.in-iframe) {
+        background: #090b10;
+      }
+      body:not(.in-iframe) .cf-card-wrap {
+        width: 385px;
+        height: 640px;
+        border-radius: 24px;
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85);
+      }
     }
 
     /* INITIAL LOADING SCREEN */
@@ -86,10 +101,10 @@
       color: #72767d;
     }
 
-    /* HEADER: Avatar + #İletişim + Çevrimiçi Durum + Kapat Butonu */
+    /* HEADER: Görseldeki Avatar + #İletişim + Çevrimiçi Durum + Kapat Butonu */
     .cf-header {
       padding: 16px 20px 14px 20px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -192,7 +207,7 @@
       padding: 16px 16px 12px 16px;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
       scroll-behavior: smooth;
     }
     .cf-chat-messages::-webkit-scrollbar {
@@ -204,89 +219,50 @@
     }
 
     /* =====================================================================
-       FOTOĞRAFTAKİ SQUIRCLE AVATAR + DİSCORD EMBED YORUM DÜZENİ
+       DİSCORD EMBED: SADECE SOL MOR ÇİZGİ DURSUN, YANINDAKİ BORDER OLMASIN!
        ===================================================================== */
-    .cf-message-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      width: 100%;
-      animation: cfFadeIn 0.22s ease-out;
-    }
-    .cf-message-row.bot-row {
-      justify-content: flex-start;
-    }
-    .cf-message-row.user-row {
-      justify-content: flex-end;
-    }
-
-    /* SQUIRCLE AVATAR KUTUSU (Görsel 2'deki Sol Kutu + 👋 Çıkartması) */
-    .cf-avatar-squircle {
-      width: 44px;
-      height: 44px;
-      min-width: 44px;
-      max-width: 44px;
-      border-radius: 14px;
-      background: #1c1d22;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      flex-shrink: 0;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-    }
-    .cf-avatar-squircle.bot-avatar {
-      background: #1b1d24;
-    }
-    .cf-avatar-squircle.user-avatar {
-      background: #1e2229;
-    }
-    .cf-avatar-badge-sticker {
-      position: absolute;
-      bottom: -4px;
-      right: -4px;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: #18191c;
-      border: 2px solid #111113;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 10.5px;
-      line-height: 1;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-    }
-
-    /* DİSCORD EMBED KARTI (SAYDAM CAM + SOL VURGU ŞERİDİ) */
-    .cf-discord-embed,
-    .cf-user-embed {
+    .cf-discord-embed {
       background: rgba(255, 255, 255, 0.035);
       -webkit-backdrop-filter: blur(12px);
       backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-left: 4px solid #5865F2; /* Discord Blurple */
+      border: none !important;
+      border-left: 4px solid #5865F2 !important; /* MOR ÇİZGİ DURSUN */
       border-radius: 4px 14px 14px 4px;
+      box-shadow: none !important;
       padding: 12px 16px;
-      flex: 1;
-      max-width: calc(100% - 56px);
+      max-width: 92%;
+      align-self: flex-start;
       display: flex;
       flex-direction: column;
       gap: 6px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+      animation: cfFadeIn 0.22s ease-out;
     }
 
+    /* GÖNDERİLEN KULLANICI MESAJI: SADECE SOL MAVİ ÇİZGİ DURSUN */
     .cf-user-embed {
-      border-left-color: #38bdf8;
       background: rgba(56, 189, 248, 0.04);
-      border-color: rgba(56, 189, 248, 0.12);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      border: none !important;
+      border-left: 4px solid #38bdf8 !important; /* MAVİ ÇİZGİ DURSUN */
+      border-radius: 4px 14px 14px 4px;
+      box-shadow: none !important;
+      padding: 12px 16px;
+      max-width: 92%;
+      align-self: flex-end;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      animation: cfFadeIn 0.22s ease-out;
     }
+
     .cf-discord-embed.green-accent {
-      border-left-color: #10b981;
+      border: none !important;
+      border-left: 4px solid #10b981 !important;
     }
     .cf-discord-embed.purple-accent {
-      border-left-color: #5865F2;
+      border: none !important;
+      border-left: 4px solid #5865F2 !important;
     }
 
     @keyframes cfFadeIn {
@@ -336,32 +312,6 @@
       line-height: 1.5;
       word-break: break-word;
     }
-
-    /* GÖRSELDEKİ EMBED HAPLARI / BUTONLARI */
-    .cf-embed-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 4px;
-    }
-    .cf-action-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 6px;
-      padding: 4px 10px;
-      font-size: 11px;
-      font-weight: 600;
-      color: #dcddde;
-    }
-    .cf-action-pill.primary {
-      background: #5865F2;
-      border-color: #5865F2;
-      color: #ffffff;
-    }
-
     .cf-embed-footer {
       display: flex;
       align-items: center;
@@ -388,14 +338,13 @@
       background: rgba(255, 255, 255, 0.04);
       -webkit-backdrop-filter: blur(8px);
       backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-left: 3px solid #5865F2;
+      border: none !important;
+      border-left: 3px solid #5865F2 !important;
       border-radius: 4px 12px 12px 4px;
       padding: 7px 14px;
       font-size: 11.5px;
       color: #949ba4;
       align-self: flex-start;
-      margin-left: 56px;
       margin-bottom: 4px;
     }
     .cf-dots {
@@ -419,7 +368,7 @@
     /* INPUT CARD: Mat Koyu Kart (ADINIZ * + Gri Input + Gri Buton) */
     .cf-input-card {
       background: #141416;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: none !important;
       border-radius: 16px;
       padding: 12px 14px;
       margin: 0 16px 8px 16px;
@@ -427,6 +376,7 @@
       flex-direction: column;
       gap: 8px;
       flex-shrink: 0;
+      box-shadow: none !important;
     }
     .cf-input-header {
       display: flex;
@@ -454,17 +404,17 @@
     .cf-input-field {
       flex: 1;
       background: #1c1c1f;
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      border: none !important;
       outline: none !important;
       border-radius: 8px;
       padding: 11px 14px;
       color: #f2f3f5;
       font-size: 13.5px;
-      transition: background 0.15s ease, border-color 0.15s ease;
+      transition: background 0.15s ease;
+      box-shadow: none !important;
     }
     .cf-input-field:focus {
       background: #222327;
-      border-color: rgba(255, 255, 255, 0.12);
     }
     .cf-input-field::placeholder {
       color: #72767d;
@@ -483,6 +433,7 @@
       cursor: pointer;
       transition: background 0.16s ease, color 0.16s ease;
       flex-shrink: 0;
+      box-shadow: none !important;
     }
     .cf-send-btn:hover {
       background: #36393f;
@@ -528,7 +479,7 @@
       align-items: center;
       gap: 5px;
       background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      border: none !important;
       border-radius: 6px;
       padding: 6px 10px;
       font-size: 11px;
@@ -572,35 +523,24 @@
 
     <!-- SOHBET ALANI -->
     <div class="cf-chat-messages" id="cfChatMessages">
-      <!-- 2. Fotoğraftaki Gibi: Squircle Avatar (👋) + Discord Embed Yorum Kartı -->
-      <div class="cf-message-row bot-row">
-        <div class="cf-avatar-squircle bot-avatar">
-          <svg class="cf-avatar-svg" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-          <span class="cf-avatar-badge-sticker">👋</span>
+      <!-- Discord Embed: Mor Çizgi Dursun, Yanındaki Border Olmasın! -->
+      <div class="cf-discord-embed purple-accent" id="cfWelcomeEmbed">
+        <div class="cf-embed-author">
+          <span>Nsone Bot</span>
+          <span class="cf-bot-tag">BOT</span>
         </div>
-        <div class="cf-discord-embed purple-accent" id="cfWelcomeEmbed">
-          <div class="cf-embed-author">
-            <span>Nsone Bot</span>
-            <span class="cf-bot-tag">BOT</span>
-          </div>
-          <div class="cf-embed-title">Welcome to the server!</div>
-          <div class="cf-embed-desc">
-            Merhaba! 👋 dostum<br><br>
-            Bir sorunuz, öneriniz veya iletmek istediğiniz bir konu varsa formu kullanarak bize iletebilirsiniz.
-          </div>
-          <div class="cf-embed-pills">
-            <span class="cf-action-pill primary">İletişim</span>
-            <span class="cf-action-pill">E-posta</span>
-            <span class="cf-action-pill">7/24 Aktif</span>
-          </div>
-          <div class="cf-embed-footer">
-            <span>Şimdi</span>
-            <svg class="cf-double-check" viewBox="0 0 24 24"><path d="M18 6L7 17l-5-5M22 10l-7.5 7.5L13 16"></path></svg>
-          </div>
+        <div class="cf-embed-title">Topicroom İletişim'e Hoş Geldiniz! 👋</div>
+        <div class="cf-embed-desc">
+          Merhaba! 👋 dostum<br><br>
+          Bir sorunuz, öneriniz veya iletmek istediğiniz bir konu varsa aşağıdaki formu kullanarak bize doğrudan ulaşabilirsiniz. Size en kısa sürede dönüş yapacağız.
+        </div>
+        <div class="cf-embed-footer">
+          <span>Şimdi</span>
+          <svg class="cf-double-check" viewBox="0 0 24 24"><path d="M18 6L7 17l-5-5M22 10l-7.5 7.5L13 16"></path></svg>
         </div>
       </div>
 
-      <div id="cfDynamicArea" style="display:flex; flex-direction:column; gap:14px; width:100%;"></div>
+      <div id="cfDynamicArea" style="display:flex; flex-direction:column; gap:12px; width:100%;"></div>
 
       <!-- NSONE BOT YAZIYOR... -->
       <div id="cfTypingIndicator" class="cf-typing-pill" style="display:none;">
@@ -630,12 +570,17 @@
     <!-- ALT BİLGİ ÇUBUĞU -->
     <div class="cf-footer-bar">
       <div class="cf-footer-left">Nsone Bot v2.0 • Güvenli İletişim</div>
-      <div class="cf-footer-right" id="cfFooterOrigin">aleyulala.blogspot.com</div>
+      <div class="cf-footer-right" id="cfFooterOrigin">aleyulala.github.io</div>
     </div>
   </div>
 
   <script>
     var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby2BbaRplWrOLZDiTba4Wnn9LAy6m2IuIBDmhFS6aSYr-fagSGVKbw_PYb9aajK39jZ/exec';
+
+    // iframe kontrolü (Cuk diye oturma)
+    if (window.self !== window.top) {
+      document.body.classList.add('in-iframe');
+    }
 
     var currentStep = 0; // 0: Name, 1: Email, 2: Message 1, 3: Message 2, 4: Message 3
     var chatData = { name: '', email: '', messages: [] };
@@ -681,47 +626,35 @@
       }
     }
 
-    // GÖNDERİLEN MESAJ: DİSCORD EMBED + SQUIRCLE AVATAR (Görsel 2 Düzeni)
+    // GÖNDERİLEN KULLANICI MESAJI: SADECE SOL MAVİ ÇİZGİ, YANINDAKİ BORDER YOK!
     function appendUserEmbed(text) {
       var authorName = chatData.name ? chatData.name : 'Siz';
-      var row = document.createElement('div');
-      row.className = 'cf-message-row user-row';
-      row.innerHTML = '<div class="cf-user-embed">' +
-        '<div class="cf-embed-author">' +
-          '<span>' + escapeHtml(authorName) + '</span>' +
-          '<span class="cf-user-tag">ÜYE</span>' +
+      var embed = document.createElement('div');
+      embed.className = 'cf-user-embed';
+      embed.innerHTML = '<div class="cf-embed-author">' +
+        '<span>' + escapeHtml(authorName) + '</span>' +
+        '<span class="cf-user-tag">ÜYE</span>' +
         '</div>' +
         '<div class="cf-embed-desc">' + escapeHtml(text) + '</div>' +
         '<div class="cf-embed-footer"><span>Şimdi</span>' +
-        '<svg class="cf-double-check" viewBox="0 0 24 24"><path d="M18 6L7 17l-5-5M22 10l-7.5 7.5L13 16"></path></svg></div>' +
-        '</div>' +
-        '<div class="cf-avatar-squircle user-avatar">' +
-          '<svg class="cf-avatar-svg" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>' +
-          '<span class="cf-avatar-badge-sticker">💬</span>' +
-        '</div>';
-      dynamicArea.appendChild(row);
+        '<svg class="cf-double-check" viewBox="0 0 24 24"><path d="M18 6L7 17l-5-5M22 10l-7.5 7.5L13 16"></path></svg></div>';
+      dynamicArea.appendChild(embed);
       scrollToBottom();
     }
 
-    // BOT MESAJI: DİSCORD EMBED + SQUIRCLE AVATAR (Görsel 2 Düzeni)
+    // BOT MESAJI: SADECE SOL MOR/YEŞİL ÇİZGİ, YANINDAKİ BORDER YOK!
     function appendBotEmbed(descHtml, accentClass) {
       accentClass = accentClass || 'purple-accent';
-      var row = document.createElement('div');
-      row.className = 'cf-message-row bot-row';
-      row.innerHTML = '<div class="cf-avatar-squircle bot-avatar">' +
-        '<svg class="cf-avatar-svg" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>' +
-        '<span class="cf-avatar-badge-sticker">✨</span>' +
-        '</div>' +
-        '<div class="cf-discord-embed ' + accentClass + '">' +
-        '<div class="cf-embed-author">' +
-          '<span>Nsone Bot</span>' +
-          '<span class="cf-bot-tag">BOT</span>' +
+      var embed = document.createElement('div');
+      embed.className = 'cf-discord-embed ' + accentClass;
+      embed.innerHTML = '<div class="cf-embed-author">' +
+        '<span>Nsone Bot</span>' +
+        '<span class="cf-bot-tag">BOT</span>' +
         '</div>' +
         '<div class="cf-embed-desc">' + descHtml + '</div>' +
         '<div class="cf-embed-footer"><span>Şimdi</span>' +
-        '<svg class="cf-double-check" viewBox="0 0 24 24"><path d="M18 6L7 17l-5-5M22 10l-7.5 7.5L13 16"></path></svg></div>' +
-        '</div>';
-      dynamicArea.appendChild(row);
+        '<svg class="cf-double-check" viewBox="0 0 24 24"><path d="M18 6L7 17l-5-5M22 10l-7.5 7.5L13 16"></path></svg></div>';
+      dynamicArea.appendChild(embed);
       scrollToBottom();
     }
 
@@ -820,7 +753,7 @@
 
     function showSocialLinks() {
       var d = document.createElement('div');
-      d.innerHTML = '<div class="cf-social-pills-row" style="margin-left: 56px;">' +
+      d.innerHTML = '<div class="cf-social-pills-row">' +
         '<a href="https://t.me/" target="_blank" rel="noopener" class="cf-soc-pill">' +
           '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"></path></svg>' +
           '<span>Telegram</span>' +

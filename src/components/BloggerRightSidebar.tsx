@@ -99,6 +99,38 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [contactOpenSignal]);
 
+  // Global tıklama ve postMessage dinleyicileri (Direk linke gitmeyi engeller ve modalı açar)
+  useEffect(() => {
+    const onMsg = (ev: MessageEvent) => {
+      if (ev.data && (ev.data.action === 'close_contact_widget' || ev.data.type === 'topicroom_contact_close')) {
+        closeSpotlight();
+      }
+    };
+    window.addEventListener('message', onMsg);
+
+    const onGlobalClick = (ev: MouseEvent) => {
+      const target = (ev.target as HTMLElement)?.closest('a');
+      if (!target) return;
+      const href = target.getAttribute('href') || '';
+      if (
+        href === '#ContactForm2' ||
+        href === '#contact' ||
+        href === '#iletisim' ||
+        href.includes('AKfycby2BbaRplWrOLZDiTba4Wnn9LAy6m2IuIBDmhFS6aSYr-fagSGVKbw_PYb9aajK39jZ')
+      ) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        openSpotlight();
+      }
+    };
+    document.addEventListener('click', onGlobalClick, true);
+
+    return () => {
+      window.removeEventListener('message', onMsg);
+      document.removeEventListener('click', onGlobalClick, true);
+    };
+  }, []);
+
   // Esc ile kapatma + gövde kaydırma kilidi (nsone.xml closeSpotlight 1:1)
   useEffect(() => {
     if (!isSpotlightOpen) return;
@@ -711,39 +743,18 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
               onClick={closeSpotlight}
             />
 
-            {/* Spotlight Penceresi (.cf-spotlight) - Topicroom Canlı İletişim Formu */}
+            {/* Spotlight Penceresi (.cf-spotlight) - Cuk Diye Oturan İletişim Formu */}
             <section
               id="ContactForm2Spotlight"
               role="dialog"
               aria-modal="true"
               aria-label="Bize Ulaşın — Topicroom İletişim"
-              className="cf-spotlight fixed left-1/2 top-1/2 z-[9999] w-[min(calc(100vw-32px),450px)] max-h-[min(94vh,760px)] overflow-hidden rounded-[24px] max-[600px]:rounded-[20px] bg-[rgba(22,25,34,0.92)] backdrop-blur-[28px] border border-white/10 p-4 shadow-[0_30px_80px_rgba(0,0,0,0.72)] cf-spotlight-anim"
+              className="cf-spotlight fixed left-1/2 top-1/2 z-[9999] -translate-x-1/2 -translate-y-1/2 w-[385px] max-w-[calc(100vw-24px)] h-[640px] max-h-[min(92vh,660px)] overflow-hidden rounded-[24px] bg-[#111113] p-0 border-0 shadow-[0_24px_60px_rgba(0,0,0,0.85)] cf-spotlight-anim"
             >
-              {/* Kapat (X) Butonu (.cf-close-btn) */}
-              <button
-                type="button"
-                onClick={closeSpotlight}
-                className="absolute top-3 right-3 w-9 h-9 rounded-[10px] bg-white/[0.08] backdrop-blur-[14px] border-0 hover:bg-[#333333] text-[#989b9f] hover:text-white flex items-center justify-center transition-all cursor-pointer z-20"
-                aria-label="Kapat"
-                title="Kapat"
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  className="w-[17px] h-[17px]"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.2"
-                  strokeLinecap="round"
-                >
-                  <line x1="18" y1="6" x2="6" y2="18" />
-                  <line x1="6" y1="6" x2="18" y2="18" />
-                </svg>
-              </button>
-
               <iframe
                 id="bttContactWidgetIframeGithub"
                 src="./widget.html?id=topicroom-widget&source=github"
-                className="w-full h-[470px] border-0 rounded-[16px] bg-transparent block"
+                className="w-full h-full border-0 rounded-[24px] bg-[#111113] block"
                 title="Topicroom Sohbet & İletişim"
                 allow="clipboard-write"
               />
