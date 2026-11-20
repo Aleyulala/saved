@@ -69,37 +69,9 @@
       margin: 0 auto;
     }
     .cf-close-btn {
-      position: absolute;
-      right: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 30px;
-      height: 30px;
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: #94a3b8;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    .cf-close-btn:hover {
-      background: rgba(255, 255, 255, 0.15);
-      color: #ffffff;
-      transform: translateY(-50%) scale(1.05);
-    }
-    .cf-close-btn:active {
-      transform: translateY(-50%) scale(0.95);
-    }
-    .cf-close-btn svg {
-      width: 14px;
-      height: 14px;
-      stroke: currentColor;
-      stroke-width: 2.2;
-      stroke-linecap: round;
-      fill: none;
+      display: none !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
     }
 
     /* CHAT STREAM & BUBBLES */
@@ -400,12 +372,9 @@
 </head>
 <body>
   <div class="cf-card-wrap" id="cfCard">
-    <!-- HEADER: #İletişim Ortalanmış + Üstte Şık Çarpı Butonu -->
+    <!-- HEADER: #İletişim Ortalanmış (Üstte Çarpı Yok - Sadece Sağ Altta) -->
     <div class="cf-bot-header">
       <h3 class="cf-bot-name">#İletişim</h3>
-      <button aria-label="Kapat" class="cf-close-btn" id="cfCloseTop" type="button" title="Kapat" onclick="handleWidgetClose()">
-        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-      </button>
     </div>
 
     <!-- CHAT MESSAGES STREAM -->
