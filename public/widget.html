@@ -280,7 +280,7 @@
     document.getElementById('avatarBox').innerHTML = title.charAt(0).toUpperCase() + '<span class="avatar-dot"></span>';
     document.getElementById('welcomeMsg').textContent = 'Merhaba! ' + title + ' ile doğrudan iletişime geçmek için mesajınızı aşağıdan yazabilirsiniz. Size en kısa sürede dönüş sağlanacaktır 👋';
 
-    var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwcZprdS6F_jJ6nin0YalTKweQKP4t936UgrTnme-d5gA-qHbi986vh6HxdzvA236Of/exec';
+    var APPS_SCRIPT_URL = urlParams.get('script_url') || 'https://script.google.com/macros/s/AKfycbwcZprdS6F_jJ6nin0YalTKweQKP4t936UgrTnme-d5gA-qHbi986vh6HxdzvA236Of/exec';
 
     try {
       var sn = localStorage.getItem('topicroom_sender_name');
