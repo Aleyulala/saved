@@ -742,7 +742,7 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
 
               <iframe
                 id="bttContactWidgetIframeGithub"
-                src="https://script.google.com/macros/s/AKfycbx8B_7DX64ss6H1CxIyZ_KOUyzyfcEvX82pqmsPixLn4YVDaVtoPB5qp_qhj7ExckZR/exec?action=contact&source=github"
+                src="https://aleyulala.github.io/saved/widget.html?source=github"
                 className="w-full h-[470px] border-0 rounded-[16px] bg-transparent block"
                 title="Topicroom İletişim Formu"
                 allow="clipboard-write"
