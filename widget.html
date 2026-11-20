@@ -25,12 +25,12 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* CARD CONTAINER: Görsel 1 Düzeni (Layout) */
+    /* CARD CONTAINER: Görsel 2 Düzeni (Uzun Mobil Uygulama) */
     .cf-card-wrap {
-      width: 380px;
+      width: 385px;
       max-width: calc(100vw - 20px);
-      height: 530px;
-      max-height: min(94vh, 550px);
+      height: 640px;
+      max-height: min(92vh, 660px);
       background: #12141a;
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 24px;
@@ -434,10 +434,64 @@
         padding: 10px 12px 12px 12px;
       }
     }
-  </style>
+  
+    /* INITIAL LOADING OVERLAY */
+    .cf-loading-overlay {
+      position: absolute;
+      inset: 0;
+      background: #12141a;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+      border-radius: 24px;
+    }
+    .cf-loading-overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .cf-loading-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .cf-loading-spinner {
+      width: 38px;
+      height: 38px;
+      border: 3px solid rgba(88, 101, 242, 0.15);
+      border-top-color: #5865F2;
+      border-radius: 50%;
+      animation: cfSpin 0.75s linear infinite;
+    }
+    @keyframes cfSpin {
+      to { transform: rotate(360deg); }
+    }
+    .cf-loading-logo {
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.2px;
+    }
+    .cf-loading-sub {
+      font-size: 11.5px;
+      color: #949ba4;
+    }
+</style>
 </head>
 <body>
   <div class="cf-card-wrap" id="cfCard">
+    <!-- BAŞLANGIÇ YÜKLEME EKRANI (LOADING OVERLAY) -->
+    <div id="cfLoadingScreen" class="cf-loading-overlay">
+      <div class="cf-loading-center">
+        <div class="cf-loading-spinner"></div>
+        <div class="cf-loading-logo">#İletişim</div>
+        <div class="cf-loading-sub">Nsone Bot bağlanıyor...</div>
+      </div>
+    </div>
+
     <!-- HEADER: Görsel 1 & 3 Ortalı #İletişim -->
     <div class="cf-header">
       <h3 class="cf-header-title">#İletişim</h3>
@@ -562,6 +616,10 @@
       var val = (inputField.value || '').trim();
       if (!val) {
         inputField.focus();
+    setTimeout(function() {
+      var ldr = document.getElementById('cfLoadingScreen');
+      if (ldr) ldr.classList.add('hidden');
+    }, 380);
         return;
       }
 
