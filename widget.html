@@ -80,44 +80,28 @@
       border-radius: 4px;
     }
 
-    /* TYPING INDICATOR */
-    .cf-typing-pill {
-      align-self: flex-start;
-      background: #1a1d27;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 14px;
-      padding: 6px 12px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11px;
-      color: #9ca3af;
-      margin-bottom: 2px;
-      animation: cfFadeIn 0.2s ease-out;
-    }
-    .cf-pill-dots {
-      color: #38bdf8;
-      letter-spacing: 2px;
-      font-weight: bold;
-      animation: cfBlink 1.4s infinite;
-    }
-
-    /* DISCORD EMBED BOT BUBBLE */
+    /* BOT DISCORD EMBED - SAYDAM ARKAPLAN */
     .cf-discord-embed {
-      background: #1e2024;
-      border-left: 4px solid #38bdf8;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-left: 4px solid #5865F2;
       border-radius: 4px 12px 12px 4px;
       padding: 12px 14px;
       max-width: 90%;
       align-self: flex-start;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
       display: flex;
       flex-direction: column;
       gap: 6px;
       animation: cfFadeIn 0.25s ease-out;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
     .cf-discord-embed.green-accent {
       border-left-color: #10b981;
+    }
+    .cf-discord-embed.blue-accent {
+      border-left-color: #38bdf8;
     }
     .cf-discord-embed.purple-accent {
       border-left-color: #5865F2;
@@ -165,29 +149,58 @@
       fill: none;
     }
 
-    /* USER BUBBLE (Görsel 2'deki gibi Sağa Yaslı Okyanus Mavisi) */
-    .cf-user-bubble {
-      background: #173847;
-      border: 1px solid rgba(56, 189, 248, 0.25);
-      border-radius: 14px 14px 4px 14px;
-      padding: 10px 14px;
-      max-width: 82%;
+    /* KULLANICI GÖNDERİLEN MESAJ: DİSCORD EMBED - SAYDAM ARKAPLAN */
+    .cf-user-embed {
+      background: rgba(56, 189, 248, 0.05);
+      border: 1px solid rgba(56, 189, 248, 0.18);
+      border-left: 4px solid #0284c7;
+      border-radius: 4px 12px 12px 4px;
+      padding: 11px 14px;
+      max-width: 88%;
       align-self: flex-end;
-      color: #e0f2fe;
-      font-size: 13px;
-      line-height: 1.45;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      word-break: break-word;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
       animation: cfFadeIn 0.22s ease-out;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
-    .cf-user-meta {
+    .cf-user-embed .cf-embed-author {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #38bdf8;
+    }
+    .cf-user-tag {
+      background: rgba(56, 189, 248, 0.18);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      font-size: 9px;
+      font-weight: 700;
+      padding: 1px 4px;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      line-height: 1.2;
+    }
+    .cf-user-embed .cf-embed-desc {
+      font-size: 13px;
+      color: #e0f2fe;
+      line-height: 1.48;
+      word-break: break-word;
+    }
+    .cf-user-embed .cf-embed-footer {
       display: flex;
       align-items: center;
       justify-content: flex-end;
       gap: 4px;
       font-size: 11px;
       color: #38bdf8;
-      margin-top: 4px;
+      font-weight: 500;
+      margin-top: 2px;
     }
 
     /* BOTTOM FORM AREA: Görsel 3 Düzeni (Input + Mavi İleri Butonu + Çarpı Butonu) */
@@ -283,12 +296,18 @@
       fill: none;
     }
 
-    /* FOOTER BAR: Sol Altta Yeşil Noktalı Nsone Bot • Çevrimiçi */
+    /* FOOTER BAR: Sol Altta Nsone Bot • Çevrimiçi, SAĞ ALTTA ŞEFFAF NSONE BOT YAZIYOR... */
     .cf-footer-bar {
       display: flex;
       align-items: center;
-      gap: 7px;
+      justify-content: space-between;
       padding: 0 2px;
+      min-height: 24px;
+    }
+    .cf-footer-status {
+      display: flex;
+      align-items: center;
+      gap: 7px;
     }
     .cf-online-dot {
       width: 8px;
@@ -306,6 +325,28 @@
       letter-spacing: -0.1px;
     }
 
+    /* SAĞ ALT ŞEFFAF BOT YAZIYOR GÖSTERGESİ */
+    .cf-typing-pill {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 3px 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: #9ca3af;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      animation: cfFadeIn 0.2s ease-out;
+    }
+    .cf-pill-dots {
+      color: #38bdf8;
+      letter-spacing: 2px;
+      font-weight: bold;
+      animation: cfBlink 1.4s infinite;
+    }
+
     /* SOCIAL NETWORK INVITE (3. Mesajdan Sonra) */
     .cf-social-invite {
       margin-top: 8px;
@@ -314,7 +355,7 @@
       gap: 8px;
     }
     .cf-social-trigger-btn {
-      background: linear-gradient(135deg, #1e293b, #0f172a);
+      background: rgba(56, 189, 248, 0.08);
       border: 1px solid rgba(56, 189, 248, 0.35);
       color: #38bdf8;
       padding: 8px 12px;
@@ -327,6 +368,8 @@
       justify-content: center;
       gap: 6px;
       transition: all 0.2s ease;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
     .cf-social-trigger-btn:hover {
       background: #0284c7;
@@ -349,10 +392,12 @@
       font-size: 11px;
       font-weight: 500;
       text-decoration: none;
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.04);
       border: 1px solid rgba(255, 255, 255, 0.1);
       color: #e2e8f0;
       transition: all 0.2s ease;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
     }
     .cf-soc-pill:hover {
       background: rgba(255, 255, 255, 0.12);
@@ -400,13 +445,7 @@
 
     <!-- SOHBET ALANI -->
     <div class="cf-chat-messages" id="cfChatMessages">
-      <!-- Bot Yazıyor Göstergesi -->
-      <div class="cf-typing-pill" id="cfTypingPill">
-        <span class="cf-pill-dots">•••</span>
-        <span>Nsone Bot yazıyor...</span>
-      </div>
-
-      <!-- Discord Embed Başlangıç Mesajı -->
+      <!-- Discord Embed Başlangıç Mesajı (Saydam Arkaplan) -->
       <div class="cf-discord-embed purple-accent" id="cfWelcomeEmbed">
         <div class="cf-embed-author">
           <span>Nsone Bot</span>
@@ -438,10 +477,16 @@
         </div>
       </form>
 
-      <!-- ALT ÇUBUK: Sol Altta Yeşil Noktalı Nsone Bot • Çevrimiçi -->
+      <!-- ALT ÇUBUK: Sol Altta Nsone Bot • Çevrimiçi | SAĞ ALTTA ŞEFFAF NSONE BOT YAZIYOR... -->
       <div class="cf-footer-bar">
-        <span class="cf-online-dot"></span>
-        <span class="cf-status-label">Nsone Bot • Çevrimiçi</span>
+        <div class="cf-footer-status">
+          <span class="cf-online-dot"></span>
+          <span class="cf-status-label">Nsone Bot • Çevrimiçi</span>
+        </div>
+        <div class="cf-typing-pill" id="cfTypingPill" style="display: none;"
+          <span class="cf-pill-dots">•••</span>
+          <span>Nsone Bot yazıyor...</span>
+        </div>
       </div>
     </div>
   </div>
@@ -468,23 +513,30 @@
       }, 50);
     }
 
+    // SAĞ ALTTA ŞEFFAF BOT YAZIYOR GÖSTERGESİ
     function showTyping(show) {
       if (typingPill) {
         typingPill.style.display = show ? 'inline-flex' : 'none';
-        if (show) scrollToBottom();
       }
     }
 
-    function appendUserBubble(text) {
-      var bubble = document.createElement('div');
-      bubble.className = 'cf-user-bubble';
-      bubble.innerHTML = '<span>' + escapeHtml(text) + '</span>' +
-        '<div class="cf-user-meta"><span>Şimdi</span>' +
+    // KULLANICI GÖNDERİLEN MESAJI DİSCORD EMBED ŞEKLİNDE EKLE (SAYDAM)
+    function appendUserEmbed(text) {
+      var authorName = chatData.name ? escapeHtml(chatData.name) : 'Siz';
+      var embed = document.createElement('div');
+      embed.className = 'cf-user-embed';
+      embed.innerHTML = '<div class="cf-embed-author">' +
+        '<span>' + authorName + '</span>' +
+        '<span class="cf-user-tag">ÜYE</span>' +
+        '</div>' +
+        '<div class="cf-embed-desc">' + escapeHtml(text) + '</div>' +
+        '<div class="cf-embed-footer"><span>Şimdi</span>' +
         '<svg class="cf-double-check" viewBox="0 0 24 24"><path d="M18 6L7 17l-5-5M22 10l-7.5 7.5L13 16"></path></svg></div>';
-      chatMessages.appendChild(bubble);
+      chatMessages.appendChild(embed);
       scrollToBottom();
     }
 
+    // BOT MESAJI DİSCORD EMBED ŞEKLİNDE EKLE (SAYDAM)
     function appendBotEmbed(descHtml, accentClass) {
       accentClass = accentClass || 'blue-accent';
       var embed = document.createElement('div');
@@ -516,7 +568,7 @@
       if (currentStep === 0) {
         // Name step
         chatData.name = val;
-        appendUserBubble(val);
+        appendUserEmbed(val);
         inputField.value = '';
         inputField.disabled = true;
         showTyping(true);
@@ -541,7 +593,7 @@
         }
 
         chatData.email = val;
-        appendUserBubble(val);
+        appendUserEmbed(val);
         inputField.value = '';
         inputField.disabled = true;
         showTyping(true);
@@ -560,7 +612,7 @@
         // Message steps (up to 3)
         chatData.messagesSent++;
         var count = chatData.messagesSent;
-        appendUserBubble(val);
+        appendUserEmbed(val);
         inputField.value = '';
         inputField.disabled = true;
         showTyping(true);
@@ -665,7 +717,6 @@
       }
     }
 
-    // Input Enter Tuşu Desteği
     inputField.addEventListener('keydown', function(e) {
       if (e.key === 'Enter') {
         e.preventDefault();
