@@ -15,7 +15,7 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
-      background: #090a0f;
+      background: #090b10;
       color: #f1f5f9;
       font-size: 13px;
       line-height: 1.45;
@@ -25,15 +25,15 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* CARD CONTAINER: Sabit Mobil Boyut + Obsidian Teması */
+    /* CARD CONTAINER: Görsel 1 Düzeni (Layout Olarak Bu Güzel) + Görsel 2 UI */
     .cf-card-wrap {
       width: 380px;
       max-width: calc(100vw - 20px);
       height: 530px;
       max-height: min(94vh, 550px);
-      background: #12141a;
+      background: #12141c;
       border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 24px;
+      border-radius: 22px;
       box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 2px 10px rgba(0, 0, 0, 0.5);
       display: flex;
       flex-direction: column;
@@ -47,85 +47,58 @@
       to { opacity: 1; transform: scale(1) translateY(0); }
     }
 
-    /* HEADER: Görsel 2/3 UI Şıklığı */
+    /* HEADER: Görsel 2 (Beyaz Sohbet Balonu İkonu + #İletişim + Çevrimiçi • Nsone Bot) */
     .cf-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
       padding: 18px 20px 14px 20px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
       flex-shrink: 0;
     }
-    .cf-header-left {
+    .cf-header-icon {
+      width: 22px;
+      height: 22px;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cf-header-icon svg {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+    }
+    .cf-header-title-row {
       display: flex;
       flex-direction: column;
       gap: 3px;
     }
-    .cf-header-icon {
-      width: 24px;
-      height: 24px;
-      margin-bottom: 2px;
-      color: #ffffff;
-    }
     .cf-header-title {
-      font-size: 19px;
+      font-size: 20px;
       font-weight: 700;
       color: #ffffff;
       letter-spacing: -0.3px;
-      line-height: 1.2;
+      line-height: 1.15;
     }
     .cf-header-subtitle {
-      display: flex;
-      align-items: center;
-      gap: 5px;
       font-size: 12px;
       color: #9ca3af;
       font-weight: 500;
       line-height: 1.2;
     }
-    .cf-sub-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #10b981;
-      box-shadow: 0 0 6px rgba(16, 185, 129, 0.8);
-      display: inline-block;
+    .cf-header-divider {
+      height: 1px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.08);
+      margin-top: 10px;
     }
 
-    .cf-close-btn {
-      width: 32px;
-      height: 32px;
-      border-radius: 9px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      color: #9ca3af;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      margin-top: 2px;
-    }
-    .cf-close-btn:hover {
-      background: rgba(255, 255, 255, 0.12);
-      color: #ffffff;
-      transform: scale(1.05);
-    }
-    .cf-close-btn svg {
-      width: 14px;
-      height: 14px;
-      stroke: currentColor;
-      stroke-width: 2.2;
-      stroke-linecap: round;
-      fill: none;
-    }
-
-    /* CHAT STREAM (SABİT ALAN, BÜYÜYÜP KÜÇÜLMEZ) */
+    /* CHAT STREAM (SABİT ALAN, ASLA ESNEYİP KÜÇÜLMEZ) */
     .cf-chat-messages {
       flex: 1 1 0%;
       min-height: 0;
       overflow-y: auto;
-      padding: 14px 18px;
+      padding: 14px 20px 12px 20px;
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -140,40 +113,19 @@
       border-radius: 4px;
     }
 
-    /* TYPING PILL */
-    .cf-typing-pill {
-      align-self: flex-start;
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      background: #1b1e27;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 20px;
-      padding: 4px 12px;
-      font-size: 11px;
-      color: #8b949e;
-      margin-bottom: 2px;
-    }
-    .cf-pill-dots {
-      letter-spacing: 2px;
-      color: #38bdf8;
-      font-size: 12px;
-      line-height: 1;
-    }
-
-    /* BUBBLE STACK */
+    /* BUBBLE STACK (Görsel 2 UI: Yuvarlak Köşeli Obsidiyen Baloncuklar) */
     .cf-bubble-stack {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
     }
     .cf-chat-bubble {
-      background: #1a1d26;
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: #191c26;
+      border: 1px solid rgba(255, 255, 255, 0.07);
       color: #e2e8f0;
-      padding: 11px 14px;
-      border-radius: 16px 16px 16px 4px;
-      max-width: 88%;
+      padding: 12px 16px;
+      border-radius: 16px;
+      max-width: 90%;
       align-self: flex-start;
       font-size: 13px;
       line-height: 1.48;
@@ -184,7 +136,7 @@
       background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
       color: #ffffff;
       border: none;
-      border-radius: 16px 16px 4px 16px;
+      border-radius: 16px;
       max-width: 85%;
       align-self: flex-end;
       text-align: left;
@@ -195,7 +147,7 @@
       align-items: center;
       justify-content: flex-end;
       gap: 4px;
-      font-size: 10px;
+      font-size: 10.5px;
       color: #8b949e;
       margin-top: 5px;
     }
@@ -212,8 +164,8 @@
       background: rgba(16, 185, 129, 0.12);
       border: 1px solid rgba(16, 185, 129, 0.25);
       color: #a7f3d0;
-      border-radius: 14px 14px 14px 4px;
-      padding: 9px 13px;
+      border-radius: 14px;
+      padding: 10px 14px;
       font-size: 12.5px;
       align-self: flex-start;
       animation: cfFadeIn 0.25s ease;
@@ -224,15 +176,13 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* INPUT SECTION: Görsel 1'deki Sevilen Düzen */
-    .cf-input-section {
-      padding: 8px 16px 12px 16px;
-      background: #141720;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      flex-shrink: 0;
+    /* FORM & INPUT ROW (Görsel 1 Düzeni + Görsel 2 Uçak İkonu, Çakışma Yok) */
+    .cf-form-area {
+      padding: 6px 20px 8px 20px;
       display: flex;
       flex-direction: column;
       gap: 8px;
+      flex-shrink: 0;
     }
     .cf-input-row {
       display: flex;
@@ -240,11 +190,17 @@
       gap: 8px;
       width: 100%;
     }
-    .cf-styled-input {
+    .cf-input-field {
       flex: 1;
-      height: 42px;
-      background: #0f1117;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .cf-styled-input {
+      width: 100%;
+      height: 44px;
+      background: #11131a;
+      border: 1px solid rgba(255, 255, 255, 0.09);
       border-radius: 12px;
       color: #ffffff;
       padding: 0 14px;
@@ -254,62 +210,62 @@
       box-sizing: border-box;
     }
     .cf-styled-input:focus {
-      border-color: #0284c7;
-      background: #12151e;
-      box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.2);
+      border-color: #38bdf8;
+      background: #13151e;
+      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.15);
     }
     .cf-styled-input::placeholder {
       color: #64748b;
     }
 
-    /* AKSİYON VE KAPATMA BUTONLARI (Squircle) */
-    .cf-btn-action {
-      width: 42px;
-      height: 42px;
-      min-width: 42px;
-      min-height: 42px;
+    /* ACTION BUTTONS (Görsel 2 Uçak İkonu + Squircle Kapat Butonu) */
+    .cf-btn-send {
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      min-height: 44px;
       border-radius: 12px;
-      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      background: #252834;
+      border: 1px solid rgba(255, 255, 255, 0.08);
       color: #ffffff;
-      border: none;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       flex-shrink: 0;
-      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);
       transition: all 0.2s ease;
     }
-    .cf-btn-action:hover:not(:disabled) {
+    .cf-btn-send:hover:not(:disabled) {
+      background: #2e3342;
+      color: #38bdf8;
+      border-color: rgba(56, 189, 248, 0.35);
       transform: translateY(-1px);
-      box-shadow: 0 6px 18px rgba(2, 132, 199, 0.45);
     }
-    .cf-btn-action:active:not(:disabled) {
+    .cf-btn-send:active:not(:disabled) {
       transform: scale(0.96);
     }
-    .cf-btn-action:disabled {
+    .cf-btn-send:disabled {
       opacity: 0.35;
       cursor: not-allowed;
-      box-shadow: none;
     }
-    .cf-btn-action svg {
+    .cf-btn-send svg {
       width: 18px;
       height: 18px;
       stroke: currentColor;
-      stroke-width: 2.2;
+      stroke-width: 2;
       stroke-linecap: round;
       stroke-linejoin: round;
       fill: none;
     }
 
-    .cf-btn-bottom-close {
-      width: 42px;
-      height: 42px;
-      min-width: 42px;
-      min-height: 42px;
+    .cf-btn-close {
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      min-height: 44px;
       border-radius: 12px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.09);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       color: #94a3b8;
       display: flex;
       align-items: center;
@@ -318,55 +274,83 @@
       flex-shrink: 0;
       transition: all 0.2s ease;
     }
-    .cf-btn-bottom-close:hover {
+    .cf-btn-close:hover {
       background: rgba(255, 255, 255, 0.12);
       color: #ffffff;
       transform: translateY(-1px);
     }
-    .cf-btn-bottom-close:active {
+    .cf-btn-close:active {
       transform: scale(0.96);
     }
-    .cf-btn-bottom-close svg {
-      width: 17px;
-      height: 17px;
+    .cf-btn-close svg {
+      width: 16px;
+      height: 16px;
       stroke: currentColor;
       stroke-width: 2.2;
       stroke-linecap: round;
-      stroke-linejoin: round;
       fill: none;
     }
 
-    /* FOOTER BAR: Çevrimiçi Durumu + Sürüm */
+    /* FOOTER BAR (Görsel 2 UI: Sol Çevrimiçi Durumu + Sağ Yazıyor... Hapı) */
     .cf-footer-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      padding: 4px 22px 14px 22px;
       width: 100%;
-      padding: 2px 2px 0 2px;
-      font-size: 11.5px;
+      box-sizing: border-box;
+      flex-shrink: 0;
     }
     .cf-footer-status {
       display: flex;
       align-items: center;
       gap: 6px;
+      font-size: 11.5px;
       color: #10b981;
       font-weight: 600;
     }
     .cf-online-dot {
       width: 7px;
       height: 7px;
-      background-color: #10b981;
       border-radius: 50%;
-      display: inline-block;
+      background: #10b981;
       box-shadow: 0 0 6px rgba(16, 185, 129, 0.7);
-    }
-    .cf-footer-credit {
-      color: #64748b;
-      font-size: 10.5px;
-      font-weight: 500;
+      display: inline-block;
     }
 
-    /* TOPLULUK DAVET BUTONU VE LİNKLERİ */
+    /* YAZIYOR... HAPI (Görsel 2 Birebir: Sağ Alt Köşede Şık Hap) */
+    .cf-typing-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #1a1d27;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 20px;
+      padding: 3px 11px;
+      font-size: 11px;
+      color: #8b949e;
+      transition: opacity 0.2s ease;
+    }
+    .cf-typing-dots {
+      display: flex;
+      gap: 3px;
+    }
+    .cf-typing-dots span {
+      width: 3.5px;
+      height: 3.5px;
+      background: #38bdf8;
+      border-radius: 50%;
+      animation: cfBlink 1.4s infinite;
+    }
+    .cf-typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .cf-typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes cfBlink {
+      0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
+      40% { opacity: 1; transform: scale(1.1); }
+    }
+
+    /* SOSYAL MEDYA BUTONU VE GRİDİ */
     .cf-social-invite {
       margin-top: 8px;
     }
@@ -431,32 +415,22 @@
 </head>
 <body>
   <div class="cf-card-wrap" id="cfCard">
-    <!-- HEADER: Görsel 2/3 UI'ı -->
+    <!-- HEADER: Görsel 2 Birebir (Beyaz Sohbet Balonu İkonu + #İletişim + Çevrimiçi • Nsone Bot) -->
     <div class="cf-header">
-      <div class="cf-header-left">
-        <!-- Solid Speech Bubble Icon (Görsel 2) -->
-        <svg class="cf-header-icon" viewBox="0 0 24 24" fill="currentColor">
+      <div class="cf-header-icon">
+        <svg viewBox="0 0 24 24">
           <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
         </svg>
-        <h3 class="cf-header-title">#İletişim</h3>
-        <div class="cf-header-subtitle">
-          <span class="cf-sub-dot"></span>
-          <span>Çevrimiçi • Nsone Bot</span>
-        </div>
       </div>
-      <button aria-label="Kapat" class="cf-close-btn" id="cfCloseTop" type="button" title="Kapat" onclick="handleWidgetClose()">
-        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-      </button>
+      <div class="cf-header-title-row">
+        <h2 class="cf-header-title">#İletişim</h2>
+        <span class="cf-header-subtitle">Çevrimiçi • Nsone Bot</span>
+      </div>
+      <div class="cf-header-divider"></div>
     </div>
 
     <!-- CHAT MESSAGES STREAM -->
     <div class="cf-chat-messages" id="cfChatMessages">
-      <!-- Typing Indicator Pill -->
-      <div class="cf-typing-pill" id="cfTypingPill">
-        <span class="cf-pill-dots">•••</span>
-        <span>Nsone Bot yazıyor...</span>
-      </div>
-
       <div class="cf-bubble-stack" id="cfBubbleStack">
         <div class="cf-chat-bubble">
           <span>Merhaba! 👋 dostum</span>
@@ -474,25 +448,38 @@
       </div>
     </div>
 
-    <!-- INPUT SECTION: Görsel 1'deki Kullanışlı Düzen -->
-    <div class="cf-input-section">
-      <div class="cf-input-row">
-        <input type="text" class="cf-styled-input" id="cfInputField" placeholder="Adınız ve soyadınız... (Enter)" autocomplete="name" required />
-        <button type="button" class="cf-btn-action" id="cfActionBtn" title="İleri" onclick="handleStepAction()">
-          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-        </button>
-        <button type="button" class="cf-btn-bottom-close" id="cfBottomClose" title="Kapat" onclick="handleWidgetClose()">
-          <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-        </button>
-      </div>
-
-      <!-- FOOTER STATUS & CREDIT -->
-      <div class="cf-footer-bar">
-        <div class="cf-footer-status">
-          <span class="cf-online-dot"></span>
-          <span>Nsone Bot • Çevrimiçi</span>
+    <!-- FORM & INPUT ROW (Görsel 1 Düzeni + Görsel 2 Uçak Butonu) -->
+    <div class="cf-form-area">
+      <form id="cfForm" onsubmit="return false;">
+        <div class="cf-input-row">
+          <div class="cf-input-field">
+            <input type="text" class="cf-styled-input" id="cfInputField" placeholder="Adınız ve soyadınız..." autocomplete="name" required />
+          </div>
+          <button type="button" class="cf-btn-send" id="cfActionBtn" title="İleri" onclick="handleStepAction()">
+            <svg viewBox="0 0 24 24">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+          <button type="button" class="cf-btn-close" id="cfCloseBtn" title="Kapat" onclick="handleWidgetClose()">
+            <svg viewBox="0 0 24 24">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
         </div>
-        <span class="cf-footer-credit">Nsone Bot v2.0 • Güvenli İletişim</span>
+      </form>
+    </div>
+
+    <!-- FOOTER BAR: Görsel 2 Birebir (Sol Durum + Sağ Yazıyor... Hapı) -->
+    <div class="cf-footer-bar">
+      <div class="cf-footer-status">
+        <span class="cf-online-dot"></span>
+        <span class="cf-status-label">Nsone Bot • Çevrimiçi</span>
+      </div>
+      <div class="cf-typing-pill" id="cfTypingPill">
+        <div class="cf-typing-dots"><span></span><span></span><span></span></div>
+        <span class="cf-typing-text">Nsone Bot yazıyor...</span>
       </div>
     </div>
   </div>
@@ -512,6 +499,7 @@
     var actionBtn = document.getElementById('cfActionBtn');
     var bubbleStack = document.getElementById('cfBubbleStack');
     var messagesArea = document.getElementById('cfChatMessages');
+    var typingPill = document.getElementById('cfTypingPill');
 
     function scrollToBottom() {
       if (messagesArea) {
@@ -574,7 +562,7 @@
         currentStep = 1;
 
         inputField.type = 'email';
-        inputField.placeholder = 'E-posta adresiniz... (Enter)';
+        inputField.placeholder = 'E-posta adresiniz...';
         inputField.autocomplete = 'email';
         inputField.focus();
       } else if (currentStep === 1) {
@@ -590,10 +578,8 @@
         currentStep = 2;
 
         inputField.type = 'text';
-        inputField.placeholder = 'Mesajınızı buraya yazın... (Enter)';
+        inputField.placeholder = 'Mesajınızı buraya yazın...';
         inputField.autocomplete = 'off';
-        actionBtn.innerHTML = '<svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>';
-        actionBtn.title = 'Gönder';
         inputField.focus();
       } else if (currentStep >= 2) {
         // Mesaj Gönder
@@ -626,7 +612,7 @@
           }, 350);
         } else if (chatData.messagesSent === 3) {
           setTimeout(function() {
-            appendBotBubble('<span>Mesajın kaydedildi. En kısa sürede e-posta adresine dönüş sağlayacağız. 👍 (3/3)</span><div class="cf-social-invite"><button type="button" id="cfSocialTriggerBtn" class="cf-social-trigger-btn" onclick="showSocialLinks()"><svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"></path></svg>Sosyal Ağlarımıza Katılmak İster misin? ✨</button></div>', true);
+            appendBotBubble('<span>Mesajın kaydedildi. En kısa sürede e-posta adresine dönüş sağlayacağız. 👍 (3/3)</span><div class="cf-social-invite"><button type="button" id="cfSocialTriggerBtn" class="cf-social-trigger-btn" onclick="showSocialLinks()"><svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>Sosyal Ağlarımıza Katılmak İster misin? ✨</button></div>', true);
             inputField.disabled = true;
             inputField.placeholder = 'Maksimum mesaj limitine ulaşıldı (3/3).';
             actionBtn.disabled = true;
