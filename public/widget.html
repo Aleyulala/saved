@@ -106,42 +106,6 @@
       border-radius: 4px;
     }
 
-    .cf-typing-indicator {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      padding: 6px 12px;
-      border-radius: 14px 14px 14px 4px;
-      font-size: 11.5px;
-      color: #94a3b8;
-      width: fit-content;
-      animation: cfFadeIn 0.3s ease;
-    }
-    .cf-typing-dots {
-      display: flex;
-      gap: 3px;
-    }
-    .cf-typing-dots span {
-      width: 5px;
-      height: 5px;
-      background: #38bdf8;
-      border-radius: 50%;
-      animation: cfBlink 1.4s infinite;
-    }
-    .cf-typing-dots span:nth-child(2) { animation-delay: 0.2s; }
-    .cf-typing-dots span:nth-child(3) { animation-delay: 0.4s; }
-
-    @keyframes cfBlink {
-      0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
-      40% { opacity: 1; transform: scale(1.1); }
-    }
-    @keyframes cfFadeIn {
-      from { opacity: 0; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
     .cf-bubble-stack {
       display: flex;
       flex-direction: column;
@@ -196,9 +160,14 @@
       animation: cfFadeIn 0.3s ease;
     }
 
+    @keyframes cfFadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     /* FORM & SLIDES */
     .cf-form-area {
-      padding: 8px 16px 12px 16px;
+      padding: 8px 16px 10px 16px;
       background: rgba(22, 25, 34, 0.95);
       border-top: 1px solid rgba(255, 255, 255, 0.05);
       flex-shrink: 0;
@@ -254,6 +223,40 @@
       color: #64748b;
     }
 
+    .cf-btn-bottom-close {
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      min-height: 44px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #94a3b8;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+    .cf-btn-bottom-close:hover {
+      background: rgba(255, 255, 255, 0.16);
+      color: #f1f5f9;
+      transform: translateY(-1px);
+    }
+    .cf-btn-bottom-close:active {
+      transform: scale(0.96);
+    }
+    .cf-btn-bottom-close svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+
     /* BUTTONS: 12px squircle corner */
     .cf-btn-next {
       width: 44px;
@@ -280,8 +283,9 @@
       transform: scale(0.96);
     }
     .cf-btn-next:disabled {
-      opacity: 0.45;
+      opacity: 0.35;
       cursor: not-allowed;
+      box-shadow: none;
     }
     .cf-btn-next svg {
       width: 18px;
@@ -293,7 +297,16 @@
       fill: none;
     }
 
-    /* FOOTER STATUS: Sol Alta Taşınan Nsone Bot • Çevrimiçi */
+    /* FOOTER BAR: Sol Alt Status + Sağ Alt Yazıyor Bildirimi */
+    .cf-footer-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 4px 2px 4px;
+      width: 100%;
+      box-sizing: border-box;
+      position: relative;
+    }
     .cf-footer-status {
       display: flex;
       align-items: center;
@@ -301,20 +314,49 @@
       font-size: 11.5px;
       color: #10b981;
       font-weight: 600;
-      padding: 6px 4px 0 4px;
-      width: 100%;
+      position: static !important;
     }
     .cf-online-dot {
-      width: 7px;
-      height: 7px;
-      background-color: #10b981;
-      border-radius: 50%;
-      display: inline-block;
-      box-shadow: 0 0 6px rgba(16, 185, 129, 0.6);
+      width: 7px !important;
+      height: 7px !important;
+      min-width: 7px !important;
+      min-height: 7px !important;
+      background-color: #10b981 !important;
+      border-radius: 50% !important;
+      display: inline-block !important;
+      position: static !important;
+      box-shadow: 0 0 6px rgba(16, 185, 129, 0.6) !important;
     }
     .cf-status-label {
       color: #10b981;
       font-size: 11.5px;
+    }
+
+    .cf-typing-indicator {
+      display: none;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      color: #94a3b8;
+      animation: cfFadeIn 0.2s ease;
+    }
+    .cf-typing-dots {
+      display: flex;
+      gap: 3px;
+    }
+    .cf-typing-dots span {
+      width: 4px;
+      height: 4px;
+      background: #38bdf8;
+      border-radius: 50%;
+      animation: cfBlink 1.4s infinite;
+    }
+    .cf-typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .cf-typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes cfBlink {
+      0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
+      40% { opacity: 1; transform: scale(1.1); }
     }
   </style>
 </head>
@@ -323,18 +365,10 @@
     <!-- HEADER: #İletişim Ortalanmış -->
     <div class="cf-bot-header">
       <h3 class="cf-bot-name">#İletişim</h3>
-      <button aria-label="Kapat" class="cf-close-btn" type="button" title="Kapat" onclick="handleWidgetClose()">
-        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-      </button>
     </div>
 
     <!-- CHAT MESSAGES STREAM -->
     <div class="cf-chat-messages" id="cfChatMessages">
-      <div class="cf-typing-indicator" id="cfTypingIndicator">
-        <div class="cf-typing-dots"><span></span><span></span><span></span></div>
-        <span class="cf-typing-text">Nsone Bot yazıyor...</span>
-      </div>
-
       <div class="cf-bubble-stack" id="cfBubbleStack">
         <div class="cf-chat-bubble">
           <span>Merhaba! 👋 dostum</span>
@@ -364,6 +398,9 @@
             <button type="button" class="cf-btn-next" id="cfNext1" title="İleri" onclick="handleNext1()">
               <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </button>
+            <button type="button" class="cf-btn-bottom-close" title="Kapat" onclick="handleWidgetClose()">
+              <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
           </div>
 
           <!-- 1. E-posta Slaytı -->
@@ -374,9 +411,12 @@
             <button type="button" class="cf-btn-next" id="cfNext2" title="İleri" onclick="handleNext2()">
               <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </button>
+            <button type="button" class="cf-btn-bottom-close" title="Kapat" onclick="handleWidgetClose()">
+              <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
           </div>
 
-          <!-- 2. Mesaj Slaytı (Sürekli Mesajlaşma / Continuous Chat) -->
+          <!-- 2. Mesaj Slaytı (Maksimum 3 Mesaj Sınırı) -->
           <div class="cf-slide" id="cfSlideMsg">
             <div class="cf-input-field">
               <textarea id="cfInputMsg" placeholder="Mesajınızı buraya yazın... (Enter)" rows="1" required></textarea>
@@ -384,14 +424,23 @@
             <button type="button" class="cf-btn-next" id="cfNext3" title="Gönder" onclick="handleSendMsg()">
               <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
             </button>
+            <button type="button" class="cf-btn-bottom-close" title="Kapat" onclick="handleWidgetClose()">
+              <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
           </div>
         </div>
       </form>
 
-      <!-- FOOTER STATUS: Sol Alta Taşınan Nsone Bot • Çevrimiçi -->
-      <div class="cf-footer-status">
-        <span class="cf-online-dot"></span>
-        <span class="cf-status-label">Nsone Bot • Çevrimiçi</span>
+      <!-- FOOTER BAR: Sol Alt Status + Sağ Alt Yazıyor Bildirimi -->
+      <div class="cf-footer-bar">
+        <div class="cf-footer-status">
+          <span class="cf-online-dot"></span>
+          <span class="cf-status-label">Nsone Bot • Çevrimiçi</span>
+        </div>
+        <div class="cf-typing-indicator" id="cfTypingIndicator">
+          <div class="cf-typing-dots"><span></span><span></span><span></span></div>
+          <span class="cf-typing-text">Nsone Bot yazıyor...</span>
+        </div>
       </div>
     </div>
   </div>
@@ -403,6 +452,7 @@
       email: '',
       messagesCount: 0
     };
+    var MAX_MESSAGES = 3;
 
     var slideName = document.getElementById('cfSlideName');
     var slideEmail = document.getElementById('cfSlideEmail');
@@ -412,6 +462,7 @@
     var inputMsg = document.getElementById('cfInputMsg');
     var bubbleStack = document.getElementById('cfBubbleStack');
     var messagesArea = document.getElementById('cfChatMessages');
+    var typingIndicator = document.getElementById('cfTypingIndicator');
 
     function scrollToBottom() {
       if (messagesArea) {
@@ -448,7 +499,6 @@
       inputMsg.addEventListener('input', autoResize);
     }
 
-    // Step 0: Name -> Email
     function handleNext1() {
       var val = (inputName ? inputName.value : '').trim();
       if (!val || val.length < 2) {
@@ -462,7 +512,6 @@
       if (inputEmail) setTimeout(function() { inputEmail.focus(); }, 120);
     }
 
-    // Step 1: Email -> Msg
     function handleNext2() {
       var val = (inputEmail ? inputEmail.value : '').trim();
       if (!val || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
@@ -476,8 +525,11 @@
       if (inputMsg) setTimeout(function() { inputMsg.focus(); autoResize(); }, 120);
     }
 
-    // Step 2: Continuous Messaging (Ardı ardına mesaj gönderebilme)
+    // Sadece 3 mesaja kadar izin ver (3'ten fazla mesaj balonu atılmasın)
     function handleSendMsg() {
+      if (chatData.messagesCount >= MAX_MESSAGES) {
+        return;
+      }
       var val = (inputMsg ? inputMsg.value : '').trim();
       if (!val) {
         if (inputMsg) inputMsg.focus();
@@ -489,10 +541,13 @@
       inputMsg.value = '';
       autoResize();
 
-      // Gönderim: Google Apps Script Backend (GET + POST desteği)
+      // Sağ altta Nsone Bot yazıyor... göster
+      if (typingIndicator) typingIndicator.style.display = 'flex';
+
+      // Gönderim: Her iki e-postaya da iletilir
       var payload = {
         action: 'submit_contact',
-        source: 'topicroom',
+        source: 'negron',
         name: chatData.name,
         email: chatData.email,
         message: val
@@ -500,7 +555,7 @@
 
       try {
         var bkUrl = APPS_SCRIPT_URL + '?action=submit_contact' +
-          '&source=topicroom' +
+          '&source=negron' +
           '&name=' + encodeURIComponent(chatData.name) +
           '&email=' + encodeURIComponent(chatData.email) +
           '&message=' + encodeURIComponent(val);
@@ -511,25 +566,38 @@
         try { google.script.run.submitContactFormFromWidget(payload); } catch (_) {}
       }
 
-      // Bot Conversational Reply (Ardı ardına mesajlaştıkça canlı sohbet deneyimi)
       setTimeout(function() {
+        if (typingIndicator) typingIndicator.style.display = 'none';
+
         if (chatData.messagesCount === 1) {
-          appendBotBubble('<span>Mesajınızı aldık! İletmek istediğiniz başka bir konu varsa aşağıdan yazmaya devam edebilirsiniz. 👇</span>', true);
+          appendBotBubble('<span>Mesajını ilettik! İletmek istediğin başka bir konu varsa aşağıdan yazmaya devam edebilirsin. 👇 (1/3)</span>', true);
+          if (inputMsg) {
+            inputMsg.placeholder = 'Yeni bir mesaj yazın... (2/3)';
+            inputMsg.focus();
+          }
         } else if (chatData.messagesCount === 2) {
-          appendBotBubble('<span>Ek mesajınız da iletildi. ✓✓</span>', true);
-        } else if (chatData.messagesCount === 3) {
-          appendBotBubble('<span>Mesajınız kaydedildi. En kısa sürede e-posta adresinize dönüş sağlayacağız. 👍</span>', true);
-        } else {
-          appendBotBubble('<span>Mesajınız iletildi. ✓✓</span>', true);
+          appendBotBubble('<span>Ek mesajını da ilettik. ✓✓ (2/3)</span>', true);
+          if (inputMsg) {
+            inputMsg.placeholder = 'Son mesajınızı yazın... (3/3)';
+            inputMsg.focus();
+          }
+        } else if (chatData.messagesCount >= 3) {
+          appendBotBubble('<span>Mesajın kaydedildi. En kısa sürede e-posta adresine dönüş sağlayacağız. 👍 (3/3)</span>', true);
+          // 3 mesaja ulaşıldığında kitle
+          if (inputMsg) {
+            inputMsg.disabled = true;
+            inputMsg.placeholder = 'Maksimum mesaj limitine ulaşıldı (3/3).';
+          }
+          var btn = document.getElementById('cfNext3');
+          if (btn) {
+            btn.disabled = true;
+            btn.style.opacity = '0.35';
+            btn.style.cursor = 'not-allowed';
+          }
         }
-        if (inputMsg) {
-          inputMsg.placeholder = 'Yeni bir mesaj yazın... (Enter)';
-          inputMsg.focus();
-        }
-      }, 350);
+      }, 400);
     }
 
-    // Enter Key Bindings
     if (inputName) {
       inputName.addEventListener('keydown', function(e) {
         if (e.key === 'Enter') { e.preventDefault(); handleNext1(); }
