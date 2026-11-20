@@ -16,7 +16,7 @@
       height: 100%;
       overflow: hidden;
       background: transparent;
-      color: #f4f4f5;
+      color: #f1f5f9;
       font-size: 13.5px;
       line-height: 1.45;
     }
@@ -25,11 +25,11 @@
       flex-direction: column;
       height: 100%;
       width: 100%;
-      background: linear-gradient(180deg, #181922 0%, #111216 100%);
+      background: #161922;
       border-radius: 18px;
-      border: 1px solid rgba(255, 255, 255, 0.09);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       overflow: hidden;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(16, 185, 129, 0.25);
+      box-shadow: 0 25px 65px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(2, 132, 199, 0.2);
       position: relative;
     }
     .chat-header {
@@ -37,10 +37,10 @@
       align-items: center;
       justify-content: space-between;
       padding: 12px 16px;
-      background: rgba(255, 255, 255, 0.03);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.025);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
     .header-left {
       display: flex;
@@ -51,7 +51,7 @@
       width: 36px;
       height: 36px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
       color: #fff;
       font-weight: 700;
       font-size: 15px;
@@ -59,23 +59,23 @@
       align-items: center;
       justify-content: center;
       position: relative;
-      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);
     }
     .avatar-dot {
       position: absolute;
       bottom: 0;
       right: 0;
-      width: 9px;
-      height: 9px;
-      background: #10b981;
-      border: 2px solid #181922;
+      width: 9.5px;
+      height: 9.5px;
+      background: #38bdf8;
+      border: 2px solid #161922;
       border-radius: 50%;
       animation: radarPulse 2s infinite ease-in-out;
     }
     @keyframes radarPulse {
-      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-      70% { transform: scale(1); box-shadow: 0 0 0 7px rgba(16, 185, 129, 0); }
-      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 7px rgba(56, 189, 248, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
     }
     .header-meta h3 {
       font-size: 13.5px;
@@ -85,7 +85,7 @@
     }
     .header-meta p {
       font-size: 11px;
-      color: #34d399;
+      color: #38bdf8;
       font-weight: 500;
       display: flex;
       align-items: center;
@@ -93,43 +93,17 @@
     }
     .badge-source {
       font-size: 10.5px;
-      background: rgba(16, 185, 129, 0.12);
-      border: 1px solid rgba(16, 185, 129, 0.28);
-      color: #34d399;
+      background: rgba(2, 132, 199, 0.12);
+      border: 1px solid rgba(2, 132, 199, 0.28);
+      color: #38bdf8;
       padding: 3px 9px;
       border-radius: 12px;
       font-weight: 600;
     }
-    .chat-profile-bar {
-      display: flex;
-      gap: 8px;
-      padding: 8px 12px;
-      background: rgba(255, 255, 255, 0.02);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    }
-    .profile-input {
-      flex: 1;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 8px;
-      color: #ffffff;
-      padding: 6px 11px;
-      font-size: 11.5px;
-      outline: none;
-      transition: all .16s ease;
-    }
-    .profile-input:focus {
-      border-color: #10b981;
-      background: rgba(255, 255, 255, 0.08);
-      box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
-    }
-    .profile-input::placeholder {
-      color: #71717a;
-    }
     .chat-stream {
       flex: 1;
       overflow-y: auto;
-      padding: 14px 12px;
+      padding: 14px 13px;
       display: flex;
       flex-direction: column;
       gap: 11px;
@@ -139,7 +113,7 @@
       width: 5px;
     }
     .chat-stream::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.15);
       border-radius: 4px;
     }
     .msg-row {
@@ -153,7 +127,7 @@
       justify-content: flex-end;
     }
     .bubble {
-      max-width: 85%;
+      max-width: 86%;
       padding: 10px 14px;
       border-radius: 15px;
       font-size: 13px;
@@ -167,8 +141,8 @@
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
     .bubble.bot {
-      background: rgba(255, 255, 255, 0.06);
-      color: #f4f4f5;
+      background: rgba(255, 255, 255, 0.055);
+      color: #e2e8f0;
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-bottom-left-radius: 4px;
       backdrop-filter: blur(8px);
@@ -176,14 +150,14 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
     }
     .bubble.user {
-      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
       color: #ffffff;
       border-bottom-right-radius: 4px;
-      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.32);
+      box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
     }
     .bubble-meta {
       font-size: 9.5px;
-      opacity: 0.8;
+      opacity: 0.75;
       margin-top: 4px;
       display: flex;
       align-items: center;
@@ -193,37 +167,79 @@
     .bubble.user .bubble-meta {
       color: rgba(255, 255, 255, 0.9);
     }
-    .quick-chips {
-      display: flex;
-      gap: 6px;
-      padding: 4px 12px 6px 12px;
-      overflow-x: auto;
-      background: rgba(255, 255, 255, 0.015);
-      border-top: 1px solid rgba(255, 255, 255, 0.04);
-    }
-    .quick-chips::-webkit-scrollbar { display: none; }
-    .quick-chip {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.09);
+    .summary-card {
+      margin-top: 8px;
+      padding: 12px 14px;
       border-radius: 12px;
-      color: #d4d4d8;
-      font-size: 11px;
-      padding: 4px 9px;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: all .15s ease;
-      user-select: none;
+      background: rgba(2, 132, 199, 0.08);
+      border: 1px solid rgba(2, 132, 199, 0.22);
+      color: #f1f5f9;
+      font-size: 12.5px;
+      line-height: 1.6;
     }
-    .quick-chip:hover {
-      background: rgba(16, 185, 129, 0.16);
-      border-color: rgba(16, 185, 129, 0.35);
-      color: #34d399;
+    .summary-card .field-row {
+      display: flex;
+      margin-bottom: 4px;
+    }
+    .summary-card .field-label {
+      color: #94a3b8;
+      width: 65px;
+      flex-shrink: 0;
+      font-weight: 500;
+    }
+    .summary-card .field-val {
+      color: #ffffff;
+      font-weight: 600;
+      word-break: break-word;
+    }
+    .summary-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .btn-submit-card {
+      flex: 1;
+      padding: 9px 16px;
+      border-radius: 10px;
+      border: none;
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all .16s ease;
+      box-shadow: 0 3px 12px rgba(2, 132, 199, 0.35);
+    }
+    .btn-submit-card:hover:not(:disabled) {
       transform: translateY(-1px);
+      box-shadow: 0 5px 16px rgba(2, 132, 199, 0.5);
+    }
+    .btn-submit-card:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+    .btn-edit-card {
+      padding: 9px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.05);
+      color: #cbd5e1;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all .16s ease;
+    }
+    .btn-edit-card:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
     }
     .chat-footer {
-      padding: 8px 12px 10px 12px;
-      background: rgba(255, 255, 255, 0.03);
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 9px 12px 10px 12px;
+      background: rgba(255, 255, 255, 0.025);
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
       display: flex;
       gap: 8px;
       align-items: center;
@@ -240,19 +256,19 @@
       transition: all .16s ease;
     }
     .chat-input:focus {
-      border-color: #10b981;
+      border-color: #0284c7;
       background: rgba(255, 255, 255, 0.08);
-      box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+      box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.25);
     }
     .chat-input::placeholder {
-      color: #71717a;
+      color: #64748b;
     }
     .send-btn {
       width: 38px;
       height: 38px;
       border-radius: 50%;
       border: none;
-      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
       color: #fff;
       display: flex;
       align-items: center;
@@ -260,11 +276,11 @@
       cursor: pointer;
       transition: all .16s ease;
       flex-shrink: 0;
-      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.3);
     }
     .send-btn:hover:not(:disabled) {
       transform: scale(1.06);
-      box-shadow: 0 0 16px rgba(16, 185, 129, 0.5);
+      box-shadow: 0 0 16px rgba(2, 132, 199, 0.5);
     }
     .send-btn:active:not(:disabled) {
       transform: scale(0.95);
@@ -273,47 +289,42 @@
       opacity: 0.45;
       cursor: not-allowed;
     }
+    .step-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 10.5px;
+      color: #38bdf8;
+      background: rgba(2, 132, 199, 0.12);
+      border: 1px solid rgba(2, 132, 199, 0.25);
+      padding: 2px 7px;
+      border-radius: 10px;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
   </style>
 </head>
 <body>
   <div class="chat-app" id="topicroom-widget">
     <div class="chat-header">
       <div class="header-left">
-        <div class="chat-avatar" id="avatarBox">T<span class="avatar-dot"></span></div>
+        <div class="chat-avatar" id="avatarBox">N<span class="avatar-dot"></span></div>
         <div class="header-meta">
-          <h3 id="chatTitle">Topicroom Sohbet</h3>
+          <h3 id="chatTitle">Negron Show Blogu</h3>
           <p id="chatOnlineStatus">● Çevrimiçi Destek</p>
         </div>
       </div>
       <span class="badge-source" id="sourceBadge">Canlı Sohbet</span>
     </div>
 
-    <div class="chat-profile-bar">
-      <input type="text" class="profile-input" id="chatSenderName" placeholder="Adınız Soyadınız" autocomplete="name" />
-      <input type="email" class="profile-input" id="chatSenderEmail" placeholder="E-posta Adresiniz" autocomplete="email" />
-    </div>
+    <div class="chat-stream" id="chatStream"></div>
 
-    <div class="chat-stream" id="chatStream">
-      <div class="msg-row bot">
-        <div class="bubble bot">
-          <span id="welcomeMsg">Merhaba! Bizimle doğrudan iletişime geçmek için mesajınızı aşağıdan yazabilirsiniz. Size en kısa sürede dönüş sağlanacaktır 👋</span>
-          <div class="bubble-meta" id="welcomeTime">Şimdi</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="quick-chips" id="quickChips">
-      <span class="quick-chip" onclick="applyQuickChip('👋 Merhaba')">👋 Merhaba</span>
-      <span class="quick-chip" onclick="applyQuickChip('💬 Bir sorum var')">💬 Soru</span>
-      <span class="quick-chip" onclick="applyQuickChip('💡 Öneri / Geri bildirim')">💡 Öneri</span>
-    </div>
-
-    <form class="chat-footer" id="chatForm" onsubmit="handleChatSend(event)">
-      <input type="text" class="chat-input" id="chatMsgInput" placeholder="Mesajınızı buraya yazın... (Enter ile gönder)" required autocomplete="off" />
-      <button type="submit" class="send-btn" id="chatSendBtn" title="Gönder">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="22" y1="2" x2="11" y2="13"></line>
-          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+    <form class="chat-footer" id="chatForm" onsubmit="handleChatSubmit(event)">
+      <input type="text" class="chat-input" id="chatMsgInput" placeholder="Adınızı ve Soyadınızı yazın..." required autocomplete="off" />
+      <button type="submit" class="send-btn" id="chatSendBtn" title="İleri">
+        <svg id="btnSvgIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
         </svg>
       </button>
     </form>
@@ -327,77 +338,46 @@
       tr: {
         online: "● Çevrimiçi Destek",
         liveChat: "Canlı Sohbet",
-        namePlaceholder: "Adınız Soyadınız",
-        emailPlaceholder: "E-posta Adresiniz",
-        welcomePrefix: "Merhaba! ",
-        welcomeSuffix: " ile doğrudan iletişime geçmek için mesajınızı aşağıdan yazabilirsiniz. Size en kısa sürede dönüş sağlanacaktır 👋",
-        inputPlaceholder: "Mesajınızı buraya yazın... (Enter ile gönder)",
-        sendSuccess: "Mesajınız başarıyla iletildi! En kısa sürede dönüş sağlanacaktır.",
-        emailError: "Lütfen size yanıt verebilmemiz için geçerli bir e-posta adresi girin.",
         now: "Şimdi",
-        chipHello: "👋 Merhaba",
-        chipQuestion: "💬 Soru",
-        chipFeedback: "💡 Öneri"
+        step1Title: "1/3 Adım: İsim",
+        step1Prompt: "Merhaba! 👋 Size yardımcı olabilmemiz için adınızı ve soyadınızı yazar mısınız?",
+        step1Placeholder: "Adınızı ve Soyadınızı yazın... (Enter)",
+        step2Title: "2/3 Adım: E-posta",
+        step2Prompt: "Tanıştığımıza memnun oldum! Size geri dönüş yapabilmemiz için e-posta adresinizi yazar mısınız?",
+        step2Placeholder: "ornek@mail.com (Enter)",
+        step2Error: "Lütfen geçerli bir e-posta adresi girin (örn: isim@mail.com).",
+        step3Title: "3/3 Adım: Mesaj",
+        step3Prompt: "Harika! Bize iletmek istediğiniz mesajınızı veya konunuzu yazın:",
+        step3Placeholder: "Mesajınızı buraya yazın... (Enter)",
+        summaryTitle: "Bilgileriniz hazır, göndermeye hazır mısınız?",
+        sendBtn: "Mesajı Gönder",
+        sendingBtn: "Gönderiliyor...",
+        editBtn: "Düzenle",
+        successMsg: "🎉 Mesajınız başarıyla iletildi! En kısa sürede e-posta adresinize dönüş yapılacaktır.",
+        newMsgBtn: "Yeni Mesaj Yaz",
+        welcomeBack: "Tekrar hoş geldiniz! Mesajınızı aşağıdan yazabilirsiniz:"
       },
       en: {
         online: "● Online Support",
         liveChat: "Live Chat",
-        namePlaceholder: "Your Name",
-        emailPlaceholder: "Your Email Address",
-        welcomePrefix: "Hello! ",
-        welcomeSuffix: " - you can message us directly below. We will get back to you shortly 👋",
-        inputPlaceholder: "Type your message here... (Press Enter to send)",
-        sendSuccess: "Your message has been sent successfully! We will get back to you soon.",
-        emailError: "Please enter a valid email address so we can reply.",
         now: "Just now",
-        chipHello: "👋 Hello",
-        chipQuestion: "💬 Question",
-        chipFeedback: "💡 Feedback"
-      },
-      de: {
-        online: "● Online-Support",
-        liveChat: "Live-Chat",
-        namePlaceholder: "Ihr Name",
-        emailPlaceholder: "Ihre E-Mail-Adresse",
-        welcomePrefix: "Hallo! ",
-        welcomeSuffix: " - schreiben Sie uns direkt unten. Wir werden uns in Kürze bei Ihnen melden 👋",
-        inputPlaceholder: "Nachricht eingeben... (Enter zum Senden)",
-        sendSuccess: "Ihre Nachricht wurde erfolgreich gesendet!",
-        emailError: "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
-        now: "Jetzt",
-        chipHello: "👋 Hallo",
-        chipQuestion: "💬 Frage",
-        chipFeedback: "💡 Vorschlag"
-      },
-      fr: {
-        online: "● Support en ligne",
-        liveChat: "Chat en direct",
-        namePlaceholder: "Votre Nom",
-        emailPlaceholder: "Votre Adresse E-mail",
-        welcomePrefix: "Bonjour ! ",
-        welcomeSuffix: " - écrivez-nous ci-dessous. Nous vous répondrons rapidement 👋",
-        inputPlaceholder: "Tapez votre message... (Entrée pour envoyer)",
-        sendSuccess: "Votre message a été envoyé avec succès !",
-        emailError: "Veuillez entrer une adresse e-mail valide.",
-        now: "Maintenant",
-        chipHello: "👋 Bonjour",
-        chipQuestion: "💬 Question",
-        chipFeedback: "💡 Suggestion"
-      },
-      az: {
-        online: "● Onlayn Dəstək",
-        liveChat: "Canlı Söhbət",
-        namePlaceholder: "Adınız Soyadınız",
-        emailPlaceholder: "E-poçt Ünvanınız",
-        welcomePrefix: "Salam! ",
-        welcomeSuffix: " ilə birbaşa əlaqə saxlamaq üçün mesajınızı aşağıda yaza bilərsiniz 👋",
-        inputPlaceholder: "Mesajınızı bura yazın... (Enter ilə göndər)",
-        sendSuccess: "Mesajınız uğurla göndərildi!",
-        emailError: "Zəhmət olmasa düzgün e-poçt ünvanı daxil edin.",
-        now: "İndi",
-        chipHello: "👋 Salam",
-        chipQuestion: "💬 Sual",
-        chipFeedback: "💡 Təklif"
+        step1Title: "Step 1/3: Name",
+        step1Prompt: "Hello! 👋 Could you please enter your name and surname?",
+        step1Placeholder: "Enter your full name... (Enter)",
+        step2Title: "Step 2/3: Email",
+        step2Prompt: "Nice to meet you! Could you please provide your email address so we can reply?",
+        step2Placeholder: "example@mail.com (Enter)",
+        step2Error: "Please enter a valid email address.",
+        step3Title: "Step 3/3: Message",
+        step3Prompt: "Great! Please write your message or inquiry:",
+        step3Placeholder: "Type your message here... (Enter)",
+        summaryTitle: "Your inquiry is ready, send now?",
+        sendBtn: "Send Message",
+        sendingBtn: "Sending...",
+        editBtn: "Edit",
+        successMsg: "🎉 Your message has been sent successfully! We will get back to you shortly.",
+        newMsgBtn: "Write New Message",
+        welcomeBack: "Welcome back! You can type your message below:"
       }
     };
 
@@ -408,7 +388,7 @@
       'negron': 'Negron Show Blogu',
       'ali': 'Aleyulala Blogu',
       'aleyyul': 'Aleyulala Blogu',
-      'github': 'GitHub - Saved Uygulaması',
+      'github': 'GitHub - Saved',
       'general': 'Topicroom'
     };
 
@@ -417,86 +397,167 @@
     document.getElementById('avatarBox').innerHTML = title.charAt(0).toUpperCase() + '<span class="avatar-dot"></span>';
     document.getElementById('chatOnlineStatus').textContent = t.online;
     document.getElementById('sourceBadge').textContent = t.liveChat;
-    document.getElementById('chatSenderName').placeholder = t.namePlaceholder;
-    document.getElementById('chatSenderEmail').placeholder = t.emailPlaceholder;
-    document.getElementById('chatMsgInput').placeholder = t.inputPlaceholder;
-    document.getElementById('welcomeMsg').textContent = t.welcomePrefix + title + t.welcomeSuffix;
-    document.getElementById('welcomeTime').textContent = t.now;
 
     var APPS_SCRIPT_URL = urlParams.get('script_url') || 'https://script.google.com/macros/s/AKfycbwcZprdS6F_jJ6nin0YalTKweQKP4t936UgrTnme-d5gA-qHbi986vh6HxdzvA236Of/exec';
 
+    // Conversational State Machine: 0 = Name, 1 = Email, 2 = Message, 3 = Summary/Sent
+    var chatState = {
+      step: 0,
+      name: '',
+      email: '',
+      message: ''
+    };
+
+    // Load saved profile if available
     try {
-      var sn = localStorage.getItem('topicroom_sender_name');
-      var se = localStorage.getItem('topicroom_sender_email');
-      if (sn) document.getElementById('chatSenderName').value = sn;
-      if (se) document.getElementById('chatSenderEmail').value = se;
+      chatState.name = localStorage.getItem('topicroom_sender_name') || '';
+      chatState.email = localStorage.getItem('topicroom_sender_email') || '';
     } catch (_) {}
 
-    function applyQuickChip(txt) {
-      var inp = document.getElementById('chatMsgInput');
-      if (inp) {
-        inp.value = txt + ' ';
-        inp.focus();
-      }
-    }
-
-    function scrollChatBottom() {
+    function scrollBottom() {
       var s = document.getElementById('chatStream');
       if (s) s.scrollTop = s.scrollHeight;
     }
 
-    function appendMessage(text, isUser) {
+    function appendBotMsg(htmlContent) {
       var stream = document.getElementById('chatStream');
       var row = document.createElement('div');
-      row.className = 'msg-row ' + (isUser ? 'user' : 'bot');
+      row.className = 'msg-row bot';
       var now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-      var checkmark = isUser ? ' <span style="color:#a7f3d0;font-weight:700;">✓✓</span>' : '';
-      row.innerHTML = '<div class="bubble ' + (isUser ? 'user' : 'bot') + '">' +
-        text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') +
-        '<div class="bubble-meta">' + now + checkmark + '</div></div>';
+      row.innerHTML = '<div class="bubble bot">' + htmlContent + '<div class="bubble-meta">' + now + '</div></div>';
       stream.appendChild(row);
-      scrollChatBottom();
+      scrollBottom();
     }
 
-    function handleChatSend(ev) {
-      if (ev) ev.preventDefault();
-      var input = document.getElementById('chatMsgInput');
-      var msg = (input ? input.value : '').trim();
-      if (!msg) return;
+    function appendUserMsg(text) {
+      var stream = document.getElementById('chatStream');
+      var row = document.createElement('div');
+      row.className = 'msg-row user';
+      var now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      row.innerHTML = '<div class="bubble user">' + text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') + '<div class="bubble-meta">' + now + ' <span style="color:#7dd3fc;font-weight:700;">✓✓</span></div></div>';
+      stream.appendChild(row);
+      scrollBottom();
+    }
 
-      var nameEl = document.getElementById('chatSenderName');
-      var emailEl = document.getElementById('chatSenderEmail');
-      var name = (nameEl ? nameEl.value : '').trim() || 'Ziyaretçi';
-      var email = (emailEl ? emailEl.value : '').trim();
-
-      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        if (emailEl) { emailEl.focus(); emailEl.style.borderColor = '#ef4444'; }
-        appendMessage(t.emailError, false);
-        return;
+    function initChatFlow() {
+      if (chatState.name && chatState.email) {
+        // Returning user flow
+        chatState.step = 2; // Directly ask for message
+        var initialHtml = '<span class="step-pill">Hızlı İletişim</span><div>' + t.welcomeBack + '<br><small style="color:#94a3b8;">(' + chatState.name + ' - ' + chatState.email + ')</small></div>';
+        appendBotMsg(initialHtml);
+        setInputMode('text', t.step3Placeholder, false);
+      } else {
+        // Step 1: Name
+        chatState.step = 0;
+        appendBotMsg('<span class="step-pill">' + t.step1Title + '</span><div>' + t.step1Prompt + '</div>');
+        setInputMode('text', t.step1Placeholder, false);
       }
-      if (emailEl) emailEl.style.borderColor = '';
+    }
 
-      try {
-        localStorage.setItem('topicroom_sender_name', name);
-        localStorage.setItem('topicroom_sender_email', email);
-      } catch (_) {}
-
-      appendMessage(msg, true);
-      input.value = '';
-
-      var chips = document.getElementById('quickChips');
-      if (chips) chips.style.display = 'none';
-
+    function setInputMode(type, placeholder, isSubmit) {
+      var inp = document.getElementById('chatMsgInput');
       var btn = document.getElementById('chatSendBtn');
-      if (btn) btn.disabled = true;
+      var svg = document.getElementById('btnSvgIcon');
+      if (inp) {
+        inp.type = type;
+        inp.placeholder = placeholder;
+        inp.value = '';
+        setTimeout(function() { inp.focus(); }, 80);
+      }
+      if (svg) {
+        if (isSubmit) {
+          svg.innerHTML = '<line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>';
+        } else {
+          svg.innerHTML = '<line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline>';
+        }
+      }
+    }
+
+    function handleChatSubmit(ev) {
+      if (ev) ev.preventDefault();
+      var inp = document.getElementById('chatMsgInput');
+      var val = (inp ? inp.value : '').trim();
+      if (!val) return;
+
+      if (chatState.step === 0) {
+        // Name step
+        chatState.name = val;
+        appendUserMsg(val);
+        chatState.step = 1;
+        setTimeout(function() {
+          appendBotMsg('<span class="step-pill">' + t.step2Title + '</span><div>' + t.step2Prompt + '</div>');
+          setInputMode('email', t.step2Placeholder, false);
+        }, 300);
+      } else if (chatState.step === 1) {
+        // Email step
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+          appendBotMsg('<span style="color:#f87171;">⚠️ ' + t.step2Error + '</span>');
+          return;
+        }
+        chatState.email = val;
+        appendUserMsg(val);
+        try {
+          localStorage.setItem('topicroom_sender_name', chatState.name);
+          localStorage.setItem('topicroom_sender_email', chatState.email);
+        } catch (_) {}
+        chatState.step = 2;
+        setTimeout(function() {
+          appendBotMsg('<span class="step-pill">' + t.step3Title + '</span><div>' + t.step3Prompt + '</div>');
+          setInputMode('text', t.step3Placeholder, true);
+        }, 300);
+      } else if (chatState.step === 2) {
+        // Message step
+        chatState.message = val;
+        appendUserMsg(val);
+        chatState.step = 3;
+        inp.value = '';
+        inp.blur();
+
+        setTimeout(function() {
+          var safeName = chatState.name.replace(/</g, '&lt;');
+          var safeEmail = chatState.email.replace(/</g, '&lt;');
+          var safeMsg = chatState.message.replace(/</g, '&lt;');
+
+          var summaryHtml =
+            '<div>' + t.summaryTitle + '</div>' +
+            '<div class="summary-card">' +
+              '<div class="field-row"><span class="field-label">Ad:</span><span class="field-val">' + safeName + '</span></div>' +
+              '<div class="field-row"><span class="field-label">E-posta:</span><span class="field-val">' + safeEmail + '</span></div>' +
+              '<div class="field-row"><span class="field-label">Mesaj:</span><span class="field-val">' + safeMsg + '</span></div>' +
+              '<div class="summary-actions">' +
+                '<button type="button" class="btn-submit-card" id="btnFinalSubmit" onclick="executeFinalSend()">' +
+                  '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>' +
+                  '<span>' + t.sendBtn + '</span>' +
+                '</button>' +
+                '<button type="button" class="btn-edit-card" onclick="restartFlow()">' + t.editBtn + '</button>' +
+              '</div>' +
+            '</div>';
+
+          appendBotMsg(summaryHtml);
+        }, 350);
+      }
+    }
+
+    function restartFlow() {
+      chatState.step = 0;
+      appendBotMsg('<span class="step-pill">' + t.step1Title + '</span><div>' + t.step1Prompt + '</div>');
+      setInputMode('text', t.step1Placeholder, false);
+    }
+
+    function executeFinalSend() {
+      var btn = document.getElementById('btnFinalSubmit');
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<span>' + t.sendingBtn + '</span>';
+      }
 
       var payload = {
         action: 'submit_contact',
         source: currentSource,
-        name: name,
-        email: email,
-        subject: 'Yeni Sohbet Mesajı',
-        message: msg
+        name: chatState.name,
+        email: chatState.email,
+        subject: 'Yeni İletişim Mesajı',
+        message: chatState.message
       };
 
       fetch(APPS_SCRIPT_URL, {
@@ -505,14 +566,21 @@
         body: JSON.stringify(payload)
       })
       .then(function() {
-        if (btn) btn.disabled = false;
-        appendMessage(t.sendSuccess, false);
+        showSuccessResponse();
       })
       .catch(function() {
-        if (btn) btn.disabled = false;
-        appendMessage(t.sendSuccess, false);
+        showSuccessResponse();
       });
     }
+
+    function showSuccessResponse() {
+      appendBotMsg('<div>' + t.successMsg + '</div><div style="margin-top:8px;"><button type="button" class="btn-edit-card" onclick="restartFlow()">' + t.newMsgBtn + '</button></div>');
+      setInputMode('text', t.step3Placeholder, false);
+      chatState.step = 2; // Ready for another message
+    }
+
+    // Start flow on load
+    initChatFlow();
   </script>
 </body>
 </html>
