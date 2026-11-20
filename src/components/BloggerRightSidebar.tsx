@@ -742,7 +742,7 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
 
               <iframe
                 id="bttContactWidgetIframeGithub"
-                src="https://script.google.com/macros/s/AKfycbwcZprdS6F_jJ6nin0YalTKweQKP4t936UgrTnme-d5gA-qHbi986vh6HxdzvA236Of/exec?action=contact&source=github"
+                src="./widget.html?id=topicroom-widget&source=github"
                 className="w-full h-[470px] border-0 rounded-[16px] bg-transparent block"
                 title="Topicroom Sohbet & İletişim"
                 allow="clipboard-write"
