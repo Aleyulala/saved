@@ -25,7 +25,7 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* CARD CONTAINER: Image 3 Birebir Tasarımı */
+    /* CARD CONTAINER: Sabit Mobil Boyut + Obsidian Teması */
     .cf-card-wrap {
       width: 380px;
       max-width: calc(100vw - 20px);
@@ -47,67 +47,38 @@
       to { opacity: 1; transform: scale(1) translateY(0); }
     }
 
-    /* HEADER (Görsel 3 Birebir) */
+    /* HEADER: Görsel 2/3 UI Şıklığı */
     .cf-header {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
-      padding: 16px 18px 12px 18px;
+      padding: 18px 20px 14px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
       flex-shrink: 0;
     }
     .cf-header-left {
       display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .cf-avatar-wrap {
-      position: relative;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: #1c1f28;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #9aa0a6;
-      flex-shrink: 0;
-    }
-    .cf-avatar-icon {
-      width: 20px;
-      height: 20px;
-      stroke: currentColor;
-      stroke-width: 1.8;
-      fill: none;
-    }
-    .cf-avatar-dot {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #10b981;
-      border: 2px solid #12141a;
-      box-shadow: 0 0 6px rgba(16, 185, 129, 0.7);
-    }
-    .cf-header-info {
-      display: flex;
       flex-direction: column;
-      gap: 2px;
+      gap: 3px;
+    }
+    .cf-header-icon {
+      width: 24px;
+      height: 24px;
+      margin-bottom: 2px;
+      color: #ffffff;
     }
     .cf-header-title {
-      font-size: 16px;
+      font-size: 19px;
       font-weight: 700;
       color: #ffffff;
-      letter-spacing: -0.2px;
+      letter-spacing: -0.3px;
       line-height: 1.2;
     }
     .cf-header-subtitle {
       display: flex;
       align-items: center;
       gap: 5px;
-      font-size: 11.5px;
+      font-size: 12px;
       color: #9ca3af;
       font-weight: 500;
       line-height: 1.2;
@@ -117,14 +88,14 @@
       height: 6px;
       border-radius: 50%;
       background: #10b981;
-      box-shadow: 0 0 5px rgba(16, 185, 129, 0.8);
+      box-shadow: 0 0 6px rgba(16, 185, 129, 0.8);
       display: inline-block;
     }
 
     .cf-close-btn {
       width: 32px;
       height: 32px;
-      border-radius: 8px;
+      border-radius: 9px;
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.08);
       color: #9ca3af;
@@ -133,11 +104,12 @@
       justify-content: center;
       cursor: pointer;
       transition: all 0.2s ease;
+      margin-top: 2px;
     }
     .cf-close-btn:hover {
       background: rgba(255, 255, 255, 0.12);
       color: #ffffff;
-      transform: scale(1.04);
+      transform: scale(1.05);
     }
     .cf-close-btn svg {
       width: 14px;
@@ -148,12 +120,12 @@
       fill: none;
     }
 
-    /* CHAT STREAM (SABİT ALAN, ESNEYİP KÜÇÜLMEZ) */
+    /* CHAT STREAM (SABİT ALAN, BÜYÜYÜP KÜÇÜLMEZ) */
     .cf-chat-messages {
       flex: 1 1 0%;
       min-height: 0;
       overflow-y: auto;
-      padding: 4px 18px 12px 18px;
+      padding: 14px 18px;
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -168,7 +140,7 @@
       border-radius: 4px;
     }
 
-    /* TYPING PILL (Görsel 3 Birebir) */
+    /* TYPING PILL */
     .cf-typing-pill {
       align-self: flex-start;
       display: inline-flex;
@@ -177,15 +149,15 @@
       background: #1b1e27;
       border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 20px;
-      padding: 5px 13px;
-      font-size: 11.5px;
+      padding: 4px 12px;
+      font-size: 11px;
       color: #8b949e;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+      margin-bottom: 2px;
     }
     .cf-pill-dots {
       letter-spacing: 2px;
       color: #38bdf8;
-      font-size: 13px;
+      font-size: 12px;
       line-height: 1;
     }
 
@@ -196,8 +168,8 @@
       gap: 8px;
     }
     .cf-chat-bubble {
-      background: #1b1e27;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      background: #1a1d26;
+      border: 1px solid rgba(255, 255, 255, 0.06);
       color: #e2e8f0;
       padding: 11px 14px;
       border-radius: 16px 16px 16px 4px;
@@ -223,7 +195,7 @@
       align-items: center;
       justify-content: flex-end;
       gap: 4px;
-      font-size: 10.5px;
+      font-size: 10px;
       color: #8b949e;
       margin-top: 5px;
     }
@@ -252,40 +224,17 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* INPUT CARD CONTAINER (Görsel 3 Birebir) */
-    .cf-input-card {
-      margin: 0 18px 8px 18px;
-      padding: 12px 14px;
-      background: #171a23;
-      border: 1px solid rgba(255, 255, 255, 0.07);
-      border-radius: 14px;
+    /* INPUT SECTION: Görsel 1'deki Sevilen Düzen */
+    .cf-input-section {
+      padding: 8px 16px 12px 16px;
+      background: #141720;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      flex-shrink: 0;
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      flex-shrink: 0;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      gap: 8px;
     }
-    .cf-input-card-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-    }
-    .cf-input-label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.6px;
-      color: #e2e8f0;
-      text-transform: uppercase;
-    }
-    .cf-step-dash {
-      width: 24px;
-      height: 3.5px;
-      background: #38bdf8;
-      border-radius: 2px;
-      box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
-    }
-    .cf-input-card-bottom {
+    .cf-input-row {
       display: flex;
       align-items: center;
       gap: 8px;
@@ -294,9 +243,9 @@
     .cf-styled-input {
       flex: 1;
       height: 42px;
-      background: #11131a;
+      background: #0f1117;
       border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 10px;
+      border-radius: 12px;
       color: #ffffff;
       padding: 0 14px;
       font-size: 13.5px;
@@ -305,45 +254,45 @@
       box-sizing: border-box;
     }
     .cf-styled-input:focus {
-      border-color: #38bdf8;
-      background: #13151e;
-      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.15);
+      border-color: #0284c7;
+      background: #12151e;
+      box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.2);
     }
     .cf-styled-input::placeholder {
       color: #64748b;
     }
 
-    /* SQUIRCLE ACTION BUTTON (Görsel 3 Birebir) */
-    .cf-styled-btn {
+    /* AKSİYON VE KAPATMA BUTONLARI (Squircle) */
+    .cf-btn-action {
       width: 42px;
       height: 42px;
       min-width: 42px;
       min-height: 42px;
-      border-radius: 10px;
-      background: #222632;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      color: #e2e8f0;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      color: #ffffff;
+      border: none;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       flex-shrink: 0;
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);
       transition: all 0.2s ease;
     }
-    .cf-styled-btn:hover:not(:disabled) {
-      background: #2b3040;
-      color: #38bdf8;
-      border-color: rgba(56, 189, 248, 0.35);
+    .cf-btn-action:hover:not(:disabled) {
       transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(2, 132, 199, 0.45);
     }
-    .cf-styled-btn:active:not(:disabled) {
+    .cf-btn-action:active:not(:disabled) {
       transform: scale(0.96);
     }
-    .cf-styled-btn:disabled {
+    .cf-btn-action:disabled {
       opacity: 0.35;
       cursor: not-allowed;
+      box-shadow: none;
     }
-    .cf-styled-btn svg {
+    .cf-btn-action svg {
       width: 18px;
       height: 18px;
       stroke: currentColor;
@@ -353,25 +302,71 @@
       fill: none;
     }
 
-    /* FOOTER (Görsel 3 Birebir) */
-    .cf-footer-credits {
+    .cf-btn-bottom-close {
+      width: 42px;
+      height: 42px;
+      min-width: 42px;
+      min-height: 42px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+    .cf-btn-bottom-close:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+    .cf-btn-bottom-close:active {
+      transform: scale(0.96);
+    }
+    .cf-btn-bottom-close svg {
+      width: 17px;
+      height: 17px;
+      stroke: currentColor;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+
+    /* FOOTER BAR: Çevrimiçi Durumu + Sürüm */
+    .cf-footer-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 4px 22px 14px 22px;
       width: 100%;
-      box-sizing: border-box;
-      flex-shrink: 0;
+      padding: 2px 2px 0 2px;
+      font-size: 11.5px;
     }
-    .cf-credit-left,
-    .cf-credit-right {
-      font-size: 11px;
-      color: #6b7280;
+    .cf-footer-status {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #10b981;
+      font-weight: 600;
+    }
+    .cf-online-dot {
+      width: 7px;
+      height: 7px;
+      background-color: #10b981;
+      border-radius: 50%;
+      display: inline-block;
+      box-shadow: 0 0 6px rgba(16, 185, 129, 0.7);
+    }
+    .cf-footer-credit {
+      color: #64748b;
+      font-size: 10.5px;
       font-weight: 500;
-      letter-spacing: -0.1px;
     }
 
-    /* SOSYAL MEDYA BUTONU VE GRİDİ */
+    /* TOPLULUK DAVET BUTONU VE LİNKLERİ */
     .cf-social-invite {
       margin-top: 8px;
     }
@@ -436,19 +431,17 @@
 </head>
 <body>
   <div class="cf-card-wrap" id="cfCard">
-    <!-- HEADER -->
+    <!-- HEADER: Görsel 2/3 UI'ı -->
     <div class="cf-header">
       <div class="cf-header-left">
-        <div class="cf-avatar-wrap">
-          <svg class="cf-avatar-icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-          <span class="cf-avatar-dot"></span>
-        </div>
-        <div class="cf-header-info">
-          <h3 class="cf-header-title">#İletişim</h3>
-          <div class="cf-header-subtitle">
-            <span class="cf-sub-dot"></span>
-            <span>Çevrimiçi • Nsone Bot</span>
-          </div>
+        <!-- Solid Speech Bubble Icon (Görsel 2) -->
+        <svg class="cf-header-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+        </svg>
+        <h3 class="cf-header-title">#İletişim</h3>
+        <div class="cf-header-subtitle">
+          <span class="cf-sub-dot"></span>
+          <span>Çevrimiçi • Nsone Bot</span>
         </div>
       </div>
       <button aria-label="Kapat" class="cf-close-btn" id="cfCloseTop" type="button" title="Kapat" onclick="handleWidgetClose()">
@@ -481,24 +474,26 @@
       </div>
     </div>
 
-    <!-- INPUT CARD CONTAINER -->
-    <div class="cf-input-card">
-      <div class="cf-input-card-top">
-        <span class="cf-input-label" id="cfInputLabel">ADINIZ *</span>
-        <div class="cf-step-dash" id="cfStepDash"></div>
-      </div>
-      <div class="cf-input-card-bottom">
-        <input type="text" class="cf-styled-input" id="cfInputField" placeholder="Adınız ve soyadınız..." autocomplete="name" required />
-        <button type="button" class="cf-styled-btn" id="cfActionBtn" title="İleri" onclick="handleStepAction()">
+    <!-- INPUT SECTION: Görsel 1'deki Kullanışlı Düzen -->
+    <div class="cf-input-section">
+      <div class="cf-input-row">
+        <input type="text" class="cf-styled-input" id="cfInputField" placeholder="Adınız ve soyadınız... (Enter)" autocomplete="name" required />
+        <button type="button" class="cf-btn-action" id="cfActionBtn" title="İleri" onclick="handleStepAction()">
           <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </button>
+        <button type="button" class="cf-btn-bottom-close" id="cfBottomClose" title="Kapat" onclick="handleWidgetClose()">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
       </div>
-    </div>
 
-    <!-- FOOTER CREDITS -->
-    <div class="cf-footer-credits">
-      <span class="cf-credit-left">Nsone Bot v2.0 • Güvenli İletişim</span>
-      <span class="cf-credit-right" id="cfCreditDomain">aleyulala.blogspot.com</span>
+      <!-- FOOTER STATUS & CREDIT -->
+      <div class="cf-footer-bar">
+        <div class="cf-footer-status">
+          <span class="cf-online-dot"></span>
+          <span>Nsone Bot • Çevrimiçi</span>
+        </div>
+        <span class="cf-footer-credit">Nsone Bot v2.0 • Güvenli İletişim</span>
+      </div>
     </div>
   </div>
 
@@ -514,18 +509,9 @@
     };
 
     var inputField = document.getElementById('cfInputField');
-    var inputLabel = document.getElementById('cfInputLabel');
     var actionBtn = document.getElementById('cfActionBtn');
-    var stepDash = document.getElementById('cfStepDash');
     var bubbleStack = document.getElementById('cfBubbleStack');
     var messagesArea = document.getElementById('cfChatMessages');
-    var domainSpan = document.getElementById('cfCreditDomain');
-
-    try {
-      if (window.location && window.location.hostname && window.location.hostname !== 'localhost') {
-        domainSpan.textContent = window.location.hostname;
-      }
-    } catch (_) {}
 
     function scrollToBottom() {
       if (messagesArea) {
@@ -587,9 +573,8 @@
         inputField.value = '';
         currentStep = 1;
 
-        inputLabel.textContent = 'E-POSTA ADRESİNİZ *';
         inputField.type = 'email';
-        inputField.placeholder = 'E-posta adresiniz...';
+        inputField.placeholder = 'E-posta adresiniz... (Enter)';
         inputField.autocomplete = 'email';
         inputField.focus();
       } else if (currentStep === 1) {
@@ -604,9 +589,8 @@
         inputField.value = '';
         currentStep = 2;
 
-        inputLabel.textContent = 'MESAJINIZ (1/3) *';
         inputField.type = 'text';
-        inputField.placeholder = 'Mesajınızı buraya yazın...';
+        inputField.placeholder = 'Mesajınızı buraya yazın... (Enter)';
         inputField.autocomplete = 'off';
         actionBtn.innerHTML = '<svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>';
         actionBtn.title = 'Gönder';
@@ -631,21 +615,18 @@
         if (chatData.messagesSent === 1) {
           setTimeout(function() {
             appendBotBubble('<span>Mesajını ilettik! İletmek istediğin başka bir konu varsa aşağıdan yazmaya devam edebilirsin. 👇 (1/3)</span>', true);
-            inputLabel.textContent = 'MESAJINIZ (2/3) *';
             inputField.placeholder = 'Ek mesajınızı yazın... (2/3)';
             inputField.focus();
           }, 350);
         } else if (chatData.messagesSent === 2) {
           setTimeout(function() {
             appendBotBubble('<span>Ek mesajını da ilettik. ✓✓ (2/3)</span>', true);
-            inputLabel.textContent = 'SON MESAJINIZ (3/3) *';
             inputField.placeholder = 'Son mesajınızı yazın... (3/3)';
             inputField.focus();
           }, 350);
         } else if (chatData.messagesSent === 3) {
           setTimeout(function() {
-            appendBotBubble('<span>Mesajın kaydedildi. En kısa sürede e-posta adresine dönüş sağlayacağız. 👍 (3/3)</span><div class="cf-social-invite"><button type="button" id="cfSocialTriggerBtn" class="cf-social-trigger-btn" onclick="showSocialLinks()"><svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>Sosyal Ağlarımıza Katılmak İster misin? ✨</button></div>', true);
-            inputLabel.textContent = 'MESAJ LİMİTİ DOLDU (3/3)';
+            appendBotBubble('<span>Mesajın kaydedildi. En kısa sürede e-posta adresine dönüş sağlayacağız. 👍 (3/3)</span><div class="cf-social-invite"><button type="button" id="cfSocialTriggerBtn" class="cf-social-trigger-btn" onclick="showSocialLinks()"><svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"></path></svg>Sosyal Ağlarımıza Katılmak İster misin? ✨</button></div>', true);
             inputField.disabled = true;
             inputField.placeholder = 'Maksimum mesaj limitine ulaşıldı (3/3).';
             actionBtn.disabled = true;
