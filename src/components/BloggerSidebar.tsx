@@ -186,7 +186,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                 <div className="sidebar-flyout w-[164px] p-1.5 rounded-[16px] rounded-tl-[5px] bg-[#252526] shadow-xl space-y-0.5">
                   {/* 1. Chat */}
                   <a
-                    href="https://script.google.com/macros/s/AKfycbwcZprdS6F_jJ6nin0YalTKweQKP4t936UgrTnme-d5gA-qHbi986vh6HxdzvA236Of/exec"
+                    href="https://script.google.com/macros/s/AKfycby2BbaRplWrOLZDiTba4Wnn9LAy6m2IuIBDmhFS6aSYr-fagSGVKbw_PYb9aajK39jZ/exec"
                     target="_blank"
                     rel="nofollow noreferrer noopener"
                     className="w-full flex items-center gap-2 px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-white/[0.06] hover:text-[var(--linkC,#9aa0a6)] transition-colors"
@@ -401,7 +401,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                 {/* 1. Chat */}
                 <li>
                   <a
-                    href="https://script.google.com/macros/s/AKfycbwcZprdS6F_jJ6nin0YalTKweQKP4t936UgrTnme-d5gA-qHbi986vh6HxdzvA236Of/exec"
+                    href="https://script.google.com/macros/s/AKfycby2BbaRplWrOLZDiTba4Wnn9LAy6m2IuIBDmhFS6aSYr-fagSGVKbw_PYb9aajK39jZ/exec"
                     target="_blank"
                     rel="nofollow noreferrer noopener"
                     className="w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-[#252526] hover:text-[var(--linkC,#9aa0a6)] transition-colors"

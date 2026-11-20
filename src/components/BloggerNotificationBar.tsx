@@ -151,7 +151,7 @@ export const BloggerNotificationBar: React.FC<BloggerNotificationBarProps> = ({
           {activeSlide === 2 && (
             <div className="flex items-center justify-center gap-2 text-xs sm:text-sm animate-in fade-in duration-300">
               <a
-                href="https://script.google.com/macros/s/AKfycbwcZprdS6F_jJ6nin0YalTKweQKP4t936UgrTnme-d5gA-qHbi986vh6HxdzvA236Of/exec"
+                href="https://script.google.com/macros/s/AKfycby2BbaRplWrOLZDiTba4Wnn9LAy6m2IuIBDmhFS6aSYr-fagSGVKbw_PYb9aajK39jZ/exec"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="ntf-contact-text inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--linkC,#9aa0a6)] hover:text-white transition-colors cursor-pointer"
