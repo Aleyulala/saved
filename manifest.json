@@ -1,5 +1,5 @@
 {
-  "name": "NESCİONE",
+  "name": "Saved",
   "short_name": "Saved",
   "description": "Giriş gerektirmeyen, IndexedDB tabanlı, GitHub Pages uyumlu açık kaynaklı bağlantı yöneticisi.",
   "start_url": "./",

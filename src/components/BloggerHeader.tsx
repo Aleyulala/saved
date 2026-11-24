@@ -309,7 +309,7 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
             e.preventDefault();
             onGoHome();
           }}
-          className="cursor-pointer inline-flex items-center group select-none ml-2.5 no-underline"
+          className="cursor-pointer inline-flex items-center group select-none ml-[5px] no-underline"
           title="Ana Sayfaya Git (NESCİONE)"
           aria-label="Ana Sayfa"
         >
@@ -326,7 +326,7 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
       </div>
 
       {/* 2. Orta Bölüm: Blogger Arama Hapı (Ekranın TAM GEOMETRİK ORTASINDA: absolute left-1/2 -translate-x-1/2 — Blogger 1:1) */}
-      <div className="hidden min-[800px]:flex absolute left-1/2 -translate-x-1/2 w-full max-w-[440px] px-2.5 min-w-0 z-10 items-center justify-center h-full pointer-events-none">
+      <div className="hidden min-[800px]:flex absolute left-1/2 min-[896px]:left-[calc(50%+42px)] -translate-x-1/2 w-full max-w-[440px] px-2.5 min-w-0 z-10 items-center justify-center h-full pointer-events-none">
         <div
           onClick={onOpenSearchModal}
           className="head-search-pill relative flex items-center w-full h-9 rounded-[14px] px-3.5 gap-2.5 bg-[#252526] pointer-events-auto hover:bg-[#28282b] border border-white/[0.08] hover:border-[rgba(96,205,255,0.4)] cursor-pointer group select-none transition-all duration-200"
@@ -375,7 +375,7 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
       )}
 
       {/* 3. Sağ Bölüm: Blogger XML 1:1 .headIc Butonları */}
-      <div className={`flex items-center justify-end shrink-0 pr-3 sm:pr-4 gap-1 sm:gap-1.5 ml-auto ${hasContextOpen ? '' : 'z-20'}`}>
+      <div className={`flex items-center justify-end shrink-0 pr-3 sm:pr-[15px] gap-1 ml-auto ${hasContextOpen ? '' : 'z-20'}`}>
         {/* Mobilde Arama Butonu (<800px .headIc .isSrh) */}
         <button
           onClick={onOpenSearchModal}

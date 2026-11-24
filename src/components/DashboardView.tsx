@@ -11,7 +11,7 @@ import {
   Newspaper
 } from 'lucide-react';
 import { CollectionItem, LinkItem } from '../types';
-import { formatDate, getDomain, getFaviconUrl } from '../utils/favicon';
+import { formatBlogDate, getDomain, getFaviconUrl } from '../utils/favicon';
 import { getAuthorData } from '../utils/bloggerAuthors';
 import { DashboardItem } from './DashboardItem';
 import { LinkCard } from './LinkCard';
@@ -354,20 +354,20 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
       {/* 3. Sabitlenmiş Gönderi (Pinned Post - 1:1 Blogger Stili) */}
       {pinnedPost && (
-        <section aria-label="Sabitlenmiş Gönderi" className="space-y-3 pt-1">
+        <section aria-label="Sabitlenmiş Gönderi" className="space-y-[21px] pb-4">
           <div className="flex items-center gap-2">
             <RankingIcon className="w-5 h-5 text-[var(--linkC,#9aa0a6)]" />
-            <h2 className="text-sm sm:text-base font-bold text-white tracking-wide">
+            <h2 className="text-sm sm:text-base font-bold text-white">
               Sabitlenmiş Gönderi
             </h2>
           </div>
 
           <article 
             onClick={() => onOpenPostPage(pinnedPost)}
-            className="group relative bg-transparent border-0 transition-all duration-200 cursor-pointer flex flex-col md:flex-row gap-4 md:gap-5 select-none items-stretch"
+            className="group relative bg-transparent border-0 transition-all duration-200 cursor-pointer flex flex-col md:flex-row gap-4 md:gap-[17px] select-none items-stretch"
           >
             {/* Sol Görsel / Thumbnail (Blogger FeaturedPost01 1:1 — Temiz görsel, köşe rozet yığını yok) */}
-            <div className="relative w-full md:w-[320px] lg:w-[340px] aspect-[16/9] rounded-[12px] bg-[#1e1e1e] overflow-hidden shrink-0">
+            <div className="relative w-full md:w-[300px] aspect-[16/9] rounded-[12px] bg-[#1e1e1e] overflow-hidden shrink-0">
               {pinnedPost.thumbnail ? (
                 <img
                   src={pinnedPost.thumbnail}
@@ -409,18 +409,18 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             </div>
 
             {/* Sağ Metin İçeriği (negron.xml 1:1 kutusuz doğrudan akış) */}
-            <div className="py-0.5 flex flex-col justify-between flex-1 gap-2.5 min-w-0">
+            <div className="pt-0.5 md:pt-4 md:pb-[13px] flex flex-col justify-between flex-1 gap-2.5 min-w-0">
               <div className="space-y-1.5">
-                <div className="text-[12px] text-[var(--linkC,#9aa0a6)] hover:underline lowercase font-medium">
+                <div className="text-[13px] text-[var(--linkC,#9aa0a6)] hover:underline lowercase font-medium">
                   {pinnedPost.tags[0] || (pinnedPost.collectionId ? collectionMap.get(pinnedPost.collectionId)?.name.toLowerCase() : 'genel')}
                 </div>
 
-                <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-[var(--linkC,#9aa0a6)] leading-snug transition-colors line-clamp-2">
+                <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-[var(--linkC,#9aa0a6)] leading-snug transition-colors line-clamp-2">
                   {pinnedPost.title}
                 </h3>
 
                 {pinnedPost.description && (
-                  <p className="text-xs sm:text-[13px] text-[#989b9f] leading-relaxed line-clamp-2">
+                  <p className="text-[14px] text-[#989b9f] leading-[21px] line-clamp-2">
                     {pinnedPost.description}
                   </p>
                 )}
@@ -432,7 +432,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   <span className="text-[10px] px-2 py-0.5 rounded bg-[#5f6368] text-white font-semibold">
                     Güncellendi
                   </span>
-                  <span className="text-[11px] text-[#71717a]">{formatDate(pinnedPost.createdAt)}</span>
+                  <span className="text-[11px] text-[#71717a]">{formatBlogDate(pinnedPost.createdAt, true)}</span>
                 </div>
 
                 <span className="text-xs text-[#989b9f] group-hover:text-[var(--linkC,#9aa0a6)] group-hover:underline font-medium">

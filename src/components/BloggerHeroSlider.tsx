@@ -443,6 +443,8 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
                 isActive ? 'opacity-100 z-10 pointer-events-auto' : 'opacity-0 z-0 pointer-events-none'
               }`}
             >
+              {/* Görsel yüklenemezse görünen degrade zemin */}
+              <div className="absolute inset-0 bg-gradient-to-br from-[#2a2a2e] via-[#1e1e1e] to-[#141416]" />
               {/* Wallpaper Image (Responsive, razor-sharp, cover) */}
               <img
                 src={slide.imageUrl}
@@ -452,8 +454,12 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
                 draggable={false}
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
-                  if (target.src !== FALLBACK_IMAGE) {
+                  // 1) yedek görsel, 2) o da yüklenmezse görseli gizle (arkadaki degrade görünür)
+                  if (target.dataset.fb !== '1' && target.src !== FALLBACK_IMAGE) {
+                    target.dataset.fb = '1';
                     target.src = FALLBACK_IMAGE;
+                  } else {
+                    target.style.visibility = 'hidden';
                   }
                 }}
               />

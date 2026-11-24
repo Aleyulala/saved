@@ -76,23 +76,23 @@ export const BloggerNotificationBar: React.FC<BloggerNotificationBarProps> = ({
   if (!isVisible) return null;
 
   return (
-    <div className="w-full mb-4">
+    <div className="w-full mb-[23px]">
       <div
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
-        className="ntfC flex items-center justify-between gap-3 px-4 py-2 rounded-[14px] bg-[#252526] border border-transparent shadow-sm select-none min-h-[46px] touch-pan-y"
+        className="ntfC flex items-center justify-between gap-3 px-[15px] rounded-[14px] bg-[#252526] border border-transparent shadow-sm select-none h-[47px] touch-pan-y"
       >
 
         {/* Sol Kapat Butonu */}
         <button
           onClick={handleDismiss}
-          className="p-1 rounded-full text-[#9ca3af] opacity-75 hover:opacity-100 hover:text-white hover:bg-[#333333] transition-colors shrink-0 cursor-pointer"
+          className="w-8 h-8 inline-flex items-center justify-center rounded-lg border border-white/[0.08] text-[#9ca3af] opacity-90 hover:opacity-100 hover:text-white hover:bg-[#333333] transition-colors shrink-0 cursor-pointer"
           title="Bildirimi Gizle (1 gün)"
           aria-label="Kapat"
         >
-          <X className="w-3.5 h-3.5" />
+          <X className="w-4 h-4" />
         </button>
 
         {/* Orta Slayt İçeriği (.bar-slider) */}
@@ -137,7 +137,7 @@ export const BloggerNotificationBar: React.FC<BloggerNotificationBarProps> = ({
                 target={onOpenChat ? undefined : '_blank'}
                 rel={onOpenChat ? undefined : 'noopener noreferrer'}
                 onClick={onOpenChat ? (e) => { e.preventDefault(); onOpenChat(); } : undefined}
-                className="ntf-contact-text inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--linkC,#9aa0a6)] hover:text-white transition-colors cursor-pointer"
+                className="ntf-contact-text inline-flex items-center gap-1.5 text-[18px] font-semibold text-[var(--linkC,#9aa0a6)] hover:text-white transition-colors cursor-pointer"
                 title="#Sohbet — Sohbet çekmecesini açar"
               >
                 <MessageCircle className="w-4 h-4 shrink-0" />
@@ -156,7 +156,7 @@ export const BloggerNotificationBar: React.FC<BloggerNotificationBarProps> = ({
                   e.preventDefault();
                   onOpenContact?.();
                 }}
-                className="ntf-contact-text inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--linkC,#9aa0a6)] hover:text-white transition-colors cursor-pointer bg-transparent border-0 p-0"
+                className="ntf-contact-text inline-flex items-center gap-1.5 text-[18px] font-semibold text-[var(--linkC,#9aa0a6)] hover:text-white transition-colors cursor-pointer bg-transparent border-0 p-0"
                 title="#İletişim — İletişim & Katıl Kapısını Açar"
               >
                 <Send className="w-4 h-4 shrink-0" />
