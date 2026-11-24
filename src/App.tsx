@@ -865,6 +865,7 @@ export const App: React.FC = () => {
                     setSearchQuery('');
                   }}
                   onOpenPostPage={handleOpenPostPage}
+                  onTogglePin={handleTogglePin}
                   isDrawerOpen={isRightDrawerOpen}
                   onCloseDrawer={() => setIsRightDrawerOpen(false)}
                   contactOpenSignal={contactOpenSignal}

@@ -9,7 +9,8 @@ import {
   ChatBloggerIcon,
   ArchiveIcon,
   ArchiveAddIcon,
-  ArchiveTickIcon
+  ArchiveTickIcon,
+  MessageNotif1Icon
 } from './BloggerIcons';
 import { BrandLogoCard } from './BrandLogoCard';
 
@@ -88,32 +89,33 @@ export const LinkCard: React.FC<LinkCardProps> = ({
           <BrandLogoCard url={link.url} title={link.title} size="card" />
         )}
 
-        {/* Blogger XML 1:1 Yer İmleri / Kaydet Butonu (.bm-button — yalnızca hover veya kayıtlıyken) */}
-        <div className={`absolute top-2 right-2 z-10 transition-opacity duration-200 ${link.isPinned ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
-          <button
-            type="button"
-            onClick={(e) => {
-              if (onTogglePin && link.id) {
+        {/* .tfxM.T: solda yer imi (hover'da "Kaydet" açılır), sağda yorum sayısı — her zaman görünür */}
+        <div className="tfxM T">
+          <div className="tfxC">
+            <button
+              type="button"
+              onClick={(e) => {
                 e.stopPropagation();
-                onTogglePin(link.id, link.isPinned);
-              }
-            }}
-            className={`tIc bm-button w-7 h-7 rounded-full backdrop-blur-md shadow-sm transition-all duration-200 active:scale-90 cursor-pointer flex items-center justify-center ${
-              link.isPinned 
-                ? 'bg-black/75 text-amber-400' 
-                : 'bg-black/65 text-white hover:bg-black/80'
-            }`}
-            data-save="Kaydet"
-            data-saved="Kaydedildi"
-            title={link.isPinned ? 'Kaydedildi' : 'Kaydet'}
-            aria-label={link.isPinned ? 'Kaydedildi' : 'Kaydet'}
-          >
-            {link.isPinned ? (
-              <ArchiveTickIcon className="w-3.5 h-3.5 text-amber-400" />
-            ) : (
-              <ArchiveAddIcon className="w-3.5 h-3.5 text-white" />
-            )}
-          </button>
+                if (onTogglePin && link.id) onTogglePin(link.id, link.isPinned);
+              }}
+              className={`bM bm-button${link.isPinned ? ' added' : ''}`}
+              title={link.isPinned ? 'Kaydedildi' : 'Kaydet'}
+              aria-label={link.isPinned ? 'Kaydedildi' : 'Kaydet'}
+            >
+              {link.isPinned ? (
+                <ArchiveTickIcon className="" />
+              ) : (
+                <ArchiveAddIcon className="" />
+              )}
+              <span className="bMt">{link.isPinned ? 'Kaydedildi' : 'Kaydet'}</span>
+            </button>
+          </div>
+          <div className="tfxC">
+            <div className="cmnt" title="Yorumlar">
+              <MessageNotif1Icon className="" />
+              <span>{comments}</span>
+            </div>
+          </div>
         </div>
 
       </div>

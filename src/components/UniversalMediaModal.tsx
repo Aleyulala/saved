@@ -257,7 +257,7 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
     <div
       id="fsMediaModal"
       className="fixed inset-0 z-[1000000] bg-black flex items-center justify-center select-none animate-in fade-in duration-200"
-      style={{ backgroundColor: '#000000' }}
+      style={{ backgroundColor: 'rgba(0, 0, 0, 0.94)' }}
       onClick={(e) => {
         if (e.target === e.currentTarget) {
           onClose();
@@ -270,31 +270,15 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
       onMouseUp={handleMouseUp}
     >
       {/* Sağ Üst Araç Çubuğu (Screenshot 3 & 10 1:1: Zoom+, Zoom-, Döndür, İndir, Link, Tam Ekran, Kapat) */}
-      <div className="fixed top-3 right-3 sm:top-5 sm:right-6 z-[1000005] flex items-center gap-1.5 sm:gap-2">
+      <div className="fsToolbar">
         {!isVideo && (
           <>
-            {/* Zoom In */}
-            <button
-              type="button"
-              onClick={handleZoomIn}
-              className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#181a20]/80 hover:bg-[#252832] border border-white/10 text-white flex items-center justify-center transition-all cursor-pointer shadow-lg backdrop-blur-md active:scale-95"
-              title="Yakınlaştır (+)"
-              aria-label="Yakınlaştır"
-            >
-              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="11" cy="11" r="8" />
-                <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                <line x1="11" y1="8" x2="11" y2="14" />
-                <line x1="8" y1="11" x2="14" y2="11" />
-              </svg>
-            </button>
-
             {/* Zoom Out */}
             <button
               type="button"
               onClick={handleZoomOut}
               disabled={zoomLevel <= 1}
-              className={`w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#181a20]/80 hover:bg-[#252832] border border-white/10 text-white flex items-center justify-center transition-all cursor-pointer shadow-lg backdrop-blur-md active:scale-95 ${
+              className={`fsToolBtn ${
                 zoomLevel <= 1 ? 'opacity-40 cursor-not-allowed' : ''
               }`}
               title="Uzaklaştır (-)"
@@ -307,11 +291,27 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
               </svg>
             </button>
 
+            {/* Zoom In */}
+            <button
+              type="button"
+              onClick={handleZoomIn}
+              className="fsToolBtn"
+              title="Yakınlaştır (+)"
+              aria-label="Yakınlaştır"
+            >
+              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                <line x1="11" y1="8" x2="11" y2="14" />
+                <line x1="8" y1="11" x2="14" y2="11" />
+              </svg>
+            </button>
+
             {/* Sola Döndür (RotateCcw) */}
             <button
               type="button"
               onClick={handleRotateLeft}
-              className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#181a20]/80 hover:bg-[#252832] border border-white/10 text-white flex items-center justify-center transition-all cursor-pointer shadow-lg backdrop-blur-md active:scale-95"
+              className="fsToolBtn"
               title="Sola Döndür (L)"
               aria-label="Sola Döndür"
             >
@@ -325,7 +325,7 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
             <button
               type="button"
               onClick={handleRotateRight}
-              className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#181a20]/80 hover:bg-[#252832] border border-white/10 text-white flex items-center justify-center transition-all cursor-pointer shadow-lg backdrop-blur-md active:scale-95"
+              className="fsToolBtn"
               title="Sağa Döndür (R)"
               aria-label="Sağa Döndür"
             >
@@ -339,7 +339,7 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
             <button
               type="button"
               onClick={handleDownload}
-              className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#181a20]/80 hover:bg-[#252832] border border-white/10 text-white flex items-center justify-center transition-all cursor-pointer shadow-lg backdrop-blur-md active:scale-95"
+              className="fsToolBtn"
               title="İndir"
               aria-label="İndir"
             >
@@ -354,7 +354,7 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
             <button
               type="button"
               onClick={handleCopyLink}
-              className={`w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#181a20]/80 hover:bg-[#252832] border border-white/10 text-white flex items-center justify-center transition-all cursor-pointer shadow-lg backdrop-blur-md active:scale-95 ${
+              className={`fsToolBtn ${
                 copiedLink ? 'text-[var(--linkC,#9aa0a6)] border-[var(--linkC,#9aa0a6)]' : ''
               }`}
               title={copiedLink ? 'Kopyalandı!' : 'Bağlantıyı Kopyala'}
@@ -372,7 +372,7 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
         <button
           type="button"
           onClick={handleToggleFullscreen}
-          className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#181a20]/80 hover:bg-[#252832] border border-white/10 text-white flex items-center justify-center transition-all cursor-pointer shadow-lg backdrop-blur-md active:scale-95"
+          className="fsToolBtn"
           title="Tam Ekran (F)"
           aria-label="Tam Ekran"
         >
@@ -388,7 +388,7 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
         <button
           type="button"
           onClick={onClose}
-          className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#181a20]/80 hover:bg-[#252832] border border-white/10 text-white flex items-center justify-center transition-all cursor-pointer shadow-lg backdrop-blur-md active:scale-95"
+          className="fsClose"
           title="Kapat (Esc)"
           aria-label="Kapat"
         >
@@ -404,7 +404,7 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
         <button
           type="button"
           onClick={handlePrev}
-          className="fixed left-3 sm:left-6 top-1/2 -translate-y-1/2 z-[1000005] w-9 h-11 sm:w-10 sm:h-12 rounded-xl bg-[#181a20]/80 hover:bg-[#252832] border border-white/10 text-white flex items-center justify-center transition-all cursor-pointer shadow-lg backdrop-blur-md active:scale-95"
+          className="fsNavBtn fsPrev"
           title="Önceki (Sol Ok)"
           aria-label="Önceki"
         >
@@ -419,7 +419,7 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
         <button
           type="button"
           onClick={handleNext}
-          className="fixed right-3 sm:right-6 top-1/2 -translate-y-1/2 z-[1000005] w-9 h-11 sm:w-10 sm:h-12 rounded-xl bg-[#181a20]/80 hover:bg-[#252832] border border-white/10 text-white flex items-center justify-center transition-all cursor-pointer shadow-lg backdrop-blur-md active:scale-95"
+          className="fsNavBtn fsNext"
           title="Sonraki (Sağ Ok)"
           aria-label="Sonraki"
         >
@@ -431,8 +431,10 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
 
       {/* Alt Orta Sayaç & Başlık (Screenshot 3 & 10 1:1: "2 / 10 · Fotoğraf — Videolar & Sinema") */}
       {items.length > 0 && (
-        <div className="fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-[1000005] text-xs sm:text-[13px] text-white/75 font-medium tracking-wide pointer-events-none select-none text-center">
-          {currentIndex + 1} / {items.length} · {currentItem.type === 'image' ? 'Fotoğraf — ' : ''}{currentItem.title || 'Videolar & Sinema'}
+        <div className="fsCounter">
+          <span>{currentIndex + 1} / {items.length}</span>
+          <span>•</span>
+          <span>{currentItem.type === 'image' ? 'Fotoğraf — ' : ''}{currentItem.title || 'Videolar & Sinema'}</span>
         </div>
       )}
 

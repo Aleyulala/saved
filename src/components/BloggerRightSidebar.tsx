@@ -7,6 +7,8 @@ import {
   EyeIcon,
   MessageNotif1Icon,
   ArchiveIcon,
+  ArchiveAddIcon,
+  ArchiveTickIcon,
   TagBloggerIcon,
   ChatBloggerIcon
 } from './BloggerIcons';
@@ -35,6 +37,7 @@ interface BloggerRightSidebarProps {
   onSelectCollection: (id: number) => void;
   onSelectTag: (tag: string) => void;
   onOpenPostPage: (link: LinkItem) => void;
+  onTogglePin?: (id: number, current: boolean) => void;
   // Mobile / Drawer props
   isDrawerOpen?: boolean;
   onCloseDrawer?: () => void;
@@ -51,6 +54,7 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
   onSelectCollection,
   onSelectTag,
   onOpenPostPage,
+  onTogglePin,
   isDrawerOpen = false,
   onCloseDrawer,
   contactOpenSignal = 0
@@ -648,6 +652,31 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
                     ) : (
                       <BrandLogoCard url={post.url} title={post.title} size="card" />
                     )}
+
+                    {/* .tfxM.T — yer imi (hover'da "Kaydet") + yorum sayısı */}
+                    <div className="tfxM T">
+                      <div className="tfxC">
+                        <button
+                          type="button"
+                          className={`bM bm-button${post.isPinned ? ' added' : ''}`}
+                          title={post.isPinned ? 'Kaydedildi' : 'Kaydet'}
+                          aria-label={post.isPinned ? 'Kaydedildi' : 'Kaydet'}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            if (onTogglePin && post.id) onTogglePin(post.id, post.isPinned);
+                          }}
+                        >
+                          {post.isPinned ? <ArchiveTickIcon className="" /> : <ArchiveAddIcon className="" />}
+                          <span className="bMt">{post.isPinned ? 'Kaydedildi' : 'Kaydet'}</span>
+                        </button>
+                      </div>
+                      <div className="tfxC">
+                        <div className="cmnt" title="Yorumlar">
+                          <MessageNotif1Icon className="" />
+                          <span>{post.commentsCount ?? 0}</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 )}
 

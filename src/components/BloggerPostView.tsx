@@ -171,25 +171,25 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
       )}
 
       {/* 2. Page Views & Greetings Rozetleri (.pGV - Screenshot 1 & 4 1:1) */}
-      <div className="pGV flex items-center gap-2 pt-0.5">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#252526] text-xs text-[#d4d4d4] font-medium shadow-none">
-          <BloggerEyeIcon className="w-3.5 h-3.5 text-[#38bdf8]" />
+      <div className="pGV flex items-center pt-0.5">
+        <div className="pgChip">
+          <BloggerEyeIcon className="text-[#38bdf8]" />
           <span>{link.views || 78} views</span>
         </div>
 
         <button 
           type="button"
           onClick={handleToggleGreeting}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#252526] hover:bg-[#333333] text-xs text-[#d4d4d4] font-medium transition-colors cursor-pointer active:scale-95 shadow-none"
+          className="pgChip hover:bg-[#333333] transition-colors cursor-pointer active:scale-95"
           title="Selamlama Değiştir"
         >
-          <EmojiHappyIcon className="w-3.5 h-3.5 text-amber-400" />
+          <EmojiHappyIcon className="text-amber-400" />
           <span>{greeting}</span>
         </button>
       </div>
 
       {/* 3. Blogger XML 1:1 Breadcrumbs (.brdCmb) */}
-      <div className="brdCmb flex items-center gap-2 text-xs text-[#a1a1aa] pt-0.5 flex-wrap">
+      <div className="brdCmb flex items-center gap-2 text-[#a1a1aa] pt-0.5 flex-wrap">
         <button 
           onClick={onBack} 
           className="hover:text-white transition-colors cursor-pointer font-medium"
@@ -211,16 +211,16 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
           href={link.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-white/5 hover:bg-white/10 text-slate-300 text-[11px] transition-colors border border-white/10 cursor-pointer"
+          className="domPill transition-colors cursor-pointer"
           title={`Adrese Git: ${link.url}`}
         >
           <img
             src={getFaviconUrl(link.url)}
             alt={getDomain(link.url)}
-            className="w-3.5 h-3.5 object-contain"
+            className="object-contain"
             onError={(e) => { (e.target as HTMLElement).style.display = 'none'; }}
           />
-          <span className="font-medium text-white/90">{getDomain(link.url)}</span>
+          <span>{getDomain(link.url)}</span>
         </a>
       </div>
 
