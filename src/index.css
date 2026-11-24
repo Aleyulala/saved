@@ -2222,3 +2222,20 @@ body:has(#advSearchModal.is-open) .zmVideoBtn, body:has(#advSearchModal.is-open)
 .pTabs button { padding: 10px 18px; font-size: 14px; font-weight: 700; line-height: 22.4px; color: #e8eaed; border-bottom: 2px solid transparent; margin-bottom: -1px; cursor: pointer; transition: all .2s ease; }
 .pTabs button.on { color: var(--linkC, #5f6368); border-bottom-color: var(--linkC, #5f6368); }
 .pTabs button:hover { opacity: .9; }
+
+/* --- Arama penceresi: İletişim gibi TAM EKRAN (bulanık arka plan yok), çarpı sağ üstte --- */
+#advSearchModal { background-color: #1e1e1e; -webkit-backdrop-filter: none; backdrop-filter: none; padding: 0; }
+:root.lgT #advSearchModal { background-color: #fff; }
+#advSearchModal .adv-card {
+  width: 100%; max-width: 680px; height: 100%; max-height: none; margin: 0 auto; box-sizing: border-box;
+  padding: 76px 16px max(20px, env(safe-area-inset-bottom)); border: 0; border-radius: 0; background: transparent; box-shadow: none;
+  transform: none; display: flex; flex-direction: column; min-height: 0;
+}
+#advSearchModal .adv-results-list { flex: 1 1 auto; min-height: 0; max-height: none; overflow-y: auto; }
+#advSearchModal .adv-close-btn { top: max(20px, env(safe-area-inset-top)); right: max(20px, env(safe-area-inset-right)); }
+.adv-pin-ico { width: 12px; height: 12px; margin-left: 6px; flex-shrink: 0; opacity: .8; }
+@media screen and (max-width: 640px) { #advSearchModal .adv-card { padding-top: 68px; } }
+:root:not(.lgT) #advSearchModal .adv-card, :root.lgT #advSearchModal .adv-card, #advSearchModal .adv-card {
+  background: transparent !important; border: 0 !important; border-radius: 0 !important; box-shadow: none !important; -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
+}
+.adv-item-title .adv-pin-ico { display: inline-block; vertical-align: -1px; }
