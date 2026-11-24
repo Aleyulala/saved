@@ -368,11 +368,12 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           >
             {/* Sol Görsel / Thumbnail (Blogger FeaturedPost01 1:1 — Temiz görsel, köşe rozet yığını yok) */}
             <div className="relative w-full md:w-[300px] aspect-[16/9] rounded-[12px] bg-[#1e1e1e] overflow-hidden shrink-0">
+              <div className="pinGrd" aria-hidden="true" />
               {pinnedPost.thumbnail ? (
                 <img
                   src={pinnedPost.thumbnail}
                   alt={pinnedPost.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                  className="w-full h-full object-cover thmb-zoom"
                   loading="lazy"
                 />
               ) : (

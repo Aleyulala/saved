@@ -81,7 +81,7 @@ export const LinkCard: React.FC<LinkCardProps> = ({
             alt={link.title}
             referrerPolicy="no-referrer"
             onError={() => setImgError(true)}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+            className="w-full h-full object-cover thmb-zoom"
             loading="lazy"
           />
         ) : (

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { X, MessageCircle, Send } from 'lucide-react';
+import { CloseIcon, ChatBloggerIcon, SmsEditIcon } from './BloggerIcons';
 
 /**
  * nsone.xml LinkList06 'Bildiri' birebir karşılığı:
@@ -82,37 +82,38 @@ export const BloggerNotificationBar: React.FC<BloggerNotificationBarProps> = ({
         onTouchEnd={handleTouchEnd}
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
-        className="ntfC flex items-center justify-between gap-3 px-[15px] rounded-[14px] bg-[#252526] border border-transparent shadow-sm select-none h-[47px] touch-pan-y"
+        className="ntfC ntfBar select-none touch-pan-y"
       >
 
         {/* Sol Kapat Butonu */}
         <button
+          type="button"
           onClick={handleDismiss}
-          className="w-8 h-8 inline-flex items-center justify-center rounded-lg border border-white/[0.08] text-[#9ca3af] opacity-90 hover:opacity-100 hover:text-white hover:bg-[#333333] transition-colors shrink-0 cursor-pointer"
+          className="c ntfClose"
           title="Bildirimi Gizle (1 gün)"
           aria-label="Kapat"
         >
-          <X className="w-4 h-4" />
+          <CloseIcon className="" />
         </button>
 
         {/* Orta Slayt İçeriği (.bar-slider) */}
-        <div className="flex-1 overflow-hidden flex items-center justify-center text-center">
+        <div className="bar-slider">
 
           {/* SLAYT 0: ALİ & NSONE (LinkList05 'Sekmeli Menü' 1:1) */}
           {activeSlide === 0 && (
-            <div className="ali-nsone-text-wrap inline-flex items-center justify-center gap-3 sm:gap-4 select-none animate-in fade-in duration-300">
+            <div className="ali-nsone-text-wrap select-none bar-slide-in">
               <a
                 href="https://aleyulala.blogspot.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ali-nsone-slide-btn font-bold text-sm sm:text-[15px] tracking-[0.12em] uppercase text-white hover:text-[var(--linkC,#9aa0a6)] transition-colors cursor-pointer"
+                className="ali-nsone-slide-btn"
                 title="ALİ"
               >
                 ALİ
               </a>
               <a
                 href="https://aleyulala.github.io/saved/"
-                className="ali-nsone-amp font-bold text-sm sm:text-[15px] text-[var(--linkC,#9aa0a6)] px-1.5 py-0.5 rounded-md hover:bg-white/10 transition-all cursor-pointer"
+                className="ali-nsone-amp"
                 title="ALİ &amp; NSONE"
               >
                 &amp;
@@ -121,7 +122,7 @@ export const BloggerNotificationBar: React.FC<BloggerNotificationBarProps> = ({
                 href="https://negronshow.blogspot.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ali-nsone-slide-btn font-bold text-sm sm:text-[15px] tracking-[0.12em] uppercase text-white hover:text-[var(--linkC,#9aa0a6)] transition-colors cursor-pointer"
+                className="ali-nsone-slide-btn"
                 title="NSONE"
               >
                 NSONE
@@ -131,37 +132,35 @@ export const BloggerNotificationBar: React.FC<BloggerNotificationBarProps> = ({
 
           {/* SLAYT 1: #Sohbet (href='#comments') → sohbet çekmecesini açar */}
           {activeSlide === 1 && (
-            <div className="flex items-center justify-center gap-2 text-xs sm:text-sm animate-in fade-in duration-300">
+            <div className="bar-slide-in">
               <a
                 href={onOpenChat ? '#Sohbet' : 'https://matrix.to/#/#negronn-show:matrix.org'}
                 target={onOpenChat ? undefined : '_blank'}
                 rel={onOpenChat ? undefined : 'noopener noreferrer'}
                 onClick={onOpenChat ? (e) => { e.preventDefault(); onOpenChat(); } : undefined}
-                className="ntf-contact-text inline-flex items-center gap-1.5 text-[18px] font-semibold text-[var(--linkC,#9aa0a6)] hover:text-white transition-colors cursor-pointer"
+                className="ntf-contact-text"
                 title="#Sohbet — Sohbet çekmecesini açar"
               >
-                <MessageCircle className="w-4 h-4 shrink-0" />
-                <span className="font-bold">#</span>
-                <span className="text-white">Sohbet</span>
+                <ChatBloggerIcon className="" />
+                <span><span className="punct-mark">#</span>Sohbet</span>
               </a>
             </div>
           )}
 
           {/* SLAYT 2: #İletişim → Google Apps Script İletişim & Katıl Kapısı */}
           {activeSlide === 2 && (
-            <div className="flex items-center justify-center gap-2 text-xs sm:text-sm animate-in fade-in duration-300">
+            <div className="bar-slide-in">
               <button
                 type="button"
                 onClick={(e) => {
                   e.preventDefault();
                   onOpenContact?.();
                 }}
-                className="ntf-contact-text inline-flex items-center gap-1.5 text-[18px] font-semibold text-[var(--linkC,#9aa0a6)] hover:text-white transition-colors cursor-pointer bg-transparent border-0 p-0"
+                className="ntf-contact-text"
                 title="#İletişim — İletişim & Katıl Kapısını Açar"
               >
-                <Send className="w-4 h-4 shrink-0" />
-                <span className="font-bold">#</span>
-                <span className="text-white">İletişim</span>
+                <SmsEditIcon className="" />
+                <span><span className="punct-mark">#</span>İletişim</span>
               </button>
             </div>
           )}
@@ -169,24 +168,18 @@ export const BloggerNotificationBar: React.FC<BloggerNotificationBarProps> = ({
         </div>
 
         {/* Sağ Çizgi Butonlar (.panel-slider-dots .ntfSliderDots) — Blogger 1:1: 2 tırnak, sağa/sola çevirir */}
-        <div className="flex items-center gap-1.5 shrink-0">
+        <div className="panel-slider-dots" aria-hidden="true" title="Sekmeler & Bildiri Slaytı">
           <button
+            type="button"
             onClick={() => setActiveSlide((prev) => (prev - 1 + totalSlides) % totalSlides)}
-            className={`h-1.5 rounded-full transition-all duration-200 cursor-pointer ${
-              activeSlide === 0
-                ? 'w-6 bg-[var(--linkC,#9aa0a6)]'
-                : 'w-3.5 bg-white/20 hover:bg-white/40'
-            }`}
+            className={`dot${activeSlide === 0 ? ' active' : ''}`}
             title="Önceki (Sekmeler)"
             aria-label="Önceki Slayt"
           />
           <button
+            type="button"
             onClick={() => setActiveSlide((prev) => (prev + 1) % totalSlides)}
-            className={`h-1.5 rounded-full transition-all duration-200 cursor-pointer ${
-              activeSlide !== 0
-                ? 'w-6 bg-[var(--linkC,#9aa0a6)]'
-                : 'w-3.5 bg-white/20 hover:bg-white/40'
-            }`}
+            className={`dot${activeSlide !== 0 ? ' active' : ''}`}
             title="Sonraki (İletişim)"
             aria-label="Sonraki Slayt"
           />

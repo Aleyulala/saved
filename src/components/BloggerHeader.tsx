@@ -1,9 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Palette, Sun, Moon, Laptop, Check, ChevronDown } from 'lucide-react';
 import { 
   MenuHamburgerIcon, 
   SearchNormalIcon, 
-  CloseIcon, 
+  CloseIcon, CheckMarkIcon, 
   SunMoonIcon,
   TranslateIcon,
   TelegramIcon,
@@ -480,6 +479,7 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
                 onClick={() => {
                   setIsProfileOpen(false);
                   setIsTranslateOpen(false);
+                  setIsThemePaletteOpen(false);
                   setIsAppearanceOpen(prev => !prev);
                 }}
                 className={`head-action-btn ${isAppearanceOpen ? 'is-active' : ''}`}
@@ -489,106 +489,32 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
                 <SunMoonIcon className="w-4 h-4" isDark={isDark} />
               </button>
 
-              {/* Blogger XML 1:1 Görünüm Context Menüsü */}
-              {isAppearanceOpen && (
-                <div className="aprW context-menu-card absolute right-0 top-[calc(100%+8px)] w-60 bg-[#252526] border-0 rounded-[14px] shadow-2xl p-2 z-50 animate-in fade-in zoom-in-95 duration-150 select-none">
-                  
-                  <div className="px-2.5 py-1.5 text-[11px] font-bold text-[#989b9f] uppercase tracking-wider flex items-center justify-between">
-                    <span>Görünüm</span>
-                    <button 
-                      onClick={() => setIsAppearanceOpen(false)} 
-                      className="text-[#71717a] hover:text-white p-0.5 rounded cursor-pointer"
-                      title="Kapat"
-                    >
-                      <CloseIcon className="w-3 h-3" />
-                    </button>
+              {/* Blogger XML 1:1 Görünüm paneli (.aprW) — ikonsuz metin düğmeleri + aktif onay işareti */}
+              {isAppearanceOpen && !isThemePaletteOpen && (
+                <div className="aprX" data-text="Görünüm" role="menu">
+                  <button type="button" role="menuitemradio" aria-label="Aydınlık" aria-pressed={currentMode === 'light'} onClick={() => applyThemeMode('light')} />
+                  <button type="button" role="menuitemradio" aria-label="Karanlık" aria-pressed={currentMode === 'dark'} onClick={() => applyThemeMode('dark')} />
+                  <button type="button" role="menuitemradio" aria-label="Sistem" aria-pressed={currentMode === 'system'} onClick={() => applyThemeMode('system')} />
+                  <button type="button" role="menuitem" aria-label="Tema" onClick={() => setIsThemePaletteOpen(true)} />
+                </div>
+              )}
+
+              {/* Tema renkleri (.thmW > .thmP) */}
+              {isAppearanceOpen && isThemePaletteOpen && (
+                <div className="thmX" data-text="Tema">
+                  <div className="thmP">
+                    {THEME_COLORS.map(c => (
+                      <button
+                        key={c.id}
+                        type="button"
+                        className={currentThemeIndex === c.id ? 'on' : ''}
+                        style={{ ['--c' as string]: c.hex } as React.CSSProperties}
+                        onClick={() => applyThemeColor(c.hex, c.id)}
+                        title={c.name}
+                        aria-label={c.name}
+                      />
+                    ))}
                   </div>
-
-                  {/* Tema Modu: Açık / Koyu / Sistem */}
-                  <div className="space-y-1 py-1.5">
-                    <button
-                      type="button"
-                      onClick={() => applyThemeMode('light')}
-                      className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
-                        currentMode === 'light' ? 'bg-[#333333] text-white font-semibold' : 'text-[#d4d4d4] hover:bg-white/5 hover:text-white'
-                      }`}
-                    >
-                      <div className="flex items-center gap-2.5">
-                        <Sun className="w-4 h-4 text-amber-400" />
-                        <span>Açık</span>
-                      </div>
-                      {currentMode === 'light' && <Check className="w-3.5 h-3.5 text-[var(--linkC,#9aa0a6)]" />}
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => applyThemeMode('dark')}
-                      className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
-                        currentMode === 'dark' ? 'bg-[#333333] text-white font-semibold' : 'text-[#d4d4d4] hover:bg-white/5 hover:text-white'
-                      }`}
-                    >
-                      <div className="flex items-center gap-2.5">
-                        <Moon className="w-4 h-4 text-[var(--linkC,#9aa0a6)]" />
-                        <span>Koyu</span>
-                      </div>
-                      {currentMode === 'dark' && <Check className="w-3.5 h-3.5 text-[var(--linkC,#9aa0a6)]" />}
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => applyThemeMode('system')}
-                      className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
-                        currentMode === 'system' ? 'bg-[#333333] text-white font-semibold' : 'text-[#d4d4d4] hover:bg-white/5 hover:text-white'
-                      }`}
-                    >
-                      <div className="flex items-center gap-2.5">
-                        <Laptop className="w-4 h-4 text-[#989b9f]" />
-                        <span>Sistem</span>
-                      </div>
-                      {currentMode === 'system' && <Check className="w-3.5 h-3.5 text-[var(--linkC,#9aa0a6)]" />}
-                    </button>
-                  </div>
-
-                  {/* Vurgu Rengi */}
-                  <div className="pt-1.5">
-                    <button
-                      type="button"
-                      onClick={() => setIsThemePaletteOpen(prev => !prev)}
-                      className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium text-[#d4d4d4] hover:bg-white/5 hover:text-white transition-colors cursor-pointer"
-                    >
-                      <div className="flex items-center gap-2.5">
-                        <Palette className="w-4 h-4" style={{ color: currentThemeColor }} />
-                        <span>Tema Rengi</span>
-                      </div>
-                      <div className="flex items-center gap-1.5">
-                        <span className="w-3.5 h-3.5 rounded-full border border-white/20" style={{ backgroundColor: currentThemeColor }} />
-                        <ChevronDown className={`w-3.5 h-3.5 text-[#71717a] transition-transform duration-200 ${isThemePaletteOpen ? 'rotate-180' : ''}`} />
-                      </div>
-                    </button>
-
-                    {isThemePaletteOpen && (
-                      <div className="thmP grid grid-cols-4 gap-2.5 p-2 mt-1.5 bg-[#252526] rounded-lg border-0 animate-in fade-in duration-150">
-                        {THEME_COLORS.map(c => {
-                          const isSelected = currentThemeIndex === c.id;
-                          return (
-                            <button
-                              key={c.id}
-                              type="button"
-                              onClick={() => applyThemeColor(c.hex, c.id)}
-                              className={`w-7 h-7 rounded-full flex items-center justify-center transition-all hover:scale-115 cursor-pointer relative shadow-sm ${
-                                isSelected ? 'ring-2 ring-white ring-offset-2 ring-offset-[#1e1e1e] scale-110 shadow-lg' : ''
-                              }`}
-                              style={{ backgroundColor: c.hex }}
-                              title={c.name}
-                            >
-                              {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-white shadow-xs" />}
-                            </button>
-                          );
-                        })}
-                      </div>
-                    )}
-                  </div>
-
                 </div>
               )}
             </div>
@@ -641,7 +567,7 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
                         }`}
                       >
                         <span>{lang.native}</span>
-                        {selectedLang === lang.code && <Check className="w-3.5 h-3.5 text-[var(--linkC,#9aa0a6)]" />}
+                        {selectedLang === lang.code && <CheckMarkIcon className="w-3.5 h-3.5 text-[var(--linkC,#9aa0a6)]" />}
                       </button>
                     ))}
                   </div>
