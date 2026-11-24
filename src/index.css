@@ -2193,3 +2193,19 @@ body:has(#advSearchModal.is-open) .zmVideoBtn, body:has(#advSearchModal.is-open)
 
 /* Arama penceresi: blogda gövde 14px / satır yüksekliği normal; Tailwind'in 16px/24px mirasını kes */
 #advSearchModal { font-size: 14px; line-height: normal; font-family: inherit; }
+
+/* --- Sayfalama (.blogN) — canlı blogdaki hesaplanmış değerler; ok düğmeleri komşu sayıyı da gösterir --- */
+#blog-pager.blogN { gap: 8px !important; margin: 40px auto 35px !important; padding: 10px 0 !important; width: 100% !important; font-size: 13px !important; font-weight: 600 !important; }
+#blog-pager.blogN > * {
+  min-width: 40px !important; min-height: 40px !important; padding: 6px 14px !important; border-radius: 8px !important;
+  font-size: 13px !important; font-weight: 600 !important; line-height: 20px !important; color: #fffdfc !important;
+  background: #5f6368 !important; border: 1px solid rgba(255, 255, 255, 0.08) !important; box-shadow: none !important;
+}
+#blog-pager.blogN > .nPst { background: #282828 !important; color: #fff !important; border: 0 !important; }
+#blog-pager.blogN > .active { font-weight: 700 !important; background: #282828 !important; color: #fff !important; box-shadow: none !important; border: 0 !important; }
+#blog-pager.blogN > .ellipsis { min-width: 40px !important; color: #fff !important; background: #282828 !important; }
+#blog-pager.blogN > .disabled { opacity: .3 !important; background: #282828 !important; border: 0 !important; }
+#blog-pager.blogN > button:hover:not(.nPst) { background: #6b6f74 !important; color: #fff !important; border-color: rgba(255, 255, 255, 0.08) !important; transform: translateY(-2px) !important; box-shadow: 0 4px 14px rgba(0, 0, 0, .35) !important; }
+#blog-pager.blogN svg, #blog-pager.blogN svg.line { width: 18px !important; height: 18px !important; stroke-width: 2.2 !important; }
+#blog-pager.blogN .nwLnk[data-text]::after { content: attr(data-text); margin: 0 8px; }
+#blog-pager.blogN .olLnk[data-text]::before { content: attr(data-text); margin: 0 8px; }
