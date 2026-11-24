@@ -92,7 +92,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
       )}
 
       {/* Floating Action Menu Container (Fixed Bottom Right - Blogger .qeF & .tTb 1:1; mobilde .mob-nav-bar üstü: 86px) */}
-      <div className="fixed bottom-[calc(86px+env(safe-area-inset-bottom,0px))] right-5 min-[897px]:bottom-6 min-[897px]:right-6 z-50 flex items-end gap-2.5 select-none">
+      <div className="fixed bottom-[calc(86px+env(safe-area-inset-bottom,0px))] right-5 min-[897px]:bottom-[70px] min-[897px]:right-5 z-50 flex items-end gap-3.5 select-none">
         {isOpen ? (
           /* Blogger .qeL 4 Basamaklı Merdiven / Çapraz Genişleyen Menü (Screenshot 3 1:1 Parity) */
           <div className="grid grid-cols-4 gap-2 p-1 animate-in zoom-in-95 duration-150">
@@ -376,7 +376,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
           /* Kapalıyken Blogger .qeT Tarzı İkon Butonu */
           <button
             type="button"
-            className="floating-btn w-10 h-10 rounded-[12px] bg-[#252526] hover:bg-[#333333] border border-white/10 text-white hover:text-[var(--linkC,#9aa0a6)] flex items-center justify-center transition-all cursor-pointer shadow-lg active:scale-95 group relative"
+            className="floating-btn w-9 h-9 rounded-[10px] bg-[#252526] hover:bg-[#333333] border border-white/10 text-white hover:text-[var(--linkC,#9aa0a6)] flex items-center justify-center transition-all cursor-pointer shadow-lg active:scale-95 group relative"
             onClick={() => setIsOpen(true)}
             title="Hızlı İşlemler Paneli"
             aria-label="Hızlı İşlemler"
@@ -392,7 +392,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
         <button
           type="button"
           onClick={handleScrollToggle}
-          className="floating-btn w-10 h-10 rounded-full bg-[#252526] hover:bg-[#333333] border border-white/15 text-white flex items-center justify-center transition-all cursor-pointer shadow-lg active:scale-95 shrink-0"
+          className="floating-btn w-9 h-9 rounded-full bg-[#252526] hover:bg-[#333333] border border-white/15 text-white flex items-center justify-center transition-all cursor-pointer shadow-lg active:scale-95 shrink-0"
           title={isScrolled ? 'Yukarı Çık' : 'Aşağı İn'}
           aria-label={isScrolled ? 'Yukarı Çık' : 'Aşağı İn'}
         >

@@ -1,3 +1,4 @@
+import { createPortal } from 'react-dom';
 import React, { useState, useEffect, useMemo } from 'react';
 import { 
   Check, 
@@ -491,7 +492,7 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
       )}
 
       {/* 12. Diğer Uygulamalarla Paylaş Tam Ekran Sekmesi (negron-v3.xml .shBr.fixL 1:1 — bulanık kenarsız, karanlık/aydınlık tam ekran) */}
-      {isShareModalOpen && (
+      {isShareModalOpen && createPortal(
         <div
           id="ShareFullscreenModal"
           className="sh-fullscreen fixed inset-0 z-[999999] w-screen h-[100dvh] bg-[#1e1e1e] flex flex-col justify-between animate-in fade-in duration-150"
@@ -612,7 +613,7 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
             </button>
           </div>
         </div>
-      )}
+      , document.body)}
 
     </article>
   );

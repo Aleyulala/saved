@@ -19,6 +19,7 @@ import { ManageTagsModal } from './components/ManageTagsModal';
 import { LinkDetailModal } from './components/LinkDetailModal';
 import { ImportExportModal } from './components/ImportExportModal';
 import { SettingsModal } from './components/SettingsModal';
+import { SohbetModal } from './components/SohbetModal';
 import { BloggerFooter } from './components/BloggerFooter';
 import { BloggerPostView } from './components/BloggerPostView';
 import { BloggerPrivacyView } from './components/BloggerPrivacyView';
@@ -66,6 +67,23 @@ export const App: React.FC = () => {
     return 'dashboard';
   });
   const [selectedPost, setSelectedPost] = useState<LinkItem | null>(null);
+  const [isSohbetOpen, setIsSohbetOpen] = useState<boolean>(() => {
+    try { return /^#(sohbet|comments)$/i.test(window.location.hash); } catch { return false; }
+  });
+
+  // #Sohbet / #comments bağlantıları tam ekran sohbeti açar
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      const a = (e.target as HTMLElement | null)?.closest?.('a');
+      const href = a?.getAttribute('href') || '';
+      if (/^#(sohbet|comments)$/i.test(href)) {
+        e.preventDefault();
+        setIsSohbetOpen(true);
+      }
+    };
+    document.addEventListener('click', onClick);
+    return () => document.removeEventListener('click', onClick);
+  }, []);
   const [selectedCollectionId, setSelectedCollectionId] = useState<number | null>(null);
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [resetPageTrigger, setResetPageTrigger] = useState<number>(0);
@@ -505,6 +523,7 @@ export const App: React.FC = () => {
 
   return (
     <div className="flex flex-col h-screen w-screen overflow-hidden bg-[#1e1e1e] text-[#fffdfc] font-sans antialiased">
+      {isSohbetOpen && <SohbetModal onClose={() => setIsSohbetOpen(false)} />}
       
       {/* 1. ÜST BAR: Blogger Header (.mainH - Fixed at Top) */}
       <BloggerHeader
@@ -644,7 +663,7 @@ export const App: React.FC = () => {
                       setIsAddModalOpen(true);
                     }}
                     onOpenMedia={handleOpenMedia}
-                    onOpenChat={() => setIsRightDrawerOpen(true)}
+                    onOpenChat={() => setIsSohbetOpen(true)}
                     onOpenContact={() => {
                       setContactOpenSignal((prev) => prev + 1);
                     }}

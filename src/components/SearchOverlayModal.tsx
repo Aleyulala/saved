@@ -606,7 +606,7 @@ export const SearchOverlayModal: React.FC<SearchOverlayModalProps> = ({
                         <div className="adv-item-title">
                           <span>{link.title}</span>
                           {link.isPinned && (
-                            <RankingIcon className="" />
+                            <RankingIcon className="adv-pin-ico" />
                           )}
                         </div>
                         <div className="adv-item-sub">
