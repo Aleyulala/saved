@@ -1,361 +1,471 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" data-theme="dark" data-custom-theme="0" data-embed="1" style="--cf-accent:#fffdfc;">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>#İletişim - Nsone Bot</title>
+  <script>
+    (function(){
+      var d = document.documentElement;
+      if (d.getAttribute("data-theme") === "auto") {
+        var isLight = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches;
+        d.setAttribute("data-theme", isLight ? "light" : "dark");
+      }
+    })();
+  </script>
   <style>
+    :root {
+      --cf-bg: #1e1e1e;
+      --cf-text: #fffdfc;
+      --cf-body: #e4e4e7;
+      --cf-muted: #949ba4;
+      --cf-bar: #fffdfc;
+      --cf-user-bar: rgba(255, 253, 252, 0.55);
+      --cf-surface: rgba(255, 255, 255, 0.04);
+      --cf-editor-bg: rgba(0, 0, 0, 0.22);
+      --cf-border: rgba(255, 255, 255, 0.08);
+      --cf-halo: rgba(255, 255, 255, 0.06);
+      --cf-badge-bg: rgba(255, 255, 255, 0.07);
+      --cf-badge-text: #a1a1aa;
+      --cf-pop-bg: #252526;
+      --cf-font-sans: "Google Sans Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --cf-font-serif: Georgia, Cambria, "Times New Roman", serif;
+    }
+    html[data-theme="light"] {
+      --cf-bg: #ffffff;
+      --cf-text: #111214;
+      --cf-body: #27272a;
+      --cf-muted: #71717a;
+      --cf-bar: #111214;
+      --cf-user-bar: #52525b;
+      --cf-surface: rgba(0, 0, 0, 0.035);
+      --cf-editor-bg: rgba(0, 0, 0, 0.025);
+      --cf-border: rgba(0, 0, 0, 0.08);
+      --cf-halo: rgba(0, 0, 0, 0.05);
+      --cf-badge-bg: rgba(0, 0, 0, 0.05);
+      --cf-badge-text: #52525b;
+      --cf-pop-bg: #ffffff;
+    }
+    html[data-theme="dark"] {
+      --cf-bg: #1e1e1e;
+      --cf-text: #fffdfc;
+      --cf-body: #e4e4e7;
+      --cf-muted: #949ba4;
+      --cf-bar: #fffdfc;
+      --cf-user-bar: rgba(255, 253, 252, 0.55);
+      --cf-surface: rgba(255, 255, 255, 0.04);
+      --cf-editor-bg: rgba(0, 0, 0, 0.22);
+      --cf-border: rgba(255, 255, 255, 0.08);
+      --cf-halo: rgba(255, 255, 255, 0.06);
+      --cf-badge-bg: rgba(255, 255, 255, 0.07);
+      --cf-badge-text: #a1a1aa;
+      --cf-pop-bg: #252526;
+    }
+    html[data-custom-theme="1"] {
+      --cf-bar: var(--cf-accent);
+      --cf-user-bar: var(--cf-accent);
+    }
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
     html, body {
       width: 100%;
       height: 100%;
-      margin: 0;
-      padding: 0;
+      height: 100dvh;
       overflow: hidden;
-      background: #111113;
-      color: #f1f5f9;
-      font-size: 13px;
-      line-height: 1.45;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background: var(--cf-bg);
+      color: var(--cf-text);
+      font-family: var(--cf-font-sans);
+      font-size: 13.5px;
+      line-height: 1.48;
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
-
-    /* CARD CONTAINER: Çerçeveye Cuk Diye Oturan Koyu Tema */
-    .cf-card-wrap {
+    .cf-shell {
       width: 100%;
       height: 100%;
-      max-width: 100%;
-      max-height: 100%;
-      background: #111113;
-      border: none !important;
-      border-radius: 24px;
-      box-shadow: none !important;
+      height: 100dvh;
+      background: var(--cf-bg);
       display: flex;
       flex-direction: column;
       overflow: hidden;
       position: relative;
     }
-
-    /* Standalone masaüstü görünümü (iframe dışındayken) */
-    @media screen and (min-width: 480px) and (min-height: 700px) {
-      body:not(.in-iframe) {
-        background: #090b10;
-      }
-      body:not(.in-iframe) .cf-card-wrap {
-        width: 385px;
-        height: 640px;
-        border-radius: 24px;
-        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85);
-      }
-    }
-
-    /* INITIAL LOADING SCREEN */
-    .cf-loading-overlay {
-      position: absolute;
-      inset: 0;
-      background: #111113;
-      z-index: 999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: opacity 0.35s ease, visibility 0.35s ease;
-      border-radius: 24px;
-    }
-    .cf-loading-overlay.hidden {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-    .cf-loading-center {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-    }
-    .cf-loading-spinner {
-      width: 36px;
-      height: 36px;
-      border: 3px solid rgba(88, 101, 242, 0.15);
-      border-top-color: #5865F2;
-      border-radius: 50%;
-      animation: cfSpin 0.75s linear infinite;
-    }
-    @keyframes cfSpin {
-      to { transform: rotate(360deg); }
-    }
-    .cf-loading-logo {
-      font-size: 15px;
-      font-weight: 700;
-      color: #ffffff;
-      letter-spacing: -0.2px;
-    }
-    .cf-loading-sub {
-      font-size: 12px;
-      color: #72767d;
-    }
-
-    /* HEADER: Görseldeki Avatar + #İletişim + Çevrimiçi Durum + Kapat Butonu */
-    .cf-header {
-      padding: 16px 20px 14px 20px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: relative;
-      background: #111113;
-      flex-shrink: 0;
-    }
-    .cf-header-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .cf-header-avatar {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: #1d1e22;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      flex-shrink: 0;
-    }
-    .cf-avatar-svg {
-      width: 18px;
-      height: 18px;
-      stroke: #dcdedf;
-      stroke-width: 2;
-      fill: none;
-    }
-    .cf-avatar-status-dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: #23a55a;
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      border: 2px solid #111113;
-    }
-    .cf-header-info {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-    .cf-header-title {
-      font-size: 15.5px;
-      font-weight: 700;
-      color: #ffffff;
-      letter-spacing: -0.2px;
-      margin: 0;
-      line-height: 1.2;
-    }
-    .cf-header-sub {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 11.5px;
-      color: #949ba4;
-      line-height: 1;
-    }
-    .cf-sub-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #23a55a;
-      display: inline-block;
-    }
-    .cf-header-close {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      background: #1e1f23;
-      border: none;
-      outline: none;
-      color: #80848e;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
-    .cf-header-close:hover {
-      background: #2b2d31;
-      color: #f2f3f5;
-    }
-    .cf-header-close svg {
-      width: 15px;
-      height: 15px;
-      stroke: currentColor;
-      stroke-width: 2.2;
-      fill: none;
-    }
-
-    /* CHAT STREAM */
-    .cf-chat-messages {
+    .cf-main-area {
       flex: 1 1 0%;
       min-height: 0;
       overflow-y: auto;
-      padding: 16px 16px 12px 16px;
+      overflow-x: hidden;
+      padding: 16px 24px 20px 24px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 18px;
       scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
     }
-    .cf-chat-messages::-webkit-scrollbar {
-      width: 4px;
-    }
-    .cf-chat-messages::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.08);
+    .cf-main-area::-webkit-scrollbar { width: 5px; }
+    .cf-main-area::-webkit-scrollbar-thumb {
+      background: var(--cf-border);
       border-radius: 4px;
     }
-
-    /* =====================================================================
-       DİSCORD EMBED: SADECE SOL MOR ÇİZGİ DURSUN, YANINDAKİ BORDER OLMASIN!
-       ===================================================================== */
-    .cf-discord-embed {
-      background: rgba(255, 255, 255, 0.035);
-      -webkit-backdrop-filter: blur(12px);
-      backdrop-filter: blur(12px);
-      border: none !important;
-      border-left: 4px solid #5865F2 !important; /* MOR ÇİZGİ DURSUN */
-      border-radius: 4px 14px 14px 4px;
-      box-shadow: none !important;
-      padding: 12px 16px;
-      max-width: 92%;
-      align-self: flex-start;
+    /* TOP SEARCH BAR (1:1 WITH #SOHBET) */
+    .cf-top-search {
+      width: 100%;
+      flex-shrink: 0;
+    }
+    .cf-search-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      background: var(--cf-surface);
+      border: 1px solid var(--cf-border);
+      border-radius: 10px;
+      padding: 9px 14px;
+      transition: border-color 0.15s ease, background 0.15s ease;
+    }
+    .cf-search-wrap:focus-within {
+      border-color: var(--cf-bar);
+      background: var(--cf-halo);
+    }
+    .cf-search-wrap svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--cf-muted);
+      stroke-width: 1.7;
+      fill: none;
+      flex-shrink: 0;
+    }
+    .cf-search-input {
+      flex: 1 1 auto;
+      min-width: 0;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--cf-text);
+      font-family: var(--cf-font-sans);
+      font-size: 13px;
+    }
+    .cf-search-input::placeholder {
+      color: var(--cf-muted);
+    }
+    /* COMMENT-STYLE MESSAGE LIST (1:1 WITH #SOHBET #cmHolder) */
+    .cf-msg-list {
       display: flex;
       flex-direction: column;
-      gap: 6px;
-      animation: cfFadeIn 0.22s ease-out;
+      gap: 16px;
+      width: 100%;
     }
-
-    /* GÖNDERİLEN KULLANICI MESAJI: SADECE SOL MAVİ ÇİZGİ DURSUN */
-    .cf-user-embed {
-      background: rgba(56, 189, 248, 0.04);
-      -webkit-backdrop-filter: blur(12px);
-      backdrop-filter: blur(12px);
-      border: none !important;
-      border-left: 4px solid #38bdf8 !important; /* MAVİ ÇİZGİ DURSUN */
-      border-radius: 4px 14px 14px 4px;
-      box-shadow: none !important;
-      padding: 12px 16px;
-      max-width: 92%;
-      align-self: flex-end;
+    #cfDynamicArea {
       display: flex;
       flex-direction: column;
-      gap: 6px;
-      animation: cfFadeIn 0.22s ease-out;
+      gap: 16px;
+      width: 100%;
     }
-
-    .cf-discord-embed.green-accent {
-      border: none !important;
-      border-left: 4px solid #10b981 !important;
+    .cf-cm-row {
+      display: grid;
+      grid-template-columns: 24px minmax(0, 1fr);
+      column-gap: 8px;
+      row-gap: 2px;
+      border: none;
+      border-left: 3px solid var(--cf-bar);
+      padding: 3px 8px 3px 12px;
+      background: transparent;
+      width: 100%;
+      animation: cfFadeIn 0.18s ease-out;
     }
-    .cf-discord-embed.purple-accent {
-      border: none !important;
-      border-left: 4px solid #5865F2 !important;
+    .cf-cm-row.is-user {
+      border-left-color: var(--cf-user-bar);
     }
-
+    html[data-custom-theme="1"] .cf-cm-row {
+      border-left-color: var(--cf-accent);
+    }
     @keyframes cfFadeIn {
-      from { opacity: 0; transform: translateY(6px); }
+      from { opacity: 0; transform: translateY(4px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
-    .cf-embed-author {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 12px;
-      font-weight: 600;
-      color: #f1f5f9;
-    }
-    .cf-bot-tag {
-      background: #5865F2;
-      color: #ffffff;
-      font-size: 9px;
-      font-weight: 700;
-      padding: 1px 5px;
-      border-radius: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.4px;
-      line-height: 1.2;
-    }
-    .cf-user-tag {
-      background: #38bdf8;
-      color: #090b10;
-      font-size: 9px;
-      font-weight: 700;
-      padding: 1px 5px;
-      border-radius: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.4px;
-      line-height: 1.2;
-    }
-    .cf-embed-title {
-      font-size: 14.5px;
-      font-weight: 700;
-      color: #ffffff;
-      letter-spacing: -0.2px;
-    }
-    .cf-embed-desc {
-      font-size: 13px;
-      color: #dcddde;
-      line-height: 1.5;
-      word-break: break-word;
-    }
-    .cf-embed-footer {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 4px;
-      font-size: 11px;
-      color: #72767d;
-      font-weight: 500;
-      margin-top: 2px;
-    }
-    .cf-double-check {
-      width: 14px;
-      height: 14px;
-      stroke: #72767d;
-      stroke-width: 2.2;
-      fill: none;
-    }
-
-    /* TYPING INDICATOR */
-    .cf-typing-pill {
+    .cf-cm-av {
+      grid-column: 1;
+      grid-row: 1 / span 4;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--cf-badge-bg);
+      border: 1px solid var(--cf-border);
+      color: var(--cf-text);
       display: inline-flex;
       align-items: center;
-      gap: 7px;
-      background: rgba(255, 255, 255, 0.04);
-      -webkit-backdrop-filter: blur(8px);
-      backdrop-filter: blur(8px);
-      border: none !important;
-      border-left: 3px solid #5865F2 !important;
-      border-radius: 4px 12px 12px 4px;
-      padding: 7px 14px;
-      font-size: 11.5px;
-      color: #949ba4;
-      align-self: flex-start;
-      margin-bottom: 4px;
+      justify-content: center;
+      font-size: 9.5px;
+      font-weight: 700;
+      margin-top: 1px;
+      flex-shrink: 0;
+      overflow: hidden;
     }
-    .cf-dots {
+    .cf-cm-av.bot-av {
+      background: #14532d;
+      color: #86efac;
+      border-color: rgba(134, 239, 172, 0.25);
+    }
+    html[data-theme="light"] .cf-cm-av.bot-av {
+      background: #dcfce7;
+      color: #166534;
+      border-color: rgba(22, 101, 52, 0.2);
+    }
+    .cf-cm-av svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      fill: none;
+    }
+    .cf-cm-hr {
+      grid-column: 2;
       display: flex;
-      gap: 3px;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 4px 6px;
+      min-width: 0;
     }
+    .cf-cm-author {
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 18px;
+      color: var(--cf-text);
+      letter-spacing: -0.1px;
+    }
+    .cf-cm-badge {
+      font-size: 10px;
+      font-weight: 500;
+      line-height: 1.3;
+      padding: 1px 6px;
+      border-radius: 5px;
+      background: var(--cf-badge-bg);
+      border: 1px solid var(--cf-border);
+      color: var(--cf-badge-text);
+    }
+    .cf-cm-verified {
+      display: inline-flex;
+      align-items: center;
+      color: var(--cf-muted);
+    }
+    .cf-cm-verified svg {
+      width: 13px;
+      height: 13px;
+      fill: currentColor;
+    }
+    .cf-cm-time {
+      font-size: 11.5px;
+      color: var(--cf-muted);
+      font-weight: 400;
+    }
+    /* QUOTE REF BAR (1:1 WITH .btt-reply-quote-ref) */
+    .cf-quote-ref {
+      grid-column: 2;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      background: var(--cf-surface);
+      border: none;
+      border-left: 3.5px solid var(--cf-bar);
+      border-radius: 0 6px 6px 0;
+      padding: 5px 10px;
+      margin: 2px 0 4px 0;
+      gap: 10px;
+    }
+    html[data-custom-theme="1"] .cf-quote-ref {
+      border-left-color: var(--cf-accent);
+    }
+    .cf-rq-left {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      min-width: 0;
+      flex: 1;
+    }
+    .cf-rq-tag {
+      font-family: var(--cf-font-serif);
+      font-size: 11px;
+      font-style: italic;
+      color: var(--cf-muted);
+      line-height: 14px;
+    }
+    .cf-rq-content {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      font-size: 12.5px;
+      line-height: 16px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .cf-rq-author {
+      font-weight: 700;
+      color: var(--cf-text);
+      white-space: nowrap;
+    }
+    html[data-custom-theme="1"] .cf-rq-author {
+      color: var(--cf-accent);
+    }
+    .cf-rq-text {
+      color: var(--cf-body);
+      font-weight: 500;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .cf-rq-jump {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--cf-muted);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .cf-cm-co {
+      grid-column: 2;
+      font-size: 13.5px;
+      line-height: 1.48;
+      color: var(--cf-body);
+      word-break: break-word;
+      padding: 1px 0 2px 0;
+    }
+    /* ACTION BAR (1:1 WITH .cmAc VUESAX .qeF ICONS) */
+    .cf-cm-ac {
+      grid-column: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      margin-top: 2px;
+    }
+    .cf-rx-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      position: relative;
+      flex-wrap: wrap;
+    }
+    .cf-rx-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      height: 24px;
+      padding: 0 7px;
+      border-radius: 6px;
+      background: var(--cf-surface);
+      border: 1px solid var(--cf-border);
+      color: var(--cf-text);
+      font-size: 11.5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .cf-rx-pill:hover {
+      background: var(--cf-halo);
+    }
+    .cf-icon-btn {
+      position: relative;
+      width: 26px;
+      height: 26px;
+      min-width: 26px;
+      min-height: 26px;
+      border-radius: 50%;
+      background: transparent;
+      border: none;
+      color: var(--cf-text);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0;
+    }
+    .cf-icon-btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: var(--cf-halo);
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(0.85);
+      transition: all 0.18s ease;
+    }
+    .cf-icon-btn:hover::before {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1.25);
+    }
+    .cf-icon-btn svg {
+      position: relative;
+      z-index: 1;
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+      opacity: 0.78;
+      transition: opacity 0.18s ease;
+    }
+    .cf-icon-btn:hover svg {
+      opacity: 1;
+    }
+    .cf-rx-pop {
+      position: absolute;
+      bottom: calc(100% + 6px);
+      left: 0;
+      background: var(--cf-pop-bg);
+      border: 1px solid var(--cf-border);
+      border-radius: 10px;
+      padding: 4px 6px;
+      display: none;
+      align-items: center;
+      gap: 4px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+      z-index: 100;
+    }
+    .cf-rx-pop.is-open {
+      display: inline-flex;
+    }
+    .cf-rx-opt {
+      background: transparent;
+      border: none;
+      font-size: 16px;
+      padding: 3px 4px;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: transform 0.12s ease;
+    }
+    .cf-rx-opt:hover {
+      transform: scale(1.2);
+      background: var(--cf-halo);
+    }
+    .cf-ac-right {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      margin-left: auto;
+    }
+    .cf-typing-row {
+      border-left: 3px solid var(--cf-border);
+      padding: 3px 0 3px 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--cf-muted);
+      font-size: 12.5px;
+    }
+    .cf-dots { display: inline-flex; gap: 3px; }
     .cf-dot {
       width: 4px;
       height: 4px;
       border-radius: 50%;
-      background: #5865F2;
+      background: var(--cf-muted);
       animation: cfDotPulse 1.2s infinite ease-in-out;
     }
     .cf-dot:nth-child(2) { animation-delay: 0.2s; }
@@ -364,472 +474,710 @@
       0%, 80%, 100% { opacity: 0.3; transform: scale(0.85); }
       40% { opacity: 1; transform: scale(1.15); }
     }
-
-    /* INPUT CARD: Mat Koyu Kart (ADINIZ * + Gri Input + Gri Buton) */
-    .cf-input-card {
-      background: #141416;
-      border: none !important;
-      border-radius: 16px;
-      padding: 12px 14px;
-      margin: 0 16px 8px 16px;
+    /* COMPOSER SECTION (1:1 WITH YORUM YAZ IN IMAGE 1) */
+    .cf-composer-section {
+      width: 100%;
+      margin-top: 6px;
+      border-left: 3px solid var(--cf-bar);
+      padding: 4px 0 4px 16px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      flex-shrink: 0;
-      box-shadow: none !important;
+      gap: 6px;
     }
-    .cf-input-header {
+    html[data-custom-theme="1"] .cf-composer-section {
+      border-left-color: var(--cf-accent);
+    }
+    .cf-comp-head {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 12px;
     }
-    .cf-input-label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      color: #949ba4;
-      text-transform: uppercase;
-    }
-    .cf-input-progress-pill {
-      width: 26px;
-      height: 4px;
-      border-radius: 2px;
-      background: #2a2b30;
-    }
-    .cf-input-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .cf-input-field {
-      flex: 1;
-      background: #1c1c1f;
-      border: none !important;
-      outline: none !important;
-      border-radius: 8px;
-      padding: 11px 14px;
-      color: #f2f3f5;
+    .cf-comp-title {
       font-size: 13.5px;
-      transition: background 0.15s ease;
-      box-shadow: none !important;
+      font-weight: 700;
+      color: var(--cf-text);
     }
-    .cf-input-field:focus {
-      background: #222327;
-    }
-    .cf-input-field::placeholder {
-      color: #72767d;
-    }
-    .cf-send-btn {
-      width: 42px;
-      height: 42px;
+    .cf-refresh-btn {
+      background: var(--cf-surface);
+      border: 1px solid var(--cf-border);
       border-radius: 8px;
-      background: #2b2d31;
-      border: none !important;
-      outline: none !important;
-      color: #dcddde;
+      padding: 5px 13px;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--cf-text);
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+    .cf-refresh-btn:hover {
+      background: var(--cf-halo);
+    }
+    .cf-comp-sub {
+      font-size: 11.5px;
+      color: var(--cf-muted);
+      margin-top: 2px;
+    }
+    .cf-progress-track {
+      width: 100%;
+      height: 5px;
+      background: var(--cf-surface);
+      border-radius: 99px;
+      overflow: hidden;
+      position: relative;
+      margin: 2px 0 4px 0;
+    }
+    .cf-progress-fill {
+      height: 100%;
+      width: 16px;
+      background: var(--cf-bar);
+      border-radius: 99px;
+      transition: width 0.28s ease;
+    }
+    html[data-custom-theme="1"] .cf-progress-fill {
+      background: var(--cf-accent);
+    }
+    .cf-input-error {
+      font-size: 12px;
+      color: #ef4444;
+      display: none;
+    }
+    .cf-editor-box {
+      width: 100%;
+      background: var(--cf-editor-bg);
+      border: 1px solid var(--cf-border);
+      border-radius: 6px;
+      padding: 14px 16px;
+      min-height: 118px;
       display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .cf-editor-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      width: 100%;
+    }
+    .cf-editor-av {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--cf-badge-bg);
+      border: 1px solid var(--cf-border);
+      color: var(--cf-text);
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
-      transition: background 0.16s ease, color 0.16s ease;
       flex-shrink: 0;
-      box-shadow: none !important;
     }
-    .cf-send-btn:hover {
-      background: #36393f;
-      color: #ffffff;
-    }
-    .cf-send-btn:disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
-    }
-    .cf-send-btn svg {
-      width: 18px;
-      height: 18px;
+    .cf-editor-av svg {
+      width: 15px;
+      height: 15px;
       stroke: currentColor;
-      stroke-width: 2.2;
+      stroke-width: 1.8;
       fill: none;
     }
-
-    /* FOOTER BAR */
-    .cf-footer-bar {
+    .cf-input-field {
+      flex: 1 1 auto;
+      min-width: 0;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--cf-text);
+      font-family: var(--cf-font-sans);
+      font-size: 14px;
+      line-height: 1.5;
+      padding: 3px 0;
+    }
+    .cf-input-field::placeholder {
+      color: var(--cf-muted);
+    }
+    .cf-editor-bottom {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 18px 12px 18px;
-      font-size: 11px;
-      color: #72767d;
-      flex-shrink: 0;
+      gap: 10px;
+      padding-top: 6px;
+      border-top: 1px solid var(--cf-border);
     }
-    .cf-footer-left, .cf-footer-right {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    /* SOSYAL BUTONLAR */
-    .cf-social-pills-row {
+    .cf-step-pills {
       display: flex;
-      flex-wrap: wrap;
+      align-items: center;
       gap: 6px;
-      margin-top: 6px;
+      flex-wrap: wrap;
     }
-    .cf-soc-pill {
+    .cf-step-chip {
       display: inline-flex;
       align-items: center;
       gap: 5px;
-      background: rgba(255, 255, 255, 0.05);
-      border: none !important;
+      padding: 3px 9px;
       border-radius: 6px;
-      padding: 6px 10px;
+      background: var(--cf-surface);
+      border: 1px solid var(--cf-border);
       font-size: 11px;
-      color: #dcddde;
-      text-decoration: none;
-      transition: background 0.16s ease;
+      color: var(--cf-muted);
     }
-    .cf-soc-pill:hover {
-      background: rgba(255, 255, 255, 0.1);
-      color: #ffffff;
+    .cf-step-chip.active {
+      color: var(--cf-text);
+      border-color: var(--cf-bar);
+      font-weight: 600;
+    }
+    .cf-send-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 8px;
+      background: var(--cf-surface);
+      border: 1px solid var(--cf-border);
+      color: var(--cf-text);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+    .cf-send-pill:hover {
+      background: var(--cf-halo);
+      border-color: var(--cf-bar);
+    }
+    .cf-send-pill:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    .cf-send-pill svg {
+      width: 15px;
+      height: 15px;
+      stroke: currentColor;
+      stroke-width: 1.7;
+      fill: none;
+    }
+    /* BOTTOM BAR (HIDDEN WHEN EMBED=1 BECAUSE HOST PROVIDES IT) */
+    html[data-embed="1"] .cf-bottom-bar {
+      display: none;
+    }
+    .cf-bottom-bar {
+      flex-shrink: 0;
+      background: var(--cf-bg);
+      border-top: 1px solid var(--cf-border);
+      padding: 12px 20px;
+      padding-bottom: max(12px, env(safe-area-inset-bottom));
+    }
+    .cf-bottom-inner {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .cf-bottom-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .cf-bottom-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--cf-text);
+      letter-spacing: -0.2px;
+    }
+    .cf-count-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--cf-surface);
+      color: var(--cf-muted);
+      font-size: 12px;
+      padding: 2px 9px;
+      border-radius: 10px;
+    }
+    @media (max-width: 640px) {
+      .cf-main-area { padding: 12px 14px 16px 14px; }
+      .cf-editor-box { padding: 12px; min-height: 104px; }
     }
   </style>
 </head>
 <body>
-  <div class="cf-card-wrap" id="cfCard">
-    <!-- BAŞLANGIÇ YÜKLEME GÖSTERGESİ -->
-    <div id="cfLoadingScreen" class="cf-loading-overlay">
-      <div class="cf-loading-center">
-        <div class="cf-loading-spinner"></div>
-        <div class="cf-loading-logo">#İletişim</div>
-        <div class="cf-loading-sub">Nsone Bot bağlanıyor...</div>
+  <div class="cf-shell" id="cfCard">
+    <div class="cf-main-area" id="cfChatMessages">
+      <div class="cf-top-search">
+        <div class="cf-search-wrap">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="cfSearchInput" class="cf-search-input" placeholder="Mesajlarda, konularda veya @Nsone Bot yanıtlarında ara..." autocomplete="off" />
+        </div>
+      </div>
+      <div class="cf-msg-list" id="cfMsgList">
+        <div class="cf-cm-row is-bot" data-msg-id="bot_welcome">
+          <div class="cf-cm-av bot-av">NB</div>
+          <div class="cf-cm-hr">
+            <span class="cf-cm-author">Nsone Bot</span>
+            <span class="cf-cm-badge">Ana Mesaj</span>
+            <span class="cf-cm-verified" title="Doğrulanmış İletişim Botu"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 2.1 3.1-.4 1.2 2.9 2.9 1.2-.4 3.1L23.3 13l-2.1 2.4.4 3.1-2.9 1.2-1.2 2.9-3.1-.4L12 24.3l-2.4-2.1-3.1.4-1.2-2.9-2.9-1.2.4-3.1L.7 13l2.1-2.4-.4-3.1 2.9-1.2 1.2-2.9 3.1.4L12 2zm-1.1 14.6l6.2-6.2-1.4-1.4-4.8 4.8-2.4-2.4-1.4 1.4 3.8 3.8z"/></svg></span>
+            <span class="cf-cm-time">Negron Show Blogu · Şimdi</span>
+          </div>
+          <div class="cf-cm-co">Merhaba! Bir sorunuz, öneriniz veya iletmek istediğiniz bir konu varsa aşağıdan <b>adınızı</b> yazarak başlayabilirsiniz.</div>
+          <div class="cf-cm-ac">
+            <div class="cf-rx-wrap">
+              <div class="cf-rx-pills"></div>
+              <button type="button" class="cf-icon-btn" title="Tepki Ekle" onclick="toggleRxPopup(this, event)">
+                <svg class="line" viewBox="0 0 24 24"><path d="M22 11v1a10 10 0 1 1-9-10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/><path class="c" d="M16 5h6M19 2v6"/></svg>
+              </button>
+              <div class="cf-rx-pop">
+                <button type="button" class="cf-rx-opt" onclick="pickReaction(this, '👍', event)">👍</button>
+                <button type="button" class="cf-rx-opt" onclick="pickReaction(this, '❤️', event)">❤️</button>
+                <button type="button" class="cf-rx-opt" onclick="pickReaction(this, '🔥', event)">🔥</button>
+                <button type="button" class="cf-rx-opt" onclick="pickReaction(this, '🚀', event)">🚀</button>
+                <button type="button" class="cf-rx-opt" onclick="pickReaction(this, '🎉', event)">🎉</button>
+                <button type="button" class="cf-rx-opt" onclick="pickReaction(this, '😂', event)">😂</button>
+              </div>
+            </div>
+            <div class="cf-ac-right">
+              <button type="button" class="cf-icon-btn" title="Mesajı Kopyala" onclick="copyMsgText(this)">
+                <svg class="line" viewBox="0 0 24 24"><path d="M14.99 17.5H16.5C19.52 17.5 22 15.03 22 12C22 8.98 19.53 6.5 16.5 6.5H14.99"/><path d="M9 6.5H7.5C4.47 6.5 2 8.97 2 12C2 15.02 4.47 17.5 7.5 17.5H9"/><path class="c" d="M8 12H16"/></svg>
+              </button>
+              <button type="button" class="cf-icon-btn" title="Bu mesajı yanıtla" onclick="replyMsgText(this)">
+                <svg class="line" viewBox="0 0 24 24"><path d="M9 14L4 9l5-5"/><path class="c" d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5v2.5"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div id="cfDynamicArea"></div>
+        <div id="cfTypingIndicator" class="cf-typing-row" style="display:none;">
+          <span class="cf-dots"><span class="cf-dot"></span><span class="cf-dot"></span><span class="cf-dot"></span></span>
+          <span>Nsone Bot yazıyor...</span>
+        </div>
+      </div>
+      <div class="cf-composer-section">
+        <div class="cf-comp-head">
+          <span class="cf-comp-title" id="cfInputLabel">Mesaj Yaz</span>
+          <button type="button" class="cf-refresh-btn" onclick="resetConversation()">Yenile</button>
+        </div>
+        <div class="cf-comp-sub" id="cfStepSubtitle">Sorunuzu, önerinizi veya iletişim mesajınızı paylaşın</div>
+        <div id="cfComposerQuote" class="cf-quote-ref" style="display:none;"></div>
+        <div class="cf-progress-track"><div class="cf-progress-fill" id="cfProgressFill" style="width: 18px;"></div></div>
+        <div class="cf-input-error" id="cfInputError"></div>
+        <div class="cf-editor-box" onclick="document.getElementById('cfInputField').focus()">
+          <div class="cf-editor-top">
+            <div class="cf-editor-av"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+            <input type="text" class="cf-input-field" id="cfInputField" placeholder="Adınızı girin... (Enter)" autocomplete="off" />
+          </div>
+          <div class="cf-editor-bottom">
+            <div class="cf-step-pills">
+              <span class="cf-step-chip active" id="cfChipStep0">1. Adınız</span>
+              <span class="cf-step-chip" id="cfChipStep1">2. E-posta</span>
+              <span class="cf-step-chip" id="cfChipStep2">3. Mesajınız</span>
+            </div>
+            <button type="button" class="cf-send-pill" id="cfSendBtn" onclick="handleStepAction()">
+              <span>Gönder</span>
+              <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-
-    <!-- HEADER: Avatar + #İletişim + Çevrimiçi • Nsone Bot + Kapat Butonu -->
-    <div class="cf-header">
-      <div class="cf-header-left">
-        <div class="cf-header-avatar">
-          <svg viewBox="0 0 24 24" class="cf-avatar-svg"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-          <span class="cf-avatar-status-dot"></span>
+    <div class="cf-bottom-bar">
+      <div class="cf-bottom-inner">
+        <div class="cf-bottom-left">
+          <span class="cf-bottom-title">#İletişim</span>
+          <span class="cf-count-pill" id="cfMsgCountBadge">(1)</span>
         </div>
-        <div class="cf-header-info">
-          <h3 class="cf-header-title">#İletişim</h3>
-          <div class="cf-header-sub"><span class="cf-sub-dot"></span>Çevrimiçi • Nsone Bot</div>
-        </div>
-      </div>
-      <button type="button" class="cf-header-close" onclick="handleWidgetClose()" title="Kapat">
-        <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"></path></svg>
-      </button>
-    </div>
-
-    <!-- SOHBET ALANI -->
-    <div class="cf-chat-messages" id="cfChatMessages">
-      <!-- Discord Embed: Mor Çizgi Dursun, Yanındaki Border Olmasın! -->
-      <div class="cf-discord-embed purple-accent" id="cfWelcomeEmbed">
-        <div class="cf-embed-author">
-          <span>Nsone Bot</span>
-          <span class="cf-bot-tag">BOT</span>
-        </div>
-        <div class="cf-embed-title">Topicroom İletişim'e Hoş Geldiniz! 👋</div>
-        <div class="cf-embed-desc">
-          Merhaba! 👋 dostum<br><br>
-          Bir sorunuz, öneriniz veya iletmek istediğiniz bir konu varsa aşağıdaki formu kullanarak bize doğrudan ulaşabilirsiniz. Size en kısa sürede dönüş yapacağız.
-        </div>
-        <div class="cf-embed-footer">
-          <span>Şimdi</span>
-          <svg class="cf-double-check" viewBox="0 0 24 24"><path d="M18 6L7 17l-5-5M22 10l-7.5 7.5L13 16"></path></svg>
-        </div>
-      </div>
-
-      <div id="cfDynamicArea" style="display:flex; flex-direction:column; gap:12px; width:100%;"></div>
-
-      <!-- NSONE BOT YAZIYOR... -->
-      <div id="cfTypingIndicator" class="cf-typing-pill" style="display:none;">
-        <span class="cf-dots">
-          <span class="cf-dot"></span>
-          <span class="cf-dot"></span>
-          <span class="cf-dot"></span>
-        </span>
-        <span>Nsone Bot yazıyor...</span>
-      </div>
-    </div>
-
-    <!-- GİRİŞ KARTI (ADINIZ * + Gri Input + Gri Buton) -->
-    <div class="cf-input-card">
-      <div class="cf-input-header">
-        <span class="cf-input-label" id="cfInputLabel">ADINIZ *</span>
-        <span class="cf-input-progress-pill" id="cfInputPill"></span>
-      </div>
-      <div class="cf-input-row">
-        <input type="text" class="cf-input-field" id="cfInputField" placeholder="Adınız ve soyadınız... (Enter)" autocomplete="off" />
-        <button type="button" class="cf-send-btn" id="cfSendBtn" onclick="handleStepAction()" title="Gönder">
-          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+        <button type="button" class="cf-icon-btn" id="cfCloseBtn" onclick="handleWidgetClose()" aria-label="Kapat" title="Kapat (Esc)">
+          <svg viewBox="0 0 24 24"><path d="M19.0005 4.99988L5.00049 18.9999M5.00049 4.99988L19.0005 18.9999"/></svg>
         </button>
       </div>
     </div>
-
-    <!-- ALT BİLGİ ÇUBUĞU -->
-    <div class="cf-footer-bar">
-      <div class="cf-footer-left">Nsone Bot v2.0 • Güvenli İletişim</div>
-      <div class="cf-footer-right" id="cfFooterOrigin">aleyulala.github.io</div>
-    </div>
   </div>
-
   <script>
-    var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby2BbaRplWrOLZDiTba4Wnn9LAy6m2IuIBDmhFS6aSYr-fagSGVKbw_PYb9aajK39jZ/exec';
-
-    // iframe kontrolü (Cuk diye oturma)
-    if (window.self !== window.top) {
-      document.body.classList.add('in-iframe');
-    }
-
-    var currentStep = 0; // 0: Name, 1: Email, 2: Message 1, 3: Message 2, 4: Message 3
-    var chatData = { name: '', email: '', messages: [] };
+    var APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby2BbaRplWrOLZDiTba4Wnn9LAy6m2IuIBDmhFS6aSYr-fagSGVKbw_PYb9aajK39jZ/exec";
+    var WIDGET_SOURCE = "negron";
+    var ROUTE_LABEL = "Negron Show Blogu";
+    var currentStep = 0;
+    var chatData = { name: "", email: "", messages: [] };
     var extraMessageCount = 0;
-    var MAX_EXTRA_MESSAGES = 3;
-
-    var chatMessages = document.getElementById('cfChatMessages');
-    var dynamicArea = document.getElementById('cfDynamicArea');
-    var inputField = document.getElementById('cfInputField');
-    var inputLabel = document.getElementById('cfInputLabel');
-    var inputPill = document.getElementById('cfInputPill');
-    var sendBtn = document.getElementById('cfSendBtn');
-    var typingIndicator = document.getElementById('cfTypingIndicator');
-    var footerOrigin = document.getElementById('cfFooterOrigin');
-
-    // Domain belirleme
-    try {
-      var refHost = '';
-      if (window.parent && window.parent !== window) {
-        refHost = window.parent.location.hostname;
+    var lastPromptText = "Bir sorunuz, öneriniz veya iletmek istediğiniz bir konu varsa adınızı yazarak başlayabilirsiniz.";
+    var lastPromptAuthor = "Nsone Bot";
+    var chatMessages = document.getElementById("cfChatMessages");
+    var dynamicArea = document.getElementById("cfDynamicArea");
+    var inputField = document.getElementById("cfInputField");
+    var inputLabel = document.getElementById("cfInputLabel");
+    var stepSubtitle = document.getElementById("cfStepSubtitle");
+    var progressFill = document.getElementById("cfProgressFill");
+    var inputError = document.getElementById("cfInputError");
+    var sendBtn = document.getElementById("cfSendBtn");
+    var typingIndicator = document.getElementById("cfTypingIndicator");
+    var composerQuote = document.getElementById("cfComposerQuote");
+    var searchInput = document.getElementById("cfSearchInput");
+    function applyThemeSync(data) {
+      if (!data) return;
+      var root = document.documentElement;
+      if (data.theme === "light" || data.theme === "dark") {
+        root.setAttribute("data-theme", data.theme);
       }
-      if (!refHost && document.referrer) {
-        var a = document.createElement('a');
-        a.href = document.referrer;
-        refHost = a.hostname;
+      if (typeof data.customTheme === "boolean") {
+        root.setAttribute("data-custom-theme", data.customTheme ? "1" : "0");
       }
-      if (!refHost) refHost = window.location.hostname;
-      if (refHost && footerOrigin) {
-        footerOrigin.textContent = refHost;
+      if (data.accent && /^#[0-9a-fA-F]{3,8}$/.test(String(data.accent))) {
+        root.style.setProperty("--cf-accent", String(data.accent));
       }
-    } catch (_) {}
-
+      if (data.bg && /^#[0-9a-fA-F]{3,8}$/.test(String(data.bg))) {
+        root.style.setProperty("--cf-bg", String(data.bg));
+      }
+    }
+    window.addEventListener("message", function(ev) {
+      if (ev && ev.data && ev.data.type === "topicroom_theme_sync") {
+        applyThemeSync(ev.data);
+      }
+    });
+    function postToHost(msg) {
+      try {
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage(msg, "*");
+        }
+      } catch (_) {}
+      try {
+        if (window.top && window.top !== window && window.top !== window.parent) {
+          window.top.postMessage(msg, "*");
+        }
+      } catch (_) {}
+    }
+    postToHost({ type: "topicroom_request_theme" });
+    postToHost({ type: "topicroom_widget_ready" });
+    function updateMsgCount() {
+      var rows = document.querySelectorAll(".cf-cm-row");
+      var badge = document.getElementById("cfMsgCountBadge");
+      if (badge) badge.textContent = "(" + rows.length + ")";
+    }
+    function updateStepChips(step) {
+      for (var i = 0; i <= 2; i++) {
+        var c = document.getElementById("cfChipStep" + i);
+        if (c) {
+          if (i === Math.min(step, 2)) c.classList.add("active");
+          else c.classList.remove("active");
+        }
+      }
+      if (progressFill) {
+        progressFill.style.width = (step === 0 ? "18px" : (step === 1 ? "45%" : "100%"));
+      }
+    }
     function scrollToBottom() {
       setTimeout(function() {
-        chatMessages.scrollTop = chatMessages.scrollHeight;
+        if (chatMessages) chatMessages.scrollTop = chatMessages.scrollHeight;
       }, 30);
     }
-
     function showTyping(show) {
       if (typingIndicator) {
-        typingIndicator.style.display = show ? 'inline-flex' : 'none';
+        typingIndicator.style.display = show ? "inline-flex" : "none";
         scrollToBottom();
       }
     }
-
-    // GÖNDERİLEN KULLANICI MESAJI: SADECE SOL MAVİ ÇİZGİ, YANINDAKİ BORDER YOK!
-    function appendUserEmbed(text) {
-      var authorName = chatData.name ? chatData.name : 'Siz';
-      var embed = document.createElement('div');
-      embed.className = 'cf-user-embed';
-      embed.innerHTML = '<div class="cf-embed-author">' +
-        '<span>' + escapeHtml(authorName) + '</span>' +
-        '<span class="cf-user-tag">ÜYE</span>' +
-        '</div>' +
-        '<div class="cf-embed-desc">' + escapeHtml(text) + '</div>' +
-        '<div class="cf-embed-footer"><span>Şimdi</span>' +
-        '<svg class="cf-double-check" viewBox="0 0 24 24"><path d="M18 6L7 17l-5-5M22 10l-7.5 7.5L13 16"></path></svg></div>';
-      dynamicArea.appendChild(embed);
-      scrollToBottom();
+    function setValidationError(msg) {
+      if (!inputError) return;
+      if (msg) {
+        inputError.textContent = msg;
+        inputError.style.display = "block";
+      } else {
+        inputError.textContent = "";
+        inputError.style.display = "none";
+      }
     }
-
-    // BOT MESAJI: SADECE SOL MOR/YEŞİL ÇİZGİ, YANINDAKİ BORDER YOK!
-    function appendBotEmbed(descHtml, accentClass) {
-      accentClass = accentClass || 'purple-accent';
-      var embed = document.createElement('div');
-      embed.className = 'cf-discord-embed ' + accentClass;
-      embed.innerHTML = '<div class="cf-embed-author">' +
-        '<span>Nsone Bot</span>' +
-        '<span class="cf-bot-tag">BOT</span>' +
-        '</div>' +
-        '<div class="cf-embed-desc">' + descHtml + '</div>' +
-        '<div class="cf-embed-footer"><span>Şimdi</span>' +
-        '<svg class="cf-double-check" viewBox="0 0 24 24"><path d="M18 6L7 17l-5-5M22 10l-7.5 7.5L13 16"></path></svg></div>';
-      dynamicArea.appendChild(embed);
-      scrollToBottom();
-    }
-
     function escapeHtml(str) {
-      var d = document.createElement('div');
+      var d = document.createElement("div");
       d.textContent = str;
       return d.innerHTML;
     }
-
-    function handleStepAction() {
-      var val = (inputField.value || '').trim();
-      if (!val) {
-        inputField.focus();
-        return;
+    function truncateQuote(str, maxLen) {
+      var t = String(str || "").trim();
+      if (t.length <= (maxLen || 90)) return t;
+      return t.slice(0, (maxLen || 90) - 1) + "…";
+    }
+    function toggleRxPopup(btn, ev) {
+      if (ev) ev.stopPropagation();
+      var wrap = btn.closest(".cf-rx-wrap");
+      if (!wrap) return;
+      var pop = wrap.querySelector(".cf-rx-pop");
+      document.querySelectorAll(".cf-rx-pop.is-open").forEach(function(p) {
+        if (p !== pop) p.classList.remove("is-open");
+      });
+      if (pop) pop.classList.toggle("is-open");
+    }
+    document.addEventListener("click", function() {
+      document.querySelectorAll(".cf-rx-pop.is-open").forEach(function(p) {
+        p.classList.remove("is-open");
+      });
+    });
+    function pickReaction(optBtn, emoji, ev) {
+      if (ev) ev.stopPropagation();
+      var wrap = optBtn.closest(".cf-rx-wrap");
+      if (!wrap) return;
+      var pop = wrap.querySelector(".cf-rx-pop");
+      if (pop) pop.classList.remove("is-open");
+      var pillsBox = wrap.querySelector(".cf-rx-pills");
+      if (!pillsBox) return;
+      var existing = pillsBox.querySelector('[data-emo="' + emoji + '"]');
+      if (existing) {
+        existing.remove();
+      } else {
+        var pill = document.createElement("button");
+        pill.type = "button";
+        pill.className = "cf-rx-pill";
+        pill.setAttribute("data-emo", emoji);
+        pill.innerHTML = "<span>" + emoji + "</span><span>1</span>";
+        pill.onclick = function() { pill.remove(); };
+        pillsBox.appendChild(pill);
       }
-
+    }
+    function copyMsgText(btn) {
+      if (!btn) return;
+      var block = btn.closest(".cf-cm-row");
+      if (!block) return;
+      var textEl = block.querySelector(".cf-cm-co");
+      var text = textEl ? textEl.textContent.trim() : "";
+      if (text && navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text);
+        btn.style.color = "#23a55a";
+        setTimeout(function() { btn.style.color = ""; }, 1000);
+      }
+    }
+    function replyMsgText(btn) {
+      if (!btn) return;
+      var block = btn.closest(".cf-cm-row");
+      if (!block) return;
+      var textEl = block.querySelector(".cf-cm-co");
+      var authEl = block.querySelector(".cf-cm-author");
+      var text = textEl ? textEl.textContent.trim() : "";
+      var auth = authEl ? authEl.textContent.trim() : "Nsone Bot";
+      if (text) {
+        lastPromptText = text;
+        lastPromptAuthor = auth;
+        if (composerQuote) {
+          composerQuote.style.display = "flex";
+          composerQuote.innerHTML = "<div class=\"cf-rq-left\"><span class=\"cf-rq-tag\">Yanıtlanan Mesaj:</span><div class=\"cf-rq-content\"><span class=\"cf-rq-author\">@" + escapeHtml(auth) + "</span><span class=\"cf-rq-text\">\"" + escapeHtml(truncateQuote(text, 75)) + "\"</span></div></div><button type=\"button\" class=\"cf-icon-btn\" onclick=\"clearComposerQuote(event)\" title=\"Alıntıyı Kaldır\">✕</button>";
+        }
+        if (inputField) inputField.focus();
+      }
+    }
+    function clearComposerQuote(ev) {
+      if (ev) ev.stopPropagation();
+      if (composerQuote) {
+        composerQuote.style.display = "none";
+        composerQuote.innerHTML = "";
+      }
+    }
+    function buildActionBarHtml() {
+      return "<div class=\"cf-cm-ac\">" +
+        "<div class=\"cf-rx-wrap\">" +
+          "<div class=\"cf-rx-pills\"></div>" +
+          "<button type=\"button\" class=\"cf-icon-btn\" title=\"Tepki Ekle\" onclick=\"toggleRxPopup(this, event)\">" +
+            "<svg class=\"line\" viewBox=\"0 0 24 24\"><path d=\"M22 11v1a10 10 0 1 1-9-10\"/><path d=\"M8 14s1.5 2 4 2 4-2 4-2\"/><line x1=\"9\" y1=\"9\" x2=\"9.01\" y2=\"9\"/><line x1=\"15\" y1=\"9\" x2=\"15.01\" y2=\"9\"/><path class=\"c\" d=\"M16 5h6M19 2v6\"/></svg>" +
+          "</button>" +
+          "<div class=\"cf-rx-pop\">" +
+            ['👍','❤️','🔥','🚀','🎉','😂'].map(function(em) { return "<button type=\"button\" class=\"cf-rx-opt\" onclick=\"pickReaction(this, '" + em + "', event)\">" + em + "</button>"; }).join("") +
+          "</div>" +
+        "</div>" +
+        "<div class=\"cf-ac-right\">" +
+          "<button type=\"button\" class=\"cf-icon-btn\" title=\"Mesajı Kopyala\" onclick=\"copyMsgText(this)\"><svg class=\"line\" viewBox=\"0 0 24 24\"><path d=\"M14.99 17.5H16.5C19.52 17.5 22 15.03 22 12C22 8.98 19.53 6.5 16.5 6.5H14.99\"/><path d=\"M9 6.5H7.5C4.47 6.5 2 8.97 2 12C2 15.02 4.47 17.5 7.5 17.5H9\"/><path class=\"c\" d=\"M8 12H16\"/></svg></button>" +
+          "<button type=\"button\" class=\"cf-icon-btn\" title=\"Bu mesajı yanıtla\" onclick=\"replyMsgText(this)\"><svg class=\"line\" viewBox=\"0 0 24 24\"><path d=\"M9 14L4 9l5-5\"/><path class=\"c\" d=\"M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5v2.5\"/></svg></button>" +
+        "</div>" +
+      "</div>";
+    }
+    function appendUserBlock(text, quotedPrompt, quotedAuthor) {
+      var authorName = chatData.name ? chatData.name : "Ziyaretçi";
+      var row = document.createElement("div");
+      row.className = "cf-cm-row is-user";
+      var qText = truncateQuote(quotedPrompt || lastPromptText || "", 80);
+      var qAuth = quotedAuthor || lastPromptAuthor || "Nsone Bot";
+      var quoteHtml = qText ? ("<div class=\"cf-quote-ref\"><div class=\"cf-rq-left\"><span class=\"cf-rq-tag\">Etiketlenen Mesaj:</span><div class=\"cf-rq-content\"><span class=\"cf-rq-author\">@" + escapeHtml(qAuth) + "</span><span class=\"cf-rq-text\">\"" + escapeHtml(qText) + "\"</span></div></div><span class=\"cf-rq-jump\">Önceki Mesaj ↑</span></div>") : "";
+      row.innerHTML =
+        "<div class=\"cf-cm-av\"><svg viewBox=\"0 0 24 24\"><path d=\"M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2\"/><circle cx=\"12\" cy=\"7\" r=\"4\"/></svg></div>" +
+        "<div class=\"cf-cm-hr\"><span class=\"cf-cm-author\">" + escapeHtml(authorName) + "</span><span class=\"cf-cm-badge\">Yanıt</span><span class=\"cf-cm-time\">Şimdi</span></div>" +
+        quoteHtml +
+        "<div class=\"cf-cm-co\">" + escapeHtml(text) + "</div>" +
+        buildActionBarHtml();
+      dynamicArea.appendChild(row);
+      clearComposerQuote();
+      updateMsgCount();
+      scrollToBottom();
+    }
+    function appendBotBlock(bodyHtml, quotedUserText) {
+      var row = document.createElement("div");
+      row.className = "cf-cm-row is-bot";
+      var qText = truncateQuote(quotedUserText || "", 80);
+      var userAuth = chatData.name || "Ziyaretçi";
+      var quoteHtml = qText ? ("<div class=\"cf-quote-ref\"><div class=\"cf-rq-left\"><span class=\"cf-rq-tag\">Etiketlenen Mesaj:</span><div class=\"cf-rq-content\"><span class=\"cf-rq-author\">@" + escapeHtml(userAuth) + "</span><span class=\"cf-rq-text\">\"" + escapeHtml(qText) + "\"</span></div></div><span class=\"cf-rq-jump\">Önceki Mesaj ↑</span></div>") : "";
+      row.innerHTML =
+        "<div class=\"cf-cm-av bot-av\">NB</div>" +
+        "<div class=\"cf-cm-hr\">" +
+          "<span class=\"cf-cm-author\">Nsone Bot</span>" +
+          "<span class=\"cf-cm-badge\">Yanıt</span>" +
+          "<span class=\"cf-cm-verified\"><svg viewBox=\"0 0 24 24\"><path d=\"M12 2l2.4 2.1 3.1-.4 1.2 2.9 2.9 1.2-.4 3.1L23.3 13l-2.1 2.4.4 3.1-2.9 1.2-1.2 2.9-3.1-.4L12 24.3l-2.4-2.1-3.1.4-1.2-2.9-2.9-1.2.4-3.1L.7 13l2.1-2.4-.4-3.1 2.9-1.2 1.2-2.9 3.1.4L12 2zm-1.1 14.6l6.2-6.2-1.4-1.4-4.8 4.8-2.4-2.4-1.4 1.4 3.8 3.8z\"/></svg></span>" +
+          "<span class=\"cf-cm-time\">Şimdi</span>" +
+        "</div>" +
+        quoteHtml +
+        "<div class=\"cf-cm-co\">" + bodyHtml + "</div>" +
+        buildActionBarHtml();
+      dynamicArea.appendChild(row);
+      updateMsgCount();
+      scrollToBottom();
+    }
+    function resetConversation() {
+      currentStep = 0;
+      chatData = { name: "", email: "", messages: [] };
+      extraMessageCount = 0;
+      lastPromptText = "Bir sorunuz, öneriniz veya iletmek istediğiniz bir konu varsa adınızı yazarak başlayabilirsiniz.";
+      lastPromptAuthor = "Nsone Bot";
+      if (dynamicArea) dynamicArea.innerHTML = "";
+      clearComposerQuote();
+      setValidationError("");
+      if (inputField) {
+        inputField.disabled = false;
+        inputField.type = "text";
+        inputField.value = "";
+        inputField.placeholder = "Adınızı girin... (Enter)";
+        inputField.focus();
+      }
+      if (inputLabel) inputLabel.textContent = "Mesaj Yaz";
+      if (stepSubtitle) stepSubtitle.textContent = "Sorunuzu, önerinizi veya iletişim mesajınızı paylaşın";
+      if (sendBtn) sendBtn.disabled = false;
+      updateStepChips(0);
+      updateMsgCount();
+    }
+    function sendMessageToBackend(msg, index, callback) {
+      try {
+        var qs = "action=contact_submit" +
+          "&name=" + encodeURIComponent(chatData.name) +
+          "&email=" + encodeURIComponent(chatData.email) +
+          "&message=" + encodeURIComponent(msg) +
+          "&index=" + encodeURIComponent(index) +
+          "&source=" + encodeURIComponent(WIDGET_SOURCE || "widget");
+        fetch(APPS_SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
+          body: qs
+        }).then(function() {
+          if (callback) callback();
+        }).catch(function() {
+          try {
+            var img = new Image();
+            img.src = APPS_SCRIPT_URL + "?" + qs + "&_t=" + Date.now();
+          } catch (_) {}
+          if (callback) callback();
+        });
+      } catch (e) {
+        try {
+          var img = new Image();
+          img.src = APPS_SCRIPT_URL + "?" + qs + "&_t=" + Date.now();
+        } catch (_) {}
+        if (callback) callback();
+      }
+    }
+    function handleStepAction() {
+      var val = (inputField.value || "").trim();
+      if (!val) { inputField.focus(); return; }
+      setValidationError("");
       if (currentStep === 0) {
-        // Name step
         chatData.name = val;
-        appendUserEmbed(val);
-        inputField.value = '';
+        appendUserBlock(val, lastPromptText, lastPromptAuthor);
+        inputField.value = "";
         inputField.disabled = true;
         showTyping(true);
-
         setTimeout(function() {
           showTyping(false);
-          appendBotEmbed('Memnun oldum <b>' + escapeHtml(val) + '</b>! Sana hızlıca dönüş yapabilmemiz için <b>e-posta adresini</b> yazabilir misin? 📧', 'purple-accent');
+          lastPromptText = "Sana hızlıca dönüş yapabilmemiz için e-posta adresini yazabilir misin?";
+          lastPromptAuthor = "Nsone Bot";
+          appendBotBlock("Memnun oldum <b>" + escapeHtml(val) + "</b>! Sana hızlıca dönüş yapabilmemiz için e-posta adresini yazabilir misin?", val);
           inputField.disabled = false;
-          inputField.type = 'email';
-          inputLabel.textContent = 'E-POSTA ADRESİNİZ *';
-          inputField.placeholder = 'E-posta adresiniz... (Enter)';
+          inputField.type = "email";
+          inputLabel.textContent = "E-posta Adresiniz *";
+          if (stepSubtitle) stepSubtitle.textContent = "Yanıtımızı ileteceğimiz e-posta adresinizi girin";
+          inputField.placeholder = "E-posta adresinizi girin... (Enter)";
           inputField.focus();
           currentStep = 1;
-        }, 500);
-
+          updateStepChips(1);
+        }, 380);
       } else if (currentStep === 1) {
-        // Email step
         var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRe.test(val)) {
-          alert('Lütfen geçerli bir e-posta adresi girin.');
+          setValidationError("Lütfen geçerli bir e-posta adresi girin.");
           inputField.focus();
           return;
         }
         chatData.email = val;
-        appendUserEmbed(val);
-        inputField.value = '';
+        appendUserBlock(val, lastPromptText, lastPromptAuthor);
+        inputField.value = "";
         inputField.disabled = true;
         showTyping(true);
-
         setTimeout(function() {
           showTyping(false);
-          appendBotEmbed('Harika! Şimdi bize iletmek istediğin <b>mesajını</b> yazabilirsin. 👇', 'purple-accent');
+          lastPromptText = "Harika! Şimdi bize iletmek istediğin mesajını yazabilirsin.";
+          lastPromptAuthor = "Nsone Bot";
+          appendBotBlock("Harika! Şimdi bize iletmek istediğin mesajını yazabilirsin.", val);
           inputField.disabled = false;
-          inputField.type = 'text';
-          inputLabel.textContent = 'MESAJINIZ * (1/3)';
-          inputField.placeholder = 'Mesajınızı buraya yazın... (Enter)';
+          inputField.type = "text";
+          inputLabel.textContent = "Mesajınız * (1/3)";
+          if (stepSubtitle) stepSubtitle.textContent = "İletmek istediğiniz mesajınızı aşağıya yazın";
+          inputField.placeholder = "Mesajınızı girin... (Enter)";
           inputField.focus();
           currentStep = 2;
-        }, 500);
-
+          updateStepChips(2);
+        }, 380);
       } else if (currentStep >= 2) {
-        // Message step (up to 3 messages)
         extraMessageCount++;
         chatData.messages.push(val);
-        appendUserEmbed(val);
-        inputField.value = '';
+        appendUserBlock(val, lastPromptText, lastPromptAuthor);
+        inputField.value = "";
         inputField.disabled = true;
         showTyping(true);
-
         var currentMsgIndex = extraMessageCount;
         sendMessageToBackend(val, currentMsgIndex, function() {
           showTyping(false);
           inputField.disabled = false;
-
           if (currentMsgIndex === 1) {
-            appendBotEmbed('Mesajını ilettik! İletmek istediğin başka bir konu varsa aşağıdan yazmaya devam edebilirsin. 👇 (1/3)', 'green-accent');
-            inputLabel.textContent = 'EK MESAJ (2/3)';
-            inputField.placeholder = 'Ek mesajınızı yazın... (2/3)';
+            lastPromptText = "Mesajını ilettik! Eklemek istediğin başka bir konu varsa aşağıdan yazmaya devam edebilirsin. (1/3)";
+            lastPromptAuthor = "Nsone Bot";
+            appendBotBlock(lastPromptText, val);
+            inputLabel.textContent = "Ek Mesaj (2/3)";
+            inputField.placeholder = "Ek mesajınızı girin... (2/3)";
             inputField.focus();
-            showSocialLinks();
           } else if (currentMsgIndex === 2) {
-            appendBotEmbed('Ek mesajını da ilettik. ✓✓ (2/3)', 'green-accent');
-            inputLabel.textContent = 'SON MESAJ (3/3)';
-            inputField.placeholder = 'Son mesajınızı yazın... (3/3)';
+            lastPromptText = "Ek mesajını da ilettik. Son bir ekleme yapmak istersen yazabilirsin. (2/3)";
+            lastPromptAuthor = "Nsone Bot";
+            appendBotBlock(lastPromptText, val);
+            inputLabel.textContent = "Son Mesaj (3/3)";
+            inputField.placeholder = "Son mesajınızı girin... (3/3)";
             inputField.focus();
           } else if (currentMsgIndex >= 3) {
-            appendBotEmbed('Tüm mesajlarını başarıyla aldık! En kısa sürede <b>' + escapeHtml(chatData.email) + '</b> adresinden sana dönüş yapacağız. Teşekkürler! 🎉 (3/3)', 'green-accent');
+            appendBotBlock("Tüm mesajlarını başarıyla aldık! En kısa sürede <b>" + escapeHtml(chatData.email) + "</b> adresinden sana dönüş yapacağız. Teşekkürler! (3/3)", val);
             inputField.disabled = true;
-            inputLabel.textContent = 'KOTA DOLDU (3/3)';
-            inputField.placeholder = 'Mesaj kotanız doldu (3/3)';
+            inputLabel.textContent = "Tamamlandı (3/3)";
+            inputField.placeholder = "Yeni mesaj için sağ üstten Yenile butonuna basın";
             if (sendBtn) sendBtn.disabled = true;
           }
         });
       }
     }
-
-    function showSocialLinks() {
-      var d = document.createElement('div');
-      d.innerHTML = '<div class="cf-social-pills-row">' +
-        '<a href="https://t.me/" target="_blank" rel="noopener" class="cf-soc-pill">' +
-          '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"></path></svg>' +
-          '<span>Telegram</span>' +
-        '</a>' +
-        '<a href="https://instagram.com/" target="_blank" rel="noopener" class="cf-soc-pill">' +
-          '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>' +
-          '<span>Instagram</span>' +
-        '</a>' +
-        '<a href="https://youtube.com/" target="_blank" rel="noopener" class="cf-soc-pill">' +
-          '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>' +
-          '<span>YouTube</span>' +
-        '</a>' +
-        '<a href="https://github.com/Aleyulala/saved/discussions/?pli=1" target="_blank" rel="noopener" class="cf-soc-pill">' +
-          '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>' +
-          '<span>GitHub Topluluk</span>' +
-        '</a>' +
-      '</div>';
-      dynamicArea.appendChild(d);
-      scrollToBottom();
-    }
-
-    function sendMessageToBackend(msg, index, callback) {
-      try {
-        var payload = 'action=contact_submit' +
-          '&name=' + encodeURIComponent(chatData.name) +
-          '&email=' + encodeURIComponent(chatData.email) +
-          '&message=' + encodeURIComponent(msg) +
-          '&index=' + encodeURIComponent(index) +
-          '&source=widget';
-
-        fetch(APPS_SCRIPT_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
-          body: payload
-        }).then(function() {
-          if (callback) callback();
-        }).catch(function() {
-          if (callback) callback();
-        });
-      } catch (e) {
-        if (callback) callback();
-      }
-    }
-
     function handleWidgetClose() {
-      try {
-        if (window.parent && window.parent !== window) {
-          window.parent.postMessage({ action: 'close_contact_widget', type: 'topicroom_contact_close' }, '*');
-        }
-      } catch (_) {}
-      var card = document.getElementById('cfCard');
-      if (card) {
-        card.style.transition = 'all 0.22s ease';
-        card.style.opacity = '0';
-        card.style.transform = 'scale(0.96)';
-      }
+      postToHost({ action: "close_contact_widget", type: "topicroom_contact_close" });
     }
-
-    // LOADING SCREEN SMOOTH DISMISS
-    window.addEventListener('load', function() {
-      setTimeout(function() {
-        var ldr = document.getElementById('cfLoadingScreen');
-        if (ldr) ldr.classList.add('hidden');
-      }, 400);
-    });
-    setTimeout(function() {
-      var ldr = document.getElementById('cfLoadingScreen');
-      if (ldr && !ldr.classList.contains('hidden')) ldr.classList.add('hidden');
-    }, 1200);
-
-    inputField.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') {
+    if (searchInput) {
+      searchInput.addEventListener("input", function() {
+        var q = (searchInput.value || "").toLowerCase().trim();
+        document.querySelectorAll(".cf-cm-row").forEach(function(r) {
+          if (!q) { r.style.display = ""; return; }
+          var txt = (r.textContent || "").toLowerCase();
+          r.style.display = txt.indexOf(q) !== -1 ? "" : "none";
+        });
+      });
+    }
+    inputField.addEventListener("keydown", function(e) {
+      if (e.key === "Enter") {
         e.preventDefault();
         handleStepAction();
       }
+    });
+    inputField.addEventListener("input", function() { setValidationError(""); });
+    document.addEventListener("keydown", function(e) {
+      if (e.key === "Escape") { handleWidgetClose(); }
     });
   </script>
 </body>

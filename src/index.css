@@ -1441,157 +1441,184 @@ html.lgT:not(.thS) {
   30% { transform: translateY(-4px); opacity: 1; }
 }
 
-/* Cam yüzeylerin ve Arama Modalının açık/koyu tema karşılıkları — nsone.xml 1:1 */
-:root.lgT .cf-spotlight {
-  background: rgba(255, 255, 255, 0.86) !important;
-  border-color: rgba(0, 0, 0, 0.08) !important;
-  box-shadow: 0 25px 65px rgba(0, 0, 0, 0.12) !important;
-}
-
-:root.lgT .cf-backdrop,
-:root.lgT .adv-backdrop {
-  background: rgba(15, 17, 23, 0.36) !important;
-}
-
-:root.lgT .adv-close-btn {
+/* Tam ekran İletişim (#ContactForm2Spotlight), Paylaş (#ShareFullscreenModal) ve Arama (#advSearchModal) — negron-v3.xml 1:1 */
+:root.lgT #ContactForm2Spotlight,
+:root.lgT .cf-spotlight,
+:root.lgT #ShareFullscreenModal,
+:root.lgT .sh-fullscreen {
+  background: #ffffff !important;
   background-color: #ffffff !important;
-  color: #5f6368 !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12) !important;
-}
-
-:root.lgT .adv-close-btn:hover {
-  background-color: #f0f4f9 !important;
-  color: #1f1f1f !important;
-}
-
-:root.drK .adv-close-btn {
-  background-color: #252526 !important;
-  color: #989b9f !important;
-}
-
-:root.drK .adv-close-btn:hover {
-  background-color: #333333 !important;
-  color: #ffffff !important;
-}
-
-:root.lgT .adv-card {
-  background: rgba(255, 255, 255, 0.94) !important;
-  border: 1px solid rgba(0, 0, 0, 0.08) !important;
-  box-shadow: 0 25px 65px rgba(0, 0, 0, 0.14) !important;
-}
-
-:root.lgT .adv-input-bar {
-  background-color: #ffffff !important;
-  border: 1px solid rgba(0, 0, 0, 0.10) !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
-}
-
-:root.lgT .adv-engine-select {
-  background-color: #f0f4f9 !important;
-  color: #1f1f1f !important;
-}
-
-:root.lgT .adv-engine-select:hover {
-  background-color: #e2e8f0 !important;
-}
-
-:root.drK .adv-search-btn {
-  background-color: var(--linkB, #9aa0a6) !important;
-  color: #0f172a !important;
-}
-
-html.drK.thS:not(.th4):not(.th7):not(.th8) .adv-search-btn {
-  color: #ffffff !important;
-}
-
-:root.lgT .adv-search-btn {
-  background-color: var(--linkB, #5f6368) !important;
-  color: #ffffff !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12) !important;
-}
-
-html.lgT.th4 .adv-search-btn,
-html.lgT.th7 .adv-search-btn,
-html.lgT.th8 .adv-search-btn {
-  color: #0f172a !important;
-}
-
-:root.lgT .adv-pill {
-  background-color: #f0f4f9 !important;
-  color: #4b5563 !important;
-}
-
-:root.lgT .adv-pill:hover {
-  background-color: #e2e8f0 !important;
-  color: #1f1f1f !important;
-}
-
-:root.lgT:not(.thS) .adv-pill.is-active {
-  background-color: #5f6368 !important;
-  color: #ffffff !important;
-  font-weight: 600 !important;
-}
-
-html.lgT.thS .adv-pill.is-active {
-  background-color: color-mix(in srgb, var(--linkC, #1a73e8) 14%, #ffffff) !important;
-  color: var(--linkC, #1a73e8) !important;
-  font-weight: 600 !important;
-}
-
-:root.drK .adv-pill.is-active {
-  background-color: color-mix(in srgb, var(--linkC, #9aa0a6) 22%, #252526) !important;
-  color: #ffffff !important;
-  font-weight: 600 !important;
-}
-
-:root.drK .adv-banner {
-  background-color: rgba(30, 30, 30, 0.92) !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
-  color: #e5e5e5 !important;
-}
-
-:root.lgT .adv-banner {
-  background-color: #ffffff !important;
-  border: 1px solid rgba(0, 0, 0, 0.08) !important;
-  color: #1f1f1f !important;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05) !important;
-}
-
-:root.drK .adv-banner-chip {
-  background-color: rgba(255, 255, 255, 0.08) !important;
-  color: #f1f5f9 !important;
-}
-
-:root.drK .adv-banner-chip:hover {
-  background-color: color-mix(in srgb, var(--linkC, #9aa0a6) 28%, rgba(255, 255, 255, 0.15)) !important;
-  color: #ffffff !important;
-}
-
-:root.lgT .adv-banner-chip {
-  background-color: #f0f4f9 !important;
-  color: #3c4043 !important;
-}
-
-:root.lgT .adv-banner-chip:hover {
-  background-color: #e2e8f0 !important;
-  color: #1f1f1f !important;
-}
-
-:root.drK .adv-banner-kbd {
-  background-color: color-mix(in srgb, var(--linkC, #9aa0a6) 25%, rgba(255, 255, 255, 0.1)) !important;
-  color: #ffffff !important;
-}
-
-:root.lgT .adv-banner-kbd {
-  background-color: #e2e8f0 !important;
   color: #1f1f1f !important;
   box-shadow: none !important;
 }
 
-:root.lgT .adv-results-list {
+:root.lgT .cf-bottom-bar,
+:root.lgT .sh-bottom-bar {
+  border-top-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+:root #advSearchModal,
+:root.drK #advSearchModal {
+  --dc-text: #f2f3f5;
+  --dc-accent: var(--linkC, var(--linkB, #f2f3f5));
+}
+
+:root.lgT #advSearchModal {
+  --dc-text: #111214;
+  --dc-accent: var(--linkC, var(--linkB, #111214));
+  background: rgba(15, 17, 23, 0.36) !important;
+}
+
+:root #advSearchModal .adv-card,
+:root.drK #advSearchModal .adv-card {
+  background: #111214 !important;
+  background-color: #111214 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.72) !important;
+}
+
+:root.lgT #advSearchModal .adv-card {
+  background: #ffffff !important;
   background-color: #ffffff !important;
   border: 1px solid rgba(0, 0, 0, 0.08) !important;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.14) !important;
+}
+
+:root #advSearchModal .adv-input-bar,
+:root.drK #advSearchModal .adv-input-bar {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: none !important;
+}
+
+:root.lgT #advSearchModal .adv-input-bar {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+  box-shadow: none !important;
+}
+
+:root #advSearchModal .adv-input-clear,
+:root #advSearchModal .adv-search-btn {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: var(--dc-text) !important;
+}
+
+:root #advSearchModal .adv-input-clear:hover,
+:root #advSearchModal .adv-search-btn:hover {
+  background: transparent !important;
+  color: var(--dc-accent) !important;
+}
+
+:root #advSearchModal .adv-pill,
+:root.drK #advSearchModal .adv-pill {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: none !important;
+  color: #f2f3f5 !important;
+}
+
+:root.lgT #advSearchModal .adv-pill {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  box-shadow: none !important;
+  color: #111214 !important;
+}
+
+:root #advSearchModal .adv-pill:hover,
+:root #advSearchModal .adv-pill.is-active,
+:root.drK #advSearchModal .adv-pill:hover,
+:root.drK #advSearchModal .adv-pill.is-active,
+:root.lgT #advSearchModal .adv-pill:hover,
+:root.lgT #advSearchModal .adv-pill.is-active {
+  background: transparent !important;
+  background-color: transparent !important;
+  border-color: var(--dc-accent) !important;
+  color: var(--dc-accent) !important;
+  font-weight: 700 !important;
+  box-shadow: none !important;
+}
+
+:root #advSearchModal .adv-banner,
+:root.drK #advSearchModal .adv-banner {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding-inline: 2px !important;
+  color: #e5e5e5 !important;
+}
+
+:root.lgT #advSearchModal .adv-banner {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.08) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding-inline: 2px !important;
+  color: #111214 !important;
+}
+
+:root #advSearchModal .adv-banner-chip,
+:root.drK #advSearchModal .adv-banner-chip,
+:root #advSearchModal .adv-banner-kbd,
+:root.drK #advSearchModal .adv-banner-kbd {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #f2f3f5 !important;
+  box-shadow: none !important;
+}
+
+:root.lgT #advSearchModal .adv-banner-chip,
+:root.lgT #advSearchModal .adv-banner-kbd {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  color: #111214 !important;
+  box-shadow: none !important;
+}
+
+:root #advSearchModal .adv-banner-chip:hover,
+:root.drK #advSearchModal .adv-banner-chip:hover,
+:root.lgT #advSearchModal .adv-banner-chip:hover {
+  background: transparent !important;
+  background-color: transparent !important;
+  border-color: var(--dc-accent) !important;
+  color: var(--dc-accent) !important;
+  box-shadow: none !important;
+}
+
+:root #advSearchModal .adv-results-list,
+:root.drK #advSearchModal .adv-results-list,
+:root.lgT #advSearchModal .adv-results-list {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 4px 0 !important;
+}
+
+:root #advSearchModal .adv-results-header,
+:root.drK #advSearchModal .adv-results-header {
+  color: #f2f3f5 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+:root.lgT #advSearchModal .adv-results-header {
+  color: #111214 !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
 }
 
 :root.lgT .adv-item:hover,
@@ -1608,9 +1635,38 @@ html.lgT.thS .adv-pill.is-active {
   color: #5f6368 !important;
 }
 
-:root.lgT .adv-item-tag {
-  background-color: #e4eaf3 !important;
-  color: #3c4043 !important;
+:root #advSearchModal .adv-item-tag,
+:root.drK #advSearchModal .adv-item-tag {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #f2f3f5 !important;
+  box-shadow: none !important;
+}
+
+:root.lgT #advSearchModal .adv-item-tag {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  color: #111214 !important;
+  box-shadow: none !important;
+}
+
+:root #advSearchModal .adv-close-btn,
+:root.drK #advSearchModal .adv-close-btn {
+  background: #111214 !important;
+  background-color: #111214 !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #f2f3f5 !important;
+  box-shadow: none !important;
+}
+
+:root.lgT #advSearchModal .adv-close-btn {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  color: #111214 !important;
+  box-shadow: none !important;
 }
 
 @media (prefers-reduced-motion: reduce) {

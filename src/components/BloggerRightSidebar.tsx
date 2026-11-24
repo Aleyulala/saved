@@ -131,7 +131,28 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
     };
   }, []);
 
-  // Esc ile kapatma + gövde kaydırma kilidi (nsone.xml closeSpotlight 1:1)
+  // Esc ile kapatma + gövde kaydırma kilidi + iframe tema senkronizasyonu (negron-v3.xml 1:1)
+  const syncContactIframeTheme = () => {
+    try {
+      const ifr = document.getElementById('bttContactWidgetIframeGithub') as HTMLIFrameElement | null;
+      if (!ifr || !ifr.contentWindow) return;
+      const htmlEl = document.documentElement;
+      const isLight = htmlEl.classList.contains('lgT') || htmlEl.classList.contains('light');
+      const cs = window.getComputedStyle(htmlEl);
+      const accent = (cs.getPropertyValue('--linkC') || cs.getPropertyValue('--linkB') || '#9aa0a6').trim();
+      ifr.contentWindow.postMessage(
+        {
+          type: 'topicroom_theme_sync',
+          theme: isLight ? 'light' : 'dark',
+          accent: accent || '#9aa0a6',
+        },
+        '*'
+      );
+    } catch {
+      // ignore cross-origin frame warning
+    }
+  };
+
   useEffect(() => {
     if (!isSpotlightOpen) return;
     const onKey = (ev: KeyboardEvent) => {
@@ -140,9 +161,16 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
     document.addEventListener('keydown', onKey);
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
+    const t1 = setTimeout(syncContactIframeTheme, 120);
+    const t2 = setTimeout(syncContactIframeTheme, 550);
+    const obs = new MutationObserver(syncContactIframeTheme);
+    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['class', 'style'] });
     return () => {
       document.removeEventListener('keydown', onKey);
       document.body.style.overflow = prevOverflow;
+      clearTimeout(t1);
+      clearTimeout(t2);
+      obs.disconnect();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSpotlightOpen]);
@@ -733,33 +761,46 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
         </div>
       )}
 
-      {/* 3. Nsone Bot Spotlight Modalı (.cf-spotlight) — nsone.xml 1:1: ortada, cam efektli, kapatılabilir */}
+      {/* 3. Topicroom Ortak İletişim Tam Ekran Sekmesi (#ContactForm2 — negron-v3.xml & saved ortak kullanım 1:1) */}
       {isSpotlightOpen &&
         createPortal(
-          <>
-            {/* Bulanık Arkaplan Örtüsü (.cf-backdrop) — tıklayınca kapatır */}
-            <div
-              className="cf-backdrop fixed inset-0 z-[9998] bg-[rgba(15,17,23,0.65)] backdrop-blur-[12px] animate-in fade-in duration-200"
-              onClick={closeSpotlight}
-            />
-
-            {/* Spotlight Penceresi (.cf-spotlight) - Cuk Diye Oturan İletişim Formu */}
-            <section
-              id="ContactForm2Spotlight"
-              role="dialog"
-              aria-modal="true"
-              aria-label="Bize Ulaşın — Topicroom İletişim"
-              className="cf-spotlight fixed left-1/2 top-1/2 z-[9999] -translate-x-1/2 -translate-y-1/2 w-[385px] max-w-[calc(100vw-24px)] h-[640px] max-h-[min(92vh,660px)] overflow-hidden rounded-[24px] bg-[#111113] p-0 border-0 shadow-[0_24px_60px_rgba(0,0,0,0.85)] cf-spotlight-anim"
-            >
+          <section
+            id="ContactForm2Spotlight"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Bize Ulaşın — Topicroom İletişim"
+            className="cf-spotlight fixed inset-0 z-[999999] w-screen h-[100dvh] overflow-hidden bg-[#1e1e1e] p-0 border-0 flex flex-col justify-between animate-in fade-in duration-150"
+          >
+            <div className="flex-1 w-full min-h-0 flex flex-col overflow-hidden">
               <iframe
                 id="bttContactWidgetIframeGithub"
-                src="./widget.html?id=topicroom-widget&source=github"
-                className="w-full h-full border-0 rounded-[24px] bg-[#111113] block"
+                src="https://script.google.com/macros/s/AKfycby2BbaRplWrOLZDiTba4Wnn9LAy6m2IuIBDmhFS6aSYr-fagSGVKbw_PYb9aajK39jZ/exec?source=saved&embed=1"
+                onLoad={syncContactIframeTheme}
+                className="w-full h-full flex-1 border-0 rounded-none bg-transparent block"
                 title="Topicroom Sohbet & İletişim"
                 allow="clipboard-write"
               />
-            </section>
-          </>,
+            </div>
+
+            {/* Alt Kapatma Çubuğu (#Sohbet / #İletişim 1:1 .cmH) */}
+            <div className="cf-bottom-bar w-full px-6 py-3.5 border-t border-white/[0.06] bg-transparent flex items-center justify-between shrink-0">
+              <div className="flex items-center gap-2 text-[14px] font-bold text-[#fffdfc]">
+                <span>#İletişim</span>
+                <span className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-white/[0.06] text-[#989b9f]">
+                  Nsone Bot
+                </span>
+              </div>
+              <button
+                type="button"
+                onClick={closeSpotlight}
+                className="w-8 h-8 rounded-lg flex items-center justify-center text-[#989b9f] hover:text-white hover:bg-white/[0.06] transition-colors cursor-pointer"
+                title="Kapat (Esc)"
+                aria-label="Kapat (Esc)"
+              >
+                <CloseIcon className="w-4 h-4" />
+              </button>
+            </div>
+          </section>,
           document.body
         )}
     </>
