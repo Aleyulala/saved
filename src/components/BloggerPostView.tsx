@@ -553,116 +553,126 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
         </section>
       )}
 
-      {/* 12. Diğer Uygulamalarla Paylaş Modal (Screenshot 7 1:1) */}
+      {/* 12. Diğer Uygulamalarla Paylaş Tam Ekran Sekmesi (negron-v3.xml .shBr.fixL 1:1 — bulanık kenarsız, karanlık/aydınlık tam ekran) */}
       {isShareModalOpen && (
-        <div 
-          className="fixed inset-0 z-50 bg-black/70 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-200"
-          onClick={() => setIsShareModalOpen(false)}
+        <div
+          id="ShareFullscreenModal"
+          className="sh-fullscreen fixed inset-0 z-[999999] w-screen h-[100dvh] bg-[#1e1e1e] flex flex-col justify-between animate-in fade-in duration-150"
         >
-          <div 
-            onClick={(e) => e.stopPropagation()}
-            className="w-full max-w-[420px] rounded-[18px] bg-[#252526] border border-white/10 shadow-2xl p-5 space-y-4 animate-in zoom-in-95 duration-150 text-white"
-          >
-            {/* Modal Header */}
-            <div className="flex items-center justify-between pb-1 border-b border-white/5">
-              <span className="text-xs font-bold text-[#989b9f]">
-                Diğer uygulamalarla paylaşın
-              </span>
-              <button
-                type="button"
-                onClick={() => setIsShareModalOpen(false)}
-                className="w-7 h-7 rounded-full bg-[#1e1e1e] hover:bg-[#333333] text-white flex items-center justify-center cursor-pointer"
-                title="Kapat"
-              >
-                <CloseIcon className="w-3.5 h-3.5" />
-              </button>
-            </div>
-
-            {/* Post Preview Box */}
-            <div className="flex items-center gap-3 p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
-              <img
-                src={primaryImage}
-                alt={link.title}
-                className="w-12 h-12 rounded-lg object-cover shrink-0"
-              />
-              <div className="min-w-0 flex-1">
-                <h4 className="text-xs font-bold text-white truncate">{link.title}</h4>
-                <span className="text-[11px] text-[#989b9f] lowercase">{link.tags[0] || 'videolar'}</span>
+          {/* Ortalanmış Paylaşım İçeriği */}
+          <div className="flex-1 w-full flex items-center justify-center p-6 overflow-y-auto">
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="w-full max-w-[540px] space-y-6 text-white"
+            >
+              {/* Header */}
+              <div className="flex items-center justify-between pb-2 border-b border-white/[0.08]">
+                <span className="text-sm font-bold text-[#989b9f]">
+                  Diğer uygulamalarla paylaşın
+                </span>
               </div>
-            </div>
 
-            {/* Share Grid (8 Apps: Facebook, WhatsApp, Twitter, Telegram, Pinterest, LinkedIn, Line, Email) */}
-            <div className="grid grid-cols-4 gap-3 py-2 text-center text-[11px] text-[#d4d4d4]">
-              <a
-                href={`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`}
-                target="_blank"
-                rel="noreferrer"
-                className="flex flex-col items-center gap-1.5 p-2 rounded-xl hover:bg-white/5 cursor-pointer no-underline text-inherit"
-              >
-                <div className="w-10 h-10 rounded-full bg-[#1877f2] flex items-center justify-center shadow-md">
-                  <FacebookIcon className="w-4 h-4 fill-white" />
-                </div>
-                <span>Facebook</span>
-              </a>
-
-              <a
-                href={`https://api.whatsapp.com/send?text=${shareTitle}%20${shareUrl}`}
-                target="_blank"
-                rel="noreferrer"
-                className="flex flex-col items-center gap-1.5 p-2 rounded-xl hover:bg-white/5 cursor-pointer no-underline text-inherit"
-              >
-                <div className="w-10 h-10 rounded-full bg-[#00a884] flex items-center justify-center shadow-md">
-                  <WhatsappIcon className="w-4 h-4 fill-white" />
-                </div>
-                <span>WhatsApp</span>
-              </a>
-
-              <a
-                href={`https://twitter.com/intent/tweet?text=${shareTitle}&url=${shareUrl}`}
-                target="_blank"
-                rel="noreferrer"
-                className="flex flex-col items-center gap-1.5 p-2 rounded-xl hover:bg-white/5 cursor-pointer no-underline text-inherit"
-              >
-                <div className="w-10 h-10 rounded-full bg-[#000000] border border-white/10 flex items-center justify-center shadow-md">
-                  <TwitterIcon className="w-4 h-4 fill-white" />
-                </div>
-                <span>X / Twitter</span>
-              </a>
-
-              <a
-                href={`https://t.me/share/url?url=${shareUrl}&text=${shareTitle}`}
-                target="_blank"
-                rel="noreferrer"
-                className="flex flex-col items-center gap-1.5 p-2 rounded-xl hover:bg-white/5 cursor-pointer no-underline text-inherit"
-              >
-                <div className="w-10 h-10 rounded-full bg-[#229ed9] flex items-center justify-center shadow-md">
-                  <TelegramIcon className="w-4 h-4 fill-white" />
-                </div>
-                <span>Telegram</span>
-              </a>
-            </div>
-
-            {/* Copy Link Row */}
-            <div className="pt-2 space-y-1.5">
-              <span className="text-[11px] text-[#71717a]">or copy link</span>
-              <div className="flex items-center gap-2 p-2 rounded-xl bg-[#1e1e1e] border border-white/10">
-                <input
-                  type="text"
-                  readOnly
-                  value={link.url}
-                  className="bg-transparent text-xs text-white/90 flex-1 outline-none px-1 font-mono truncate"
+              {/* Post Preview Box */}
+              <div className="flex items-center gap-3.5 p-3 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+                <img
+                  src={primaryImage}
+                  alt={link.title}
+                  className="w-12 h-12 rounded-lg object-cover shrink-0"
                 />
-                <button
-                  type="button"
-                  onClick={handleCopy}
-                  className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white cursor-pointer transition-colors"
-                  title="Kopyala"
+                <div className="min-w-0 flex-1">
+                  <h4 className="text-sm font-bold text-white truncate">{link.title}</h4>
+                  <span className="text-xs text-[#989b9f] lowercase">{link.tags[0] || 'videolar'}</span>
+                </div>
+              </div>
+
+              {/* Share Grid */}
+              <div className="grid grid-cols-4 gap-3 py-2 text-center text-xs text-[#d4d4d4]">
+                <a
+                  href={`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex flex-col items-center gap-2 p-2.5 rounded-xl hover:bg-white/5 cursor-pointer no-underline text-inherit transition-colors"
                 >
-                  {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
-                </button>
+                  <div className="w-11 h-11 rounded-full bg-[#1877f2] flex items-center justify-center shadow-md">
+                    <FacebookIcon className="w-4 h-4 fill-white" />
+                  </div>
+                  <span>Facebook</span>
+                </a>
+
+                <a
+                  href={`https://api.whatsapp.com/send?text=${shareTitle}%20${shareUrl}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex flex-col items-center gap-2 p-2.5 rounded-xl hover:bg-white/5 cursor-pointer no-underline text-inherit transition-colors"
+                >
+                  <div className="w-11 h-11 rounded-full bg-[#00a884] flex items-center justify-center shadow-md">
+                    <WhatsappIcon className="w-4 h-4 fill-white" />
+                  </div>
+                  <span>WhatsApp</span>
+                </a>
+
+                <a
+                  href={`https://twitter.com/intent/tweet?text=${shareTitle}&url=${shareUrl}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex flex-col items-center gap-2 p-2.5 rounded-xl hover:bg-white/5 cursor-pointer no-underline text-inherit transition-colors"
+                >
+                  <div className="w-11 h-11 rounded-full bg-[#000000] border border-white/10 flex items-center justify-center shadow-md">
+                    <TwitterIcon className="w-4 h-4 fill-white" />
+                  </div>
+                  <span>X / Twitter</span>
+                </a>
+
+                <a
+                  href={`https://t.me/share/url?url=${shareUrl}&text=${shareTitle}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex flex-col items-center gap-2 p-2.5 rounded-xl hover:bg-white/5 cursor-pointer no-underline text-inherit transition-colors"
+                >
+                  <div className="w-11 h-11 rounded-full bg-[#229ed9] flex items-center justify-center shadow-md">
+                    <TelegramIcon className="w-4 h-4 fill-white" />
+                  </div>
+                  <span>Telegram</span>
+                </a>
+              </div>
+
+              {/* Copy Link Row */}
+              <div className="pt-2 space-y-2">
+                <span className="text-xs text-[#989b9f]">veya bağlantıyı kopyalayın</span>
+                <div className="flex items-center gap-2 p-2.5 rounded-xl bg-[#252526] border border-white/[0.08]">
+                  <input
+                    type="text"
+                    readOnly
+                    value={link.url}
+                    className="bg-transparent text-xs text-white/90 flex-1 outline-none px-1.5 font-mono truncate"
+                  />
+                  <button
+                    type="button"
+                    onClick={handleCopy}
+                    className="p-2 rounded-lg bg-white/10 hover:bg-white/20 text-white cursor-pointer transition-colors"
+                    title="Kopyala"
+                  >
+                    {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+                  </button>
+                </div>
               </div>
             </div>
+          </div>
 
+          {/* Alt Kapatma Çubuğu (#Sohbet / #Paylaş 1:1 .shH) */}
+          <div className="sh-bottom-bar w-full px-6 py-3.5 border-t border-white/[0.06] bg-transparent flex items-center justify-between shrink-0">
+            <div className="flex items-center gap-2 text-[14px] font-bold text-[#fffdfc]">
+              <span>#Paylaş</span>
+            </div>
+            <button
+              type="button"
+              onClick={() => setIsShareModalOpen(false)}
+              className="w-8 h-8 rounded-lg flex items-center justify-center text-[#989b9f] hover:text-white hover:bg-white/[0.06] transition-colors cursor-pointer"
+              title="Kapat"
+              aria-label="Kapat"
+            >
+              <CloseIcon className="w-4 h-4" />
+            </button>
           </div>
         </div>
       )}

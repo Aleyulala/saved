@@ -10,7 +10,7 @@ import {
   ArchiveIcon,
   Profile1Icon,
   Verify1Icon,
-  Edit3Icon
+  EditPostIcon
 } from './BloggerIcons';
 import { BLOGGER_AUTHORS } from '../utils/bloggerAuthors';
 
@@ -281,7 +281,13 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
     }
   };
 
-  const hasContextOpen = isProfileOpen || isAppearanceOpen || isTranslateOpen;
+  useEffect(() => {
+    if (isPostDetail) {
+      setIsProfileOpen(false);
+    }
+  }, [isPostDetail]);
+
+  const hasContextOpen = (!isPostDetail && isProfileOpen) || isAppearanceOpen || isTranslateOpen;
 
   return (
     <header className={`sticky top-0 ${hasContextOpen ? 'z-[60]' : 'z-40'} w-full h-[60px] bg-[#1e1e1e] border-0 flex items-center select-none`}>
@@ -356,7 +362,7 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
       </div>
 
       {/* Backdrop Blur Overlay (.fCls — negron.xml 1:1 context menu açılınca arka planı bulanıklaştırır) */}
-      {(isProfileOpen || isAppearanceOpen || isTranslateOpen) && (
+      {hasContextOpen && (
         <div
           onClick={() => {
             setIsProfileOpen(false);
@@ -369,7 +375,7 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
       )}
 
       {/* 3. Sağ Bölüm: Blogger XML 1:1 .headIc Butonları */}
-      <div className={`flex items-center justify-end shrink-0 pr-3 sm:pr-4 gap-1 sm:gap-1.5 ml-auto ${(isProfileOpen || isAppearanceOpen || isTranslateOpen) ? '' : 'z-20'}`}>
+      <div className={`flex items-center justify-end shrink-0 pr-3 sm:pr-4 gap-1 sm:gap-1.5 ml-auto ${hasContextOpen ? '' : 'z-20'}`}>
         {/* Mobilde Arama Butonu (<800px .headIc .isSrh) */}
         <button
           onClick={onOpenSearchModal}
@@ -380,7 +386,8 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
           <SearchNormalIcon className="w-4 h-4" />
         </button>
             
-            {/* 1. Buton: Yazarlar & Profil (.isPrf - Profile1Icon & .wPrf) */}
+            {/* 1. Buton: Yazarlar & Profil (.isPrf - Blogger XML 1:1 yalnızca liste/ana sayfada, yazı detayında yerini .isEditPost alır) */}
+            {!isPostDetail && (
             <div className={`relative ${isProfileOpen ? 'z-50' : ''}`} ref={profileRef}>
               <button
                 onClick={() => {
@@ -452,6 +459,7 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
                 </div>
               )}
             </div>
+            )}
 
             {/* 2. Buton: Yer İmleri (.isBkm - svg.archive) */}
             <button
@@ -641,10 +649,23 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
               )}
             </div>
 
-
-
-
-
+            {/* 4. Buton: Konuyu / Bağlantıyı Düzenle (.isEditPost - Blogger XML 1:1, bağlantı detayında sağ üst köşede) */}
+            {isPostDetail && (
+              <button
+                type="button"
+                onClick={() => {
+                  setIsProfileOpen(false);
+                  setIsAppearanceOpen(false);
+                  setIsTranslateOpen(false);
+                  onOpenNewLink();
+                }}
+                className="head-action-btn isEditPost"
+                title={postTitle ? `Bağlantıyı Düzenle: ${postTitle}` : 'Konuyu Düzenle'}
+                aria-label="Bağlantıyı Düzenle"
+              >
+                <EditPostIcon className="w-4 h-4" />
+              </button>
+            )}
           </div>
     </header>
   );

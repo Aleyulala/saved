@@ -38,7 +38,8 @@ type MainViewType =
   | 'tags_list' 
   | 'trash'
   | 'post_detail'
-  | 'privacy';
+  | 'privacy'
+  | 'widget';
 
 export const App: React.FC = () => {
   // Navigation View State (URL Query ?view=privacy ve Hash #privacy Desteğiyle Başlat)
@@ -48,6 +49,9 @@ export const App: React.FC = () => {
       const viewParam = params.get('view') || params.get('tab') || params.get('page');
       const hash = window.location.hash.replace(/^#/, '').toLowerCase();
 
+      if (viewParam === 'widget' || params.has('widget') || params.get('id') === 'topicroom-widget' || hash === 'widget' || hash === 'topicroom-widget') {
+        return 'widget';
+      }
       if (viewParam === 'privacy' || hash === 'privacy' || hash === 'politikalar') {
         return 'privacy';
       }
@@ -485,6 +489,20 @@ export const App: React.FC = () => {
     return 'dashboard';
   }, [activeView]);
 
+  if (activeView === 'widget') {
+    const iframeSrc = `./widget.html${window.location.search || ''}${window.location.hash || ''}`;
+    return (
+      <div id="topicroom-widget" className="w-full h-screen bg-[#18181b] flex flex-col p-0 m-0 overflow-hidden">
+        <iframe
+          src={iframeSrc}
+          className="w-full h-full border-0 bg-transparent block"
+          title="Topicroom Sohbet"
+          allow="clipboard-write"
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col h-screen w-screen overflow-hidden bg-[#1e1e1e] text-[#fffdfc] font-sans antialiased">
       
@@ -625,11 +643,7 @@ export const App: React.FC = () => {
                     onOpenMedia={handleOpenMedia}
                     onOpenChat={() => setIsRightDrawerOpen(true)}
                     onOpenContact={() => {
-                      window.open(
-                        'https://script.google.com/macros/s/AKfycbwcZprdS6F_jJ6nin0YalTKweQKP4t936UgrTnme-d5gA-qHbi986vh6HxdzvA236Of/exec',
-                        '_blank',
-                        'noopener,noreferrer'
-                      );
+                      setContactOpenSignal((prev) => prev + 1);
                     }}
                   />
                 )}

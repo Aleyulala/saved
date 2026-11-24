@@ -91,8 +91,8 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
         />
       )}
 
-      {/* Floating Action Menu Container (Fixed Bottom Right - Blogger .qeF & .tTb 1:1) */}
-      <div className="fixed bottom-6 right-6 z-50 flex items-end gap-2.5 select-none">
+      {/* Floating Action Menu Container (Fixed Bottom Right - Blogger .qeF & .tTb 1:1; mobilde .mob-nav-bar üstü: 86px) */}
+      <div className="fixed bottom-[calc(86px+env(safe-area-inset-bottom,0px))] right-5 min-[897px]:bottom-6 min-[897px]:right-6 z-50 flex items-end gap-2.5 select-none">
         {isOpen ? (
           /* Blogger .qeL 4 Basamaklı Merdiven / Çapraz Genişleyen Menü (Screenshot 3 1:1 Parity) */
           <div className="grid grid-cols-4 gap-2 p-1 animate-in zoom-in-95 duration-150">
