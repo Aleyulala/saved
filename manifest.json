@@ -1,6 +1,6 @@
 {
-  "name": "Saved",
-  "short_name": "Saved",
+  "name": "SAVED",
+  "short_name": "SAVED",
   "description": "Giriş gerektirmeyen, IndexedDB tabanlı, GitHub Pages uyumlu açık kaynaklı bağlantı yöneticisi.",
   "start_url": "./",
   "display": "standalone",

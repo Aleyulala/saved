@@ -381,31 +381,22 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               )}
 
               {/* Blogger XML 1:1 Yer İmleri / Kaydet Butonu (.bm-button — yalnızca üzerine gelince veya kaydedilmişse) */}
-              <div className={`absolute top-2.5 right-2.5 z-10 transition-opacity duration-200 ${pinnedPost.isPinned ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    if (onTogglePin && pinnedPost.id) {
+              <div className="tfxM T">
+                <div className="tfxC">
+                  <button
+                    type="button"
+                    onClick={(e) => {
                       e.stopPropagation();
-                      onTogglePin(pinnedPost.id, pinnedPost.isPinned);
-                    }
-                  }}
-                  className={`tIc bm-button w-7 h-7 rounded-full backdrop-blur-md shadow-sm transition-all duration-200 active:scale-90 cursor-pointer flex items-center justify-center ${
-                    pinnedPost.isPinned 
-                      ? 'bg-black/75 text-amber-400' 
-                      : 'bg-black/65 text-white hover:bg-black/80'
-                  }`}
-                  data-save="Kaydet"
-                  data-saved="Kaydedildi"
-                  title={pinnedPost.isPinned ? 'Kaydedildi' : 'Kaydet'}
-                  aria-label={pinnedPost.isPinned ? 'Kaydedildi' : 'Kaydet'}
-                >
-                  {pinnedPost.isPinned ? (
-                    <ArchiveTickIcon className="w-3.5 h-3.5 text-amber-400" />
-                  ) : (
-                    <ArchiveAddIcon className="w-3.5 h-3.5 text-white" />
-                  )}
-                </button>
+                      if (onTogglePin && pinnedPost.id) onTogglePin(pinnedPost.id, pinnedPost.isPinned);
+                    }}
+                    className={`bM bm-button${pinnedPost.isPinned ? ' added' : ''}`}
+                    title={pinnedPost.isPinned ? 'Kaydedildi' : 'Kaydet'}
+                    aria-label={pinnedPost.isPinned ? 'Kaydedildi' : 'Kaydet'}
+                  >
+                    {pinnedPost.isPinned ? <ArchiveTickIcon className="" /> : <ArchiveAddIcon className="" />}
+                    <span className="bMt">{pinnedPost.isPinned ? 'Kaydedildi' : 'Kaydet'}</span>
+                  </button>
+                </div>
               </div>
             </div>
 

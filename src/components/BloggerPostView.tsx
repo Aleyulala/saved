@@ -481,9 +481,9 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
             title={link.isPinned ? 'Kaydedildi' : 'Kaydet'}
           >
             {link.isPinned ? (
-              <ArchiveTickIcon className="w-4 h-4 text-amber-300" />
+              <ArchiveTickIcon className="w-4 h-4" />
             ) : (
-              <ArchiveIcon className="w-4 h-4" />
+              <ArchiveAddIcon className="w-4 h-4" />
             )}
           </button>
 
