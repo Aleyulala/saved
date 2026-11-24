@@ -319,21 +319,39 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
     }
   };
 
-  // 1 2 3 4 5 Numaratör Butonları (Blogger Plus UI Algoritması)
-  const pageNumbers = useMemo(() => {
-    const items: (number | string)[] = [];
-    if (totalPages <= 7) {
-      for (let i = 1; i <= totalPages; i++) items.push(i);
+  // Blogun sayfalama betiği (renderPager) ile aynı pencere algoritması.
+  // Önceki/sonraki sayfa, ok düğmesine birleşir: "← 1  [2]  3 →  4  5  ...  8"
+  const pagerParts = useMemo(() => {
+    const T = totalPages;
+    const c = currentPage;
+    const pages: (number | string)[] = [];
+    if (T <= 7) {
+      for (let i = 1; i <= T; i++) pages.push(i);
     } else {
-      for (let i = 1; i <= totalPages; i++) {
-        if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
-          items.push(i);
-        } else if (i === currentPage - 2 || i === currentPage + 2) {
-          items.push('...');
-        }
+      pages.push(1);
+      let startP = Math.max(2, c - 2);
+      let endP = Math.min(T - 1, c + 2);
+      if (c <= 3) {
+        startP = 2;
+        endP = Math.min(5, T - 1);
+      } else if (c >= T - 2) {
+        startP = Math.max(2, T - 4);
+        endP = T - 1;
       }
+      if (startP > 2) pages.push('...');
+      for (let i = startP; i <= endP; i++) pages.push(i);
+      if (endP < T - 1) pages.push('...');
+      pages.push(T);
     }
-    return items.filter((item, idx, arr) => item !== '...' || arr[idx - 1] !== '...');
+    const at = pages.indexOf(c);
+    const clean = (list: (number | string)[], drop: number) => {
+      const out = list.filter((x) => x !== drop);
+      return out.filter((x, i, arr) => !(x === '...' && (i === 0 || i === arr.length - 1 || arr[i - 1] === '...')));
+    };
+    return {
+      left: clean(pages.slice(0, at < 0 ? 0 : at), c - 1),
+      right: clean(pages.slice(at < 0 ? 0 : at + 1), c + 1),
+    };
   }, [totalPages, currentPage]);
 
   return (
@@ -381,31 +399,28 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               )}
 
               {/* Blogger XML 1:1 Yer İmleri / Kaydet Butonu (.bm-button — yalnızca üzerine gelince veya kaydedilmişse) */}
-              <div className={`absolute top-2.5 right-2.5 z-10 transition-opacity duration-200 ${pinnedPost.isPinned ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    if (onTogglePin && pinnedPost.id) {
+              <div className="tfxM T">
+                <div className="tfxC">
+                  <button
+                    type="button"
+                    onClick={(e) => {
                       e.stopPropagation();
-                      onTogglePin(pinnedPost.id, pinnedPost.isPinned);
-                    }
-                  }}
-                  className={`tIc bm-button w-7 h-7 rounded-full backdrop-blur-md shadow-sm transition-all duration-200 active:scale-90 cursor-pointer flex items-center justify-center ${
-                    pinnedPost.isPinned 
-                      ? 'bg-black/75 text-amber-400' 
-                      : 'bg-black/65 text-white hover:bg-black/80'
-                  }`}
-                  data-save="Kaydet"
-                  data-saved="Kaydedildi"
-                  title={pinnedPost.isPinned ? 'Kaydedildi' : 'Kaydet'}
-                  aria-label={pinnedPost.isPinned ? 'Kaydedildi' : 'Kaydet'}
-                >
-                  {pinnedPost.isPinned ? (
-                    <ArchiveTickIcon className="w-3.5 h-3.5 text-amber-400" />
-                  ) : (
-                    <ArchiveAddIcon className="w-3.5 h-3.5 text-white" />
-                  )}
-                </button>
+                      if (onTogglePin && pinnedPost.id) onTogglePin(pinnedPost.id, pinnedPost.isPinned);
+                    }}
+                    className={`bM bm-button${pinnedPost.isPinned ? ' added' : ''}`}
+                    title={pinnedPost.isPinned ? 'Kaydedildi' : 'Kaydet'}
+                    aria-label={pinnedPost.isPinned ? 'Kaydedildi' : 'Kaydet'}
+                  >
+                    {pinnedPost.isPinned ? <ArchiveTickIcon className="" /> : <ArchiveAddIcon className="" />}
+                    <span className="bMt">{pinnedPost.isPinned ? 'Kaydedildi' : 'Kaydet'}</span>
+                  </button>
+                </div>
+                <div className="tfxC">
+                  <div className="cmnt" title="Yorumlar">
+                    <MessageNotif1Icon className="" />
+                    <span>{pinnedPost.commentsCount ?? 0}</span>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -475,14 +490,24 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       {/* 6. Blogger Plus UI Sayfalama Numaratörü (.blogN #blog-pager 1 2 3 4 5...) */}
       {totalPages > 1 && (
         <nav aria-label="Sayfalama Numaratörü" className="blogN numP" id="blog-pager">
-          {/* Önceki Sayfa (<) */}
+          {pagerParts.left.map((item, idx) =>
+            item === '...' ? (
+              <div key={`el-l-${idx}`} className="nPst ellipsis" aria-hidden="true">...</div>
+            ) : (
+              <button key={`pg-${item}`} type="button" aria-label={`Sayfa ${item}`} onClick={() => handlePageChange(item as number)}>
+                {item}
+              </button>
+            )
+          )}
+
           {currentPage > 1 ? (
             <button
               type="button"
               className="nwLnk"
+              data-text={String(currentPage - 1)}
               aria-label="Önceki Sayfa"
-              onClick={() => handlePageChange(currentPage - 1)}
               title="Önceki Sayfa"
+              onClick={() => handlePageChange(currentPage - 1)}
             >
               <svg className="line" viewBox="0 0 24 24">
                 <path d="M9.57 5.92993L3.5 11.9999L9.57 18.0699" stroke="currentColor" fill="none" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
@@ -498,40 +523,16 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             </div>
           )}
 
-          {/* Numaralar (1, 2, 3, 4, 5...) */}
-          {pageNumbers.map((item, idx) => {
-            if (item === '...') {
-              return (
-                <div key={`ellipsis-${idx}`} className="nPst ellipsis" aria-hidden="true">
-                  ...
-                </div>
-              );
-            }
-            const pageNum = item as number;
-            const isActive = pageNum === currentPage;
-            return (
-              <button
-                key={`page-${pageNum}`}
-                type="button"
-                className={`page-num-btn ${isActive ? 'active nPst' : ''}`}
-                aria-label={`Sayfa ${pageNum}`}
-                aria-current={isActive ? 'page' : undefined}
-                onClick={() => handlePageChange(pageNum)}
-                title={`Sayfa ${pageNum}`}
-              >
-                {pageNum}
-              </button>
-            );
-          })}
+          <span className="active nPst" aria-current="page">{currentPage}</span>
 
-          {/* Sonraki Sayfa (>) */}
           {currentPage < totalPages ? (
             <button
               type="button"
               className="olLnk"
+              data-text={String(currentPage + 1)}
               aria-label="Sonraki Sayfa"
-              onClick={() => handlePageChange(currentPage + 1)}
               title="Sonraki Sayfa"
+              onClick={() => handlePageChange(currentPage + 1)}
             >
               <svg className="line" viewBox="0 0 24 24">
                 <path d="M14.4301 5.92993L20.5001 11.9999L14.4301 18.0699" stroke="currentColor" fill="none" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
@@ -545,6 +546,16 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 <path d="M3.5 12H20.33" stroke="currentColor" fill="none" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </div>
+          )}
+
+          {pagerParts.right.map((item, idx) =>
+            item === '...' ? (
+              <div key={`el-r-${idx}`} className="nPst ellipsis" aria-hidden="true">...</div>
+            ) : (
+              <button key={`pg-${item}`} type="button" aria-label={`Sayfa ${item}`} onClick={() => handlePageChange(item as number)}>
+                {item}
+              </button>
+            )
           )}
         </nav>
       )}

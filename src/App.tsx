@@ -542,6 +542,9 @@ export const App: React.FC = () => {
           setActiveView('pinned');
           setSearchQuery('');
         }}
+        bookmarkedLinks={allLinks.filter(l => l.isPinned && !l.isTrash && !l.isArchived)}
+        onOpenBookmarkedPost={handleOpenPostPage}
+        onRemoveBookmark={handleTogglePin}
         onOpenSearchModal={() => setIsSearchOverlayOpen(true)}
       />
 

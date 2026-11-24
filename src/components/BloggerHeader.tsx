@@ -11,6 +11,8 @@ import {
   Verify1Icon,
   EditPostIcon
 } from './BloggerIcons';
+import { LinkItem } from '../types';
+import { getFaviconUrl } from '../utils/favicon';
 import { BLOGGER_AUTHORS } from '../utils/bloggerAuthors';
 
 const THEME_COLORS = [
@@ -59,6 +61,9 @@ interface BloggerHeaderProps {
   onGoHome: () => void;
   onOpenSearchModal?: () => void;
   onOpenPinned?: () => void;
+  bookmarkedLinks?: LinkItem[];
+  onOpenBookmarkedPost?: (link: LinkItem) => void;
+  onRemoveBookmark?: (id: number, current: boolean) => void;
   isPostDetail?: boolean;
   postTitle?: string;
 }
@@ -75,6 +80,9 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
   onGoHome,
   onOpenSearchModal,
   onOpenPinned,
+  bookmarkedLinks = [],
+  onOpenBookmarkedPost,
+  onRemoveBookmark,
   isPostDetail = false,
   postTitle
 }) => {
@@ -90,6 +98,8 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
   const translateRef = useRef<HTMLDivElement>(null);
   const appearanceRef = useRef<HTMLDivElement>(null);
   const profileRef = useRef<HTMLDivElement>(null);
+  const bookmarkRef = useRef<HTMLDivElement>(null);
+  const [isBookmarkOpen, setIsBookmarkOpen] = useState(false);
 
   const applyThemeColor = (color: string, themeId: number = 0) => {
     setCurrentThemeColor(color);
@@ -205,6 +215,9 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
       }
       if (profileRef.current && !profileRef.current.contains(e.target as Node)) {
         setIsProfileOpen(false);
+      }
+      if (bookmarkRef.current && !bookmarkRef.current.contains(e.target as Node)) {
+        setIsBookmarkOpen(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -460,18 +473,99 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
             </div>
             )}
 
-            {/* 2. Buton: Yer İmleri (.isBkm - svg.archive) */}
-            <button
-              onClick={() => {
-                if (onOpenPinned) onOpenPinned();
-                else onGoHome();
-              }}
-              className="head-action-btn"
-              title="Sabitlenenler &amp; Yer İmleri"
-              aria-label="Yer İmleri"
-            >
-              <ArchiveIcon className="w-4 h-4" />
-            </button>
+            {/* 2. Buton: Yer İmleri (.isBkm - svg.archive) + açılır panel (.wBkm) */}
+            <div className={`relative ${isBookmarkOpen ? 'z-50' : ''}`} ref={bookmarkRef}>
+              <button
+                type="button"
+                onClick={() => {
+                  setIsProfileOpen(false);
+                  setIsAppearanceOpen(false);
+                  setIsTranslateOpen(false);
+                  setIsBookmarkOpen(prev => !prev);
+                }}
+                className={`head-action-btn ${isBookmarkOpen ? 'is-active' : ''}`}
+                title="Yer İmleri"
+                aria-label="Yer İmleri"
+                aria-expanded={isBookmarkOpen}
+              >
+                <ArchiveIcon className="w-4 h-4" />
+              </button>
+
+              {isBookmarkOpen && (
+                <div className="wBkmX" role="dialog" aria-label="Yazıları Yer İmlerine Ekle">
+                  <div className="bkmWrap">
+                    <div className="bkmH" data-text="Yazıları Yer İmlerine Ekle">
+                      <button type="button" className="c" aria-label="Kapat" onClick={() => setIsBookmarkOpen(false)}>
+                        <CloseIcon className="" />
+                      </button>
+                    </div>
+                    <div className="bkmC" id="dBmPs">
+                      {bookmarkedLinks.length === 0 ? (
+                        <div className="n">
+                          <svg className="line" viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                            <g transform="translate(3.650100, 2.749900)">
+                              <path d="M16.51,5.55 L10.84,0.15 C10.11,0.05 9.29,0 8.39,0 C2.1,0 -1.95399252e-14,2.32 -1.95399252e-14,9.25 C-1.95399252e-14,16.19 2.1,18.5 8.39,18.5 C14.69,18.5 16.79,16.19 16.79,9.25 C16.79,7.83 16.7,6.6 16.51,5.55 Z" />
+                              <path d="M10.2839,0.0827 L10.2839,2.7437 C10.2839,4.6017 11.7899,6.1067 13.6479,6.1067 L16.5989,6.1067" />
+                            </g>
+                          </svg>
+                          <p>
+                            <span className="noBookmarkText">Henüz favori makale listeniz yok...</span>
+                          </p>
+                          <button
+                            type="button"
+                            className="viewAllArticles"
+                            onClick={() => {
+                              setIsBookmarkOpen(false);
+                              onGoHome();
+                            }}
+                          >
+                            <span className="viewAllText">Tüm yazıları gör</span>
+                          </button>
+                        </div>
+                      ) : (
+                        bookmarkedLinks.map((l) => (
+                          <div
+                            key={l.id}
+                            className="item"
+                            onClick={() => {
+                              setIsBookmarkOpen(false);
+                              if (onOpenBookmarkedPost) onOpenBookmarkedPost(l);
+                              else if (onOpenPinned) onOpenPinned();
+                            }}
+                          >
+                            <div className="pThmb">
+                              {l.thumbnail ? (
+                                <img src={l.thumbnail} alt={l.title} referrerPolicy="no-referrer" loading="lazy" />
+                              ) : (
+                                <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                  <img src={getFaviconUrl(l.url)} alt="" style={{ width: 28, height: 28, objectFit: 'contain', borderRadius: 6 }} onError={(e) => { (e.target as HTMLElement).style.display = 'none'; }} />
+                                </div>
+                              )}
+                            </div>
+                            <div className="itmC">
+                              <div className="itmTtl">{l.title || l.url}</div>
+                              <div className="pLbls">{(l.tags && l.tags[0]) || 'genel'}</div>
+                              <button
+                                type="button"
+                                className="del"
+                                title="Yer imini kaldır"
+                                aria-label="Yer imini kaldır"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  if (onRemoveBookmark && l.id) onRemoveBookmark(l.id, true);
+                                }}
+                              >
+                                <CloseIcon className="" />
+                              </button>
+                            </div>
+                          </div>
+                        ))
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
 
             {/* 3. Buton: Ay / Görünüm & Tema (.isMode - svg.moon-sun-icon & .aprW & .thmW) */}
             <div className={`relative ${isAppearanceOpen ? 'z-50' : ''}`} ref={appearanceRef}>
