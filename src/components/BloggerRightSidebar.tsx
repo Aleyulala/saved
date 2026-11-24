@@ -715,24 +715,18 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
           </div>
 
           {/* Blogger Çizgi Navigasyon Butonları */}
-          <div className="flex items-center gap-1.5">
+          <div className="car-nav">
             <button
+              type="button"
               onClick={() => scrollTags('left')}
-              className={`h-1.5 rounded-full transition-all duration-200 ${
-                tagCanScrollLeft 
-                  ? 'w-6 bg-[var(--linkC,#9aa0a6)] cursor-pointer' 
-                  : 'w-4 bg-white/20 opacity-40 cursor-default'
-              }`}
+              className={`car-btn car-prev${tagCanScrollLeft ? ' active' : ' is-disabled'}`}
               title="Önceki Etiketler"
               aria-label="Önceki Etiketler"
             />
             <button
+              type="button"
               onClick={() => scrollTags('right')}
-              className={`h-1.5 rounded-full transition-all duration-200 ${
-                tagCanScrollRight 
-                  ? 'w-6 bg-[var(--linkC,#9aa0a6)] cursor-pointer' 
-                  : 'w-4 bg-white/20 opacity-40 cursor-default'
-              }`}
+              className={`car-btn car-next${tagCanScrollRight ? ' active' : ' is-disabled'}`}
               title="Sonraki Etiketler"
               aria-label="Sonraki Etiketler"
             />
