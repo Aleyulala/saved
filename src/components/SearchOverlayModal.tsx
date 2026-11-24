@@ -482,16 +482,6 @@ export const SearchOverlayModal: React.FC<SearchOverlayModalProps> = ({
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      {/* Kapat Butonu (.adv-close-btn) — negron-v3.xml 1:1 karemsi 32px */}
-      <button
-        onClick={onClose}
-        className="adv-close-btn"
-        aria-label="Aramayı Kapat (Esc)"
-        title="Kapat (Esc)"
-      >
-        <CloseIcon className="w-4 h-4" />
-      </button>
-
       {/* Modal Kartı (.adv-card) — negron-v3.xml 1:1: 660px #111214 / #ffffff kart */}
       <div className="adv-card">
 
@@ -500,9 +490,6 @@ export const SearchOverlayModal: React.FC<SearchOverlayModalProps> = ({
 
           {/* Arama Input (.adv-search-input) */}
           <div className="adv-input-wrap">
-            <span className="adv-input-ico">
-              <SearchNormalIcon className="w-4 h-4" />
-            </span>
             <input
               ref={inputRef}
               type="text"
@@ -531,7 +518,8 @@ export const SearchOverlayModal: React.FC<SearchOverlayModalProps> = ({
             type="button"
             onClick={() => executeSearch()}
             className="adv-search-btn"
-            title="Ara veya Git (Enter)"
+            title="Ara"
+            aria-label="Ara"
           >
             <SearchNormalIcon className="w-4 h-4 stroke-[2.2]" />
           </button>
@@ -634,6 +622,14 @@ export const SearchOverlayModal: React.FC<SearchOverlayModalProps> = ({
           </div>
         )}
 
+      </div>
+
+      {/* Alt çubuk: #Arama + kapat (Esc ve boşluğa tıklama da kapatır) */}
+      <div className="advBottomBar">
+        <span className="advBottomTitle">#Arama</span>
+        <button type="button" onClick={onClose} className="advBottomClose" title="Kapat (Esc)" aria-label="Kapat (Esc)">
+          <CloseIcon className="" />
+        </button>
       </div>
     </div>
   );
