@@ -72,14 +72,15 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
   const authorInitial = (currentAuthor.name || 'A').charAt(0).toUpperCase();
 
   // Greeting
-  const GREETING_OPTIONS = ['Tatlı rüyalar!', 'Günaydın!', 'İyi günler!', 'İyi akşamlar!', 'İyi geceler!'];
-  const [greeting, setGreeting] = useState('Tatlı rüyalar!');
-  const handleToggleGreeting = () => {
-    setGreeting(prev => {
-      const idx = GREETING_OPTIONS.indexOf(prev);
-      return GREETING_OPTIONS[(idx + 1) % GREETING_OPTIONS.length];
-    });
-  };
+  // Blogdaki saat kuralı: <4 İyi uykular, <12 Günaydın, <17 İyi günler, <22 İyi akşamlar, sonrası İyi geceler
+  const greeting = (() => {
+    const h = new Date().getHours();
+    if (h < 4) return 'İyi uykular!';
+    if (h < 12) return 'Günaydın!';
+    if (h < 17) return 'İyi günler!';
+    if (h < 22) return 'İyi akşamlar!';
+    return 'İyi geceler!';
+  })();
 
   // Ticker bar states
   const otherPosts = allLinks.filter(l => l.id !== link.id && !l.isTrash);
@@ -131,126 +132,62 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
       
       {/* 1. Ticker Paneli (#ticker-wrapper - Screenshot 4 & 8: 1:1 Fedora / Linux Adobe Stili) */}
       {isTickerVisible && currentTickerPost && (
-        <div className="h-11 sm:h-12 rounded-[14px] bg-[#282828] border border-white/5 px-3.5 flex items-center justify-between gap-3 text-xs select-none shadow-sm transition-all">
-          <div className="flex items-center gap-3 overflow-hidden flex-1 min-w-0">
-            <button
-              type="button"
-              onClick={() => setIsTickerVisible(false)}
-              className="w-6 h-6 rounded-full bg-[#383838] hover:bg-[#444444] text-[#a3a3a3] hover:text-white flex items-center justify-center shrink-0 transition-colors cursor-pointer"
-              title="Kapat"
-              aria-label="Kapat"
-            >
-              <span className="text-[11px] leading-none">✕</span>
-            </button>
+        <div className="ntfC ntfBar select-none" style={{ marginBottom: 47 }}>
+          <button
+            type="button"
+            onClick={() => setIsTickerVisible(false)}
+            className="c ntfClose"
+            title="Kapat"
+            aria-label="Kapat"
+          >
+            <CloseIcon className="" />
+          </button>
 
-            <span 
+          <div className="bar-slider">
+            <span
               onClick={() => onNavigatePost(currentTickerPost)}
-              className="truncate font-semibold text-white/90 hover:text-[var(--linkC,#9aa0a6)] transition-colors cursor-pointer text-xs sm:text-[13px]"
+              className="ntf-contact-text bar-slide-in"
               title={currentTickerPost.title}
             >
               {currentTickerPost.title}
             </span>
           </div>
 
-          {/* Sağ Taraf Slayt Çizgi Butonları */}
-          <div className="flex items-center gap-1.5 shrink-0">
-            <button 
-              type="button"
-              onClick={handlePrevTicker}
-              className="w-5 h-1.5 rounded-full bg-white/40 hover:bg-white transition-all cursor-pointer"
-              aria-label="Önceki"
-            />
-            <button 
-              type="button"
-              onClick={handleNextTicker}
-              className="w-5 h-1.5 rounded-full bg-white/20 hover:bg-white transition-all cursor-pointer"
-              aria-label="Sonraki"
-            />
+          <div className="panel-slider-dots" aria-hidden="true">
+            <button type="button" onClick={handlePrevTicker} className="dot" aria-label="Önceki" />
+            <button type="button" onClick={handleNextTicker} className="dot active" aria-label="Sonraki" />
           </div>
         </div>
       )}
 
       {/* 2. Page Views & Greetings Rozetleri (.pGV - Screenshot 1 & 4 1:1) */}
       <div className="pGV flex items-center pt-0.5">
-        <div className="pgChip">
-          <BloggerEyeIcon className="text-[#38bdf8]" />
+        <span className="pgChip">
+          <BloggerEyeIcon />
           <span>{link.views || 78} views</span>
-        </div>
+        </span>
 
-        <button 
-          type="button"
-          onClick={handleToggleGreeting}
-          className="pgChip hover:bg-[#333333] transition-colors cursor-pointer active:scale-95"
-          title="Selamlama Değiştir"
-        >
-          <EmojiHappyIcon className="text-amber-400" />
+        <span className="pgChip">
+          <EmojiHappyIcon />
           <span>{greeting}</span>
-        </button>
+        </span>
       </div>
 
       {/* 3. Blogger XML 1:1 Breadcrumbs (.brdCmb) */}
-      <div className="brdCmb flex items-center gap-2 text-[#a1a1aa] pt-0.5 flex-wrap">
-        <button 
-          onClick={onBack} 
-          className="hover:text-white transition-colors cursor-pointer font-medium"
-        >
-          Ana Sayfa
-        </button>
-        
-        <span className="text-[#52525b]">/</span>
-        
-        <span 
-          className="hover:underline cursor-pointer lowercase font-medium text-[var(--linkC,#9aa0a6)]"
-        >
-          {link.tags[0] || collection?.name || 'videolar'}
-        </span>
-
-        {/* Website Logo & Domain pill */}
-        <span className="text-[#52525b]">/</span>
-        <a
-          href={link.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="domPill transition-colors cursor-pointer"
-          title={`Adrese Git: ${link.url}`}
-        >
-          <img
-            src={getFaviconUrl(link.url)}
-            alt={getDomain(link.url)}
-            className="object-contain"
-            onError={(e) => { (e.target as HTMLElement).style.display = 'none'; }}
-          />
-          <span>{getDomain(link.url)}</span>
-        </a>
+      <div className="brdCmb">
+        <button type="button" onClick={onBack} className="brdHm">Ana Sayfa</button>
+        <span className="brdLb">{link.tags[0] || collection?.name || 'videolar'}</span>
       </div>
 
       {/* 4. Gönderi Ana Başlığı (.pTtl - Screenshot 1 & 4 1:1) */}
-      <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-snug pt-1">
+      <h1 className="pTtl">
         {link.title}
       </h1>
 
       {/* 5. Sekmeler: Medya / Yazı (Screenshot 1 & 4 1:1) */}
-      <div className="flex items-center gap-6 border-b border-white/10 pt-2 pb-1 text-sm font-semibold">
-        <button
-          onClick={() => setActiveTab('medya')}
-          className={`pb-2.5 transition-all cursor-pointer relative ${
-            activeTab === 'medya'
-              ? 'text-white border-b-2 border-[var(--linkC,#9aa0a6)] font-bold'
-              : 'text-[#989b9f] hover:text-white'
-          }`}
-        >
-          Medya
-        </button>
-        <button
-          onClick={() => setActiveTab('yazi')}
-          className={`pb-2.5 transition-all cursor-pointer relative ${
-            activeTab === 'yazi'
-              ? 'text-white border-b-2 border-[var(--linkC,#9aa0a6)] font-bold'
-              : 'text-[#989b9f] hover:text-white'
-          }`}
-        >
-          Yazı
-        </button>
+      <div className="pTabs">
+        <button type="button" onClick={() => setActiveTab('medya')} className={activeTab === 'medya' ? 'on' : ''}>Medya</button>
+        <button type="button" onClick={() => setActiveTab('yazi')} className={activeTab === 'yazi' ? 'on' : ''}>Yazı</button>
       </div>
 
       {/* 6. Medya Sekmesi İçeriği (Screenshot 4: Thumbnail Seçici + Büyük Görsel + Tam Ekran Butonu) */}
@@ -264,8 +201,8 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
                   key={idx}
                   type="button"
                   onClick={() => setSelectedMediaIndex(idx)}
-                  className={`w-16 h-11 rounded-lg overflow-hidden border-2 transition-all cursor-pointer relative ${
-                    selectedMediaIndex === idx ? 'border-[var(--linkC,#9aa0a6)] scale-105 shadow-md' : 'border-white/10 opacity-70 hover:opacity-100'
+                  className={`w-[108px] h-[62px] rounded-[10px] overflow-hidden border-2 transition-all cursor-pointer relative ${
+                    selectedMediaIndex === idx ? 'border-[#e8eaed]' : 'border-transparent opacity-90 hover:opacity-100'
                   }`}
                   title={item.type === 'image' ? 'Görseli Göster' : 'Videoyu Oynat'}
                 >

@@ -1761,14 +1761,14 @@ html.lgT:not(.thS) {
 
 /* --- Kayar göstergeler (.panel-slider-dots .dot / .car-nav .car-btn) --- */
 .panel-slider-dots, .car-nav {
-  display: flex; justify-content: center; align-items: center; gap: 8px; margin: 0; padding: 0; height: 18px;
+  display: flex; justify-content: center; align-items: center; gap: 8px; margin: 0; padding: 0; height: 14px;
   box-sizing: border-box; line-height: 1; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
 }
 .panel-slider-dots .dot, .car-nav .car-btn {
   display: inline-block; appearance: none; -webkit-appearance: none; box-sizing: border-box;
-  width: 28px; height: 8px; min-width: 28px; min-height: 8px; border-radius: 99px;
-  background: color-mix(in srgb, var(--line, rgba(128,128,128,0.3)) 85%, transparent);
-  border: 1px solid color-mix(in srgb, var(--line, rgba(128,128,128,0.3)) 65%, transparent);
+  width: 14px; height: 5px; min-width: 14px; min-height: 5px; border-radius: 99px;
+  background: rgba(128, 128, 128, 0.26);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   cursor: pointer; transition: all .24s cubic-bezier(0.16, 1, 0.3, 1); padding: 0; margin: 0; outline: none; flex-shrink: 0; vertical-align: middle; box-shadow: none;
 }
 .panel-slider-dots .dot:hover, .car-nav .car-btn:hover {
@@ -1777,14 +1777,14 @@ html.lgT:not(.thS) {
 }
 .panel-slider-dots .dot:active, .car-nav .car-btn:active { transform: scale(0.95); }
 .panel-slider-dots .dot.active, .car-nav .car-btn.active {
-  width: 34px; height: 7px; background: var(--accent, #5f6368); border-color: var(--accent, #5f6368);
+  width: 24px; height: 5px; background: var(--accent, #5f6368); border-color: var(--accent, #5f6368);
   box-shadow: 0 0 6px color-mix(in srgb, var(--accent, #5f6368) 40%, transparent);
 }
 .panel-slider-dots .dot:focus-visible, .car-nav .car-btn:focus-visible { outline: 2px solid var(--accent, #5f6368); outline-offset: 2px; }
 /* Hero (.sldW) göstergeleri */
 .sldW .car-nav { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); z-index: 20; }
-.sldW .car-nav .car-btn { background: color-mix(in srgb, rgba(255,255,255,0.5) 85%, transparent); border-color: rgba(255,255,255,0.35); }
-.sldW .car-nav .car-btn.active { width: 36px; height: 8px; background: var(--accent, #60cdff); border-color: var(--accent, #60cdff); box-shadow: 0 0 10px color-mix(in srgb, var(--accent, #60cdff) 50%, transparent); }
+.sldW .car-nav .car-btn { background: rgba(255, 255, 255, 0.34); border-color: rgba(255, 255, 255, 0.16); }
+.sldW .car-nav .car-btn.active { width: 24px; height: 5px; background: var(--accent, #60cdff); border-color: var(--accent, #60cdff); box-shadow: 0 0 6px color-mix(in srgb, var(--accent, #60cdff) 40%, transparent); }
 
 /* --- Cam düğmeler (.cmH .x / .fsToolBtn): 32px, r10, hover'da vurgu kenarlığı --- */
 .glassBtn {
@@ -1809,8 +1809,6 @@ html.lgT:not(.thS) {
   .ali-nsone-amp { font-size: 12px; }
   .ntf-contact-text { font-size: 14px; }
   .ntf-contact-text svg { width: 16px; height: 16px; }
-  .panel-slider-dots .dot, .car-nav .car-btn { width: 22px; height: 6px; min-width: 22px; min-height: 6px; }
-  .panel-slider-dots .dot.active, .car-nav .car-btn.active { width: 28px; height: 6px; }
 }
 
 /* --- Görünüm paneli (.aprW) ve Tema renkleri (.thmW) — ali-v3.xml 1:1 --- */
@@ -2209,3 +2207,18 @@ body:has(#advSearchModal.is-open) .zmVideoBtn, body:has(#advSearchModal.is-open)
 #blog-pager.blogN svg, #blog-pager.blogN svg.line { width: 18px !important; height: 18px !important; stroke-width: 2.2 !important; }
 #blog-pager.blogN .nwLnk[data-text]::after { content: attr(data-text); margin: 0 8px; }
 #blog-pager.blogN .olLnk[data-text]::before { content: attr(data-text); margin: 0 8px; }
+.car-nav .car-btn.is-disabled { cursor: default; }
+
+/* --- Yazı sayfası başlığı / gezinti yolu / sekmeler — canlı blogdan ölçüldü --- */
+.pGV .pgChip svg { color: #e8eaed; stroke: currentColor; margin-right: 0; }
+.brdCmb { display: flex; align-items: center; font-size: 14px; margin: 0 0 5px; color: #fffdfc; }
+.brdCmb .brdHm { font-size: 12.6px; opacity: .7; color: #fffdfc; cursor: pointer; padding: 0; }
+.brdCmb .brdHm::after { content: '/'; margin: 0 8px; opacity: .7; }
+.brdCmb .brdHm:hover { opacity: 1; }
+.brdCmb .brdLb { font-size: 14px; color: #fffdfc; text-transform: lowercase; }
+.pTtl { margin: 0; font-size: 36px; font-weight: 700; line-height: 1.3em; color: #fff; }
+@media screen and (max-width: 640px) { .pTtl { font-size: 28px; } }
+.pTabs { display: flex; align-items: flex-end; padding-top: 2px; margin: 0 0 22px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+.pTabs button { padding: 10px 18px; font-size: 14px; font-weight: 700; line-height: 22.4px; color: #e8eaed; border-bottom: 2px solid transparent; margin-bottom: -1px; cursor: pointer; transition: all .2s ease; }
+.pTabs button.on { color: var(--linkC, #5f6368); border-bottom-color: var(--linkC, #5f6368); }
+.pTabs button:hover { opacity: .9; }
