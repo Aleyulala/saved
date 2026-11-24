@@ -12,6 +12,16 @@ export function getFaviconUrl(urlStr: string): string {
   return `https://www.google.com/s2/favicons?domain=${encodeURIComponent(domain)}&sz=128`;
 }
 
+const TR_MONTHS = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'];
+
+/** Blogger temasıyla aynı tarih biçimi: "Eki 13" (withYear=true ise "Eki 23, 2026"). */
+export function formatBlogDate(timestamp: number, withYear = false): string {
+  if (!timestamp) return '';
+  const d = new Date(timestamp);
+  const base = `${TR_MONTHS[d.getMonth()]} ${d.getDate()}`;
+  return withYear ? `${base}, ${d.getFullYear()}` : base;
+}
+
 export function formatDate(timestamp: number): string {
   if (!timestamp) return '';
   const date = new Date(timestamp);

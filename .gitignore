@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Yanlışlıkla oluşan dev/yedek dosyaları
+nsone.xml*
+*.xml.bak

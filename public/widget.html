@@ -1041,35 +1041,61 @@
       updateStepChips(0);
       updateMsgCount();
     }
+    // Gönderilemeyen mesajlar localStorage kuyruğunda tutulur; çevrimiçi olunca / sayfa açılınca yeniden denenir.
+    var QUEUE_KEY = "topicroom_contact_queue_v1";
+    function readQueue() {
+      try { return JSON.parse(localStorage.getItem(QUEUE_KEY) || "[]") || []; } catch (_) { return []; }
+    }
+    function writeQueue(q) {
+      try { localStorage.setItem(QUEUE_KEY, JSON.stringify(q.slice(-20))); } catch (_) {}
+    }
+    function buildQs(item) {
+      return "action=contact_submit" +
+        "&name=" + encodeURIComponent(item.name) +
+        "&email=" + encodeURIComponent(item.email) +
+        "&message=" + encodeURIComponent(item.message) +
+        "&index=" + encodeURIComponent(item.index) +
+        "&source=" + encodeURIComponent(item.source || "widget");
+    }
+    function postItem(item) {
+      // no-cors: yanıt okunamaz ama ağ hatasında promise reddedilir -> kuyruğa alınır.
+      return fetch(APPS_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        keepalive: true,
+        headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
+        body: buildQs(item)
+      });
+    }
+    function flushQueue() {
+      var q = readQueue();
+      if (!q.length) return;
+      writeQueue([]);
+      q.forEach(function(item) {
+        postItem(item).catch(function() {
+          var cur = readQueue(); cur.push(item); writeQueue(cur);
+        });
+      });
+    }
+    window.addEventListener("online", flushQueue);
+    flushQueue();
     function sendMessageToBackend(msg, index, callback) {
+      var item = { name: chatData.name, email: chatData.email, message: msg, index: index, source: WIDGET_SOURCE || "widget" };
+      var done = false;
+      function finish() { if (!done) { done = true; if (callback) callback(); } }
       try {
-        var qs = "action=contact_submit" +
-          "&name=" + encodeURIComponent(chatData.name) +
-          "&email=" + encodeURIComponent(chatData.email) +
-          "&message=" + encodeURIComponent(msg) +
-          "&index=" + encodeURIComponent(index) +
-          "&source=" + encodeURIComponent(WIDGET_SOURCE || "widget");
-        fetch(APPS_SCRIPT_URL, {
-          method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
-          body: qs
-        }).then(function() {
-          if (callback) callback();
-        }).catch(function() {
-          try {
-            var img = new Image();
-            img.src = APPS_SCRIPT_URL + "?" + qs + "&_t=" + Date.now();
-          } catch (_) {}
-          if (callback) callback();
+        postItem(item).then(finish).catch(function() {
+          var q = readQueue(); q.push(item); writeQueue(q);
+          // Yedek: görsel isteği (GET) ile de dene
+          try { var img = new Image(); img.src = APPS_SCRIPT_URL + "?" + buildQs(item) + "&_t=" + Date.now(); } catch (_) {}
+          finish();
         });
       } catch (e) {
-        try {
-          var img = new Image();
-          img.src = APPS_SCRIPT_URL + "?" + qs + "&_t=" + Date.now();
-        } catch (_) {}
-        if (callback) callback();
+        var q2 = readQueue(); q2.push(item); writeQueue(q2);
+        finish();
       }
+      // Ağ takılırsa arayüz kilitli kalmasın
+      setTimeout(finish, 8000);
     }
     function handleStepAction() {
       var val = (inputField.value || "").trim();

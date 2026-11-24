@@ -428,3 +428,10 @@ export const EditPostIcon: React.FC<{ className?: string }> = ({ className = 'w-
 
 
 
+
+// Blogger .aprW onay işareti (16x11 viewBox) — ali-v3.xml
+export const CheckMarkIcon: React.FC<{ className?: string }> = ({ className = 'w-3.5 h-3.5' }) => (
+  <svg className={className} viewBox="0 0 16 11" fill="currentColor" aria-hidden="true">
+    <path d="M14.7813 1.21873C15.0751 1.51248 15.0751 1.98748 14.7813 2.2781L6.53135 10.5312C6.2376 10.825 5.7626 10.825 5.47197 10.5312L1.21885 6.28123C0.925098 5.98748 0.925098 5.51248 1.21885 5.22185C1.5126 4.93123 1.9876 4.9281 2.27822 5.22185L5.99697 8.9406L13.7188 1.21873C14.0126 0.924976 14.4876 0.924976 14.7782 1.21873H14.7813Z" />
+  </svg>
+);

@@ -419,7 +419,7 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
   return (
     <div className="w-full relative select-none">
       <div 
-        className="hero-dark-overlay relative w-full overflow-hidden rounded-[14px] bg-[#000000] shadow-lg group aspect-video cursor-pointer touch-pan-y"
+        className="sldW hero-dark-overlay relative w-full overflow-hidden rounded-[14px] bg-[#000000] shadow-[0_4px_20px_rgba(0,0,0,0.12)] group aspect-video cursor-pointer touch-pan-y"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => {
           setIsPaused(false);
@@ -443,6 +443,8 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
                 isActive ? 'opacity-100 z-10 pointer-events-auto' : 'opacity-0 z-0 pointer-events-none'
               }`}
             >
+              {/* Görsel yüklenemezse görünen degrade zemin */}
+              <div className="absolute inset-0 bg-gradient-to-br from-[#2a2a2e] via-[#1e1e1e] to-[#141416]" />
               {/* Wallpaper Image (Responsive, razor-sharp, cover) */}
               <img
                 src={slide.imageUrl}
@@ -452,15 +454,18 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
                 draggable={false}
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
-                  if (target.src !== FALLBACK_IMAGE) {
+                  // 1) yedek görsel, 2) o da yüklenmezse görseli gizle (arkadaki degrade görünür)
+                  if (target.dataset.fb !== '1' && target.src !== FALLBACK_IMAGE) {
+                    target.dataset.fb = '1';
                     target.src = FALLBACK_IMAGE;
+                  } else {
+                    target.style.visibility = 'hidden';
                   }
                 }}
               />
 
               {/* Gradient overlay for contrast */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-black/15 pointer-events-none" />
-              <div className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-black/35 to-transparent pointer-events-none" />
+              <div className="sldGrad" />
             </div>
           );
         })}
@@ -483,52 +488,34 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
           </button>
         </div>
 
-        {/* Bottom-Left: Blogger Slider .sldL Rozeti + Başlık & Alt Başlık */}
-        <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-5 z-20 flex items-center gap-2.5 text-left">
+        {/* Alt-Sol: .sldTitleWrap > .sldL (16px halka) + .sldT (başlık / alt başlık) — ali-v3.xml 1:1 */}
+        <div className="sldTitleWrap">
           <button
             type="button"
             onClick={(e) => handleCategoryClick(e, activeSlide)}
-            className="hero-cat-pill w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white text-[#1f1f1f] flex items-center justify-center shadow-md hover:scale-105 transition-transform shrink-0 cursor-pointer"
+            className="sldL"
             title={activeSlide.collectionName || activeSlide.category}
             aria-label={activeSlide.collectionName || activeSlide.category}
-          >
-            <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M7 17L17 7M17 7H8M17 7V16" />
-            </svg>
-          </button>
-          <div className="pointer-events-none">
-            <h2 className="text-sm sm:text-base lg:text-lg font-bold text-white tracking-wide drop-shadow-md leading-tight">
-              {toSingleWord(activeSlide.title)}
-            </h2>
-            {activeSlide.subtitle && (
-              <p className="text-[11px] sm:text-xs text-white/80 mt-0.5 max-w-md line-clamp-1 drop-shadow">
-                {toSingleWord(activeSlide.subtitle)}
-              </p>
-            )}
+          />
+          <div className="sldT">
+            <span className="t">{toSingleWord(activeSlide.title)}</span>
+            {activeSlide.subtitle && <span className="c">{toSingleWord(activeSlide.subtitle)}</span>}
           </div>
         </div>
 
-        {/* Bottom-Center: Blogger Saved 2 Line Pills (.sld-car-nav) — aktif çizgi YÖNÜ gösterir (Blogger 1:1) */}
-        <div className="absolute bottom-3.5 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
-          {/* Sol Çizgi Buton (car-prev) */}
+        {/* Alt-Orta: .sld-car-nav > .car-btn (28x8, aktif 36) */}
+        <div className="car-nav">
           <button
+            type="button"
             onClick={handlePrev}
-            className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-              navDir === -1
-                ? 'w-9 bg-[var(--linkC,#9aa0a6)]'
-                : 'w-7 bg-white/40 hover:bg-white/60 hover:scale-110'
-            }`}
+            className={`car-btn${navDir === -1 ? ' active' : ''}`}
             aria-label="Önceki Çizgi Buton"
             title="Önceki Slayt"
           />
-          {/* Sağ Çizgi Buton (car-next) */}
           <button
+            type="button"
             onClick={handleNext}
-            className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-              navDir === 1
-                ? 'w-9 bg-[var(--linkC,#9aa0a6)]'
-                : 'w-7 bg-white/40 hover:bg-white/60 hover:scale-110'
-            }`}
+            className={`car-btn${navDir === 1 ? ' active' : ''}`}
             aria-label="Sonraki Çizgi Buton"
             title="Sonraki Slayt"
           />

@@ -25,11 +25,6 @@
 
 ## 📂 Proje Dizin Yapısı
 
-Bu proje şu konumda yer almaktadır:
-```
-/home/negronn/İndirilenler/saved/
-```
-
 Klasör hiyerarşisi:
 ```
 saved/
