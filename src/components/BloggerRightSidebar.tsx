@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect, useMemo } from 'react';
+import { FullscreenModal } from './FullscreenModal';
 import { createPortal } from 'react-dom';
 import { 
   PulseIcon, 
@@ -774,16 +775,10 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
       </div>
 
       {/* 2. Mobil / Tablet Sağ Çekmece */}
-      {isDrawerOpen && (
-        <div className="lg:hidden fixed inset-0 z-50 flex justify-end">
-          <div
-            className="fixed inset-0 bg-black/70 backdrop-blur-sm transition-opacity"
-            onClick={onCloseDrawer}
-          />
-          <div className="relative w-80 max-w-[85vw] h-full bg-[#1e1e1e] border-0 shadow-2xl p-4 overflow-y-auto z-10 animate-in slide-in-from-right duration-300">
-            {renderContent(true)}
-          </div>
-        </div>
+      {isDrawerOpen && onCloseDrawer && typeof window !== 'undefined' && window.innerWidth < 1024 && (
+        <FullscreenModal title="#Sağ Panel" ariaLabel="Sağ Panel" maxWidth="max-w-xl" onClose={onCloseDrawer}>
+          {renderContent(false)}
+        </FullscreenModal>
       )}
 
       {/* 3. Topicroom Ortak İletişim Tam Ekran Sekmesi (#ContactForm2 — negron-v3.xml & saved ortak kullanım 1:1) */}

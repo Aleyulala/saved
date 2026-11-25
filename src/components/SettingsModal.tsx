@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { FullscreenModal } from './FullscreenModal';
 import { 
   X, 
   Settings as SettingsIcon, 
@@ -52,16 +53,6 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
 
   const bookmarkletCode = `javascript:(function(){var u=encodeURIComponent(window.location.href);var t=encodeURIComponent(document.title);window.open('https://aleyulala.github.io/x/?url='+u+'&title='+t,'_blank');})();`;
 
-  // Esc ile kapat (arama kutusu ve düzenle penceresiyle aynı davranış)
-  useEffect(() => {
-    if (!isOpen) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [isOpen, onClose]);
-
   if (!isOpen) return null;
 
   const handleCopyBookmarklet = () => {
@@ -84,23 +75,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   };
 
   return (
-    <div
-      id="settingsModal"
-      className="editFullscreen fixed inset-0 z-[999999] overflow-y-auto animate-in fade-in duration-200"
-      role="dialog"
-      aria-modal="true"
-      aria-label="Ayarlar"
-      onClick={(e) => {
-        if (e.target === e.currentTarget) onClose();
-      }}
-    >
-      {/* Tam ekran içerik; boşluğa dokunmak da pencereyi kapatır */}
-      <div
-        className="w-full max-w-xl mx-auto px-3 pt-12 pb-[calc(55px+env(safe-area-inset-bottom,0px)+24px)] text-neutral-200"
-        onClick={(e) => {
-          if (e.target === e.currentTarget) onClose();
-        }}
-      >
+    <FullscreenModal id="settingsModal" title="#Ayarlar" ariaLabel="Ayarlar" maxWidth="max-w-xl" onClose={onClose}>
         <div className="flex items-center justify-between px-4 py-4 border-b border-[#333333]">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-xl bg-[#38bdf8]/15 text-[#38bdf8] flex items-center justify-center">
@@ -329,15 +304,6 @@ GNU General Public License for more details.`}
             )}
           </div>
         </div>
-      </div>
-
-      {/* Alt çubuk: #Ayarlar + kapat (Esc ve boşluğa tıklama da kapatır) — arama kutusuyla aynı */}
-      <div className="advBottomBar">
-        <span className="advBottomTitle">#Ayarlar</span>
-        <button type="button" onClick={onClose} className="advBottomClose" title="Kapat (Esc)" aria-label="Kapat (Esc)">
-          <X className="" />
-        </button>
-      </div>
-    </div>
+    </FullscreenModal>
   );
 };

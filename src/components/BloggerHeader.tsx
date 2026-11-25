@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { FullscreenModal } from './FullscreenModal';
 import { 
   MenuHamburgerIcon, 
   SearchNormalIcon, 
@@ -214,6 +215,8 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
   // Close popups on outside click
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
+      // Tam ekran pencereler (portal) kendi kapatma işini yapar
+      if ((e.target as Element | null)?.closest?.('.editFullscreen')) return;
       if (translateRef.current && !translateRef.current.contains(e.target as Node)) {
         setIsTranslateOpen(false);
       }
@@ -306,7 +309,7 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
     }
   }, [isPostDetail]);
 
-  const hasContextOpen = (!isPostDetail && isProfileOpen) || isAppearanceOpen || isTranslateOpen || isBookmarkOpen;
+  const hasContextOpen = isAppearanceOpen;
 
   return (
     <header className={`sticky top-0 ${hasContextOpen ? 'z-[60]' : 'z-40'} w-full h-[60px] bg-[#1e1e1e] border-0 flex items-center select-none`}>
@@ -424,32 +427,9 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
 
               {/* Blogger XML 1:1 Profil / Yazarlar Açılır Kartı */}
               {isProfileOpen && (
-                <div
-                  className="wPrf fixLs context-menu-card bg-[#252526] border-0 animate-in fade-in duration-200 flex flex-col origin-top-right z-50"
-                  style={{
-                    position: 'absolute',
-                    top: 'calc(100% + (var(--headerHc, 60px) - 100%) / 2)',
-                    insetInlineEnd: 0,
-                    width: '285px',
-                    maxHeight: '380px',
-                    borderRadius: '14px',
-                    overflow: 'hidden',
-                    zIndex: 50
-                  }}
-                >
-                  <div className="prfH fixH fixT flex items-center justify-between gap-2 px-4 pt-3.5 pb-1 shrink-0 border-0">
-                    <span className="flex-1 text-[13px] font-medium text-[#989b9f]">Yazarlar</span>
-                    <button
-                      onClick={() => setIsProfileOpen(false)}
-                      className="w-8 h-8 aspect-square rounded-[10px] bg-[#252526] hover:bg-[#333333] text-white hover:text-[var(--linkC,#9aa0a6)] flex items-center justify-center transition-all duration-200 outline-none cursor-pointer shrink-0"
-                      title="Kapat"
-                      aria-label="Kapat"
-                    >
-                      <CloseIcon className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
-
-                  <div className="prfC fixC teamPrfWrap overflow-y-auto px-3 pb-3 pt-1 flex flex-col gap-1.5">
+                <FullscreenModal title="#Yazarlar" ariaLabel="Yazarlar" maxWidth="max-w-md" onClose={() => setIsProfileOpen(false)}>
+                  <h2 className="text-base font-bold text-white px-1 pb-3">Yazarlar</h2>
+                  <div className="prfC fixC teamPrfWrap pb-3 flex flex-col gap-1.5">
                     {Object.values(BLOGGER_AUTHORS).map((author) => (
                       <a
                         key={author.name}
@@ -476,7 +456,7 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
                       </a>
                     ))}
                   </div>
-                </div>
+                </FullscreenModal>
               )}
             </div>
             )}
@@ -500,12 +480,10 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
               </button>
 
               {isBookmarkOpen && (
-                <div className="wBkmX" role="dialog" aria-label="Yazıları Yer İmlerine Ekle">
+                <FullscreenModal title="#Yer İmleri" ariaLabel="Yazıları Yer İmlerine Ekle" maxWidth="max-w-xl" onClose={() => setIsBookmarkOpen(false)}>
+                <div className="wBkmX bkmFull">
                   <div className="bkmWrap">
                     <div className="bkmH" data-text="Yazıları Yer İmlerine Ekle">
-                      <button type="button" className="c" aria-label="Kapat" onClick={() => setIsBookmarkOpen(false)}>
-                        <CloseIcon className="" />
-                      </button>
                     </div>
                     <div className="bkmC" id="dBmPs">
                       {bookmarkedLinks.length === 0 ? (
@@ -572,6 +550,7 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
                     </div>
                   </div>
                 </div>
+                </FullscreenModal>
               )}
             </div>
 
@@ -637,29 +616,9 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
               </button>
 
               {isTranslateOpen && (
-                <div
-                  className="wTrans fixLs context-menu-card bg-[#252526] border-0 animate-in fade-in duration-200 flex flex-col origin-top-right select-none"
-                  style={{
-                    position: 'absolute',
-                    top: 'calc(100% + 8px)',
-                    insetInlineEnd: 0,
-                    width: '200px',
-                    maxHeight: '260px',
-                    borderRadius: '14px',
-                    overflow: 'hidden',
-                    zIndex: 50
-                  }}
-                >
-                  <div className="fixH px-3 py-2.5 border-0 flex items-center justify-between text-xs font-bold text-white">
-                    <span>Dili Seçin</span>
-                    <button
-                      onClick={() => setIsTranslateOpen(false)}
-                      className="text-[#989b9f] hover:text-white p-0.5 cursor-pointer"
-                    >
-                      <CloseIcon className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
-                  <div className="overflow-y-auto p-1.5 space-y-0.5">
+                <FullscreenModal title="#Dil" ariaLabel="Dili seçin" maxWidth="max-w-md" onClose={() => setIsTranslateOpen(false)}>
+                  <h2 className="text-base font-bold text-white px-1 pb-3">Dili Seçin</h2>
+                  <div className="space-y-1">
                     {LANGUAGES.map(lang => (
                       <button
                         key={lang.code}
@@ -673,7 +632,7 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
                       </button>
                     ))}
                   </div>
-                </div>
+                </FullscreenModal>
               )}
             </div>
 
