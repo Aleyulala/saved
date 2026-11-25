@@ -13,13 +13,16 @@ interface UniversalMediaModalProps {
   onClose: () => void;
   items: MediaItem[];
   initialIndex?: number;
+  /** true ise doğrudan kayan pencerede açılır */
+  initialFloating?: boolean;
 }
 
 export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
   isOpen,
   onClose,
   items,
-  initialIndex = 0
+  initialIndex = 0,
+  initialFloating = false
 }) => {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
   const [zoomLevel, setZoomLevel] = useState(1);
@@ -31,6 +34,19 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
   const [imgFailed, setImgFailed] = useState(false);
   const [isFloating, setIsFloating] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
+  // Kayan pencerenin sürüklenmiş konumu (sağ/alt boşluk, px); cihazda hatırlanır
+  const [floatPos, setFloatPos] = useState<{ right: number; bottom: number } | null>(() => {
+    try {
+      const raw = localStorage.getItem('saved_float_pos_v1');
+      if (raw) {
+        const v = JSON.parse(raw);
+        if (typeof v.right === 'number' && typeof v.bottom === 'number') return v;
+      }
+    } catch { /* yok say */ }
+    return null;
+  });
+  const floatBoxRef = useRef<HTMLDivElement>(null);
+  const floatDragRef = useRef<{ x: number; y: number; right: number; bottom: number } | null>(null);
   const dragStartRef = useRef({ x: 0, y: 0, posX: 0, posY: 0 });
   const didDragRef = useRef(false);
 
@@ -42,11 +58,11 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
       setIsWidescreen(false);
       setPanPos({ x: 0, y: 0 });
       didDragRef.current = false;
-      setIsFloating(false);
+      setIsFloating(!!initialFloating);
     } else {
       setIsFloating(false);
     }
-  }, [isOpen, initialIndex, items]);
+  }, [isOpen, initialIndex, items, initialFloating]);
 
   const currentItem = items[currentIndex];
 
@@ -284,7 +300,7 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
       ref={rootRef}
       className={
         isFloating
-          ? 'fixed inset-0 z-[999000] pointer-events-none select-none'
+          ? 'is-floating fixed inset-0 z-[999000] pointer-events-none select-none'
           : 'fixed inset-0 z-[1000000] bg-black flex items-center justify-center select-none animate-in fade-in duration-200'
       }
       style={
@@ -497,9 +513,11 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
       <div 
         className={
           isFloating
-            ? 'fixed left-3 bottom-[calc(66px+env(safe-area-inset-bottom,0px))] min-[897px]:bottom-4 z-10 w-[min(300px,72vw)] pointer-events-auto rounded-[14px] overflow-hidden bg-black border border-white/10 shadow-[0_8px_30px_rgba(0,0,0,0.6)] flex items-center justify-center'
+            ? `fixed z-10 ${isShorts ? 'w-[160px] aspect-[9/16]' : 'w-[260px] min-[897px]:w-[330px] aspect-video'} max-w-[calc(100vw-32px)] pointer-events-auto rounded-2xl overflow-hidden bg-black border border-white/10 shadow-[0_8px_30px_rgba(0,0,0,0.6)] flex items-center justify-center ${floatPos ? '' : 'right-4 bottom-[calc(66px+env(safe-area-inset-bottom,0px))] min-[897px]:right-6 min-[897px]:bottom-6'}`
             : 'relative flex items-center justify-center max-w-[88vw] max-h-[82vh] overflow-hidden'
         }
+        ref={floatBoxRef}
+        style={isFloating && floatPos ? { right: floatPos.right, bottom: floatPos.bottom } : undefined}
         onClick={(e) => e.stopPropagation()}
       >
         {currentItem.type === 'image' && imgFailed && (
@@ -521,7 +539,7 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
             onError={() => setImgFailed(true)}
             src={currentItem.url}
             alt={currentItem.title || 'Blogger Görsel'}
-            className={`${isFloating ? 'max-w-full max-h-[220px] rounded-none' : 'max-w-[86vw] max-h-[82vh] rounded-[18px] sm:rounded-[22px]'} object-contain shadow-2xl transition-transform duration-200 select-none ${
+            className={`${isFloating ? 'w-full h-full object-cover rounded-none' : 'max-w-[86vw] max-h-[82vh] rounded-[18px] sm:rounded-[22px]'} object-contain shadow-2xl transition-transform duration-200 select-none ${
               zoomLevel > 1 ? 'cursor-grab active:cursor-grabbing' : 'cursor-zoom-in'
             }`}
             style={{
@@ -590,34 +608,59 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
         )}
 
         {isFloating && (
-          <div className="absolute top-1.5 right-1.5 z-10 flex items-center gap-1.5">
-            <button
-              type="button"
-              onClick={() => setIsFloating(false)}
-              className="w-7 h-7 inline-flex items-center justify-center rounded-lg bg-black/65 hover:bg-black/85 text-white border border-white/15 cursor-pointer"
-              title="Tam ekrana büyüt"
-              aria-label="Tam ekrana büyüt"
+          <>
+            {/* Sürükleme tutacağı (iframe'ler dokunmayı yuttuğu için üst şerit) */}
+            <div
+              className="absolute top-0 left-0 right-0 h-9 z-10 cursor-grab active:cursor-grabbing touch-none bg-gradient-to-b from-black/55 to-transparent"
+              onPointerDown={(e) => {
+                const box = floatBoxRef.current;
+                if (!box || (e.target as HTMLElement).closest('button')) return;
+                const r = box.getBoundingClientRect();
+                floatDragRef.current = {
+                  x: e.clientX, y: e.clientY,
+                  right: window.innerWidth - r.right,
+                  bottom: window.innerHeight - r.bottom
+                };
+                (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+              }}
+              onPointerMove={(e) => {
+                const d = floatDragRef.current;
+                const box = floatBoxRef.current;
+                if (!d || !box) return;
+                const w = box.offsetWidth, h = box.offsetHeight;
+                const right = Math.max(8, Math.min(window.innerWidth - w - 8, d.right - (e.clientX - d.x)));
+                const bottom = Math.max(8, Math.min(window.innerHeight - h - 8, d.bottom - (e.clientY - d.y)));
+                setFloatPos({ right, bottom });
+              }}
+              onPointerUp={() => {
+                if (floatDragRef.current) {
+                  floatDragRef.current = null;
+                  try { if (floatPos) localStorage.setItem('saved_float_pos_v1', JSON.stringify(floatPos)); } catch { /* yok say */ }
+                }
+              }}
+              onPointerCancel={() => { floatDragRef.current = null; }}
             >
-              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="15 3 21 3 21 9" />
-                <polyline points="9 21 3 21 3 15" />
-                <line x1="21" y1="3" x2="14" y2="10" />
-                <line x1="3" y1="21" x2="10" y2="14" />
-              </svg>
-            </button>
-            <button
-              type="button"
-              onClick={onClose}
-              className="w-7 h-7 inline-flex items-center justify-center rounded-lg bg-black/65 hover:bg-black/85 text-white border border-white/15 cursor-pointer"
-              title="Kapat"
-              aria-label="Kayan pencereyi kapat"
-            >
-              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-            </button>
-          </div>
+              <div className="mx-auto mt-1.5 w-8 h-1 rounded-full bg-white/40" />
+            </div>
+            <div className="absolute top-1.5 right-1.5 z-20 flex items-center gap-1.5">
+              {items.length > 1 && (
+                <>
+                  <button type="button" onClick={() => setCurrentIndex((currentIndex - 1 + items.length) % items.length)} className="w-7 h-7 inline-flex items-center justify-center rounded-lg bg-black/65 hover:bg-black/85 text-white border border-white/15 cursor-pointer" title="Önceki" aria-label="Önceki">
+                    <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
+                  </button>
+                  <button type="button" onClick={() => setCurrentIndex((currentIndex + 1) % items.length)} className="w-7 h-7 inline-flex items-center justify-center rounded-lg bg-black/65 hover:bg-black/85 text-white border border-white/15 cursor-pointer" title="Sonraki" aria-label="Sonraki">
+                    <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
+                  </button>
+                </>
+              )}
+              <button type="button" onClick={() => setIsFloating(false)} className="w-7 h-7 inline-flex items-center justify-center rounded-lg bg-black/65 hover:bg-black/85 text-white border border-white/15 cursor-pointer" title="Tam ekrana büyüt" aria-label="Tam ekrana büyüt">
+                <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 3 21 3 21 9" /><polyline points="9 21 3 21 3 15" /><line x1="21" y1="3" x2="14" y2="10" /><line x1="3" y1="21" x2="10" y2="14" /></svg>
+              </button>
+              <button type="button" onClick={onClose} className="w-7 h-7 inline-flex items-center justify-center rounded-lg bg-black/65 hover:bg-red-500/90 text-white border border-white/15 cursor-pointer" title="Kapat" aria-label="Kayan pencereyi kapat">
+                <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+              </button>
+            </div>
+          </>
         )}
       </div>
     </div>

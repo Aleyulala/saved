@@ -22,7 +22,6 @@ import {
   VkIcon,
   MatrixIcon,
   WhatsappIcon,
-  GoogleChatIcon,
   LabsIcon
 } from './BloggerIcons';
 import { CollectionItem, TagItem } from '../types';
@@ -191,7 +190,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                     rel="nofollow noreferrer noopener"
                     className="w-full flex items-center gap-2 px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-white/[0.06] hover:text-[var(--linkC,#9aa0a6)] transition-colors"
                   >
-                    <GoogleChatIcon className="w-[18px] h-[18px] opacity-80 text-[var(--linkC,#9aa0a6)]" />
+                    <SmsEditIcon className="w-[18px] h-[18px] opacity-80 text-[#9ca3af]" />
                     <span>Chat</span>
                   </a>
                   {/* 2. Tartışmalar */}
@@ -407,7 +406,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                     className="w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-[#252526] hover:text-[var(--linkC,#9aa0a6)] transition-colors"
                   >
                     <div className="flex items-center gap-2">
-                      <GoogleChatIcon className="w-4 h-4 opacity-80 text-[var(--linkC,#9aa0a6)]" />
+                      <SmsEditIcon className="w-4 h-4 opacity-80 text-[#9ca3af]" />
                       <span>Chat</span>
                     </div>
                   </a>

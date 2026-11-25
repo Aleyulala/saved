@@ -1,0 +1,190 @@
+import React, { useEffect, useRef, useCallback } from 'react';
+import { MediaItem } from './UniversalMediaModal';
+
+interface PostMediaSliderProps {
+  items: MediaItem[];
+  index: number;
+  onIndexChange: (i: number) => void;
+  title: string;
+  onOpenMedia?: (items: MediaItem[], initialIndex?: number, opts?: { floating?: boolean }) => void;
+}
+
+/** YouTube gömme/şort adresinden video kimliği */
+const ytId = (url: string): string => {
+  const m = url.match(/(?:embed\/|shorts\/|v=|youtu\.be\/)([A-Za-z0-9_-]{6,})/);
+  return m ? m[1] : '';
+};
+
+const thumbOf = (it: MediaItem): string => {
+  if (it.thumbnail) return it.thumbnail;
+  if (it.type === 'image') return it.url;
+  const id = ytId(it.url);
+  return id ? `https://img.youtube.com/vi/${id}/hqdefault.jpg` : '';
+};
+
+/**
+ * Blogger .post-media-slider 1:1: kaydırmalı slayt, ok düğmeleri, noktalar, tam ekran ve kayan pencere
+ * düğmeleri; altında hikaye (story) şeridi — her küçük resim bir medya, aktif olan çerçeveli.
+ */
+export const PostMediaSlider: React.FC<PostMediaSliderProps> = ({ items, index, onIndexChange, title, onOpenMedia }) => {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const trayRef = useRef<HTMLDivElement>(null);
+  const rafRef = useRef(0);
+  const total = items.length;
+
+  const goTo = useCallback((i: number) => {
+    const t = trackRef.current;
+    const c = Math.max(0, Math.min(total - 1, i));
+    if (t) t.scrollTo({ left: c * t.clientWidth, behavior: 'smooth' });
+    onIndexChange(c);
+  }, [total, onIndexChange]);
+
+  // Dışarıdan indeks değişince (ör. yeni gönderi) izi hizala
+  useEffect(() => {
+    const t = trackRef.current;
+    if (t && Math.round(t.scrollLeft / (t.clientWidth || 1)) !== index) {
+      t.scrollTo({ left: index * t.clientWidth, behavior: 'auto' });
+    }
+  }, [index, total]);
+
+  // Aktif hikaye küçük resmini görünür tut
+  useEffect(() => {
+    const tray = trayRef.current;
+    const el = tray?.children[index] as HTMLElement | undefined;
+    if (tray && el) {
+      tray.scrollTo({ left: el.offsetLeft - (tray.clientWidth - el.offsetWidth) / 2, behavior: 'smooth' });
+    }
+  }, [index]);
+
+  const onScroll = () => {
+    cancelAnimationFrame(rafRef.current);
+    rafRef.current = requestAnimationFrame(() => {
+      const t = trackRef.current;
+      if (!t) return;
+      const i = Math.max(0, Math.min(total - 1, Math.round(t.scrollLeft / (t.clientWidth || 1))));
+      if (i !== index) onIndexChange(i);
+    });
+  };
+
+  const cur = items[index] || items[0];
+  const iconBtn = 'w-8 h-8 rounded-[10px] bg-[#282828] hover:bg-[#333333] text-white border-0 flex items-center justify-center cursor-pointer shadow-md active:scale-95 transition-all';
+
+  return (
+    <div className="post-media-slider space-y-2.5">
+      <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] rounded-[16px] overflow-hidden bg-[#18181b] border border-white/5 shadow-2xl">
+        <div
+          ref={trackRef}
+          onScroll={onScroll}
+          className="flex w-full h-full overflow-x-auto overflow-y-hidden snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          style={{ overscrollBehaviorX: 'contain' }}
+        >
+          {items.map((it, i) => {
+            const isActive = i === index;
+            const thumb = thumbOf(it);
+            return (
+              <div key={i} className="relative w-full h-full shrink-0 snap-center bg-black">
+                {it.type === 'image' ? (
+                  <img
+                    src={it.url}
+                    alt={it.title || title}
+                    referrerPolicy="no-referrer"
+                    draggable={false}
+                    className="w-full h-full object-cover object-center cursor-pointer"
+                    onClick={() => onOpenMedia && onOpenMedia(items, i)}
+                    onError={(e) => {
+                      const t = e.currentTarget;
+                      if (t.src.includes('maxresdefault.jpg')) t.src = t.src.replace('maxresdefault.jpg', 'hqdefault.jpg');
+                    }}
+                  />
+                ) : isActive ? (
+                  it.type === 'video' ? (
+                    <video src={it.url} controls className="w-full h-full object-contain bg-black" />
+                  ) : (
+                    <iframe
+                      src={it.url}
+                      title={it.title || title}
+                      className="w-full h-full border-0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                    />
+                  )
+                ) : (
+                  <button type="button" onClick={() => goTo(i)} className="relative w-full h-full block cursor-pointer border-0 p-0 bg-black" aria-label={it.title || 'Videoyu aç'}>
+                    {thumb && <img src={thumb} alt="" className="w-full h-full object-cover" draggable={false} />}
+                    <span className="absolute inset-0 flex items-center justify-center bg-black/25">
+                      <svg viewBox="0 0 24 24" className="w-12 h-12 drop-shadow-lg" fill="#fff"><polygon points="8,5 19,12 8,19" /></svg>
+                    </span>
+                  </button>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Sağ üst: kayan pencere + tam ekran */}
+        {onOpenMedia && cur && (
+          <div className="absolute top-3 right-3 z-10 flex items-center gap-2">
+            <button type="button" className={iconBtn} title="Kayan Pencere" aria-label="Kayan Pencere" onClick={(e) => { e.stopPropagation(); onOpenMedia(items, index, { floating: true }); }}>
+              <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="14" rx="2" /><rect x="12" y="11" width="7" height="5" rx="1" /></svg>
+            </button>
+            <button type="button" className={iconBtn} title="Tam Ekran" aria-label="Tam Ekran" onClick={(e) => { e.stopPropagation(); onOpenMedia(items, index); }}>
+              <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" /></svg>
+            </button>
+          </div>
+        )}
+
+        {/* Ok düğmeleri */}
+        {total >= 2 && (
+          <>
+            <button type="button" className={`${iconBtn} absolute left-3 top-1/2 -translate-y-1/2 z-10 ${index === 0 ? 'opacity-40 pointer-events-none' : ''}`} aria-label="Önceki" onClick={() => goTo(index - 1)}>
+              <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
+            </button>
+            <button type="button" className={`${iconBtn} absolute right-3 top-1/2 -translate-y-1/2 z-10 ${index === total - 1 ? 'opacity-40 pointer-events-none' : ''}`} aria-label="Sonraki" onClick={() => goTo(index + 1)}>
+              <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
+            </button>
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5">
+              {items.map((_, d) => (
+                <button key={d} type="button" aria-label={`${d + 1}. medya`} onClick={() => goTo(d)} className={`h-[5px] rounded-full border-0 p-0 cursor-pointer transition-all ${d === index ? 'w-6 bg-white/95' : 'w-3.5 bg-white/40'}`} />
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+
+      {/* Hikaye şeridi (.insta-stories-tray) */}
+      {total >= 2 && (
+        <div ref={trayRef} className="insta-stories-tray flex items-center gap-2.5 overflow-x-auto px-1 py-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x" role="tablist" aria-label="Hikaye Listesi">
+          {items.map((it, i) => {
+            const thumb = thumbOf(it);
+            const active = i === index;
+            return (
+              <button
+                key={i}
+                type="button"
+                role="tab"
+                aria-selected={active}
+                aria-label={it.title || `İçerik ${i + 1}`}
+                title={it.title || `İçerik ${i + 1}`}
+                onClick={() => (active ? onOpenMedia && onOpenMedia(items, i) : goTo(i))}
+                className={`insta-story-item shrink-0 snap-start w-[104px] h-[58px] p-0 border-0 bg-transparent cursor-pointer transition-all hover:-translate-y-0.5 active:scale-95 ${active ? 'opacity-100' : 'opacity-70 hover:opacity-100'}`}
+              >
+                <span className={`relative block w-full h-full rounded-lg ${active ? 'shadow-[0_0_0_2px_var(--linkC,#9aa0a6)]' : ''}`}>
+                  <span className="relative block w-full h-full rounded-lg overflow-hidden bg-[#282828]">
+                    {thumb && <img src={thumb} alt="" draggable={false} className="w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />}
+                    <span className="absolute inset-0 flex items-center justify-center bg-black/[0.16]">
+                      {it.type === 'image' ? (
+                        <svg viewBox="0 0 24 24" className="w-[18px] h-[18px] drop-shadow" fill="none" stroke="#fff" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" fill="#fff" /><polyline points="21 15 16 10 5 21" /></svg>
+                      ) : (
+                        <svg viewBox="0 0 24 24" className="w-[18px] h-[18px] drop-shadow" fill="#fff"><polygon points="8,5 19,12 8,19" /></svg>
+                      )}
+                    </span>
+                  </span>
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+};

@@ -20,7 +20,6 @@ import {
   VkIcon,
   MatrixIcon,
   WhatsappIcon,
-  GoogleChatIcon,
   TiktokIcon,
   LabsIcon
 } from './BloggerIcons';
@@ -258,8 +257,8 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
                       className="w-full group flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] transition-colors outline-none"
                     >
                       <div className="flex items-center gap-2">
-                        <span className="font-semibold text-white/95 group-hover:text-[var(--linkC,#9aa0a6)]">Chat</span>
-                        <GoogleChatIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[var(--linkC,#9aa0a6)]" />
+                        <span>Chat</span>
+                        <SmsEditIcon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[#9ca3af] group-hover:text-[var(--linkC,#9aa0a6)]" />
                       </div>
                     </a>
                   </li>

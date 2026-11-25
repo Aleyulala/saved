@@ -120,6 +120,17 @@ export function getCategoryFallbackImage(category = 'genel', title = '', id?: st
   return list[idx];
 }
 
+/** Fotoğrafı olmayan gönderi/sayfalar için kategoriye göre birkaç farklı görsel (slayt + hikaye şeridi için) */
+export function getCategoryFallbackImages(category = 'genel', title = '', id?: string | number, url?: string, count = 3): string[] {
+  const key = resolveCategoryKey(category);
+  const list = CATEGORY_IMAGES[key] || CATEGORY_IMAGES.genel;
+  const first = getCategoryFallbackImage(category, title, id, url);
+  const start = Math.max(0, list.indexOf(first));
+  const out: string[] = [];
+  for (let i = 0; i < Math.min(count, list.length); i++) out.push(list[(start + i) % list.length]);
+  return out;
+}
+
 export function cleanMediaUrl(u: string): string {
   if (!u) return '';
   let res = u.replace(/&amp;/g, '&').trim();

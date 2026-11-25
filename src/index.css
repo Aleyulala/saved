@@ -2281,6 +2281,10 @@ html body #advSearchModal .adv-search-input { padding-left: 12px !important; }
 .wBkmX.bkmFull .bkmH .c { display: none !important; }
 .wBkmX.bkmFull .bkmC { overflow: visible !important; max-height: none !important; padding-inline: 4px; }
 
+/* Kayan pencere: tam ekran siyah katmanı kaldır, sayfa görünür ve tıklanabilir kalsın */
+#fsMediaModal.is-floating { background: transparent !important; pointer-events: none !important; z-index: 999000 !important; display: block !important; }
+#fsMediaModal.is-floating img { max-width: 100% !important; max-height: none !important; border-radius: 0 !important; box-shadow: none !important; }
+
 /* Yazarlar ve Çeviri açılır kartları — Blogger ölçüleriyle: sağ üstte kart, arkası bulanık */
 .popX { position: fixed; top: 58px; right: 21px; width: min(304px, calc(100vw - 24px)); max-height: min(520px, calc(100vh - 130px)); display: flex; flex-direction: column; background: #111111; color: #fffdfc; border-radius: 16px; border: 0; box-shadow: 0 14px 40px rgba(0, 0, 0, 0.55); overflow: hidden; z-index: 70; animation: aprIn .2s cubic-bezier(0.16, 1, 0.3, 1) both; transform-origin: top right; }
 :root.lgT .popX { background: #fff; color: #1f1f1f; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); }
