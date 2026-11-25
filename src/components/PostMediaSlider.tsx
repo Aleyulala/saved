@@ -199,6 +199,22 @@ export const PostMediaSlider: React.FC<PostMediaSliderProps> = ({ items, index, 
 
       </div>
 
+      {/* Slayt göstergesi: Blogger .car-nav gibi altta kısa çizgiler (ok düğmesi yok) */}
+      {total >= 2 && (
+        <div className="flex items-center justify-center gap-2 pt-1" role="tablist" aria-label="Slayt göstergesi">
+          {Array.from({ length: total }, (_, d) => (
+            <button
+              key={d}
+              type="button"
+              role="tab"
+              aria-selected={d === index}
+              aria-label={`${d + 1}. medya`}
+              onClick={() => goTo(d)}
+              className={`h-[5px] rounded-full border-0 p-0 cursor-pointer transition-all duration-200 ${d === index ? 'w-6 bg-[var(--linkC,#9aa0a6)]' : 'w-3.5 bg-white/25 hover:bg-white/45'}`}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
