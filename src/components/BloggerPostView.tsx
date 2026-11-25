@@ -206,7 +206,8 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
           {/* Fotoğrafı olmayan gönderilerde kategori görselleriyle slayt + hikaye şeridi */}
           <PostMediaSlider
             items={hasRealMedia && mediaItems.length > 0 ? mediaItems : fallbackMediaItems}
-            index={Math.min(selectedMediaIndex, (hasRealMedia && mediaItems.length > 0 ? mediaItems : fallbackMediaItems).length - 1)}
+            brand={hasRealMedia && mediaItems.length > 0 ? undefined : { url: link.url, title: link.title }}
+            index={Math.min(selectedMediaIndex, (hasRealMedia && mediaItems.length > 0 ? mediaItems : fallbackMediaItems).length - (hasRealMedia && mediaItems.length > 0 ? 1 : 0))}
             onIndexChange={setSelectedMediaIndex}
             title={link.title}
             onOpenMedia={onOpenMedia}

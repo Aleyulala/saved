@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useCallback } from 'react';
 import { MediaItem } from './UniversalMediaModal';
+import { BrandLogoCard } from './BrandLogoCard';
+import { getFaviconUrl } from '../utils/favicon';
 
 interface PostMediaSliderProps {
   items: MediaItem[];
@@ -7,6 +9,8 @@ interface PostMediaSliderProps {
   onIndexChange: (i: number) => void;
   title: string;
   onOpenMedia?: (items: MediaItem[], initialIndex?: number, opts?: { floating?: boolean }) => void;
+  /** Verilirse ilk slayt marka kartıdır; basınca siteye gider */
+  brand?: { url: string; title: string };
 }
 
 /** YouTube gömme/şort adresinden video kimliği */
@@ -26,11 +30,13 @@ const thumbOf = (it: MediaItem): string => {
  * Blogger .post-media-slider 1:1: kaydırmalı slayt, ok düğmeleri, noktalar, tam ekran ve kayan pencere
  * düğmeleri; altında hikaye (story) şeridi — her küçük resim bir medya, aktif olan çerçeveli.
  */
-export const PostMediaSlider: React.FC<PostMediaSliderProps> = ({ items, index, onIndexChange, title, onOpenMedia }) => {
+export const PostMediaSlider: React.FC<PostMediaSliderProps> = ({ items, index, onIndexChange, title, onOpenMedia, brand }) => {
   const trackRef = useRef<HTMLDivElement>(null);
   const trayRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef(0);
-  const total = items.length;
+  const off = brand ? 1 : 0; // marka slaydı varsa medya indeksleri 1 kayar
+  const total = items.length + off;
+  const openAt = (i: number, floating?: boolean) => onOpenMedia && i >= off && onOpenMedia(items, i - off, floating ? { floating: true } : undefined);
 
   const goTo = useCallback((i: number) => {
     const t = trackRef.current;
@@ -66,7 +72,7 @@ export const PostMediaSlider: React.FC<PostMediaSliderProps> = ({ items, index, 
     });
   };
 
-  const cur = items[index] || items[0];
+  const cur = index >= off ? items[index - off] : undefined;
   const iconBtn = 'w-8 h-8 rounded-[10px] bg-[#282828] hover:bg-[#333333] text-white border-0 flex items-center justify-center cursor-pointer shadow-md active:scale-95 transition-all';
 
   return (
@@ -78,7 +84,15 @@ export const PostMediaSlider: React.FC<PostMediaSliderProps> = ({ items, index, 
           className="flex w-full h-full overflow-x-auto overflow-y-hidden snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           style={{ overscrollBehaviorX: 'contain' }}
         >
-          {items.map((it, i) => {
+          {brand && (
+            <div className="relative w-full h-full shrink-0 snap-center bg-black">
+              <a href={brand.url} target="_blank" rel="noopener noreferrer" title={`${brand.title || brand.url} Sitesine Git`} className="block w-full h-full no-underline active:scale-[0.99] transition-transform">
+                <BrandLogoCard url={brand.url} title={brand.title} size="detail" />
+              </a>
+            </div>
+          )}
+          {items.map((it, k) => {
+            const i = k + off;
             const isActive = i === index;
             const thumb = thumbOf(it);
             return (
@@ -90,7 +104,7 @@ export const PostMediaSlider: React.FC<PostMediaSliderProps> = ({ items, index, 
                     referrerPolicy="no-referrer"
                     draggable={false}
                     className="w-full h-full object-cover object-center cursor-pointer"
-                    onClick={() => onOpenMedia && onOpenMedia(items, i)}
+                    onClick={() => openAt(i)}
                     onError={(e) => {
                       const t = e.currentTarget;
                       if (t.src.includes('maxresdefault.jpg')) t.src = t.src.replace('maxresdefault.jpg', 'hqdefault.jpg');
@@ -124,10 +138,10 @@ export const PostMediaSlider: React.FC<PostMediaSliderProps> = ({ items, index, 
         {/* Sağ üst: kayan pencere + tam ekran */}
         {onOpenMedia && cur && (
           <div className="absolute top-3 right-3 z-10 flex items-center gap-2">
-            <button type="button" className={iconBtn} title="Kayan Pencere" aria-label="Kayan Pencere" onClick={(e) => { e.stopPropagation(); onOpenMedia(items, index, { floating: true }); }}>
+            <button type="button" className={iconBtn} title="Kayan Pencere" aria-label="Kayan Pencere" onClick={(e) => { e.stopPropagation(); openAt(index, true); }}>
               <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="14" rx="2" /><rect x="12" y="11" width="7" height="5" rx="1" /></svg>
             </button>
-            <button type="button" className={iconBtn} title="Tam Ekran" aria-label="Tam Ekran" onClick={(e) => { e.stopPropagation(); onOpenMedia(items, index); }}>
+            <button type="button" className={iconBtn} title="Tam Ekran" aria-label="Tam Ekran" onClick={(e) => { e.stopPropagation(); openAt(index); }}>
               <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" /></svg>
             </button>
           </div>
@@ -143,7 +157,7 @@ export const PostMediaSlider: React.FC<PostMediaSliderProps> = ({ items, index, 
               <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
             </button>
             <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5">
-              {items.map((_, d) => (
+              {Array.from({ length: total }, (_, d) => (
                 <button key={d} type="button" aria-label={`${d + 1}. medya`} onClick={() => goTo(d)} className={`h-[5px] rounded-full border-0 p-0 cursor-pointer transition-all ${d === index ? 'w-6 bg-white/95' : 'w-3.5 bg-white/40'}`} />
               ))}
             </div>
@@ -154,7 +168,25 @@ export const PostMediaSlider: React.FC<PostMediaSliderProps> = ({ items, index, 
       {/* Hikaye şeridi (.insta-stories-tray) */}
       {total >= 2 && (
         <div ref={trayRef} className="insta-stories-tray flex items-center gap-2.5 overflow-x-auto px-1 py-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x" role="tablist" aria-label="Hikaye Listesi">
-          {items.map((it, i) => {
+          {brand && (
+            <button
+              type="button"
+              role="tab"
+              aria-selected={index === 0}
+              aria-label={brand.title}
+              title={brand.title}
+              onClick={() => goTo(0)}
+              className={`insta-story-item shrink-0 snap-start w-[104px] h-[58px] p-0 border-0 bg-transparent cursor-pointer transition-all hover:-translate-y-0.5 active:scale-95 ${index === 0 ? 'opacity-100' : 'opacity-70 hover:opacity-100'}`}
+            >
+              <span className={`relative block w-full h-full rounded-lg ${index === 0 ? 'shadow-[0_0_0_2px_var(--linkC,#9aa0a6)]' : ''}`}>
+                <span className="relative flex items-center justify-center w-full h-full rounded-lg overflow-hidden bg-[#1c1e26]">
+                  <img src={getFaviconUrl(brand.url)} alt="" draggable={false} className="w-7 h-7 rounded-md" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                </span>
+              </span>
+            </button>
+          )}
+          {items.map((it, k) => {
+            const i = k + off;
             const thumb = thumbOf(it);
             const active = i === index;
             return (
@@ -165,7 +197,7 @@ export const PostMediaSlider: React.FC<PostMediaSliderProps> = ({ items, index, 
                 aria-selected={active}
                 aria-label={it.title || `İçerik ${i + 1}`}
                 title={it.title || `İçerik ${i + 1}`}
-                onClick={() => (active ? onOpenMedia && onOpenMedia(items, i) : goTo(i))}
+                onClick={() => (active ? openAt(i) : goTo(i))}
                 className={`insta-story-item shrink-0 snap-start w-[104px] h-[58px] p-0 border-0 bg-transparent cursor-pointer transition-all hover:-translate-y-0.5 active:scale-95 ${active ? 'opacity-100' : 'opacity-70 hover:opacity-100'}`}
               >
                 <span className={`relative block w-full h-full rounded-lg ${active ? 'shadow-[0_0_0_2px_var(--linkC,#9aa0a6)]' : ''}`}>
