@@ -93,17 +93,20 @@ export const App: React.FC = () => {
     isOpen: boolean;
     items: MediaItem[];
     initialIndex: number;
+    floating: boolean;
   }>({
     isOpen: false,
     items: [],
-    initialIndex: 0
+    initialIndex: 0,
+    floating: false
   });
 
-  const handleOpenMedia = (items: MediaItem[], initialIndex = 0) => {
+  const handleOpenMedia = (items: MediaItem[], initialIndex = 0, opts?: { floating?: boolean }) => {
     setMediaModal({
       isOpen: true,
       items,
-      initialIndex
+      initialIndex,
+      floating: !!opts?.floating
     });
   };
 
@@ -1081,6 +1084,7 @@ export const App: React.FC = () => {
         onClose={() => setMediaModal(prev => ({ ...prev, isOpen: false }))}
         items={mediaModal.items}
         initialIndex={mediaModal.initialIndex}
+        initialFloating={mediaModal.floating}
       />
 
     </div>

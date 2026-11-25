@@ -2280,3 +2280,7 @@ html body #advSearchModal .adv-search-input { padding-left: 12px !important; }
 .wBkmX.bkmFull { position: static !important; width: 100% !important; max-height: none !important; min-height: 0 !important; border-radius: 0 !important; background: transparent !important; box-shadow: none !important; animation: none !important; overflow: visible !important; color: inherit; }
 .wBkmX.bkmFull .bkmH .c { display: none !important; }
 .wBkmX.bkmFull .bkmC { overflow: visible !important; max-height: none !important; padding-inline: 4px; }
+
+/* Kayan pencere: tam ekran siyah katmanı kaldır, sayfa görünür ve tıklanabilir kalsın */
+#fsMediaModal.is-floating { background: transparent !important; pointer-events: none !important; z-index: 999000 !important; display: block !important; }
+#fsMediaModal.is-floating img { max-width: 100% !important; max-height: none !important; border-radius: 0 !important; box-shadow: none !important; }
