@@ -5181,5 +5181,14 @@ export const SEED_LINKS: RawSeedLink[] = [
     "color": "#f59e0b",
     "isPinned": false,
     "description": "Topluluk ve çevrimiçi kurs platformu"
+  },
+  {
+    "title": "Element",
+    "url": "https://element.io/",
+    "categoryName": "Sosyal",
+    "tags": ["matrix", "sohbet", "topluluk"],
+    "color": "#0dbd8b",
+    "isPinned": false,
+    "description": "Matrix ağı için güvenli ve merkeziyetsiz sohbet uygulaması"
   }
 ];
