@@ -20,6 +20,7 @@ import { LinkDetailModal } from './components/LinkDetailModal';
 import { ImportExportModal } from './components/ImportExportModal';
 import { SettingsModal } from './components/SettingsModal';
 import { SohbetModal } from './components/SohbetModal';
+import { CookieNotice } from './components/CookieNotice';
 import { BloggerFooter } from './components/BloggerFooter';
 import { BloggerPostView } from './components/BloggerPostView';
 import { BloggerPrivacyView } from './components/BloggerPrivacyView';
@@ -527,6 +528,7 @@ export const App: React.FC = () => {
   return (
     <div className="flex flex-col h-screen w-screen overflow-hidden bg-[#1e1e1e] text-[#fffdfc] font-sans antialiased">
       {isSohbetOpen && <SohbetModal onClose={() => setIsSohbetOpen(false)} />}
+      <CookieNotice onOpenPolicy={() => setActiveView('privacy')} />
       
       {/* 1. ÜST BAR: Blogger Header (.mainH - Fixed at Top) */}
       <BloggerHeader
