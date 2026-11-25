@@ -479,7 +479,9 @@ export const SearchOverlayModal: React.FC<SearchOverlayModalProps> = ({
       id="advSearchModal"
       className="is-open"
       onClick={(e) => {
-        if (e.target === e.currentTarget) onClose();
+        // Arama kutusu, motor hapları, sonuç listesi ve alt çubuk dışında herhangi bir boşluğa dokunmak kapatır
+        const t = e.target as HTMLElement;
+        if (!t.closest('.adv-input-bar, .adv-pills-row, .adv-item, .adv-results-header, .advBottomBar')) onClose();
       }}
     >
       {/* Modal Kartı (.adv-card) — negron-v3.xml 1:1: 660px #111214 / #ffffff kart */}

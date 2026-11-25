@@ -7,7 +7,9 @@ import {
   Copy, 
   ChevronLeft, 
   ChevronRight,
-  FileText
+  FileText,
+  Mail,
+  Link2 as LinkIcon2
 } from 'lucide-react';
 import { CollectionItem, LinkItem } from '../types';
 import { formatDate, getDomain, getFaviconUrl } from '../utils/favicon';
@@ -403,102 +405,61 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
           id="ShareFullscreenModal"
           className="sh-fullscreen fixed inset-0 z-[999999] w-screen h-[100dvh] bg-[#1e1e1e] flex flex-col justify-between animate-in fade-in duration-150"
         >
-          {/* Ortalanmış Paylaşım İçeriği */}
-          <div className="flex-1 w-full flex items-center justify-center p-6 overflow-y-auto">
-            <div
-              onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-[540px] space-y-6 text-white"
-            >
-              {/* Header */}
-              <div className="flex items-center justify-between pb-2 border-b border-white/[0.08]">
-                <span className="text-sm font-bold text-[#989b9f]">
-                  Diğer uygulamalarla paylaşın
-                </span>
-              </div>
+          {/* Paylaşım içeriği — Blogger .shBr 1:1: başlık, yazı kartı, 4×2 yuvarlak düğme, bağlantı kopyala */}
+          <div className="shBody flex-1 w-full flex items-center justify-center py-6 px-[21px] overflow-y-auto">
+            <div onClick={(e) => e.stopPropagation()} className="w-full max-w-[540px] text-white">
+              <div className="shTitle">Diğer uygulamalarla paylaşın</div>
 
-              {/* Post Preview Box */}
-              <div className="flex items-center gap-3.5 p-3 rounded-xl bg-white/[0.03] border border-white/[0.06]">
-                <img
-                  src={primaryImage}
-                  alt={link.title}
-                  className="w-12 h-12 rounded-lg object-cover shrink-0"
-                />
+              <div className="shCard">
+                <img src={primaryImage} alt={link.title} className="shThumb" />
                 <div className="min-w-0 flex-1">
-                  <h4 className="text-sm font-bold text-white truncate">{link.title}</h4>
-                  <span className="text-xs text-[#989b9f] lowercase">{link.tags[0] || 'videolar'}</span>
+                  <h4 className="shCardT">{link.title}</h4>
+                  <span className="shCardS">{link.tags[0] || 'videolar'}</span>
                 </div>
               </div>
 
-              {/* Share Grid */}
-              <div className="grid grid-cols-4 gap-3 py-2 text-center text-xs text-[#d4d4d4]">
-                <a
-                  href={`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex flex-col items-center gap-2 p-2.5 rounded-xl hover:bg-white/5 cursor-pointer no-underline text-inherit transition-colors"
-                >
-                  <div className="w-11 h-11 rounded-full bg-[#1877f2] flex items-center justify-center shadow-md">
-                    <FacebookIcon className="w-4 h-4 fill-white" />
-                  </div>
+              <div className="shGrid">
+                <a className="shBtn" target="_blank" rel="noreferrer" href={`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`}>
+                  <span className="shCirc" style={{ background: '#1877f2' }}><FacebookIcon className="w-[26px] h-[26px] fill-white" /></span>
                   <span>Facebook</span>
                 </a>
-
-                <a
-                  href={`https://api.whatsapp.com/send?text=${shareTitle}%20${shareUrl}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex flex-col items-center gap-2 p-2.5 rounded-xl hover:bg-white/5 cursor-pointer no-underline text-inherit transition-colors"
-                >
-                  <div className="w-11 h-11 rounded-full bg-[#00a884] flex items-center justify-center shadow-md">
-                    <WhatsappIcon className="w-4 h-4 fill-white" />
-                  </div>
+                <a className="shBtn" target="_blank" rel="noreferrer" href={`https://api.whatsapp.com/send?text=${shareTitle}%20${shareUrl}`}>
+                  <span className="shCirc" style={{ background: '#25d366' }}><WhatsappIcon className="w-[26px] h-[26px] fill-white" /></span>
                   <span>WhatsApp</span>
                 </a>
-
-                <a
-                  href={`https://twitter.com/intent/tweet?text=${shareTitle}&url=${shareUrl}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex flex-col items-center gap-2 p-2.5 rounded-xl hover:bg-white/5 cursor-pointer no-underline text-inherit transition-colors"
-                >
-                  <div className="w-11 h-11 rounded-full bg-[#000000] border border-white/10 flex items-center justify-center shadow-md">
-                    <TwitterIcon className="w-4 h-4 fill-white" />
-                  </div>
+                <a className="shBtn" target="_blank" rel="noreferrer" href={`https://twitter.com/intent/tweet?text=${shareTitle}&url=${shareUrl}`}>
+                  <span className="shCirc" style={{ background: '#000', border: '1px solid rgba(255,255,255,0.1)' }}><TwitterIcon className="w-[26px] h-[26px] fill-white" /></span>
                   <span>X / Twitter</span>
                 </a>
-
-                <a
-                  href={`https://t.me/share/url?url=${shareUrl}&text=${shareTitle}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex flex-col items-center gap-2 p-2.5 rounded-xl hover:bg-white/5 cursor-pointer no-underline text-inherit transition-colors"
-                >
-                  <div className="w-11 h-11 rounded-full bg-[#229ed9] flex items-center justify-center shadow-md">
-                    <TelegramIcon className="w-4 h-4 fill-white" />
-                  </div>
+                <a className="shBtn" target="_blank" rel="noreferrer" href={`https://t.me/share/url?url=${shareUrl}&text=${shareTitle}`}>
+                  <span className="shCirc" style={{ background: '#229ed9' }}><TelegramIcon className="w-[26px] h-[26px] fill-white" /></span>
                   <span>Telegram</span>
+                </a>
+                <a className="shBtn" target="_blank" rel="noreferrer" href={`https://pinterest.com/pin/create/button/?url=${shareUrl}&description=${shareTitle}`}>
+                  <span className="shCirc shGray"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" strokeWidth="2" /><path d="M12.6 6.2c-3 0-4.6 2-4.6 4.1 0 1 .5 2.2 1.3 2.6.2.1.3 0 .3-.1l.2-.8c0-.2 0-.3-.1-.4-.4-.5-.7-1.100-.7-1.900 0-1.900 1.400-3.700 3.800-3.700 2.100 0 3.300 1.300 3.300 3 0 2.200-1 4.100-2.400 4.100-.8 0-1.400-.7-1.200-1.500.2-1 .7-2 .7-2.700 0-.6-.3-1.100-1-1.100-.8 0-1.500.8-1.500 2 0 .7.2 1.200.2 1.200l-1 4.100c-.2.900-.1 2 0 2.800 0 .1.100.1.200 0 .1-.1.900-1.200 1.200-2.300l.5-1.800c.3.500 1 .9 1.800.9 2.400 0 4-2.200 4-5.100 0-2.200-1.900-4.300-4.800-4.300z" /></svg></span>
+                  <span>Pinterest</span>
+                </a>
+                <a className="shBtn" target="_blank" rel="noreferrer" href={`https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`}>
+                  <span className="shCirc shGray"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M4.500 9h3.200v10.500H4.500zM6.100 3.900a1.900 1.900 0 110 3.800 1.900 1.900 0 010-3.800zM9.800 9h3v1.400h.1c.4-.8 1.500-1.700 3.100-1.700 3.300 0 3.900 2.200 3.900 5v5.800h-3.200v-5.100c0-1.200 0-2.800-1.700-2.800s-2 1.300-2 2.700v5.200H9.800z" /></svg></span>
+                  <span>LinkedIn</span>
+                </a>
+                <a className="shBtn" target="_blank" rel="noreferrer" href={`https://social-plugins.line.me/lineit/share?url=${shareUrl}`}>
+                  <span className="shCirc shGray"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M12 3C6.800 3 2.600 6.400 2.600 10.600c0 3.700 3.300 6.800 7.800 7.400.3.100.7.200.8.500.1.300.1.700 0 1l-.1.900c0 .3-.2 1 .9.500s5.800-3.400 7.900-5.800c1.400-1.600 2.100-3.200 2.100-4.500C20.000 6.400 16.800 3 12 3z" /><text x="12" y="12.600" textAnchor="middle" fontSize="5.200" fontWeight="800" fill="#2b2b2b" fontFamily="Arial,sans-serif">LINE</text></svg></span>
+                  <span>Line</span>
+                </a>
+                <a className="shBtn" href={`mailto:?subject=${shareTitle}&body=${shareUrl}`}>
+                  <span className="shCirc shGray"><Mail className="w-[26px] h-[26px]" /></span>
+                  <span>Email</span>
                 </a>
               </div>
 
-              {/* Copy Link Row */}
-              <div className="pt-2 space-y-2">
-                <span className="text-xs text-[#989b9f]">veya bağlantıyı kopyalayın</span>
-                <div className="flex items-center gap-2 p-2.5 rounded-xl bg-[#252526] border border-white/[0.08]">
-                  <input
-                    type="text"
-                    readOnly
-                    value={link.url}
-                    className="bg-transparent text-xs text-white/90 flex-1 outline-none px-1.5 font-mono truncate"
-                  />
-                  <button
-                    type="button"
-                    onClick={handleCopy}
-                    className="p-2 rounded-lg bg-white/10 hover:bg-white/20 text-white cursor-pointer transition-colors"
-                    title="Kopyala"
-                  >
-                    {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
-                  </button>
-                </div>
+              <div className="shOr">or copy link</div>
+              <div className="shCopy">
+                <LinkIcon2 className="w-5 h-5 shrink-0 opacity-70" />
+                <input type="text" readOnly value={link.url} className="shUrl" />
+                <button type="button" onClick={handleCopy} className="shCopyBtn" title="Kopyala" aria-label="Kopyala">
+                  {copied ? <Check className="w-5 h-5 text-emerald-400" /> : <Copy className="w-5 h-5" />}
+                </button>
               </div>
             </div>
           </div>

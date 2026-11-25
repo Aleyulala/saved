@@ -2284,3 +2284,52 @@ html body #advSearchModal .adv-search-input { padding-left: 12px !important; }
 /* Kayan pencere: tam ekran siyah katmanı kaldır, sayfa görünür ve tıklanabilir kalsın */
 #fsMediaModal.is-floating { background: transparent !important; pointer-events: none !important; z-index: 999000 !important; display: block !important; }
 #fsMediaModal.is-floating img { max-width: 100% !important; max-height: none !important; border-radius: 0 !important; box-shadow: none !important; }
+
+/* Yazarlar ve Çeviri açılır kartları — Blogger ölçüleriyle: sağ üstte kart, arkası bulanık */
+.popX { position: fixed; top: 58px; right: 21px; width: min(304px, calc(100vw - 24px)); max-height: min(520px, calc(100vh - 130px)); display: flex; flex-direction: column; background: #111111; color: #fffdfc; border-radius: 16px; border: 0; box-shadow: 0 14px 40px rgba(0, 0, 0, 0.55); overflow: hidden; z-index: 70; animation: aprIn .2s cubic-bezier(0.16, 1, 0.3, 1) both; transform-origin: top right; }
+:root.lgT .popX { background: #fff; color: #1f1f1f; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); }
+.popTrans { width: min(209px, calc(100vw - 24px)); }
+.popH { display: flex; align-items: center; justify-content: space-between; padding: 20px 14px 0 15px; font-size: 14px; font-weight: 700; flex-shrink: 0; }
+.popAuthors .popH { height: 83px; align-items: center; padding-top: 0; padding-bottom: 15px; }
+.popTrans .popH { font-weight: 400; font-size: 14px; opacity: .72; padding: 14px 21px 6px; }
+.popClose { width: 33px; height: 33px; display: inline-flex; align-items: center; justify-content: center; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.09); background: rgba(255, 255, 255, 0.02); color: inherit; cursor: pointer; }
+:root.lgT .popClose { border-color: rgba(0, 0, 0, 0.1); }
+.popClose:hover { background: rgba(255, 255, 255, 0.07); }
+.popBody { padding: 0 13px 14px; overflow-y: auto; }
+.popAuthors .popBody { display: flex; flex-direction: column; gap: 11px; padding-top: 0; }
+.popList { padding: 4px 0 8px; margin-top: 0 !important; }
+.popItem { display: flex; align-items: center; width: 100%; height: 40px; padding: 0 16px 0 0; font-size: 14px; text-align: start; color: inherit; background: transparent; border: 0; cursor: pointer; }
+.popItem:hover { background: rgba(255, 255, 255, 0.06); }
+:root.lgT .popItem:hover { background: rgba(0, 0, 0, 0.05); }
+.popTick { width: 38px; display: inline-flex; justify-content: center; flex-shrink: 0; opacity: .85; padding-left: 0; }
+.popAuthors .prfAuthorBlock { color: inherit; border: 1px solid rgba(255, 255, 255, 0.07); background: rgba(255, 255, 255, 0.015); border-radius: 14px; padding: 11px 12px 12px; }
+:root.lgT .popAuthors .prfAuthorBlock { border-color: rgba(0, 0, 0, 0.08); background: transparent; }
+.popAuthors .prfName { font-size: 15px; }
+.popAuthors .prfRole { font-size: 12px; font-weight: 700; }
+.popAuthors .prfBio { font-size: 12.5px; line-height: 1.3; margin-top: 5px; }
+/* Görünüm paneli: diğer açılır kartlarla aynı konum ve ölçü */
+.aprX { position: fixed; top: 58px; inset-inline-end: 21px; width: 156px; min-width: 0; max-width: none; padding: 0 0 8px; background: #111111; border: 0; border-radius: 16px; font-size: 14px; box-shadow: 0 14px 40px rgba(0, 0, 0, 0.55); }
+.aprX::before { padding: 14px 12px 6px; font-size: 14px; opacity: .72; }
+.aprX > button { height: 40px; padding-block: 0; padding-inline: 7px 12px; border-radius: 0; }
+.aprX > button::before { width: 20px; margin-inline-end: 10px; }
+
+/* Paylaş tam ekranı — Blogger ölçüleri */
+.shTitle { font-size: 14px; color: #989b9f; margin-bottom: 26px; }
+.shCard { display: flex; align-items: center; gap: 16px; padding: 12px 18px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.07); background: rgba(255, 255, 255, 0.02); }
+.shThumb { width: 73px; height: 46px; border-radius: 8px; object-fit: cover; flex-shrink: 0; }
+.shCardT { font-size: 15px; font-weight: 500; margin: 0 0 3px; color: #fffdfc; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.shCardS { font-size: 14px; color: #989b9f; }
+.shGrid { display: grid; grid-template-columns: repeat(4, 1fr); row-gap: 37px; margin: 40px 0 36px; text-align: center; }
+.shBtn { display: flex; flex-direction: column; align-items: center; gap: 12px; font-size: 14px; color: #d4d4d4; text-decoration: none; cursor: pointer; }
+.shCirc { width: 63px; height: 63px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; transition: transform .15s ease; }
+.shBtn:hover .shCirc { transform: scale(1.06); }
+.shGray { background: #2b2b2b; color: #d4d4d4; }
+.shOr { font-size: 16px; color: #d4d4d4; margin-bottom: 14px; }
+.shCopy { display: flex; align-items: center; gap: 14px; height: 65px; padding: 0 20px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.07); background: rgba(255, 255, 255, 0.02); }
+.shUrl { flex: 1; min-width: 0; background: transparent; border: 0; outline: 0; color: #fffdfc; font-size: 15px; text-overflow: ellipsis; }
+.shCopyBtn { background: transparent; border: 0; color: inherit; cursor: pointer; padding: 4px; }
+:root.lgT .shTitle, :root.lgT .shCardS { color: #5f6368; }
+:root.lgT .shCardT, :root.lgT .shUrl { color: #1f1f1f; }
+:root.lgT .shGray { background: #e8eaed; color: #3c4043; }
+:root.lgT .shBtn, :root.lgT .shOr { color: #3c4043; }
+:root.lgT .shCard, :root.lgT .shCopy { border-color: rgba(0, 0, 0, 0.1); }
