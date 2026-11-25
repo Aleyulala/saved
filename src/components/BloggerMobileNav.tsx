@@ -67,7 +67,7 @@ export const BloggerMobileNav: React.FC<BloggerMobileNavProps> = ({
     <nav className="min-[897px]:hidden fixed bottom-0 inset-x-0 z-40 select-none pb-safe">
       {/* Blogger .mobC container */}
       <div className="mob-nav-bar relative w-full bg-[#18181b] border-t border-[#333333]/90 px-2 py-1.5">
-        <ul className="flex items-center justify-around h-12 m-0 p-0 list-none">
+        <ul className="flex items-center justify-around h-[42px] m-0 p-0 list-none">
           {navItems.map((item) => {
             const Icon = item.icon;
 
@@ -88,7 +88,7 @@ export const BloggerMobileNav: React.FC<BloggerMobileNavProps> = ({
                         : 'text-[#a1a1aa] hover:text-white'
                   }`}
                 >
-                  <Icon className="w-5 h-5 shrink-0 stroke-[1.8]" />
+                  <Icon className="w-[18px] h-[18px] shrink-0 stroke-[1.8]" />
                 </button>
               </li>
             );
