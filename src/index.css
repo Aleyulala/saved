@@ -2317,6 +2317,8 @@ html body #advSearchModal .adv-search-input { padding-left: 12px !important; }
 .shTitle { font-size: 14px; color: #989b9f; margin-bottom: 26px; }
 .shCard { display: flex; align-items: center; gap: 16px; padding: 12px 18px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.07); background: rgba(255, 255, 255, 0.02); }
 .shThumb { width: 73px; height: 46px; border-radius: 8px; object-fit: cover; flex-shrink: 0; }
+.shThumbSite { display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 50% 0, #22345a, #141824); border: 1px solid rgba(255, 255, 255, 0.08); }
+.shThumbSite .shThumbIco { width: 26px; height: 26px; border-radius: 6px; object-fit: contain; }
 .shCardT { font-size: 15px; font-weight: 500; margin: 0 0 3px; color: #fffdfc; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .shCardS { font-size: 14px; color: #989b9f; }
 .shGrid { display: grid; grid-template-columns: repeat(4, 1fr); row-gap: 37px; margin: 40px 0 36px; text-align: center; }

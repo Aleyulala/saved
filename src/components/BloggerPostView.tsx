@@ -60,6 +60,7 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
   onOpenMedia
 }) => {
   const [copied, setCopied] = useState(false);
+  const [shareThumbFailed, setShareThumbFailed] = useState(false);
   // Otomatik Medya ve Video Çıkarıcı (Extractor: Asla Central Cinema fallback kullanmaz)
   const postMedia = useMemo(() => extractPostMedia(link), [link]);
   const primaryImage = postMedia.primaryImage;
@@ -124,6 +125,7 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
   useEffect(() => {
     setActiveTab('medya');
     setSelectedMediaIndex(0);
+    setShareThumbFailed(false);
   }, [link.id]);
 
   // Benzer Yazılar: Önce aynı kategori/etikete sahip yazılar, yetmezse diğer aktif yazılar
@@ -403,7 +405,14 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
               <div className="shTitle">Diğer uygulamalarla paylaşın</div>
 
               <div className="shCard">
-                <img src={primaryImage} alt={link.title} className="shThumb" />
+                {primaryImage && !shareThumbFailed ? (
+                  <img src={primaryImage} alt="" referrerPolicy="no-referrer" className="shThumb" onError={() => setShareThumbFailed(true)} />
+                ) : (
+                  /* Fotoğraf yoksa ya da yüklenemezse sitenin logosu (bozuk resim yerine) */
+                  <span className="shThumb shThumbSite">
+                    <img src={getFaviconUrl(link.url)} alt="" className="shThumbIco" />
+                  </span>
+                )}
                 <div className="min-w-0 flex-1">
                   <h4 className="shCardT">{link.title}</h4>
                   <span className="shCardS">{link.tags[0] || 'videolar'}</span>
