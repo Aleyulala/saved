@@ -77,6 +77,59 @@ export const PostMediaSlider: React.FC<PostMediaSliderProps> = ({ items, index, 
 
   return (
     <div className="post-media-slider space-y-2.5">
+      {/* Hikaye şeridi (.insta-stories-tray) */}
+      {total >= 2 && (
+        <div ref={trayRef} className="insta-stories-tray flex items-center gap-2.5 overflow-x-auto px-1 py-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x" role="tablist" aria-label="Hikaye Listesi">
+          {brand && (
+            <button
+              type="button"
+              role="tab"
+              aria-selected={index === 0}
+              aria-label={brand.title}
+              title={brand.title}
+              onClick={() => goTo(0)}
+              className={`insta-story-item shrink-0 snap-start w-[104px] h-[58px] p-0 border-0 bg-transparent cursor-pointer transition-all hover:-translate-y-0.5 active:scale-95 ${index === 0 ? 'opacity-100' : 'opacity-70 hover:opacity-100'}`}
+            >
+              <span className={`relative block w-full h-full rounded-lg ${index === 0 ? 'shadow-[0_0_0_2px_var(--linkC,#9aa0a6)]' : ''}`}>
+                <span className="relative flex items-center justify-center w-full h-full rounded-lg overflow-hidden bg-[#1c1e26]">
+                  <img src={getFaviconUrl(brand.url)} alt="" draggable={false} className="w-7 h-7 rounded-md" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                </span>
+              </span>
+            </button>
+          )}
+          {items.map((it, k) => {
+            const i = k + off;
+            const thumb = thumbOf(it);
+            const active = i === index;
+            return (
+              <button
+                key={i}
+                type="button"
+                role="tab"
+                aria-selected={active}
+                aria-label={it.title || `İçerik ${i + 1}`}
+                title={it.title || `İçerik ${i + 1}`}
+                onClick={() => (active ? openAt(i) : goTo(i))}
+                className={`insta-story-item shrink-0 snap-start w-[104px] h-[58px] p-0 border-0 bg-transparent cursor-pointer transition-all hover:-translate-y-0.5 active:scale-95 ${active ? 'opacity-100' : 'opacity-70 hover:opacity-100'}`}
+              >
+                <span className={`relative block w-full h-full rounded-lg ${active ? 'shadow-[0_0_0_2px_var(--linkC,#9aa0a6)]' : ''}`}>
+                  <span className="relative block w-full h-full rounded-lg overflow-hidden bg-[#282828]">
+                    {thumb && <img src={thumb} alt="" draggable={false} className="w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />}
+                    <span className="absolute inset-0 flex items-center justify-center bg-black/[0.16]">
+                      {it.type === 'image' ? (
+                        <svg viewBox="0 0 24 24" className="w-[18px] h-[18px] drop-shadow" fill="none" stroke="#fff" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" fill="#fff" /><polyline points="21 15 16 10 5 21" /></svg>
+                      ) : (
+                        <svg viewBox="0 0 24 24" className="w-[18px] h-[18px] drop-shadow" fill="#fff"><polygon points="8,5 19,12 8,19" /></svg>
+                      )}
+                    </span>
+                  </span>
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      )}
+
       <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] rounded-[16px] overflow-hidden bg-[#18181b] border border-white/5 shadow-2xl">
         <div
           ref={trackRef}
@@ -165,58 +218,6 @@ export const PostMediaSlider: React.FC<PostMediaSliderProps> = ({ items, index, 
         )}
       </div>
 
-      {/* Hikaye şeridi (.insta-stories-tray) */}
-      {total >= 2 && (
-        <div ref={trayRef} className="insta-stories-tray flex items-center gap-2.5 overflow-x-auto px-1 py-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x" role="tablist" aria-label="Hikaye Listesi">
-          {brand && (
-            <button
-              type="button"
-              role="tab"
-              aria-selected={index === 0}
-              aria-label={brand.title}
-              title={brand.title}
-              onClick={() => goTo(0)}
-              className={`insta-story-item shrink-0 snap-start w-[104px] h-[58px] p-0 border-0 bg-transparent cursor-pointer transition-all hover:-translate-y-0.5 active:scale-95 ${index === 0 ? 'opacity-100' : 'opacity-70 hover:opacity-100'}`}
-            >
-              <span className={`relative block w-full h-full rounded-lg ${index === 0 ? 'shadow-[0_0_0_2px_var(--linkC,#9aa0a6)]' : ''}`}>
-                <span className="relative flex items-center justify-center w-full h-full rounded-lg overflow-hidden bg-[#1c1e26]">
-                  <img src={getFaviconUrl(brand.url)} alt="" draggable={false} className="w-7 h-7 rounded-md" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
-                </span>
-              </span>
-            </button>
-          )}
-          {items.map((it, k) => {
-            const i = k + off;
-            const thumb = thumbOf(it);
-            const active = i === index;
-            return (
-              <button
-                key={i}
-                type="button"
-                role="tab"
-                aria-selected={active}
-                aria-label={it.title || `İçerik ${i + 1}`}
-                title={it.title || `İçerik ${i + 1}`}
-                onClick={() => (active ? openAt(i) : goTo(i))}
-                className={`insta-story-item shrink-0 snap-start w-[104px] h-[58px] p-0 border-0 bg-transparent cursor-pointer transition-all hover:-translate-y-0.5 active:scale-95 ${active ? 'opacity-100' : 'opacity-70 hover:opacity-100'}`}
-              >
-                <span className={`relative block w-full h-full rounded-lg ${active ? 'shadow-[0_0_0_2px_var(--linkC,#9aa0a6)]' : ''}`}>
-                  <span className="relative block w-full h-full rounded-lg overflow-hidden bg-[#282828]">
-                    {thumb && <img src={thumb} alt="" draggable={false} className="w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />}
-                    <span className="absolute inset-0 flex items-center justify-center bg-black/[0.16]">
-                      {it.type === 'image' ? (
-                        <svg viewBox="0 0 24 24" className="w-[18px] h-[18px] drop-shadow" fill="none" stroke="#fff" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" fill="#fff" /><polyline points="21 15 16 10 5 21" /></svg>
-                      ) : (
-                        <svg viewBox="0 0 24 24" className="w-[18px] h-[18px] drop-shadow" fill="#fff"><polygon points="8,5 19,12 8,19" /></svg>
-                      )}
-                    </span>
-                  </span>
-                </span>
-              </button>
-            );
-          })}
-        </div>
-      )}
     </div>
   );
 };
