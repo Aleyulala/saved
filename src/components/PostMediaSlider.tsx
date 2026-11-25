@@ -79,7 +79,7 @@ export const PostMediaSlider: React.FC<PostMediaSliderProps> = ({ items, index, 
     <div className="post-media-slider space-y-2.5">
       {/* Hikaye şeridi (.insta-stories-tray) */}
       {total >= 2 && (
-        <div ref={trayRef} className="insta-stories-tray flex items-center gap-2.5 overflow-x-auto px-1 py-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x" role="tablist" aria-label="Hikaye Listesi">
+        <div ref={trayRef} className="insta-stories-tray flex items-center [justify-content:safe_center] gap-2.5 overflow-x-auto px-[3px] py-[3px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x" role="tablist" aria-label="Hikaye Listesi">
           {brand && (
             <button
               type="button"
