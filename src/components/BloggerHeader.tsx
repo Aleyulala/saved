@@ -306,7 +306,7 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
     }
   }, [isPostDetail]);
 
-  const hasContextOpen = (!isPostDetail && isProfileOpen) || isAppearanceOpen || isTranslateOpen;
+  const hasContextOpen = (!isPostDetail && isProfileOpen) || isAppearanceOpen || isTranslateOpen || isBookmarkOpen;
 
   return (
     <header className={`sticky top-0 ${hasContextOpen ? 'z-[60]' : 'z-40'} w-full h-[60px] bg-[#1e1e1e] border-0 flex items-center select-none`}>
@@ -387,6 +387,7 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
             setIsProfileOpen(false);
             setIsAppearanceOpen(false);
             setIsTranslateOpen(false);
+            setIsBookmarkOpen(false);
           }}
           className="head-context-backdrop fixed inset-0 z-40 transition-opacity duration-200"
           aria-hidden="true"

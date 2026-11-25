@@ -596,11 +596,12 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
     </>
   );
 
-  const content = (
+  // showDrawerHeader: "Sağ Panel / Kapat" başlığı yalnızca mobil çekmecede görünür, sayfa akışında değil
+  const renderContent = (showDrawerHeader: boolean) => (
     <div className="space-y-6 text-xs text-[#a1a1aa] select-none">
       
       {/* Mobile Drawer Header (Only when opened as drawer on mobile) */}
-      {onCloseDrawer && (
+      {showDrawerHeader && onCloseDrawer && (
         <div className="flex items-center justify-between pb-3 lg:hidden">
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-[var(--linkC,#9aa0a6)]" />
@@ -769,7 +770,7 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
     <>
       {/* 1. Masaüstü Sağ Bar: Sayfayla Birlikte Kayar! (Ayrı kaydırma çubuğu YOK) */}
       <div className="w-full block">
-        {content}
+        {renderContent(false)}
       </div>
 
       {/* 2. Mobil / Tablet Sağ Çekmece */}
@@ -780,7 +781,7 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
             onClick={onCloseDrawer}
           />
           <div className="relative w-80 max-w-[85vw] h-full bg-[#1e1e1e] border-0 shadow-2xl p-4 overflow-y-auto z-10 animate-in slide-in-from-right duration-300">
-            {content}
+            {renderContent(true)}
           </div>
         </div>
       )}
