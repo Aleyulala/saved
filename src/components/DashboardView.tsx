@@ -16,6 +16,7 @@ import { getAuthorData } from '../utils/bloggerAuthors';
 import { DashboardItem } from './DashboardItem';
 import { LinkCard } from './LinkCard';
 import { BloggerHeroSlider } from './BloggerHeroSlider';
+import { BloggerOffTopicSlider } from './BloggerOffTopicSlider';
 import { BloggerNotificationBar } from './BloggerNotificationBar';
 import { MediaItem } from './UniversalMediaModal';
 import { 
@@ -57,110 +58,6 @@ interface DashboardViewProps {
   onOpenChat?: () => void;
   onOpenContact?: () => void;
 }
-
-// Reusable Category Card Slider Section (.cat-showcase-carousel)
-const CategoryShowcaseSection: React.FC<{
-  col: CollectionItem;
-  links: LinkItem[];
-  onViewCollection: (id: number) => void;
-  onTogglePin: (id: number, current: boolean) => void;
-  onOpenPostPage: (link: LinkItem) => void;
-}> = ({
-  col,
-  links,
-  onViewCollection,
-  onTogglePin,
-  onOpenPostPage
-}) => {
-  const trackRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
-
-  const checkScroll = () => {
-    if (!trackRef.current) return;
-    const { scrollLeft, scrollWidth, clientWidth } = trackRef.current;
-    setCanScrollLeft(scrollLeft > 4);
-    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 4);
-  };
-
-  const scroll = (direction: 'left' | 'right') => {
-    if (!trackRef.current) return;
-    const offset = direction === 'left' ? -280 : 280;
-    trackRef.current.scrollBy({ left: offset, behavior: 'smooth' });
-    setTimeout(checkScroll, 300);
-  };
-
-  return (
-    <section aria-label={col.name} className="space-y-3 pt-3">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <span 
-            className="w-2.5 h-2.5 rounded-full shrink-0 shadow-xs" 
-            style={{ backgroundColor: col.color || '#38bdf8' }}
-          />
-          <h2 className="text-sm sm:text-base font-semibold text-white tracking-tight">
-            {col.name}
-          </h2>
-          <span className="text-[11px] text-[#9ca3af] font-mono">
-            ({links.length})
-          </span>
-        </div>
-
-        <div className="flex items-center gap-3">
-          {/* Blogger Stili Çizgi Butonlar (.car-nav) */}
-          <div className="hidden sm:flex items-center gap-1.5">
-            <button
-              onClick={() => scroll('left')}
-              className={`h-1.5 rounded-full transition-all duration-200 ${
-                canScrollLeft 
-                  ? 'w-6 bg-[var(--linkC,#9aa0a6)] shadow-[0_0_8px_rgba(96,205,255,0.6)] cursor-pointer' 
-                  : 'w-3.5 bg-white/20 opacity-40 cursor-default'
-              }`}
-              title="Önceki Kartlar"
-              aria-label="Önceki Kartlar"
-            />
-            <button
-              onClick={() => scroll('right')}
-              className={`h-1.5 rounded-full transition-all duration-200 ${
-                canScrollRight 
-                  ? 'w-6 bg-[var(--linkC,#9aa0a6)] shadow-[0_0_8px_rgba(96,205,255,0.6)] cursor-pointer' 
-                  : 'w-3.5 bg-white/20 opacity-40 cursor-default'
-              }`}
-              title="Sonraki Kartlar"
-              aria-label="Sonraki Kartlar"
-            />
-          </div>
-
-          <button
-            onClick={() => col.id && onViewCollection(col.id)}
-            className="flex items-center gap-1 text-xs text-[#a3a3a3] hover:text-[#38bdf8] font-medium transition-colors cursor-pointer"
-          >
-            <span>Tümünü Gör</span>
-            <ChevronRight className="w-3.5 h-3.5" />
-          </button>
-        </div>
-      </div>
-
-      {/* Horizontal Scroll Track with Cards */}
-      <div 
-        ref={trackRef}
-        onScroll={checkScroll}
-        className="flex gap-4 overflow-x-auto pb-3 pt-1 hide-scrollbar scroll-smooth"
-      >
-        {links.map((link) => (
-          <div key={link.id} className="min-w-[260px] w-[270px] max-w-[290px] shrink-0">
-            <LinkCard
-              link={link}
-              collection={col}
-              onTogglePin={onTogglePin}
-              onOpenPostPage={onOpenPostPage}
-            />
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-};
 
 export const DashboardView: React.FC<DashboardViewProps> = ({
   links,
@@ -291,14 +188,15 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
     return slice;
   }, [activeLinks, pinnedPost, currentPage]);
 
-  // Sayfalar ilerledikçe değişen kategoriler:
-  // Sayfa 1: Konu Dışı (Blogger negronshow ile birebir)
-  // Sayfa 2+: Sırasıyla diğer kategoriler
-  const pageCategories = useMemo(() => {
-    if (sortedCollections.length === 0) return [];
-    const catIdx = (currentPage - 1) % sortedCollections.length;
-    return [sortedCollections[catIdx]];
-  }, [sortedCollections, currentPage]);
+  // "Konu Dışı" slaydı: Blogger'daki gibi her sayfada, En Son Yayınlar ile sayfalama arasında görünür
+  const konuCollection = useMemo(
+    () => sortedCollections.find(c => c.name.toLowerCase().includes('konu')),
+    [sortedCollections]
+  );
+  const konuLinks = useMemo(
+    () => (konuCollection?.id ? (linksByCollection[konuCollection.id] || []).slice(0, 12) : []),
+    [konuCollection, linksByCollection]
+  );
 
   const handlePageChange = (newPage: number) => {
     if (newPage < 1 || newPage > totalPages || newPage === currentPage) return;
@@ -486,6 +384,19 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           ))}
         </div>
       </section>
+
+      {/* 5b. Konu Dışı Slaytı (Blogger .sldW kart kaydırıcısı) */}
+      {konuCollection && konuLinks.length > 0 && (
+        <BloggerOffTopicSlider
+          collection={konuCollection}
+          links={konuLinks}
+          onViewAll={() => {
+            if (konuCollection.id && konuCollection.id > 0) onViewCollection(konuCollection.id);
+            else onViewAllRecent();
+          }}
+          onOpenPostPage={onOpenPostPage}
+        />
+      )}
 
       {/* 6. Blogger Plus UI Sayfalama Numaratörü (.blogN #blog-pager 1 2 3 4 5...) */}
       {totalPages > 1 && (

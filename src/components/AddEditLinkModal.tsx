@@ -65,6 +65,16 @@ export const AddEditLinkModal: React.FC<AddEditLinkModalProps> = ({
     }
   }, [editingLink, isOpen, defaultCollectionId, collections]);
 
+  // Esc ile kapat (arama kutusuyla aynı davranış)
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   const handleAutoFindRss = (targetUrl?: string) => {
@@ -133,13 +143,25 @@ export const AddEditLinkModal: React.FC<AddEditLinkModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-xs overflow-y-auto animate-in fade-in duration-200">
-      <div 
-        className="w-full max-w-lg bg-[#212121] rounded-2xl shadow-2xl border border-[#3e3e3e] overflow-hidden my-8 text-neutral-200 animate-in zoom-in duration-200"
-        onClick={(e) => e.stopPropagation()}
+    <div
+      id="editLinkModal"
+      className="editFullscreen fixed inset-0 z-[999999] overflow-y-auto animate-in fade-in duration-200"
+      role="dialog"
+      aria-modal="true"
+      aria-label={editingLink ? 'Bağlantıyı düzenle' : 'Yeni bağlantı'}
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
+      {/* Tam ekran içerik; boşluğa dokunmak da pencereyi kapatır */}
+      <div
+        className="w-full max-w-lg mx-auto px-3 pt-12 pb-[calc(55px+env(safe-area-inset-bottom,0px)+24px)] text-neutral-200"
+        onClick={(e) => {
+          if (e.target === e.currentTarget) onClose();
+        }}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[#333333]">
+        <div className="flex items-center justify-between px-4 py-4 border-b border-[#333333]">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-xl bg-[#38bdf8]/15 text-[#38bdf8] flex items-center justify-center">
               <LinkIcon className="w-4 h-4" />
@@ -148,16 +170,10 @@ export const AddEditLinkModal: React.FC<AddEditLinkModalProps> = ({
               {editingLink ? 'Edit Link' : 'New Link'}
             </h2>
           </div>
-          <button
-            onClick={onClose}
-            className="p-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-[#333333] transition-colors"
-          >
-            <X className="w-5 h-5" />
-          </button>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+        <form onSubmit={handleSubmit} className="p-4 space-y-4">
           <div>
             <label className="block text-xs font-semibold text-neutral-300 uppercase tracking-wider mb-1.5">
               URL *
@@ -416,6 +432,14 @@ export const AddEditLinkModal: React.FC<AddEditLinkModalProps> = ({
             </button>
           </div>
         </form>
+      </div>
+
+      {/* Alt çubuk: #Düzenle + kapat (Esc ve boşluğa tıklama da kapatır) — arama kutusuyla aynı */}
+      <div className="advBottomBar">
+        <span className="advBottomTitle">{editingLink ? '#Düzenle' : '#Yeni Bağlantı'}</span>
+        <button type="button" onClick={onClose} className="advBottomClose" title="Kapat (Esc)" aria-label="Kapat (Esc)">
+          <X className="" />
+        </button>
       </div>
     </div>
   );

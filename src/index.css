@@ -2263,3 +2263,7 @@ html body #advSearchModal .adv-search-input { padding-left: 12px !important; }
 .advBottomClose { width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; color: inherit; opacity: .85; cursor: pointer; border-radius: 10px; transition: all .2s ease; }
 .advBottomClose:hover { opacity: 1; color: var(--linkC, #60cdff); background: rgba(255, 255, 255, 0.08); }
 .advBottomClose svg { width: 18px; height: 18px; stroke: currentColor; fill: none; }
+
+/* Düzenle / Yeni bağlantı penceresi — arama kutusu (#advSearchModal) gibi tam ekran */
+.editFullscreen { background: #1e1e1e; color: #fffdfc; overscroll-behavior: contain; }
+:root .editFullscreen .advBottomBar { background: #1e1e1e; color: #fffdfc; border-top-color: rgba(255, 255, 255, 0.08); }
