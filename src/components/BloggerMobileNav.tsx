@@ -2,8 +2,8 @@ import React from 'react';
 import { 
   HomeIcon, 
   SearchNormalIcon, 
-  MenuHamburgerIcon, 
-  FolderFavoriteIcon, 
+  AppsGridIcon,
+  SunMoonIcon,
   ArrowUp4Icon 
 } from './BloggerIcons';
 
@@ -42,17 +42,17 @@ export const BloggerMobileNav: React.FC<BloggerMobileNavProps> = ({
     {
       id: 'menu',
       label: 'Menü',
-      icon: MenuHamburgerIcon,
+      icon: AppsGridIcon,
       isActive: false,
       onClick: onOpenDrawer,
       isSpecial: true
     },
     {
-      id: 'pinned',
-      label: 'Sabitler',
-      icon: FolderFavoriteIcon,
-      isActive: currentTab === 'pinned',
-      onClick: () => onSelectTab('pinned')
+      id: 'theme',
+      label: 'Tema',
+      icon: SunMoonIcon,
+      isActive: false,
+      onClick: () => window.dispatchEvent(new CustomEvent('saved:toggle-theme'))
     },
     {
       id: 'top',

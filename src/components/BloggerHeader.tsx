@@ -159,6 +159,13 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
   };
 
   // Initialize theme from PLUS_UI_APPEARANCE / localStorage
+  // Mobil alt menüdeki ay (tema) butonu bu olayı gönderir
+  useEffect(() => {
+    const onToggle = () => applyThemeMode(isDark ? 'light' : 'dark');
+    window.addEventListener('saved:toggle-theme', onToggle);
+    return () => window.removeEventListener('saved:toggle-theme', onToggle);
+  }, [isDark]);
+
   useEffect(() => {
     try {
       const appStr = localStorage.getItem('PLUS_UI_APPEARANCE');

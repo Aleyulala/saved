@@ -11,6 +11,16 @@ export const MenuHamburgerIcon: React.FC<{ className?: string }> = ({ className 
   </svg>
 );
 
+// apps-icon: dört daireli ızgara (Blogger alt menü, 3. ikon)
+export const AppsGridIcon: React.FC<{ className?: string }> = ({ className = 'w-5 h-5' }) => (
+  <svg className={`line ${className}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="7" cy="7" r="3" />
+    <circle cx="17" cy="7" r="3" />
+    <circle cx="7" cy="17" r="3" />
+    <circle cx="17" cy="17" r="3" />
+  </svg>
+);
+
 export const SearchNormalIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
   <svg className={`line ${className}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <g>
