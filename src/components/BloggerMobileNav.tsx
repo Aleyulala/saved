@@ -66,7 +66,7 @@ export const BloggerMobileNav: React.FC<BloggerMobileNavProps> = ({
   return (
     <nav className="min-[897px]:hidden fixed bottom-0 inset-x-0 z-40 select-none pb-safe">
       {/* Blogger .mobC container */}
-      <div className="mob-nav-bar relative mx-auto max-w-lg bg-[#18181b]/95 backdrop-blur-2xl border-t border-[#333333]/90 shadow-[0_-12px_35px_rgba(0,0,0,0.6)] rounded-t-2xl px-2 py-1.5 transition-all duration-200">
+      <div className="mob-nav-bar relative w-full bg-[#18181b] border-t border-[#333333]/90 px-2 py-1.5">
         <ul className="flex items-center justify-around h-12 m-0 p-0 list-none">
           {navItems.map((item) => {
             const Icon = item.icon;
@@ -80,17 +80,15 @@ export const BloggerMobileNav: React.FC<BloggerMobileNavProps> = ({
                   onClick={item.onClick}
                   aria-label={item.label}
                   title={item.label}
-                  className={`group relative inline-flex items-center justify-center w-10 h-10 rounded-full transition-all duration-200 active:scale-95 ${
+                  className={`group relative inline-flex items-center justify-center w-10 h-10 bg-transparent border-0 rounded-none shadow-none outline-none transition-colors duration-150 active:opacity-70 ${
                     item.isActive
-                      ? 'bg-[var(--linkC,#9aa0a6)]/15 text-[var(--linkC,#9aa0a6)] font-bold shadow-inner'
+                      ? 'text-[var(--linkC,#9aa0a6)]'
                       : item.isSpecial
-                        ? 'text-white hover:text-[var(--linkC,#9aa0a6)] hover:bg-[#27272a]'
-                        : 'text-[#a1a1aa] hover:text-white hover:bg-[#27272a]'
+                        ? 'text-white hover:text-[var(--linkC,#9aa0a6)]'
+                        : 'text-[#a1a1aa] hover:text-white'
                   }`}
                 >
-                  <Icon className={`w-5 h-5 shrink-0 transition-transform duration-150 ${
-                    item.isActive ? 'stroke-[2.5] scale-110' : 'stroke-[1.8] group-hover:scale-110'
-                  }`} />
+                  <Icon className="w-5 h-5 shrink-0 stroke-[1.8]" />
                 </button>
               </li>
             );
