@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { FullscreenModal } from './FullscreenModal';
 import { X, Plus, Star, CheckCircle2, Archive, Link as LinkIcon, Folder, Tag, FileText, Rss, Sparkles, Check } from 'lucide-react';
 import { CollectionItem, LinkItem, TagItem } from '../types';
 import { getDomain } from '../utils/favicon';
@@ -64,16 +65,6 @@ export const AddEditLinkModal: React.FC<AddEditLinkModalProps> = ({
       setIsPinned(false);
     }
   }, [editingLink, isOpen, defaultCollectionId, collections]);
-
-  // Esc ile kapat (arama kutusuyla aynı davranış)
-  useEffect(() => {
-    if (!isOpen) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
@@ -143,23 +134,7 @@ export const AddEditLinkModal: React.FC<AddEditLinkModalProps> = ({
   };
 
   return (
-    <div
-      id="editLinkModal"
-      className="editFullscreen fixed inset-0 z-[999999] overflow-y-auto animate-in fade-in duration-200"
-      role="dialog"
-      aria-modal="true"
-      aria-label={editingLink ? 'Bağlantıyı düzenle' : 'Yeni bağlantı'}
-      onClick={(e) => {
-        if (e.target === e.currentTarget) onClose();
-      }}
-    >
-      {/* Tam ekran içerik; boşluğa dokunmak da pencereyi kapatır */}
-      <div
-        className="w-full max-w-lg mx-auto px-3 pt-12 pb-[calc(55px+env(safe-area-inset-bottom,0px)+24px)] text-neutral-200"
-        onClick={(e) => {
-          if (e.target === e.currentTarget) onClose();
-        }}
-      >
+    <FullscreenModal id="editLinkModal" title={editingLink ? '#Düzenle' : '#Yeni Bağlantı'} ariaLabel={editingLink ? 'Bağlantıyı düzenle' : 'Yeni bağlantı'} maxWidth="max-w-lg" onClose={onClose}>
         {/* Header */}
         <div className="flex items-center justify-between px-4 py-4 border-b border-[#333333]">
           <div className="flex items-center gap-2.5">
@@ -432,15 +407,6 @@ export const AddEditLinkModal: React.FC<AddEditLinkModalProps> = ({
             </button>
           </div>
         </form>
-      </div>
-
-      {/* Alt çubuk: #Düzenle + kapat (Esc ve boşluğa tıklama da kapatır) — arama kutusuyla aynı */}
-      <div className="advBottomBar">
-        <span className="advBottomTitle">{editingLink ? '#Düzenle' : '#Yeni Bağlantı'}</span>
-        <button type="button" onClick={onClose} className="advBottomClose" title="Kapat (Esc)" aria-label="Kapat (Esc)">
-          <X className="" />
-        </button>
-      </div>
-    </div>
+    </FullscreenModal>
   );
 };
