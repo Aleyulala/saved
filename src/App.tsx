@@ -694,6 +694,11 @@ export const App: React.FC = () => {
                       setIsAddModalOpen(true);
                     }}
                     onOpenMedia={handleOpenMedia}
+                    onSelectTag={(tag) => {
+                      setSelectedTag(tag);
+                      setActiveView('tag');
+                      setSearchQuery('');
+                    }}
                   />
                 )}
 

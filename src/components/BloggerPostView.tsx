@@ -48,6 +48,8 @@ interface BloggerPostViewProps {
   onMoveToTrash: (id: number) => void;
   onEdit: (link: LinkItem) => void;
   onOpenMedia?: (items: MediaItem[], initialIndex?: number, opts?: { floating?: boolean }) => void;
+  /** Etikete basınca o etiketli bağlantıları listeler */
+  onSelectTag?: (tag: string) => void;
 }
 
 export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
@@ -57,7 +59,8 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
   onBack,
   onNavigatePost,
   onTogglePin,
-  onOpenMedia
+  onOpenMedia,
+  onSelectTag
 }) => {
   const [copied, setCopied] = useState(false);
   const [shareThumbFailed, setShareThumbFailed] = useState(false);
@@ -188,7 +191,13 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
       {/* 3. Blogger XML 1:1 Breadcrumbs (.brdCmb) */}
       <div className="brdCmb">
         <button type="button" onClick={onBack} className="brdHm">Ana Sayfa</button>
-        <span className="brdLb">{link.tags[0] || collection?.name || 'videolar'}</span>
+        {link.tags[0] && onSelectTag ? (
+          <button type="button" className="brdLb cursor-pointer hover:underline" onClick={() => onSelectTag(link.tags[0])} title={`#${link.tags[0]} etiketli bağlantılar`}>
+            {link.tags[0]}
+          </button>
+        ) : (
+          <span className="brdLb">{link.tags[0] || collection?.name || 'videolar'}</span>
+        )}
       </div>
 
       {/* 4. Gönderi Ana Başlığı (.pTtl - Screenshot 1 & 4 1:1) */}
@@ -360,11 +369,25 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
         </div>
       )}
 
-      {/* 10. Etiket Rozeti (Screenshot 1 1:1) */}
-      <div className="pt-1">
-        <span className="inline-block px-3 py-1.5 rounded-xl bg-[#252526] text-xs font-semibold text-white/80">
-          {link.tags[0] || 'videolar'}
-        </span>
+      {/* 10. Etiket Rozetleri: basınca o etiketli kartlar listelenir */}
+      <div className="pt-1 flex flex-wrap gap-2">
+        {(link.tags && link.tags.length ? link.tags : ['videolar']).map((tag) =>
+          onSelectTag && link.tags && link.tags.length ? (
+            <button
+              key={tag}
+              type="button"
+              onClick={() => onSelectTag(tag)}
+              title={`#${tag} etiketli bağlantılar`}
+              className="inline-block px-3 py-1.5 rounded-xl bg-[#252526] hover:bg-[#333333] text-xs font-semibold text-white/80 hover:text-white cursor-pointer transition-colors active:scale-95"
+            >
+              {tag}
+            </button>
+          ) : (
+            <span key={tag} className="inline-block px-3 py-1.5 rounded-xl bg-[#252526] text-xs font-semibold text-white/80">
+              {tag}
+            </span>
+          )
+        )}
       </div>
 
       {/* 11. Benzer Yazılar (1:1 Blogger Plu$ UI LinkCard Grid) */}
@@ -375,9 +398,15 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
               <span className="w-1.5 h-3.5 rounded-full bg-[var(--linkC,#60cdff)]" />
               Benzer Yazılar
             </h3>
-            <span className="text-xs text-[#989b9f] lowercase">
-              {link.tags[0] ? `#${link.tags[0]}` : 'öneriler'}
-            </span>
+            {link.tags[0] && onSelectTag ? (
+              <button type="button" onClick={() => onSelectTag(link.tags[0])} className="text-xs text-[#989b9f] hover:text-white lowercase cursor-pointer hover:underline">
+                #{link.tags[0]}
+              </button>
+            ) : (
+              <span className="text-xs text-[#989b9f] lowercase">
+                {link.tags[0] ? `#${link.tags[0]}` : 'öneriler'}
+              </span>
+            )}
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
