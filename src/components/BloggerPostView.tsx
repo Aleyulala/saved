@@ -2,6 +2,7 @@ import { createPortal } from 'react-dom';
 import React, { useState, useEffect, useMemo } from 'react';
 import { PostReactions } from './PostReactions';
 import { PostMediaSlider } from './PostMediaSlider';
+import { getCategoryFallbackImages } from '../utils/mediaExtractor';
 import { 
   Check, 
   Copy, 
@@ -114,6 +115,10 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
   const shareUrl = encodeURIComponent(link.url);
   const shareTitle = encodeURIComponent(link.title);
 
+  const fallbackMediaItems: MediaItem[] = useMemo(
+    () => getCategoryFallbackImages(link.tags?.[0] || '', link.title, link.id, link.url, 3).map(u => ({ type: 'image' as const, url: u, title: link.title })),
+    [link]
+  );
   const currentMedia = mediaItems[selectedMediaIndex] || mediaItems[0] || (primaryImage ? { type: 'image' as const, url: primaryImage, title: link.title } : null);
 
   useEffect(() => {
@@ -198,28 +203,14 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
       {/* 6. Medya Sekmesi İçeriği (Screenshot 4: Thumbnail Seçici + Büyük Görsel + Tam Ekran Butonu) */}
       {activeTab === 'medya' && (
         <div className="space-y-4 pt-1">
-          {hasRealMedia && mediaItems.length > 0 ? (
-            <PostMediaSlider
-              items={mediaItems}
-              index={Math.min(selectedMediaIndex, mediaItems.length - 1)}
-              onIndexChange={setSelectedMediaIndex}
-              title={link.title}
-              onOpenMedia={onOpenMedia}
-            />
-          ) : (
-            <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] rounded-[16px] overflow-hidden bg-[#18181b] border border-white/5 shadow-2xl">
-              {/* Medya yoksa: karta basınca doğrudan web sitesine gider */}
-              <a
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full h-full relative block cursor-pointer group no-underline transition-all duration-200 active:scale-[0.99]"
-                title={`${link.title || link.url} Sitesine Git`}
-              >
-                <BrandLogoCard url={link.url} title={link.title} size="detail" />
-              </a>
-            </div>
-          )}
+          {/* Fotoğrafı olmayan gönderilerde kategori görselleriyle slayt + hikaye şeridi */}
+          <PostMediaSlider
+            items={hasRealMedia && mediaItems.length > 0 ? mediaItems : fallbackMediaItems}
+            index={Math.min(selectedMediaIndex, (hasRealMedia && mediaItems.length > 0 ? mediaItems : fallbackMediaItems).length - 1)}
+            onIndexChange={setSelectedMediaIndex}
+            title={link.title}
+            onOpenMedia={onOpenMedia}
+          />
         </div>
       )}
 

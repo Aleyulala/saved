@@ -699,6 +699,7 @@ export const App: React.FC = () => {
                   <BloggerPrivacyView
                     onBack={handleGoHome}
                     onGoHome={handleGoHome}
+                    onOpenMedia={handleOpenMedia}
                   />
                 )}
 

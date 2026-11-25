@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { 
   ArrowLeft, 
   ShieldCheck, 
@@ -16,6 +16,9 @@ import {
   Link as LinkIcon
 } from 'lucide-react';
 import { PRIVACY_SECTIONS, PrivacySection } from '../data/privacyContent';
+import { PostMediaSlider } from './PostMediaSlider';
+import { MediaItem } from './UniversalMediaModal';
+import { getCategoryFallbackImages } from '../utils/mediaExtractor';
 import { getAuthorData } from '../utils/bloggerAuthors';
 import { 
   Verify1Icon, 
@@ -29,12 +32,19 @@ import {
 interface BloggerPrivacyViewProps {
   onBack: () => void;
   onGoHome?: () => void;
+  onOpenMedia?: (items: MediaItem[], initialIndex?: number, opts?: { floating?: boolean }) => void;
 }
 
 export const BloggerPrivacyView: React.FC<BloggerPrivacyViewProps> = ({
   onBack,
-  onGoHome
+  onGoHome,
+  onOpenMedia
 }) => {
+  const [mediaIdx, setMediaIdx] = useState(0);
+  const mediaItems: MediaItem[] = useMemo(
+    () => getCategoryFallbackImages('guvenlik', 'Gizlilik Politikası', 'privacy', 'privacy', 3).map(u => ({ type: 'image' as const, url: u, title: 'Gizlilik Politikası' })),
+    []
+  );
   const [activeSectionId, setActiveSectionId] = useState<string>('');
   const [copiedLink, setCopiedLink] = useState(false);
   const authorData = getAuthorData('NEGRONN');
@@ -153,6 +163,11 @@ export const BloggerPrivacyView: React.FC<BloggerPrivacyViewProps> = ({
           </div>
         </div>
       </header>
+
+      {/* Medya slaydı + hikaye şeridi (Blogger sayfalarındaki gibi) */}
+      <div className="mb-8">
+        <PostMediaSlider items={mediaItems} index={mediaIdx} onIndexChange={setMediaIdx} title="Gizlilik Politikası" onOpenMedia={onOpenMedia} />
+      </div>
 
       {/* 2.1 BLOG ENTEGRASYON URL'İ KUTUSU (Blogger Sayfaları İçin Doğrudan URL Eki) */}
       <div className="p-3.5 rounded-xl bg-[#252526] border border-white/5 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs shadow-sm">
