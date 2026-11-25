@@ -309,7 +309,7 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
     }
   }, [isPostDetail]);
 
-  const hasContextOpen = isAppearanceOpen;
+  const hasContextOpen = isAppearanceOpen || isProfileOpen || isTranslateOpen || isBookmarkOpen;
 
   return (
     <header className={`sticky top-0 ${hasContextOpen ? 'z-[60]' : 'z-40'} w-full h-[60px] bg-[#1e1e1e] border-0 flex items-center select-none`}>
@@ -427,16 +427,21 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
 
               {/* Blogger XML 1:1 Profil / Yazarlar Açılır Kartı */}
               {isProfileOpen && (
-                <FullscreenModal title="#Yazarlar" ariaLabel="Yazarlar" maxWidth="max-w-md" onClose={() => setIsProfileOpen(false)}>
-                  <h2 className="text-base font-bold text-white px-1 pb-3">Yazarlar</h2>
-                  <div className="prfC fixC teamPrfWrap pb-3 flex flex-col gap-1.5">
+                <div className="popX popAuthors" role="dialog" aria-label="Yazarlar">
+                  <div className="popH">
+                    <span>Yazarlar</span>
+                    <button type="button" className="popClose" aria-label="Kapat" onClick={() => setIsProfileOpen(false)}>
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+                    </button>
+                  </div>
+                  <div className="prfC fixC teamPrfWrap popBody flex flex-col gap-2.5">
                     {Object.values(BLOGGER_AUTHORS).map((author) => (
                       <a
                         key={author.name}
                         href={author.url}
                         target="_blank"
                         rel="noreferrer"
-                        className="prfAuthorBlock block px-3 py-2.5 rounded-[10px] bg-transparent border-0 no-underline text-inherit hover:bg-white/5 transition-all duration-200"
+                        className="prfAuthorBlock block px-3.5 py-3 rounded-[12px] bg-transparent border border-white/[0.07] no-underline text-inherit hover:bg-white/5 transition-all duration-200"
                       >
                         <div className="prfTopRow flex items-center gap-3">
                           <img
@@ -456,7 +461,7 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
                       </a>
                     ))}
                   </div>
-                </FullscreenModal>
+                </div>
               )}
             </div>
             )}
@@ -616,23 +621,23 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
               </button>
 
               {isTranslateOpen && (
-                <FullscreenModal title="#Dil" ariaLabel="Dili seçin" maxWidth="max-w-md" onClose={() => setIsTranslateOpen(false)}>
-                  <h2 className="text-base font-bold text-white px-1 pb-3">Dili Seçin</h2>
-                  <div className="space-y-1">
+                <div className="popX popTrans" role="menu" aria-label="Çeviri">
+                  <div className="popH"><span>Çeviri</span></div>
+                  <div className="popBody popList">
                     {LANGUAGES.map(lang => (
                       <button
                         key={lang.code}
                         onClick={() => handleSelectLanguage(lang.code)}
-                        className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs transition-colors cursor-pointer ${
-                          selectedLang === lang.code ? 'bg-[#333333] text-white font-bold' : 'text-[#d4d4d4] hover:bg-white/5'
-                        }`}
+                        role="menuitemradio"
+                        aria-checked={selectedLang === lang.code}
+                        className="popItem"
                       >
+                        <span className="popTick">{selectedLang === lang.code && <CheckMarkIcon className="w-4 h-4" />}</span>
                         <span>{lang.native}</span>
-                        {selectedLang === lang.code && <CheckMarkIcon className="w-3.5 h-3.5 text-[var(--linkC,#9aa0a6)]" />}
                       </button>
                     ))}
                   </div>
-                </FullscreenModal>
+                </div>
               )}
             </div>
 
