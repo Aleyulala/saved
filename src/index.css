@@ -2267,3 +2267,8 @@ html body #advSearchModal .adv-search-input { padding-left: 12px !important; }
 /* Düzenle / Yeni bağlantı penceresi — arama kutusu (#advSearchModal) gibi tam ekran */
 .editFullscreen { background: #1e1e1e; color: #fffdfc; overscroll-behavior: contain; }
 :root .editFullscreen .advBottomBar { background: #1e1e1e; color: #fffdfc; border-top-color: rgba(255, 255, 255, 0.08); }
+
+/* Slayt bağlantı (URL) düğmesi: diğer slayt düğmeleriyle aynı koyu cam düğme */
+:root .sldTitleWrap .sldL { width: 28px; height: 28px; border-radius: 10px; background: rgba(28, 30, 38, 0.78); border: 1px solid rgba(255, 255, 255, 0.14); box-shadow: none; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); transition: background-color 0.2s ease, border-color 0.2s ease; }
+:root .sldTitleWrap .sldL:hover { background: #333333; border-color: var(--linkC, #60cdff); opacity: 1; }
+:root .sldTitleWrap .sldL::after { width: 14px; height: 14px; background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M13.0601 10.9399C15.3101 13.1899 15.3101 16.8299 13.0601 19.0699C10.8101 21.3099 7.17009 21.3199 4.93009 19.0699C2.69009 16.8199 2.68009 13.1799 4.93009 10.9399'></path><path d='M10.59 13.4099C8.24996 11.0699 8.24996 7.26988 10.59 4.91988C12.93 2.56988 16.73 2.57988 19.08 4.91988C21.43 7.25988 21.42 11.0599 19.08 13.4099'></path></svg>"); background-position: center; background-repeat: no-repeat; background-size: contain; }
