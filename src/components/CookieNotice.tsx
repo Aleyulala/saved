@@ -9,8 +9,8 @@ interface CookieNoticeProps {
 }
 
 /**
- * Çerez politikası: Blogger şablonundaki gibi tam ekran, yazılar üstte, "Tamam, anladım." düğmesi
- * metnin yanında, altta #Çerez çubuğu ve kapat düğmesi. Kapat / Esc / Tamam hepsi onay sayılır.
+ * Çerez politikası: Blogger şablonundaki gibi tam ekran, yazılar üstte, "Tamam, anladım." renkli yazı
+ * olarak metnin yanında, altta #Çerez çubuğu ve kapat düğmesi. Kapat / Esc / Tamam hepsi onay sayılır.
  * Tab ve Shift+Tab pencerenin içinde döner, açılışta odak "Tamam, anladım." düğmesindedir.
  */
 export const CookieNotice: React.FC<CookieNoticeProps> = ({ onOpenPolicy }) => {
@@ -54,7 +54,7 @@ export const CookieNotice: React.FC<CookieNoticeProps> = ({ onOpenPolicy }) => {
           type="button"
           data-cookie-accept
           onClick={accept}
-          className="inline-flex items-center h-[34px] px-3.5 ml-2 align-middle rounded-[10px] bg-[#1a73e8] hover:bg-[#1666d0] text-white text-sm font-semibold border-0 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--linkC,#60cdff)] focus-visible:outline-offset-2"
+          className="inline ml-1.5 p-0 bg-transparent border-0 font-bold text-[var(--linkC,#60cdff)] hover:underline cursor-pointer rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--linkC,#60cdff)] focus-visible:outline-offset-2"
         >
           Tamam, anladım.
         </button>
