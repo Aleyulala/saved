@@ -1,3 +1,4 @@
+import { BloggerPager } from './BloggerPager';
 import React, { useState, useEffect } from 'react';
 import { 
   Search, 
@@ -44,21 +45,6 @@ interface LinksViewProps {
   onEmptyTrash?: () => void;
 }
 
-function getPageNumbers(currentPage: number, totalPages: number): (number | string)[] {
-  if (totalPages <= 7) {
-    return Array.from({ length: totalPages }, (_, i) => i + 1);
-  }
-
-  if (currentPage <= 4) {
-    return [1, 2, 3, 4, 5, '...', totalPages];
-  }
-
-  if (currentPage >= totalPages - 3) {
-    return [1, '...', totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages];
-  }
-
-  return [1, '...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages];
-}
 
 export const LinksView: React.FC<LinksViewProps> = ({
   title,
@@ -256,122 +242,8 @@ export const LinksView: React.FC<LinksViewProps> = ({
         </div>
       )}
 
-      {/* Blogger XML 1:1 Sayfalama Butonları (#blog-pager / .blogN: 1 2 3 4 5...) */}
-      {totalPages > 1 && (
-        <div className="pt-4 space-y-2">
-          <nav 
-            id="blog-pager" 
-            aria-label="Sayfalama" 
-            className="blogN flex flex-wrap items-center justify-center gap-2 select-none"
-          >
-            {/* İlk Sayfa */}
-            <button
-              type="button"
-              onClick={() => handlePageChange(1)}
-              disabled={currentPage === 1}
-              className={`min-w-9 h-9 px-2 rounded-lg flex items-center justify-center text-xs font-semibold transition-all ${
-                currentPage === 1
-                  ? 'opacity-30 bg-[#252526] text-[#71717a] cursor-not-allowed'
-                  : 'bg-[#252526] hover:bg-[#333333] text-[#d4d4d4] hover:text-white cursor-pointer active:scale-95'
-              }`}
-              title="İlk Sayfa"
-              aria-label="İlk Sayfa"
-            >
-              <ChevronsLeft className="w-4 h-4" />
-            </button>
-
-            {/* Önceki Sayfa (.nwLnk) */}
-            <button
-              type="button"
-              onClick={() => handlePageChange(currentPage - 1)}
-              disabled={currentPage === 1}
-              className={`nwLnk min-w-9 h-9 px-3 rounded-lg flex items-center justify-center gap-1.5 text-xs font-semibold transition-all ${
-                currentPage === 1
-                  ? 'opacity-30 bg-[#252526] text-[#71717a] cursor-not-allowed'
-                  : 'bg-[#252526] hover:bg-[#333333] text-[#d4d4d4] hover:text-white cursor-pointer active:scale-95'
-              }`}
-              title="Önceki Sayfa"
-              aria-label="Önceki Sayfa"
-            >
-              <ChevronLeft className="w-4 h-4" />
-              <span className="hidden sm:inline">Önceki</span>
-            </button>
-
-            {/* Sayfa Numaraları: 1 2 3 4 5... */}
-            <div className="flex items-center gap-1.5">
-              {getPageNumbers(currentPage, totalPages).map((p, idx) => {
-                if (p === '...') {
-                  return (
-                    <span 
-                      key={`ellipsis-${idx}`} 
-                      className="min-w-8 h-9 flex items-center justify-center text-[#71717a] font-mono text-xs select-none"
-                    >
-                      …
-                    </span>
-                  );
-                }
-
-                const pageNum = p as number;
-                const isActive = pageNum === currentPage;
-                return (
-                  <button
-                    key={pageNum}
-                    type="button"
-                    onClick={() => handlePageChange(pageNum)}
-                    className={`min-w-9 h-9 px-3 rounded-lg flex items-center justify-center text-xs font-bold transition-all cursor-pointer active:scale-95 ${
-                      isActive
-                        ? 'pager-active bg-[var(--linkC,#9aa0a6)] text-[#0f172a] shadow-md shadow-sky-500/25 scale-105'
-                        : 'bg-[#252526] hover:bg-[#333333] text-[#d4d4d4] hover:text-white'
-                    }`}
-                    aria-current={isActive ? 'page' : undefined}
-                    title={`Sayfa ${pageNum}`}
-                  >
-                    {pageNum}
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Sonraki Sayfa (.olLnk) */}
-            <button
-              type="button"
-              onClick={() => handlePageChange(currentPage + 1)}
-              disabled={currentPage === totalPages}
-              className={`olLnk min-w-9 h-9 px-3 rounded-lg flex items-center justify-center gap-1.5 text-xs font-semibold transition-all ${
-                currentPage === totalPages
-                  ? 'opacity-30 bg-[#252526] text-[#71717a] cursor-not-allowed'
-                  : 'bg-[#252526] hover:bg-[#333333] text-[#d4d4d4] hover:text-white cursor-pointer active:scale-95'
-              }`}
-              title="Sonraki Sayfa"
-              aria-label="Sonraki Sayfa"
-            >
-              <span className="hidden sm:inline">Sonraki</span>
-              <ChevronRight className="w-4 h-4" />
-            </button>
-
-            {/* Son Sayfa */}
-            <button
-              type="button"
-              onClick={() => handlePageChange(totalPages)}
-              disabled={currentPage === totalPages}
-              className={`min-w-9 h-9 px-2 rounded-lg flex items-center justify-center text-xs font-semibold transition-all ${
-                currentPage === totalPages
-                  ? 'opacity-30 bg-[#252526] text-[#71717a] cursor-not-allowed'
-                  : 'bg-[#252526] hover:bg-[#333333] text-[#d4d4d4] hover:text-white cursor-pointer active:scale-95'
-              }`}
-              title="Son Sayfa"
-              aria-label="Son Sayfa"
-            >
-              <ChevronsRight className="w-4 h-4" />
-            </button>
-          </nav>
-
-          {/* Sayfa Altı Bilgi Metni */}
-          <div className="text-center text-[11px] text-[#71717a] font-mono">
-            Sayfa {currentPage} / {totalPages} • Toplam {links.length} bağlantı (Sayfa başına {itemsPerPage})
-          </div>
-        </div>
-      )}
+      {/* Blogger Plus UI numaralı sayfalama ile birebir aynı (BloggerPager) */}
+      <BloggerPager current={currentPage} total={totalPages} onChange={handlePageChange} />
 
     </div>
   );
