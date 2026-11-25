@@ -78,12 +78,12 @@ export const BloggerOffTopicSlider: React.FC<BloggerOffTopicSliderProps> = ({
 
   return (
     <section aria-label={collection.name} className="space-y-5 pt-2">
-      <div className="flex items-center justify-between gap-3">
-        <h2 className="text-[1.35rem] font-bold text-white tracking-tight">{collection.name}</h2>
+      <div className="flex items-center justify-between gap-3 mb-9">
+        <h2 className="text-[20px] font-bold text-white tracking-tight">{collection.name}</h2>
         <button
           type="button"
           onClick={onViewAll}
-          className="shrink-0 px-4 py-2 rounded-xl bg-[#3c4043] hover:bg-[#4a4e52] text-[#e8eaed] text-[15px] font-medium transition-colors cursor-pointer"
+          className="shrink-0 h-7 px-[15px] rounded-[8px] bg-[#56595e] hover:bg-[#62666b] text-[#fdfdfd] text-[12px] font-normal leading-none transition-colors cursor-pointer"
         >
           Tümünü göster
         </button>
