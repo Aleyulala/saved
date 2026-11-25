@@ -27,7 +27,7 @@ export class SavedDatabase extends Dexie {
 
 export const db = new SavedDatabase();
 
-const CURRENT_SEED_VERSION = 'saved-linkwarden-v17';
+const CURRENT_SEED_VERSION = 'saved-linkwarden-v18';
 
 export async function seedSavedMainData(force = false) {
   // Quick safety check: Rename any existing 'Routine' records to 'Rutin'

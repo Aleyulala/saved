@@ -3,7 +3,7 @@ import { FullscreenModal } from './FullscreenModal';
 import { X, Plus, Star, CheckCircle2, Archive, Link as LinkIcon, Folder, Tag, FileText, Rss, Sparkles, Check } from 'lucide-react';
 import { CollectionItem, LinkItem, TagItem } from '../types';
 import { getDomain } from '../utils/favicon';
-import { resolveRss, getCandidateRssUrls } from '../utils/rssResolver';
+import { resolveRss, discoverRss, getCandidateRssUrls } from '../utils/rssResolver';
 
 interface AddEditLinkModalProps {
   isOpen: boolean;
@@ -30,6 +30,8 @@ export const AddEditLinkModal: React.FC<AddEditLinkModalProps> = ({
   const [thumbnail, setThumbnail] = useState('');
   const [rss, setRss] = useState('');
   const [rssFound, setRssFound] = useState(false);
+  const [isFindingRss, setIsFindingRss] = useState(false);
+  const [rssNotFound, setRssNotFound] = useState(false);
   const [showCandidates, setShowCandidates] = useState(false);
   const [collectionId, setCollectionId] = useState<number | null>(null);
   const [tags, setTags] = useState<string[]>([]);
@@ -58,6 +60,7 @@ export const AddEditLinkModal: React.FC<AddEditLinkModalProps> = ({
       setThumbnail('');
       setRss('');
       setRssFound(false);
+      setRssNotFound(false);
       setShowCandidates(false);
       setCollectionId(defaultCollectionId ?? (collections[0]?.id || null));
       setTags([]);
@@ -68,16 +71,25 @@ export const AddEditLinkModal: React.FC<AddEditLinkModalProps> = ({
 
   if (!isOpen) return null;
 
-  const handleAutoFindRss = (targetUrl?: string) => {
+  const handleAutoFindRss = async (targetUrl?: string) => {
     const toCheck = targetUrl || url;
-    if (!toCheck.trim()) return;
-    const detected = resolveRss(toCheck);
-    if (detected) {
-      setRss(detected);
-      setRssFound(true);
-      setShowCandidates(false);
-    } else {
-      setShowCandidates(true);
+    if (!toCheck.trim() || isFindingRss) return;
+    setIsFindingRss(true);
+    setRssNotFound(false);
+    try {
+      // Bilinen kurallar -> sayfadaki <link rel="alternate"> -> yaygın adreslerin doğrulanması
+      const detected = await discoverRss(toCheck);
+      if (detected) {
+        setRss(detected);
+        setRssFound(true);
+        setShowCandidates(false);
+      } else {
+        setRssFound(false);
+        setRssNotFound(true);
+        setShowCandidates(true);
+      }
+    } finally {
+      setIsFindingRss(false);
     }
   };
 
@@ -87,7 +99,12 @@ export const AddEditLinkModal: React.FC<AddEditLinkModalProps> = ({
       setTitle(domain.charAt(0).toUpperCase() + domain.slice(1));
     }
     if (url && !rss) {
-      handleAutoFindRss(url);
+      // Odak kaybında yalnızca ağ kullanmayan kurallara bakılır; sayfa taraması "RSS Bul" düğmesiyle yapılır
+      const quick = resolveRss(url);
+      if (quick) {
+        setRss(quick);
+        setRssFound(true);
+      }
     }
   };
 
@@ -188,11 +205,12 @@ export const AddEditLinkModal: React.FC<AddEditLinkModalProps> = ({
               <button
                 type="button"
                 onClick={() => handleAutoFindRss()}
-                className="inline-flex items-center gap-1 text-[11px] font-medium text-[#38bdf8] hover:text-[#7dd3fc] hover:underline cursor-pointer"
+                disabled={isFindingRss}
+                className="inline-flex items-center gap-1 text-[11px] font-medium text-[#38bdf8] hover:text-[#7dd3fc] hover:underline cursor-pointer disabled:opacity-60 disabled:cursor-wait"
                 title="URL'den RSS akışını otomatik tespit et"
               >
                 <Sparkles className="w-3 h-3" />
-                <span>RSS Bul</span>
+                <span>{isFindingRss ? 'Aranıyor…' : 'RSS Bul'}</span>
               </button>
             </div>
 
@@ -203,6 +221,7 @@ export const AddEditLinkModal: React.FC<AddEditLinkModalProps> = ({
                 onChange={(e) => {
                   setRss(e.target.value);
                   setRssFound(false);
+                  setRssNotFound(false);
                 }}
                 placeholder="https://example.com/feed (opsiyonel)"
                 className="w-full pl-3.5 pr-28 py-2.5 rounded-xl bg-[#171717] border border-[#383838] text-sm text-white focus:outline-none focus:border-[#38bdf8] transition-colors font-mono text-xs"
@@ -219,7 +238,7 @@ export const AddEditLinkModal: React.FC<AddEditLinkModalProps> = ({
             {showCandidates && url.trim() && (
               <div className="mt-2 p-2.5 rounded-xl bg-[#171717] border border-[#383838] space-y-1.5">
                 <div className="flex items-center justify-between text-[11px] text-[#989b9f]">
-                  <span>Önerilen Akış Formatları (Tıklayıp Seçin):</span>
+                  <span>{rssNotFound ? 'Otomatik akış bulunamadı. Olası adresler (tıklayıp seçin):' : 'Önerilen Akış Formatları (Tıklayıp Seçin):'}</span>
                   <button 
                     type="button" 
                     onClick={() => setShowCandidates(false)}
@@ -229,7 +248,7 @@ export const AddEditLinkModal: React.FC<AddEditLinkModalProps> = ({
                   </button>
                 </div>
                 <div className="flex flex-wrap gap-1.5">
-                  {getCandidateRssUrls(url).slice(0, 4).map((cand) => (
+                  {getCandidateRssUrls(url).slice(0, 6).map((cand) => (
                     <button
                       key={cand}
                       type="button"

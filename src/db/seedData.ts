@@ -4812,5 +4812,374 @@ export const SEED_LINKS: RawSeedLink[] = [
     "views": 180,
     "commentsCount": 3,
     "authorName": "NEGRONN"
+  },
+  {
+    "title": "İkinci Vardiya",
+    "url": "https://www.ikincivardiya.com/",
+    "categoryName": "Oyun",
+    "tags": ["oyun", "ikinci-el"],
+    "color": "#f97316",
+    "isPinned": false,
+    "description": "İkinci Vardiya - oyun kategorisindeki ikinci el sitesi"
+  },
+  {
+    "title": "IsThereAnyDeal",
+    "url": "https://isthereanydeal.com/",
+    "categoryName": "Oyun",
+    "tags": ["oyun", "fiyat", "indirim"],
+    "color": "#3b82f6",
+    "isPinned": false,
+    "description": "Oyun fiyatlarını ve mağaza indirimlerini karşılaştıran takip sitesi"
+  },
+  {
+    "title": "HowLongToBeat",
+    "url": "https://howlongtobeat.com/",
+    "categoryName": "Oyun",
+    "tags": ["oyun", "rehber"],
+    "color": "#22c55e",
+    "isPinned": false,
+    "description": "Oyunların ortalama bitirme sürelerini gösteren topluluk veritabanı"
+  },
+  {
+    "title": "Fanatical",
+    "url": "https://www.fanatical.com/",
+    "categoryName": "Oyun",
+    "tags": ["oyun", "magaza"],
+    "color": "#f59e0b",
+    "isPinned": false,
+    "description": "PC oyunları ve oyun paketleri satan çevrimiçi mağaza"
+  },
+  {
+    "title": "Green Man Gaming",
+    "url": "https://www.greenmangaming.com/",
+    "categoryName": "Oyun",
+    "tags": ["oyun", "magaza"],
+    "color": "#16a34a",
+    "isPinned": false,
+    "description": "PC oyun anahtarı ve dijital oyun mağazası"
+  },
+  {
+    "title": "Instant Gaming",
+    "url": "https://www.instant-gaming.com/",
+    "categoryName": "Oyun",
+    "tags": ["oyun", "magaza"],
+    "color": "#f97316",
+    "isPinned": false,
+    "description": "Dijital oyun anahtarları ve indirimli oyunlar"
+  },
+  {
+    "title": "Eneba",
+    "url": "https://www.eneba.com/",
+    "categoryName": "Oyun",
+    "tags": ["oyun", "magaza"],
+    "color": "#7c3aed",
+    "isPinned": false,
+    "description": "Oyun anahtarları, hediye kartları ve dijital içerik pazarı"
+  },
+  {
+    "title": "Lutris",
+    "url": "https://lutris.net/",
+    "categoryName": "Oyun",
+    "tags": ["oyun", "linux"],
+    "color": "#f59e0b",
+    "isPinned": false,
+    "description": "Linux için açık kaynak oyun yöneticisi ve oyun kataloğu"
+  },
+  {
+    "title": "Heroic Games Launcher",
+    "url": "https://heroicgameslauncher.com/",
+    "categoryName": "Oyun",
+    "tags": ["oyun", "linux", "launcher"],
+    "color": "#6366f1",
+    "isPinned": false,
+    "description": "Epic, GOG ve Amazon oyunları için açık kaynak başlatıcı"
+  },
+  {
+    "title": "Dreamina",
+    "url": "https://dreamina.capcut.com/",
+    "categoryName": "AI",
+    "tags": ["ai", "gorsel", "video"],
+    "color": "#8b5cf6",
+    "isPinned": false,
+    "description": "Yapay zekâ ile görsel ve video üretim stüdyosu (CapCut)"
+  },
+  {
+    "title": "Z-Image",
+    "url": "https://github.com/Tongyi-MAI/Z-Image",
+    "categoryName": "AI",
+    "tags": ["ai", "gorsel", "acik-kaynak"],
+    "color": "#f59e0b",
+    "isPinned": false,
+    "description": "Alibaba Tongyi laboratuvarının açık kaynak görsel üretim modeli"
+  },
+  {
+    "title": "Jarrus AI",
+    "url": "https://jarrus.ai/",
+    "categoryName": "AI",
+    "tags": ["ai", "asistan"],
+    "color": "#06b6d4",
+    "isPinned": false,
+    "description": "Jarrus AI yapay zekâ servisi"
+  },
+  {
+    "title": "Civitai",
+    "url": "https://civitai.com/",
+    "categoryName": "AI",
+    "tags": ["ai", "gorsel", "model"],
+    "color": "#3b82f6",
+    "isPinned": false,
+    "description": "Görsel üretim modelleri, LoRA ve örnek çalışmaların paylaşıldığı topluluk"
+  },
+  {
+    "title": "Replicate",
+    "url": "https://replicate.com/",
+    "categoryName": "AI",
+    "tags": ["ai", "api", "model"],
+    "color": "#111827",
+    "isPinned": false,
+    "description": "Açık kaynak yapay zekâ modellerini API ile çalıştırma platformu"
+  },
+  {
+    "title": "ComfyUI",
+    "url": "https://github.com/comfyanonymous/ComfyUI",
+    "categoryName": "AI",
+    "tags": ["ai", "gorsel", "acik-kaynak"],
+    "color": "#22c55e",
+    "isPinned": false,
+    "description": "Düğüm tabanlı açık kaynak görsel üretim arayüzü"
+  },
+  {
+    "title": "Open WebUI",
+    "url": "https://openwebui.com/",
+    "categoryName": "AI",
+    "tags": ["ai", "self-hosted", "sohbet"],
+    "color": "#6366f1",
+    "isPinned": false,
+    "description": "Yerel ve uzak modellerle çalışan kendi sunucunda barındırılan yapay zekâ arayüzü"
+  },
+  {
+    "title": "Immich",
+    "url": "https://immich.app/",
+    "categoryName": "Araçlar",
+    "tags": ["self-hosted", "foto", "yedek"],
+    "color": "#4f46e5",
+    "isPinned": false,
+    "description": "Kendi sunucunda barındırılan açık kaynak fotoğraf ve video yedekleme"
+  },
+  {
+    "title": "Matomo",
+    "url": "https://matomo.org/",
+    "categoryName": "Araçlar",
+    "tags": ["analitik", "self-hosted"],
+    "color": "#3253a8",
+    "isPinned": false,
+    "description": "Gizlilik odaklı açık kaynak web analitiği"
+  },
+  {
+    "title": "Chatwoot",
+    "url": "https://www.chatwoot.com/",
+    "categoryName": "Araçlar",
+    "tags": ["destek", "self-hosted"],
+    "color": "#1f93ff",
+    "isPinned": false,
+    "description": "Açık kaynak müşteri destek ve canlı sohbet platformu"
+  },
+  {
+    "title": "Plausible Analytics",
+    "url": "https://plausible.io/",
+    "categoryName": "Araçlar",
+    "tags": ["analitik", "gizlilik"],
+    "color": "#5850ec",
+    "isPinned": false,
+    "description": "Hafif ve çerezsiz web analitiği"
+  },
+  {
+    "title": "Umami",
+    "url": "https://umami.is/",
+    "categoryName": "Araçlar",
+    "tags": ["analitik", "self-hosted"],
+    "color": "#111827",
+    "isPinned": false,
+    "description": "Basit ve gizlilik dostu açık kaynak web analitiği"
+  },
+  {
+    "title": "Home Assistant",
+    "url": "https://www.home-assistant.io/",
+    "categoryName": "Araçlar",
+    "tags": ["akilli-ev", "self-hosted"],
+    "color": "#18bcf2",
+    "isPinned": false,
+    "description": "Yerel çalışan açık kaynak akıllı ev otomasyonu"
+  },
+  {
+    "title": "Vaultwarden",
+    "url": "https://github.com/dani-garcia/vaultwarden",
+    "categoryName": "Araçlar",
+    "tags": ["parola", "self-hosted"],
+    "color": "#175ddc",
+    "isPinned": false,
+    "description": "Bitwarden uyumlu hafif parola yöneticisi sunucusu"
+  },
+  {
+    "title": "Uptime Kuma",
+    "url": "https://github.com/louislam/uptime-kuma",
+    "categoryName": "Araçlar",
+    "tags": ["izleme", "self-hosted"],
+    "color": "#5cdd8b",
+    "isPinned": false,
+    "description": "Kendi sunucunda barındırılan site ve servis izleme panosu"
+  },
+  {
+    "title": "Paperless-ngx",
+    "url": "https://docs.paperless-ngx.com/",
+    "categoryName": "Araçlar",
+    "tags": ["belge", "self-hosted"],
+    "color": "#17541f",
+    "isPinned": false,
+    "description": "Belgeleri tarayıp aranabilir arşive çeviren açık kaynak yönetim sistemi"
+  },
+  {
+    "title": "GadgetCue",
+    "url": "https://gadgetcue.com/",
+    "categoryName": "Araçlar",
+    "tags": ["teknoloji", "site"],
+    "color": "#0ea5e9",
+    "isPinned": false,
+    "description": "GadgetCue web sitesi"
+  },
+  {
+    "title": "Penpot",
+    "url": "https://penpot.app/",
+    "categoryName": "Web Uygulamaları",
+    "tags": ["tasarim", "acik-kaynak"],
+    "color": "#7efff5",
+    "isPinned": false,
+    "description": "Açık kaynak tasarım ve prototip aracı"
+  },
+  {
+    "title": "Excalidraw",
+    "url": "https://excalidraw.com/",
+    "categoryName": "Web Uygulamaları",
+    "tags": ["cizim", "beyaz-tahta"],
+    "color": "#6965db",
+    "isPinned": false,
+    "description": "El çizimi görünümlü çevrimiçi beyaz tahta"
+  },
+  {
+    "title": "Dolphy App",
+    "url": "https://unvoiddd.github.io/Dolphy-App/",
+    "categoryName": "Web Uygulamaları",
+    "tags": ["app", "web"],
+    "color": "#0ea5e9",
+    "isPinned": false,
+    "description": "Dolphy web uygulaması (GitHub Pages)"
+  },
+  {
+    "title": "Squoosh",
+    "url": "https://squoosh.app/",
+    "categoryName": "Web Uygulamaları",
+    "tags": ["gorsel", "sikistirma"],
+    "color": "#f97316",
+    "isPinned": false,
+    "description": "Görselleri tarayıcıda sıkıştıran ve dönüştüren Google aracı"
+  },
+  {
+    "title": "tldraw",
+    "url": "https://www.tldraw.com/",
+    "categoryName": "Web Uygulamaları",
+    "tags": ["cizim", "beyaz-tahta"],
+    "color": "#2f80ed",
+    "isPinned": false,
+    "description": "Sonsuz tuvalli çevrimiçi çizim ve diyagram aracı"
+  },
+  {
+    "title": "Navidrome",
+    "url": "https://www.navidrome.org/",
+    "categoryName": "Medya",
+    "tags": ["muzik", "self-hosted"],
+    "color": "#0084ff",
+    "isPinned": false,
+    "description": "Kendi müzik arşivini yayınlayan açık kaynak müzik sunucusu"
+  },
+  {
+    "title": "Jellyfin",
+    "url": "https://jellyfin.org/",
+    "categoryName": "Medya",
+    "tags": ["video", "self-hosted"],
+    "color": "#00a4dc",
+    "isPinned": false,
+    "description": "Ücretsiz ve açık kaynak medya sunucusu"
+  },
+  {
+    "title": "Nota",
+    "url": "https://github.com/nota-daw/nota",
+    "categoryName": "Medya",
+    "tags": ["muzik", "daw", "acik-kaynak"],
+    "color": "#a855f7",
+    "isPinned": false,
+    "description": "Ücretsiz ve açık kaynak dijital ses iş istasyonu (DAW)"
+  },
+  {
+    "title": "Audiobookshelf",
+    "url": "https://www.audiobookshelf.org/",
+    "categoryName": "Medya",
+    "tags": ["sesli-kitap", "self-hosted"],
+    "color": "#d4a017",
+    "isPinned": false,
+    "description": "Sesli kitap ve podcast sunucusu"
+  },
+  {
+    "title": "Google Apps Script",
+    "url": "https://script.google.com/home?hl=tr",
+    "categoryName": "Programlama",
+    "tags": ["google", "otomasyon", "kod"],
+    "color": "#4285f4",
+    "isPinned": false,
+    "description": "Google Workspace'i JavaScript ile otomatikleştirme platformu"
+  },
+  {
+    "title": "ArtCraft Android",
+    "url": "https://github.com/MostafaXS1/artcraft-android",
+    "categoryName": "Programlama",
+    "tags": ["android", "github", "arac"],
+    "color": "#22c55e",
+    "isPinned": false,
+    "description": "ArtCraft uygulamalarını Android paketine dönüştüren araç"
+  },
+  {
+    "title": "GitTrend",
+    "url": "https://gittrend.io/",
+    "categoryName": "Programlama",
+    "tags": ["github", "trend"],
+    "color": "#f59e0b",
+    "isPinned": false,
+    "description": "GitHub'da yükselen depoları takip eden trend sitesi"
+  },
+  {
+    "title": "GitHub Trending",
+    "url": "https://github.com/trending",
+    "categoryName": "Programlama",
+    "tags": ["github", "trend"],
+    "color": "#9ca3af",
+    "isPinned": false,
+    "description": "GitHub'ın günlük, haftalık ve aylık yükselen depoları"
+  },
+  {
+    "title": "Awesome Selfhosted",
+    "url": "https://github.com/awesome-selfhosted/awesome-selfhosted",
+    "categoryName": "Programlama",
+    "tags": ["self-hosted", "liste"],
+    "color": "#22c55e",
+    "isPinned": false,
+    "description": "Kendi sunucunda barındırılabilen özgür yazılımların derlemesi"
+  },
+  {
+    "title": "Skool",
+    "url": "https://www.skool.com/",
+    "categoryName": "Eğitim",
+    "tags": ["topluluk", "kurs"],
+    "color": "#f59e0b",
+    "isPinned": false,
+    "description": "Topluluk ve çevrimiçi kurs platformu"
   }
 ];
