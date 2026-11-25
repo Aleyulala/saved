@@ -206,10 +206,10 @@ export const AddEditLinkModal: React.FC<AddEditLinkModalProps> = ({
                 type="button"
                 onClick={() => handleAutoFindRss()}
                 disabled={isFindingRss}
-                className="inline-flex items-center gap-1 text-[11px] font-medium text-[#38bdf8] hover:text-[#7dd3fc] hover:underline cursor-pointer disabled:opacity-60 disabled:cursor-wait"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#252526] hover:bg-[#333333] border border-[#383838] text-xs font-semibold text-[#38bdf8] hover:text-[#7dd3fc] cursor-pointer disabled:opacity-60 disabled:cursor-wait"
                 title="URL'den RSS akışını otomatik tespit et"
               >
-                <Sparkles className="w-3 h-3" />
+                <Sparkles className="w-3.5 h-3.5" />
                 <span>{isFindingRss ? 'Aranıyor…' : 'RSS Bul'}</span>
               </button>
             </div>
