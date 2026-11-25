@@ -2280,3 +2280,19 @@ html body #advSearchModal .adv-search-input { padding-left: 12px !important; }
 .wBkmX.bkmFull { position: static !important; width: 100% !important; max-height: none !important; min-height: 0 !important; border-radius: 0 !important; background: transparent !important; box-shadow: none !important; animation: none !important; overflow: visible !important; color: inherit; }
 .wBkmX.bkmFull .bkmH .c { display: none !important; }
 .wBkmX.bkmFull .bkmC { overflow: visible !important; max-height: none !important; padding-inline: 4px; }
+
+/* Yazarlar ve Çeviri açılır kartları — Blogger'daki gibi sağ üstte kart (tam ekran değil), arkası bulanık */
+.popX { position: fixed; top: 68px; right: 8px; width: min(333px, calc(100vw - 16px)); max-height: calc(100vh - 150px); display: flex; flex-direction: column; background: #121212; color: #fffdfc; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.06); box-shadow: 0 14px 40px rgba(0, 0, 0, 0.55); overflow: hidden; z-index: 70; animation: aprIn .2s cubic-bezier(0.16, 1, 0.3, 1) both; transform-origin: top right; }
+:root.lgT .popX { background: #fff; color: #1f1f1f; border-color: rgba(0, 0, 0, 0.08); }
+.popH { display: flex; align-items: center; justify-content: space-between; min-height: 46px; padding: 14px 16px 6px 16px; font-size: 14px; font-weight: 700; flex-shrink: 0; }
+.popTrans .popH { font-weight: 500; font-size: 13px; opacity: .75; padding-bottom: 10px; }
+.popClose { width: 34px; height: 34px; display: inline-flex; align-items: center; justify-content: center; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.08); background: transparent; color: inherit; cursor: pointer; }
+:root.lgT .popClose { border-color: rgba(0, 0, 0, 0.1); }
+.popClose:hover { background: rgba(255, 255, 255, 0.07); }
+.popBody { padding: 10px 12px 14px; overflow-y: auto; }
+.popList { padding: 4px 0 8px; }
+.popItem { display: flex; align-items: center; width: 100%; padding: 11px 16px 11px 8px; gap: 4px; font-size: 14px; text-align: start; color: inherit; background: transparent; border: 0; cursor: pointer; }
+.popItem:hover { background: rgba(255, 255, 255, 0.06); }
+:root.lgT .popItem:hover { background: rgba(0, 0, 0, 0.05); }
+.popTick { width: 36px; display: inline-flex; justify-content: center; flex-shrink: 0; opacity: .85; }
+.popAuthors .prfAuthorBlock { color: inherit; }
