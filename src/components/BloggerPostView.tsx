@@ -1,5 +1,6 @@
 import { createPortal } from 'react-dom';
 import React, { useState, useEffect, useMemo } from 'react';
+import { PostReactions } from './PostReactions';
 import { 
   Check, 
   Copy, 
@@ -441,6 +442,9 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
         </div>
 
       </div>
+
+      {/* Yazı altı tepki satırı */}
+      {link.id != null && <PostReactions postKey={`post_${link.id}`} />}
 
       {/* 9. Önceki Gönderi Bloğu (Screenshot 1 1:1) */}
       {prevLink && (

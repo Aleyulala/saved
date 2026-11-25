@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FullscreenModal } from './FullscreenModal';
 import { 
   X, 
   Download, 
@@ -170,11 +171,7 @@ export const ImportExportModal: React.FC<ImportExportModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-xs overflow-y-auto animate-in fade-in duration-200">
-      <div 
-        className="w-full max-w-xl bg-[#212121] rounded-2xl shadow-2xl border border-[#3e3e3e] overflow-hidden my-8 text-neutral-200 animate-in zoom-in duration-200"
-        onClick={(e) => e.stopPropagation()}
-      >
+    <FullscreenModal id="importExportModal" title="#İçe/Dışa Aktar" ariaLabel="İçe ve dışa aktarma" maxWidth="max-w-xl" onClose={onClose}>
         <div className="flex items-center justify-between px-6 py-4 border-b border-[#333333]">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-xl bg-[#38bdf8]/15 text-[#38bdf8] flex items-center justify-center">
@@ -189,12 +186,6 @@ export const ImportExportModal: React.FC<ImportExportModalProps> = ({
               </p>
             </div>
           </div>
-          <button
-            onClick={onClose}
-            className="p-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-[#333333] transition-colors"
-          >
-            <X className="w-5 h-5" />
-          </button>
         </div>
 
         <div className="flex border-b border-[#333333] px-6 pt-3 gap-4">
@@ -349,7 +340,6 @@ export const ImportExportModal: React.FC<ImportExportModalProps> = ({
             </span>
           </div>
         </div>
-      </div>
-    </div>
+    </FullscreenModal>
   );
 };

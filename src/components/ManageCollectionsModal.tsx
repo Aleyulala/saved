@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FullscreenModal } from './FullscreenModal';
 import { X, Plus, Trash2, Edit2, Folder, Check } from 'lucide-react';
 import { CollectionItem } from '../types';
 
@@ -78,11 +79,7 @@ export const ManageCollectionsModal: React.FC<ManageCollectionsModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-xs overflow-y-auto animate-in fade-in duration-200">
-      <div 
-        className="w-full max-w-lg bg-[#212121] rounded-2xl shadow-2xl border border-[#3e3e3e] overflow-hidden my-8 text-neutral-200 animate-in zoom-in duration-200"
-        onClick={(e) => e.stopPropagation()}
-      >
+    <FullscreenModal id="manageCollectionsModal" title="#Koleksiyonlar" ariaLabel="Koleksiyonları yönet" maxWidth="max-w-lg" onClose={onClose}>
         <div className="flex items-center justify-between px-6 py-4 border-b border-[#333333]">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-xl bg-[#38bdf8]/15 text-[#38bdf8] flex items-center justify-center">
@@ -92,12 +89,6 @@ export const ManageCollectionsModal: React.FC<ManageCollectionsModalProps> = ({
               Manage Collections
             </h2>
           </div>
-          <button
-            onClick={onClose}
-            className="p-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-[#333333] transition-colors"
-          >
-            <X className="w-5 h-5" />
-          </button>
         </div>
 
         <div className="p-6 space-y-5">
@@ -212,7 +203,6 @@ export const ManageCollectionsModal: React.FC<ManageCollectionsModalProps> = ({
             </div>
           </div>
         </div>
-      </div>
-    </div>
+    </FullscreenModal>
   );
 };

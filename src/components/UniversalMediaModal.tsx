@@ -28,6 +28,7 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
   const [panPos, setPanPos] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [copiedLink, setCopiedLink] = useState(false);
+  const [imgFailed, setImgFailed] = useState(false);
   const dragStartRef = useRef({ x: 0, y: 0, posX: 0, posY: 0 });
   const didDragRef = useRef(false);
 
@@ -43,6 +44,17 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
   }, [isOpen, initialIndex, items]);
 
   const currentItem = items[currentIndex];
+
+  // Başka bir ögeye geçilince görsel hata durumunu sıfırla
+  useEffect(() => { setImgFailed(false); }, [currentIndex, currentItem?.url]);
+
+  // Medya açıkken arkadaki sayfa kaymasın
+  useEffect(() => {
+    if (!isOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = prev; };
+  }, [isOpen]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -257,7 +269,7 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
     <div
       id="fsMediaModal"
       className="fixed inset-0 z-[1000000] bg-black flex items-center justify-center select-none animate-in fade-in duration-200"
-      style={{ backgroundColor: 'rgba(0, 0, 0, 0.94)' }}
+      style={{ backgroundColor: 'rgba(0, 0, 0, 0.94)', paddingBottom: 'calc(55px + env(safe-area-inset-bottom, 0px))' }}
       onClick={(e) => {
         if (e.target === e.currentTarget) {
           onClose();
@@ -383,20 +395,6 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
             <line x1="3" y1="21" x2="10" y2="14" />
           </svg>
         </button>
-
-        {/* Kapat Butonu (Screenshot 1:1) */}
-        <button
-          type="button"
-          onClick={onClose}
-          className="fsClose"
-          title="Kapat (Esc)"
-          aria-label="Kapat"
-        >
-          <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18" />
-            <line x1="6" y1="6" x2="18" y2="18" />
-          </svg>
-        </button>
       </div>
 
       {/* Sol Ok Butonu (Screenshot 1:1) */}
@@ -429,6 +427,23 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
         </button>
       )}
 
+      {/* Alt çubuk: #Medya + kapat (paylaş, arama ve diğer pencerelerle aynı) */}
+      <div className="advBottomBar">
+        <span className="advBottomTitle">#Medya</span>
+        <button
+          type="button"
+          onClick={onClose}
+          className="advBottomClose"
+          title="Kapat (Esc)"
+          aria-label="Kapat (Esc)"
+        >
+          <svg viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+      </div>
+
       {/* Alt Orta Sayaç & Başlık (Screenshot 3 & 10 1:1: "2 / 10 · Fotoğraf — Videolar & Sinema") */}
       {items.length > 0 && (
         <div className="fsCounter">
@@ -443,8 +458,23 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
         className="relative flex items-center justify-center max-w-[88vw] max-h-[82vh] overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
-        {currentItem.type === 'image' && (
+        {currentItem.type === 'image' && imgFailed && (
+          <div className="flex flex-col items-center gap-3 px-6 py-10 rounded-[18px] bg-[#1e1e1e] text-center text-[#e8eaed]">
+            <p className="text-sm">Görsel yüklenemedi.</p>
+            <a
+              href={currentItem.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 h-7 inline-flex items-center rounded-[8px] bg-[#56595e] hover:bg-[#62666b] text-[12px] text-white"
+            >
+              Yeni sekmede aç
+            </a>
+          </div>
+        )}
+
+        {currentItem.type === 'image' && !imgFailed && (
           <img
+            onError={() => setImgFailed(true)}
             src={currentItem.url}
             alt={currentItem.title || 'Blogger Görsel'}
             className={`max-w-[86vw] max-h-[82vh] rounded-[18px] sm:rounded-[22px] object-contain shadow-2xl transition-transform duration-200 select-none ${
