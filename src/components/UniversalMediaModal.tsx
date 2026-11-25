@@ -29,6 +29,8 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
   const [isDragging, setIsDragging] = useState(false);
   const [copiedLink, setCopiedLink] = useState(false);
   const [imgFailed, setImgFailed] = useState(false);
+  const [isFloating, setIsFloating] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
   const dragStartRef = useRef({ x: 0, y: 0, posX: 0, posY: 0 });
   const didDragRef = useRef(false);
 
@@ -40,6 +42,9 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
       setIsWidescreen(false);
       setPanPos({ x: 0, y: 0 });
       didDragRef.current = false;
+      setIsFloating(false);
+    } else {
+      setIsFloating(false);
     }
   }, [isOpen, initialIndex, items]);
 
@@ -50,16 +55,24 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
 
   // Medya açıkken arkadaki sayfa kaymasın
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen || isFloating) return;
     const prev = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     return () => { document.body.style.overflow = prev; };
-  }, [isOpen]);
+  }, [isOpen, isFloating]);
 
   useEffect(() => {
     if (!isOpen) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
+      if (isFloating) {
+        // Kayan pencere açıkken sayfa kullanılıyor: yalnızca odak pencerenin içindeyse Esc kapatır
+        if (e.key === 'Escape' && rootRef.current && rootRef.current.contains(document.activeElement)) {
+          e.preventDefault();
+          onClose();
+        }
+        return;
+      }
       if (e.key === 'Escape') {
         e.preventDefault();
         onClose();
@@ -115,7 +128,7 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, items.length, currentIndex, zoomLevel]);
+  }, [isOpen, items.length, currentIndex, zoomLevel, isFloating]);
 
   if (!isOpen || !currentItem) return null;
 
@@ -268,10 +281,19 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
   return (
     <div
       id="fsMediaModal"
-      className="fixed inset-0 z-[1000000] bg-black flex items-center justify-center select-none animate-in fade-in duration-200"
-      style={{ backgroundColor: 'rgba(0, 0, 0, 0.94)', paddingBottom: 'calc(55px + env(safe-area-inset-bottom, 0px))' }}
+      ref={rootRef}
+      className={
+        isFloating
+          ? 'fixed inset-0 z-[999000] pointer-events-none select-none'
+          : 'fixed inset-0 z-[1000000] bg-black flex items-center justify-center select-none animate-in fade-in duration-200'
+      }
+      style={
+        isFloating
+          ? undefined
+          : { backgroundColor: 'rgba(0, 0, 0, 0.94)', paddingBottom: 'calc(55px + env(safe-area-inset-bottom, 0px))' }
+      }
       onClick={(e) => {
-        if (e.target === e.currentTarget) {
+        if (!isFloating && e.target === e.currentTarget) {
           onClose();
         }
       }}
@@ -282,6 +304,7 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
       onMouseUp={handleMouseUp}
     >
       {/* Sağ Üst Araç Çubuğu (Screenshot 3 & 10 1:1: Zoom+, Zoom-, Döndür, İndir, Link, Tam Ekran, Kapat) */}
+      {!isFloating && (
       <div className="fsToolbar">
         {!isVideo && (
           <>
@@ -380,6 +403,20 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
           </>
         )}
 
+        {/* Kayan pencere: videoyu/fotoğrafı durdurmadan küçük pencereye al, sayfada gezinmeye devam et */}
+        <button
+          type="button"
+          onClick={() => setIsFloating(true)}
+          className="fsToolBtn"
+          title="Kayan Pencere"
+          aria-label="Kayan Pencere"
+        >
+          <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="3" y="4" width="18" height="14" rx="2" />
+            <rect x="12" y="11" width="7" height="5" rx="1" />
+          </svg>
+        </button>
+
         {/* Fullscreen / Widescreen */}
         <button
           type="button"
@@ -396,9 +433,10 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
           </svg>
         </button>
       </div>
+      )}
 
       {/* Sol Ok Butonu (Screenshot 1:1) */}
-      {items.length > 1 && (
+      {!isFloating && items.length > 1 && (
         <button
           type="button"
           onClick={handlePrev}
@@ -413,7 +451,7 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
       )}
 
       {/* Sağ Ok Butonu (Screenshot 1:1) */}
-      {items.length > 1 && (
+      {!isFloating && items.length > 1 && (
         <button
           type="button"
           onClick={handleNext}
@@ -428,6 +466,7 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
       )}
 
       {/* Alt çubuk: #Medya + kapat (paylaş, arama ve diğer pencerelerle aynı) */}
+      {!isFloating && (
       <div className="advBottomBar">
         <span className="advBottomTitle">#Medya</span>
         <button
@@ -443,9 +482,10 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
           </svg>
         </button>
       </div>
+      )}
 
       {/* Alt Orta Sayaç & Başlık (Screenshot 3 & 10 1:1: "2 / 10 · Fotoğraf — Videolar & Sinema") */}
-      {items.length > 0 && (
+      {!isFloating && items.length > 0 && (
         <div className="fsCounter">
           <span>{currentIndex + 1} / {items.length}</span>
           <span>•</span>
@@ -455,7 +495,11 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
 
       {/* Medya İçeriği (Screenshot 1:1: Ortalanmış, rounded-[18px] sm:rounded-[22px] köşe yuvarlaklığı) */}
       <div 
-        className="relative flex items-center justify-center max-w-[88vw] max-h-[82vh] overflow-hidden"
+        className={
+          isFloating
+            ? 'fixed left-3 bottom-[calc(66px+env(safe-area-inset-bottom,0px))] min-[897px]:bottom-4 z-10 w-[min(300px,72vw)] pointer-events-auto rounded-[14px] overflow-hidden bg-black border border-white/10 shadow-[0_8px_30px_rgba(0,0,0,0.6)] flex items-center justify-center'
+            : 'relative flex items-center justify-center max-w-[88vw] max-h-[82vh] overflow-hidden'
+        }
         onClick={(e) => e.stopPropagation()}
       >
         {currentItem.type === 'image' && imgFailed && (
@@ -477,7 +521,7 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
             onError={() => setImgFailed(true)}
             src={currentItem.url}
             alt={currentItem.title || 'Blogger Görsel'}
-            className={`max-w-[86vw] max-h-[82vh] rounded-[18px] sm:rounded-[22px] object-contain shadow-2xl transition-transform duration-200 select-none ${
+            className={`${isFloating ? 'max-w-full max-h-[220px] rounded-none' : 'max-w-[86vw] max-h-[82vh] rounded-[18px] sm:rounded-[22px]'} object-contain shadow-2xl transition-transform duration-200 select-none ${
               zoomLevel > 1 ? 'cursor-grab active:cursor-grabbing' : 'cursor-zoom-in'
             }`}
             style={{
@@ -508,7 +552,9 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
         {(currentItem.type === 'youtube' || currentItem.type === 'shorts') && (
           <div
             className={`relative rounded-[18px] overflow-hidden bg-black shadow-2xl ${
-              isShorts && !isWidescreen 
+              isFloating
+                ? (isShorts ? 'w-[150px] aspect-[9/16]' : 'w-full aspect-video')
+                : isShorts && !isWidescreen 
                 ? 'w-[min(85vh*9/16,400px)] aspect-[9/16]' 
                 : isWidescreen 
                   ? 'w-[min(94vw,1200px)] aspect-video' 
@@ -528,7 +574,7 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
         {currentItem.type === 'video' && (
           <div
             className={`relative rounded-[18px] overflow-hidden bg-black shadow-2xl ${
-              isWidescreen 
+              isFloating ? 'w-full aspect-video' : isWidescreen 
                 ? 'w-[min(94vw,1200px)] aspect-video' 
                 : 'w-[min(88vw,960px)] aspect-video'
             }`}
@@ -540,6 +586,37 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
               playsInline
               className="w-full h-full object-contain"
             />
+          </div>
+        )}
+
+        {isFloating && (
+          <div className="absolute top-1.5 right-1.5 z-10 flex items-center gap-1.5">
+            <button
+              type="button"
+              onClick={() => setIsFloating(false)}
+              className="w-7 h-7 inline-flex items-center justify-center rounded-lg bg-black/65 hover:bg-black/85 text-white border border-white/15 cursor-pointer"
+              title="Tam ekrana büyüt"
+              aria-label="Tam ekrana büyüt"
+            >
+              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="15 3 21 3 21 9" />
+                <polyline points="9 21 3 21 3 15" />
+                <line x1="21" y1="3" x2="14" y2="10" />
+                <line x1="3" y1="21" x2="10" y2="14" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              onClick={onClose}
+              className="w-7 h-7 inline-flex items-center justify-center rounded-lg bg-black/65 hover:bg-black/85 text-white border border-white/15 cursor-pointer"
+              title="Kapat"
+              aria-label="Kayan pencereyi kapat"
+            >
+              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
           </div>
         )}
       </div>
