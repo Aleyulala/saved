@@ -79,7 +79,7 @@ export const PostMediaSlider: React.FC<PostMediaSliderProps> = ({ items, index, 
     <div className="post-media-slider space-y-2.5">
       {/* Hikaye şeridi (.insta-stories-tray) */}
       {total >= 2 && (
-        <div ref={trayRef} className="insta-stories-tray flex items-center [justify-content:safe_center] gap-2.5 overflow-x-auto px-[3px] py-[3px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x" role="tablist" aria-label="Hikaye Listesi">
+        <div ref={trayRef} className="insta-stories-tray flex items-center [justify-content:safe_center] gap-2.5 overflow-x-auto px-[4px] py-[4px] [scroll-padding-inline:4px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" role="tablist" aria-label="Hikaye Listesi">
           {brand && (
             <button
               type="button"
@@ -88,7 +88,7 @@ export const PostMediaSlider: React.FC<PostMediaSliderProps> = ({ items, index, 
               aria-label={brand.title}
               title={brand.title}
               onClick={() => goTo(0)}
-              className={`insta-story-item shrink-0 snap-start w-[104px] h-[58px] p-0 border-0 bg-transparent cursor-pointer transition-all hover:-translate-y-0.5 active:scale-95 ${index === 0 ? 'opacity-100' : 'opacity-70 hover:opacity-100'}`}
+              className={`insta-story-item shrink-0 w-[104px] h-[58px] p-0 border-0 bg-transparent cursor-pointer transition-all hover:-translate-y-0.5 active:scale-95 ${index === 0 ? 'opacity-100' : 'opacity-70 hover:opacity-100'}`}
             >
               <span className={`relative block w-full h-full rounded-lg ${index === 0 ? 'shadow-[0_0_0_2px_var(--linkC,#9aa0a6)]' : ''}`}>
                 <span className="relative flex items-center justify-center w-full h-full rounded-lg overflow-hidden bg-[#1c1e26]">
@@ -110,7 +110,7 @@ export const PostMediaSlider: React.FC<PostMediaSliderProps> = ({ items, index, 
                 aria-label={it.title || `İçerik ${i + 1}`}
                 title={it.title || `İçerik ${i + 1}`}
                 onClick={() => (active ? openAt(i) : goTo(i))}
-                className={`insta-story-item shrink-0 snap-start w-[104px] h-[58px] p-0 border-0 bg-transparent cursor-pointer transition-all hover:-translate-y-0.5 active:scale-95 ${active ? 'opacity-100' : 'opacity-70 hover:opacity-100'}`}
+                className={`insta-story-item shrink-0 w-[104px] h-[58px] p-0 border-0 bg-transparent cursor-pointer transition-all hover:-translate-y-0.5 active:scale-95 ${active ? 'opacity-100' : 'opacity-70 hover:opacity-100'}`}
               >
                 <span className={`relative block w-full h-full rounded-lg ${active ? 'shadow-[0_0_0_2px_var(--linkC,#9aa0a6)]' : ''}`}>
                   <span className="relative block w-full h-full rounded-lg overflow-hidden bg-[#282828]">
