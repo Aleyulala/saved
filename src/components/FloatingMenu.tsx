@@ -29,6 +29,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [atEdge, setAtEdge] = useState(true);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,7 +38,8 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
       const scrollTop = el ? el.scrollTop : (window.scrollY || root.scrollTop);
       const max = el ? el.scrollHeight - el.clientHeight : root.scrollHeight - window.innerHeight;
       setIsScrolled(scrollTop > 20);
-      setAtEdge(scrollTop <= 20 || scrollTop >= max - 24);
+      setAtEdge(max < 60 || scrollTop <= 20 || scrollTop >= max - 24);
+      setProgress(max > 0 ? Math.min(100, Math.max(0, (scrollTop / max) * 100)) : 0);
     };
 
     // capture: kaydırma alanı sonradan yeniden oluşturulsa da olaylar yakalanır
@@ -392,20 +394,23 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
           </button>
         )}
 
-        {/* Scroll to Top / Bottom (.tTb - Screenshot 1 1:1 Yuvarlak Buton) */}
+        {/* Yukarı / aşağı (.tTb) — Blogger ile birebir: ilerleme halkası; en üstte aşağı iner. Dişliyle birlikte yalnızca en üstte / en altta görünür */}
         <button
           type="button"
           onClick={handleScrollToggle}
-          className="floating-btn w-9 h-9 rounded-full bg-[#252526] hover:bg-[#333333] border border-white/15 text-white flex items-center justify-center transition-all cursor-pointer shadow-lg active:scale-95 shrink-0"
+          className={`tTb floating-btn shrink-0 p-0 border-0 bg-transparent rounded-full cursor-pointer text-white hover:text-[var(--linkC,#9aa0a6)] transition-all duration-300 active:scale-95 ${hideGear ? 'opacity-0 translate-y-3 pointer-events-none' : ''}`}
+          style={{ ['--progress' as string]: progress } as React.CSSProperties}
           title={isScrolled ? 'Yukarı Çık' : 'Aşağı İn'}
           aria-label={isScrolled ? 'Yukarı Çık' : 'Aşağı İn'}
+          aria-hidden={hideGear || undefined}
+          tabIndex={hideGear ? -1 : undefined}
         >
-          <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            {isScrolled ? (
-              <polyline points="18 15 12 9 6 15" />
-            ) : (
-              <polyline points="6 9 12 15 18 9" />
-            )}
+          <svg viewBox="0 0 34 34" className="w-9 h-9 block" aria-hidden="true">
+            <g transform="translate(0, 34) rotate(-90)" strokeWidth="2.2" stroke="currentColor" strokeLinecap="round">
+              <circle cx="17" cy="17" r="15.92" className="tTbBg" />
+              <circle cx="17" cy="17" r="15.92" fill="none" strokeDasharray="100, 100" className="tTbRing" />
+              <path transform={isScrolled ? undefined : 'translate(34, 34) rotate(180)'} d="M15.07,21.06,19.16,17l-4.09-4.06" fill="none" strokeWidth="1.25" />
+            </g>
           </svg>
         </button>
       </div>

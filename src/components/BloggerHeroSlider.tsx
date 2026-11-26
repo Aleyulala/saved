@@ -14,6 +14,7 @@ export interface BloggerSlide {
   link?: string;
 }
 
+/** Blogger ana sayfa slaytı (sec_Carousel: Image01–Image10) — başlık, açıklama ve bağlantılar şablonla aynı */
 export const BLOGGER_SLIDES: BloggerSlide[] = [
   {
     id: 'Image01',
@@ -23,7 +24,7 @@ export const BLOGGER_SLIDES: BloggerSlide[] = [
     category: 'videolar',
     collectionName: 'Medya',
     imageUrl: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=1920&q=85',
-    link: 'https://negronshow.blogspot.com/search/label/videolar'
+    link: 'https://negronshow.blogspot.com/search/label/%C3%B6neri'
   },
   {
     id: 'Image02',
@@ -33,7 +34,7 @@ export const BLOGGER_SLIDES: BloggerSlide[] = [
     category: 'öneri',
     collectionName: 'Genel',
     imageUrl: 'https://images.unsplash.com/photo-1508739773434-c26b3d09e071?auto=format&fit=crop&w=1920&q=85',
-    link: 'https://negronshow.blogspot.com/search/label/%C3%B6neri'
+    link: 'https://negronshow.blogspot.com/search/label/videolar'
   },
   {
     id: 'Image03',
@@ -114,169 +115,12 @@ export const BLOGGER_SLIDES: BloggerSlide[] = [
     collectionName: 'Alışveriş',
     imageUrl: 'https://images.unsplash.com/photo-1642543492481-44e81e3914a7?auto=format&fit=crop&w=1920&q=85',
     link: 'https://negronshow.blogspot.com/search/label/ticaret'
-  },
-  {
-    id: 'Image11',
-    title: 'Güvenlik',
-    subtitle: 'Kripto',
-    note: '*Güvenlik ve gizlilik rehberleri',
-    category: 'Güvenlik',
-    collectionName: 'Araçlar',
-    imageUrl: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1920&q=85',
-    link: 'https://negronshow.blogspot.com/search/label/bilgisayar'
-  },
-  {
-    id: 'Image12',
-    title: 'Linux',
-    subtitle: 'Çekirdek',
-    note: '*Açık kaynak yazılım deposu',
-    category: 'Linux',
-    collectionName: 'Programlama',
-    imageUrl: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1920&q=85',
-    link: 'https://negronshow.blogspot.com/search/label/bilgisayar'
-  },
-  {
-    id: 'Image13',
-    title: 'Bilim',
-    subtitle: 'Uzay',
-    note: '*Bilim ve evren kütüphanesi',
-    category: 'Bilim',
-    collectionName: 'Genel',
-    imageUrl: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1920&q=85',
-    link: 'https://negronshow.blogspot.com/search/label/teknoloji'
-  },
-  {
-    id: 'Image14',
-    title: 'Müzik',
-    subtitle: 'Akustik',
-    note: '*Müzik ve ses prodüksiyon araçları',
-    category: 'Müzik',
-    collectionName: 'Medya',
-    imageUrl: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1920&q=85',
-    link: 'https://negronshow.blogspot.com/search/label/videolar'
-  },
-  {
-    id: 'Image15',
-    title: 'Sinema',
-    subtitle: 'Kamera',
-    note: '*Sinema ve kamera rehberleri',
-    category: 'Sinema',
-    collectionName: 'Medya',
-    imageUrl: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1920&q=85',
-    link: 'https://negronshow.blogspot.com/search/label/videolar'
-  },
-  {
-    id: 'Image16',
-    title: 'Donanım',
-    subtitle: 'İşlemci',
-    note: '*Donanım mimarisi ve işlemciler',
-    category: 'Donanım',
-    collectionName: 'Araçlar',
-    imageUrl: 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=1920&q=85',
-    link: 'https://negronshow.blogspot.com/search/label/bilgisayar'
-  },
-  {
-    id: 'Image17',
-    title: 'VR',
-    subtitle: 'Simülasyon',
-    note: '*Sanal gerçeklik ve 3D teknolojileri',
-    category: 'VR',
-    collectionName: 'AI',
-    imageUrl: 'https://images.unsplash.com/photo-1593508512255-86ab42a8e620?auto=format&fit=crop&w=1920&q=85',
-    link: 'https://negronshow.blogspot.com/search/label/teknoloji'
-  },
-  {
-    id: 'Image18',
-    title: 'Espor',
-    subtitle: 'Turnuva',
-    note: '*E-spor ve rekabetçi oyun kaynakları',
-    category: 'Espor',
-    collectionName: 'Oyun',
-    imageUrl: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1920&q=85',
-    link: 'https://negronshow.blogspot.com/search/label/oyun'
-  },
-  {
-    id: 'Image19',
-    title: 'Robotik',
-    subtitle: 'Otomasyon',
-    note: '*Robotik ve otonom sistemler',
-    category: 'Robotik',
-    collectionName: 'AI',
-    imageUrl: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1920&q=85',
-    link: 'https://negronshow.blogspot.com/search/label/teknoloji'
-  },
-  {
-    id: 'Image20',
-    title: 'Doğa',
-    subtitle: 'Manzara',
-    note: '*Doğa ve çevre belgeselleri',
-    category: 'Doğa',
-    collectionName: 'Genel',
-    imageUrl: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1920&q=85',
-    link: 'https://negronshow.blogspot.com/search/label/genel'
-  },
-  {
-    id: 'Image21',
-    title: 'Şehir',
-    subtitle: 'Neon',
-    note: '*Şehir estetiği ve mimari fotoğraflar',
-    category: 'Metropol',
-    collectionName: 'Genel',
-    imageUrl: 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1920&q=85',
-    link: 'https://negronshow.blogspot.com/search/label/genel'
-  },
-  {
-    id: 'Image22',
-    title: 'Rutin',
-    subtitle: 'Odak',
-    note: '*Üretkenlik ve çalışma alışkanlıkları',
-    category: 'Rutin',
-    collectionName: 'Rutin',
-    imageUrl: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1920&q=85',
-    link: 'https://negronshow.blogspot.com/search/label/rutin'
-  },
-  {
-    id: 'Image23',
-    title: 'Arşiv',
-    subtitle: 'Kütüphane',
-    note: '*Akademi ve dijital kütüphaneler',
-    category: 'Eğitim',
-    collectionName: 'Eğitim',
-    imageUrl: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=1920&q=85',
-    link: 'https://negronshow.blogspot.com/search/label/egitim'
-  },
-  {
-    id: 'Image24',
-    title: 'Metropol',
-    subtitle: 'Mimari',
-    note: '*Modern dünya ve şehir portreleri',
-    category: 'Kentsel',
-    collectionName: 'Genel',
-    imageUrl: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=1920&q=85',
-    link: 'https://negronshow.blogspot.com/search/label/genel'
-  },
-  {
-    id: 'Image25',
-    title: 'Retro',
-    subtitle: 'Nostalji',
-    note: '*Retro teknoloji ve nostalji köşesi',
-    category: 'Retro',
-    collectionName: 'Oyun',
-    imageUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1920&q=85',
-    link: 'https://negronshow.blogspot.com/search/label/oyun'
   }
 ];
 
 const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1920&q=85';
 
 
-// Tek kelimeye indirgeme yardımcısı
-const toSingleWord = (str?: string): string => {
-  if (!str) return '';
-  const cleaned = str.replace(/&amp;/g, '').replace(/&/g, '').trim();
-  const words = cleaned.split(/\s+/).filter(Boolean);
-  return words[0] ? words[0].replace(/[,.;:!?]/g, '') : '';
-};
 
 interface BloggerHeroSliderProps {
   collections?: CollectionItem[];
@@ -293,6 +137,13 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  // Tam ekran medya açıkken arka plan slaytı durur (kayan pencerede devam eder) — Blogger startAutoPlay ile aynı
+  const [modalOpen, setModalOpen] = useState(false);
+  useEffect(() => {
+    const on = (e: Event) => { const d = (e as CustomEvent<{ open: boolean; floating: boolean }>).detail; setModalOpen(!!d && d.open && !d.floating); };
+    window.addEventListener('saved-modal', on);
+    return () => window.removeEventListener('saved-modal', on);
+  }, []);
   // Blogger .sld-car-nav (updateHeroNav) 1:1: aktif çizgi butonu gezinme YÖNÜNÜ gösterir
   const [navDir, setNavDir] = useState<1 | -1>(1);
   const touchStartX = useRef<number | null>(null);
@@ -303,15 +154,15 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
 
   // Auto-play interval
   useEffect(() => {
-    if (isPaused) return;
+    if (isPaused || modalOpen) return;
 
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % BLOGGER_SLIDES.length);
       setNavDir(1);
-    }, 6000);
+    }, 5000);
 
     return () => clearInterval(timer);
-  }, [isPaused]);
+  }, [isPaused, modalOpen, currentIndex]);
 
   const handlePrev = (e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
@@ -326,10 +177,13 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
   };
 
   // Touch Swipe handlers
+  const resumeTimer = useRef<number | undefined>(undefined);
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
     touchEndX.current = null;
     didDrag.current = false;
+    window.clearTimeout(resumeTimer.current);
+    setIsPaused(true);
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
@@ -340,9 +194,10 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
   };
 
   const handleTouchEnd = () => {
+    resumeTimer.current = window.setTimeout(() => setIsPaused(false), 1000);
     if (!touchStartX.current || !touchEndX.current) return;
     const diff = touchStartX.current - touchEndX.current;
-    const threshold = 40;
+    const threshold = 28;
 
     if (diff > threshold) {
       handleNext();
@@ -359,6 +214,7 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
   const isMouseDown = useRef(false);
 
   const handleMouseDown = (e: React.MouseEvent) => {
+    if (e.button !== 0 || (e.target as HTMLElement).closest('a, button, input, label')) return;
     isMouseDown.current = true;
     mouseStartX.current = e.clientX;
     didDrag.current = false;
@@ -366,21 +222,27 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!isMouseDown.current || mouseStartX.current === null) return;
-    const diff = mouseStartX.current - e.clientX;
-    if (Math.abs(diff) > 10) {
-      didDrag.current = true;
-    }
-    if (Math.abs(diff) > 45) {
-      if (diff > 0) handleNext();
-      else handlePrev();
-      isMouseDown.current = false;
-      mouseStartX.current = null;
-    }
+    if (Math.abs(mouseStartX.current - e.clientX) > 8) didDrag.current = true;
   };
 
-  const handleMouseUp = () => {
+  const handleMouseUp = (e?: React.MouseEvent) => {
+    if (isMouseDown.current && mouseStartX.current !== null && e && didDrag.current) {
+      const diff = mouseStartX.current - e.clientX;
+      if (Math.abs(diff) > 28) {
+        if (diff > 0) handleNext();
+        else handlePrev();
+      }
+    }
     isMouseDown.current = false;
     mouseStartX.current = null;
+  };
+
+  // Klavye: ← → slayt, F tam ekran (Blogger sldW keydown)
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    if (e.key === 'ArrowLeft') { e.preventDefault(); handlePrev(); }
+    else if (e.key === 'ArrowRight') { e.preventDefault(); handleNext(); }
+    else if (e.key === 'f' || e.key === 'F') { e.preventDefault(); handleOpenViewer(currentIndex); }
   };
 
   const handleOpenViewer = (index: number) => {
@@ -423,8 +285,15 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => {
           setIsPaused(false);
-          handleMouseUp();
+          isMouseDown.current = false;
+          mouseStartX.current = null;
         }}
+        tabIndex={0}
+        role="region"
+        aria-roledescription="carousel"
+        aria-label="Öne çıkanlar"
+        onKeyDown={handleKeyDown}
+        onDragStart={(e) => e.preventDefault()}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -439,9 +308,8 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
           return (
             <div
               key={slide.id}
-              className={`absolute inset-0 w-full h-full transition-opacity duration-700 ease-in-out ${
-                isActive ? 'opacity-100 z-10 pointer-events-auto' : 'opacity-0 z-0 pointer-events-none'
-              }`}
+              className={`sldA absolute inset-0 w-full h-full ${isActive ? 'is-active' : ''}`}
+              aria-hidden={!isActive}
             >
               {/* Görsel yüklenemezse görünen degrade zemin */}
               <div className="absolute inset-0 bg-gradient-to-br from-[#2a2a2e] via-[#1e1e1e] to-[#141416]" />
@@ -449,7 +317,7 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
               <img
                 src={slide.imageUrl}
                 alt={slide.title}
-                className="w-full h-full object-cover object-center transform scale-100 group-hover:scale-102 transition-transform duration-700 ease-out"
+                className="sldI w-full h-full object-cover object-center"
                 loading={idx === 0 ? 'eager' : 'lazy'}
                 draggable={false}
                 onError={(e) => {
@@ -498,8 +366,8 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
             aria-label={activeSlide.collectionName || activeSlide.category}
           />
           <div className="sldT">
-            <span className="t">{toSingleWord(activeSlide.title)}</span>
-            {activeSlide.subtitle && <span className="c">{toSingleWord(activeSlide.subtitle)}</span>}
+            <span className="t">{activeSlide.title}</span>
+            {activeSlide.subtitle && <span className="c">{activeSlide.subtitle}</span>}
           </div>
         </div>
 

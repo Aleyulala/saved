@@ -2343,3 +2343,24 @@ html body #advSearchModal .adv-search-input { padding-left: 12px !important; }
 .saved-now i:nth-child(3) { animation-delay: .3s; }
 @keyframes savedEq { 0%, 100% { transform: scaleY(.35); } 50% { transform: scaleY(1); } }
 @media (prefers-reduced-motion: reduce) { .saved-now i { animation: none; } }
+
+/* Ana sayfa slaytı — Blogger .sldA / .sldI / .sldT / .sld-car-nav ile birebir */
+.sldW .sldA { opacity: 0; visibility: hidden; z-index: 0; pointer-events: none; transition: opacity .45s cubic-bezier(0.16, 1, 0.3, 1), visibility .45s cubic-bezier(0.16, 1, 0.3, 1); }
+.sldW .sldA.is-active { opacity: 1; visibility: visible; z-index: 10; pointer-events: auto; }
+.sldW .sldA .sldI { transform: scale(1.05); transition: transform .6s cubic-bezier(0.16, 1, 0.3, 1); }
+.sldW .sldA.is-active .sldI { transform: scale(1); }
+.sldW:focus-visible { outline: 2px solid var(--linkC, #60cdff); outline-offset: 3px; }
+.sldTitleWrap .sldT .t { font-size: 19px; font-weight: 700; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8); }
+.sldW .car-nav { height: auto; }
+.sldW .car-nav .car-btn { width: 28px; height: 8px; min-width: 28px; min-height: 8px; }
+.sldW .car-nav .car-btn.active { width: 36px; height: 8px; box-shadow: 0 0 10px color-mix(in srgb, var(--accent, #60cdff) 50%, transparent); }
+@media (max-width: 640px) { .sldTitleWrap .sldT .t { font-size: 15px; } }
+
+/* Yukarı / aşağı düğmesi (.tTb) — Blogger ile birebir ilerleme halkası */
+.tTb .tTbBg { fill: #252526; stroke: rgba(255, 255, 255, 0.15); }
+.tTb .tTbRing { stroke: var(--linkC, #9aa0a6); stroke-dashoffset: calc(100 - var(--progress, 0)); transition: stroke-dashoffset .5s cubic-bezier(.5, 1.7, .4, .8); }
+:root.lgT .tTb .tTbBg { fill: #ffffff; stroke: #e2e8f0; }
+:root.lgT .tTb { color: #0f172a; }
+/* Sayfanın sonunda kayan düğmeler son satırı (tepki, paylaş, alt bilgi) örtmesin */
+#mainScrollContainer { scroll-padding-bottom: 96px; }
+#mainScrollContainer > :last-child { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
