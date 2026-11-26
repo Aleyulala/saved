@@ -2335,3 +2335,11 @@ html body #advSearchModal .adv-search-input { padding-left: 12px !important; }
 :root.lgT .shGray { background: #e8eaed; color: #3c4043; }
 :root.lgT .shBtn, :root.lgT .shOr { color: #3c4043; }
 :root.lgT .shCard, :root.lgT .shCopy { border-color: rgba(0, 0, 0, 0.1); }
+
+/* Yazı içi medya kartı (Blogger kuralı): yerinde oynamaz, kapak + tür etiketi; çalan medyada "Oynatılıyor" */
+.saved-poster { background: radial-gradient(120% 90% at 20% 10%, color-mix(in srgb, var(--linkC, #9aa0a6) 38%, #10131a), #0b0d12 70%); }
+.saved-now i { display: block; width: 4px; height: 18px; border-radius: 2px; background: var(--linkC, #9aa0a6); transform-origin: bottom; animation: savedEq .9s ease-in-out infinite; }
+.saved-now i:nth-child(2) { animation-delay: .15s; }
+.saved-now i:nth-child(3) { animation-delay: .3s; }
+@keyframes savedEq { 0%, 100% { transform: scaleY(.35); } 50% { transform: scaleY(1); } }
+@media (prefers-reduced-motion: reduce) { .saved-now i { animation: none; } }
