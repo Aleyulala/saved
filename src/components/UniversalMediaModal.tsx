@@ -75,6 +75,10 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
     window.dispatchEvent(new CustomEvent('saved-now', { detail: nowUrl }));
   }, [nowUrl]);
   useEffect(() => () => { window.dispatchEvent(new CustomEvent('saved-now', { detail: null })); }, []);
+  // Ana sayfa slaytı tam ekran açıkken durur
+  useEffect(() => {
+    window.dispatchEvent(new CustomEvent('saved-modal', { detail: { open: isOpen, floating: isFloating } }));
+  }, [isOpen, isFloating]);
 
   // Medya açıkken arkadaki sayfa kaymasın
   useEffect(() => {
