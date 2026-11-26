@@ -69,6 +69,13 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
   // Başka bir ögeye geçilince görsel hata durumunu sıfırla
   useEffect(() => { setImgFailed(false); }, [currentIndex, currentItem?.url]);
 
+  // Çalan medyayı bildir: yazı içi slaytta o kartın üstünde "Oynatılıyor" görünür
+  const nowUrl = isOpen && currentItem && currentItem.type !== 'image' ? currentItem.url : null;
+  useEffect(() => {
+    window.dispatchEvent(new CustomEvent('saved-now', { detail: nowUrl }));
+  }, [nowUrl]);
+  useEffect(() => () => { window.dispatchEvent(new CustomEvent('saved-now', { detail: null })); }, []);
+
   // Medya açıkken arkadaki sayfa kaymasın
   useEffect(() => {
     if (!isOpen || isFloating) return;
