@@ -28,29 +28,31 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [atEdge, setAtEdge] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
       const el = document.getElementById('mainScrollContainer');
-      const scrollTop = el ? el.scrollTop : (window.scrollY || document.documentElement.scrollTop);
+      const root = document.documentElement;
+      const scrollTop = el ? el.scrollTop : (window.scrollY || root.scrollTop);
+      const max = el ? el.scrollHeight - el.clientHeight : root.scrollHeight - window.innerHeight;
       setIsScrolled(scrollTop > 20);
+      setAtEdge(scrollTop <= 20 || scrollTop >= max - 24);
     };
 
-    const container = document.getElementById('mainScrollContainer');
-    if (container) {
-      container.addEventListener('scroll', handleScroll, { passive: true });
-    }
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    // capture: kaydırma alanı sonradan yeniden oluşturulsa da olaylar yakalanır
+    document.addEventListener('scroll', handleScroll, { capture: true, passive: true });
+    window.addEventListener('resize', handleScroll, { passive: true });
 
     handleScroll();
 
     return () => {
-      if (container) {
-        container.removeEventListener('scroll', handleScroll);
-      }
-      window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('scroll', handleScroll, { capture: true });
+      window.removeEventListener('resize', handleScroll);
     };
   }, []);
+
+  const hideGear = !isOpen && !atEdge;
 
   const handleScrollToggle = () => {
     const el = document.getElementById('mainScrollContainer');
@@ -376,7 +378,9 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
           /* Kapalıyken Blogger .qeT Tarzı İkon Butonu */
           <button
             type="button"
-            className="floating-btn w-9 h-9 rounded-[10px] bg-[#252526] hover:bg-[#333333] border border-white/10 text-white hover:text-[var(--linkC,#9aa0a6)] flex items-center justify-center transition-all cursor-pointer shadow-lg active:scale-95 group relative"
+            className={`floating-btn w-9 h-9 rounded-[10px] bg-[#252526] hover:bg-[#333333] border border-white/10 text-white hover:text-[var(--linkC,#9aa0a6)] flex items-center justify-center transition-all duration-300 cursor-pointer shadow-lg active:scale-95 group relative ${hideGear ? 'opacity-0 translate-y-3 pointer-events-none' : ''}`}
+            aria-hidden={hideGear || undefined}
+            tabIndex={hideGear ? -1 : undefined}
             onClick={() => setIsOpen(true)}
             title="Hızlı İşlemler Paneli"
             aria-label="Hızlı İşlemler"
