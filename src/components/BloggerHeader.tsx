@@ -15,6 +15,7 @@ import {
 import { LinkItem } from '../types';
 import { getFaviconUrl } from '../utils/favicon';
 import { BLOGGER_AUTHORS } from '../utils/bloggerAuthors';
+import { useSheet, SheetGrip } from '../utils/sheet';
 
 const THEME_COLORS = [
   { id: 0, hex: '#9aa0a6', name: 'Gri (Varsayılan)' },
@@ -310,6 +311,10 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
   }, [isPostDetail]);
 
   const hasContextOpen = isAppearanceOpen || isProfileOpen || isTranslateOpen || isBookmarkOpen;
+  /* Telefonda açılır menüler alttan açılan sayfa: tutamaçtan ya da başlıktan aşağı çekince kapanır */
+  const profileSheet = useSheet<HTMLDivElement>(() => setIsProfileOpen(false));
+  const appearanceSheet = useSheet<HTMLDivElement>(() => { setIsThemePaletteOpen(false); setIsAppearanceOpen(false); });
+  const translateSheet = useSheet<HTMLDivElement>(() => setIsTranslateOpen(false));
 
   return (
     <header className={`sticky top-0 ${hasContextOpen ? 'z-[60]' : 'z-40'} w-full h-[60px] bg-[#1e1e1e] border-0 flex items-center select-none`}>
@@ -427,7 +432,8 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
 
               {/* Blogger XML 1:1 Profil / Yazarlar Açılır Kartı */}
               {isProfileOpen && (
-                <div className="popX popAuthors" role="dialog" aria-label="Yazarlar">
+                <div className="popX popAuthors cSheet" role="dialog" aria-label="Yazarlar" ref={profileSheet}>
+                  <SheetGrip />
                   <div className="popH">
                     <span>Yazarlar</span>
                     <button type="button" className="popClose" aria-label="Kapat" onClick={() => setIsProfileOpen(false)}>
@@ -577,7 +583,8 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
 
               {/* Blogger XML 1:1 Görünüm paneli (.aprW) — ikonsuz metin düğmeleri + aktif onay işareti */}
               {isAppearanceOpen && !isThemePaletteOpen && (
-                <div className="aprX" data-text="Görünüm" role="menu">
+                <div className="aprX cSheet" data-text="Görünüm" role="menu" ref={appearanceSheet}>
+                  <SheetGrip />
                   <button type="button" role="menuitemradio" aria-label="Aydınlık" aria-pressed={currentMode === 'light'} onClick={() => applyThemeMode('light')} />
                   <button type="button" role="menuitemradio" aria-label="Karanlık" aria-pressed={currentMode === 'dark'} onClick={() => applyThemeMode('dark')} />
                   <button type="button" role="menuitemradio" aria-label="Sistem" aria-pressed={currentMode === 'system'} onClick={() => applyThemeMode('system')} />
@@ -587,7 +594,8 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
 
               {/* Tema renkleri (.thmW > .thmP) */}
               {isAppearanceOpen && isThemePaletteOpen && (
-                <div className="thmX" data-text="Tema">
+                <div className="thmX cSheet" data-text="Tema" ref={appearanceSheet}>
+                  <SheetGrip />
                   <div className="thmP">
                     {THEME_COLORS.map(c => (
                       <button
@@ -621,7 +629,8 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
               </button>
 
               {isTranslateOpen && (
-                <div className="popX popTrans" role="menu" aria-label="Çeviri">
+                <div className="popX popTrans cSheet" role="menu" aria-label="Çeviri" ref={translateSheet}>
+                  <SheetGrip />
                   <div className="popH"><span>Çeviri</span></div>
                   <div className="popBody popList">
                     {LANGUAGES.map(lang => (
