@@ -394,16 +394,14 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
           </button>
         )}
 
-        {/* Yukarı / aşağı (.tTb) — Blogger ile birebir: ilerleme halkası; en üstte aşağı iner. Dişliyle birlikte yalnızca en üstte / en altta görünür */}
+        {/* Yukarı / aşağı (.tTb) — Blogger ile birebir: ilerleme halkası; en üstte aşağı iner. Sayfanın ortasında dişli gizlenir, bu düğme görünür kalır */}
         <button
           type="button"
           onClick={handleScrollToggle}
-          className={`tTb floating-btn shrink-0 p-0 border-0 bg-transparent rounded-full cursor-pointer text-white hover:text-[var(--linkC,#9aa0a6)] transition-all duration-300 active:scale-95 ${hideGear ? 'opacity-0 translate-y-3 pointer-events-none' : ''}`}
+          className={`tTb floating-btn shrink-0 p-0 border-0 bg-transparent rounded-full cursor-pointer text-white hover:text-[var(--linkC,#9aa0a6)] transition-all duration-300 active:scale-95`}
           style={{ ['--progress' as string]: progress } as React.CSSProperties}
           title={isScrolled ? 'Yukarı Çık' : 'Aşağı İn'}
           aria-label={isScrolled ? 'Yukarı Çık' : 'Aşağı İn'}
-          aria-hidden={hideGear || undefined}
-          tabIndex={hideGear ? -1 : undefined}
         >
           <svg viewBox="0 0 34 34" className="w-9 h-9 block" aria-hidden="true">
             <g transform="translate(0, 34) rotate(-90)" strokeWidth="2.2" stroke="currentColor" strokeLinecap="round">
