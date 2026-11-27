@@ -200,7 +200,7 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
                   {/* 2. CLASS (svg.edit-3) */}
                   <li>
                     <a
-                      href="https://aleyulala.github.io/Class/"
+                      href="https://aleyulala.github.io/class"
                       target="_blank"
                       rel="nofollow noreferrer noopener"
                       className="w-full group flex items-center justify-between px-2.5 py-2 rounded-[12px] text-xs text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] transition-colors outline-none"
