@@ -2364,3 +2364,26 @@ html body #advSearchModal .adv-search-input { padding-left: 12px !important; }
 /* Sayfanın sonunda kayan düğmeler son satırı (tepki, paylaş, alt bilgi) örtmesin */
 #mainScrollContainer { scroll-padding-bottom: 96px; }
 #mainScrollContainer > :last-child { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
+
+/* ---------- Yeni nesil bağlam menüsü: telefonda alttan açılan sayfa + tutamaç (utils/sheet.tsx) ---------- */
+.cGrip { display: none; }
+@keyframes cSheetUp { from { transform: translateY(100%); } to { transform: none; } }
+@media (max-width: 896px) {
+  .cSheet { position: fixed !important; inset: auto 0 0 0 !important; top: auto !important; width: 100% !important; min-width: 0 !important; max-width: none !important; max-height: min(80dvh, calc(100dvh - 56px)) !important; display: flex !important; flex-direction: column !important; overflow-x: hidden !important; overflow-y: auto !important; overscroll-behavior: contain; border-radius: 12px 12px 0 0 !important; border-width: 1px 0 0 !important; padding-bottom: env(safe-area-inset-bottom, 0px) !important; box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.45) !important; z-index: 1000 !important; animation: cSheetUp .28s cubic-bezier(.2, .8, .2, 1) !important; transform-origin: 50% 100%; }
+  .cGrip { display: flex; flex: none; order: -1; align-items: center; justify-content: center; width: 100%; height: 26px; cursor: grab; touch-action: none; position: sticky; top: 0; z-index: 1; background: inherit; }
+  .cGrip span { width: 44px; height: 5px; border-radius: 5px; background: currentColor; opacity: .3; }
+  .cGrip:hover span { opacity: .55; }
+  .cSheet .popH, [data-drag] { touch-action: none; }
+  .popX.cSheet .popBody { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+  .popAuthors.cSheet .popH { height: auto; padding: 4px 14px 14px 18px; }
+  .popAuthors.cSheet .popBody { padding: 0 14px 16px; }
+  .popTrans.cSheet .popH { padding: 2px 21px 6px; }
+  .popTrans.cSheet .popItem { height: 46px; font-size: 15px; }
+  .aprX.cSheet { padding: 0 8px calc(12px + env(safe-area-inset-bottom, 0px)) !important; }
+  .aprX.cSheet::before { padding: 0 10px 8px; }
+  .aprX.cSheet > button { height: 48px; font-size: 15px; }
+  .thmX.cSheet { padding: 0 18px calc(18px + env(safe-area-inset-bottom, 0px)) !important; }
+  .thmX.cSheet::before { margin: 0 0 14px; }
+  .thmX.cSheet .thmP { grid-template-columns: repeat(6, 1fr); justify-items: center; row-gap: 16px; }
+}
+@media (max-width: 896px) and (prefers-reduced-motion: reduce) { .cSheet { animation: none !important; } }
