@@ -29,7 +29,7 @@ export const DashboardItem: React.FC<DashboardItemProps> = ({
           onClick();
         }
       }}
-      className={`group relative flex items-center justify-between w-full rounded-2xl border border-transparent p-3.5 sm:p-4 bg-[#252526] hover:bg-[#28282b] shadow-sm transition-all duration-200 select-none ${
+      className={`group relative flex items-center justify-between w-full rounded-[12px] border border-transparent p-3.5 sm:p-4 bg-[#252526] hover:bg-[#28282b] shadow-sm transition-all duration-200 select-none ${
         onClick
           ? 'cursor-pointer hover:shadow-md hover:shadow-black/40 active:scale-[0.98]'
           : ''

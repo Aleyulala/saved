@@ -228,7 +228,7 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
 
       {/* 6.1. Yazı Sekmesi İçeriği (Makale Metni) */}
       {activeTab === 'yazi' && (
-        <div className="rounded-[16px] bg-[#252526] border border-white/5 p-6 sm:p-8 space-y-4 shadow-md text-sm text-[#d4d4d4] leading-relaxed whitespace-pre-wrap">
+        <div className="rounded-[12px] bg-[#252526] border border-white/5 p-6 sm:p-8 space-y-4 shadow-md text-sm text-[#d4d4d4] leading-relaxed whitespace-pre-wrap">
           <p>{link.description}</p>
           {link.notes && (
             <div className="mt-4 p-4 rounded-xl bg-[#1e1e1e] border border-white/5 text-xs text-[#a1a1aa]">
@@ -502,7 +502,7 @@ export const BloggerPostView: React.FC<BloggerPostViewProps> = ({
             <button
               type="button"
               onClick={() => setIsShareModalOpen(false)}
-              className="w-8 h-8 rounded-lg flex items-center justify-center text-[#989b9f] hover:text-white hover:bg-white/[0.06] transition-colors cursor-pointer"
+              className="w-8 h-8 rounded-[12px] flex items-center justify-center text-[#989b9f] hover:text-white hover:bg-white/[0.06] transition-colors cursor-pointer"
               title="Kapat"
               aria-label="Kapat"
             >

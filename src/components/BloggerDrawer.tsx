@@ -132,7 +132,7 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
               value={localSearch}
               readOnly
               placeholder="Bul... (Ctrl+K)"
-              className="w-full bg-[#252526] border-0 rounded-lg pl-9 pr-3 py-2 text-xs text-white placeholder-[#737373] outline-none cursor-pointer"
+              className="w-full bg-[#252526] border-0 rounded-[12px] pl-9 pr-3 py-2 text-xs text-white placeholder-[#737373] outline-none cursor-pointer"
             />
             <SearchNormalIcon className="w-[18px] h-[18px] text-[#737373] group-hover:text-[var(--linkC,#9aa0a6)] transition-colors absolute left-2.5 top-2.5 pointer-events-none" />
           </div>
@@ -148,7 +148,7 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
                     onClose();
                     onSelectTab('dashboard');
                   }}
-                  className="w-full group flex items-center justify-between px-3 py-2.5 rounded-lg font-medium transition-colors cursor-pointer outline-none text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)]"
+                  className="w-full group flex items-center justify-between px-3 py-2.5 rounded-[12px] font-medium transition-colors cursor-pointer outline-none text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)]"
                 >
                   <div className="flex items-center gap-2.5">
                     <span className="font-semibold text-xs">Ana Sayfa</span>
@@ -162,7 +162,7 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
             <li className="pt-1 relative">
               <div 
                 onClick={() => setHizmetlerOpen(!hizmetlerOpen)}
-                className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-semibold text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] cursor-pointer transition-colors outline-none relative"
+                className="flex items-center justify-between px-3 py-2 rounded-[12px] text-xs font-semibold text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] cursor-pointer transition-colors outline-none relative"
               >
                 <div className="flex items-center gap-2.5">
                   <span>Uygulamalar</span>
@@ -184,7 +184,7 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
                         onClose();
                         onSelectTab('links');
                       }}
-                      className={`w-full group flex items-center justify-between px-2.5 py-2 rounded-lg text-xs transition-colors cursor-pointer outline-none ${
+                      className={`w-full group flex items-center justify-between px-2.5 py-2 rounded-[12px] text-xs transition-colors cursor-pointer outline-none ${
                         currentTab === 'links'
                           ? 'text-[var(--linkC,#9aa0a6)] font-bold'
                           : 'text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)]'
@@ -203,7 +203,7 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
                       href="https://notebooklm.google.com/"
                       target="_blank"
                       rel="nofollow noreferrer noopener"
-                      className="w-full group flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] transition-colors outline-none"
+                      className="w-full group flex items-center justify-between px-2.5 py-2 rounded-[12px] text-xs text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] transition-colors outline-none"
                     >
                       <div className="flex items-center gap-2">
                         <span>NotebookLM</span>
@@ -218,7 +218,7 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
                       href="https://docs.google.com/forms/u/0/"
                       target="_blank"
                       rel="nofollow noreferrer noopener"
-                      className="w-full group flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] transition-colors outline-none"
+                      className="w-full group flex items-center justify-between px-2.5 py-2 rounded-[12px] text-xs text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] transition-colors outline-none"
                     >
                       <div className="flex items-center gap-2">
                         <span>Formlar</span>
@@ -234,7 +234,7 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
             <li className="pt-1 relative">
               <div 
                 onClick={() => setKlasorOpen(!klasorOpen)}
-                className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-semibold text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] cursor-pointer transition-colors outline-none relative"
+                className="flex items-center justify-between px-3 py-2 rounded-[12px] text-xs font-semibold text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] cursor-pointer transition-colors outline-none relative"
               >
                 <div className="flex items-center gap-2.5">
                   <span>Topluluk</span>
@@ -254,7 +254,7 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
                       href="https://script.google.com/macros/s/AKfycby2BbaRplWrOLZDiTba4Wnn9LAy6m2IuIBDmhFS6aSYr-fagSGVKbw_PYb9aajK39jZ/exec"
                       target="_blank"
                       rel="nofollow noreferrer noopener"
-                      className="w-full group flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] transition-colors outline-none"
+                      className="w-full group flex items-center justify-between px-2.5 py-2 rounded-[12px] text-xs text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] transition-colors outline-none"
                     >
                       <div className="flex items-center gap-2">
                         <span>Chat</span>
@@ -269,7 +269,7 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
                       href="https://github.com/Aleyulala/saved/discussions/?pli=1"
                       target="_blank"
                       rel="nofollow noreferrer noopener"
-                      className="w-full group flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] transition-colors outline-none"
+                      className="w-full group flex items-center justify-between px-2.5 py-2 rounded-[12px] text-xs text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] transition-colors outline-none"
                     >
                       <div className="flex items-center gap-2">
                         <span>Tartışmalar</span>
@@ -284,7 +284,7 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
                       href="https://labs.google.com/"
                       target="_blank"
                       rel="nofollow noreferrer noopener"
-                      className="w-full group flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] transition-colors outline-none"
+                      className="w-full group flex items-center justify-between px-2.5 py-2 rounded-[12px] text-xs text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] transition-colors outline-none"
                     >
                       <div className="flex items-center gap-2">
                         <span>Labs</span>
@@ -300,7 +300,7 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
             <li className="pt-1 relative">
               <div 
                 onClick={() => setGelistiriciOpen(!gelistiriciOpen)}
-                className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-semibold text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] cursor-pointer transition-colors outline-none relative"
+                className="flex items-center justify-between px-3 py-2 rounded-[12px] text-xs font-semibold text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] cursor-pointer transition-colors outline-none relative"
               >
                 <div className="flex items-center gap-2.5">
                   <span>Araçlar</span>
@@ -317,7 +317,7 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
                       href="https://search.google.com/test/rich-results"
                       target="_blank"
                       rel="nofollow noreferrer noopener"
-                      className="w-full group flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] transition-colors outline-none"
+                      className="w-full group flex items-center justify-between px-2.5 py-2 rounded-[12px] text-xs text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] transition-colors outline-none"
                     >
                       <div className="flex items-center gap-2">
                         <span>SEO</span>
@@ -332,7 +332,7 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
                       href="https://pagespeed.web.dev/analysis"
                       target="_blank"
                       rel="nofollow noreferrer noopener"
-                      className="w-full group flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] transition-colors outline-none"
+                      className="w-full group flex items-center justify-between px-2.5 py-2 rounded-[12px] text-xs text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] transition-colors outline-none"
                     >
                       <div className="flex items-center gap-2">
                         <span>Hız</span>
@@ -350,7 +350,7 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
                         const next = current === 'rtl' ? 'ltr' : 'rtl';
                         document.documentElement.setAttribute('dir', next);
                       }}
-                      className="w-full group flex items-center justify-between px-2.5 py-2 rounded-lg text-xs text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] transition-colors cursor-pointer outline-none"
+                      className="w-full group flex items-center justify-between px-2.5 py-2 rounded-[12px] text-xs text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] transition-colors cursor-pointer outline-none"
                     >
                       <div className="flex items-center gap-2">
                         <span>Ayna</span>
@@ -369,7 +369,7 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
         {/* Alt Bölüm (.mnMob Footer): E-posta, Gizlilik ve Yorumlar Slaytı (.PageList02) + Sosyal Butonlar (.LinkList04 / .mSoc) */}
         <div className="sidebar-foot-panel p-3.5 bg-[#1e1e1e] space-y-1.5">
           {/* PageList02: E-posta, Gizlilik ve Yorumlar Kayan Slider + [+] Butonu */}
-          <div className="sidebar-foot-slider relative h-9 bg-transparent rounded-[9px] overflow-hidden flex items-center">
+          <div className="sidebar-foot-slider relative h-9 bg-transparent rounded-[12px] overflow-hidden flex items-center">
             {/* Slayt 0: E-posta */}
             <div
               className={`absolute inset-0 flex items-center justify-between px-3 transition-all duration-300 ease-in-out ${
@@ -479,7 +479,7 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
           </div>
 
           {/* LinkList04: Sosyal Medya Kayan Slider + [+] Butonu */}
-          <div className="sidebar-foot-slider relative h-9 bg-transparent rounded-[9px] overflow-hidden flex items-center">
+          <div className="sidebar-foot-slider relative h-9 bg-transparent rounded-[12px] overflow-hidden flex items-center">
             {drawerSocialLinks.map((item, idx) => {
               const IconComp = item.icon;
               return (

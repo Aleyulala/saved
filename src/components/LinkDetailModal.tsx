@@ -95,7 +95,7 @@ export const LinkDetailModal: React.FC<LinkDetailModalProps> = ({
             <div className="flex items-center gap-2 shrink-0">
               <button
                 onClick={handleCopy}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#262626] border border-[#404040] text-xs font-medium text-neutral-300 hover:text-white hover:bg-[#333333] transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[12px] bg-[#262626] border border-[#404040] text-xs font-medium text-neutral-300 hover:text-white hover:bg-[#333333] transition-colors"
               >
                 {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                 <span>{copied ? 'Copied' : 'Copy'}</span>
@@ -105,7 +105,7 @@ export const LinkDetailModal: React.FC<LinkDetailModalProps> = ({
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#7dd3fc] hover:bg-[#38bdf8] text-[#0f172a] text-xs font-bold shadow-xs transition-colors"
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-[12px] bg-[#7dd3fc] hover:bg-[#38bdf8] text-[#0f172a] text-xs font-bold shadow-xs transition-colors"
               >
                 <ExternalLink className="w-3.5 h-3.5" />
                 <span>Visit Link</span>
@@ -126,7 +126,7 @@ export const LinkDetailModal: React.FC<LinkDetailModalProps> = ({
                 href={link.rss}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 text-xs font-medium transition-colors shrink-0"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[12px] bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 text-xs font-medium transition-colors shrink-0"
               >
                 <ExternalLink className="w-3 h-3" />
                 <span>RSS Akışı</span>
@@ -177,7 +177,7 @@ export const LinkDetailModal: React.FC<LinkDetailModalProps> = ({
                 {link.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="text-xs font-medium px-2.5 py-1 rounded-lg bg-[#38bdf8]/15 text-[#7dd3fc] border border-[#38bdf8]/20"
+                    className="text-xs font-medium px-2.5 py-1 rounded-[12px] bg-[#38bdf8]/15 text-[#7dd3fc] border border-[#38bdf8]/20"
                   >
                     #{tag}
                   </span>
@@ -211,7 +211,7 @@ export const LinkDetailModal: React.FC<LinkDetailModalProps> = ({
                 type="button"
                 onClick={handleSaveNotes}
                 disabled={isSavingNotes || notes === (link.notes || '')}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-[#7dd3fc] hover:bg-[#38bdf8] disabled:opacity-50 text-[#0f172a] shadow-xs transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[12px] text-xs font-bold bg-[#7dd3fc] hover:bg-[#38bdf8] disabled:opacity-50 text-[#0f172a] shadow-xs transition-colors"
               >
                 <Save className="w-3.5 h-3.5" />
                 <span>{isSavingNotes ? 'Saving...' : 'Update Notes'}</span>

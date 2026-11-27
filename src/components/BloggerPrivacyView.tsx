@@ -97,7 +97,7 @@ export const BloggerPrivacyView: React.FC<BloggerPrivacyViewProps> = ({
       <div className="flex items-center justify-between py-3 mb-5 border-b border-[#252526]">
         <button
           onClick={onBack}
-          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#252526] hover:bg-[#333333] text-xs sm:text-sm text-[#d4d4d4] hover:text-white transition-all active:scale-95 cursor-pointer"
+          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-[12px] bg-[#252526] hover:bg-[#333333] text-xs sm:text-sm text-[#d4d4d4] hover:text-white transition-all active:scale-95 cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4 text-[#38bdf8]" />
           <span>Ana Sayfaya Dön</span>
@@ -106,7 +106,7 @@ export const BloggerPrivacyView: React.FC<BloggerPrivacyViewProps> = ({
         <div className="flex items-center gap-2">
           <button
             onClick={handleCopyLink}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#252526] hover:bg-[#333333] text-xs text-[#d4d4d4] hover:text-white transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[12px] bg-[#252526] hover:bg-[#333333] text-xs text-[#d4d4d4] hover:text-white transition-colors cursor-pointer"
             title="Blogger İçin Doğrudan Politika Bağlantısını Kopyala"
           >
             {copiedLink ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Share2 className="w-3.5 h-3.5" />}
@@ -118,7 +118,7 @@ export const BloggerPrivacyView: React.FC<BloggerPrivacyViewProps> = ({
       {/* 2. BLOGGER GÖNDERİ BAŞLIK BLOĞU (.pHead / .pIn) */}
       <header className="mb-6 space-y-4">
         {/* Kategori Rozeti */}
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[#1e293b] text-[#38bdf8] text-xs font-semibold">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-[12px] bg-[#1e293b] text-[#38bdf8] text-xs font-semibold">
           <ShieldCheck className="w-3.5 h-3.5" />
           <span>Yasal İlkeler & Blogger Politikaları</span>
         </div>
@@ -157,7 +157,7 @@ export const BloggerPrivacyView: React.FC<BloggerPrivacyViewProps> = ({
             <span>12 dk okuma süresi</span>
           </div>
 
-          <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-lg bg-emerald-950/70 text-emerald-400 font-semibold text-[11px]">
+          <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-[12px] bg-emerald-950/70 text-emerald-400 font-semibold text-[11px]">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
             <span>Güncel & Yayında</span>
           </div>
@@ -182,13 +182,13 @@ export const BloggerPrivacyView: React.FC<BloggerPrivacyViewProps> = ({
         </div>
 
         <div className="flex items-center gap-2">
-          <code className="px-2.5 py-1.5 rounded-lg bg-[#1e1e1e] text-[var(--linkC,#9aa0a6)] font-mono text-[11px] select-all truncate max-w-[260px] sm:max-w-[320px]">
+          <code className="px-2.5 py-1.5 rounded-[12px] bg-[#1e1e1e] text-[var(--linkC,#9aa0a6)] font-mono text-[11px] select-all truncate max-w-[260px] sm:max-w-[320px]">
             {privacyDirectUrl}
           </code>
           <button
             type="button"
             onClick={handleCopyLink}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#38bdf8] hover:bg-[#7dd3fc] text-[#0f172a] font-bold text-xs transition-all active:scale-95 cursor-pointer shrink-0 shadow-md shadow-sky-500/20"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[12px] bg-[#38bdf8] hover:bg-[#7dd3fc] text-[#0f172a] font-bold text-xs transition-all active:scale-95 cursor-pointer shrink-0 shadow-md shadow-sky-500/20"
             title="URL Bağlantısını Kopyala"
           >
             {copiedLink ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
@@ -204,7 +204,7 @@ export const BloggerPrivacyView: React.FC<BloggerPrivacyViewProps> = ({
             <button
               key={sec.id}
               onClick={() => handlePillClick(sec.id)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all cursor-pointer ${
+              className={`px-3 py-1.5 rounded-[12px] text-xs font-medium whitespace-nowrap transition-all cursor-pointer ${
                 activeSectionId === sec.id
                   ? 'bg-[#38bdf8] text-[#0f172a] shadow-md shadow-sky-500/20 font-bold'
                   : 'bg-[#252526] hover:bg-[#333333] text-[#d4d4d4] hover:text-white'
@@ -241,7 +241,7 @@ export const BloggerPrivacyView: React.FC<BloggerPrivacyViewProps> = ({
 
             {/* Rozet */}
             {sec.badge && (
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-[#1e1e1e] border border-transparent text-xs text-[#38bdf8] font-medium">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-[12px] bg-[#1e1e1e] border border-transparent text-xs text-[#38bdf8] font-medium">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                 <span>{sec.badge}</span>
               </div>
@@ -249,7 +249,7 @@ export const BloggerPrivacyView: React.FC<BloggerPrivacyViewProps> = ({
 
             {/* Bölüm HTML İçeriği */}
             <div 
-              className="prose prose-invert max-w-none text-sm text-[#d4d4d4] leading-relaxed space-y-3 font-sans [&_strong]:text-white [&_strong]:font-bold [&_p]:leading-relaxed [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:space-y-1 [&_li]:text-[#d4d4d4] [&_.alert-box]:p-4 [&_.alert-box]:rounded-lg [&_.alert-box]:bg-[#1e1e1e] [&_.alert-box]:my-3 [&_.alert-box]:flex [&_.alert-box]:items-start [&_.alert-box]:gap-3 [&_.alert-box.info]:border-l-4 [&_.alert-box.info]:border-l-[#38bdf8] [&_.alert-box.warning]:border-l-4 [&_.alert-box.warning]:border-l-amber-400 [&_.table-wrap]:overflow-x-auto [&_.cookie-table]:w-full [&_.cookie-table]:text-xs [&_.cookie-table_th]:p-2.5 [&_.cookie-table_th]:bg-[#1e1e1e] [&_.cookie-table_th]:text-white [&_.cookie-table_td]:p-2.5 [&_.cookie-table_td]:border-t [&_.cookie-table_td]:border-[#333] [&_.faq-item]:p-4 [&_.faq-item]:rounded-lg [&_.faq-item]:bg-[#1e1e1e] [&_.faq-item]:mb-3 [&_.faq-trigger]:font-bold [&_.faq-trigger]:text-white [&_.faq-trigger]:text-sm [&_.faq-content]:text-xs [&_.faq-content]:text-[#a1a1aa] [&_.faq-content]:mt-2 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:bg-black/50 [&_code]:text-[#38bdf8] [&_code]:font-mono [&_pre]:p-4 [&_pre]:rounded-lg [&_pre]:bg-black/60 [&_pre]:overflow-x-auto [&_pre]:text-xs [&_pre]:font-mono [&_a]:text-[#38bdf8] [&_a]:underline"
+              className="prose prose-invert max-w-none text-sm text-[#d4d4d4] leading-relaxed space-y-3 font-sans [&_strong]:text-white [&_strong]:font-bold [&_p]:leading-relaxed [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:space-y-1 [&_li]:text-[#d4d4d4] [&_.alert-box]:p-4 [&_.alert-box]:rounded-[12px] [&_.alert-box]:bg-[#1e1e1e] [&_.alert-box]:my-3 [&_.alert-box]:flex [&_.alert-box]:items-start [&_.alert-box]:gap-3 [&_.alert-box.info]:border-l-4 [&_.alert-box.info]:border-l-[#38bdf8] [&_.alert-box.warning]:border-l-4 [&_.alert-box.warning]:border-l-amber-400 [&_.table-wrap]:overflow-x-auto [&_.cookie-table]:w-full [&_.cookie-table]:text-xs [&_.cookie-table_th]:p-2.5 [&_.cookie-table_th]:bg-[#1e1e1e] [&_.cookie-table_th]:text-white [&_.cookie-table_td]:p-2.5 [&_.cookie-table_td]:border-t [&_.cookie-table_td]:border-[#333] [&_.faq-item]:p-4 [&_.faq-item]:rounded-[12px] [&_.faq-item]:bg-[#1e1e1e] [&_.faq-item]:mb-3 [&_.faq-trigger]:font-bold [&_.faq-trigger]:text-white [&_.faq-trigger]:text-sm [&_.faq-content]:text-xs [&_.faq-content]:text-[#a1a1aa] [&_.faq-content]:mt-2 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:bg-black/50 [&_code]:text-[#38bdf8] [&_code]:font-mono [&_pre]:p-4 [&_pre]:rounded-[12px] [&_pre]:bg-black/60 [&_pre]:overflow-x-auto [&_pre]:text-xs [&_pre]:font-mono [&_a]:text-[#38bdf8] [&_a]:underline"
               dangerouslySetInnerHTML={{ __html: sec.bodyHtml }}
             />
           </article>
@@ -285,7 +285,7 @@ export const BloggerPrivacyView: React.FC<BloggerPrivacyViewProps> = ({
                 <span className="text-xs text-[#71717a] font-normal mr-1">Yazan:</span>
                 <span>{authorData.name}</span>
                 <Verify1Icon className="w-3.5 h-3.5 text-[#38bdf8]" />
-                <span className="text-[10px] px-2 py-0.5 rounded-lg bg-[#1e1e1e] text-[var(--linkC,#9aa0a6)] font-semibold ml-1">
+                <span className="text-[10px] px-2 py-0.5 rounded-[12px] bg-[#1e1e1e] text-[var(--linkC,#9aa0a6)] font-semibold ml-1">
                   {authorData.role}
                 </span>
               </bdi>
@@ -300,7 +300,7 @@ export const BloggerPrivacyView: React.FC<BloggerPrivacyViewProps> = ({
                 href={authorData.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#1e1e1e] hover:bg-[#333333] text-[#d4d4d4] hover:text-white transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[12px] bg-[#1e1e1e] hover:bg-[#333333] text-[#d4d4d4] hover:text-white transition-colors"
                 title="Blogger Profil"
               >
                 <BloggerBIcon className="w-3.5 h-3.5 text-amber-500" />
@@ -311,7 +311,7 @@ export const BloggerPrivacyView: React.FC<BloggerPrivacyViewProps> = ({
                 href={authorData.communityUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#1e1e1e] hover:bg-[#333333] text-[var(--linkC,#9aa0a6)] hover:text-white transition-colors border border-[var(--linkC,#9aa0a6)]/20 hover:border-[var(--linkC,#9aa0a6)]/50 font-medium"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[12px] bg-[#1e1e1e] hover:bg-[#333333] text-[var(--linkC,#9aa0a6)] hover:text-white transition-colors border border-[var(--linkC,#9aa0a6)]/20 hover:border-[var(--linkC,#9aa0a6)]/50 font-medium"
                 title="Topluluk: Matrix / Element.io (#negronn-show:matrix.org)"
               >
                 <MatrixIcon className="w-3.5 h-3.5 text-[var(--linkC,#9aa0a6)]" />
@@ -322,7 +322,7 @@ export const BloggerPrivacyView: React.FC<BloggerPrivacyViewProps> = ({
                 href={authorData.telegram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#1e1e1e] hover:bg-[#229ed9] text-[#d4d4d4] hover:text-white transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[12px] bg-[#1e1e1e] hover:bg-[#229ed9] text-[#d4d4d4] hover:text-white transition-colors"
                 title="Telegram"
               >
                 <TelegramIcon className="w-3.5 h-3.5 text-sky-400" />
@@ -333,7 +333,7 @@ export const BloggerPrivacyView: React.FC<BloggerPrivacyViewProps> = ({
                 href={authorData.vk}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#1e1e1e] hover:bg-[#4680c2] text-[#d4d4d4] hover:text-white transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[12px] bg-[#1e1e1e] hover:bg-[#4680c2] text-[#d4d4d4] hover:text-white transition-colors"
                 title="VKontakte"
               >
                 <VkIcon className="w-3.5 h-3.5 text-[#4680c2]" />
@@ -342,7 +342,7 @@ export const BloggerPrivacyView: React.FC<BloggerPrivacyViewProps> = ({
 
               <a
                 href={`mailto:${authorData.email}`}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#1e1e1e] hover:bg-[#ea4335] text-[#d4d4d4] hover:text-white transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[12px] bg-[#1e1e1e] hover:bg-[#ea4335] text-[#d4d4d4] hover:text-white transition-colors"
                 title="E-posta İletişim"
               >
                 <MailIcon className="w-3.5 h-3.5 text-rose-400" />
@@ -357,7 +357,7 @@ export const BloggerPrivacyView: React.FC<BloggerPrivacyViewProps> = ({
       <footer className="mt-8 flex items-center justify-between pt-4 border-t border-[#252526]">
         <button
           onClick={onBack}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#252526] hover:bg-[#333333] text-xs font-semibold text-white transition-all active:scale-95 cursor-pointer"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-[12px] bg-[#252526] hover:bg-[#333333] text-xs font-semibold text-white transition-all active:scale-95 cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4 text-[#38bdf8]" />
           <span>Ana Sayfaya Dön</span>
@@ -365,7 +365,7 @@ export const BloggerPrivacyView: React.FC<BloggerPrivacyViewProps> = ({
 
         <button
           onClick={scrollToTop}
-          className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-[#252526] hover:bg-[#333333] text-xs text-[#a1a1aa] hover:text-white transition-colors cursor-pointer"
+          className="inline-flex items-center gap-1.5 px-3 py-2 rounded-[12px] bg-[#252526] hover:bg-[#333333] text-xs text-[#a1a1aa] hover:text-white transition-colors cursor-pointer"
           title="En Başa Dön"
         >
           <ChevronUp className="w-4 h-4" />

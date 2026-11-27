@@ -83,7 +83,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
     }
   };
 
-  const buttonClass = "w-9 h-9 rounded-[10px] bg-[#252526] hover:bg-[#333333] border border-white/10 hover:border-[var(--linkC,#9aa0a6)] text-white hover:text-[var(--linkC,#9aa0a6)] flex items-center justify-center transition-all cursor-pointer shadow-md active:scale-95 group relative";
+  const buttonClass = "w-9 h-9 rounded-[12px] bg-[#252526] hover:bg-[#333333] border border-white/10 hover:border-[var(--linkC,#9aa0a6)] text-white hover:text-[var(--linkC,#9aa0a6)] flex items-center justify-center transition-all cursor-pointer shadow-md active:scale-95 group relative";
 
   return (
     <>
@@ -380,7 +380,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
           /* Kapalıyken Blogger .qeT Tarzı İkon Butonu */
           <button
             type="button"
-            className={`floating-btn w-9 h-9 rounded-[10px] bg-[#252526] hover:bg-[#333333] border border-white/10 text-white hover:text-[var(--linkC,#9aa0a6)] flex items-center justify-center transition-all duration-300 cursor-pointer shadow-lg active:scale-95 group relative ${hideGear ? 'opacity-0 translate-y-3 pointer-events-none' : ''}`}
+            className={`floating-btn w-9 h-9 rounded-[12px] bg-[#252526] hover:bg-[#333333] border border-white/10 text-white hover:text-[var(--linkC,#9aa0a6)] flex items-center justify-center transition-all duration-300 cursor-pointer shadow-lg active:scale-95 group relative ${hideGear ? 'opacity-0 translate-y-3 pointer-events-none' : ''}`}
             aria-hidden={hideGear || undefined}
             tabIndex={hideGear ? -1 : undefined}
             onClick={() => setIsOpen(true)}

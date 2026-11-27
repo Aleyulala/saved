@@ -140,7 +140,7 @@ export const ManageCollectionsModal: React.FC<ManageCollectionsModalProps> = ({
                 <button
                   type="button"
                   onClick={handleCancelEdit}
-                  className="px-3 py-1.5 rounded-lg text-xs font-medium text-neutral-400 hover:bg-[#262626]"
+                  className="px-3 py-1.5 rounded-[12px] text-xs font-medium text-neutral-400 hover:bg-[#262626]"
                 >
                   Cancel
                 </button>
@@ -148,7 +148,7 @@ export const ManageCollectionsModal: React.FC<ManageCollectionsModalProps> = ({
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="px-4 py-1.5 rounded-lg text-xs font-bold bg-[#7dd3fc] hover:bg-[#38bdf8] text-[#0f172a] shadow-xs"
+                className="px-4 py-1.5 rounded-[12px] text-xs font-bold bg-[#7dd3fc] hover:bg-[#38bdf8] text-[#0f172a] shadow-xs"
               >
                 {editingId ? 'Update' : 'Create Collection'}
               </button>
@@ -185,14 +185,14 @@ export const ManageCollectionsModal: React.FC<ManageCollectionsModalProps> = ({
                   <div className="flex items-center gap-1 shrink-0">
                     <button
                       onClick={() => handleStartEdit(col)}
-                      className="p-1.5 rounded-lg text-[#8e8e8e] hover:text-white hover:bg-[#282828] transition-colors"
+                      className="p-1.5 rounded-[12px] text-[#8e8e8e] hover:text-white hover:bg-[#282828] transition-colors"
                       title="Edit"
                     >
                       <Edit2 className="w-3.5 h-3.5" />
                     </button>
                     <button
                       onClick={() => col.id && onDeleteCollection(col.id)}
-                      className="p-1.5 rounded-lg text-[#8e8e8e] hover:text-rose-400 hover:bg-rose-950/30 transition-colors"
+                      className="p-1.5 rounded-[12px] text-[#8e8e8e] hover:text-rose-400 hover:bg-rose-950/30 transition-colors"
                       title="Delete"
                     >
                       <Trash2 className="w-3.5 h-3.5" />

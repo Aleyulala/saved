@@ -28,7 +28,7 @@ export const CollectionsView: React.FC<CollectionsViewProps> = ({
 
         <button
           onClick={onOpenManageCollections}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#7dd3fc] hover:bg-[#38bdf8] text-[#0f172a] font-bold text-xs shadow-sm transition-all"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-[12px] bg-[#7dd3fc] hover:bg-[#38bdf8] text-[#0f172a] font-bold text-xs shadow-sm transition-all"
         >
           <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
           <span>New Collection</span>
@@ -42,11 +42,11 @@ export const CollectionsView: React.FC<CollectionsViewProps> = ({
             <div
               key={col.id}
               onClick={() => col.id && onSelectCollection(col.id)}
-              className="p-4 rounded-lg bg-[#252526] hover:bg-[#28282b] border border-transparent cursor-pointer transition-all flex items-center justify-between group shadow-sm"
+              className="p-4 rounded-[12px] bg-[#252526] hover:bg-[#28282b] border border-transparent cursor-pointer transition-all flex items-center justify-between group shadow-sm"
             >
               <div className="flex items-center gap-3 min-w-0">
                 <div 
-                  className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 shadow-inner"
+                  className="w-10 h-10 rounded-[12px] flex items-center justify-center shrink-0 shadow-inner"
                   style={{ backgroundColor: `${col.color || '#38bdf8'}22` }}
                 >
                   <Folder className="w-5 h-5" style={{ color: col.color || '#38bdf8' }} />
@@ -64,7 +64,7 @@ export const CollectionsView: React.FC<CollectionsViewProps> = ({
               </div>
 
               <div className="flex items-center gap-2 shrink-0 ml-3">
-                <span className="text-xs font-mono font-semibold px-2 py-0.5 rounded-lg bg-[#1e1e1e] text-[#a3a3a3]">
+                <span className="text-xs font-mono font-semibold px-2 py-0.5 rounded-[12px] bg-[#1e1e1e] text-[#a3a3a3]">
                   {count}
                 </span>
                 <ChevronRight className="w-4 h-4 text-[#737373] group-hover:translate-x-0.5 transition-transform" />

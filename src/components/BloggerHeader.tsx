@@ -351,7 +351,7 @@ export const BloggerHeader: React.FC<BloggerHeaderProps> = ({
       <div className="hidden min-[800px]:flex absolute left-1/2 min-[896px]:left-[calc(50%+42px)] -translate-x-1/2 w-full max-w-[440px] px-2.5 min-w-0 z-10 items-center justify-center h-full pointer-events-none">
         <div
           onClick={onOpenSearchModal}
-          className="head-search-pill relative flex items-center w-full h-9 rounded-[14px] px-3.5 gap-2.5 bg-[#252526] pointer-events-auto hover:bg-[#28282b] border border-white/[0.08] hover:border-[rgba(96,205,255,0.4)] cursor-pointer group select-none transition-all duration-200"
+          className="head-search-pill relative flex items-center w-full h-9 rounded-[12px] px-3.5 gap-2.5 bg-[#252526] pointer-events-auto hover:bg-[#28282b] border border-white/[0.08] hover:border-[rgba(96,205,255,0.4)] cursor-pointer group select-none transition-all duration-200"
           title="Gelişmiş Arama & Bul Paneli (Ctrl+K)"
         >
           <span className="text-[#989b9f] group-hover:text-[var(--linkC,#9aa0a6)] transition-colors pointer-events-none shrink-0 flex items-center justify-center">

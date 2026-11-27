@@ -588,7 +588,7 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
 
           {/* Hata Bildirimi */}
           {errorMessage && (
-            <div className="mt-2.5 p-2 rounded-lg bg-red-500/10 text-red-400 text-xs text-center font-medium">
+            <div className="mt-2.5 p-2 rounded-[12px] bg-red-500/10 text-red-400 text-xs text-center font-medium">
               {errorMessage}
             </div>
           )}
@@ -610,7 +610,7 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
           </div>
           <button
             onClick={onCloseDrawer}
-            className="p-1.5 rounded-lg bg-[#252526] hover:bg-[#333333] text-[#a1a1aa] hover:text-white transition-colors"
+            className="p-1.5 rounded-[12px] bg-[#252526] hover:bg-[#333333] text-[#a1a1aa] hover:text-white transition-colors"
             aria-label="Kapat"
           >
             <CloseIcon className="w-4 h-4" />
@@ -754,7 +754,7 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
                   onSelectTag(t.name);
                   if (onCloseDrawer) onCloseDrawer();
                 }}
-                className="inline-flex items-center gap-1.5 h-[38px] px-[10px] rounded-lg bg-[#252526] hover:bg-[#2d2d30] text-[#d4d4d4] hover:text-[var(--linkC,#9aa0a6)] border-0 text-[13px] font-medium transition-all shrink-0 active:scale-95 shadow-none cursor-pointer"
+                className="inline-flex items-center gap-1.5 h-[38px] px-[10px] rounded-[12px] bg-[#252526] hover:bg-[#2d2d30] text-[#d4d4d4] hover:text-[var(--linkC,#9aa0a6)] border-0 text-[13px] font-medium transition-all shrink-0 active:scale-95 shadow-none cursor-pointer"
               >
                 <span>{t.name}</span>
                 <span className="text-[11px] text-[#9ca3af] opacity-80 font-normal ml-0.5 shadow-none bg-transparent">({count})</span>
@@ -813,7 +813,7 @@ export const BloggerRightSidebar: React.FC<BloggerRightSidebarProps> = ({
               <button
                 type="button"
                 onClick={closeSpotlight}
-                className="w-8 h-8 rounded-lg flex items-center justify-center text-[#989b9f] hover:text-white hover:bg-white/[0.06] transition-colors cursor-pointer"
+                className="w-8 h-8 rounded-[12px] flex items-center justify-center text-[#989b9f] hover:text-white hover:bg-white/[0.06] transition-colors cursor-pointer"
                 title="Kapat (Esc)"
                 aria-label="Kapat (Esc)"
               >

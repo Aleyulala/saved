@@ -182,7 +182,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                   setTimeout(() => setSavedKeyMsg(false), 2000);
                 }}
                 placeholder="Örn: a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-                className="flex-1 px-3 py-2 rounded-lg bg-[#212121] border border-[#383838] text-xs text-white focus:outline-none focus:border-[var(--linkC,#9aa0a6)] font-mono"
+                className="flex-1 px-3 py-2 rounded-[12px] bg-[#212121] border border-[#383838] text-xs text-white focus:outline-none focus:border-[var(--linkC,#9aa0a6)] font-mono"
               />
               {savedKeyMsg && (
                 <span className="text-[11px] text-emerald-400 font-semibold shrink-0">
@@ -206,7 +206,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                 href={bookmarkletCode}
                 onClick={(e) => e.preventDefault()}
                 draggable
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#7dd3fc] hover:bg-[#38bdf8] text-[#0f172a] text-xs font-bold shadow-xs cursor-grab active:cursor-grabbing transition-transform hover:scale-105"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[12px] bg-[#7dd3fc] hover:bg-[#38bdf8] text-[#0f172a] text-xs font-bold shadow-xs cursor-grab active:cursor-grabbing transition-transform hover:scale-105"
                 title="Drag to your bookmarks bar"
               >
                 <span>📌 Save to Saved</span>
@@ -215,7 +215,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
               <button
                 type="button"
                 onClick={handleCopyBookmarklet}
-                className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-[#262626] border border-[#404040] text-xs font-medium text-neutral-300 hover:text-white transition-colors"
+                className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-[12px] bg-[#262626] border border-[#404040] text-xs font-medium text-neutral-300 hover:text-white transition-colors"
               >
                 {copiedBookmarklet ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                 <span>{copiedBookmarklet ? 'Copied' : 'Copy Code'}</span>
@@ -242,7 +242,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
             </p>
 
             {showLicense && (
-              <div className="mt-3 p-3 bg-[#111111] rounded-lg border border-[#333333] max-h-48 overflow-y-auto text-[11px] font-mono text-neutral-400 whitespace-pre-wrap">
+              <div className="mt-3 p-3 bg-[#111111] rounded-[12px] border border-[#333333] max-h-48 overflow-y-auto text-[11px] font-mono text-neutral-400 whitespace-pre-wrap">
 {`GNU GENERAL PUBLIC LICENSE
 Version 3, 29 June 2007
 
@@ -288,14 +288,14 @@ GNU General Public License for more details.`}
                     type="button"
                     onClick={handleReset}
                     disabled={isResetting}
-                    className="px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold shadow-xs"
+                    className="px-3 py-1.5 rounded-[12px] bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold shadow-xs"
                   >
                     {isResetting ? 'Resetting...' : 'Yes, Reset'}
                   </button>
                   <button
                     type="button"
                     onClick={() => setConfirmReset(false)}
-                    className="px-3 py-1.5 rounded-lg text-neutral-400 text-xs font-medium hover:bg-[#262626]"
+                    className="px-3 py-1.5 rounded-[12px] text-neutral-400 text-xs font-medium hover:bg-[#262626]"
                   >
                     Cancel
                   </button>

@@ -83,7 +83,7 @@ export const BloggerOffTopicSlider: React.FC<BloggerOffTopicSliderProps> = ({
         <button
           type="button"
           onClick={onViewAll}
-          className="shrink-0 h-7 px-[15px] rounded-[8px] bg-[#56595e] hover:bg-[#62666b] text-[#fdfdfd] text-[12px] font-normal leading-none transition-colors cursor-pointer"
+          className="shrink-0 h-7 px-[15px] rounded-[12px] bg-[#56595e] hover:bg-[#62666b] text-[#fdfdfd] text-[12px] font-normal leading-none transition-colors cursor-pointer"
         >
           Tümünü göster
         </button>

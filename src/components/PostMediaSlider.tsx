@@ -112,7 +112,7 @@ export const PostMediaSlider: React.FC<PostMediaSliderProps> = ({ items, index, 
     window.addEventListener('saved-now', on);
     return () => window.removeEventListener('saved-now', on);
   }, []);
-  const iconBtn = 'w-8 h-8 rounded-[10px] bg-[#282828] hover:bg-[#333333] text-white border-0 flex items-center justify-center cursor-pointer shadow-md active:scale-95 transition-all';
+  const iconBtn = 'w-8 h-8 rounded-[12px] bg-[#282828] hover:bg-[#333333] text-white border-0 flex items-center justify-center cursor-pointer shadow-md active:scale-95 transition-all';
 
   return (
     <div className="post-media-slider space-y-2.5">
@@ -129,8 +129,8 @@ export const PostMediaSlider: React.FC<PostMediaSliderProps> = ({ items, index, 
               onClick={() => goTo(0)}
               className={`insta-story-item shrink-0 w-[104px] h-[58px] p-0 border-0 bg-transparent cursor-pointer transition-all hover:-translate-y-0.5 active:scale-95 ${index === 0 ? 'opacity-100' : 'opacity-70 hover:opacity-100'}`}
             >
-              <span className={`relative block w-full h-full rounded-lg ${index === 0 ? 'shadow-[0_0_0_2px_var(--linkC,#9aa0a6)]' : ''}`}>
-                <span className="relative flex items-center justify-center w-full h-full rounded-lg overflow-hidden bg-[#1c1e26]">
+              <span className={`relative block w-full h-full rounded-[12px] ${index === 0 ? 'shadow-[0_0_0_2px_var(--linkC,#9aa0a6)]' : ''}`}>
+                <span className="relative flex items-center justify-center w-full h-full rounded-[12px] overflow-hidden bg-[#1c1e26]">
                   <img src={getFaviconUrl(brand.url)} alt="" draggable={false} className="w-7 h-7 rounded-md" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
                 </span>
               </span>
@@ -151,8 +151,8 @@ export const PostMediaSlider: React.FC<PostMediaSliderProps> = ({ items, index, 
                 onClick={() => (active ? openAt(i) : goTo(i))}
                 className={`insta-story-item shrink-0 w-[104px] h-[58px] p-0 border-0 bg-transparent cursor-pointer transition-all hover:-translate-y-0.5 active:scale-95 ${active ? 'opacity-100' : 'opacity-70 hover:opacity-100'}`}
               >
-                <span className={`relative block w-full h-full rounded-lg ${active || (nowUrl && it.url === nowUrl) ? 'shadow-[0_0_0_2px_var(--linkC,#9aa0a6)]' : ''}`}>
-                  <span className="relative block w-full h-full rounded-lg overflow-hidden bg-[#282828]">
+                <span className={`relative block w-full h-full rounded-[12px] ${active || (nowUrl && it.url === nowUrl) ? 'shadow-[0_0_0_2px_var(--linkC,#9aa0a6)]' : ''}`}>
+                  <span className="relative block w-full h-full rounded-[12px] overflow-hidden bg-[#282828]">
                     {thumb && <img src={thumb} alt="" draggable={false} className="w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />}
                     <span className="absolute inset-0 flex items-center justify-center bg-black/[0.16]">
                       {it.type === 'image' ? (
@@ -169,7 +169,7 @@ export const PostMediaSlider: React.FC<PostMediaSliderProps> = ({ items, index, 
         </div>
       )}
 
-      <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] rounded-[16px] overflow-hidden bg-[#18181b] border border-white/5 shadow-2xl">
+      <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] rounded-[12px] overflow-hidden bg-[#18181b] border border-white/5 shadow-2xl">
         <div
           ref={trackRef}
           onScroll={onScroll}
@@ -216,7 +216,7 @@ export const PostMediaSlider: React.FC<PostMediaSliderProps> = ({ items, index, 
                     ) : it.type === 'video' ? (
                       <VideoFrame url={it.url} />
                     ) : null}
-                    <span className="absolute left-2.5 bottom-2.5 max-w-[calc(100%-20px)] inline-flex items-center gap-1.5 pl-2 pr-2.5 py-1.5 rounded-[10px] bg-[rgba(10,12,18,0.72)] backdrop-blur-md border border-white/15 text-[13px] pointer-events-none">
+                    <span className="absolute left-2.5 bottom-2.5 max-w-[calc(100%-20px)] inline-flex items-center gap-1.5 pl-2 pr-2.5 py-1.5 rounded-[12px] bg-[rgba(10,12,18,0.72)] backdrop-blur-md border border-white/15 text-[13px] pointer-events-none">
                       {camIcon('w-4 h-4 shrink-0 text-[var(--linkC,#9aa0a6)]')}
                       <b className="font-semibold truncate">{it.title || (it.type === 'shorts' ? 'Shorts' : 'Video')}</b>
                     </span>
