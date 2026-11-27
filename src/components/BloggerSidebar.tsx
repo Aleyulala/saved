@@ -142,15 +142,15 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                     <MessageNotif1Icon className="w-[18px] h-[18px] opacity-80 text-[var(--linkC,#9aa0a6)]" />
                     <span>NESCİONE</span>
                   </button>
-                  {/* 2. Notlarınız */}
+                  {/* 2. CLASS */}
                   <a
-                    href="https://notebooklm.google.com/"
+                    href="https://aleyulala.github.io/class"
                     target="_blank"
                     rel="nofollow noreferrer noopener"
                     className="w-full flex items-center gap-2 px-2.5 py-2 rounded-[12px] text-xs text-[#d4d4d4] hover:bg-white/[0.06] hover:text-[var(--linkC,#9aa0a6)] transition-colors"
                   >
                     <Edit3Icon className="w-[18px] h-[18px] opacity-80 text-[#9ca3af]" />
-                    <span>NotebookLM</span>
+                    <span>CLASS</span>
                   </a>
                   {/* 3. Forumlarınız */}
                   <a
@@ -346,17 +346,17 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                   </button>
                 </li>
 
-                {/* 2. Notlarınız (svg.edit-3) */}
+                {/* 2. CLASS (svg.edit-3) */}
                 <li>
                   <a
-                    href="https://notebooklm.google.com/"
+                    href="https://aleyulala.github.io/class"
                     target="_blank"
                     rel="nofollow noreferrer noopener"
                     className="w-full flex items-center justify-between px-2.5 py-2 rounded-[12px] text-xs text-[#d4d4d4] hover:bg-[#252526] hover:text-[var(--linkC,#9aa0a6)] transition-colors"
                   >
                     <div className="flex items-center gap-2">
                       <Edit3Icon className="w-4 h-4 opacity-80 text-[#9ca3af]" />
-                      <span>NotebookLM</span>
+                      <span>CLASS</span>
                     </div>
                   </a>
                 </li>

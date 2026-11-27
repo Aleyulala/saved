@@ -197,16 +197,16 @@ export const BloggerDrawer: React.FC<BloggerDrawerProps> = ({
                     </button>
                   </li>
 
-                  {/* 2. NotebookLM (svg.edit-3) */}
+                  {/* 2. CLASS (svg.edit-3) */}
                   <li>
                     <a
-                      href="https://notebooklm.google.com/"
+                      href="https://aleyulala.github.io/class"
                       target="_blank"
                       rel="nofollow noreferrer noopener"
                       className="w-full group flex items-center justify-between px-2.5 py-2 rounded-[12px] text-xs text-[#d4d4d4] hover:bg-transparent hover:text-[var(--linkC,#9aa0a6)] transition-colors outline-none"
                     >
                       <div className="flex items-center gap-2">
-                        <span>NotebookLM</span>
+                        <span>CLASS</span>
                         <Edit3Icon className="w-[18px] h-[18px] shrink-0 opacity-80 text-[#9ca3af] group-hover:text-[var(--linkC,#9aa0a6)]" />
                       </div>
                     </a>
