@@ -144,7 +144,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                   </button>
                   {/* 2. CLASS */}
                   <a
-                    href="https://aleyulala.github.io/class"
+                    href="https://aleyulala.github.io/class/"
                     target="_blank"
                     rel="nofollow noreferrer noopener"
                     className="w-full flex items-center gap-2 px-2.5 py-2 rounded-[12px] text-xs text-[#d4d4d4] hover:bg-white/[0.06] hover:text-[var(--linkC,#9aa0a6)] transition-colors"
@@ -349,7 +349,7 @@ export const BloggerSidebar: React.FC<BloggerSidebarProps> = ({
                 {/* 2. CLASS (svg.edit-3) */}
                 <li>
                   <a
-                    href="https://aleyulala.github.io/class"
+                    href="https://aleyulala.github.io/class/"
                     target="_blank"
                     rel="nofollow noreferrer noopener"
                     className="w-full flex items-center justify-between px-2.5 py-2 rounded-[12px] text-xs text-[#d4d4d4] hover:bg-[#252526] hover:text-[var(--linkC,#9aa0a6)] transition-colors"
