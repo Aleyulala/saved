@@ -99,7 +99,7 @@ export const LinksView: React.FC<LinksViewProps> = ({
             <h1 className="text-xl sm:text-2xl font-light text-white tracking-tight">
               {title}
             </h1>
-            <span className="text-xs font-semibold px-2.5 py-0.5 rounded-lg bg-[#252526] border border-transparent text-[#a3a3a3] font-mono">
+            <span className="text-xs font-semibold px-2.5 py-0.5 rounded-[12px] bg-[#252526] border border-transparent text-[#a3a3a3] font-mono">
               {links.length}
             </span>
           </div>
@@ -113,7 +113,7 @@ export const LinksView: React.FC<LinksViewProps> = ({
           {isTrashView && onEmptyTrash && links.length > 0 && (
             <button
               onClick={onEmptyTrash}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-rose-500/10 text-rose-400 border border-transparent text-xs font-medium hover:bg-rose-500/20 transition-colors cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-[12px] bg-rose-500/10 text-rose-400 border border-transparent text-xs font-medium hover:bg-rose-500/20 transition-colors cursor-pointer"
             >
               <Trash2 className="w-3.5 h-3.5" />
               <span>Çöpü Boşalt</span>
@@ -125,7 +125,7 @@ export const LinksView: React.FC<LinksViewProps> = ({
             <select
               value={sortBy}
               onChange={(e) => onSortByChange(e.target.value as SortOption)}
-              className="appearance-none pl-8 pr-7 py-1.5 rounded-lg bg-[#252526] border border-transparent text-xs text-[#d4d4d4] hover:bg-[#2d2d30] cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#38bdf8]"
+              className="appearance-none pl-8 pr-7 py-1.5 rounded-[12px] bg-[#252526] border border-transparent text-xs text-[#d4d4d4] hover:bg-[#2d2d30] cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#38bdf8]"
             >
               <option value="date_desc">En Yeni</option>
               <option value="date_asc">En Eski</option>
@@ -137,10 +137,10 @@ export const LinksView: React.FC<LinksViewProps> = ({
           </div>
 
           {/* View Mode Toggle */}
-          <div className="flex items-center bg-[#252526] border border-transparent p-0.5 rounded-lg">
+          <div className="flex items-center bg-[#252526] border border-transparent p-0.5 rounded-[12px]">
             <button
               onClick={() => onViewModeChange('grid')}
-              className={`p-1.5 rounded-lg text-xs transition-colors cursor-pointer ${
+              className={`p-1.5 rounded-[12px] text-xs transition-colors cursor-pointer ${
                 viewMode === 'grid'
                   ? 'bg-[#333333] text-[#38bdf8] shadow-xs'
                   : 'text-[#737373] hover:text-white'
@@ -151,7 +151,7 @@ export const LinksView: React.FC<LinksViewProps> = ({
             </button>
             <button
               onClick={() => onViewModeChange('list')}
-              className={`p-1.5 rounded-lg text-xs transition-colors cursor-pointer ${
+              className={`p-1.5 rounded-[12px] text-xs transition-colors cursor-pointer ${
                 viewMode === 'list'
                   ? 'bg-[#333333] text-[#38bdf8] shadow-xs'
                   : 'text-[#737373] hover:text-white'
@@ -166,7 +166,7 @@ export const LinksView: React.FC<LinksViewProps> = ({
           {!isTrashView && (
             <button
               onClick={onOpenNewLink}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#7dd3fc] hover:bg-[#38bdf8] text-[#0f172a] font-bold text-xs shadow-sm shadow-sky-500/20 active:scale-98 transition-all cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-[12px] bg-[#7dd3fc] hover:bg-[#38bdf8] text-[#0f172a] font-bold text-xs shadow-sm shadow-sky-500/20 active:scale-98 transition-all cursor-pointer"
             >
               <Plus className="w-4 h-4 stroke-[2.5]" />
               <span className="hidden sm:inline">Yeni Bağlantı</span>
@@ -185,7 +185,7 @@ export const LinksView: React.FC<LinksViewProps> = ({
           value={searchQuery}
           onChange={(e) => onSearchChange(e.target.value)}
           placeholder="Bağlantı başlığı, URL veya açıklamasında ara..."
-          className="w-full pl-10 pr-4 py-2 text-xs rounded-lg bg-[#252526] border border-transparent focus:border-[#38bdf8]/50 text-white placeholder-[#737373] focus:outline-none transition-colors"
+          className="w-full pl-10 pr-4 py-2 text-xs rounded-[12px] bg-[#252526] border border-transparent focus:border-[#38bdf8]/50 text-white placeholder-[#737373] focus:outline-none transition-colors"
         />
       </div>
 
@@ -222,7 +222,7 @@ export const LinksView: React.FC<LinksViewProps> = ({
           </div>
         )
       ) : (
-        <div className="text-center py-16 px-4 bg-[#252526]/40 border border-dashed border-[#333333] rounded-2xl">
+        <div className="text-center py-16 px-4 bg-[#252526]/40 border border-dashed border-[#333333] rounded-[12px]">
           <Bookmark className="w-8 h-8 text-[#525252] mx-auto mb-3" />
           <p className="text-sm font-medium text-[#d4d4d4] mb-1">
             {searchQuery ? 'Aramayla eşleşen bağlantı bulunamadı' : 'Burada henüz bir bağlantı yok'}
@@ -233,7 +233,7 @@ export const LinksView: React.FC<LinksViewProps> = ({
           {!searchQuery && !isTrashView && (
             <button
               onClick={onOpenNewLink}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-[#7dd3fc] text-[#0f172a] font-bold text-xs cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-[12px] bg-[#7dd3fc] text-[#0f172a] font-bold text-xs cursor-pointer"
             >
               <Plus className="w-4 h-4" />
               <span>Yeni Bağlantı</span>

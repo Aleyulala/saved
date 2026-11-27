@@ -21,14 +21,14 @@ export const TagsView: React.FC<TagsViewProps> = ({
         <div className="flex items-center gap-2">
           <Hash className="w-5 h-5 text-[#38bdf8]" />
           <h1 className="text-xl font-light text-white tracking-tight">Tags</h1>
-          <span className="text-xs px-2.5 py-0.5 rounded-lg bg-[#252526] text-[#a3a3a3] font-mono">
+          <span className="text-xs px-2.5 py-0.5 rounded-[12px] bg-[#252526] text-[#a3a3a3] font-mono">
             {tags.length}
           </span>
         </div>
 
         <button
           onClick={onOpenManageTags}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#7dd3fc] hover:bg-[#38bdf8] text-[#0f172a] font-bold text-xs shadow-sm transition-all"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-[12px] bg-[#7dd3fc] hover:bg-[#38bdf8] text-[#0f172a] font-bold text-xs shadow-sm transition-all"
         >
           <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
           <span>New Tag</span>
@@ -42,7 +42,7 @@ export const TagsView: React.FC<TagsViewProps> = ({
             <button
               key={tag.name}
               onClick={() => onSelectTag(tag.name)}
-              className="p-3.5 rounded-lg bg-[#252526] hover:bg-[#28282b] border border-transparent cursor-pointer transition-all flex items-center justify-between text-left group shadow-none"
+              className="p-3.5 rounded-[12px] bg-[#252526] hover:bg-[#28282b] border border-transparent cursor-pointer transition-all flex items-center justify-between text-left group shadow-none"
             >
               <div className="flex items-center gap-2 truncate">
                 <span className="text-neutral-500 font-mono">#</span>

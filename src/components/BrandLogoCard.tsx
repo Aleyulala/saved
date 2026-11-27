@@ -286,7 +286,7 @@ export const BrandLogoCard: React.FC<BrandLogoCardProps> = ({
 
       {/* Glassmorphic Logo Emblem */}
       <div 
-        className={`relative z-10 rounded-2xl bg-white/[0.08] hover:bg-white/[0.12] backdrop-blur-xl border border-white/15 shadow-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-108 group-hover:border-white/30 ${
+        className={`relative z-10 rounded-[12px] bg-white/[0.08] hover:bg-white/[0.12] backdrop-blur-xl border border-white/15 shadow-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-108 group-hover:border-white/30 ${
           isLarge ? 'w-20 h-20 p-4 mb-3' : 'w-14 h-14 p-3 shadow-lg'
         }`}
       >

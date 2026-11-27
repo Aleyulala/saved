@@ -281,7 +281,7 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
   return (
     <div className="w-full relative select-none">
       <div 
-        className="sldW hero-dark-overlay relative w-full overflow-hidden rounded-[14px] bg-[#000000] shadow-[0_4px_20px_rgba(0,0,0,0.12)] group aspect-video cursor-pointer touch-pan-y"
+        className="sldW hero-dark-overlay relative w-full overflow-hidden rounded-[12px] bg-[#000000] shadow-[0_4px_20px_rgba(0,0,0,0.12)] group aspect-video cursor-pointer touch-pan-y"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => {
           setIsPaused(false);
@@ -346,7 +346,7 @@ export const BloggerHeroSlider: React.FC<BloggerHeroSliderProps> = ({
               e.stopPropagation();
               handleOpenViewer(currentIndex);
             }}
-            className="hero-zoom-btn w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-[rgba(28,30,38,0.78)] hover:bg-[#333333] border border-white/10 text-white flex items-center justify-center transition-all duration-200 active:scale-95 shadow-md backdrop-blur-md cursor-pointer"
+            className="hero-zoom-btn w-8 h-8 sm:w-9 sm:h-9 rounded-[12px] bg-[rgba(28,30,38,0.78)] hover:bg-[#333333] border border-white/10 text-white flex items-center justify-center transition-all duration-200 active:scale-95 shadow-md backdrop-blur-md cursor-pointer"
             title="Tam Ekran Vitrini"
             aria-label="Tam Ekran Vitrini"
           >

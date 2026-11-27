@@ -520,11 +520,11 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
         </div>
       )}
 
-      {/* Medya İçeriği (Screenshot 1:1: Ortalanmış, rounded-[18px] sm:rounded-[22px] köşe yuvarlaklığı) */}
+      {/* Medya İçeriği (Screenshot 1:1: Ortalanmış, rounded-[12px] sm:rounded-[12px] köşe yuvarlaklığı) */}
       <div 
         className={
           isFloating
-            ? `fixed z-10 ${isShorts ? 'w-[160px] aspect-[9/16]' : 'w-[260px] min-[897px]:w-[330px] aspect-video'} max-w-[calc(100vw-32px)] pointer-events-auto rounded-2xl overflow-hidden bg-black border border-white/10 shadow-[0_8px_30px_rgba(0,0,0,0.6)] flex items-center justify-center ${floatPos ? '' : 'right-4 bottom-[calc(66px+env(safe-area-inset-bottom,0px))] min-[897px]:right-6 min-[897px]:bottom-6'}`
+            ? `fixed z-10 ${isShorts ? 'w-[160px] aspect-[9/16]' : 'w-[260px] min-[897px]:w-[330px] aspect-video'} max-w-[calc(100vw-32px)] pointer-events-auto rounded-[12px] overflow-hidden bg-black border border-white/10 shadow-[0_8px_30px_rgba(0,0,0,0.6)] flex items-center justify-center ${floatPos ? '' : 'right-4 bottom-[calc(66px+env(safe-area-inset-bottom,0px))] min-[897px]:right-6 min-[897px]:bottom-6'}`
             : 'relative flex items-center justify-center max-w-[88vw] max-h-[82vh] overflow-hidden'
         }
         ref={floatBoxRef}
@@ -532,13 +532,13 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
         onClick={(e) => e.stopPropagation()}
       >
         {currentItem.type === 'image' && imgFailed && (
-          <div className="flex flex-col items-center gap-3 px-6 py-10 rounded-[18px] bg-[#1e1e1e] text-center text-[#e8eaed]">
+          <div className="flex flex-col items-center gap-3 px-6 py-10 rounded-[12px] bg-[#1e1e1e] text-center text-[#e8eaed]">
             <p className="text-sm">Görsel yüklenemedi.</p>
             <a
               href={currentItem.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 h-7 inline-flex items-center rounded-[8px] bg-[#56595e] hover:bg-[#62666b] text-[12px] text-white"
+              className="px-4 h-7 inline-flex items-center rounded-[12px] bg-[#56595e] hover:bg-[#62666b] text-[12px] text-white"
             >
               Yeni sekmede aç
             </a>
@@ -550,7 +550,7 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
             onError={() => setImgFailed(true)}
             src={currentItem.url}
             alt={currentItem.title || 'Blogger Görsel'}
-            className={`${isFloating ? 'w-full h-full object-cover rounded-none' : 'max-w-[86vw] max-h-[82vh] rounded-[18px] sm:rounded-[22px]'} object-contain shadow-2xl transition-transform duration-200 select-none ${
+            className={`${isFloating ? 'w-full h-full object-cover rounded-none' : 'max-w-[86vw] max-h-[82vh] rounded-[12px] sm:rounded-[12px]'} object-contain shadow-2xl transition-transform duration-200 select-none ${
               zoomLevel > 1 ? 'cursor-grab active:cursor-grabbing' : 'cursor-zoom-in'
             }`}
             style={{
@@ -580,7 +580,7 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
 
         {(currentItem.type === 'youtube' || currentItem.type === 'shorts') && (
           <div
-            className={`relative rounded-[18px] overflow-hidden bg-black shadow-2xl ${
+            className={`relative rounded-[12px] overflow-hidden bg-black shadow-2xl ${
               isFloating
                 ? (isShorts ? 'w-[150px] aspect-[9/16]' : 'w-full aspect-video')
                 : isShorts && !isWidescreen 
@@ -602,7 +602,7 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
 
         {currentItem.type === 'video' && (
           <div
-            className={`relative rounded-[18px] overflow-hidden bg-black shadow-2xl ${
+            className={`relative rounded-[12px] overflow-hidden bg-black shadow-2xl ${
               isFloating ? 'w-full aspect-video' : isWidescreen 
                 ? 'w-[min(94vw,1200px)] aspect-video' 
                 : 'w-[min(88vw,960px)] aspect-video'
@@ -656,18 +656,18 @@ export const UniversalMediaModal: React.FC<UniversalMediaModalProps> = ({
             <div className="absolute top-1.5 right-1.5 z-20 flex items-center gap-1.5">
               {items.length > 1 && (
                 <>
-                  <button type="button" onClick={() => setCurrentIndex((currentIndex - 1 + items.length) % items.length)} className="w-7 h-7 inline-flex items-center justify-center rounded-lg bg-black/65 hover:bg-black/85 text-white border border-white/15 cursor-pointer" title="Önceki" aria-label="Önceki">
+                  <button type="button" onClick={() => setCurrentIndex((currentIndex - 1 + items.length) % items.length)} className="w-7 h-7 inline-flex items-center justify-center rounded-[12px] bg-black/65 hover:bg-black/85 text-white border border-white/15 cursor-pointer" title="Önceki" aria-label="Önceki">
                     <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
                   </button>
-                  <button type="button" onClick={() => setCurrentIndex((currentIndex + 1) % items.length)} className="w-7 h-7 inline-flex items-center justify-center rounded-lg bg-black/65 hover:bg-black/85 text-white border border-white/15 cursor-pointer" title="Sonraki" aria-label="Sonraki">
+                  <button type="button" onClick={() => setCurrentIndex((currentIndex + 1) % items.length)} className="w-7 h-7 inline-flex items-center justify-center rounded-[12px] bg-black/65 hover:bg-black/85 text-white border border-white/15 cursor-pointer" title="Sonraki" aria-label="Sonraki">
                     <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
                   </button>
                 </>
               )}
-              <button type="button" onClick={() => setIsFloating(false)} className="w-7 h-7 inline-flex items-center justify-center rounded-lg bg-black/65 hover:bg-black/85 text-white border border-white/15 cursor-pointer" title="Tam ekrana büyüt" aria-label="Tam ekrana büyüt">
+              <button type="button" onClick={() => setIsFloating(false)} className="w-7 h-7 inline-flex items-center justify-center rounded-[12px] bg-black/65 hover:bg-black/85 text-white border border-white/15 cursor-pointer" title="Tam ekrana büyüt" aria-label="Tam ekrana büyüt">
                 <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 3 21 3 21 9" /><polyline points="9 21 3 21 3 15" /><line x1="21" y1="3" x2="14" y2="10" /><line x1="3" y1="21" x2="10" y2="14" /></svg>
               </button>
-              <button type="button" onClick={onClose} className="w-7 h-7 inline-flex items-center justify-center rounded-lg bg-black/65 hover:bg-red-500/90 text-white border border-white/15 cursor-pointer" title="Kapat" aria-label="Kayan pencereyi kapat">
+              <button type="button" onClick={onClose} className="w-7 h-7 inline-flex items-center justify-center rounded-[12px] bg-black/65 hover:bg-red-500/90 text-white border border-white/15 cursor-pointer" title="Kapat" aria-label="Kayan pencereyi kapat">
                 <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
               </button>
             </div>

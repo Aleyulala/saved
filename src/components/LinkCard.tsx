@@ -75,7 +75,7 @@ export const LinkCard: React.FC<LinkCardProps> = ({
     >
       
       {/* 1. Blogger Post Thumbnail (.pThmb — Temiz köşesiz rozetsiz Blogger 1:1 görsel) */}
-      <div className="relative w-full aspect-[16/9] rounded-[10px] bg-[#1e1e1e] overflow-hidden">
+      <div className="relative w-full aspect-[16/9] rounded-[12px] bg-[#1e1e1e] overflow-hidden">
         {hasThumbnail ? (
           <img
             src={displayThumb}

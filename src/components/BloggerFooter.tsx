@@ -24,7 +24,7 @@ export const BloggerFooter: React.FC<BloggerFooterProps> = ({
                 <img
                   src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjuF5-IgFBevlNcBbXMSdl7Egn34HcWcPccvcujWL1XU0r_22ZPQIFUySo7l_YmmIwpzmkppKZUPJVAl0ipZ-HHB4LyzCQgq39Ii7PPcvvcTbBWkPa2Z2_fYvD57BQrq9yNckevGtzc79XFgbfi9QZQ9wKVIJfVA1R3cmj98A4Ce9jxeDU4R4lvggThYP4/s150/minimize%20nsw.png"
                   alt="NSW Logo"
-                  className="w-14 h-14 rounded-2xl object-cover shadow-md shrink-0"
+                  className="w-14 h-14 rounded-[12px] object-cover shadow-md shrink-0"
                 />
                 <div className="space-y-1">
                   <h3 className="text-white font-bold text-base tracking-wider uppercase leading-none">

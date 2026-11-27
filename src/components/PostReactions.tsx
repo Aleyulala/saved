@@ -73,7 +73,7 @@ export const PostReactions: React.FC<PostReactionsProps> = ({ postKey }) => {
           onClick={() => choose(current)}
           title="Tepkiyi kaldır"
           aria-label="Tepkiyi kaldır"
-          className="h-[34px] px-2.5 inline-flex items-center gap-1.5 rounded-[10px] border border-[var(--linkC,#60cdff)] bg-[rgba(96,205,255,0.12)] hover:bg-[rgba(96,205,255,0.22)] text-[#fffdfc] cursor-pointer"
+          className="h-[34px] px-2.5 inline-flex items-center gap-1.5 rounded-[12px] border border-[var(--linkC,#60cdff)] bg-[rgba(96,205,255,0.12)] hover:bg-[rgba(96,205,255,0.22)] text-[#fffdfc] cursor-pointer"
         >
           <span className="text-[15px] leading-none">{current}</span>
           <span className="text-[12px] font-bold leading-none text-[var(--linkC,#60cdff)]">1</span>
@@ -86,7 +86,7 @@ export const PostReactions: React.FC<PostReactionsProps> = ({ postKey }) => {
         title="Tepki Ekle"
         aria-label="Tepki Ekle"
         aria-expanded={open}
-        className="w-[34px] h-[34px] inline-flex items-center justify-center rounded-[10px] border border-[#3c4043] bg-[#28292c] hover:bg-[#35363a] text-[#e8eaed] cursor-pointer transition-colors"
+        className="w-[34px] h-[34px] inline-flex items-center justify-center rounded-[12px] border border-[#3c4043] bg-[#28292c] hover:bg-[#35363a] text-[#e8eaed] cursor-pointer transition-colors"
       >
         <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
           <circle cx="12" cy="12" r="9" />
@@ -96,14 +96,14 @@ export const PostReactions: React.FC<PostReactionsProps> = ({ postKey }) => {
       </button>
 
       {open && (
-        <div className="absolute left-0 bottom-[calc(100%+6px)] z-20 flex items-center gap-1 px-1.5 py-1 rounded-[10px] bg-[#202124] border border-[#3c4043] shadow-[0_8px_24px_rgba(0,0,0,0.45)] animate-in fade-in duration-150">
+        <div className="absolute left-0 bottom-[calc(100%+6px)] z-20 flex items-center gap-1 px-1.5 py-1 rounded-[12px] bg-[#202124] border border-[#3c4043] shadow-[0_8px_24px_rgba(0,0,0,0.45)] animate-in fade-in duration-150">
           {EMOJIS.map(em => (
             <button
               key={em}
               type="button"
               onClick={() => choose(em)}
               aria-label={`Tepki: ${em}`}
-              className={`px-1.5 py-1 rounded-[10px] text-[17px] leading-none cursor-pointer hover:bg-white/10 hover:scale-110 transition ${current === em ? 'bg-[#35363a]' : ''}`}
+              className={`px-1.5 py-1 rounded-[12px] text-[17px] leading-none cursor-pointer hover:bg-white/10 hover:scale-110 transition ${current === em ? 'bg-[#35363a]' : ''}`}
             >
               {em}
             </button>

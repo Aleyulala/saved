@@ -206,7 +206,7 @@ export const AddEditLinkModal: React.FC<AddEditLinkModalProps> = ({
                 type="button"
                 onClick={() => handleAutoFindRss()}
                 disabled={isFindingRss}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#252526] hover:bg-[#333333] border border-[#383838] text-xs font-semibold text-[#38bdf8] hover:text-[#7dd3fc] cursor-pointer disabled:opacity-60 disabled:cursor-wait"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[12px] bg-[#252526] hover:bg-[#333333] border border-[#383838] text-xs font-semibold text-[#38bdf8] hover:text-[#7dd3fc] cursor-pointer disabled:opacity-60 disabled:cursor-wait"
                 title="URL'den RSS akışını otomatik tespit et"
               >
                 <Sparkles className="w-3.5 h-3.5" />
@@ -257,7 +257,7 @@ export const AddEditLinkModal: React.FC<AddEditLinkModalProps> = ({
                         setRssFound(true);
                         setShowCandidates(false);
                       }}
-                      className="px-2 py-1 rounded-lg bg-[#252526] hover:bg-[#333333] hover:text-[#38bdf8] text-[11px] font-mono text-[#d4d4d4] transition-colors truncate max-w-[220px] cursor-pointer"
+                      className="px-2 py-1 rounded-[12px] bg-[#252526] hover:bg-[#333333] hover:text-[#38bdf8] text-[11px] font-mono text-[#d4d4d4] transition-colors truncate max-w-[220px] cursor-pointer"
                       title={cand}
                     >
                       {cand.replace(/^https?:\/\/[^/]+/, '') || cand}
@@ -344,7 +344,7 @@ export const AddEditLinkModal: React.FC<AddEditLinkModalProps> = ({
               {tags.map((tag) => (
                 <span
                   key={tag}
-                  className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#38bdf8]/15 text-[#7dd3fc] text-xs font-medium border border-[#38bdf8]/20"
+                  className="inline-flex items-center gap-1 px-2.5 py-1 rounded-[12px] bg-[#38bdf8]/15 text-[#7dd3fc] text-xs font-medium border border-[#38bdf8]/20"
                 >
                   #{tag}
                   <button
